@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1. rsync入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="2. Rsync同步" href="index.html"/>
+        <link rel="next" title="2.2. linux同步到linux" href="linux和linux.html"/>
+        <link rel="prev" title="2. Rsync同步" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Rsync同步</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. rsync入门</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.1.1. rsync简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1.2. rsync是如何工作的</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsyncd">2.1.3. rsyncd的主要参数设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.1.4. 样例的配置文件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linux和linux.html">2.2. linux同步到linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window和linux.html">2.3. linux推送到window</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">2. Rsync同步</a> &raquo;</li>
+        
+      <li>2.1. rsync入门</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Rsync同步/rsync简介.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rsync">
+<span id="topics-rsync"></span><h1>2.1. rsync入门<a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2.1.1. rsync简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Rsync是一个很棒的小工具，在你的机器上很容易设置。而不是有一个脚本的FTP会话，或其他形式的文件传输脚本  rsync只复制文件的差异，实际上差异就是已经改变的文件，如果你想要的安全可以通过ssh。但它的意思是：</p>
+<ul class="simple">
+<li>区别 - 只传输实际更改的文件，而不是整个文件。这使得更新速度更快，尤其是在像调制解调器这样的慢速链路上。即使只更改了一个字节，FTP也会传输整个文件。</li>
+<li>压缩 - 差异的细小部分随即进行压缩，进一步节省文件传输时间并减少网络负载。</li>
+<li>安全外壳 - 你的安全意识就是这样，你应该都使用它。来自rsync的流通过ssh协议来加密会话，而不是rsh，这也是一个选项。</li>
+</ul>
+<p>作为备份/镜像工具，rsync是相当通用的，提供了超出上述的许多功能。以下是一些rsync的其他主要功能：</p>
+<ul class="simple">
+<li>支持复制链接，设备，所有者，组和权限</li>
+<li>排除和排除类似于GNU tar的选项</li>
+<li>CVS排除模式，用于忽略CVS将忽略的相同文件</li>
+<li>不需要root权限</li>
+<li>管理文件传输以最小化延迟成本</li>
+<li>支持匿名或认证的rsync服务器(理想的镜像)</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2.1.2. rsync是如何工作的<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>rsync是cs架构的，也就是必须有客户端和服务端的，您必须通过以守护进程模式运行rsync(命令行中的”rsync –daemon”)并设置一个简短易用的配置文件（/etc/rsyncd.conf）来将一台或另一台机器设置为”rsync服务器” ）。</p>
+<p>任何安装了rsync的机器都可以与运行rsync守护进程的机器同步。您可以使用它来进行备份，镜像文件系统，分发文件或任意数量的类似操作。通过使用只传输文件之间的差异（类似于补丁文件）的”rsync算法”，然后压缩它们 - 您将得到一个非常高效的系统。</p>
+</div>
+<div class="section" id="rsyncd">
+<h2>2.1.3. rsyncd的主要参数设置<a class="headerlink" href="#rsyncd" title="Permalink to this headline">¶</a></h2>
+<p>我们使用一天服务器指定为rsync的服务器，需要运行rsync指定–daemon以守护进程运行并且需要给它提供一个配置文件，这个配置就是、/etc/rsyncd.conf文件。</p>
+<p>主要的全局的参数</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>motd file                # 这个是欢迎提示信息，指定的是文件名，把内容写到这个文件里面
+pid file                 # 守护进程的运行pid文件
+port                     # 运行端口，默认是873
+address                  # 默认是监听在所有ip上的，有时候我们只需要监听在内部ip上就需要改变这个值
+</pre></div>
+</div>
+<p>主要的模块参数</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>comment              # 注释信息
+path                 # 需要同步的路径，这个参数必须指定的。
+use chroot           # 如果为true，rsync守护进程将在与客户端开始文件传输的时候切换到指定路径运行，提供更高的安全性。
+charset              # 存储文件名的字符集
+max connections      # 指定最大连接数
+log file             # 日志文件路径
+syslog facility      # 运行你指定系统日志工具名称的，默认是daemon,你可以设置其他值，比如auth, authpriv, cron, daemon, ftp,
+                        kern, lpr, mail, news, security, syslog, user, uucp, local0-7.
+max verbosity        # 这个参数是控制日志级别的，数值范围1-4，默认1，越大日志信息越丰富。同步文件夹大的时候，建议设置默认值1，避免日志文件过大。
+lock file            # 锁文件，默认是/var/run/rsyncd.lock.
+read only            # 这个是只读的，默认都是只读的。
+write only           # 这个参数控制客户端是否可以下载的，默认是可以下载的，不建议修改。
+list                 # 此参数确定当客户要求提供可用模块列表时，是否列出此模块
+uid                  # 守护进程以那个用户身份运行
+gid                  # 守护进程以那个用户组运行
+exclude              # 该参数采用空格分隔的守护进程排除模式列表
+include              # 该参数采用空格分隔的守护进程包含模式列表
+exclude from         # 类似exclude，不过需要写到文件里面，每行一个，这个参数写文件名
+include from         # 类似include，不过需要写到文件里面，每行一个，这个参数写文件名
+incoming chmod       # 对进入文件chmod修改权限的
+outgoing chmod       # 对出去的文件chmod修改权限的。
+auth users           # 认证的用户
+secrets file         # 密码文件，配合auth users使用，格式为&quot;username:password&quot; 或者 &quot;@groupname:password&quot;
+strict modes         # 是否检查密码文件的权限，默认值true,适应windows操作系统运行rsync
+hosts allow          # 运行的主机，格式直接也是比较多的。常用格式如下
+                        192.168.2.2
+                        192.168.2.2/24
+                        192.168.2.2/255.255.255.0
+                        主机名
+hosts deny           # 不允许的主机
+ignore errors        # 忽略i/o错误
+ignore nonoreadable  # 这告诉rsync守护程序完全忽略用户不可读的文件
+transfer logging     # 这个参数使得每个文件的日志记录下载和上传的格式有点类似于ftp守护进程所使用的格式
+log format           # 日志格式的，特别多，参考https://rsync.samba.org/ftp/rsync/rsyncd.conf.html
+timeout              # 此参数允许您覆盖客户端选择此模块的I / O超时。 使用这个参数你可以确保rsync不会永远等待死客户端，默认600s
+dont compress        # 不压缩
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>2.1.4. 样例的配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">uid</span> <span class="o">=</span> root
+<span class="nv">gid</span> <span class="o">=</span> root
+use <span class="nv">chroot</span> <span class="o">=</span> yes
+max <span class="nv">connections</span> <span class="o">=</span> <span class="m">4</span>
+syslog <span class="nv">facility</span> <span class="o">=</span> local5
+pid <span class="nv">file</span> <span class="o">=</span> /var/run/rsyncd.pid
+
+<span class="o">[</span>ftp<span class="o">]</span>
+        <span class="nv">path</span> <span class="o">=</span> /var/ftp/pub
+        <span class="nv">comment</span> <span class="o">=</span> whole ftp area <span class="o">(</span>approx <span class="m">6</span>.1 GB<span class="o">)</span>
+
+<span class="o">[</span>sambaftp<span class="o">]</span>
+        <span class="nv">path</span> <span class="o">=</span> /var/ftp/./pub/samba
+        <span class="nv">comment</span> <span class="o">=</span> Samba ftp area <span class="o">(</span>approx <span class="m">300</span> MB<span class="o">)</span>
+
+<span class="o">[</span>rsyncftp<span class="o">]</span>
+        <span class="nv">path</span> <span class="o">=</span> /var/ftp/./pub/rsync
+        <span class="nv">comment</span> <span class="o">=</span> rsync ftp area <span class="o">(</span>approx <span class="m">6</span> MB<span class="o">)</span>
+
+<span class="o">[</span>sambawww<span class="o">]</span>
+        <span class="nv">path</span> <span class="o">=</span> /public_html/samba
+        <span class="nv">comment</span> <span class="o">=</span> Samba WWW pages <span class="o">(</span>approx <span class="m">240</span> MB<span class="o">)</span>
+
+<span class="o">[</span>cvs<span class="o">]</span>
+        <span class="nv">path</span> <span class="o">=</span> /data/cvs
+        <span class="nv">comment</span> <span class="o">=</span> CVS repository <span class="o">(</span>requires authentication<span class="o">)</span>
+        auth <span class="nv">users</span> <span class="o">=</span> tridge, susan
+        secrets <span class="nv">file</span> <span class="o">=</span> /etc/rsyncd.secrets
+</pre></div>
+</div>
+<p>密码文件样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tridge:mypass
+susan:herpass
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">密码文件格式为username:password,且这个用户不必要在系统存在，密码文件权限为600。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="linux和linux.html" class="btn btn-neutral float-right" title="2.2. linux同步到linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="2. Rsync同步" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
