@@ -1,0 +1,1222 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4.1. ansible &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="4. 自动化运维" href="index.html"/>
+        <link rel="next" title="4.2. pssh" href="pssh.html"/>
+        <link rel="prev" title="4. 自动化运维" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">4. 自动化运维</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1. ansible</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1.1. ansible特性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.1.2. ansible架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.1.3. ansible工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1.4. 安装软件包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.1.5. 添加管理主机和修改配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.1.6. 使用ansible模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ping">4.1.6.1. ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command">4.1.6.2. command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shell">4.1.6.3. shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#script">4.1.6.4. script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#copy">4.1.6.5. copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fetch">4.1.6.6. fetch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file">4.1.6.7. file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hostname">4.1.6.8. hostname</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cron">4.1.6.9. cron</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yum">4.1.6.10. yum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service">4.1.6.11. service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user">4.1.6.12. user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup">4.1.6.13. setup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#galaxy">4.1.7. galaxy的使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#playbook">4.1.8. playbook的基础使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hello-world">4.1.8.1. hello world</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.1.8.2. 安装服务并启动服务</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vault">4.1.9. vault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#console">4.1.10. console</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.1.11. playbook其他使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">4.1.11.1. 变量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template">4.1.11.2. template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when">4.1.11.3. when</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#with-item">4.1.11.4. with-item</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">4.1.11.5. 迭代变量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#for">4.1.11.6. for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#if">4.1.11.7. if</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#role">4.1.12. role角色</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html">4.2. pssh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">4. 自动化运维</a> &raquo;</li>
+        
+      <li>4.1. ansible</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/自动化运维/ansible.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ansible">
+<h1>4.1. ansible<a class="headerlink" href="#ansible" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>4.1.1. ansible特性<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>模块化：调用特定的模块，完成特定任务</li>
+<li>有Paramiko，PyYAML，Jinja2（模板语言）三个关键模块</li>
+<li>支持自定义模块</li>
+<li>基于Python语言实现</li>
+<li>部署简单，基于python和SSH(默认已安装)，agentless</li>
+<li>安全，基于OpenSSH</li>
+<li>支持playbook编排任务</li>
+<li>幂等性：一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况</li>
+<li>无需代理不依赖PKI（无需ssl）</li>
+<li>可使用任何编程语言写模块</li>
+<li>YAML格式，编排任务，支持丰富的数据结构</li>
+<li>较强大的多层解决方案</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>4.1.2. ansible架构<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/架构图.png" src="../_images/架构图.png" />
+</div>
+<div class="section" id="id3">
+<h2>4.1.3. ansible工作原理<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/工作原理.png" src="../_images/工作原理.png" />
+</div>
+<div class="section" id="id4">
+<h2>4.1.4. 安装软件包<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># yum install ansible -y</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># rpm -ql ansible</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>4.1.5. 添加管理主机和修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim /etc/ansible/hosts</span>
+<span class="c1"># 添加我们管理的主机</span>
+<span class="o">[</span>db<span class="o">]</span>
+<span class="m">192</span>.168.46.6
+<span class="o">[</span>web<span class="o">]</span>
+<span class="m">172</span>.168.46.<span class="o">[</span><span class="m">6</span>-7<span class="o">]</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim /etc/ansible/ansible.cfg</span>
+<span class="c1"># 去除以下2行的注释</span>
+<span class="nv">host_key_checking</span> <span class="o">=</span> False
+<span class="nv">log_path</span> <span class="o">=</span> /var/log/ansible.log
+</pre></div>
+</div>
+<p>hosts文件指定的db,web就是各自包含的主机统称，内置一个all变量代表所有主机。</p>
+<p>host_key_checking 这个就是主机key检查，我们默认使用ssh连接一个主机会提示yes/no的提示，就是信任这个主机的key。</p>
+</div>
+<div class="section" id="id6">
+<h2>4.1.6. 使用ansible模块<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>查看ansible模块的个数</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc  -l  | wc -l</span>
+<span class="m">1378</span>
+</pre></div>
+</div>
+<p>获取指定模块使用帮助</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc ping</span>
+</pre></div>
+</div>
+<div class="section" id="ping">
+<h3>4.1.6.1. ping<a class="headerlink" href="#ping" title="Permalink to this headline">¶</a></h3>
+<p>功能： ping主机</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible all -m ping</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> UNREACHABLE! <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;Failed to connect to the host via ssh: ssh: connect to host 172.18.46.7 port 22: Connection timed out\r\n&quot;</span>,
+    <span class="s2">&quot;unreachable&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> UNREACHABLE! <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;Failed to connect to the host via ssh: ssh: connect to host 172.18.46.6 port 22: Connection timed out\r\n&quot;</span>,
+    <span class="s2">&quot;unreachable&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>上面我们的出错了。 是因为我们没有配置ssh免密码登陆的原因。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果不想配置主机信任，使用ansibile需要配合-k选项输入密码，
+如果使用了sudo需要再配合-K选项输入sudo密码</p>
+</div>
+<p>配置ssh免密码登陆：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ssh-keygen</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ssh-copy-id  172.18.46.6</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ssh-copy-id  172.18.46.7</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ssh-copy-id  192.168.46.6</span>
+</pre></div>
+</div>
+<p>再次执行</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible all -m ping</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这个ping模块不是走的icmp协议，走的ssh协议。</p>
+</div>
+</div>
+<div class="section" id="command">
+<h3>4.1.6.2. command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p>功能： 执行command</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc command</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db  -m command -a &#39;chdir=/root ls&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+anaconda-ks.cfg
+anaconda-ks.cfg.bak
+install.log
+install.log.syslog
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">在命令中使用了”&lt;”, “&gt;”, “|”, “;”和”&amp;”符号的时候，需要改用shell模块的。</p>
+</div>
+</div>
+<div class="section" id="shell">
+<h3>4.1.6.3. shell<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h3>
+<p>功能： 执行远程shell命令。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc shell</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m shell -a &#39;cd /root; ls -l ; touch test.txt ; ls -l;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="script">
+<h3>4.1.6.4. script<a class="headerlink" href="#script" title="Permalink to this headline">¶</a></h3>
+<p>功能： 复制本地的脚本到远程，并执行，然后删除脚本</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc script</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m script -a &#39;/root/test.sh&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;rc&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;stderr&quot;</span>: <span class="s2">&quot;Shared connection to 192.168.46.6 closed.\r\n&quot;</span>,
+    <span class="s2">&quot;stdout&quot;</span>: <span class="s2">&quot;Fri Jan 12 22:47:41 CST 2018\r\nFilesystem            Size  Used Avail Use% Mounted on\r\n/dev/mapper/VolGroup-lv_root\r\n                       50G   19G   29G  40% /\r\ntmpfs                 491M     0  491M   0% /dev/shm\r\n/dev/sda1             477M   34M  418M   8% /boot\r\n/dev/mapper/VolGroup-lv_home\r\n                      146G   60M  138G   1% /home\r\n/dev/sr0              5.8G  5.8G     0 100% /mnt/cdrom\r\n&quot;</span>,
+    <span class="s2">&quot;stdout_lines&quot;</span>: <span class="o">[</span>
+        <span class="s2">&quot;Fri Jan 12 22:47:41 CST 2018&quot;</span>,
+        <span class="s2">&quot;Filesystem            Size  Used Avail Use% Mounted on&quot;</span>,
+        <span class="s2">&quot;/dev/mapper/VolGroup-lv_root&quot;</span>,
+        <span class="s2">&quot;                       50G   19G   29G  40% /&quot;</span>,
+        <span class="s2">&quot;tmpfs                 491M     0  491M   0% /dev/shm&quot;</span>,
+        <span class="s2">&quot;/dev/sda1             477M   34M  418M   8% /boot&quot;</span>,
+        <span class="s2">&quot;/dev/mapper/VolGroup-lv_home&quot;</span>,
+        <span class="s2">&quot;                      146G   60M  138G   1% /home&quot;</span>,
+        <span class="s2">&quot;/dev/sr0              5.8G  5.8G     0 100% /mnt/cdrom&quot;</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="copy">
+<h3>4.1.6.5. copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
+<p>功能： 复制本地的文件到远程去</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m copy -a &#39;src=/root/test.sh dest=/root/test.sh backup=yes owner=zhaojiedi group=root mode=0644&#39;</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;checksum&quot;</span>: <span class="s2">&quot;c3724e329cc83de9876f2d379065ca463e858ae6&quot;</span>,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/root/test.sh&quot;</span>,
+    <span class="s2">&quot;gid&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;group&quot;</span>: <span class="s2">&quot;root&quot;</span>,
+    <span class="s2">&quot;md5sum&quot;</span>: <span class="s2">&quot;220f72b1a4e636373d4b9310569cf027&quot;</span>,
+    <span class="s2">&quot;mode&quot;</span>: <span class="s2">&quot;0644&quot;</span>,
+    <span class="s2">&quot;owner&quot;</span>: <span class="s2">&quot;zhaojiedi&quot;</span>,
+    <span class="s2">&quot;size&quot;</span>: <span class="m">11</span>,
+    <span class="s2">&quot;src&quot;</span>: <span class="s2">&quot;/root/.ansible/tmp/ansible-tmp-1515809310.86-157163266332298/source&quot;</span>,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;file&quot;</span>,
+    <span class="s2">&quot;uid&quot;</span>: <span class="m">500</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;checksum&quot;</span>: <span class="s2">&quot;c3724e329cc83de9876f2d379065ca463e858ae6&quot;</span>,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/root/test.sh&quot;</span>,
+    <span class="s2">&quot;gid&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;group&quot;</span>: <span class="s2">&quot;root&quot;</span>,
+    <span class="s2">&quot;md5sum&quot;</span>: <span class="s2">&quot;220f72b1a4e636373d4b9310569cf027&quot;</span>,
+    <span class="s2">&quot;mode&quot;</span>: <span class="s2">&quot;0644&quot;</span>,
+    <span class="s2">&quot;owner&quot;</span>: <span class="s2">&quot;zhaojiedi&quot;</span>,
+    <span class="s2">&quot;secontext&quot;</span>: <span class="s2">&quot;system_u:object_r:admin_home_t:s0&quot;</span>,
+    <span class="s2">&quot;size&quot;</span>: <span class="m">11</span>,
+    <span class="s2">&quot;src&quot;</span>: <span class="s2">&quot;/root/.ansible/tmp/ansible-tmp-1515809310.9-111150527159897/source&quot;</span>,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;file&quot;</span>,
+    <span class="s2">&quot;uid&quot;</span>: <span class="m">1000</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fetch">
+<h3>4.1.6.6. fetch<a class="headerlink" href="#fetch" title="Permalink to this headline">¶</a></h3>
+<p>功能： 提取远程主机的文件到本地</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /app</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible all -m fetch -a &#39;src=/var/log/messages dest=/app&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;checksum&quot;</span>: <span class="s2">&quot;6651f324a541ddd5d3a52603353785751743610f&quot;</span>,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/app/192.168.46.6/var/log/messages&quot;</span>,
+    <span class="s2">&quot;md5sum&quot;</span>: <span class="s2">&quot;1d98b389a9644276cd5c42259af2471f&quot;</span>,
+    <span class="s2">&quot;remote_checksum&quot;</span>: <span class="s2">&quot;6651f324a541ddd5d3a52603353785751743610f&quot;</span>,
+    <span class="s2">&quot;remote_md5sum&quot;</span>: null
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;checksum&quot;</span>: <span class="s2">&quot;3d69d7fe50ad1166782cd962f352782088c2eb6b&quot;</span>,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/app/172.18.46.7/var/log/messages&quot;</span>,
+    <span class="s2">&quot;md5sum&quot;</span>: <span class="s2">&quot;fa3859cc24a7ff717741ae7d043a7134&quot;</span>,
+    <span class="s2">&quot;remote_checksum&quot;</span>: <span class="s2">&quot;3d69d7fe50ad1166782cd962f352782088c2eb6b&quot;</span>,
+    <span class="s2">&quot;remote_md5sum&quot;</span>: null
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;checksum&quot;</span>: <span class="s2">&quot;36ca673a1fe553d3607e1540b6d3f72ac2ebde6b&quot;</span>,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/app/172.18.46.6/var/log/messages&quot;</span>,
+    <span class="s2">&quot;md5sum&quot;</span>: <span class="s2">&quot;a60aa16df60e68a36f7c29a4c60badf8&quot;</span>,
+    <span class="s2">&quot;remote_checksum&quot;</span>: <span class="s2">&quot;36ca673a1fe553d3607e1540b6d3f72ac2ebde6b&quot;</span>,
+    <span class="s2">&quot;remote_md5sum&quot;</span>: null
+<span class="o">}</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /app</span>
+/app
+├── <span class="m">172</span>.18.46.6
+│   └── var
+│       └── log
+│           └── messages
+├── <span class="m">172</span>.18.46.7
+│   └── var
+│       └── log
+│           └── messages
+└── <span class="m">192</span>.168.46.6
+    └── var
+</pre></div>
+</div>
+<p>可以看出来，这个功能还是相当nice的， 自动帮我们分类整理好了。</p>
+</div>
+<div class="section" id="file">
+<h3>4.1.6.7. file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h3>
+<p>功能： 文件管理的</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 创建文件</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m file -a &#39;path=/root/testfile state=touch mode=644 owner=root group=root &#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;dest&quot;</span>: <span class="s2">&quot;/root/testfile&quot;</span>,
+    <span class="s2">&quot;gid&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;group&quot;</span>: <span class="s2">&quot;root&quot;</span>,
+    <span class="s2">&quot;mode&quot;</span>: <span class="s2">&quot;0644&quot;</span>,
+    <span class="s2">&quot;owner&quot;</span>: <span class="s2">&quot;root&quot;</span>,
+    <span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;file&quot;</span>,
+    <span class="s2">&quot;uid&quot;</span>: <span class="m">0</span>
+<span class="o">}</span>
+<span class="c1"># 创建软连接</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m file -a &#39;path=/root/testfile.link state=link src=/root/testfile&#39;</span>
+<span class="c1"># 查看软连接</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -a &#39;ls -l  /root/&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+total <span class="m">24</span>
+-rw-------. <span class="m">1</span> root root <span class="m">1300</span> Jan <span class="m">10</span> <span class="m">22</span>:10 anaconda-ks.cfg
+-rw-------. <span class="m">1</span> root root <span class="m">1196</span> Jan <span class="m">10</span> <span class="m">21</span>:25 anaconda-ks.cfg.bak
+-rw-r--r--. <span class="m">1</span> root root <span class="m">9919</span> Jan <span class="m">10</span> <span class="m">16</span>:57 install.log
+-rw-r--r--. <span class="m">1</span> root root <span class="m">3161</span> Jan <span class="m">10</span> <span class="m">16</span>:56 install.log.syslog
+-rw-r--r--  <span class="m">1</span> root root    <span class="m">0</span> Jan <span class="m">13</span> <span class="m">00</span>:04 testfile
+lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <span class="m">13</span> <span class="m">00</span>:05 testfile.link -&gt; /root/testfile
+<span class="c1"># 删除文件</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m file -a &#39;path=/root/testfile state=absent&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;path&quot;</span>: <span class="s2">&quot;/root/testfile&quot;</span>,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;absent&quot;</span>
+</pre></div>
+</div>
+<p>}</p>
+<p>file模块的state主要有下面几个值</p>
+<ul class="simple">
+<li>directory</li>
+<li>file</li>
+<li>link</li>
+<li>absent</li>
+<li>hard</li>
+<li>touch</li>
+</ul>
+</div>
+<div class="section" id="hostname">
+<h3>4.1.6.8. hostname<a class="headerlink" href="#hostname" title="Permalink to this headline">¶</a></h3>
+<p>功能修改hostname</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc hostname</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible 172.18.46.6 -m hostname  -a &quot;name=centos6.linuxpanda.tech&quot;</span>
+</pre></div>
+</div>
+<p>hostname模块可以修改同时修改当前和文件的hostname的值。</p>
+</div>
+<div class="section" id="cron">
+<h3>4.1.6.9. cron<a class="headerlink" href="#cron" title="Permalink to this headline">¶</a></h3>
+<p>功能：计划任务管理</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加计划任务</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m cron  -a &#39;minute=*/5  weekday=1,3,5 job=&quot;ntpdate 172.18.0.1&quot; name=&quot;update time&quot; &#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;envs&quot;</span>: <span class="o">[]</span>,
+    <span class="s2">&quot;jobs&quot;</span>: <span class="o">[</span>
+        <span class="s2">&quot;update time&quot;</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+<span class="c1"># 查看下</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m shell -a &#39;crontab -l&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+<span class="c1">#Ansible: update time</span>
+*/5 * * * <span class="m">1</span>,3,5 ntpdate <span class="m">172</span>.18.0.1
+
+<span class="c1"># 删除</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m cron -a &#39;job=&quot;ntpdate 172.18.0.1&quot; name=&quot;update time&quot; state=absent&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;envs&quot;</span>: <span class="o">[]</span>,
+    <span class="s2">&quot;jobs&quot;</span>: <span class="o">[]</span>
+<span class="o">}</span>
+
+<span class="c1"># 再次查看</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible db -m shell -a &#39;crontab -l&#39;</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</pre></div>
+</div>
+<p>我们可以设置disabled属性为yes/no，来启用计划任务和关闭计划任务。</p>
+</div>
+<div class="section" id="yum">
+<h3>4.1.6.10. yum<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装包</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m yum -a &#39;name=httpd&#39;</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;rc&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;results&quot;</span>: <span class="o">[</span>
+        <span class="s2">&quot;httpd-2.4.6-67.el7.centos.6.x86_64 providing httpd is already installed&quot;</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;rc&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;results&quot;</span>: <span class="o">[</span>
+        <span class="s2">&quot;httpd-2.2.15-60.el6.centos.6.x86_64 providing httpd is already installed&quot;</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+
+<span class="c1"># 卸载包</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m yum -a &#39;name=httpd state=absent&#39;</span>
+
+<span class="c1"># 安装最新版本且禁用gpg检查</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m yum -a &#39;name=httpd state=latest disable_gpg_check=yes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="service">
+<h3>4.1.6.11. service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h3>
+<p>功能： 服务管理</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-doc service</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m service -a &#39;name=httpd  state=started&#39;</span>
+</pre></div>
+</div>
+<p>service的状态比较多：</p>
+<ul class="simple">
+<li>started</li>
+<li>stop</li>
+<li>restarted</li>
+<li>reloaded</li>
+</ul>
+</div>
+<div class="section" id="user">
+<h3>4.1.6.12. user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p>功能： 用户管理</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 创建用户</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m user -a &#39;name=test1 comment=&quot;test1&quot; uid=1005 shell=&quot;/bin/bash&quot; groups=root append=yes createhome=yes&#39;</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> FAILED! <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;usermod: UID &#39;1005&#39; already exists\n&quot;</span>,
+    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;test1&quot;</span>,
+    <span class="s2">&quot;rc&quot;</span>: <span class="m">4</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;comment&quot;</span>: <span class="s2">&quot;test1&quot;</span>,
+    <span class="s2">&quot;createhome&quot;</span>: true,
+    <span class="s2">&quot;group&quot;</span>: <span class="m">1005</span>,
+    <span class="s2">&quot;groups&quot;</span>: <span class="s2">&quot;root&quot;</span>,
+    <span class="s2">&quot;home&quot;</span>: <span class="s2">&quot;/home/test1&quot;</span>,
+    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;test1&quot;</span>,
+    <span class="s2">&quot;shell&quot;</span>: <span class="s2">&quot;/bin/bash&quot;</span>,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;present&quot;</span>,
+    <span class="s2">&quot;system&quot;</span>: false,
+    <span class="s2">&quot;uid&quot;</span>: <span class="m">1005</span>
+<span class="o">}</span>
+<span class="c1"># 删除用户</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m user -a &#39;name=test1 comment=&quot;test1&quot; state=absent force=yes &#39;</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;force&quot;</span>: true,
+    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;test1&quot;</span>,
+    <span class="s2">&quot;remove&quot;</span>: false,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;absent&quot;</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: true,
+    <span class="s2">&quot;force&quot;</span>: true,
+    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;test1&quot;</span>,
+    <span class="s2">&quot;remove&quot;</span>: false,
+    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;absent&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup">
+<h3>4.1.6.13. setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>功能： 查看主机信息</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1">#  ansible all  -m setup -a &#39;filter=&quot;*version*&quot;&#39;</span>
+<span class="m">192</span>.168.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;ansible_facts&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;ansible_bios_version&quot;</span>: <span class="s2">&quot;6.00&quot;</span>,
+        <span class="s2">&quot;ansible_distribution_major_version&quot;</span>: <span class="s2">&quot;7&quot;</span>,
+        <span class="s2">&quot;ansible_distribution_version&quot;</span>: <span class="s2">&quot;7.4.1708&quot;</span>,
+        <span class="s2">&quot;ansible_product_version&quot;</span>: <span class="s2">&quot;None&quot;</span>,
+        <span class="s2">&quot;ansible_python_version&quot;</span>: <span class="s2">&quot;2.7.5&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;changed&quot;</span>: <span class="nb">false</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.7 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;ansible_facts&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;ansible_bios_version&quot;</span>: <span class="s2">&quot;6.00&quot;</span>,
+        <span class="s2">&quot;ansible_distribution_major_version&quot;</span>: <span class="s2">&quot;7&quot;</span>,
+        <span class="s2">&quot;ansible_distribution_version&quot;</span>: <span class="s2">&quot;7.4.1708&quot;</span>,
+        <span class="s2">&quot;ansible_product_version&quot;</span>: <span class="s2">&quot;None&quot;</span>,
+        <span class="s2">&quot;ansible_python_version&quot;</span>: <span class="s2">&quot;2.7.5&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;changed&quot;</span>: <span class="nb">false</span>
+<span class="o">}</span>
+<span class="m">172</span>.18.46.6 <span class="p">|</span> UNREACHABLE! <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;Failed to connect to the host via ssh: ssh: connect to host 172.18.46.6 port 22: No route to host\r\n&quot;</span>,
+    <span class="s2">&quot;unreachable&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+<span class="m">192</span>.168.46.6 <span class="p">|</span> UNREACHABLE! <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;msg&quot;</span>: <span class="s2">&quot;Failed to connect to the host via ssh: ssh: connect to host 192.168.46.6 port 22: No route to host\r\n&quot;</span>,
+    <span class="s2">&quot;unreachable&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>setup模块提供了远程主机的信息， 我们后面可以使用这个信息做分支处理的。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">setup模块提供的的信息都是内置变量，方便我们引用变量。</p>
+</div>
+</div>
+</div>
+<div class="section" id="galaxy">
+<h2>4.1.7. galaxy的使用<a class="headerlink" href="#galaxy" title="Permalink to this headline">¶</a></h2>
+<p>别人写好的剧本，你感觉不错也挺适合你的工作环境的，可以下载下来简单修改下就使用的。</p>
+<p>我们首先在 <a class="reference external" href="https://galaxy.ansible.com/explore#/">galaxy</a> 上下载获取一个地址</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible-galaxy install geerlingguy.nginx</span>
+- downloading role <span class="s1">&#39;nginx&#39;</span>, owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-nginx/archive/2.5.0.tar.gz
+
+- extracting geerlingguy.nginx to /root/.ansible/roles/geerlingguy.nginx
+- geerlingguy.nginx <span class="o">(</span><span class="m">2</span>.5.0<span class="o">)</span> was installed successfully
+</pre></div>
+</div>
+</div>
+<div class="section" id="playbook">
+<h2>4.1.8. playbook的基础使用<a class="headerlink" href="#playbook" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hello-world">
+<h3>4.1.8.1. hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir ansible</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd ansible/</span>
+
+<span class="c1"># 编辑一个playbook</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim helloworld.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat helloworld.yml</span>
+---
+
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: hello world
+    command: <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
+
+<span class="c1"># 检查</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook helloworld.yml  -C</span>
+
+PLAY <span class="o">[</span>all<span class="o">]</span> **********************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> **********************************************************************************************************
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+TASK <span class="o">[</span>hello world<span class="o">]</span> **************************************************************************************************************
+skipping: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+skipping: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+skipping: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+PLAY RECAP **********************************************************************************************************************
+<span class="m">172</span>.18.46.6                : <span class="nv">ok</span><span class="o">=</span><span class="m">1</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">172</span>.18.46.7                : <span class="nv">ok</span><span class="o">=</span><span class="m">1</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">192</span>.168.46.6               : <span class="nv">ok</span><span class="o">=</span><span class="m">1</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># 执行</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook helloworld.yml</span>
+
+PLAY <span class="o">[</span>all<span class="o">]</span> **********************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> **********************************************************************************************************
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+
+TASK <span class="o">[</span>hello world<span class="o">]</span> **************************************************************************************************************
+changed: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+PLAY RECAP **********************************************************************************************************************
+<span class="m">172</span>.18.46.6                : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">172</span>.18.46.7                : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">192</span>.168.46.6               : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>4.1.8.2. 安装服务并启动服务<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim helloworld.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat helloworld.yml</span>
+---
+
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: hello world
+    command: <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook helloworld.yml</span>
+
+PLAY <span class="o">[</span>all<span class="o">]</span> **********************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> **********************************************************************************************************
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+
+TASK <span class="o">[</span>hello world<span class="o">]</span> **************************************************************************************************************
+changed: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+PLAY RECAP **********************************************************************************************************************
+<span class="m">172</span>.18.46.6                : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">172</span>.18.46.7                : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">192</span>.168.46.6               : <span class="nv">ok</span><span class="o">=</span><span class="m">2</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ls</span>
+helloworld.yml  httpd.yml  makehttpd.yml
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim httpd.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat httpd.yml</span>
+---
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: install httpd
+    yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
+    - name: start httpd
+    service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook httpd.yml</span>
+
+PLAY <span class="o">[</span>all<span class="o">]</span> **********************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> **********************************************************************************************************
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+
+TASK <span class="o">[</span>install httpd<span class="o">]</span> ************************************************************************************************************
+ok: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+ok: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+TASK <span class="o">[</span>start httpd<span class="o">]</span> **************************************************************************************************************
+ok: <span class="o">[</span><span class="m">192</span>.168.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.6<span class="o">]</span>
+changed: <span class="o">[</span><span class="m">172</span>.18.46.7<span class="o">]</span>
+
+PLAY RECAP **********************************************************************************************************************
+<span class="m">172</span>.18.46.6                : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">172</span>.18.46.7                : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+<span class="m">192</span>.168.46.6               : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="vault">
+<h2>4.1.9. vault<a class="headerlink" href="#vault" title="Permalink to this headline">¶</a></h2>
+<p>这个主要用户管理剧本的，加密解密的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 加密</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-vault encrypt httpd.yml</span>
+New Vault password:
+Confirm New Vault password:
+Encryption successful
+<span class="c1"># 查看</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat httpd.yml</span>
+<span class="nv">$ANSIBLE_VAULT</span><span class="p">;</span><span class="m">1</span>.1<span class="p">;</span>AES256
+<span class="m">65613239653666353638626464363565633531663734663661376138623766346363336132336435</span>
+3866363231353338663439353730623162633630656539310a663466323539386563373631313836
+<span class="m">65386430623637333264616564613738663766373836623536356439643938333933643737396432</span>
+3831653430396261350a353832306639383138303136336464303336663432356536336638643839
+<span class="m">32353664303131633234623634653731386136353665373536396561366162303535363066663933</span>
+<span class="m">65616461313135613162613530336361613262643230323962626362353362333136636535323830</span>
+<span class="m">37613234386433626162373535396236623231376164636561623936333832343466653562613461</span>
+<span class="m">64313831303432353431396237393431383261383439353939633363323933343465623038623566</span>
+<span class="m">62633534363138626138376530366233656434353330343935666531313165306434663935323431</span>
+<span class="m">37613064393036346639656534376638643231343539323366616566653032343064383034363535</span>
+<span class="m">38313831386232343464313130343734343634303062613766303532623637343661653661623733</span>
+<span class="m">31306634656563653231353739363936363236306430663266366362323561383966393033376565</span>
+<span class="m">63343966376336383534643066323462373336333137653965616337353063646132323839323933</span>
+<span class="m">6263656164636164303231666162383066666530306161643833</span>
+<span class="c1"># 查看</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-vault view httpd.yml</span>
+Vault password:
+---
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: install httpd
+    yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
+    - name: start httpd
+    service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
+<span class="c1"># 解密</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-vault decrypt httpd.yml</span>
+Vault password:
+Decryption successful
+<span class="c1"># 查看</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat httpd.yml</span>
+---
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: install httpd
+    yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
+    - name: start httpd
+    service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
+</pre></div>
+</div>
+</div>
+<div class="section" id="console">
+<h2>4.1.10. console<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h2>
+<p>交互式执行ansible命令，不经常使用的，不过里面有写只能提示还是不错的。</p>
+<p>使用样例：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-console</span>
+Vault password:
+Welcome to the ansible console.
+Type <span class="nb">help</span> or ? to list commands.
+
+root@all <span class="o">(</span><span class="m">3</span><span class="o">)[</span>f:5<span class="o">]</span>$ <span class="nb">cd</span> db
+root@db <span class="o">(</span><span class="m">1</span><span class="o">)[</span>f:5<span class="o">]</span>$ ping
+<span class="m">192</span>.168.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
+root@db <span class="o">(</span><span class="m">1</span><span class="o">)[</span>f:5<span class="o">]</span>$ <span class="nb">exit</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>4.1.11. playbook其他使用<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3>4.1.11.1. 变量<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>变量定义的必须字母开头，有字母、数字和下划线组成。</p>
+<p>方案1： 通过命令行指定 ：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat var1.yml</span>
+---
+- hosts: web
+remote_user: root
+
+tasks:
+    - name: install package
+    yum: <span class="nv">name</span><span class="o">={{</span>pkname<span class="o">}}</span>
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook -e &quot;pkname=htop var2=xxx&quot; var1.yml</span>
+</pre></div>
+</div>
+<p>方案2： 直接在hosts文件中指定变量 ：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 修改/etc/ansible/hosts文件</span>
+<span class="o">[</span>centos7<span class="o">]</span>
+<span class="m">172</span>.18.46.7 <span class="nv">pkname</span><span class="o">=</span>htop <span class="nv">var2</span><span class="o">=</span>xxx <span class="nv">var3</span><span class="o">=</span>xxx
+<span class="m">192</span>.168.46.7 <span class="nv">pkname</span><span class="o">=</span>htop
+<span class="c1"># 或者修改为如下</span>
+<span class="o">[</span>centos7<span class="o">]</span>
+<span class="m">172</span>.18.46.7 <span class="nv">pkname</span><span class="o">=</span>htop
+<span class="m">192</span>.168.46.7 <span class="nv">pkname</span><span class="o">=</span>htop
+<span class="o">[</span>centos7:vars<span class="o">]</span>
+<span class="nv">pkname</span><span class="o">=</span>htop
+<span class="nv">var2</span><span class="o">=</span>xxxx
+</pre></div>
+</div>
+<p>方案3： 直接在yml文件中指定变量 ：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat var1.yml</span>
+---
+- hosts: centos7
+remote_user: root
+vars:
+    - pkgname: htop
+    var2: xxx
+
+tasks:
+    - name: install package
+    yum: <span class="nv">name</span><span class="o">={{</span>pkname<span class="o">}}</span>
+</pre></div>
+</div>
+<p>方案4： 使用setup的变量 ：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible all -m setup -a &#39;filter=&quot;*nodename*&quot;&#39;</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat var1.yml</span>
+---
+- hosts: centos7
+remote_user: root
+tasks:
+    - name: touch a file
+    file: <span class="nv">name</span><span class="o">=</span>/root/<span class="o">{{</span>ansible_nodename<span class="o">}}</span>.txt <span class="nv">state</span><span class="o">=</span>touch
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible all -m shell -a &#39;ls -l /root&#39;</span>
+</pre></div>
+</div>
+<p>方案4： role中的的变量 ：</p>
+<p>这个后面角色的时候使用。</p>
+</div>
+<div class="section" id="template">
+<h3>4.1.11.2. template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>功能：  使用jinja2语言，支持变量替换功能和循环机制以适应各个主机的环境。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># mkdir templates/</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cp /etc/httpd/conf/httpd.conf  templates/httpd.conf.j2</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim templates/httpd.conf.j2</span>
+<span class="c1"># 修改如下Listen行为如下内容</span>
+Listen <span class="o">{{</span>listen_port<span class="o">}}</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim t1.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat t1.yml</span>
+- hosts: centos7
+remote_user: root
+
+tasks:
+    - name: copy template file <span class="k">for</span> httpd
+      template: <span class="nv">src</span><span class="o">=</span>httpd.conf.j2 <span class="nv">dest</span><span class="o">=</span>/etc/httpd/conf/httpd.conf
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook -e &quot;http_port=8080&quot; t1.yml -C</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook -e &quot;listen_port=8080&quot; t1.ym</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible 192.168.46.7 -m shell -a &#39;cat /etc/httpd/conf/httpd.conf |grep -i listen&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="when">
+<h3>4.1.11.3. when<a class="headerlink" href="#when" title="Permalink to this headline">¶</a></h3>
+<p>功能： 功能啥时候生效。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>- name: copy template file <span class="k">for</span> httpd
+  template: <span class="nv">src</span><span class="o">=</span>httpd.conf.j2 <span class="nv">dest</span><span class="o">=</span>/etc/httpd/conf/httpd.conf
+  when: <span class="nv">ansible_distribution_major_version</span><span class="o">==</span><span class="s2">&quot;7&quot;</span>
+</pre></div>
+</div>
+<p>上面的那个ansible_distribution_major_version变量是从setup模块来的， 如果主版本是7上面的那个template就执行， 其他的不执行。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这个就是setup模块内置的变量，可以直接使用。</p>
+</div>
+</div>
+<div class="section" id="with-item">
+<h3>4.1.11.4. with-item<a class="headerlink" href="#with-item" title="Permalink to this headline">¶</a></h3>
+<p>功能：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim item.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat item.yml</span>
+---
+- hosts: all
+remote_user: root
+
+tasks:
+    - name: copy file
+    file: <span class="nv">name</span><span class="o">={{</span>item<span class="o">}}</span> <span class="nv">state</span><span class="o">=</span>touch
+    with_items:
+        - file1
+        - file2
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook item.yml</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>4.1.11.5. 迭代变量<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>功能： item是一个字典。</p>
+<blockquote>
+<div><p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# vim diedai.yml
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# cat diedai.yml
+—
+- hosts: all
+remote_user: root
+tasks:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">name: add group
+group: name={{item}}
+with_items:</p>
+<blockquote>
+<div><ul class="simple">
+<li>g1</li>
+<li>g2</li>
+<li>g3</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">name: add user
+user: name={{item.user}} group={{item.group}}
+with_items:</p>
+<blockquote>
+<div><ul class="simple">
+<li>{user: ‘u1’ , group: ‘g1’ }</li>
+<li>{user: ‘u2’ , group: ‘g2’ }</li>
+<li>{user: ‘u3’ , group: ‘g3’ }</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# ansible-playbook diedai.yml
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# ansible all -m shell -a ‘id u1’</p>
+</div></blockquote>
+</div>
+<div class="section" id="for">
+<h3>4.1.11.6. for<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h3>
+<p>功能： 遍历指定的list</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># pwd</span>
+/root/ansible
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim for1.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat for1.yml</span>
+---
+- hosts: centos7
+remote_user: root
+vars:
+    ports:
+    - listen_port: <span class="m">81</span>
+    - listen_port: <span class="m">82</span>
+    - listen_port: <span class="m">83</span>
+tasks:
+    - name: <span class="nb">test</span> <span class="k">for</span>
+    template: <span class="nv">src</span><span class="o">=</span>for1.conf.j2 <span class="nv">dest</span><span class="o">=</span>/app/for1.conf
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim templates/</span>
+for1.conf.j2   httpd.conf.j2
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim templates/for1.conf.j2</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat templates/for1.conf.j2</span>
+<span class="o">{</span>% <span class="k">for</span> port in ports %<span class="o">}</span>
+server <span class="o">{</span>
+    listen <span class="o">{{</span>port.listen_port<span class="o">}}</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="o">{</span>% endfor   %<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if">
+<h3>4.1.11.7. if<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h3>
+<p>功能： 指定条件处理</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;% <span class="k">if</span> vhost.servername is defined %&gt;
+&lt;%endif%&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="role">
+<h2>4.1.12. role角色<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h2>
+<p>功能： 把常用的封装，提供可用性</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># tree</span>
+.
+├── nginx.retry
+├── nginx.yml
+└── roles
+    └── nginx
+        └── tasks
+            ├── enable.yml
+            ├── groupadd.yml
+            ├── install.yml
+            ├── main.yml
+            ├── start.yml
+            ├── stop.yml
+            └── useradd.yml
+
+<span class="m">3</span> directories, <span class="m">9</span> files
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/enable.yml</span>
+- name: <span class="nb">enable</span> nginx
+service: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv">state</span><span class="o">=</span>enabled
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/groupadd.yml</span>
+- name: group add
+group: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv">system</span><span class="o">=</span>yes
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/install.yml</span>
+- name: install nginx
+yum: <span class="nv">name</span><span class="o">=</span>nginx
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/main.yml</span>
+- import_tasks: groupadd.yml
+- import_tasks: useradd.yml
+- import_tasks: install.yml
+- import_tasks: start.yml
+- import_tasks: enable.yml
+<span class="c1">#import_tasks: stop.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/start.yml</span>
+- name: start nginx
+service: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv">state</span><span class="o">=</span>started
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/stop.yml</span>
+- name: stop nginx
+service: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv">state</span><span class="o">=</span>stopped
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat roles/nginx/tasks/useradd.yml</span>
+- name: user add
+user: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv">group</span><span class="o">=</span>nginx
+</pre></div>
+</div>
+<p>简单的说， 角色把完整的yml拆分到各自的目录中， 每个目录必须有main.yml来目录下的其他文件。</p>
+<p>上面用到了tasks目录，这是是必须的，当然还有files,templates,vars等等目录， 可以在tasks目录下的main.yml文件中引用其他的目录下yml文件。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pssh.html" class="btn btn-neutral float-right" title="4.2. pssh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="4. 自动化运维" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

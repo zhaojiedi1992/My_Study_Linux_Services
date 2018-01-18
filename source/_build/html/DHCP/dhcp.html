@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1. DHCP服务搭建 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="1. dhcp服务" href="index.html"/>
+        <link rel="next" title="2. Rsync同步" href="../Rsync同步/index.html"/>
+        <link rel="prev" title="1. dhcp服务" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. dhcp服务</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.1. DHCP服务搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmwaredhcp">1.1.1. 关闭vmware的dhcp功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#yumselinux">1.1.2. 配置yum源、禁用selinux和防火墙</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1.1.2.1. 查看网络配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yum">1.1.2.2. yum 配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selinux">1.1.2.3. selinux和防火墙关闭</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vim">1.1.2.4. vim安装</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1.3. dhcp的安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.1.4. dhcp的配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.1.5. dhcp的测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dhcpd">1.1.6. dhcpd的详细参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.1.7. dhcp的主要文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">1. dhcp服务</a> &raquo;</li>
+        
+      <li>1.1. DHCP服务搭建</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/DHCP/dhcp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dhcp">
+<span id="topics-dhcp"></span><h1>1.1. DHCP服务搭建<a class="headerlink" href="#dhcp" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vmwaredhcp">
+<h2>1.1.1. 关闭vmware的dhcp功能<a class="headerlink" href="#vmwaredhcp" title="Permalink to this headline">¶</a></h2>
+<p>默认情况下vmware会提供dhcp功能，为了不影响我们后续的自己搭建dhcp功能，建议先关闭vmware的dhcp功能。</p>
+<p>关闭vmwaredhcp功能具体步骤: 【菜单栏】-&gt;【编辑】-&gt;【虚拟网络编辑器】-&gt;【更改设置】,如下图：</p>
+<img alt="../_images/虚拟网络编辑器.png" src="../_images/虚拟网络编辑器.png" />
+<p>设置虚拟机的网络方式具体步骤： 【虚拟机右键】-&gt;【虚拟机设置】-&gt;【网络适配器】，如下图：</p>
+<img alt="../_images/仅主机模式.png" src="../_images/仅主机模式.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我这个主机是最小化安装的，环境都没有配置，下面有写环境配置相关的， 自行跳过。</p>
+</div>
+</div>
+<div class="section" id="yumselinux">
+<h2>1.1.2. 配置yum源、禁用selinux和防火墙<a class="headerlink" href="#yumselinux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>1.1.2.1. 查看网络配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat ifcfg-eth0</span>
+<span class="nv">DEVICE</span><span class="o">=</span>eth0
+<span class="nv">TYPE</span><span class="o">=</span>Ethernet
+<span class="nv">ONBOOT</span><span class="o">=</span>yes
+<span class="nv">NM_CONTROLLED</span><span class="o">=</span>no
+<span class="nv">BOOTPROTO</span><span class="o">=</span>static
+<span class="nv">IPADDR</span><span class="o">=</span><span class="m">192</span>.168.46.6
+<span class="nv">PREFIX</span><span class="o">=</span><span class="m">24</span>
+<span class="nv">GATEWAY</span><span class="o">=</span><span class="m">192</span>.168.46.1
+
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat ifcfg-eth1</span>
+<span class="nv">DEVICE</span><span class="o">=</span>eth1
+<span class="nv">TYPE</span><span class="o">=</span>Ethernet
+<span class="nv">ONBOOT</span><span class="o">=</span>yes
+<span class="nv">NM_CONTROLLED</span><span class="o">=</span>no
+<span class="nv">BOOTPROTO</span><span class="o">=</span>dhcp
+</pre></div>
+</div>
+</div>
+<div class="section" id="yum">
+<h3>1.1.2.2. yum 配置<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-fasttrack.repo  CentOS-Media.repo  CentOS-Vault.repo
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cd</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-fasttrack.repo  CentOS-Media.repo  CentOS-Vault.repo
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkdir bak                   # 创建备份目录</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mv *.repo bak/              # 备份文件</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+bak
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim cdrom.repo              # 编辑cdrom.repo</span>
+-bash: vim: <span class="nb">command</span> not found
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vi cdrom.repo               # 编辑cdrom.repo</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat cdrom.repo              # 查看cdrom</span>
+<span class="o">[</span>base<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>base
+<span class="nv">baseurl</span><span class="o">=</span>file:///mnt/cdrom
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">enable</span><span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkdir /mnt/cdrom            # 创建挂载点</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mount /dev/cdrom  /mnt/cdrom  # 挂载</span>
+mount: block device /dev/sr0 is write-protected, mounting read-only
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum clean all                 # 清空缓存</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum makecache                 # 生成yum缓存</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selinux">
+<h3>1.1.2.3. selinux和防火墙关闭<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># sed -i &#39;s@SELINUX=enforcing@SELINUX=disabled@&#39; /etc/sysconfig/selinux</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># setenforce 0</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># service iptables stop</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># chkconfig iptables off</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vim">
+<h3>1.1.2.4. vim安装<a class="headerlink" href="#vim" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install vim -y            # 安装vim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>1.1.3. dhcp的安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install dhcp -y           # 安装dhcp</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># rpm -ql dhcp                  # 查看dhcp服务</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>1.1.4. dhcp的配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>dhcp的8种报文</p>
+<img alt="../_images/dhcp报文.png" src="../_images/dhcp报文.png" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cd /etc/dhcp                         # 进入dhcp工作目录</span>
+<span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample dhcpd.conf</span>
+<span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># vim dhcpd.conf                       # 编辑主配置文件</span>
+<span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cat dhcpd.conf                       # 查看dhcp文件</span>
+<span class="c1"># dhcpd.conf</span>
+<span class="c1">#</span>
+<span class="c1"># Sample configuration file for ISC dhcpd</span>
+<span class="c1">#</span>
+
+<span class="c1"># option definitions common to all supported networks...</span>
+option domain-name <span class="s2">&quot;linuxpanda.tech&quot;</span><span class="p">;</span>
+option domain-name-servers ns1.linuxpanda.tech, ns2.linuxpanda.tech<span class="p">;</span>
+
+default-lease-time <span class="m">86400</span><span class="p">;</span>
+max-lease-time <span class="m">864000</span><span class="p">;</span>
+
+<span class="c1"># 这个地方配置动态ip范围</span>
+subnet <span class="m">192</span>.168.46.0 netmask <span class="m">255</span>.255.255.0 <span class="o">{</span>
+range dynamic-bootp <span class="m">192</span>.168.46.100 <span class="m">192</span>.168.46.200 <span class="p">;</span>
+option routers <span class="m">192</span>.168.46.6 <span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># 这个地方配置静态的ip</span>
+host boss <span class="o">{</span>
+hardware ethernet <span class="m">08</span>:00:07:26:c0:a5<span class="p">;</span>
+fixed-address <span class="m">192</span>.168.46.2 <span class="p">;</span>
+<span class="o">}</span>
+
+<span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># service dhcpd restart</span>
+Shutting down dhcpd:                                       <span class="o">[</span>  OK  <span class="o">]</span>
+Starting dhcpd:                                            <span class="o">[</span>  OK  <span class="o">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果dhcpd启动失败，可以从/var/log/message文件的后30行获取帮助信息。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>1.1.5. dhcp的测试<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>在另外一个虚拟机里面测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># dhclient -d                                         # 前台执行dhcp命令</span>
+Internet Systems Consortium DHCP Client <span class="m">4</span>.2.5
+Copyright <span class="m">2004</span>-2013 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/ens37/00:0c:29:ad:b0:fc
+Sending on   LPF/ens37/00:0c:29:ad:b0:fc
+Listening on LPF/ens33/00:0c:29:ad:b0:f2
+Sending on   LPF/ens33/00:0c:29:ad:b0:f2
+Sending on   Socket/fallback
+DHCPDISCOVER on ens37 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> interval <span class="m">7</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x5b54a061<span class="o">)</span>
+DHCPDISCOVER on ens33 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> interval <span class="m">8</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x3d839dcc<span class="o">)</span>
+DHCPDISCOVER on ens37 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> interval <span class="m">18</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x5b54a061<span class="o">)</span>
+DHCPREQUEST on ens37 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x5b54a061<span class="o">)</span>
+DHCPOFFER from <span class="m">172</span>.18.0.1
+DHCPACK from <span class="m">172</span>.18.0.1 <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x5b54a061<span class="o">)</span>
+bound to <span class="m">172</span>.18.102.149 -- renewal in <span class="m">43001</span> seconds.
+DHCPDISCOVER on ens33 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> interval <span class="m">15</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x3d839dcc<span class="o">)</span>
+DHCPREQUEST on ens33 to <span class="m">255</span>.255.255.255 port <span class="m">67</span> <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x3d839dcc<span class="o">)</span>
+DHCPOFFER from <span class="m">192</span>.168.46.6
+DHCPACK from <span class="m">192</span>.168.46.6 <span class="o">(</span><span class="nv">xid</span><span class="o">=</span>0x3d839dcc<span class="o">)</span>
+bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">40804</span> seconds.
+</pre></div>
+</div>
+<p>从上面的测试中，我们可以看出来ens33这个hostonly网卡的ip绑定了192.168.46.100这个ip,是我们dhcp服务器range的第一个ip。</p>
+</div>
+<div class="section" id="dhcpd">
+<h2>1.1.6. dhcpd的详细参数<a class="headerlink" href="#dhcpd" title="Permalink to this headline">¶</a></h2>
+<p>关于dhcpd的详细配置，我们可以使用”man dhcpd.conf”命令快速获取帮助，我这里简单介绍下常用参数</p>
+</div>
+<div class="section" id="id5">
+<h2>1.1.7. dhcp的主要文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql dhcp                                # 查看dhcp server的主要文件</span>
+/etc/dhcp                                                       <span class="c1"># dhcp主配置目录</span>
+/etc/dhcp/dhcpd.conf                                            <span class="c1"># dhcpd的主配置文件</span>
+/etc/rc.d/init.d/dhcpd                                          <span class="c1"># dhcpd的init文件</span>
+/usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample                     <span class="c1"># dhcp的样例配置文件</span>
+/var/lib/dhcpd/dhcpd.leases                                     <span class="c1"># dhcp分配的ip记录信息文件</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql dhclient                            # dhcp客户端的主要文件</span>
+/sbin/dhclient                                                  <span class="c1"># dhcp客户端软件</span>
+/var/lib/dhclient                                               <span class="c1"># dhcp获取的ip记录信息文件</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Rsync同步/index.html" class="btn btn-neutral float-right" title="2. Rsync同步" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="1. dhcp服务" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.3. linux推送到window &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="2. Rsync同步" href="index.html"/>
+        <link rel="next" title="3. 自动化安装" href="../自动化安装/index.html"/>
+        <link rel="prev" title="2.2. linux同步到linux" href="linux和linux.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Rsync同步</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsync简介.html">2.1. rsync入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux和linux.html">2.2. linux同步到linux</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. linux推送到window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.3.1. 环境介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.3.2. 服务端的配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cygwin">2.3.2.1. 下载cygwin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rsyncd">2.3.3. 编辑rsyncd的配置文件</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2.3.3.1. 创建服务器密码文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsync">2.3.3.2. 启动rsync服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">2.3.3.3. 创建一个同步目录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">2.3.3.4. 修改目录权限。</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.3.4. 客户端配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">2.3.4.1. 安装rsync软件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">2.3.4.2. 先验证下服务端是否可以访问</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2.3.4.3. 创建同步密码文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2.3.4.4. 初步测试同步</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">2.3.5. 写脚本完成自动拉取服务器数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">2.3.6. 配置计划任务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">2. Rsync同步</a> &raquo;</li>
+        
+      <li>2.3. linux推送到window</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Rsync同步/window和linux.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linuxwindow">
+<h1>2.3. linux推送到window<a class="headerlink" href="#linuxwindow" title="Permalink to this headline">¶</a></h1>
+<p>在看这个文章的时候，请确保你看完了 <a class="reference internal" href="rsync简介.html#topics-rsync"><span class="std std-ref">rsync入门</span></a>。</p>
+<p>这个文章的主要讲解如何使用rsync来把window的是文件同步到linux上去。</p>
+<div class="section" id="id1">
+<h2>2.3.1. 环境介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>2个机器</li>
+<li>centos7(192.168.1.109)，windows10(192.168.1.104)</li>
+<li>centos(/app/web)===&gt;window(c:appweb)</li>
+</ul>
+<p>我们要完成的功能是centos7的数据更新后，自动推送到window机器上面。</p>
+<p>这里我们选择windows作为服务端，centos7作为客户端，然后centos7去监控本地数据推送给window数据。</p>
+</div>
+<div class="section" id="id2">
+<h2>2.3.2. 服务端的配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cygwin">
+<h3>2.3.2.1. 下载cygwin<a class="headerlink" href="#cygwin" title="Permalink to this headline">¶</a></h3>
+<p>windows下是没有rync的， 需要安装软件来提供rsync功能的。</p>
+<p>我们下载 <a class="reference external" href="http://cygwin.com/setup-x86_64.exe">cygwin64.exe</a> , 详细的地址可以访问 <a class="reference external" href="http://x.cygwin.com/">cywin官网</a></p>
+<p>安装步骤截图：</p>
+<img alt="../_images/第一步.png" src="../_images/第一步.png" />
+<img alt="../_images/第二步.png" src="../_images/第二步.png" />
+<img alt="../_images/第三步.png" src="../_images/第三步.png" />
+<img alt="../_images/第四步.png" src="../_images/第四步.png" />
+<img alt="../_images/第五步.png" src="../_images/第五步.png" />
+<img alt="../_images/第七步.png" src="../_images/第七步.png" />
+<img alt="../_images/安装rsync.png" src="../_images/安装rsync.png" />
+<img alt="../_images/第九步.png" src="../_images/第九步.png" />
+<img alt="../_images/第十步.png" src="../_images/第十步.png" />
+<img alt="../_images/完成.png" src="../_images/完成.png" />
+<img alt="../_images/验证rsync.png" src="../_images/验证rsync.png" />
+<p>安装完毕cygwin之后，其实就是一个linux环境， 剩下的工作和linux和linux同步基本没有太大区别了。</p>
+</div>
+</div>
+<div class="section" id="rsyncd">
+<h2>2.3.3. 编辑rsyncd的配置文件<a class="headerlink" href="#rsyncd" title="Permalink to this headline">¶</a></h2>
+<p>rsyncd的配置文件在“C:cygwin64etcrsyncd.conf”(需要自己创建conf文件)</p>
+<p>使用记事本编辑这个conf文件</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>uid = test
+gid = None
+user chroot = no
+max connections = 200
+timeout = 600
+pid file = /var/run/rsyncd.pid
+lock file = /var/run/rsyncd.lock
+log file = /var/run/rsyncd.log
+
+[web]
+path = /cygdriver/c/app/web/
+ignore errors
+read only = no
+list = no
+hosts allow = 192.168.1.0/24
+auth users = web
+secrets file = /etc/rsyncd.pass
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我的uid是test，你的根据你的情况进行修改，如果不知道可以打开cygwin64Terminal终端，输入 echo $USER查看。</p>
+</div>
+<div class="section" id="id3">
+<h3>2.3.3.1. 创建服务器密码文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>上面指定了密码文件位置为/etc/rsync.pass，我们需要创建这个文件。</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>web:web
+</pre></div>
+</div>
+<p>使用cygwin64Terminal修改这个密码文件的权限为600。</p>
+<img alt="../_images/修改权限.png" src="../_images/修改权限.png" />
+</div>
+<div class="section" id="rsync">
+<h3>2.3.3.2. 启动rsync服务<a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 使用cygwin64Terminal 去启动rsync的服务进程</span>
+rsync --daemon
+psaux aux <span class="p">|</span>grep rsync
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>2.3.3.3. 创建一个同步目录<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>这个目录用于后面客户端给推送</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ mkdir /app/web
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>2.3.3.4. 修改目录权限。<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>window的权限和我们安装的cygwin有点不同的，需要在window上给我们的用户权限，我的是test用户。</p>
+<img alt="../_images/修改目录权限.png" src="../_images/修改目录权限.png" />
+</div>
+</div>
+<div class="section" id="id6">
+<h2>2.3.4. 客户端配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>2.3.4.1. 安装rsync软件<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>查看是否安装</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web <span class="o">]</span>$ rpm -ql rsync
+<span class="o">[</span>root@localhost web<span class="o">]</span>$ yum -y install rsync
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>2.3.4.2. 先验证下服务端是否可以访问<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># telnet 192.168.1.104 873</span>
+Trying <span class="m">192</span>.168.1.104...
+Connected to <span class="m">192</span>.168.1.104.
+Escape character is <span class="s1">&#39;^]&#39;</span>.
+@RSYNCD: <span class="m">31</span>.0
+</pre></div>
+</div>
+<p>出现了RSYNC的字样说明服务端的rsync服务是开启的了。</p>
+</div>
+<div class="section" id="id9">
+<h3>2.3.4.3. 创建同步密码文件<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>由于我们的服务端有密码配置，客户端需要密码才能同步我们服务端的数据，且ip在服务端的运行范围内。</p>
+<p>密码文件格式： passwd</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 ~<span class="o">]</span>$ <span class="o">(</span><span class="nb">umask</span> <span class="m">066</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;web&quot;</span> &gt; /etc/rsync.pass<span class="o">)</span>
+<span class="o">[</span>root@centos66 ~<span class="o">]</span>$ cat /etc/rsync.pass
+web
+<span class="o">[</span>root@centos66 ~<span class="o">]</span>$ ll /etc/rsync.pass
+-rw------- <span class="m">1</span> root root <span class="m">4</span> Dec <span class="m">26</span> <span class="m">08</span>:23 /etc/rsync.pass
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这里我们只需要指定密码即可，不用用户名。</p>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>2.3.4.4. 初步测试同步<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># rsync -avz web@192.168.1.104::web --password-file=/etc/rsync.pass /app/web</span>
+receiving incremental file list
+file has vanished: <span class="s2">&quot;/proc&quot;</span> <span class="o">(</span>in web<span class="o">)</span>
+file has vanished: <span class="s2">&quot;/cygdrive/c&quot;</span> <span class="o">(</span>in web<span class="o">)</span>
+./
+新建 RTF 文档.rtf
+cygdrive/
+dev/
+
+sent <span class="m">124</span> bytes  received <span class="m">598</span> bytes  <span class="m">131</span>.27 bytes/sec
+total size is <span class="m">7</span>  speedup is <span class="m">0</span>.01
+rsync warning: some files vanished before they could be transferred <span class="o">(</span>code <span class="m">24</span><span class="o">)</span> at main.c<span class="o">(</span><span class="m">1518</span><span class="o">)</span> <span class="o">[</span><span class="nv">generator</span><span class="o">=</span><span class="m">3</span>.0.9<span class="o">]</span>
+<span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">4</span>
+dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="m">197121</span>   <span class="m">6</span> Jan <span class="m">14</span> <span class="m">10</span>:24 cygdrive
+dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="m">197121</span> <span class="m">238</span> Jan <span class="m">14</span> <span class="m">10</span>:24 dev
+-rwxrwx---. <span class="m">1</span> <span class="m">197609</span> <span class="m">197121</span>   <span class="m">0</span> Jan <span class="m">14</span> <span class="m">09</span>:41 test.txt
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这里我不知道为何也罢cygdrive和dev这个目录同步过来了。 不知道为啥的.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>2.3.5. 写脚本完成自动拉取服务器数据<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>安装inotify-tool工具</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 yum.repos.d<span class="o">]</span>$ yum install inotify-tools
+</pre></div>
+</div>
+<p>编写rsync脚本</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">user</span><span class="o">=</span>web
+<span class="nv">remote_module</span><span class="o">=</span>web
+<span class="nv">local_dir</span><span class="o">=</span>/app/web/
+<span class="nv">ip</span><span class="o">=</span><span class="m">192</span>.168.1.104
+<span class="nv">password_file</span><span class="o">=</span>/etc/rsync.pass
+
+
+/usr/bin/inotifywait -mrq --timefmt <span class="s1">&#39;%d/%m/%y%H:%M&#39;</span> --format <span class="s1">&#39;%T %w %f&#39;</span> -e modify,delete,create,attrib <span class="nv">$local_dir</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> DATE TIME DIR FILE<span class="p">;</span><span class="k">do</span>
+
+        <span class="nv">filechange</span><span class="o">=</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}${</span><span class="nv">FILE</span><span class="si">}</span>
+        <span class="c1"># 拉取服务器数据</span>
+        <span class="c1">#/usr/bin/rsync -avz --delete --progress --password-file=$password_file    $user@$ip::$remote_module   $local_dir &amp;</span>
+        <span class="c1"># 推送本机的数据</span>
+        /usr/bin/rsync -avz --delete --progress --password-file<span class="o">=</span><span class="nv">$password_file</span>     <span class="nv">$local_dir</span> <span class="nv">$user</span>@<span class="nv">$ip</span>::<span class="nv">$remote_module</span>   <span class="p">&amp;</span>
+
+        <span class="nv">date_str</span><span class="o">=</span>/var/log/rsync_<span class="k">$(</span>date <span class="s2">&quot;+%F&quot;</span><span class="k">)</span>.log
+        <span class="nb">echo</span> <span class="s2">&quot;At </span><span class="si">${</span><span class="nv">TIME</span><span class="si">}</span><span class="s2"> on </span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">, file </span><span class="nv">$filechange</span><span class="s2"> was backed up via rsynce&quot;</span> &gt;&gt; <span class="nv">$date_str</span> <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h2>2.3.6. 配置计划任务<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>将上面的脚本放到while true里面即可，或者修改脚本为sysv脚本。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../自动化安装/index.html" class="btn btn-neutral float-right" title="3. 自动化安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linux和linux.html" class="btn btn-neutral" title="2.2. linux同步到linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

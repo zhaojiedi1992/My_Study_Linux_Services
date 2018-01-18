@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.3. cobble自动化安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="3. 自动化安装" href="index.html"/>
+        <link rel="next" title="4. 自动化运维" href="../自动化运维/index.html"/>
+        <link rel="prev" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 自动化安装</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="光盘自动化安装.html">3.1. 光盘自动化安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pxe+kickstart自动化安装.html">3.2. pxe+kickstart自动化安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.3. cobble自动化安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.3.1. 安装前准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.3.2. 安装软件包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cobbler">3.3.3. cobbler目录介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.3.4. cobbler常用命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.3.5. cobbler重要参数设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3.6. 修改配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.3.7. 导入镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.3.8. 系统网络安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web">3.3.9. 关于web界面的</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">3. 自动化安装</a> &raquo;</li>
+        
+      <li>3.3. cobble自动化安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/自动化安装/cobble自动化安装.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cobble">
+<span id="topics-cobble"></span><h1>3.3. cobble自动化安装<a class="headerlink" href="#cobble" title="Permalink to this headline">¶</a></h1>
+<p>前面2个实验 <a class="reference internal" href="光盘自动化安装.html#topics-cdrom"><span class="std std-ref">光盘自动化安装</span></a> 和 <a class="reference internal" href="pxe+kickstart自动化安装.html#topics-pxe"><span class="std std-ref">pxe+kickstart自动化安装</span></a> 的自动化安装， 不过还是比较麻烦的，
+这里使用cobble来自动化安装。</p>
+<p>下面的操作在centos7上操作</p>
+<div class="section" id="id1">
+<h2>3.3.1. 安装前准备<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>关闭防火墙和selinux</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl stop firewalld</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl disable firewalld</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># getenforce</span>
+Enforcing
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># setenforce 0</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sed -i &#39;s@SELINUX=enforcing@SELINUX=disabled@&#39; /etc/sysconfig/selinux</span>
+</pre></div>
+</div>
+<p>配置一个静态ip，我们需要为别的客户机器分发ip的，必须保证自己的ip是静态的。</p>
+</div>
+<div class="section" id="id2">
+<h2>3.3.2. 安装软件包<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install cobbler-web cobbler dhcp -y</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl start cobblerd</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl enable cobblerd</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/cobblerd.service to /usr/lib/systemd/system/cobblerd.service.
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl start httpd</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl enable httpd</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">centos6系统安装cobbler-web会无法访问的，依赖一些包的。</p>
+</div>
+</div>
+<div class="section" id="cobbler">
+<h2>3.3.3. cobbler目录介绍<a class="headerlink" href="#cobbler" title="Permalink to this headline">¶</a></h2>
+<p>一些cobbler重要目录：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>/etc/cobbler/dhcp.template                      # dhcp模板文件
+/etc/cobbler/iso                                # iso模板配置文件
+/etc/cobbler/iso/buildiso.template              # 构建iso模板
+/etc/cobbler/modules.conf                       # 模块配置文件
+/etc/cobbler/named.template                     # dns配置文件
+/etc/cobbler/power                              # 电源相关配置
+/etc/cobbler/pxe                                # pxe模板文件
+/etc/cobbler/settings                           # 主配置文件
+/etc/cobbler/tftpd.template                     # tfp配置模板
+/etc/cobbler/users.conf                         # web服务授权配置文件
+/etc/cobbler/users.digest                       # web访问的用户名和密码配置
+/var/lib/cobbler/config                         # 存放distros,system,profile的配置文件
+/var/lib/cobbler/kickstart                      # 用户默认的kickstart文件
+/var/lib/cobbler/loaders                        # 存放各种引导程序
+/var/lib/cobbler/ks_mirror                      # 系统所有数据
+/var/lib/cobbler/images                         # kernel和initrd镜像可用
+/var/www/cobbler/repo_mirror                    # yum仓库存储目录
+/var/log/cobbler/installing                     # 客户端安装日志
+/var/log/cobbler/cobbler.log                    # cobbler日志
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>3.3.4. cobbler常用命令<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>cobbler check               # 核对当前设置是否有问题
+cobbler list                # 列出所有元素
+cobbler report              # 列出元素的详细信息
+cobbler sync                # 同步配置到数据目录
+cobbler reposync            # 同步yum仓库
+cobbler distro              # 查看导入的系统信息
+cobbler system              # 查看添加的系统信息
+cobbler profile             # 查看配置信息
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>3.3.5. cobbler重要参数设置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>default_password_crypted    # 默认root密码
+manage_dhcp                 # 是否cobbler管理dhcp
+manage_tftpd                # 是否cobbler管理tftpd
+next_server                 # tftp服务器的ip地址
+server                      # cobbler服务器的ip地址
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>3.3.6. 修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cobbler check</span>
+The following are potential configuration items that you may want to fix:
+
+<span class="m">1</span> : The <span class="s1">&#39;server&#39;</span> field in /etc/cobbler/settings must be <span class="nb">set</span> to something other than localhost, or kickstarting features will not work.  This should be a resolvable hostname or IP <span class="k">for</span> the boot server as reachable by all machines that will use it.
+<span class="m">2</span> : For PXE to be functional, the <span class="s1">&#39;next_server&#39;</span> field in /etc/cobbler/settings must be <span class="nb">set</span> to something other than <span class="m">127</span>.0.0.1, and should match the IP of the boot server on the PXE network.
+<span class="m">3</span> : SELinux is enabled. Please review the following wiki page <span class="k">for</span> details on ensuring cobbler works correctly in your SELinux environment:
+    https://github.com/cobbler/cobbler/wiki/Selinux
+<span class="m">4</span> : change <span class="s1">&#39;disable&#39;</span> to <span class="s1">&#39;no&#39;</span> in /etc/xinetd.d/tftp
+<span class="m">5</span> : Some network boot-loaders are missing from /var/lib/cobbler/loaders, you may run <span class="s1">&#39;cobbler get-loaders&#39;</span> to download them, or, <span class="k">if</span> you only want to handle x86/x86_64 netbooting, you may ensure that you have installed a *recent* version of the syslinux package installed and can ignore this message entirely.  Files in this directory, should you want to support all architectures, should include pxelinux.0, menu.c32, elilo.efi, and yaboot. The <span class="s1">&#39;cobbler get-loaders&#39;</span> <span class="nb">command</span> is the easiest way to resolve these requirements.
+<span class="m">6</span> : <span class="nb">enable</span> and start rsyncd.service with systemctl
+<span class="m">7</span> : debmirror package is not installed, it will be required to manage debian deployments and repositories
+<span class="m">8</span> : The default password used by the sample templates <span class="k">for</span> newly installed machines <span class="o">(</span>default_password_crypted in /etc/cobbler/settings<span class="o">)</span> is still <span class="nb">set</span> to <span class="s1">&#39;cobbler&#39;</span> and should be changed, try: <span class="s2">&quot;openssl passwd -1 -salt &#39;random-phrase-here&#39; &#39;your-password-here&#39;&quot;</span> to generate new one
+<span class="m">9</span> : fencing tools were not found, and are required to use the <span class="o">(</span>optional<span class="o">)</span> power management features. install cman or fence-agents to use them
+
+Restart cobblerd and <span class="k">then</span> run <span class="s1">&#39;cobbler sync&#39;</span> to apply changes.
+</pre></div>
+</div>
+<p>上面提示了几个错误，主要总结下如下</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>server字段在/etc/cobbler/settings配置文件没有设置为本机的ip
+next_server字段没有设置为指定ip
+selinux是启用的（这个我们是关闭的，不管他）
+启用tftp服务
+运行cobbler get-loaders命令下载loader文件
+启用rsyncd.service
+debmirror包没有安装(我们不按照deb系统，这个就可以忽略了）
+默认密码没有修改
+fencing工具没有发现
+我们没有自己配置dhcp服务，想让cobbler配置，我们修改manage_dhcp
+
+修改完毕后重启cobblerd服务，使用cobbler sync同步。
+
+接下来我们对这个上面的几个错误进行修改。
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^server&quot;</span>
+server: <span class="m">127</span>.0.0.1
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># ip address show ens33 |grep inet</span>
+    inet <span class="m">192</span>.168.46.7/24 brd <span class="m">192</span>.168.46.255 scope global ens33
+    inet6 fe80::ce21:b5ad:bc87:8642/64 scope link
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># sed -i &#39;s@server: 127.0.0.1@server: 192.168.46.7@&#39; settings</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;next_server&quot;</span>
+next_server: <span class="m">192</span>.168.46.7
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl enable tftp</span>
+Created symlink from /etc/systemd/system/sockets.target.wants/tftp.socket to /usr/lib/systemd/system/tftp.socket.
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl start tftp</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler get-loaders</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl start rsyncd.service</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl enable rsyncd</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/rsyncd.service to /usr/lib/systemd/system/rsyncd.service.
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^default_password_crypted&quot;</span>
+default_password_crypted: <span class="s2">&quot;</span><span class="nv">$1$mF86</span><span class="s2">/UHC</span><span class="nv">$WvcIcX2t6crBz2onWxyac</span><span class="s2">.&quot;</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^default_password_crypted&quot;  -B 5</span>
+<span class="c1"># default is &quot;cobbler&quot; and cobbler check will warn if</span>
+<span class="c1"># this is not changed.</span>
+<span class="c1"># The simplest way to change the password is to run</span>
+<span class="c1"># openssl passwd -1</span>
+<span class="c1"># and put the output between the &quot;&quot; below.</span>
+default_password_crypted: <span class="s2">&quot;</span><span class="nv">$1$mF86</span><span class="s2">/UHC</span><span class="nv">$WvcIcX2t6crBz2onWxyac</span><span class="s2">.&quot;</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># openssl passwd -1</span>
+Password:
+Verifying - Password:
+<span class="nv">$1$bwFRrz9M$sCpsiRXZ2zHzzLLa1nAzD1</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># sed -i &#39;s@$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.@$1$bwFRrz9M$sCpsiRXZ2zHzzLLa1nAzD1@&#39; settings</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^default_password_crypted&quot;</span>
+default_password_crypted: <span class="s2">&quot;</span><span class="nv">$1$bwFRrz9M$sCpsiRXZ2zHzzLLa1nAzD1</span><span class="s2">&quot;</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^manage_dhcp&quot;</span>
+manage_dhcp: <span class="m">0</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># sed -i &#39;s@manage_dhcp: 0@manage_dhcp: 1@&#39; settings</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl restart cobblerd</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler check</span>
+The following are potential configuration items that you may want to fix:
+
+<span class="m">1</span> : SELinux is enabled. Please review the following wiki page <span class="k">for</span> details on ensuring cobbler works correctly in your SELinux environment:
+    https://github.com/cobbler/cobbler/wiki/Selinux
+<span class="m">2</span> : change <span class="s1">&#39;disable&#39;</span> to <span class="s1">&#39;no&#39;</span> in /etc/xinetd.d/tftp
+<span class="m">3</span> : debmirror package is not installed, it will be required to manage debian deployments and repositories
+<span class="m">4</span> : fencing tools were not found, and are required to use the <span class="o">(</span>optional<span class="o">)</span> power management features. install cman or fence-agents to use them
+
+Restart cobblerd and <span class="k">then</span> run <span class="s1">&#39;cobbler sync&#39;</span> to apply changes.
+
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># sed -i &#39;s@192.168.1@192.168.46@&#39; dhcp.template                                       # 这个模板文件根据自己的ip修改即可</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># systemctl restart cobblerd</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler sync</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>3.3.7. 导入镜像<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>我们在原有centos7光盘的基础上挂载一个centos6</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+└─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># for i in `find /sys/devices -name scan` ; do echo &quot;- - -&quot; &gt; $i ; done</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+└─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom
+sr1              <span class="m">11</span>:1    <span class="m">1</span>  <span class="m">5</span>.8G  <span class="m">0</span> rom
+
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># mkdir /mnt/centos{6,7}</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># mount /dev/sr0 /mnt/centos7</span>
+mount: /dev/sr0 is write-protected, mounting read-only
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># mount /dev/sr1 /mnt/centos6/</span>
+mount: /dev/sr1 is write-protected, mounting read-only
+
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler import --name centos-6.9-x86_64 --arch=x86_64 --path /mnt/centos6/</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler import --name centos-7.4-x86_64 --arch=x86_64 --path /mnt/centos7/</span>
+
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler profile list</span>
+centos-6.9-i386
+centos-6.9-x86_64
+centos-7.4-x86_64
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler profile remove centos-6.9-i386</span>
+--name is required
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler profile remove --name centos-6.9-i386</span>
+<span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cobbler profile list</span>
+centos-6.9-x86_64
+centos-7.4-x86_64
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果想使用自己的ks文件，可以在import的时候指定–kickstart=绝对路径的ks位置。</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>3.3.8. 系统网络安装<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>进入bios设置启动项目硬盘第一个，cdrom第二个，网络第三个即可。</p>
+<p>安装菜单页面：</p>
+<img alt="../_images/cobbler启动界面.png" src="../_images/cobbler启动界面.png" />
+</div>
+<div class="section" id="web">
+<h2>3.3.9. 关于web界面的<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h2>
+<p>web的额外配置</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># vim /etc/cobbler/modules.conf</span>
+<span class="c1"># 修改如下信息</span>
+<span class="nv">module</span> <span class="o">=</span> authn_pam
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># yum install cobbler-web</span>
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># service cobblerd restart</span>
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># useradd cobbler</span>
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># passwd cobbler</span>
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># vim /etc/cobbler/users.conf</span>
+<span class="c1"># 修改admin=创建的用户</span>
+<span class="nv">admin</span> <span class="o">=</span> <span class="s2">&quot;cobbler&quot;</span>
+</pre></div>
+</div>
+<p>访问测试</p>
+<p>浏览器输入https://192.168.46.6/cobbler_web</p>
+<p>登陆图：</p>
+<img alt="../_images/web登陆界面.png" src="../_images/web登陆界面.png" />
+<p>主页：</p>
+<img alt="../_images/web主界面.png" src="../_images/web主界面.png" />
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../自动化运维/index.html" class="btn btn-neutral float-right" title="4. 自动化运维" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pxe+kickstart自动化安装.html" class="btn btn-neutral" title="3.2. pxe+kickstart自动化安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

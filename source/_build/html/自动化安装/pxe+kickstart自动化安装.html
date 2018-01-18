@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.2. pxe+kickstart自动化安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="3. 自动化安装" href="index.html"/>
+        <link rel="next" title="3.3. cobble自动化安装" href="cobble自动化安装.html"/>
+        <link rel="prev" title="3.1. 光盘自动化安装" href="光盘自动化安装.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 自动化安装</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="光盘自动化安装.html">3.1. 光盘自动化安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.2. pxe+kickstart自动化安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dhcp">3.2.1. 配置dhcp服务器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tfp-server">3.2.2. tfp-server的下载安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpd">3.2.3. 安装httpd服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.2.4. 挂载光盘</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ks">3.2.5. 构建ks文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tftp">3.2.6. 填充tftp目录内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.2.7. 系统网络安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cobble自动化安装.html">3.3. cobble自动化安装</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">3. 自动化安装</a> &raquo;</li>
+        
+      <li>3.2. pxe+kickstart自动化安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/自动化安装/pxe+kickstart自动化安装.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pxe-kickstart">
+<span id="topics-pxe"></span><h1>3.2. pxe+kickstart自动化安装<a class="headerlink" href="#pxe-kickstart" title="Permalink to this headline">¶</a></h1>
+<p>pxe的工作原理：</p>
+<ol class="arabic simple">
+<li>Client向PXE Server上的DHCP发送IP地址请求消息，DHCP检测Client是否合法
+（主要是检测Client的网卡MAC地址），如果合法则返回Client的IP地址，
+同时将启动文件pxelinux.0的位置信息一并传送给Client</li>
+<li>Client向PXE Server上的TFTP发送获取pxelinux.0请求消息，TFTP接收到消息之后
+再向Client发送pxelinux.0大小信息，试探Client是否满意，当TFTP收到Client发回的同意大小信息之后，
+正式向Client发送pxelinux.0</li>
+<li>Client执行接收到的pxelinux.0文件</li>
+<li>Client向TFTP Server发送针对本机的配置信息文件（在TFTP 服务的pxelinux.cfg目录下），
+TFTP将配置文件发回Client，继而Client根据配置文件执行后续操作。</li>
+<li>Client向TFTP发送Linux内核请求信息，TFTP接收到消息之后将内核文件发送给Client</li>
+<li>Client向TFTP发送根文件请求信息，TFTP接收到消息之后返回Linux根文件系统</li>
+<li>Client启动Linux内核</li>
+<li>Client下载安装源文件，读取自动化安装脚本</li>
+</ol>
+<div class="section" id="dhcp">
+<h2>3.2.1. 配置dhcp服务器<a class="headerlink" href="#dhcp" title="Permalink to this headline">¶</a></h2>
+<p>详细的可以参考 <a class="reference internal" href="../DHCP/dhcp.html#topics-dhcp"><span class="std std-ref">DHCP服务搭建</span></a></p>
+<p>我们需要在原有的dhcp的配置稍作修改，最终dhcp配置如下 ：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># vim /etc/dhcp/dhcpd.conf</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cat /etc/dhcp/dhcpd.conf</span>
+<span class="c1"># dhcpd.conf</span>
+<span class="c1">#</span>
+<span class="c1"># Sample configuration file for ISC dhcpd</span>
+<span class="c1">#</span>
+
+<span class="c1"># option definitions common to all supported networks...</span>
+option domain-name <span class="s2">&quot;linuxpanda.tech&quot;</span><span class="p">;</span>
+option domain-name-servers ns1.linuxpanda.tech, ns2.linuxpanda.tech<span class="p">;</span>
+
+default-lease-time <span class="m">86400</span><span class="p">;</span>
+max-lease-time <span class="m">864000</span><span class="p">;</span>
+
+subnet <span class="m">192</span>.168.46.0 netmask <span class="m">255</span>.255.255.0 <span class="o">{</span>
+range dynamic-bootp <span class="m">192</span>.168.46.100 <span class="m">192</span>.168.46.200 <span class="p">;</span>
+option routers <span class="m">192</span>.168.46.6 <span class="p">;</span>
+filename <span class="s2">&quot;pxelinux.0&quot;</span><span class="p">;</span>
+next-server <span class="m">192</span>.168.46.6<span class="p">;</span>
+<span class="o">}</span>
+
+host boss <span class="o">{</span>
+hardware ethernet <span class="m">08</span>:00:07:26:c0:a5<span class="p">;</span>
+fixed-address <span class="m">192</span>.168.46.2 <span class="p">;</span>
+<span class="o">}</span>
+
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># service dhcpd restart</span>
+Shutting down dhcpd:                                       <span class="o">[</span>  OK  <span class="o">]</span>
+Starting dhcpd:                                            <span class="o">[</span>  OK  <span class="o">]</span>
+</pre></div>
+</div>
+<p>其中filename指明了引导文件名称，next-server提供了文件服务器的地址。</p>
+</div>
+<div class="section" id="tfp-server">
+<h2>3.2.2. tfp-server的下载安装<a class="headerlink" href="#tfp-server" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install tftp-server -y</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql tftp-server</span>
+/etc/xinetd.d/tftp
+/usr/sbin/in.tftpd
+............其他文件.................
+/var/lib/tftpboot
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># service xinetd start</span>
+Starting xinetd:                                           <span class="o">[</span>  OK  <span class="o">]</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chkconfig tftp on</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ss -tunl |grep 69</span>
+udp    UNCONN     <span class="m">0</span>      <span class="m">0</span>                      *:69
+</pre></div>
+</div>
+<p>tftp依赖于xinet的，我们需要启动下xinetd 。</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">这个地方只能使用tftp-server，不能使用其他的ftp软件。</p>
+</div>
+</div>
+<div class="section" id="httpd">
+<h2>3.2.3. 安装httpd服务<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost tftpboot]# yum install httpd
+[root@localhost tftpboot]# mkdir /var/www/html/centos/{6,7} -pv
+[root@localhost tftpboot]# chkconfig  httpd on
+[root@localhost tftpboot]# service httpd start
+Starting httpd: httpd: Could not reliably determine the server&#39;s fully qualified domain name, using localhost.localdomain for ServerName
+                                                        [  OK  ]
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">上面提示域名有点问题，暂时不用关心。</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>3.2.4. 挂载光盘<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>我们之前添加过centos6的光盘，这里再添加一个centos7的光盘。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># ls /dev/sr*                                   # 查看我们添加的光盘</span>
+/dev/sr0
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># find /sys/devices/ -name scan                # 找scan文件</span>
+/sys/devices/pci0000:00/0000:00:07.1/host1/scsi_host/host1/scan
+/sys/devices/pci0000:00/0000:00:07.1/host2/scsi_host/host2/scan
+/sys/devices/pci0000:00/0000:00:10.0/host0/scsi_host/host0/scan
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># for i in `find /sys/devices/ -name scan` ; do echo &quot;- - -&quot; &gt; $i ; done # 启用下硬件识别</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># ls /dev/sr*                                  # 再次查看光盘信息，发现光盘已经被识别出来了。</span>
+/dev/sr0  /dev/sr1
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># mount /dev/sr0 /var/www/html/centos/6/       # 挂载centos6</span>
+mount: block device /dev/sr0 is write-protected, mounting read-only
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># mount /dev/sr1 /var/www/html/centos/7/       # 挂载centos7</span>
+mount: block device /dev/sr1 is write-protected, mounting read-only
+</pre></div>
+</div>
+<p>我们这里都挂载好了，需要在宿主机上测试下httpd服务，宿主机测试http://192.168.46.6/centos/是否能访问。</p>
+</div>
+<div class="section" id="ks">
+<h2>3.2.5. 构建ks文件<a class="headerlink" href="#ks" title="Permalink to this headline">¶</a></h2>
+<p>我这里需要构建4个ks文件， centos6系统2个，centos7系统2个。</p>
+<p>我这里在centos6操作,centos7的ks文件需要在centos7上制作，远程复制到这个机器上来。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># cat ks6-mini.cfg</span>
+<span class="c1"># Kickstart file automatically generated by anaconda.</span>
+
+<span class="c1">#version=DEVEL</span>
+install
+url --url<span class="o">=</span>http://192.168.46.6/centos/6
+reboot
+text
+<span class="c1">#xconfig  --startxonboot</span>
+<span class="c1">#eula --agreed</span>
+lang en_US.UTF-8
+firstboot --disable
+keyboard us
+network --onboot no --device eth0 --bootproto dhcp --noipv6
+rootpw  --iscrypted <span class="nv">$6$NE46h0OLL1e8dgDc$6</span>Kpz4orvUP87oYdbaHefWtUbD12ITS5RIJPouwHn.LrluP2T9280aoFf9Cs5yvnJ9XIZJHnlV26oa1ECe39Bs1
+firewall --disabled
+authconfig --enableshadow --passalgo<span class="o">=</span>sha512
+selinux --disabled
+timezone Asia/Shanghai
+bootloader --location<span class="o">=</span>mbr --driveorder<span class="o">=</span>sda --append<span class="o">=</span><span class="s2">&quot;crashkernel=auto rhgb quiet&quot;</span>
+<span class="c1"># The following is the partition information you requested</span>
+<span class="c1"># Note that any partitions you deleted are not expressed</span>
+<span class="c1"># here so unless you clear all partitions first, this is</span>
+<span class="c1"># not guaranteed to work</span>
+clearpart --all --drives<span class="o">=</span>sda
+zerombr
+
+part /boot --fstype<span class="o">=</span>ext4 --size<span class="o">=</span><span class="m">500</span>
+part pv.008002  --size<span class="o">=</span><span class="m">200000</span>
+volgroup VolGroup --pesize<span class="o">=</span><span class="m">4096</span> pv.008002
+logvol /home --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_home --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">100</span>
+logvol / --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_root --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1024</span> --maxsize<span class="o">=</span><span class="m">51200</span>
+logvol swap --name<span class="o">=</span>lv_swap --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1984</span> --maxsize<span class="o">=</span><span class="m">1984</span>
+
+
+<span class="c1">#repo --name=&quot;CentOS&quot;  --baseurl=cdrom:sr0 --cost=100</span>
+
+%packages
+@core
+@server-policy
+@workstation-policy
+%end
+
+%post
+touch /root/post.file
+%end
+
+
+<span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># cat ks6-desktop.cfg</span>
+<span class="c1"># Kickstart file automatically generated by anaconda.</span>
+
+<span class="c1">#version=DEVEL</span>
+install
+url --url<span class="o">=</span>http://192.168.46.6/centos/6
+reboot
+text
+xconfig  --startxonboot
+<span class="c1">#eula --agreed</span>
+lang en_US.UTF-8
+firstboot --disable
+keyboard us
+network --onboot no --device eth0 --bootproto dhcp --noipv6
+rootpw  --iscrypted <span class="nv">$6$NE46h0OLL1e8dgDc$6</span>Kpz4orvUP87oYdbaHefWtUbD12ITS5RIJPouwHn.LrluP2T9280aoFf9Cs5yvnJ9XIZJHnlV26oa1ECe39Bs1
+firewall --disabled
+authconfig --enableshadow --passalgo<span class="o">=</span>sha512
+selinux --disabled
+timezone Asia/Shanghai
+bootloader --location<span class="o">=</span>mbr --driveorder<span class="o">=</span>sda --append<span class="o">=</span><span class="s2">&quot;crashkernel=auto rhgb quiet&quot;</span>
+<span class="c1"># The following is the partition information you requested</span>
+<span class="c1"># Note that any partitions you deleted are not expressed</span>
+<span class="c1"># here so unless you clear all partitions first, this is</span>
+<span class="c1"># not guaranteed to work</span>
+clearpart --all --drives<span class="o">=</span>sda
+zerombr
+
+part /boot --fstype<span class="o">=</span>ext4 --size<span class="o">=</span><span class="m">500</span>
+part pv.008002  --size<span class="o">=</span><span class="m">200000</span>
+volgroup VolGroup --pesize<span class="o">=</span><span class="m">4096</span> pv.008002
+logvol /home --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_home --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">100</span>
+logvol / --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_root --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1024</span> --maxsize<span class="o">=</span><span class="m">51200</span>
+logvol swap --name<span class="o">=</span>lv_swap --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1984</span> --maxsize<span class="o">=</span><span class="m">1984</span>
+
+
+<span class="c1">#repo --name=&quot;CentOS&quot;  --baseurl=cdrom:sr0 --cost=100</span>
+
+%packages
+@base
+@core
+@debugging
+@basic-desktop
+@desktop-platform
+@directory-client
+@fonts
+@general-desktop
+@graphical-admin-tools
+@input-methods
+@internet-applications
+@internet-browser
+@legacy-x
+@network-file-system-client
+@x11
+%end
+
+%post
+touch /root/post.file
+%end
+
+<span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># cat ks7-mini.cfg</span>
+<span class="c1">#version=DEVEL</span>
+<span class="c1"># System authorization information</span>
+auth --enableshadow --passalgo<span class="o">=</span>sha512
+<span class="c1"># Use CDROM installation media</span>
+url --url<span class="o">=</span>http://192.168.46.6/centos/7
+<span class="c1"># Use graphical install</span>
+firewall --disabled
+selinux --disabled
+text
+reboot
+<span class="c1"># Run the Setup Agent on first boot</span>
+firstboot --disable
+ignoredisk --only-use<span class="o">=</span>sda
+<span class="c1"># Keyboard layouts</span>
+keyboard --vckeymap<span class="o">=</span>us --xlayouts<span class="o">=</span><span class="s1">&#39;us&#39;</span>
+<span class="c1"># System language</span>
+lang en_US.UTF-8
+
+<span class="c1"># Network information</span>
+network  --bootproto<span class="o">=</span>dhcp --device<span class="o">=</span>ens33 --onboot<span class="o">=</span>on --ipv6<span class="o">=</span>auto --activate
+network  --hostname<span class="o">=</span>centos7.magedu.com
+
+<span class="c1"># Root password</span>
+rootpw --iscrypted <span class="nv">$6$pjgOq</span>.zzypK4qeve<span class="nv">$KrCLntLJyyvUPWElz5BIVztGXDov8Vj</span>.gJaNTQ6gzeUHeC0KTeiMLPzScbCja37wJ58mzGgKeGooAMqZD7A2h/
+<span class="c1"># System services</span>
+services --disabled<span class="o">=</span><span class="s2">&quot;chronyd&quot;</span>
+<span class="c1"># System timezone</span>
+timezone Asia/Shanghai --isUtc --nontp
+user --name<span class="o">=</span>zhao --password<span class="o">=</span><span class="nv">$6$4</span>FY9k21GGia3q98C<span class="nv">$p8NRwX2</span>/9w/MEqi03ASVe9aoyehDLRsnqV6QrkM3o38nLQW5Ox7cRvFWg8weQYoyPz85ro8D000tnVgGz225q0 --iscrypted --gecos<span class="o">=</span><span class="s2">&quot;zhao&quot;</span>
+<span class="c1"># X Window System configuration information</span>
+xconfig  --startxonboot
+<span class="c1"># System bootloader configuration</span>
+bootloader --location<span class="o">=</span>mbr --boot-drive<span class="o">=</span>sda
+<span class="c1"># Partition clearing information</span>
+zerombr
+clearpart --all --initlabel
+autopart --type<span class="o">=</span>lvm
+<span class="c1"># Disk partitioning information</span>
+<span class="c1">#part swap --fstype=&quot;swap&quot; --ondisk=sda --size=2048</span>
+<span class="c1">#part /boot --fstype=&quot;xfs&quot; --ondisk=sda --size=1024</span>
+<span class="c1">#part / --fstype=&quot;xfs&quot; --ondisk=sda --size=51200</span>
+<span class="c1">#part /app --fstype=&quot;xfs&quot; --ondisk=sda --size=20480</span>
+eula --agreed
+%packages
+@^minimal
+@core
+%end
+
+%addon com_redhat_kdump --disable --reserve-mb<span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+
+%end
+
+%anaconda
+pwpolicy root --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --notempty
+pwpolicy user --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --emptyok
+pwpolicy luks --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --notempty
+%end
+
+<span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># cat ks7-desktop.cfg</span>
+<span class="c1">#version=DEVEL</span>
+<span class="c1"># System authorization information</span>
+auth --enableshadow --passalgo<span class="o">=</span>sha512
+<span class="c1"># Use CDROM installation media</span>
+url --url<span class="o">=</span>http://192.168.46.6/centos/7
+<span class="c1"># Use graphical install</span>
+firewall --disabled
+selinux --disabled
+text
+reboot
+<span class="c1"># Run the Setup Agent on first boot</span>
+firstboot --disable
+ignoredisk --only-use<span class="o">=</span>sda
+<span class="c1"># Keyboard layouts</span>
+keyboard --vckeymap<span class="o">=</span>us --xlayouts<span class="o">=</span><span class="s1">&#39;us&#39;</span>
+<span class="c1"># System language</span>
+lang en_US.UTF-8
+
+<span class="c1"># Network information</span>
+network  --bootproto<span class="o">=</span>dhcp --device<span class="o">=</span>ens33 --onboot<span class="o">=</span>on --ipv6<span class="o">=</span>auto --activate
+network  --hostname<span class="o">=</span>centos7.magedu.com
+
+<span class="c1"># Root password</span>
+rootpw --iscrypted <span class="nv">$6$pjgOq</span>.zzypK4qeve<span class="nv">$KrCLntLJyyvUPWElz5BIVztGXDov8Vj</span>.gJaNTQ6gzeUHeC0KTeiMLPzScbCja37wJ58mzGgKeGooAMqZD7A2h/
+<span class="c1"># System services</span>
+services --disabled<span class="o">=</span><span class="s2">&quot;chronyd&quot;</span>
+<span class="c1"># System timezone</span>
+timezone Asia/Shanghai --isUtc --nontp
+user --name<span class="o">=</span>zhao --password<span class="o">=</span><span class="nv">$6$4</span>FY9k21GGia3q98C<span class="nv">$p8NRwX2</span>/9w/MEqi03ASVe9aoyehDLRsnqV6QrkM3o38nLQW5Ox7cRvFWg8weQYoyPz85ro8D000tnVgGz225q0 --iscrypted --gecos<span class="o">=</span><span class="s2">&quot;zhao&quot;</span>
+<span class="c1"># X Window System configuration information</span>
+xconfig  --startxonboot
+<span class="c1"># System bootloader configuration</span>
+bootloader --location<span class="o">=</span>mbr --boot-drive<span class="o">=</span>sda
+<span class="c1"># Partition clearing information</span>
+zerombr
+clearpart --all --initlabel
+autopart --type<span class="o">=</span>lvm
+<span class="c1"># Disk partitioning information</span>
+<span class="c1">#part swap --fstype=&quot;swap&quot; --ondisk=sda --size=2048</span>
+<span class="c1">#part /boot --fstype=&quot;xfs&quot; --ondisk=sda --size=1024</span>
+<span class="c1">#part / --fstype=&quot;xfs&quot; --ondisk=sda --size=51200</span>
+<span class="c1">#part /app --fstype=&quot;xfs&quot; --ondisk=sda --size=20480</span>
+eula --agreed
+%packages
+@base
+@core
+@dial-up
+@fonts
+@gnome-desktop
+@guest-agents
+@guest-desktop-agents
+@internet-browser
+@multimedia
+@network-file-system-client
+@networkmanager-submodules
+@x11
+%end
+
+%addon com_redhat_kdump --disable --reserve-mb<span class="o">=</span><span class="s1">&#39;auto&#39;</span>
+
+%end
+
+%anaconda
+pwpolicy root --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --notempty
+pwpolicy user --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --emptyok
+pwpolicy luks --minlen<span class="o">=</span><span class="m">6</span> --minquality<span class="o">=</span><span class="m">1</span> --notstrict --nochanges --notempty
+%end
+
+%post
+systemctl set-default multi-user.target
+systemctl disable initial-setup-graphical.service
+%end
+
+<span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># ll                                    # 这里发现权限有点问题，400的文件权限apache是无法访问的，修改下。</span>
+total <span class="m">16</span>
+-rw-------. <span class="m">1</span> root root <span class="m">1479</span> Jan <span class="m">10</span> <span class="m">23</span>:14 ks6-desktop.cfg
+-rw-------. <span class="m">1</span> root root <span class="m">1300</span> Jan <span class="m">10</span> <span class="m">22</span>:51 ks6-mini.cfg
+-rw-r--r--. <span class="m">1</span> root root <span class="m">1927</span> Jan <span class="m">10</span> <span class="m">23</span>:13 ks7-desktop.cfg
+-rw-r--r--. <span class="m">1</span> root root <span class="m">1774</span> Jan <span class="m">10</span> <span class="m">23</span>:10 ks7-mini.cfg
+<span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># chmod 644 *</span>
+</pre></div>
+</div>
+<p>一共四个文件。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">ks文件的编写可以手工编写的，建议是使用system-config-kickstart图形界面加载/root/anaconda-ks.cfg修改另存。</p>
+</div>
+</div>
+<div class="section" id="tftp">
+<h2>3.2.6. 填充tftp目录内容<a class="headerlink" href="#tftp" title="Permalink to this headline">¶</a></h2>
+<p>pxe的配置需要几个文件的：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>initrd.img              # 根文件系统
+vmlinuz                 # 内核
+menu.c32                # 启动菜单
+pxelinux.0              # pxelinux
+pxelinux.cfg/default    # pxelinux配置文件
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ks<span class="o">]</span><span class="c1"># cd /var/lib/tftpboot/</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># mkdir {6,7}</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cp /var/www/html/centos/6/isolinux/{vmlinuz,initrd.img} 6/</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cp /var/www/html/centos/7/isolinux/{vmlinuz,initrd.img} 7/</span>
+
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># mkdir pxelinux.cfg</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cp /var/www/html/centos/7/isolinux/isolinux.cfg ./pxelinux.cfg/default</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># vim pxelinux.cfg/default</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cat pxelinux.cfg/default</span>
+default menu.c32
+timeout <span class="m">600</span>
+
+menu title CentOS <span class="m">6</span> or <span class="m">7</span> <span class="p">|</span> made by zhaojiedi1992@linuxpanda.tech
+
+label centos7-mini
+  menu label Install CentOS <span class="m">7</span>-mini
+  kernel <span class="m">6</span>/vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span><span class="m">7</span>/initrd.img <span class="nv">ks</span><span class="o">=</span>http://192.168.46.6/ks/ks7-mini.cfg
+
+label centos7-Desktop
+  menu label Install CentOS <span class="m">7</span>-desktop
+  kernel <span class="m">6</span>/vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span><span class="m">7</span>/initrd.img <span class="nv">ks</span><span class="o">=</span>http://192.168.46.6/ks/ks7-desktop.cfg
+
+label centos6-mini
+  menu label Install CentOS <span class="m">6</span>-mini
+  kernel <span class="m">6</span>/vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span><span class="m">6</span>/initrd.img <span class="nv">ks</span><span class="o">=</span>http:192.168.46.6//ks/ks6-mini.cfg
+
+label centos6-desktop
+  menu label Install CentOS <span class="m">6</span>-desktop
+  kernel <span class="m">6</span>/vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span><span class="m">6</span>/initrd.img <span class="nv">ks</span><span class="o">=</span>http://192.168.46.6/ks/ks6-desktop.cfg
+
+label <span class="nb">local</span>
+  menu default
+  menu label Boot from ^local drive
+  localboot 0xffff
+
+
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cp /usr/share/syslinux/pxelinux.0 .</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># cp /usr/share/syslinux/menu.c32 .</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># tree</span>
+.
+├── <span class="m">6</span>
+│   ├── initrd.img
+│   └── vmlinuz
+├── <span class="m">7</span>
+│   ├── initrd.img
+│   └── vmlinuz
+├── menu.c32
+├── pxelinux.0
+└── pxelinux.cfg
+    └── default
+
+<span class="m">3</span> directories, <span class="m">7</span> files
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>3.2.7. 系统网络安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>进入bios设置启动项目硬盘第一个，cdrom第二个，网络第三个即可。</p>
+<p>安装菜单页面：</p>
+<img alt="../_images/安装centos6图形.png" src="../_images/安装centos6图形.png" />
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">如果你要选择图形化安装，建议内存调整为1.2G</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cobble自动化安装.html" class="btn btn-neutral float-right" title="3.3. cobble自动化安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="光盘自动化安装.html" class="btn btn-neutral" title="3.1. 光盘自动化安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

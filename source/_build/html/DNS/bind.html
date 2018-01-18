@@ -1,0 +1,1054 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7.1. bind &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="7. DNS" href="index.html"/>
+        <link rel="prev" title="7. DNS" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. DNS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.1. bind</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dns">7.1.1. dns简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">7.1.2. 资源记录</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">7.1.2.1. 资源记录类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">7.1.2.2. 资源记录格式：</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#soa">7.1.2.3. SOA记录：</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mx">7.1.2.4. MX记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a">7.1.2.5. A记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ptr">7.1.2.6. PTR记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">7.1.2.7. 别名记录</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">7.1.3. DNS软件安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">7.1.4. 正向解析</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">7.1.4.1. 编辑默认配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">7.1.4.2. 添加区域文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">7.1.4.3. 检查配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">7.1.4.4. 重启下dns服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">7.1.4.5. 测试</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">7.1.5. 反向解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">7.1.6. 主从</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">7.1.6.1. 编辑配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">7.1.6.2. 添加区域文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">7.1.6.3. 重启服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">7.1.6.4. 测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">7.1.6.5. 进一步测试</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">7.1.7. 允许远程动态更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">7.1.8. 启用查询日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">7.1.9. 子域</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">7.1.9.1. 环境配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">7.1.9.2. 顶级域配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">7.1.9.3. 一级域配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">7.1.9.4. 二级域配置</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">7.1.10. 转发</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#view">7.1.11. view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">7.1.12. 压力测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">7.1.13. 排错</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">7. DNS</a> &raquo;</li>
+        
+      <li>7.1. bind</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/DNS/bind.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bind">
+<h1>7.1. bind<a class="headerlink" href="#bind" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dns">
+<h2>7.1.1. dns简介<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h2>
+<p>DNS（domain name service ）是域名解析服务，工作在应用层，是c/s结构，监听于53端口。</p>
+<ul class="simple">
+<li>tcp 53: 用于区域传输</li>
+<li>ucp 53: 用于查询</li>
+</ul>
+<p>BIND(Bekerley Internet Name Domain) 是伯克利互联网名称域。提供了DNS服务。</p>
+<p>DNS查询类型：</p>
+<ul class="simple">
+<li>递归查询</li>
+<li>迭代查询</li>
+</ul>
+<p>服务器类型：</p>
+<ul class="simple">
+<li>主dns:      管理和为何负责解析域的服务器</li>
+<li>从dns：     从服务器从主服务器复制库</li>
+<li>缓存dns：    转发dns</li>
+</ul>
+<p>区域传输：</p>
+<ul class="simple">
+<li>完全传输：   传输整个库</li>
+<li>增量传输：    传递变化的部分内容</li>
+</ul>
+<p>解析流程：</p>
+<p>client-&gt;hosts-&gt;local dns cache-&gt;dns server -&gt; server cache-&gt; root -&gt; 二级域</p>
+<p>解析答案：</p>
+<ul class="simple">
+<li>肯定答案：</li>
+<li>否定答案：</li>
+<li>权威答案：</li>
+<li>非权威答案：</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>7.1.2. 资源记录<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>7.1.2.1. 资源记录类型<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A:            ipv4</li>
+<li>AAAA:         ipv6</li>
+<li>PTR:          ip-&gt;fqdn</li>
+<li>SOA:          起始授权记录</li>
+<li>NS:           域名</li>
+<li>CNAME:        别名</li>
+<li>MX:           邮件</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>7.1.2.2. 资源记录格式：<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span>name [ttl] IN rr_type value
+# ttl可以从全局继承
+# @引用当前区域的名字。
+# 同一个名字可以通过多条记录定义多个值，dns会轮训响应
+</pre></div>
+</div>
+</div>
+<div class="section" id="soa">
+<h3>7.1.2.3. SOA记录：<a class="headerlink" href="#soa" title="Permalink to this headline">¶</a></h3>
+<p>name: 就是当前域的名字， 例如“linuxpanda.tech.”</p>
+<p>value: 这个value由多个部分组成，当前的fqdn,邮箱地址，还有相关设置。</p>
+<p>样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>linuxpanda.tech. 866400 IN SOA ns.linuxpanda.tech. nsadmin.linuxpanda.tech. (
+                                                    20180117 ; 序列号
+                                                    2H       ; 刷新时间
+                                                    10M      ; 重试时间
+                                                    1W       ; 过期时间
+                                                    1D       ; 否定答案的ttl时间
+                                                    )
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">SOA记录必须是第一条记录。</p>
+</div>
+</div>
+<div class="section" id="mx">
+<h3>7.1.2.4. MX记录<a class="headerlink" href="#mx" title="Permalink to this headline">¶</a></h3>
+<p>样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>linuxpanda.tech. 86400 IN MX 10 mx1.linuxpanda.tech.
+linuxpanda.tech. 86400 IN MX 20 mx2.linuxpanda.tech.
+</pre></div>
+</div>
+<p>mx是有优先级的，数值越大优先级越低</p>
+</div>
+<div class="section" id="a">
+<h3>7.1.2.5. A记录<a class="headerlink" href="#a" title="Permalink to this headline">¶</a></h3>
+<p>样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>www            IN                A        1.1.1.1
+www            IN                A        2.2.2.2
+</pre></div>
+</div>
+<p>上面的www是主机名，完成的名字是www.linuxpanda.tech. 因为我们的域是linuxpanda.tech. 可以省去后面的不写，只写主机名即可。</p>
+<p>如果主机过多，可以使用生成器</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$GENERATE 10-20   www$        A           192.168.46.$
+</pre></div>
+</div>
+<p>上面的相当于www10对应10，www11对应11等等。</p>
+<p>如果避免用户写错主机名导致无法访问的问题，可以考虑使用泛域名解析</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>*.linuxpanda.tech.              IN      A        192.168.46.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="ptr">
+<h3>7.1.2.6. PTR记录<a class="headerlink" href="#ptr" title="Permalink to this headline">¶</a></h3>
+<p>需要将ip反过来写的。</p>
+<p>样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>1.46.168.192.in-addr.arpa.    IN       PTR     www.linuxpanda.tech.
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>7.1.2.7. 别名记录<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span>www.linxupanda.com.       IN   CNAME          web.linuxpanda.tech.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>7.1.3. DNS软件安装<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install bind bind-utils</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql bind</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql bind-utils</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>7.1.4. 正向解析<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>7.1.4.1. 编辑默认配置文件<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1">#注释以下行，使用//注释</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="c1"># 修改下面2项为no</span>
+dns no<span class="p">;</span>
+dnssec-validation no<span class="p">;</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+<span class="c1"># 添加如下几行</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>主要配置含义：</p>
+<ul class="simple">
+<li>listen-on：是监听配置，我们注释掉之后就是监听本机所有ip了，</li>
+<li>allow-query: 这个是允许那个主机查询，注释掉就是允许所有的，如果只是想本网使用可以修改为192.168.46.0/24即可。</li>
+</ul>
+<p>如果不修改listen-on选项，默认只是鉴定在127.0.0.1上的。</p>
+</div>
+<div class="section" id="id8">
+<h3>7.1.4.2. 添加区域文件<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># cp named.localhost linuxpanda.tech.zone -p</span>
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">20</span>
+drwxrwx---. <span class="m">2</span> named named    <span class="m">6</span> Aug  <span class="m">4</span> <span class="m">16</span>:13 data
+drwxrwx---. <span class="m">2</span> named named    <span class="m">6</span> Aug  <span class="m">4</span> <span class="m">16</span>:13 dynamic
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">152</span> Jun <span class="m">21</span>  <span class="m">2007</span> linuxpanda.tech.zone
+-rw-r-----. <span class="m">1</span> root  named <span class="m">2281</span> May <span class="m">22</span>  <span class="m">2017</span> named.ca
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">152</span> Dec <span class="m">15</span>  <span class="m">2009</span> named.empty
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">152</span> Jun <span class="m">21</span>  <span class="m">2007</span> named.localhost
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">168</span> Dec <span class="m">15</span>  <span class="m">2009</span> named.loopback
+drwxrwx---. <span class="m">2</span> named named    <span class="m">6</span> Aug  <span class="m">4</span> <span class="m">16</span>:13 slaves
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># vim linuxpanda.tech.zone</span>
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@   IN SOA  ns1 nsadmin <span class="o">(</span>
+                    <span class="m">0</span>           <span class="p">;</span> serial
+                    1D          <span class="p">;</span> refresh
+                    1H          <span class="p">;</span> retry
+                    1W          <span class="p">;</span> expire
+                    3H <span class="o">)</span>    <span class="p">;</span> minimum
+    NS      ns1
+ns1 A       <span class="m">192</span>.168.46.7
+www     A       <span class="m">192</span>.168.46.7
+</pre></div>
+</div>
+<p>“&#64;”代表的是域名“linuxpanda.tech.” 这个实在rfc1912.conf文件里面设置的。</p>
+<p>第二行没有指定的项，会从上面一行继承下来。</p>
+</div>
+<div class="section" id="id9">
+<h3>7.1.4.3. 检查配置文件<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># named-check</span>
+named-checkconf  named-checkzone
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># named-checkzone linuxpanda.tech linuxpanda.tech.zone</span>
+zone linuxpanda.tech/IN: loaded serial <span class="m">0</span>
+OK
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>7.1.4.4. 重启下dns服务<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># systemctl restart named</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>7.1.4.5. 测试<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>host方式测试</p>
+<p>dig方式测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># dig ns1.linuxpanda.tech @localhost</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; ns1.linuxpanda.tech @localhost
+<span class="p">;;</span> global options: +cmd
+<span class="p">;;</span> Got answer:
+<span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opco</span>de: QUERY, status: NOERROR, id: <span class="m">35168</span>
+<span class="p">;;</span> flags: qr aa rd ra<span class="p">;</span> QUERY: <span class="m">1</span>, ANSWER: <span class="m">1</span>, AUTHORITY: <span class="m">1</span>, ADDITIONAL: <span class="m">1</span>
+
+<span class="p">;;</span> OPT PSEUDOSECTION:
+<span class="p">;</span> EDNS: version: <span class="m">0</span>, flags:<span class="p">;</span> udp: <span class="m">4096</span>
+<span class="p">;;</span> QUESTION SECTION:
+<span class="p">;</span>ns1.linuxpanda.tech.               IN      A
+
+<span class="p">;;</span> ANSWER SECTION:
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+
+<span class="p">;;</span> AUTHORITY SECTION:
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+
+<span class="p">;;</span> Query time: <span class="m">0</span> msec
+<span class="p">;;</span> SERVER: ::1#53<span class="o">(</span>::1<span class="o">)</span>
+<span class="p">;;</span> WHEN: Wed Jan <span class="m">17</span> <span class="m">20</span>:30:04 CST <span class="m">2018</span>
+<span class="p">;;</span> MSG SIZE  rcvd: <span class="m">78</span>
+</pre></div>
+</div>
+<p>nslookup测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># nslookup</span>
+&gt; server localhost
+Default server: localhost
+Address: ::1#53
+Default server: localhost
+Address: <span class="m">127</span>.0.0.1#53
+&gt; www.linuxpanda.tech
+Server:             localhost
+Address:    ::1#53
+
+Name:       www.linuxpanda.tech
+Address: <span class="m">192</span>.168.46.7
+&gt; <span class="nb">exit</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">自己创建的zone文件，请确保named用户有读取权限。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h2>7.1.5. 反向解析<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>在主配置文件中区域</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+zone <span class="s2">&quot;46.168.192.in-addr.arpa&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;192.168.46.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">一定注意{}后面的;号了。最容易忘记了。</p>
+</div>
+<p>添加区域文件</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># cp named.loopback  192.168.46.zone -p</span>
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># vim 192.168.46.zone</span>
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># cat 192.168.46.zone</span>
+<span class="nv">$TTL</span> 1D
+@       IN SOA  ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="o">(</span>
+                                        <span class="m">0</span>       <span class="p">;</span> serial
+                                        1D      <span class="p">;</span> refresh
+                                        1H      <span class="p">;</span> retry
+                                        1W      <span class="p">;</span> expire
+                                        3H <span class="o">)</span>    <span class="p">;</span> minimum
+        IN NS      ns1.linuxpanda.tech.
+<span class="m">7</span>       IN PTR     ns1.linuxpanda.tech.
+<span class="m">7</span>       IN PTR     www.linuxpanda.tech.
+</pre></div>
+</div>
+<p>检查配置文件</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># named-checkconf</span>
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># named-checkzone  46.168.192.in-addr.arpa 192.168.46.zone</span>
+</pre></div>
+</div>
+<p>测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># rndc reload</span>
+server reload successful
+
+<span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># host 192.168.46.7 192.168.46.7</span>
+Using domain server:
+Name: <span class="m">192</span>.168.46.7
+Address: <span class="m">192</span>.168.46.7#53
+Aliases:
+
+<span class="m">7</span>.46.168.192.in-addr.arpa domain name pointer ns1.linuxpanda.tech.
+<span class="m">7</span>.46.168.192.in-addr.arpa domain name pointer www.linuxpanda.tech.
+
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># dig -t ptr www.linuxpanda.tech @192.168.46.7</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; -t ptr www.linuxpanda.tech @192.168.46.7
+<span class="p">;;</span> global options: +cmd
+<span class="p">;;</span> Got answer:
+<span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opcode: QUERY, status: NOERROR, id: 2709</span>
+<span class="s">;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1</span>
+
+<span class="s">;; OPT PSEUDOSECTION:</span>
+<span class="s">; EDNS: version: 0, flags:; udp: 4096</span>
+<span class="s">;; QUESTION SECTION:</span>
+<span class="s">;www.linuxpanda.tech.               IN      PTR</span>
+
+<span class="s">;; AUTHORITY SECTION:</span>
+<span class="s">linuxpanda.tech.    10800   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. 0 86400 3600 604800 10800</span>
+
+<span class="s">;; Query time: 3 msec</span>
+<span class="s">;; SERVER: 192.168.46.7#53(192.168.46.7)</span>
+<span class="s">;; WHEN: Thu Jan 18 13:35:24 CST 2018</span>
+<span class="s">;; MSG SIZE  rcvd: 96</span>
+
+<span class="s"># 另一个主机测试</span>
+<span class="s">[root@101 ~]# dig -t axfr linuxpanda.tech @192.168.46.7</span>
+
+<span class="s">; &lt;&lt;&gt;&gt; DiG 9.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; -t axfr linuxpanda.tech @192.168.46.7</span>
+<span class="s">;; global op</span>tions: +cmd
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">0</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+www.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">0</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+<span class="p">;;</span> Query time: <span class="m">1</span> msec
+<span class="p">;;</span> SERVER: <span class="m">192</span>.168.46.7#53<span class="o">(</span><span class="m">192</span>.168.46.7<span class="o">)</span>
+<span class="p">;;</span> WHEN: Thu Jan <span class="m">18</span> <span class="m">00</span>:44:18 EST <span class="m">2018</span>
+<span class="p">;;</span> XFR size: <span class="m">5</span> records <span class="o">(</span>messages <span class="m">1</span>, bytes <span class="m">167</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>7.1.6. 主从<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完整dns的主从配置</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">在选择主从服务器的时候，注意服务器版本问题，不同版本安装的bind可能会导致不同情况，无法同步问题。</p>
+</div>
+<div class="section" id="id14">
+<h3>7.1.6.1. 编辑配置文件<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1">#注释以下行，使用//注释</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="c1"># 修改下面2项为no</span>
+dns no<span class="p">;</span>
+dnssec-validation no<span class="p">;</span>
+<span class="c1"># 添加如下配置</span>
+allow-transfer <span class="o">{</span> <span class="m">192</span>.168.46.101<span class="p">;</span><span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>7.1.6.2. 添加区域文件<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主服务器修改</span>
+
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@   IN SOA  ns1 nsadmin <span class="o">(</span>
+                    <span class="m">0</span>       <span class="p">;</span> serial
+                    1D      <span class="p">;</span> refresh
+                    1H      <span class="p">;</span> retry
+                    1W      <span class="p">;</span> expire
+                    3H <span class="o">)</span>    <span class="p">;</span> minimum
+    NS      ns1
+    NS      ns2
+ns1 A       <span class="m">192</span>.168.46.7
+ns2     A       <span class="m">192</span>.168.46.101
+www     A       <span class="m">192</span>.168.46.7
+
+<span class="c1"># 从服务器修改</span>
+<span class="o">[</span>root@101 ~<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> slave<span class="p">;</span>
+        master <span class="o">{</span> <span class="m">192</span>.168.46.7<span class="p">;</span><span class="o">}</span>
+        file <span class="s2">&quot;slaves/linuxpanda.tech.slave.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">从服务器的必须要在主dns添加记录的。</p>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>7.1.6.3. 重启服务<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># systemctl restart named               # 重启服务</span>
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># ll slaves/                            # 发现文件已经同步过来了。</span>
+total <span class="m">4</span>
+-rw-r--r--. <span class="m">1</span> named named <span class="m">283</span> Jan <span class="m">18</span> <span class="m">01</span>:36 linuxpanda.tech.slave.zone
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># file slaves/linuxpanda.tech.slave.zone</span>
+slaves/linuxpanda.tech.slave.zone: data
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">centos7环境下从文件都是data的了，不再是文本了。</p>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>7.1.6.4. 测试<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># dig -t axfr linuxpanda.tech  @192.168.46.101          # 测试下，发下不对啊。</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; -t axfr linuxpanda.tech @192.168.46.101
+<span class="p">;;</span> global options: +cmd
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">0</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+www.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">0</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+<span class="p">;;</span> Query time: <span class="m">1</span> msec
+<span class="p">;;</span> SERVER: <span class="m">192</span>.168.46.101#53<span class="o">(</span><span class="m">192</span>.168.46.101<span class="o">)</span>
+<span class="p">;;</span> WHEN: Thu Jan <span class="m">18</span> <span class="m">01</span>:44:01 EST <span class="m">2018</span>
+<span class="p">;;</span> XFR size: <span class="m">5</span> records <span class="o">(</span>messages <span class="m">1</span>, bytes <span class="m">167</span><span class="o">)</span>
+
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc reload                                             #    这个在主机器上执行下。</span>
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># rndc reload                                           #    这个在从服务器执行</span>
+server reload successful
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># dig -t axfr linuxpanda.tech  @192.168.46.101</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; -t axfr linuxpanda.tech @192.168.46.101
+<span class="p">;;</span> global options: +cmd
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">1</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns2.linuxpanda.tech.
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+ns2.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.101
+www.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">1</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+<span class="p">;;</span> Query time: <span class="m">0</span> msec
+<span class="p">;;</span> SERVER: <span class="m">192</span>.168.46.101#53<span class="o">(</span><span class="m">192</span>.168.46.101<span class="o">)</span>
+<span class="p">;;</span> WHEN: Thu Jan <span class="m">18</span> <span class="m">01</span>:45:02 EST <span class="m">2018</span>
+<span class="p">;;</span> XFR size: <span class="m">7</span> records <span class="o">(</span>messages <span class="m">1</span>, bytes <span class="m">201</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>7.1.6.5. 进一步测试<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>主服务器修改下</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># !vim</span>
+vim linuxpanda.tech.zone
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone        # 添加了blog记录并修改了序号为2（原有基础上+1）</span>
+<span class="nv">$TTL</span> 1D
+@       IN SOA  ns1 nsadmin <span class="o">(</span>
+                    <span class="m">2</span>   <span class="p">;</span> serial
+                    1D  <span class="p">;</span> refresh
+                    1H  <span class="p">;</span> retry
+                    1W  <span class="p">;</span> expire
+                    3H <span class="o">)</span>        <span class="p">;</span> minimum
+    NS  ns1
+    NS      ns2
+ns1     A       <span class="m">192</span>.168.46.7
+ns2     A       <span class="m">192</span>.168.46.101
+www     A       <span class="m">192</span>.168.46.7
+blog    A       <span class="m">192</span>.168.46.101
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc reload                     # 重新加载配置文件</span>
+server reload successful
+</pre></div>
+</div>
+<p>从服务器测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># dig -t axfr linuxpanda.tech  @192.168.46.101                                  # 查询测试，发现我们在主dns上的blog记录已经添加进来了</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; -t axfr linuxpanda.tech @192.168.46.101
+<span class="p">;;</span> global options: +cmd
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">2</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns2.linuxpanda.tech.
+blog.linuxpanda.tech.       <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.101
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+ns2.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.101
+www.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.7
+linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. <span class="m">2</span> <span class="m">86400</span> <span class="m">3600</span> <span class="m">604800</span> <span class="m">10800</span>
+<span class="p">;;</span> Query time: <span class="m">1</span> msec
+<span class="p">;;</span> SERVER: <span class="m">192</span>.168.46.101#53<span class="o">(</span><span class="m">192</span>.168.46.101<span class="o">)</span>
+<span class="p">;;</span> WHEN: Thu Jan <span class="m">18</span> <span class="m">01</span>:50:21 EST <span class="m">2018</span>
+<span class="p">;;</span> XFR size: <span class="m">8</span> records <span class="o">(</span>messages <span class="m">1</span>, bytes <span class="m">222</span><span class="o">)</span>
+
+
+
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># cat /var/log/messages                                                         # 查看下日志关于named的信息</span>
+--------------------------省去一部分-----------------------------------------------------------
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: client <span class="m">192</span>.168.46.7#43665: received notify <span class="k">for</span> zone <span class="s1">&#39;linuxpanda.tech&#39;</span>
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: zone linuxpanda.tech/IN: Transfer started.
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: transfer of <span class="s1">&#39;linuxpanda.tech/IN&#39;</span> from <span class="m">192</span>.168.46.7#53: connected using <span class="m">192</span>.168.46.101#48087
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: zone linuxpanda.tech/IN: transferred serial <span class="m">2</span>
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: transfer of <span class="s1">&#39;linuxpanda.tech/IN&#39;</span> from <span class="m">192</span>.168.46.7#53: Transfer completed: <span class="m">1</span> messages, <span class="m">8</span> records, <span class="m">222</span> bytes, <span class="m">0</span>.010 secs <span class="o">(</span><span class="m">22200</span> bytes/sec<span class="o">)</span>
+Jan <span class="m">18</span> <span class="m">01</span>:48:49 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: zone linuxpanda.tech/IN: sending notifies <span class="o">(</span>serial <span class="m">2</span><span class="o">)</span>
+Jan <span class="m">18</span> <span class="m">01</span>:49:23 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: client <span class="m">192</span>.168.46.101#59454 <span class="o">(</span>linuxpanda.tech<span class="o">)</span>: transfer of <span class="s1">&#39;linuxpanda.tech/IN&#39;</span>: AXFR started
+Jan <span class="m">18</span> <span class="m">01</span>:49:23 station named<span class="o">[</span><span class="m">7809</span><span class="o">]</span>: client <span class="m">192</span>.168.46.101#59454 <span class="o">(</span>linuxpanda.tech<span class="o">)</span>: transfer of <span class="s1">&#39;linuxpanda.tech/IN&#39;</span>: AXFR ended
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果从DNS服务器没法同步，请检查服务器配置和2个服务器的日志信息</p>
+</div>
+</div>
+</div>
+<div class="section" id="id19">
+<h2>7.1.7. 允许远程动态更新<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<p>主服务器修改</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones       # 添加允许更新</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+        allow-update <span class="o">{</span> <span class="m">192</span>.168.46.101<span class="p">;</span><span class="o">}</span> <span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># chmod g+w /var/named/                # 给named添加目录写权限，</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># systemctl restart named              # 重启服务</span>
+</pre></div>
+</div>
+<p>从服务器来更新</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># nsupdate</span>
+&gt; server <span class="m">192</span>.168.46.7
+&gt; zone linuxpanda.tech
+&gt; update add ftp.linuxpanda.tech. <span class="m">9000</span> IN A <span class="m">192</span>.168.46.101
+&gt; send
+&gt; quit
+</pre></div>
+</div>
+<p>主服务器测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># ll -t                                                    # 查看文件</span>
+total <span class="m">28</span>
+-rw-r--r--. <span class="m">1</span> named named  <span class="m">757</span> Jan <span class="m">18</span> <span class="m">16</span>:02 linuxpanda.tech.zone.jnl
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">256</span> Jan <span class="m">18</span> <span class="m">14</span>:47 linuxpanda.tech.zone
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">258</span> Jan <span class="m">18</span> <span class="m">12</span>:32 <span class="m">192</span>.168.46.zone
+drwxrwx---. <span class="m">2</span> named named   <span class="m">31</span> Jan <span class="m">17</span> <span class="m">20</span>:43 dynamic
+drwxrwx---. <span class="m">2</span> named named   <span class="m">23</span> Jan <span class="m">17</span> <span class="m">20</span>:23 data
+drwxrwx---. <span class="m">2</span> named named    <span class="m">6</span> Aug  <span class="m">4</span> <span class="m">16</span>:13 slaves
+-rw-r-----. <span class="m">1</span> root  named <span class="m">2281</span> May <span class="m">22</span>  <span class="m">2017</span> named.ca
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">152</span> Dec <span class="m">15</span>  <span class="m">2009</span> named.empty
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">168</span> Dec <span class="m">15</span>  <span class="m">2009</span> named.loopback
+-rw-r-----. <span class="m">1</span> root  named  <span class="m">152</span> Jun <span class="m">21</span>  <span class="m">2007</span> named.localhost
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone.jnl                            # 查看下这个是啥</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># dig -t axfr linuxpanda.tech. @192.168.46.7 |grep ftp    # 查看添加的记录</span>
+ftp.linuxpanda.tech.        <span class="m">9000</span>    IN      A       <span class="m">192</span>.168.46.101
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">动态更新后，从服务器也会自动更新的，但是序号是没有增加的。</p>
+</div>
+</div>
+<div class="section" id="id20">
+<h2>7.1.8. 启用查询日志记录<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<p>这个启用dns查询日志记录功能， 不建议开启的（大量日志操作），只有在调试dns配置的时候开启。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc status</span>
+version: <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;id:8f9657aa&gt;
+CPUs found: <span class="m">1</span>
+worker threads: <span class="m">1</span>
+UDP listeners per interface: <span class="m">1</span>
+number of zones: <span class="m">103</span>
+debug level: <span class="m">0</span>
+xfers running: <span class="m">0</span>
+xfers deferred: <span class="m">0</span>
+soa queries in progress: <span class="m">0</span>
+query logging is OFF
+recursive clients: <span class="m">0</span>/0/1000
+tcp clients: <span class="m">0</span>/100
+server is up and running
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc querylog</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc status |grep logging</span>
+query logging is ON
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc querylog</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc status |grep logging</span>
+query logging is OFF
+</pre></div>
+</div>
+</div>
+<div class="section" id="id21">
+<h2>7.1.9. 子域<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<p>配置子域需要的服务器也比较多。 简单规划下。</p>
+<ul class="simple">
+<li>192.168.46.7 : linuxpanda.tech</li>
+<li>192.168.46.101 : henan.linuxpanda.tech</li>
+<li>192.168.46.102 : zhengzhou.henan.linuxpanda.tech</li>
+</ul>
+<p>我这里linuxpanda.tech 就认为是我自己的顶级域。 henan就是二级域，zhengzhou就是三级域。</p>
+<div class="section" id="id22">
+<h3>7.1.9.1. 环境配置<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>前面我使用了192.168.46.7和192.168.46.101两个机器，这个实验，我就重新安装下bind来覆盖原有设置了。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 192.168.46.7 机器上操作</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rm -rf /etc/named*</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rm -rf /var/named</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># yum reinstall bind</span>
+
+<span class="c1"># 192.168.46.101 机器上操作</span>
+<span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># rm -rf /etc/named*</span>
+<span class="o">[</span>root@102 named<span class="o">]</span><span class="c1"># rm -rf /var/named</span>
+<span class="o">[</span>root@102 named<span class="o">]</span><span class="c1"># yum reinstall bind</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id23">
+<h3>7.1.9.2. 顶级域配置<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1">#注释以下行，使用//注释</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="c1"># 修改下面2项为no</span>
+dnssec-enable no<span class="p">;</span>
+dnssec-validation no<span class="p">;</span>
+
+<span class="c1"># 添加如下配置</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="p">;</span>
+
+<span class="c1"># 添加区域文件</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cd /var/named/</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># ls</span>
+data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cp named.localhost  linuxpanda.tech.zone -p</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim linuxpanda.tech.zone</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@       IN SOA  ns1 nsadmin <span class="o">(</span>
+                                        <span class="m">0</span>       <span class="p">;</span> serial
+                                        1D      <span class="p">;</span> refresh
+                                        1H      <span class="p">;</span> retry
+                                        1W      <span class="p">;</span> expire
+                                        3H <span class="o">)</span>    <span class="p">;</span> minimum
+        NS      ns1
+henan   NS      ns2
+ns1     A       <span class="m">192</span>.168.46.7
+ns2   A         <span class="m">192</span>.168.46.101
+www     A       <span class="m">192</span>.168.46.7
+
+
+
+<span class="c1"># 配置测试</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkconf</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkzone  linuxpanda.tech linuxpanda.tech.zone</span>
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># systemctl restart named</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id24">
+<h3>7.1.9.3. 一级域配置<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1">#注释以下行，使用//注释</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="c1"># 修改下面2项为no</span>
+dnssec-enable no<span class="p">;</span>
+dnssec-validation no<span class="p">;</span>
+
+<span class="c1"># 添加如下配置</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+zone <span class="s2">&quot;henan.linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;henan.linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+
+<span class="c1"># 添加区域文件</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cd /var/named/</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># ls</span>
+data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cp -p named.localhost  henan.linuxpanda.tech.zone</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim henan.linuxpanda.tech.zone</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat henan.linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@       IN SOA  ns1 nsadmin <span class="o">(</span>
+                                        <span class="m">0</span>       <span class="p">;</span> serial
+                                        1D      <span class="p">;</span> refresh
+                                        1H      <span class="p">;</span> retry
+                                        1W      <span class="p">;</span> expire
+                                        3H <span class="o">)</span>    <span class="p">;</span> minimum
+                NS       ns1
+zhengzhou       NS       ns2
+ns1     A       <span class="m">192</span>.168.46.101
+ns2  A   <span class="m">192</span>.168.46.102
+www        A    <span class="m">192</span>.168.46.101
+
+<span class="c1"># 配置测试</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkconf</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkzone  henan.linuxpanda.tech henan.linuxpanda.tech.zone</span>
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># systemctl restart named</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id25">
+<h3>7.1.9.4. 二级域配置<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1">#注释以下行，使用//注释</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="c1"># 修改下面2项为no</span>
+dnssec-enable no<span class="p">;</span>
+dnssec-validation no<span class="p">;</span>
+
+<span class="c1"># 添加如下配置</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+zone <span class="s2">&quot;zhengzhou.henan.linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;zhengzhou.henan.linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+
+<span class="c1"># 添加区域文件</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cd /var/named/</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># ls</span>
+data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cp -p named.localhost  linuxpanda.tech.zone</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim zhengzhou.henan.linuxpanda.tech.zone</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># cat zhengzhou.henan.linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@   IN SOA  ns1 nsadmin <span class="o">(</span>
+                    <span class="m">0</span>           <span class="p">;</span> serial
+                    1D          <span class="p">;</span> refresh
+                    1H          <span class="p">;</span> retry
+                    1W          <span class="p">;</span> expire
+                    3H <span class="o">)</span>    <span class="p">;</span> minimum
+    NS       ns1
+    NS       zhengzhou
+ns1 A       <span class="m">192</span>.168.46.101
+zhengzhou  A   <span class="m">192</span>.168.46.102
+www        A    <span class="m">192</span>.168.46.101
+web     CNAME   www
+
+<span class="c1"># 配置测试</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkconf</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># named-checkzone  zhengzhou.henan.linuxpanda.tech zhengzhou.henan.linuxpanda.tech.zone</span>
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># systemctl restart named</span>
+</pre></div>
+</div>
+<p>测试下</p>
+<p>在192.168.46.7上面验证下：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># host web.zhengzhou.henan.linuxpanda.tech 192.168.46.7</span>
+Using domain server:
+Name: <span class="m">192</span>.168.46.7
+Address: <span class="m">192</span>.168.46.7#53
+Aliases:
+
+web.zhengzhou.henan.linuxpanda.tech is an <span class="nb">alias</span> <span class="k">for</span> www.zhengzhou.henan.linuxpanda.tech.
+www.zhengzhou.henan.linuxpanda.tech has address <span class="m">192</span>.168.46.102
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id26">
+<h2>7.1.10. 转发<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="view">
+<h2>7.1.11. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id27">
+<h2>7.1.12. 压力测试<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id28">
+<h2>7.1.13. 排错<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="7. DNS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.1. 光盘自动化安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="3. 自动化安装" href="index.html"/>
+        <link rel="next" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html"/>
+        <link rel="prev" title="3. 自动化安装" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 自动化安装</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.1. 光盘自动化安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ks">3.1.1. 制作ks文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.1.2. 创建自制目录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iso">3.1.3. 下载iso镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.1.4. 测试光盘</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pxe+kickstart自动化安装.html">3.2. pxe+kickstart自动化安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cobble自动化安装.html">3.3. cobble自动化安装</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">3. 自动化安装</a> &raquo;</li>
+        
+      <li>3.1. 光盘自动化安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/自动化安装/光盘自动化安装.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="topics-cdrom">
+<span id="id1"></span><h1>3.1. 光盘自动化安装<a class="headerlink" href="#topics-cdrom" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ks">
+<h2>3.1.1. 制作ks文件<a class="headerlink" href="#ks" title="Permalink to this headline">¶</a></h2>
+<p>ks的文件制作是比较麻烦的，但是我们在系统安装完毕的时候会生成当前系统的默认安装配置”/root/anaconda-ks.cfg”，
+我们可以直接在这个文件的基础上稍作修改即可。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls</span>
+anaconda-ks.cfg  install.log  install.log.syslog
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp anaconda-ks.cfg  anaconda-ks.cfg.bak</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim anaconda-ks.cfg</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum list all |grep kickstart</span>
+pykickstart.noarch                       <span class="m">1</span>.74.22-1.el6                     base
+system-config-kickstart.noarch           <span class="m">2</span>.8.6.6-1.el6                     base
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install pykickstart -y</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ksvalidator  anaconda-ks.cfg</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat anaconda-ks.cfg</span>
+
+<span class="c1"># Kickstart file automatically generated by anaconda.</span>
+
+<span class="c1">#version=DEVEL</span>
+install
+cdrom
+reboot
+text
+<span class="c1">#xconfig  --startxonboot</span>
+<span class="c1">#eula --agreed</span>
+lang en_US.UTF-8
+firstboot --disable
+keyboard us
+network --onboot no --device eth0 --bootproto dhcp --noipv6
+rootpw  --iscrypted <span class="nv">$6$NE46h0OLL1e8dgDc$6</span>Kpz4orvUP87oYdbaHefWtUbD12ITS5RIJPouwHn.LrluP2T9280aoFf9Cs5yvnJ9XIZJHnlV26oa1ECe39Bs1
+firewall --disabled
+authconfig --enableshadow --passalgo<span class="o">=</span>sha512
+selinux --disabled
+timezone Asia/Shanghai
+bootloader --location<span class="o">=</span>mbr --driveorder<span class="o">=</span>sda --append<span class="o">=</span><span class="s2">&quot;crashkernel=auto rhgb quiet&quot;</span>
+<span class="c1"># The following is the partition information you requested</span>
+<span class="c1"># Note that any partitions you deleted are not expressed</span>
+<span class="c1"># here so unless you clear all partitions first, this is</span>
+<span class="c1"># not guaranteed to work</span>
+clearpart --all --drives<span class="o">=</span>sda
+zerombr
+
+part /boot --fstype<span class="o">=</span>ext4 --size<span class="o">=</span><span class="m">500</span>
+part pv.008002  --size<span class="o">=</span><span class="m">200000</span>
+volgroup VolGroup --pesize<span class="o">=</span><span class="m">4096</span> pv.008002
+logvol /home --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_home --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">100</span>
+logvol / --fstype<span class="o">=</span>ext4 --name<span class="o">=</span>lv_root --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1024</span> --maxsize<span class="o">=</span><span class="m">51200</span>
+logvol swap --name<span class="o">=</span>lv_swap --vgname<span class="o">=</span>VolGroup --grow --size<span class="o">=</span><span class="m">1984</span> --maxsize<span class="o">=</span><span class="m">1984</span>
+
+
+<span class="c1">#repo --name=&quot;CentOS&quot;  --baseurl=cdrom:sr0 --cost=100</span>
+
+%packages
+@core
+@server-policy
+@workstation-policy
+%end
+
+%post
+touch /root/post.file
+%end
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">如果lvm的pv设置超过了后续安装的磁盘大小，就使用磁盘的全部空间。</p>
+</div>
+<p>这里为了方便看出我修改了那些。提供一个vimdiff命令对比图：</p>
+<img alt="../_images/ks.png" src="../_images/ks.png" />
+<p>ks的主要几项说明</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>cdrom                         # 光盘启动
+reboot                        # 安装完毕自动重启
+text                          # 字符安装
+firstboot --disable           # 第一次启动初始化工作禁用
+rootpw                        # 这个行是定义root密码的，可以通过openssl passwd -1 生成
+clearpart --all --drives=sda  # 清空磁盘分区
+zerombr                       # 清空mbr信息
+%post%end                     # 安装后脚本，这个时候系统已经安装完毕了，写bash脚本即可
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>3.1.2. 创建自制目录<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/cdrom /mnt/cdrom                         # 挂载光盘</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /app -pv                                      # 创建一个光盘刻录目录</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -av /mnt/cdrom /app/centos6                      # 把原有光盘数据copy过来</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /app/centos6/                                    # 进入工作目录</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># ll</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># find /app/centos6/ -name TRANS.TBL            # 查看TRANS.TBL文件</span>
+/app/centos6/TRANS.TBL
+/app/centos6/isolinux/TRANS.TBL
+/app/centos6/repodata/TRANS.TBL
+/app/centos6/EFI/TRANS.TBL
+/app/centos6/EFI/BOOT/TRANS.TBL
+/app/centos6/images/TRANS.TBL
+/app/centos6/images/pxeboot/TRANS.TBL
+/app/centos6/Packages/TRANS.TBL
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># find /app/centos6/ -name TRANS.TBL -exec rm -rf {} \; # 删除文件</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># rm -rf repodata/*                                     # 删除文件</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># cp /mnt/cdrom/repodata/43*  repodata/</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># yum install createrepo -y                             # 安装createrepo工具</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># createrepo  -g repodata/43*  . # 生成仓库</span>
+Spawning worker <span class="m">0</span> with <span class="m">6706</span> pkgs
+Workers Finished
+Gathering worker results
+
+Saving Primary metadata
+Saving file lists metadata
+Saving other metadata
+Generating sqlite DBs
+Sqlite DBs <span class="nb">complete</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># ls -1  repodata/*                                      # 查看下目录的文件是不是都自动生成了</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># mkdir ks                                               # 创建ks目录</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># cp /root/anaconda-ks.cfg ks/ks.cfg                     # 把我们制作好的ks文件复制过来</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># vim isolinux/isolinux.cfg                              # 编辑启动菜单</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># cat isolinux/isolinux.cfg                              # 查看</span>
+default vesamenu.c32
+<span class="c1">#prompt 1</span>
+timeout <span class="m">600</span>
+
+menu title Welcome to CentOS <span class="m">6</span>.9 From LinuxPanda Tech
+
+label linux
+  menu label ^Install Auto From Cdrom
+  kernel vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span>initrd.img <span class="nv">ks</span><span class="o">=</span>cdrom:/ks/ks.cfg
+label rescue
+  menu label ^Rescue installed system
+  kernel vmlinuz
+  append <span class="nv">initrd</span><span class="o">=</span>initrd.img rescue
+label <span class="nb">local</span>
+  menu label Boot from ^local drive
+  menu default
+  localboot 0xffff
+
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># yum install mkisofs -y                                # 安装mkisofs这个工具，用于制作iso</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># mkisofs -R -J -T -v --no-emul-boot --boot-load-size 4 --boot-info-table \</span>
+-V <span class="s2">&quot;CentOS 6.9 x86_64 boot&quot;</span> -b isolinux/isolinux.bin -c isolinux/boot.cat -o /var/ftp/pub/centos6.iso /app/centos6/
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># ll /root/boot.iso  -h                                 # 文件太大了。 使用ftp传送出来</span>
+-rw-r--r--. <span class="m">1</span> root root <span class="m">5</span>.8G Jan <span class="m">10</span> <span class="m">20</span>:40 /root/boot.iso
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># yum install vsftpd                                    # 安装ftp工具</span>
+<span class="o">[</span>root@localhost centos6<span class="o">]</span><span class="c1"># service vsftpd restart                                # 启动ftp功能</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iso">
+<h2>3.1.3. 下载iso镜像<a class="headerlink" href="#iso" title="Permalink to this headline">¶</a></h2>
+<p>我这里通过浏览器下载，地址是ftp://192.168.46.6/pub/boot.iso。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果不能访问，你确保你的selinux和防火墙是禁用的。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>3.1.4. 测试光盘<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>创建一个新的虚拟机，选择镜像文件为刚才下载的iso文件。进行启动。</p>
+<p>选择光盘：</p>
+<img alt="../_images/选择光盘.png" src="../_images/选择光盘.png" />
+<p>启动界面：</p>
+<img alt="../_images/启动菜单.png" src="../_images/启动菜单.png" />
+<p>安装进度截图：</p>
+<img alt="../_images/安装进度.png" src="../_images/安装进度.png" />
+<p>登陆截图：</p>
+<img alt="../_images/登陆界面.png" src="../_images/登陆界面.png" />
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pxe+kickstart自动化安装.html" class="btn btn-neutral float-right" title="3.2. pxe+kickstart自动化安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="3. 自动化安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

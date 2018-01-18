@@ -493,9 +493,9 @@ lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <
     <span class="s2">&quot;changed&quot;</span>: true,
     <span class="s2">&quot;path&quot;</span>: <span class="s2">&quot;/root/testfile&quot;</span>,
     <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;absent&quot;</span>
+<span class="o">}</span>
 </pre></div>
 </div>
-<p>}</p>
 <p>file模块的state主要有下面几个值</p>
 <ul class="simple">
 <li>directory</li>
@@ -1020,42 +1020,29 @@ tasks:
 <div class="section" id="id11">
 <h3>4.1.11.5. 迭代变量<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>功能： item是一个字典。</p>
-<blockquote>
-<div><p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# vim diedai.yml
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# cat diedai.yml
-—
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim diedai.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat diedai.yml</span>
+---
 - hosts: all
 remote_user: root
-tasks:</p>
-<blockquote>
-<div><ul>
-<li><p class="first">name: add group
-group: name={{item}}
-with_items:</p>
-<blockquote>
-<div><ul class="simple">
-<li>g1</li>
-<li>g2</li>
-<li>g3</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">name: add user
-user: name={{item.user}} group={{item.group}}
-with_items:</p>
-<blockquote>
-<div><ul class="simple">
-<li>{user: ‘u1’ , group: ‘g1’ }</li>
-<li>{user: ‘u2’ , group: ‘g2’ }</li>
-<li>{user: ‘u3’ , group: ‘g3’ }</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</div></blockquote>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# ansible-playbook diedai.yml
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> ansible]# ansible all -m shell -a ‘id u1’</p>
-</div></blockquote>
+tasks:
+  - name: add group
+    group: <span class="nv">name</span><span class="o">={{</span>item<span class="o">}}</span>
+    with_items:
+      - g1
+      - g2
+      - g3
+  - name: add user
+    user: <span class="nv">name</span><span class="o">={{</span>item.user<span class="o">}}</span> <span class="nv">group</span><span class="o">={{</span>item.group<span class="o">}}</span>
+    with_items:
+      - <span class="o">{</span>user: <span class="s1">&#39;u1&#39;</span> , group: <span class="s1">&#39;g1&#39;</span> <span class="o">}</span>
+      - <span class="o">{</span>user: <span class="s1">&#39;u2&#39;</span> , group: <span class="s1">&#39;g2&#39;</span> <span class="o">}</span>
+      - <span class="o">{</span>user: <span class="s1">&#39;u3&#39;</span> , group: <span class="s1">&#39;g3&#39;</span> <span class="o">}</span>
+
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook diedai.yml</span>
+<span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible all -m shell -a &#39;id u1&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="for">
 <h3>4.1.11.6. for<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h3>

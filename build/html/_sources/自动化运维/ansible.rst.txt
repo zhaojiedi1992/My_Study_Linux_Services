@@ -311,7 +311,7 @@ file
         "changed": true, 
         "path": "/root/testfile", 
         "state": "absent"
-}
+    }
 
 file模块的state主要有下面几个值
 
@@ -883,6 +883,8 @@ with-item
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 功能： item是一个字典。
+
+.. code-block:: bash
 
     [root@localhost ansible]# vim diedai.yml 
     [root@localhost ansible]# cat diedai.yml 
