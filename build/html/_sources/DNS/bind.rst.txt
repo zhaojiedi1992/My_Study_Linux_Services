@@ -9,6 +9,11 @@ DNS（domain name service ）是域名解析服务，工作在应用层，是c/s
 - tcp 53: 用于区域传输
 - ucp 53: 用于查询
 
+
+
+常见概念
+---------------------------------------------------------
+
 BIND(Bekerley Internet Name Domain) 是伯克利互联网名称域。提供了DNS服务。
 
 DNS查询类型： 
@@ -33,10 +38,10 @@ client->hosts->local dns cache->dns server -> server cache-> root -> 二级域
 
 解析答案： 
 
-- 肯定答案： 
-- 否定答案： 
-- 权威答案： 
-- 非权威答案： 
+- 肯定答案： 有对应条目
+- 否定答案： 么有对应条目
+- 权威答案： 请求的主机就有对应的条目
+- 非权威答案： 请求的主机没有，通过迭代找到的答案
 
 资源记录
 ---------------------------------------------------------
@@ -61,6 +66,7 @@ client->hosts->local dns cache->dns server -> server cache-> root -> 二级域
     # ttl可以从全局继承
     # @引用当前区域的名字。
     # 同一个名字可以通过多条记录定义多个值，dns会轮训响应
+    # 一条记录的对应位置没有写，会自动集成上一行的对应设置。
 
 SOA记录： 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -161,9 +167,10 @@ DNS软件安装
     //      listen-on port 53 { 127.0.0.1; };
     //      allow-query     { localhost; };
     # 修改下面2项为no
-    dns no;
-    dnssec-validation no;
+ 	dnssec-enable no;
+	dnssec-validation no;
 
+    # 在主配置文件添加对应的区域
     [root@localhost ~]# vim /etc/named.rfc1912.zones 
     # 添加如下几行
     zone "linuxpanda.tech" IN {
@@ -184,8 +191,9 @@ DNS软件安装
 
 .. code-block:: bash
 
-    [root@localhost named]# cp named.localhost linuxpanda.tech.zone -p
-    [root@localhost named]# ll 
+
+    [root@localhost named]# cp named.localhost linuxpanda.tech.zone -p      # -p选项保留权限信息，权限不对dns是没法工作的。
+    [root@localhost named]# ll                                              # 检查下权限
     total 20
     drwxrwx---. 2 named named    6 Aug  4 16:13 data
     drwxrwx---. 2 named named    6 Aug  4 16:13 dynamic
@@ -195,8 +203,8 @@ DNS软件安装
     -rw-r-----. 1 root  named  152 Jun 21  2007 named.localhost
     -rw-r-----. 1 root  named  168 Dec 15  2009 named.loopback
     drwxrwx---. 2 named named    6 Aug  4 16:13 slaves
-    [root@localhost named]# vim linuxpanda.tech.zone 
-    [root@localhost named]# cat linuxpanda.tech.zone 
+    [root@localhost named]# vim linuxpanda.tech.zone                        # 编辑区域文件
+    [root@localhost named]# cat linuxpanda.tech.zone                        # 检查下区域文件
     $TTL 1D
     @	IN SOA	ns1 nsadmin (
                         0	    ; serial
@@ -217,9 +225,8 @@ DNS软件安装
 
 .. code-block:: bash
 
-    [root@localhost named]# named-check
-    named-checkconf  named-checkzone  
-    [root@localhost named]# named-checkzone linuxpanda.tech linuxpanda.tech.zone 
+    [root@localhost named]# named-checkconf                                         # 检查主配置文件
+    [root@localhost named]# named-checkzone linuxpanda.tech linuxpanda.tech.zone    # 检查区域文件
     zone linuxpanda.tech/IN: loaded serial 0
     OK
 
@@ -228,7 +235,7 @@ DNS软件安装
 
 .. code-block:: bash
 
-    [root@localhost named]# systemctl restart named
+    [root@localhost named]# systemctl restart named                                 # 重启服务
 
 测试
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -237,7 +244,7 @@ host方式测试
 
 .. code-block:: bash
 
-    [root@localhost named]# host www.linuxpanda.tech localhost
+    [root@localhost named]# host www.linuxpanda.tech localhost                      # 通过localhost作为dns来测试。
     Using domain server:
     Name: localhost
     Address: ::1#53
@@ -245,17 +252,19 @@ host方式测试
 
     www.linuxpanda.tech has address 192.168.46.7
 
+.. note:: 这里指定了localhost做为dns，如果不想指定，在/etc/resolve.conf文件添加ip即可。
+
 dig方式测试
 
 .. code-block:: bash
 
-    [root@localhost named]# dig ns1.linuxpanda.tech @localhost
+    [root@localhost named]# dig ns1.linuxpanda.tech @localhost                      # 使用dig测试
 
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> ns1.linuxpanda.tech @localhost
     ;; global options: +cmd
     ;; Got answer:
     ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 35168
-    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1        # aa代表权威答案。
 
     ;; OPT PSEUDOSECTION:
     ; EDNS: version: 0, flags:; udp: 4096
@@ -277,7 +286,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@localhost named]# nslookup 
+    [root@localhost named]# nslookup                                                # nslookup测试，这个工具和windows环境的使用是一样的。
     > server localhost
     Default server: localhost
     Address: ::1#53
@@ -291,9 +300,6 @@ nslookup测试
     Address: 192.168.46.7
     > exit
 
-
-
-
 .. note:: 自己创建的zone文件，请确保named用户有读取权限。
 
 反向解析
@@ -303,7 +309,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@localhost named]# vim /etc/named.rfc1912.zones 
+    [root@localhost named]# vim /etc/named.rfc1912.zones                            # 添加区域配置
     zone "46.168.192.in-addr.arpa" IN {
             type master;
             file "192.168.46.zone";
@@ -316,9 +322,9 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@localhost named]# cp named.loopback  192.168.46.zone -p
-    [root@localhost named]# vim 192.168.46.zone 
-    [root@localhost named]# cat 192.168.46.zone 
+    [root@localhost named]# cp named.loopback  192.168.46.zone -p               # 创建一个区域文件
+    [root@localhost named]# vim 192.168.46.zone                                 # 编辑
+    [root@localhost named]# cat 192.168.46.zone                                 # 检查
     $TTL 1D
     @       IN SOA  ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. (
                                             0       ; serial
@@ -334,17 +340,17 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@localhost named]# named-checkconf 
-    [root@localhost named]# named-checkzone  46.168.192.in-addr.arpa 192.168.46.zone 
+    [root@localhost named]# named-checkconf                                          # 检查配置文件
+    [root@localhost named]# named-checkzone  46.168.192.in-addr.arpa 192.168.46.zone # 检查区域文件
 
 测试
 
 .. code-block:: bash
 
-    [root@localhost named]# rndc reload
+    [root@localhost named]# rndc reload                                             # 重新加载dns配置文件
     server reload successful
 
-    [root@localhost named]# host 192.168.46.7 192.168.46.7
+    [root@localhost named]# host 192.168.46.7 192.168.46.7                          # 测试
     Using domain server:
     Name: 192.168.46.7
     Address: 192.168.46.7#53
@@ -353,29 +359,8 @@ nslookup测试
     7.46.168.192.in-addr.arpa domain name pointer ns1.linuxpanda.tech.
     7.46.168.192.in-addr.arpa domain name pointer www.linuxpanda.tech.
 
-    [root@7 named]# dig -t ptr www.linuxpanda.tech @192.168.46.7
-
-    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> -t ptr www.linuxpanda.tech @192.168.46.7
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 2709
-    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
-
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags:; udp: 4096
-    ;; QUESTION SECTION:
-    ;www.linuxpanda.tech.		IN	PTR
-
-    ;; AUTHORITY SECTION:
-    linuxpanda.tech.	10800	IN	SOA	ns1.linuxpanda.tech. nsadmin.linuxpanda.tech. 0 86400 3600 604800 10800
-
-    ;; Query time: 3 msec
-    ;; SERVER: 192.168.46.7#53(192.168.46.7)
-    ;; WHEN: Thu Jan 18 13:35:24 CST 2018
-    ;; MSG SIZE  rcvd: 96
-
     # 另一个主机测试
-    [root@101 ~]# dig -t axfr linuxpanda.tech @192.168.46.7
+    [root@101 ~]# dig -t axfr linuxpanda.tech @192.168.46.7                         # 完全区域传输，走的tcp协议，普通查询走的udp协议
 
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> -t axfr linuxpanda.tech @192.168.46.7
     ;; global options: +cmd
@@ -389,7 +374,7 @@ nslookup测试
     ;; WHEN: Thu Jan 18 00:44:18 EST 2018
     ;; XFR size: 5 records (messages 1, bytes 167)
 
-主从
+主从服务器
 --------------------------------------------------------------------------------------------
 
 上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完整dns的主从配置
@@ -401,13 +386,13 @@ nslookup测试
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code-block:: bash
 
-    [root@localhost ~]# vim /etc/named.conf
+    [root@localhost ~]# vim /etc/named.conf                 # 编辑主配置文件
     #注释以下行，使用//注释
     //      listen-on port 53 { 127.0.0.1; };
     //      allow-query     { localhost; };
     # 修改下面2项为no
-    dns no;
-    dnssec-validation no;
+	dnssec-enable no;
+	dnssec-validation no;
     # 添加如下配置
     allow-transfer { 192.168.46.101;};
 
@@ -418,7 +403,8 @@ nslookup测试
 
     # 主服务器修改
 
-    [root@7 named]# cat linuxpanda.tech.zone 
+    [root@7 named]# cat linuxpanda.tech.zone           # 编辑区域文件
+    [root@7 named]# cat linuxpanda.tech.zone           # 检查区域文件，确保有从服务器的ns记录和对应的a记录
     $TTL 1D
     @	IN SOA	ns1 nsadmin (
                         0	; serial
@@ -433,7 +419,7 @@ nslookup测试
     www     A       192.168.46.7
 
     # 从服务器修改
-    [root@101 ~]# vim /etc/named.rfc1912.zones 
+    [root@101 ~]# vim /etc/named.rfc1912.zones      # 从服务器添加区域，设置与主服务器的关联配置
     zone "linuxpanda.tech" IN { 
             type slave;
             master { 192.168.46.7;}
@@ -462,7 +448,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101          # 测试下，发下不对啊。
+    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101          # 测试下，发现不对啊。
 
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> -t axfr linuxpanda.tech @192.168.46.101
     ;; global options: +cmd
@@ -476,10 +462,10 @@ nslookup测试
     ;; WHEN: Thu Jan 18 01:44:01 EST 2018
     ;; XFR size: 5 records (messages 1, bytes 167)
 
-    [root@7 named]# rndc reload                                             #    这个在主机器上执行下。 
-    [root@101 named]# rndc reload                                           #    这个在从服务器执行
+    [root@7 named]# rndc reload                                             #    这个在主服务器上执行下。 
+    [root@101 named]# rndc reload                                           #    这个在从服务器上执行
     server reload successful
-    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101
+    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101          # 再次测试
 
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> -t axfr linuxpanda.tech @192.168.46.101
     ;; global options: +cmd
@@ -504,7 +490,7 @@ nslookup测试
 
         [root@7 named]# !vim 
         vim linuxpanda.tech.zone   
-        [root@7 named]# cat linuxpanda.tech.zone        # 添加了blog记录并修改了序号为2（原有基础上+1）
+        [root@7 named]# cat linuxpanda.tech.zone        # 添加了blog记录并修改了序号为2（原有基础上+1），这个必须比原有的数值大，才有效。
         $TTL 1D
         @	IN SOA	ns1 nsadmin (
                             2	; serial
@@ -526,7 +512,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101                                  # 查询测试，发现我们在主dns上的blog记录已经添加进来了
+    [root@101 named]# dig -t axfr linuxpanda.tech  @192.168.46.101            # 查询测试，发现我们在主dns上的blog记录已经添加进来了
 
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> -t axfr linuxpanda.tech @192.168.46.101
     ;; global options: +cmd
@@ -545,7 +531,7 @@ nslookup测试
 
 
 
-    [root@101 named]# cat /var/log/messages                                                         # 查看下日志关于named的信息
+    [root@101 named]# cat /var/log/messages                        # 查看下日志关于named的信息
     --------------------------省去一部分-----------------------------------------------------------
     Jan 18 01:48:49 station named[7809]: client 192.168.46.7#43665: received notify for zone 'linuxpanda.tech'
     Jan 18 01:48:49 station named[7809]: zone linuxpanda.tech/IN: Transfer started.
@@ -580,7 +566,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@101 named]# nsupdate 
+    [root@101 named]# nsupdate                           # 这个命令是交互的
     > server 192.168.46.7
     > zone linuxpanda.tech
     > update add ftp.linuxpanda.tech. 9000 IN A 192.168.46.101
@@ -617,7 +603,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@7 named]# rndc status
+    [root@7 named]# rndc status                             # 查看dns状态信息
     version: 9.9.4-RedHat-9.9.4-50.el7 <id:8f9657aa>
     CPUs found: 1
     worker threads: 1
@@ -631,11 +617,11 @@ nslookup测试
     recursive clients: 0/0/1000
     tcp clients: 0/100
     server is up and running
-    [root@7 named]# rndc querylog
-    [root@7 named]# rndc status |grep logging
+    [root@7 named]# rndc querylog                           # 日志切换命令，off->on,on->off
+    [root@7 named]# rndc status |grep logging               # 查看
     query logging is ON
-    [root@7 named]# rndc querylog
-    [root@7 named]# rndc status |grep logging
+    [root@7 named]# rndc querylog                           # 日志切换      
+    [root@7 named]# rndc status |grep logging               # 查看
     query logging is OFF
 
 
@@ -693,10 +679,10 @@ nslookup测试
     [root@7 named]# cd /var/named/
     [root@7 named]# ls
     data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
-    [root@7 named]# cp named.localhost  linuxpanda.tech.zone -p
-    [root@7 named]# vim linuxpanda.tech.zone 
-    [root@7 named]# cat linuxpanda.tech.zone 
-    $TTL 1D
+    [root@7 named]# cp named.localhost  linuxpanda.tech.zone -p             # 保留权限
+    [root@7 named]# vim linuxpanda.tech.zone                                # 添加区域
+    [root@7 named]# cat linuxpanda.tech.zone                                # 检查区域
+    $TTL 1D     
     @       IN SOA  ns1 nsadmin (
                                             0       ; serial
                                             1D      ; refresh
@@ -709,13 +695,11 @@ nslookup测试
     ns2   A         192.168.46.101
     www     A       192.168.46.7
 
-
-
     # 配置测试
-    [root@7 named]# named-checkconf 
-    [root@7 named]# named-checkzone  linuxpanda.tech linuxpanda.tech.zone 
+    [root@7 named]# named-checkconf                                         # 检查配置
+    [root@7 named]# named-checkzone  linuxpanda.tech linuxpanda.tech.zone   # 检查区域
     # 启动服务
-    [root@7 named]# systemctl restart named
+    [root@7 named]# systemctl restart named                                 # 重启服务
 
 一级域配置
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -723,8 +707,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@7 named]# vim /etc/named.conf 
-    [root@localhost ~]# vim /etc/named.conf
+    [root@7 named]# vim /etc/named.conf                                     # 编辑主配置              
     #注释以下行，使用//注释
     //      listen-on port 53 { 127.0.0.1; };
     //      allow-query     { localhost; };
@@ -739,14 +722,13 @@ nslookup测试
             file "henan.linuxpanda.tech.zone";
     };
 
-
     # 添加区域文件
-    [root@7 named]# cd /var/named/
+    [root@7 named]# cd /var/named/          
     [root@7 named]# ls
     data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
-    [root@7 named]# cp -p named.localhost  henan.linuxpanda.tech.zone 
-    [root@7 named]# vim henan.linuxpanda.tech.zone 
-    [root@7 named]# cat henan.linuxpanda.tech.zone 
+    [root@7 named]# cp -p named.localhost  henan.linuxpanda.tech.zone   # 保留权限
+    [root@7 named]# vim henan.linuxpanda.tech.zone                      # 编辑区域文件
+    [root@7 named]# cat henan.linuxpanda.tech.zone                      # 检查区域文件
     $TTL 1D
     @       IN SOA  ns1 nsadmin (
                                             0       ; serial
@@ -761,18 +743,17 @@ nslookup测试
     www        A    192.168.46.101
 
     # 配置测试
-    [root@7 named]# named-checkconf 
-    [root@7 named]# named-checkzone  henan.linuxpanda.tech henan.linuxpanda.tech.zone 
+    [root@7 named]# named-checkconf                                                      # 检查主配置文件
+    [root@7 named]# named-checkzone  henan.linuxpanda.tech henan.linuxpanda.tech.zone    # 检查区域文件
     # 启动服务
-    [root@7 named]# systemctl restart named
+    [root@7 named]# systemctl restart named                                              # 重启服务
 
 二级域配置
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
-    [root@7 named]# vim /etc/named.conf 
-    [root@localhost ~]# vim /etc/named.conf
+    [root@7 named]# vim /etc/named.conf                             # 编辑主配置文件
     #注释以下行，使用//注释
     //      listen-on port 53 { 127.0.0.1; };
     //      allow-query     { localhost; };
@@ -787,14 +768,13 @@ nslookup测试
             file "zhengzhou.henan.linuxpanda.tech.zone";
     };
 
-
     # 添加区域文件
     [root@7 named]# cd /var/named/
     [root@7 named]# ls
     data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
-    [root@7 named]# cp -p named.localhost  linuxpanda.tech.zone 
-    [root@7 named]# vim zhengzhou.henan.linuxpanda.tech.zone 
-    [root@7 named]# cat zhengzhou.henan.linuxpanda.tech.zone 
+    [root@7 named]# cp -p named.localhost  linuxpanda.tech.zone         # 保留权限
+    [root@7 named]# vim zhengzhou.henan.linuxpanda.tech.zone            # 编辑配置文件
+    [root@7 named]# cat zhengzhou.henan.linuxpanda.tech.zone            # 检查配置文件
     $TTL 1D
     @	IN SOA	ns1 nsadmin (
                         0	    ; serial
@@ -810,10 +790,10 @@ nslookup测试
     web     CNAME   www
 
     # 配置测试
-    [root@7 named]# named-checkconf 
-    [root@7 named]# named-checkzone  zhengzhou.henan.linuxpanda.tech zhengzhou.henan.linuxpanda.tech.zone 
+    [root@7 named]# named-checkconf                                                                       # 配置文件检查
+    [root@7 named]# named-checkzone  zhengzhou.henan.linuxpanda.tech zhengzhou.henan.linuxpanda.tech.zone # 区域文件检查
     # 启动服务
-    [root@7 named]# systemctl restart named
+    [root@7 named]# systemctl restart named                                                               # 重启
 
 测试下
 
@@ -821,7 +801,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@7 named]# host web.zhengzhou.henan.linuxpanda.tech 192.168.46.7
+    [root@7 named]# host web.zhengzhou.henan.linuxpanda.tech 192.168.46.7                               # 测试
     Using domain server:
     Name: 192.168.46.7
     Address: 192.168.46.7#53
@@ -852,7 +832,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@101 ~]# vim /etc/named.rfc1912.zones 
+    [root@101 ~]# vim /etc/named.rfc1912.zones              # 编辑主配置文件
     # 添加如何内容
     zone "linuxpanda.tech" IN {
             type forward;
@@ -863,7 +843,7 @@ nslookup测试
 
 .. code-block:: bash
 
-    [root@102 ~]# vim /etc/named.rfc1912.zones 
+    [root@102 ~]# vim /etc/named.rfc1912.zones            # 编辑主配置文件
     # 添加如何内容
     zone "henan.linuxpanda.tech" IN {
             type forward;
@@ -884,7 +864,7 @@ nslookup测试
 
     # 我们先测试我内部的服务器的dns主机
 
-    [root@102 ~]$ host ns2.linuxpanda.tech 192.168.46.102
+    [root@102 ~]$ host ns2.linuxpanda.tech 192.168.46.102           # 测试192.168.46.7机器上面有的服务器。
     Using domain server:
     Name: 192.168.46.102
     Address: 192.168.46.102#53
@@ -893,7 +873,7 @@ nslookup测试
     ns2.linuxpanda.tech has address 192.168.46.101
     # 上面可以看到，我们的都给转发了。
     # 下面测试一个内部dns没有的主机wwwxx,结构跑到互联网上给我们解析了，如果forward 设置only，就不会在去解析了。
-    [root@102 ~]$ host wwwxx.linuxpanda.tech 
+    [root@102 ~]$ host wwwxx.linuxpanda.tech                        # 测试一个192.168.46.7机器上面没有的服务器
     wwwxx.linuxpanda.tech has address 39.106.157.220
     # 这个ip就是我买的云服务器ip，域名解析到这个ip了。
 
