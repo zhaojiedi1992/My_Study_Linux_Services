@@ -1,3 +1,104 @@
 pssh
 ====================================================
 
+pssh简介
+----------------------------------------------------------
+
+pssh命令是一个python编写可以在多台服务器上执行命令的工具，同时支持拷贝文件，
+使用必须在各个服务器上配置好密钥认证访问。
+
+pssh的安装
+----------------------------------------------------------
+.. code-block:: bash
+
+    [root@7 ~]# yum install pssh
+    [root@7 ~]# rpm -ql pssh |grep bin
+    /usr/bin/pnuke                      # 并行在远程主机杀进程
+    /usr/bin/prsync                     # 使用rsync协议从本地同步数据
+    /usr/bin/pscp.pssh                  # 本地文件复制到多个主机上
+    /usr/bin/pslurp                     # 把多个远程主机的问题拉到本机
+    /usr/bin/pssh                       # 多主机并行运行命令
+
+准备工作
+---------------------------------------------------------------
+
+主机信任
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+我这里测试有3个机器，ip分别是192.168.46.7，192.168.46.101，192.168.46.102,
+我想在7的机器上可以控制这三个机器，包括自己的机器。
+
+.. code-block:: bash
+
+    [root@7 ~]# ssh-keygen                   # 这个命令在3个主机上面都执行一次
+    [root@7 ~]# ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.7   # 添加信任，可以免密码到7
+    [root@7 ~]# ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.101 # 添加信任，可以免密码到101
+    [root@7 ~]# ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.102 # 添加信任，可以免密码到102
+
+新建主机配置文件
+
+.. code-block:: bash
+
+    [root@7 ~]# echo 192.168.46.7 >>/root/hosts.txt
+    [root@7 ~]# echo 192.168.46.101 >>/root/hosts.txt
+    [root@7 ~]# echo 192.168.46.102 >>/root/hosts.txt
+    [root@7 ~]# cat /root/hosts.txt 
+    192.168.46.7
+    192.168.46.101
+    192.168.46.102
+
+命令的使用
+----------------------------------------------------
+
+pssh  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    [root@7 ~]# pssh --help
+    Usage: pssh [OPTIONS] command [...]
+
+    Options:
+    --version             show program's version number and exit
+    --help                show this help message and exit
+    -h HOST_FILE, --hosts=HOST_FILE
+                            hosts file (each line "[user@]host[:port]")
+    -H HOST_STRING, --host=HOST_STRING
+                            additional host entries ("[user@]host[:port]")
+    -l USER, --user=USER  username (OPTIONAL)
+    -p PAR, --par=PAR     max number of parallel threads (OPTIONAL)
+    -o OUTDIR, --outdir=OUTDIR
+                            output directory for stdout files (OPTIONAL)
+    -e ERRDIR, --errdir=ERRDIR
+                            output directory for stderr files (OPTIONAL)
+    -t TIMEOUT, --timeout=TIMEOUT
+                            timeout (secs) (0 = no timeout) per host (OPTIONAL)
+    -O OPTION, --option=OPTION
+                            SSH option (OPTIONAL)
+    -v, --verbose         turn on warning and diagnostic messages (OPTIONAL)
+    -A, --askpass         Ask for a password (OPTIONAL)
+    -x ARGS, --extra-args=ARGS
+                            Extra command-line arguments, with processing for
+                            spaces, quotes, and backslashes
+    -X ARG, --extra-arg=ARG
+                            Extra command-line argument
+    -i, --inline          inline aggregated output and error for each server
+    --inline-stdout       inline standard output for each server
+    -I, --send-input      read from standard input and send as input to ssh
+    -P, --print           print output as we get it
+
+    Example: pssh -h hosts.txt -l irb2 -o /tmp/foo uptime
+
+
+
+pslurp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pscp.pssh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+prsync 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pnuke
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

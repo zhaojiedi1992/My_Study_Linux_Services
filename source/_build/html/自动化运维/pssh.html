@@ -98,7 +98,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">4. 自动化运维</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ansible.html">4.1. ansible</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.2. pssh</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.2. pssh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.2.1. pssh简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.2.2. pssh的安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.2.3. 准备工作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">4.2.3.1. 主机信任</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.2.4. 命令的使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">4.2.4.1. pssh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pslurp">4.2.4.2. pslurp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pscp-pssh">4.2.4.3. pscp.pssh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prsync">4.2.4.4. prsync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pnuke">4.2.4.5. pnuke</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
@@ -171,6 +187,100 @@
             
   <div class="section" id="pssh">
 <h1>4.2. pssh<a class="headerlink" href="#pssh" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>4.2.1. pssh简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>pssh命令是一个python编写可以在多台服务器上执行命令的工具，同时支持拷贝文件，
+使用必须在各个服务器上配置好密钥认证访问。</p>
+</div>
+<div class="section" id="id2">
+<h2>4.2.2. pssh的安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum install pssh</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># rpm -ql pssh |grep bin</span>
+/usr/bin/pnuke                      <span class="c1"># 并行在远程主机杀进程</span>
+/usr/bin/prsync                     <span class="c1"># 使用rsync协议从本地同步数据</span>
+/usr/bin/pscp.pssh                  <span class="c1"># 本地文件复制到多个主机上</span>
+/usr/bin/pslurp                     <span class="c1"># 把多个远程主机的问题拉到本机</span>
+/usr/bin/pssh                       <span class="c1"># 多主机并行运行命令</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>4.2.3. 准备工作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>4.2.3.1. 主机信任<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>我这里测试有3个机器，ip分别是192.168.46.7，192.168.46.101，192.168.46.102,
+我想在7的机器上可以控制这三个机器，包括自己的机器。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># ssh-keygen                   # 这个命令在3个主机上面都执行一次</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.7   # 添加信任，可以免密码到7</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.101 # 添加信任，可以免密码到101</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># ssh-copy-id  -i /root/.ssh/id_rsa.pub 192.168.46.102 # 添加信任，可以免密码到102</span>
+</pre></div>
+</div>
+<p>新建主机配置文件</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># echo 192.168.46.7 &gt;&gt;/root/hosts.txt</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># echo 192.168.46.101 &gt;&gt;/root/hosts.txt</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># echo 192.168.46.102 &gt;&gt;/root/hosts.txt</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># cat /root/hosts.txt</span>
+<span class="m">192</span>.168.46.7
+<span class="m">192</span>.168.46.101
+<span class="m">192</span>.168.46.102
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>4.2.4. 命令的使用<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>4.2.4.1. pssh<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@7 ~]# pssh --help
+Usage: pssh [OPTIONS] command [...]
+
+Options:
+--version             show program&#39;s version number and exit
+--help                show this help message and exit
+-h HOST_FILE, --hosts=HOST_FILE
+                        hosts file (each line &quot;[user@]host[:port]&quot;)
+-H HOST_STRING, --host=HOST_STRING
+                        additional host entries (&quot;[user@]host[:port]&quot;)
+-l USER, --user=USER  username (OPTIONAL)
+-p PAR, --par=PAR     max number of parallel threads (OPTIONAL)
+-o OUTDIR, --outdir=OUTDIR
+                        output directory for stdout files (OPTIONAL)
+-e ERRDIR, --errdir=ERRDIR
+                        output directory for stderr files (OPTIONAL)
+-t TIMEOUT, --timeout=TIMEOUT
+                        timeout (secs) (0 = no timeout) per host (OPTIONAL)
+-O OPTION, --option=OPTION
+                        SSH option (OPTIONAL)
+-v, --verbose         turn on warning and diagnostic messages (OPTIONAL)
+-A, --askpass         Ask for a password (OPTIONAL)
+-x ARGS, --extra-args=ARGS
+                        Extra command-line arguments, with processing for
+                        spaces, quotes, and backslashes
+-X ARG, --extra-arg=ARG
+                        Extra command-line argument
+-i, --inline          inline aggregated output and error for each server
+--inline-stdout       inline standard output for each server
+-I, --send-input      read from standard input and send as input to ssh
+-P, --print           print output as we get it
+
+Example: pssh -h hosts.txt -l irb2 -o /tmp/foo uptime
+</pre></div>
+</div>
+</div>
+<div class="section" id="pslurp">
+<h3>4.2.4.2. pslurp<a class="headerlink" href="#pslurp" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="pscp-pssh">
+<h3>4.2.4.3. pscp.pssh<a class="headerlink" href="#pscp-pssh" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="prsync">
+<h3>4.2.4.4. prsync<a class="headerlink" href="#prsync" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="pnuke">
+<h3>4.2.4.5. pnuke<a class="headerlink" href="#pnuke" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 </div>
 
 

@@ -36,7 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="next" title="4.1. ansible" href="ansible.html"/>
+        <link rel="next" title="4.1. pssh" href="pssh.html"/>
         <link rel="prev" title="3.3. cobble自动化安装" href="../自动化安装/cobble自动化安装.html"/> 
 
   
@@ -96,8 +96,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. 自动化运维</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html">4.1. ansible</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pssh.html">4.2. pssh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html">4.1. pssh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pexpect.html">4.2. pexpect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paramiko.html">4.3. paramiko</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fabric.html">4.4. fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html">4.5. ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saltstack.html">4.6. saltstack</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
@@ -170,22 +174,32 @@
 <h1>4. 自动化运维<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ansible.html">4.1. ansible</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id1">4.1.1. ansible特性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id2">4.1.2. ansible架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id3">4.1.3. ansible工作原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id4">4.1.4. 安装软件包</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id5">4.1.5. 添加管理主机和修改配置文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id6">4.1.6. 使用ansible模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#galaxy">4.1.7. galaxy的使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#playbook">4.1.8. playbook的基础使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#vault">4.1.9. vault</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#console">4.1.10. console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#id9">4.1.11. playbook其他使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ansible.html#role">4.1.12. role角色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pssh.html">4.1. pssh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html#id1">4.1.1. pssh简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html#id2">4.1.2. pssh的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html#id3">4.1.3. 准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pssh.html#id5">4.1.4. 命令的使用</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pssh.html">4.2. pssh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pexpect.html">4.2. pexpect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paramiko.html">4.3. paramiko</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fabric.html">4.4. fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ansible.html">4.5. ansible</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id1">4.5.1. ansible特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id2">4.5.2. ansible架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id3">4.5.3. ansible工作原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id4">4.5.4. 安装软件包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id5">4.5.5. 添加管理主机和修改配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id6">4.5.6. 使用ansible模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#galaxy">4.5.7. galaxy的使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#playbook">4.5.8. playbook的基础使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#vault">4.5.9. vault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#console">4.5.10. console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#id9">4.5.11. playbook其他使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible.html#role">4.5.12. role角色</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="saltstack.html">4.6. saltstack</a></li>
 </ul>
 </div>
 </div>
@@ -200,7 +214,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ansible.html" class="btn btn-neutral float-right" title="4.1. ansible" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pssh.html" class="btn btn-neutral float-right" title="4.1. pssh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../自动化安装/cobble自动化安装.html" class="btn btn-neutral" title="3.3. cobble自动化安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
