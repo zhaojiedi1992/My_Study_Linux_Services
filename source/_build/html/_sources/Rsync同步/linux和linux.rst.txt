@@ -195,14 +195,13 @@ rsync我们知道是分客户端和服务端的，那具体对于上面的情况
 .. code-block:: bash
 
 
-#!/bin/bash
+    #!/bin/bash
 
     user=web
     remote_module=web
     local_dir=/app/web/
     ip=72.18.46.7
     password_file=/etc/rsync.pass
-
 
     /usr/bin/inotifywait -mrq --timefmt '%d/%m/%y%H:%M' --format '%T %w %f' -e modify,delete,create,attrib $local_dir | while read DATE TIME DIR FILE;do
             filechange=${DIR}${FILE}

@@ -257,12 +257,10 @@ udp    UNCONN     <span class="m">0</span>      <span class="m">0</span>        
 </div>
 <div class="section" id="httpd">
 <h2>3.2.3. 安装httpd服务<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost tftpboot]# yum install httpd
-[root@localhost tftpboot]# mkdir /var/www/html/centos/{6,7} -pv
-[root@localhost tftpboot]# chkconfig  httpd on
-[root@localhost tftpboot]# service httpd start
-Starting httpd: httpd: Could not reliably determine the server&#39;s fully qualified domain name, using localhost.localdomain for ServerName
-                                                        [  OK  ]
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># yum install httpd</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># mkdir /var/www/html/centos/{6,7} -pv</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># chkconfig  httpd on</span>
+<span class="o">[</span>root@localhost tftpboot<span class="o">]</span><span class="c1"># service httpd start</span>
 </pre></div>
 </div>
 <div class="admonition note">

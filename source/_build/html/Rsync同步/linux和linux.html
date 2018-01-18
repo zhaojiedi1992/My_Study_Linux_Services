@@ -359,29 +359,26 @@ total size is <span class="m">1322779</span>  speedup is <span class="m">1</span
 </pre></div>
 </div>
 <p>编写rsync脚本</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">user</span><span class="o">=</span>web
+<span class="nv">remote_module</span><span class="o">=</span>web
+<span class="nv">local_dir</span><span class="o">=</span>/app/web/
+<span class="nv">ip</span><span class="o">=</span><span class="m">72</span>.18.46.7
+<span class="nv">password_file</span><span class="o">=</span>/etc/rsync.pass
+
+/usr/bin/inotifywait -mrq --timefmt <span class="s1">&#39;%d/%m/%y%H:%M&#39;</span> --format <span class="s1">&#39;%T %w %f&#39;</span> -e modify,delete,create,attrib <span class="nv">$local_dir</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> DATE TIME DIR FILE<span class="p">;</span><span class="k">do</span>
+        <span class="nv">filechange</span><span class="o">=</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}${</span><span class="nv">FILE</span><span class="si">}</span>
+        <span class="c1"># 拉取服务器数据</span>
+        <span class="c1">#/usr/bin/rsync -avz --delete --progress --password-file=$password_file    $user@$ip::$remote_module   $local_dir &amp;</span>
+        <span class="c1"># 推送本机的数据</span>
+        /usr/bin/rsync -avz --delete --progress --password-file<span class="o">=</span><span class="nv">$password_file</span>     <span class="nv">$local_dir</span> <span class="nv">$user</span>@<span class="nv">$ip</span>::<span class="nv">$remote_module</span>   <span class="p">&amp;</span>
+
+        <span class="nv">date_str</span><span class="o">=</span>/var/log/rsync_<span class="k">$(</span>date <span class="s2">&quot;+%F&quot;</span><span class="k">)</span>.log
+        <span class="nb">echo</span> <span class="s2">&quot;At </span><span class="si">${</span><span class="nv">TIME</span><span class="si">}</span><span class="s2"> on </span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">, file </span><span class="nv">$filechange</span><span class="s2"> was backed up via rsynce&quot;</span> &gt;&gt; <span class="nv">$date_str</span> <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">done</span>
 </pre></div>
 </div>
-<p>#!/bin/bash</p>
-<blockquote>
-<div><p>user=web
-remote_module=web
-local_dir=/app/web/
-ip=72.18.46.7
-password_file=/etc/rsync.pass</p>
-<dl class="docutils">
-<dt>/usr/bin/inotifywait -mrq –timefmt ‘%d/%m/%y%H:%M’ –format ‘%T %w %f’ -e modify,delete,create,attrib $local_dir | while read DATE TIME DIR FILE;do</dt>
-<dd><p class="first">filechange=${DIR}${FILE}
-# 拉取服务器数据
-#/usr/bin/rsync -avz –delete –progress –password-file=$password_file    <a class="reference external" href="mailto:$user&#37;&#52;&#48;$ip">$user<span>&#64;</span>$ip</a>::$remote_module   $local_dir &amp;
-# 推送本机的数据
-/usr/bin/rsync -avz –delete –progress –password-file=$password_file     $local_dir <a class="reference external" href="mailto:$user&#37;&#52;&#48;$ip">$user<span>&#64;</span>$ip</a>::$remote_module   &amp;</p>
-<p class="last">date_str=/var/log/rsync_$(date “+%F”).log
-echo “At ${TIME} on ${DATE}, file $filechange was backed up via rsynce” &gt;&gt; $date_str 2&gt;&amp;1</p>
-</dd>
-</dl>
-<p>done</p>
-</div></blockquote>
 </div>
 <div class="section" id="id12">
 <h2>2.2.5. 配置计划任务<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>

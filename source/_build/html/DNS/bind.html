@@ -37,6 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
         <link rel="up" title="7. DNS" href="index.html"/>
+        <link rel="next" title="7.2. unbound" href="unbound.html"/>
         <link rel="prev" title="7. DNS" href="index.html"/> 
 
   
@@ -129,21 +130,28 @@
 <li class="toctree-l4"><a class="reference internal" href="#id18">7.1.6.5. 进一步测试</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">7.1.7. 允许远程动态更新</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">7.1.8. 启用查询日志记录</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">7.1.9. 子域</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id22">7.1.9.1. 环境配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id23">7.1.9.2. 顶级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id24">7.1.9.3. 一级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id25">7.1.9.4. 二级域配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">7.1.7. 允许远程动态更新</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id20">7.1.7.1. 主服务器修改</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">7.1.7.2. 从服务器来更新</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">7.1.7.3. 主服务器测试</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id26">7.1.10. 转发</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">7.1.8. 启用查询日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">7.1.9. 子域配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id25">7.1.9.1. 环境配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">7.1.9.2. 顶级域配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">7.1.9.3. 一级域配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">7.1.9.4. 二级域配置</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">7.1.10. 转发服务器</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#view">7.1.11. view</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id27">7.1.12. 压力测试</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id28">7.1.13. 排错</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">7.1.12. 压力测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">7.1.13. 排错</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="unbound.html">7.2. unbound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="阿里云dns.html">7.3. 阿里云dns</a></li>
 </ul>
 </li>
 </ul>
@@ -415,6 +423,15 @@ OK
 <div class="section" id="id11">
 <h3>7.1.4.5. 测试<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>host方式测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># host www.linuxpanda.tech localhost</span>
+Using domain server:
+Name: localhost
+Address: ::1#53
+Aliases:
+
+www.linuxpanda.tech has address <span class="m">192</span>.168.46.7
+</pre></div>
+</div>
 <p>dig方式测试</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># dig ns1.linuxpanda.tech @localhost</span>
 
@@ -717,7 +734,8 @@ Jan <span class="m">18</span> <span class="m">01</span>:49:23 station named<span
 </div>
 <div class="section" id="id19">
 <h2>7.1.7. 允许远程动态更新<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
-<p>主服务器修改</p>
+<div class="section" id="id20">
+<h3>7.1.7.1. 主服务器修改<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones       # 添加允许更新</span>
 zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
         <span class="nb">type</span> master<span class="p">;</span>
@@ -728,7 +746,9 @@ zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</s
 <span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># systemctl restart named              # 重启服务</span>
 </pre></div>
 </div>
-<p>从服务器来更新</p>
+</div>
+<div class="section" id="id21">
+<h3>7.1.7.2. 从服务器来更新<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 named<span class="o">]</span><span class="c1"># nsupdate</span>
 &gt; server <span class="m">192</span>.168.46.7
 &gt; zone linuxpanda.tech
@@ -737,7 +757,9 @@ zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</s
 &gt; quit
 </pre></div>
 </div>
-<p>主服务器测试</p>
+</div>
+<div class="section" id="id22">
+<h3>7.1.7.3. 主服务器测试<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># ll -t                                                    # 查看文件</span>
 total <span class="m">28</span>
 -rw-r--r--. <span class="m">1</span> named named  <span class="m">757</span> Jan <span class="m">18</span> <span class="m">16</span>:02 linuxpanda.tech.zone.jnl
@@ -760,8 +782,9 @@ ftp.linuxpanda.tech.        <span class="m">9000</span>    IN      A       <span
 <p class="last">动态更新后，从服务器也会自动更新的，但是序号是没有增加的。</p>
 </div>
 </div>
-<div class="section" id="id20">
-<h2>7.1.8. 启用查询日志记录<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id23">
+<h2>7.1.8. 启用查询日志记录<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
 <p>这个启用dns查询日志记录功能， 不建议开启的（大量日志操作），只有在调试dns配置的时候开启。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rndc status</span>
 version: <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;id:8f9657aa&gt;
@@ -786,8 +809,8 @@ query logging is OFF
 </pre></div>
 </div>
 </div>
-<div class="section" id="id21">
-<h2>7.1.9. 子域<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id24">
+<h2>7.1.9. 子域配置<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
 <p>配置子域需要的服务器也比较多。 简单规划下。</p>
 <ul class="simple">
 <li>192.168.46.7 : linuxpanda.tech</li>
@@ -795,8 +818,8 @@ query logging is OFF
 <li>192.168.46.102 : zhengzhou.henan.linuxpanda.tech</li>
 </ul>
 <p>我这里linuxpanda.tech 就认为是我自己的顶级域。 henan就是二级域，zhengzhou就是三级域。</p>
-<div class="section" id="id22">
-<h3>7.1.9.1. 环境配置<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h3>7.1.9.1. 环境配置<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <p>前面我使用了192.168.46.7和192.168.46.101两个机器，这个实验，我就重新安装下bind来覆盖原有设置了。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 192.168.46.7 机器上操作</span>
 <span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># rm -rf /etc/named*</span>
@@ -810,8 +833,8 @@ query logging is OFF
 </pre></div>
 </div>
 </div>
-<div class="section" id="id23">
-<h3>7.1.9.2. 顶级域配置<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id26">
+<h3>7.1.9.2. 顶级域配置<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="c1">#注释以下行，使用//注释</span>
@@ -859,8 +882,8 @@ www     A       <span class="m">192</span>.168.46.7
 </pre></div>
 </div>
 </div>
-<div class="section" id="id24">
-<h3>7.1.9.3. 一级域配置<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h3>7.1.9.3. 一级域配置<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="c1">#注释以下行，使用//注释</span>
@@ -906,8 +929,8 @@ www        A    <span class="m">192</span>.168.46.101
 </pre></div>
 </div>
 </div>
-<div class="section" id="id25">
-<h3>7.1.9.4. 二级域配置<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id28">
+<h3>7.1.9.4. 二级域配置<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 named<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="c1">#注释以下行，使用//注释</span>
@@ -967,17 +990,77 @@ www.zhengzhou.henan.linuxpanda.tech has address <span class="m">192</span>.168.4
 </div>
 </div>
 </div>
-<div class="section" id="id26">
-<h2>7.1.10. 转发<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id29">
+<h2>7.1.10. 转发服务器<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<p>转发分为2种：</p>
+<ul class="simple">
+<li>全局转发： 全局配置文件设置</li>
+<li>特定域转发： 特定域内配置</li>
+</ul>
+<p>转发类型2种：</p>
+<ul class="simple">
+<li>first： 转发给特定服务器，如果他没有就在找自己找根。</li>
+<li>only: 抓饭给特定服务器，如果他找不到自己不继续找。</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">请关闭dnssec功能。</p>
+</div>
+<p>我这里接着上面的实验基础上的， 上面我做了3级别的域 linuxpanda.tech ,henan.linuxpanda.tech ,zhengzhou.henan.linuxpanda.tech</p>
+<p>给henan.linxupanda.tech配置特定域转发</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@101 ~<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+<span class="c1"># 添加如何内容</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> forward<span class="p">;</span>
+        forward first<span class="p">;</span>
+        forwarders <span class="o">{</span> <span class="m">192</span>.168.46.7<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>给zhengzhou.henan.linxupanda.tech配置特定域转发</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ~<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+<span class="c1"># 添加如何内容</span>
+zone <span class="s2">&quot;henan.linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> forward<span class="p">;</span>
+        forward first<span class="p">;</span>
+        forwarders <span class="o">{</span> <span class="m">192</span>.168.46.101<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> forward<span class="p">;</span>
+        forward first<span class="p">;</span>
+        forwarders <span class="o">{</span> <span class="m">192</span>.168.46.101<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">修改配置文件后需要重启服务或者使用rndc reload重新加载配置文件。</p>
+</div>
+<p>测试</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 我们先测试我内部的服务器的dns主机</span>
+
+<span class="o">[</span>root@102 ~<span class="o">]</span>$ host ns2.linuxpanda.tech <span class="m">192</span>.168.46.102
+Using domain server:
+Name: <span class="m">192</span>.168.46.102
+Address: <span class="m">192</span>.168.46.102#53
+Aliases:
+
+ns2.linuxpanda.tech has address <span class="m">192</span>.168.46.101
+<span class="c1"># 上面可以看到，我们的都给转发了。</span>
+<span class="c1"># 下面测试一个内部dns没有的主机wwwxx,结构跑到互联网上给我们解析了，如果forward 设置only，就不会在去解析了。</span>
+<span class="o">[</span>root@102 ~<span class="o">]</span>$ host wwwxx.linuxpanda.tech
+wwwxx.linuxpanda.tech has address <span class="m">39</span>.106.157.220
+<span class="c1"># 这个ip就是我买的云服务器ip，域名解析到这个ip了。</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="view">
 <h2>7.1.11. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="id27">
-<h2>7.1.12. 压力测试<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id30">
+<h2>7.1.12. 压力测试<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="id28">
-<h2>7.1.13. 排错<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id31">
+<h2>7.1.13. 排错<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -990,6 +1073,8 @@ www.zhengzhou.henan.linuxpanda.tech has address <span class="m">192</span>.168.4
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unbound.html" class="btn btn-neutral float-right" title="7.2. unbound" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="7. DNS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

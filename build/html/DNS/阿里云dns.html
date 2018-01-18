@@ -101,7 +101,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">7. DNS</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bind.html">7.1. bind</a></li>
 <li class="toctree-l2"><a class="reference internal" href="unbound.html">7.2. unbound</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. 阿里云dns</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. 阿里云dns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">7.3.1. 阿里云简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7.3.2. 域名注册和实名认证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">7.3.3. 域名解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">7.3.4. 测试域名配置项</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,6 +177,39 @@
             
   <div class="section" id="dns">
 <h1>7.3. 阿里云dns<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>7.3.1. 阿里云简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>阿里云域名服务是集域名注册、交易、解析、监控和保护为一体的综合域名管理平台。域名服务帮助您实现以下需求：</p>
+<ul class="simple">
+<li>域名注册：提供丰富的域名种类供您选择。</li>
+<li>域名交易：基于支付宝担保交易打造的域名交易平台，为买卖双方提供安全、便捷的域名交易服务，让您可以像淘宝一样简单地买卖域名。</li>
+<li>域名保障：基于隐私保护、安全锁等安全服务，全面保障您的注册信息和域名信息，免遭恶意骚扰。</li>
+<li>品牌保护：用域名保护您的品牌，帮助集团及大型企业安全、高效的管理品牌和域名。</li>
+<li>域名解析：依托阿里云解析，提供免费、高效、安全的 DNS 服务器，保障域名即买即用。</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>7.3.2. 域名注册和实名认证<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://wanwang.aliyun.com/domain/?spm=5176.200001.n2.13.hCGJOo">阿里域名注册</a></p>
+<p><a class="reference external" href="https://help.aliyun.com/document_detail/54068.html?spm=5176.doc54066.6.545.oqMRkY">注册流程</a></p>
+</div>
+<div class="section" id="id5">
+<h2>7.3.3. 域名解析<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>进入控制台找到域名</p>
+<img alt="../_images/解析主页.png" src="../_images/解析主页.png" />
+<p>添加解析</p>
+<img alt="../_images/添加解析.png" src="../_images/添加解析.png" />
+</div>
+<div class="section" id="id6">
+<h2>7.3.4. 测试域名配置项<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ~<span class="o">]</span>$ ping www.linuxpanda.tech
+PING www.linuxpanda.tech <span class="o">(</span><span class="m">39</span>.106.157.220<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from <span class="m">39</span>.106.157.220 <span class="o">(</span><span class="m">39</span>.106.157.220<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">52</span> <span class="nv">time</span><span class="o">=</span><span class="m">22</span>.8 ms
+<span class="m">64</span> bytes from <span class="m">39</span>.106.157.220 <span class="o">(</span><span class="m">39</span>.106.157.220<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">52</span> <span class="nv">time</span><span class="o">=</span><span class="m">13</span>.9 ms
+<span class="m">64</span> bytes from <span class="m">39</span>.106.157.220 <span class="o">(</span><span class="m">39</span>.106.157.220<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">52</span> <span class="nv">time</span><span class="o">=</span><span class="m">23</span>.5 ms
+</pre></div>
+</div>
+</div>
 </div>
 
 

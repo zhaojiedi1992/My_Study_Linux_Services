@@ -90,8 +90,7 @@ tftp依赖于xinet的，我们需要启动下xinetd 。
     [root@localhost tftpboot]# mkdir /var/www/html/centos/{6,7} -pv
     [root@localhost tftpboot]# chkconfig  httpd on
     [root@localhost tftpboot]# service httpd start
-    Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using localhost.localdomain for ServerName
-                                                            [  OK  ]
+
 .. note:: 上面提示域名有点问题，暂时不用关心。
 
 挂载光盘

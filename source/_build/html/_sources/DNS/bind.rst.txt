@@ -236,6 +236,7 @@ DNS软件安装
 host方式测试
 
 .. code-block:: bash
+
     [root@localhost named]# host www.linuxpanda.tech localhost
     Using domain server:
     Name: localhost
@@ -561,7 +562,7 @@ nslookup测试
 ---------------------------------------------------------
 
 主服务器修改
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    
 .. code-block:: bash
 
@@ -575,6 +576,7 @@ nslookup测试
     [root@7 named]# systemctl restart named              # 重启服务
 
 从服务器来更新
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -586,6 +588,7 @@ nslookup测试
     > quit
 
 主服务器测试
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -636,7 +639,7 @@ nslookup测试
     query logging is OFF
 
 
-子域
+子域配置
 ---------------------------------------------------------
 
 配置子域需要的服务器也比较多。 简单规划下。
@@ -828,11 +831,71 @@ nslookup测试
     www.zhengzhou.henan.linuxpanda.tech has address 192.168.46.102
 
 
-转发
+转发服务器
 ---------------------------------------------------------
 
+转发分为2种： 
 
+- 全局转发： 全局配置文件设置
+- 特定域转发： 特定域内配置
 
+转发类型2种： 
+
+- first： 转发给特定服务器，如果他没有就在找自己找根。
+- only: 抓饭给特定服务器，如果他找不到自己不继续找。
+
+.. note:: 请关闭dnssec功能。
+
+我这里接着上面的实验基础上的， 上面我做了3级别的域 linuxpanda.tech ,henan.linuxpanda.tech ,zhengzhou.henan.linuxpanda.tech 
+
+给henan.linxupanda.tech配置特定域转发
+
+.. code-block:: bash
+
+    [root@101 ~]# vim /etc/named.rfc1912.zones 
+    # 添加如何内容
+    zone "linuxpanda.tech" IN {
+            type forward;
+            forward first;
+            forwarders { 192.168.46.7; };
+
+给zhengzhou.henan.linxupanda.tech配置特定域转发
+
+.. code-block:: bash
+
+    [root@102 ~]# vim /etc/named.rfc1912.zones 
+    # 添加如何内容
+    zone "henan.linuxpanda.tech" IN {
+            type forward;
+            forward first;
+            forwarders { 192.168.46.101; };
+    };
+    zone "linuxpanda.tech" IN {
+            type forward;
+            forward first;
+            forwarders { 192.168.46.101; };
+    };
+
+.. note:: 修改配置文件后需要重启服务或者使用rndc reload重新加载配置文件。
+
+测试
+
+.. code-block:: bash
+
+    # 我们先测试我内部的服务器的dns主机
+
+    [root@102 ~]$ host ns2.linuxpanda.tech 192.168.46.102
+    Using domain server:
+    Name: 192.168.46.102
+    Address: 192.168.46.102#53
+    Aliases: 
+
+    ns2.linuxpanda.tech has address 192.168.46.101
+    # 上面可以看到，我们的都给转发了。
+    # 下面测试一个内部dns没有的主机wwwxx,结构跑到互联网上给我们解析了，如果forward 设置only，就不会在去解析了。
+    [root@102 ~]$ host wwwxx.linuxpanda.tech 
+    wwwxx.linuxpanda.tech has address 39.106.157.220
+    # 这个ip就是我买的云服务器ip，域名解析到这个ip了。
 
 view
 ---------------------------------------------------------
