@@ -4,5 +4,9 @@
 .. toctree::
    :maxdepth: 2
 
-   ansible
    pssh
+   pexpect
+   paramiko
+   fabric
+   ansible
+   saltstack

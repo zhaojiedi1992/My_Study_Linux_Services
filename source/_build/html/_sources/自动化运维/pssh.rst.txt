@@ -53,52 +53,136 @@ pssh的安装
 pssh  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+命令使用：
+
 .. code-block:: bash
 
     [root@7 ~]# pssh --help
     Usage: pssh [OPTIONS] command [...]
 
     Options:
-    --version             show program's version number and exit
-    --help                show this help message and exit
-    -h HOST_FILE, --hosts=HOST_FILE
-                            hosts file (each line "[user@]host[:port]")
-    -H HOST_STRING, --host=HOST_STRING
-                            additional host entries ("[user@]host[:port]")
-    -l USER, --user=USER  username (OPTIONAL)
-    -p PAR, --par=PAR     max number of parallel threads (OPTIONAL)
-    -o OUTDIR, --outdir=OUTDIR
-                            output directory for stdout files (OPTIONAL)
-    -e ERRDIR, --errdir=ERRDIR
-                            output directory for stderr files (OPTIONAL)
-    -t TIMEOUT, --timeout=TIMEOUT
-                            timeout (secs) (0 = no timeout) per host (OPTIONAL)
-    -O OPTION, --option=OPTION
-                            SSH option (OPTIONAL)
-    -v, --verbose         turn on warning and diagnostic messages (OPTIONAL)
-    -A, --askpass         Ask for a password (OPTIONAL)
-    -x ARGS, --extra-args=ARGS
-                            Extra command-line arguments, with processing for
-                            spaces, quotes, and backslashes
-    -X ARG, --extra-arg=ARG
-                            Extra command-line argument
-    -i, --inline          inline aggregated output and error for each server
-    --inline-stdout       inline standard output for each server
-    -I, --send-input      read from standard input and send as input to ssh
-    -P, --print           print output as we get it
+    --version                                       # 显示程序版本并退出
+    --help                                          # 获取帮助信息
+    -h HOST_FILE, --hosts=HOST_FILE                 # 主机文件，每行是"[user@]host[:port]"，如果有主机互信，只要ip即可。
+    -H HOST_STRING, --host=HOST_STRING              # 主机字符串
+    -l USER, --user=USER  username (OPTIONAL)       # 指定用户
+    -p PAR, --par=PAR                               # 最大并行度
+    -o OUTDIR, --outdir=OUTDIR                      # 标准输出目录
+    -e ERRDIR, --errdir=ERRDIR                      # 错误输出目录
+    -t TIMEOUT, --timeout=TIMEOUT                   # 超时时间
+    -O OPTION, --option=OPTION                      # ssh选项
+    -v, --verbose                                   # 信息详细
+    -A, --askpass                                   # 询问密码，如果没有配置主机信任，这个就需要指定
+    -i,--inline                                     # 每个服务器内部处理信息输出
 
-    Example: pssh -h hosts.txt -l irb2 -o /tmp/foo uptime
+    样例使用: pssh -h hosts.txt -l irb2 -o /tmp/foo uptime
 
+.. code-block:: bash
 
-
-pslurp
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    # -H ,-i使用
+    [root@7 ~]# pssh -H "192.168.46.101" -i ls              # 
+    [1] 22:30:42 [SUCCESS] 192.168.46.101
+    anaconda-ks.cfg
+    backup.tar.bz2
+    findresults
+    foo.sh
+    kernel-3.10.0-693.11.1.el7.x86_64.rpm
+    mkusers
+    userlist
+    # -h，-O使用
+    [root@7 ~]# mkdir pssh
+    [root@7 ~]# pssh -h /root/hosts.txt -o /root/pssh/  'uptime' 
+    [1] 22:36:04 [SUCCESS] 192.168.46.101
+    [2] 22:36:04 [SUCCESS] 192.168.46.7
+    [3] 22:36:14 [SUCCESS] 192.168.46.102
+    [root@7 ~]# tree /root/pssh/
+    /root/pssh/
+    ├── 192.168.46.101
+    ├── 192.168.46.102
+    └── 192.168.46.7
+    [root@7 ~]# cat /root/pssh/192.168.46.101 
+    09:36:04 up 14:29,  2 users,  load average: 0.05, 0.04, 0.05
 
 pscp.pssh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+命令使用
+
+.. code-block:: bash
+
+    [root@7 ~]# pscp.pssh  --help
+    Usage: pscp.pssh [OPTIONS] local remote
+
+样例： 
+
+.. code-block:: bash
+
+    [root@7 ~]# pscp.pssh  -h /root/hosts.txt file1 /root    # 文件复制到远程
+
+pslurp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+命令使用
+
+.. code-block:: bash
+
+    [root@7 ~]# pslurp --help
+    Usage: pslurp [OPTIONS] remote local
+
+样例： 
+
+.. code-block:: bash
+
+    [root@7 ~]# pslurp -h /root/hosts.txt  /var/log/messages .       # 复制远程的日志文件到当前目录
+    [1] 22:46:36 [SUCCESS] 192.168.46.101
+    [2] 22:46:36 [FAILURE] 192.168.46.7 Exited with error code 1
+    [3] 22:46:46 [SUCCESS] 192.168.46.102
+    [root@7 ~]# tree 192.168.46.*                                   # 查看下
+    192.168.46.101
+    └── messages
+    192.168.46.102
+    └── messages
+    192.168.46.7 [error opening dir]
+
+0 directories, 2 files
+
 prsync 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+命令使用
+
+.. code-block:: bash
+
+    [root@7 ~]# prsync --help
+    Usage: prsync [OPTIONS] local remote
+
+样例： 
+
+.. code-block:: bash
+
+    [root@7 ~]# pssh -h /root/hosts.txt  -P 'mkdir /tmp/etc'                 # 远程创建目录
+    [1] 22:51:08 [SUCCESS] 192.168.46.101
+    [2] 22:51:08 [SUCCESS] 192.168.46.7
+    [3] 22:51:18 [SUCCESS] 192.168.46.102
+    [root@7 ~]# prsync -h /root/hosts.txt  -a -r  /etc/sysconfig /tmp/etc   # 推送过去
+    [1] 22:51:57 [FAILURE] 192.168.46.101 Exited with error code 127
+    [2] 22:51:57 [SUCCESS] 192.168.46.7
+    [3] 22:52:07 [SUCCESS] 192.168.46.102
+
 pnuke
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+命令使用
+
+.. code-block:: bash
+
+    [root@7 ~]# pnuke --help
+    Usage: pnuke [OPTIONS] pattern
+
+样例： 
+
+.. code-block:: bash
+
+    [root@7 ~]# pnuke -h /root/hosts.txt  httpd                     # 关闭所有httpd进程
+    [1] 22:48:26 [FAILURE] 192.168.46.7 Exited with error code 1
+    [2] 22:48:26 [SUCCESS] 192.168.46.101
+    [3] 22:48:36 [FAILURE] 192.168.46.102 Exited with error code 1

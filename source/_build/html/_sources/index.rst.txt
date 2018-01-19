@@ -18,4 +18,5 @@ Linux服务
    安全监控/index
    远程登陆/index
    DNS/index
+   数据库/index
    
