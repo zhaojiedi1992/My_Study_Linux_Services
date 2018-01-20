@@ -175,7 +175,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id50">7.1.14. 压力测试</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id51">7.1.15. 排错思路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id52">7.1.16. 编译安装注意项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id52">7.1.16. 编译安装主要步骤</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="unbound.html">7.2. unbound</a></li>
@@ -1271,7 +1271,7 @@ ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span
 <div class="section" id="id36">
 <h3>7.1.13.1. 绘制架构图<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
 <p>这个实现情况布局比较复杂，需要先构思一个草图，简单如下：</p>
-<img alt="image/dns/互联网dns" src="image/dns/互联网dns" />
+<img alt="../_images/互联网dns.png" src="../_images/互联网dns.png" />
 </div>
 <div class="section" id="id37">
 <h3>7.1.13.2. 服务器规划<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
@@ -1306,7 +1306,7 @@ client:client
 <p>我这里使用ansible批量安装了。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 ansible<span class="o">]</span><span class="c1"># ansible dns -m yum -a &#39;name=bind,bind-utils&#39;</span>
 <span class="o">[</span>root@centos7 ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
-<span class="o">[</span>root@centos7 ~<span class="o">]</span><span class="c1"># ansible dns -m file -a &#39;src=/etc/named.conf dest=/etc/named.conf&#39;</span>
+<span class="o">[</span>root@centos7 ~<span class="o">]</span><span class="c1"># ansible dns -m copy -a &#39;src=/etc/named.conf dest=/etc/named.conf&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -1757,6 +1757,9 @@ this is <span class="m">192</span>.168.46.156
 </div>
 <div class="section" id="id50">
 <h2>7.1.14. 压力测试<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>queryperf -d test.txt -s <span class="m">127</span>.0.0.1
+</pre></div>
+</div>
 </div>
 <div class="section" id="id51">
 <h2>7.1.15. 排错思路<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h2>
@@ -1771,7 +1774,22 @@ this is <span class="m">192</span>.168.46.156
 </ol>
 </div>
 <div class="section" id="id52">
-<h2>7.1.16. 编译安装注意项<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h2>
+<h2>7.1.16. 编译安装主要步骤<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>账号创建，文件下载，解压</li>
+<li>查看readme，install文档</li>
+<li>dig -t NS . &#64;a.root-servers.net. &gt;named.ca 。640</li>
+<li>./configure &amp;&amp; make &amp;&amp; make install</li>
+<li>PATH , source path</li>
+<li>named.conf文件，named.rfc1912.conf文件</li>
+<li>rndc-confgen -r /dev/urandom</li>
+<li>named -u named -f -g  -d 3 启动服务</li>
+<li>cd contrib/queryperf</li>
+<li>./configure &amp;&amp; make  cp queryperf /user/local/bind9/bin/</li>
+<li>queryperf -h</li>
+<li>做文件，www.linuxpandata.tech A 每行这样。</li>
+<li>queryperf -d test.txt -s 127.0.0.1</li>
+</ol>
 </div>
 </div>
 
