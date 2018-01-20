@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8.1. mysql安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="8. 数据库" href="../index.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="../sql语句.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">8. 数据库</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.1. mysql安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yum">8.1.1. yum安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">8.1.2. 二进制安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">8.1.2.1. 原有版本的卸载</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">8.1.2.2. 下载数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">8.1.2.3. 创建用户和组</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">8.1.2.4. 安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">8.1.2.5. 存储设备准备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">8.1.2.6. 安装并配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">8.1.2.7. 启动服务</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">8.1.3. 源码安装</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">8. 数据库</a> &raquo;</li>
+        
+      <li>8.1. mysql安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/数据库/mysql/mysql安装.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysql">
+<h1>8.1. mysql安装<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="yum">
+<h2>8.1.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
+<p>yum安装是三种安装方式最简单的方式：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum info mariadb-server</span>
+<span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum install mariadb</span>
+</pre></div>
+</div>
+<p>上面方式可能下载的版本比较旧，如果想安装最新稳定版本，去这里选择 Maraidb-repo,按照下图提示操作，添加repo文件即可。</p>
+<img alt="../../_images/yum配置.png" src="../../_images/yum配置.png" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+bak  cdrom.repo  epel-7.repo
+<span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo</span>
+<span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># cat mariadb.repo</span>
+<span class="c1"># MariaDB 10.2 CentOS repository list - created 2018-01-20 01:29 UTC</span>
+<span class="c1"># http://downloads.mariadb.org/mariadb/repositories/</span>
+<span class="o">[</span>mariadb<span class="o">]</span>
+<span class="nv">name</span> <span class="o">=</span> MariaDB
+<span class="nv">baseurl</span> <span class="o">=</span> http://yum.mariadb.org/10.2/centos7-amd64
+<span class="nv">gpgkey</span><span class="o">=</span>https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># sudo yum install MariaDB-server MariaDB-client</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>8.1.2. 二进制安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>8.1.2.1. 原有版本的卸载<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># sudo yum remove MariaDB-server MariaDB-client</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>8.1.2.2. 下载数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://downloads.mariadb.org/">下载地址</a>.</p>
+<img alt="../../_images/下载二进制.png" src="../../_images/下载二进制.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">centos7的下载systemd的，centos6下载第二个。</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A/.edu.cn/mariadb/     \</span>
+ -O mariadb-10.2.12-linux-systemd-x86_64.tar.gz
+<span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># tar xf mariadb-10.2.12-linux-systemd-x86_64.tar.gz  -C /usr/local/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>8.1.2.3. 创建用户和组<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># groupadd -g 27 -r mysql</span>
+<span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># useradd -r -u 27 -g mysql mysql -s /sbin/nologin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>8.1.2.4. 安装<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>[root&#64;7 src]# cd /usr/local/
+[root&#64;7 local]# ls
+bin  etc  games  include  lib  lib64  libexec  mariadb-10.2.12-linux-systemd-x86_64  sbin  share  src
+[root&#64;7 local]# ln -s mariadb-10.2.12-linux-systemd-x86_64 mysql
+[root&#64;7 local]# chown -R mysql:mysql  mysql/
+[root&#64;7 local]# echo ‘PATH=/usr/local/bin:$PATH’ &gt;&gt; /etc/profile.d/mysql.sh
+[root&#64;7 local]# cat /etc/profile.d/mysql.sh
+PATH=/usr/local/bin:$PATH
+[root&#64;7 local]# source /etc/profile.d/mysql.sh</p>
+</div>
+<div class="section" id="id7">
+<h3>8.1.2.5. 存储设备准备<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">数据库文件占用空间很大的，建议放到lvm上面去，容易扩展，避免导致根分区占用过大。</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+└─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># for i in `find /sys/devices/ -name scan` ; do echo &quot;- - -&quot; &gt; $i ; done;</span>
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+└─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sdb               <span class="m">8</span>:16   <span class="m">0</span>   20G  <span class="m">0</span> disk
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># fdisk /dev/sdb</span>
+Welcome to fdisk <span class="o">(</span>util-linux <span class="m">2</span>.23.2<span class="o">)</span>.
+
+Changes will remain in memory only, <span class="k">until</span> you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x489a4915.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
+Partition type:
+p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span>
+e   extended
+Select <span class="o">(</span>default p<span class="o">)</span>: p
+Partition number <span class="o">(</span><span class="m">1</span>-4, default <span class="m">1</span><span class="o">)</span>:
+First sector <span class="o">(</span><span class="m">2048</span>-41943039, default <span class="m">2048</span><span class="o">)</span>:
+Using default value <span class="m">2048</span>
+Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">2048</span>-41943039, default <span class="m">41943039</span><span class="o">)</span>: +5G
+Partition <span class="m">1</span> of <span class="nb">type</span> Linux and of size <span class="m">5</span> GiB is <span class="nb">set</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: t
+Selected partition <span class="m">1</span>
+Hex code <span class="o">(</span><span class="nb">type</span> L to list all codes<span class="o">)</span>: 8e
+Changed <span class="nb">type</span> of partition <span class="s1">&#39;Linux&#39;</span> to <span class="s1">&#39;Linux LVM&#39;</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
+
+Disk /dev/sdb: <span class="m">21</span>.5 GB, <span class="m">21474836480</span> bytes, <span class="m">41943040</span> sectors
+<span class="nv">Units</span> <span class="o">=</span> sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+Disk label type: dos
+Disk identifier: 0x489a4915
+
+Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            <span class="m">2048</span>    <span class="m">10487807</span>     <span class="m">5242880</span>   8e  Linux LVM
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
+The partition table has been altered!
+
+Calling ioctl<span class="o">()</span> to re-read partition table.
+Syncing disks.
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+└─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sdb               <span class="m">8</span>:16   <span class="m">0</span>   20G  <span class="m">0</span> disk
+└─sdb1            <span class="m">8</span>:17   <span class="m">0</span>    5G  <span class="m">0</span> part
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># pvcreate /dev/sdb1</span>
+Physical volume <span class="s2">&quot;/dev/sdb1&quot;</span> successfully created.
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># vgcreate  vg_data /dev/sdb1</span>
+Volume group <span class="s2">&quot;vg_data&quot;</span> successfully created
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lvcreate -n lv_mysql -l 100%FREE vg_data</span>
+Logical volume <span class="s2">&quot;lv_mysql&quot;</span> created.
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># mkfs.xfs  /dev/mapper/vg_data-lv_mysql</span>
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># mkdir /data/mysql -pv</span>
+mkdir: created directory ‘/data’
+mkdir: created directory ‘/data/mysql’
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># mount /dev/mapper/vg_data-lv_mysql  /data/mysql/</span>
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># tail -n /etc/mtab</span>
+tail: /etc/mtab: invalid number of lines
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab</span>
+/dev/mapper/vg_data-lv_mysql /data/mysql xfs rw,seclabel,relatime,attr2,inode64,noquota <span class="m">0</span> <span class="m">0</span>
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab &gt;&gt; /etc/fstab</span>
+<span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># cd /data/</span>
+<span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">0</span>
+drwxr-xr-x. <span class="m">2</span> root root <span class="m">6</span> Jan <span class="m">20</span> <span class="m">14</span>:00 mysql
+<span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chown mysql.mysql mysql/</span>
+<span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">0</span>
+drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <span class="m">20</span> <span class="m">14</span>:00 mysql
+<span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chmod -R 770 mysql/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>8.1.2.6. 安装并配置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chmod -R 770 mysql/</span>
+<span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># cd /usr/local/mysql/</span>
+<span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ll</span>
+<span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ./scripts/mysql_install_db --datadir=/data/mysql --user=mysql    # 安装库</span>
+<span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># cp support-files/my-huge.cnf /etc/my.conf</span>
+<span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ll /etc/my.conf</span>
+-rw-r--r--. <span class="m">1</span> root root <span class="m">4914</span> Jan <span class="m">20</span> <span class="m">14</span>:19 /etc/my.conf
+
+<span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># vim /etc/my.conf</span>
+<span class="c1"># 添加如下项到[mysqld]的下一行</span>
+<span class="nv">datadir</span>         <span class="o">=</span> /data/mysql
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>8.1.2.7. 启动服务<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>   <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># cp support-files/mysql.server /etc/rc.d/init.d/mysqld</span>
+   <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># vim /etc/rc.d/init.d/mysqld</span>
+   <span class="c1"># 找到basedir行，修改如下内容</span>
+   <span class="nv">basedir</span><span class="o">=</span>/usr/local/mysql
+   <span class="nv">datadir</span><span class="o">=</span>/data/mysqldb
+   <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># chkconfig --add mysqld</span>
+   <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># chkconfig mysqld on</span>
+  <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># mysql</span>
+   Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+   Your MariaDB connection id is <span class="m">9</span>
+   Server version: <span class="m">10</span>.2.12-MariaDB MariaDB Server
+
+   Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+   Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+   MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
+
+数据库安全安装设置
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+    SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we<span class="s1">&#39;ll need the current</span>
+<span class="s1">password for the root user.  If you&#39;</span>ve just installed MariaDB, and
+you haven<span class="s1">&#39;t set the root password yet, the password will be blank,</span>
+<span class="s1">so you should just press enter here.</span>
+
+<span class="s1">Enter current password for root (enter for none):      # 没有密码就直接回车，有的话就输入</span>
+<span class="s1">OK, successfully used password, moving on...</span>
+
+<span class="s1">Setting the root password ensures that nobody can log into the MariaDB</span>
+<span class="s1">root user without the proper authorisation.</span>
+
+<span class="s1">Set root password? [Y/n] y</span>
+<span class="s1">New password:</span>
+<span class="s1">Re-enter new password:</span>
+<span class="s1">Password updated successfully!</span>
+<span class="s1">Reloading privilege tables..</span>
+<span class="s1">... Success!</span>
+
+
+<span class="s1">By default, a MariaDB installation has an anonymous user, allowing anyone</span>
+<span class="s1">to log into MariaDB without having to have a user account created for</span>
+<span class="s1">them.  This is intended only for testing, and to make the installation</span>
+<span class="s1">go a bit smoother.  You should remove them before moving into a</span>
+<span class="s1">production environment.</span>
+
+<span class="s1">Remove anonymous users? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Normally, root should only be allowed to connect from &#39;</span>localhost<span class="s1">&#39;.  This</span>
+<span class="s1">ensures that someone cannot guess at the root password from the network.</span>
+
+<span class="s1">Disallow root login remotely? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">By default, MariaDB comes with a database named &#39;</span>test<span class="s1">&#39; that anyone can</span>
+<span class="s1">access.  This is also intended only for testing, and should be removed</span>
+<span class="s1">before moving into a production environment.</span>
+
+<span class="s1">Remove test database and access to it? [Y/n] y</span>
+<span class="s1">- Dropping test database...</span>
+<span class="s1">... Success!</span>
+<span class="s1">- Removing privileges on test database...</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Reloading the privilege tables will ensure that all changes made so far</span>
+<span class="s1">will take effect immediately.</span>
+
+<span class="s1">Reload privilege tables now? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Cleaning up...</span>
+
+<span class="s1">All done!  If you&#39;</span>ve completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks <span class="k">for</span> using MariaDB!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>8.1.3. 源码安装<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../sql语句.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
