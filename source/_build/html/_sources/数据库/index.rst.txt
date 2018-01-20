@@ -4,4 +4,6 @@
 .. toctree::
    :maxdepth: 2
    
-   mysql
+   数据库基础
+   sql语句
+   mysql/mysql安装

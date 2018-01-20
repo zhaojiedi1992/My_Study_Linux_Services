@@ -880,8 +880,761 @@ nslookup测试
 view
 ---------------------------------------------------------
 
+定义acl
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    [root@centos7 ~]# vim /etc/named.conf 
+    acl netdianxin { 192.168.1.0/24;};
+    acl netyidong { 192.168.46.0/24;};
+    acl netother { any;};
+
+迁移根区域
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: bash
+
+    [root@centos7 ~]# !vim /etc/named.conf 
+    # 删除下面的4行数据
+    zone "." IN {
+            type hint;
+            file "named.ca";
+    };
+    [root@centos7 ~]# vim /etc/named.rfc1912.zones 
+    # 添加上面删除的4行数据
+    zone "." IN {
+            type hint;
+            file "named.ca";
+    };
+
+配置view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    [root@centos7 ~]# cat /etc/named.conf 
+    //
+    // named.conf
+    //
+    // Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+    // server as a caching only nameserver (as a localhost DNS resolver only).
+    //
+    // See /usr/share/doc/bind*/sample/ for example named configuration files.
+    //
+    // See the BIND Administrator's Reference Manual (ARM) for details about the
+    // configuration located in /usr/share/doc/bind-{version}/Bv9ARM.html
+    acl netdianxin { 192.168.46.0/24;};
+    acl netyidong { 192.168.1.0/24;};
+    acl netother { any;};
+    options {
+    //	listen-on port 53 { 127.0.0.1; };
+        listen-on-v6 port 53 { ::1; };
+        directory 	"/var/named";
+        dump-file 	"/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+    //	allow-query     { localhost; };
+
+        /* 
+        - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+        - If you are building a RECURSIVE (caching) DNS server, you need to enable 
+        recursion. 
+        - If your recursive DNS server has a public IP address, you MUST enable access 
+        control to limit queries to your legitimate users. Failing to do so will
+        cause your server to become part of large scale DNS amplification 
+        attacks. Implementing BCP38 within your network would greatly
+        reduce such attack surface 
+        */
+        recursion yes;
+
+        dnssec-enable no;
+        dnssec-validation no;
+
+        /* Path to ISC DLV key */
+        bindkeys-file "/etc/named.iscdlv.key";
+
+        managed-keys-directory "/var/named/dynamic";
+
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+    };
+
+    logging {
+            channel default_debug {
+                    file "data/named.run";
+                    severity dynamic;
+            };
+    };
+
+    view viewdianxin {
+        match-clients {netdianxin;};
+        zone "linuxpanda.tech" {
+            type master;
+            file "linuxpanda.tech.netdianxin.zone";	
+        };
+        include "/etc/named.rfc1912.zones";
+
+    };
+    view viewyidong{
+        match-clients {netyidong;};
+        zone "linuxpanda.tech" {
+            type master;
+            file "linuxpanda.tech.netyidong.zone";	
+        };
+        include "/etc/named.rfc1912.zones";
+
+    };
+
+    include "/etc/named.root.key";
+
+添加文件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    [root@centos7 named]# mv  linuxpanda.tech.zone linuxpanda.tech.netdianxin.zone
+    [root@centos7 named]# cp linuxpanda.tech.netdianxin.zone linuxpanda.tech.netyidong.zone 
+    [root@centos7 named]# vim linuxpanda.tech.netdianxin.zone 
+    [root@centos7 named]# cp linuxpanda.tech.netdianxin.zone linuxpanda.tech.netyidong.zone 
+    cp: overwrite ‘linuxpanda.tech.netyidong.zone’? y
+    [root@centos7 named]# vim linuxpanda.tech.netyidong.zone 
+    [root@centos7 named]# cat linuxpanda.tech.netdianxin.zone 
+    $TTL 1D
+    @	IN SOA	ns1 nsadmin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS      ns1	
+    ns1	A       192.168.46.7
+    www	A       192.168.46.7
+    [root@centos7 named]# cat linuxpanda.tech.netyidong.zone 
+    $TTL 1D
+    @	IN SOA	ns1 nsadmin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS      ns1	
+    ns1	A       192.168.1.103
+    www	A       192.168.1.103
+
+验证
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+第一个网段测试
+
+.. code-block:: bash
+
+    [root@102 ~]$ dig www.linuxpanda.tech @192.168.46.7
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-51.el7_4.1 <<>> www.linuxpanda.tech @192.168.46.7
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 33006
+    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;www.linuxpanda.tech.		IN	A
+
+    ;; ANSWER SECTION:
+    www.linuxpanda.tech.	86400	IN	A	192.168.46.7
+
+    ;; AUTHORITY SECTION:
+    linuxpanda.tech.	86400	IN	NS	ns1.linuxpanda.tech.
+
+    ;; ADDITIONAL SECTION:
+    ns1.linuxpanda.tech.	86400	IN	A	192.168.46.7
+
+    ;; Query time: 0 msec
+    ;; SERVER: 192.168.46.7#53(192.168.46.7)
+    ;; WHEN: Sat Jan 20 17:13:13 CST 2018
+    ;; MSG SIZE  rcvd: 98
+
+第二个网段测试
+
+.. code-block:: bash
+
+    [root@101 ~]# dig www.linuxpanda.tech @192.168.1.103
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> www.linuxpanda.tech @192.168.1.103
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 158
+    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;www.linuxpanda.tech.		IN	A
+
+    ;; ANSWER SECTION:
+    www.linuxpanda.tech.	86400	IN	A	192.168.1.103
+
+    ;; AUTHORITY SECTION:
+    linuxpanda.tech.	86400	IN	NS	ns1.linuxpanda.tech.
+
+    ;; ADDITIONAL SECTION:
+    ns1.linuxpanda.tech.	86400	IN	A	192.168.1.103
+
+    ;; Query time: 0 msec
+    ;; SERVER: 192.168.1.103#53(192.168.1.103)
+    ;; WHEN: Sat Jan 20 04:13:29 EST 2018
+    ;; MSG SIZE  rcvd: 98
+
+互联网dns实现
+----------------------------------------------------------
+
+绘制架构图
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+这个实现情况布局比较复杂，需要先构思一个草图，简单如下： 
+
+.. image:: /image/dns/互联网dns
+
+服务器规划
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+为了方便后续配置简单设置下主机名如下
+
+.. code-block:: text
+
+    主根： root1
+    从根： root2，ip
+    tech域： tech
+    com域：   com
+    linuxpanda: linuxpanda
+    www1:www1
+    www2:www2
+    运营商：dianxin
+    client:client
+
+ip配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+根据上面的配置设置ip信息。 
+
+.. code-block:: bash
+
+    #  nmcli con del ens33 ; 
+    #  nmcli con add con-name ens33 ifname ens33 type ethernet ipv4.method manual \
+        ivp4.ipaddress 192.168.46.151/24 ipv4.gateway 192.168.46.1
+    #  nmcli con up ens33
+    主机名字配置。
+    # hostnamectl set-hostname centos-151
+
+安装bind软件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+给所有主机安装bind.
+
+我这里使用ansible批量安装了。
+
+.. code-block:: bash
+
+    [root@centos7 ansible]# ansible dns -m yum -a 'name=bind,bind-utils'
+    [root@centos7 ~]# vim /etc/named.conf 
+    [root@centos7 ~]# ansible dns -m file -a 'src=/etc/named.conf dest=/etc/named.conf'
+
+主根配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    # 修改前的
+    zone "." IN {
+            type hint;
+            file "named.ca";
+    };
+    # 修改后的
+    zone "." IN {
+            type master;
+            file "root.zone";
+    };
+
+    [root@151 named]# cat root.zone 
+    $TTL 1D
+    @	IN SOA	ns1 admin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS      ns1	
+        NS      ns2
+    tech    NS      nstech
+    com     NS      nscom
+    ns1     A      192.168.46.151
+    ns2     A	192.168.46.152
+    nstech  A      192.168.46.153
+    nscom   A      192.168.46.154
+
+    [root@centos-151 named]# scp /etc/named.conf  192.168.46.152:/etc/
+    [root@centos-151 named]# systemctl restart named
+
+从根配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+上面已经copy过来一个i额named.conf文件， 修改修改下
+
+.. code-block:: bash
+
+    zone "." IN {
+        type slave;
+        masters { 192.168.46.151; };
+        file "slaves/root.zone";
+    };
+
+主从根测试
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    [root@centos-151 named]# !dig
+    dig nstech  @localhost
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> nstech @localhost
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32324
+    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 3
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;nstech.				IN	A
+
+    ;; ANSWER SECTION:
+    nstech.			86400	IN	A	192.168.46.153
+
+    ;; AUTHORITY SECTION:
+    .			86400	IN	NS	ns2.
+    .			86400	IN	NS	ns1.
+
+    ;; ADDITIONAL SECTION:
+    ns1.			86400	IN	A	192.168.46.151
+    ns2.			86400	IN	A	192.168.46.152
+
+    ;; Query time: 0 msec
+    ;; SERVER: ::1#53(::1)
+    ;; WHEN: Sun Jan 21 03:41:58 CST 2018
+    ;; MSG SIZE  rcvd: 115
+
+运营商配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+运营商为客户提供dns服务，默认的根是13个网络上的，配置在named.caw文件中， 我们修改为我们自己的2个根。
+
+.. code-block:: bash
+
+    [root@centos-158 named]# vim named.ca
+    [root@centos-158 named]# cat named.ca 
+
+    .			518400	IN	NS	a.root-servers.net.
+    .			518400	IN	NS	b.root-servers.net.
+    a.root-servers.net.	3600000	IN	A	192.168.46.151
+    b.root-servers.net.	3600000	IN	A	192.168.46.152
+
+运营商测试
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+运营商的dns设置自身ip即可
+
+.. code-block:: bash
+
+    [root@centos-158 named]# dig ns1
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> ns1
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8276
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;ns1.				IN	A
+
+    ;; ANSWER SECTION:
+    ns1.			86400	IN	A	192.168.46.151
+
+    ;; AUTHORITY SECTION:
+    .			86400	IN	NS	ns2.
+    .			86400	IN	NS	ns1.
+
+    ;; ADDITIONAL SECTION:
+    ns2.			86400	IN	A	192.168.46.152
+
+    ;; Query time: 1 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:11:21 CST 2018
+    ;; MSG SIZE  rcvd: 93
+
+
+客户端配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+客户端的dns设置为运营商的dns即可
+
+
+客户端修改dns为运营商的ip即可
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# nmcli con modify ens33 ipv4.gateway 192.168.46.158 ipv4.dns 192.168.46.158
+    [root@centos-159 ~]# nmcli con up ens33
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# dig nstech 
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> nstech
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 64966
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 3
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;nstech.				IN	A
+
+    ;; ANSWER SECTION:
+    nstech.			86400	IN	A	192.168.46.153
+
+    ;; AUTHORITY SECTION:
+    .			86343	IN	NS	ns2.
+    .			86343	IN	NS	ns1.
+
+    ;; ADDITIONAL SECTION:
+    ns2.			86343	IN	A	192.168.46.152
+    ns1.			86343	IN	A	192.168.46.151
+
+    ;; Query time: 1 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:12:18 CST 2018
+    ;; MSG SIZE  rcvd: 115
+
+一级域的配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+一级域有2个，tech和com域的，
+
+先配置tech域
+
+.. code-block:: bash
+
+    [root@centos-153 ~]# vim /etc/named.conf 
+    [root@centos-153 ~]# vim /etc/named.rfc1912.zones 
+    [root@centos-153 ~]# tail -n 5 /etc/named.rfc1912.zones 
+
+    zone "tech" IN { 
+        type master;
+        file "tech.zone";
+    } ; 
+
+    [root@centos-153 ~]# cd /var/named/
+    [root@centos-153 named]# ls
+    data  dynamic  named.ca  named.empty  named.localhost  named.loopback  slaves
+    [root@centos-153 named]# cp named.localhost  tech.zone -p
+    [root@centos-153 named]# vim tech.zone 
+    [root@centos-153 named]# cat tech.zone 
+    $TTL 1D
+    @	IN SOA	ns1 admin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS       ns1
+    linuxpanda NS    nslinuxpanda
+    ns1      A       192.168.46.153
+    nslinuxpanda A    192.168.46.155
+    [root@centos-153 named]# systemctl restart named
+    [root@centos-153 named]# systemctl status named
+    [root@centos-153 named]# dig ns1.tech 
+
+在配置com域
+
+.. code-block:: bash
+
+    [root@centos-154 ~]# vim /etc/named.conf 
+    [root@centos-154 ~]# vim /etc/named.rfc1912.zones 
+    [root@centos-154 ~]# tail -n 5 /etc/named.rfc1912.zones 
+    };
+    zone "com" {  
+        type master;
+        file "com.zone";
+    };
+    [root@centos-154 ~]# cd /var/named/
+    [root@centos-154 named]# cp named.localhost  com.zone -p
+    [root@centos-154 named]# vim com.zone 
+    [root@centos-154 named]# cat com.zone 
+    $TTL 1D
+    @	IN SOA	ns1 admin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS      ns1	
+    ns1     A       192.168.46.154
+    [root@centos-154 named]# dig ns1.com
+
+
+顶级域测试
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+上面已经在顶级域的自己机器上面测试了，这次直接在客户端测试下，确保没错误
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# dig ns1.tech 
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> ns1.tech
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 24895
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;ns1.tech.			IN	A
+
+    ;; ANSWER SECTION:
+    ns1.tech.		86400	IN	A	192.168.46.153
+
+    ;; AUTHORITY SECTION:
+    tech.			86400	IN	NS	ns1.tech.
+
+    ;; Query time: 1 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:27:50 CST 2018
+    ;; MSG SIZE  rcvd: 67
+
+    [root@centos-159 ~]# dig ns1.com
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> ns1.com
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 63104
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;ns1.com.			IN	A
+
+    ;; ANSWER SECTION:
+    ns1.com.		86400	IN	A	192.168.46.154
+
+    ;; AUTHORITY SECTION:
+    com.			86078	IN	NS	ns1.com.
+
+    ;; Query time: 1 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:28:01 CST 2018
+    ;; MSG SIZE  rcvd: 66
+
+
+二级域配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+二级域里面我只有tech下的linuxpanda域，
+
+.. code-block:: bash
+
+    [root@centos-155 ~]# vim /etc/named.conf 
+    [root@centos-155 named]# vim /etc/named.rfc1912.zones 
+    [root@centos-155 named]# tail -n 5 /etc/named.rfc1912.zones 
+    };
+    zone "linuxpanda.tech" {
+        type master;
+        file "linuxpanda.tech.zone";
+    };
+    [root@centos-155 named]# cd /var/named/
+    [root@centos-155 named]# cp named.localhost  linuxpanda.tech.zone -p
+    [root@centos-155 named]# vim linuxpanda.tech.zone 
+    [root@centos-155 named]# cat linuxpanda.tech.zone 
+    $TTL 1D
+    @	IN SOA	ns1 admin (
+                        0	; serial
+                        1D	; refresh
+                        1H	; retry
+                        1W	; expire
+                        3H )	; minimum
+        NS      ns1	
+    ns1     A       192.168.46.155
+    www     A       192.168.46.156
+    www     A       192.168.46.157
+    
+    [root@centos-155 named]# dig www.linuxpanda.tech 
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> www.linuxpanda.tech
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20201
+    ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;www.linuxpanda.tech.		IN	A
+
+    ;; ANSWER SECTION:
+    www.linuxpanda.tech.	86400	IN	A	192.168.46.157
+    www.linuxpanda.tech.	86400	IN	A	192.168.46.156
+
+    ;; AUTHORITY SECTION:
+    linuxpanda.tech.	86400	IN	NS	ns1.linuxpanda.tech.
+
+    ;; ADDITIONAL SECTION:
+    ns1.linuxpanda.tech.	86400	IN	A	192.168.46.155
+
+    ;; Query time: 0 msec
+    ;; SERVER: 127.0.0.1#53(127.0.0.1)
+    ;; WHEN: Sun Jan 21 04:34:38 CST 2018
+    ;; MSG SIZE  rcvd: 114
+
+三级域配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+上面在三级域配置的自己主机上测试过了，我们在在客户机上测试下
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# dig www.linuxpanda.tech
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> www.linuxpanda.tech
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 25268
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;www.linuxpanda.tech.		IN	A
+
+    ;; ANSWER SECTION:
+    www.linuxpanda.tech.	86400	IN	A	192.168.46.157
+    www.linuxpanda.tech.	86400	IN	A	192.168.46.156
+
+    ;; AUTHORITY SECTION:
+    linuxpanda.tech.	86400	IN	NS	ns1.linuxpanda.tech.
+
+    ;; ADDITIONAL SECTION:
+    ns1.linuxpanda.tech.	86400	IN	A	192.168.46.155
+
+    ;; Query time: 2 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:36:10 CST 2018
+    ;; MSG SIZE  rcvd: 114
+
+web配置
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+马上就要结束了，哈哈。 
+
+www1主机配置下web 
+
+.. code-block:: bash
+
+    [root@centos-156 ~]#  echo "this is 192.168.46.156" > /var/www/html/index.html
+    [root@centos-156 ~]# systemctl restart httpd
+    [root@centos-156 ~]# curl localhost
+    this is 192.168.46.156
+
+www2主机配置下web 
+
+.. code-block:: bash
+
+    [root@centos-157 ~]#  echo "this is 192.168.46.157" > /var/www/html/index.html
+    [root@centos-157 ~]# systemctl restart httpd
+    [root@centos-157 ~]# curl localhost
+    this is 192.168.46.157
+
+客户端最终测试
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+dns测试
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# dig www.linuxpanda.tech 
+
+    ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> www.linuxpanda.tech
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22715
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 2
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 4096
+    ;; QUESTION SECTION:
+    ;www.linuxpanda.tech.		IN	A
+
+    ;; ANSWER SECTION:
+    www.linuxpanda.tech.	85972	IN	A	192.168.46.156
+    www.linuxpanda.tech.	85972	IN	A	192.168.46.157
+
+    ;; AUTHORITY SECTION:
+    linuxpanda.tech.	85972	IN	NS	ns1.linuxpanda.tech.
+
+    ;; ADDITIONAL SECTION:
+    ns1.linuxpanda.tech.	85972	IN	A	192.168.46.155
+
+    ;; Query time: 0 msec
+    ;; SERVER: 192.168.46.158#53(192.168.46.158)
+    ;; WHEN: Sun Jan 21 04:43:18 CST 2018
+    ;; MSG SIZE  rcvd: 114
+
+web服务测试
+
+.. code-block:: bash
+
+    [root@centos-159 ~]# for i in `seq 1 20 ` ; do curl http://www.linuxpanda.tech ; done
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.156
+    this is 192.168.46.156
+    this is 192.168.46.156
+    this is 192.168.46.156
+    this is 192.168.46.157
+    this is 192.168.46.156
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.156
+    this is 192.168.46.157
+    this is 192.168.46.156
+    this is 192.168.46.157
+    this is 192.168.46.157
+    this is 192.168.46.156
+    this is 192.168.46.156
+
+
 压力测试
 ---------------------------------------------------------
 
-排错
+排错思路
 ---------------------------------------------------------
+
+#. 查看日志信息
+#. rndc querylog 启动日志临时获取查询详细信息
+#. 查看监听
+#. 查看zone权限配置
+#. 查看named.conf文件的allow-query和安全设置
+#. 使用named-checkconf和named-checkzone工具
+#. dns配置是否正确。
+
+
+编译安装注意项
+---------------------------------------------------------
+
