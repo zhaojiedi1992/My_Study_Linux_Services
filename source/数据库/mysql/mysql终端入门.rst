@@ -1,7 +1,8 @@
 mysql终端入门
 ==================================================
 
-mysql提示符修改： 
+mysql提示符修改
+-----------------------------------------------------
 
 .. code-block:: bash
 
@@ -145,3 +146,48 @@ mysql提示符修改：
     10:51:26 (root@localhost)[(none)][1]>use mysql
     Reading table information for completion of table and column names
     You can turn off this feature to get a quicker startup with -A
+
+用户和密码写到配置文件中
+-----------------------------------------------------
+
+配置前的连接方式 
+
+.. code-block:: bash
+
+    [root@centos151 init.d]# mysql -u root -p
+    Enter password: 
+    Welcome to the MariaDB monitor.  Commands end with ; or \g.
+    Your MariaDB connection id is 21
+    Server version: 10.2.12-MariaDB-log Source distribution
+
+    Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+    MariaDB [(none)]> quit
+    Bye
+
+配置
+
+[root@centos151 init.d]# vim ~/.my.cnf
+    # 添加如下行
+    [client]
+    user=root
+    password=oracle
+
+测试
+
+.. code-block:: bash
+
+    [root@centos151 init.d]# mysql
+    Welcome to the MariaDB monitor.  Commands end with ; or \g.
+    Your MariaDB connection id is 12
+    Server version: 10.2.12-MariaDB-log Source distribution
+
+    Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+    MariaDB [(none)]> 
+
+          

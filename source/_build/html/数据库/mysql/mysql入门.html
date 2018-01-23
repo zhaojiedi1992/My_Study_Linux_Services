@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mysql入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">8. 数据库</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mysql入门</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/数据库/mysql/mysql入门.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysql">
+<h1>mysql入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<p>mariadb的特性</p>
+<ul class="simple">
+<li>单进程，多线程</li>
+<li>插件式存储引擎</li>
+<li>开源</li>
+<li>提供较多测试组件</li>
+</ul>
+<div class="section" id="id1">
+<h2>客户端工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>mysql命令的重要选项</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--print-default</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>默认选项</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--verbose</span></kbd></td>
+<td>显示详细信息</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-u</span></kbd></td>
+<td>指定用户</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-p</span></kbd></td>
+<td>指定密码</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-h</span></kbd></td>
+<td>服务器主机</td></tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">mysql中的用户是username&#64;host构成的支持通配,%代表任意长度任意字符，-匹配任意单个字符。</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>执行命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>查看当前用户</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">user</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>查看服务器版本</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">version</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>数据库操作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>创建数据库和删除数据库</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
+<span class="k">drop</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>查看字符集和排序规则</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">show</span> <span class="nb">character</span> <span class="k">set</span><span class="p">;</span>
+<span class="k">show</span> <span class="k">collation</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>创建表</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">AUTO_INCREMENT</span> <span class="p">,</span> <span class="n">age</span> <span class="nb">int</span> <span class="n">unsigned</span> <span class="p">,</span><span class="n">name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="k">default</span> <span class="s1">&#39;m&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>表查看类</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">tables</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----------------+</span>
+<span class="o">|</span> <span class="n">Tables_in_test</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+</span>
+<span class="o">|</span> <span class="n">student</span>        <span class="o">|</span>
+<span class="o">+</span><span class="c1">----------------+</span>
+<span class="mi">1</span> <span class="k">row</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span> <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">id</span>    <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">age</span>   <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">name</span>  <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>      <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>   <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>    <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="n">m</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span>   <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                                                                              <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">student</span> <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">student</span><span class="o">`</span> <span class="p">(</span>
+<span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="o">`</span><span class="n">age</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="o">`</span><span class="n">sex</span><span class="o">`</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">latin1</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="mi">1</span> <span class="k">row</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">table</span> <span class="n">status</span> <span class="k">like</span> <span class="s1">&#39;student&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>数据类型</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>tinyint
+smallint
+mediumint
+int
+bigint
+float(m,d)
+double(m,d)
+decimal(m,d)
+char(n)
+varchar(n)
+tinytext
+text
+mediumtext
+longtext
+binary(m)
+varbinary(m)
+enum
+blob
+date
+time
+datetime
+timestamp
+year(2)
+year(4)
+</pre></div>
+</div>
+<p>修饰符</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>null
+not null
+default
+primary key
+unique key
+character set name
+auto_increment
+unsigned
+</pre></div>
+</div>
+<p>字段修改</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span> <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">id</span>    <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">age</span>   <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">name</span>  <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>      <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>   <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>    <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="n">m</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">student</span> <span class="k">add</span> <span class="n">address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">after</span> <span class="n">name</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">02</span> <span class="n">sec</span><span class="p">)</span>
+<span class="n">Records</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Duplicates</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>   <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">id</span>      <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">age</span>     <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">name</span>    <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>      <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">address</span> <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>     <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>    <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="n">m</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="mi">5</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">student</span> <span class="k">drop</span> <span class="n">address</span><span class="p">;</span>
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">student</span> <span class="n">change</span> <span class="n">name</span> <span class="n">stuname</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">student</span> <span class="k">modify</span> <span class="n">stuname</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>   <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">id</span>      <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">age</span>     <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>     <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>    <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="n">m</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">alter</span> <span class="k">table</span> <span class="n">student</span> <span class="k">rename</span> <span class="n">stu</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>索引</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">index</span> <span class="n">index_age</span> <span class="k">on</span> <span class="n">stu</span><span class="p">(</span><span class="n">age</span><span class="p">);</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">23</span> <span class="n">sec</span><span class="p">)</span>
+<span class="n">Records</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Duplicates</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="k">index</span> <span class="k">from</span> <span class="n">stu</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="n">Non_unique</span> <span class="o">|</span> <span class="n">Key_name</span>  <span class="o">|</span> <span class="n">Seq_in_index</span> <span class="o">|</span> <span class="k">Column_name</span> <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Cardinality</span> <span class="o">|</span> <span class="n">Sub_part</span> <span class="o">|</span> <span class="n">Packed</span> <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="n">Index_type</span> <span class="o">|</span> <span class="k">Comment</span> <span class="o">|</span> <span class="n">Index_comment</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span class="o">|</span> <span class="n">stu</span>   <span class="o">|</span>          <span class="mi">0</span> <span class="o">|</span> <span class="k">PRIMARY</span>   <span class="o">|</span>            <span class="mi">1</span> <span class="o">|</span> <span class="n">id</span>          <span class="o">|</span> <span class="n">A</span>         <span class="o">|</span>           <span class="mi">0</span> <span class="o">|</span>     <span class="k">NULL</span> <span class="o">|</span> <span class="k">NULL</span>   <span class="o">|</span>      <span class="o">|</span> <span class="n">BTREE</span>      <span class="o">|</span>         <span class="o">|</span>               <span class="o">|</span>
+<span class="o">|</span> <span class="n">stu</span>   <span class="o">|</span>          <span class="mi">1</span> <span class="o">|</span> <span class="n">index_age</span> <span class="o">|</span>            <span class="mi">1</span> <span class="o">|</span> <span class="n">age</span>         <span class="o">|</span> <span class="n">A</span>         <span class="o">|</span>           <span class="mi">0</span> <span class="o">|</span>     <span class="k">NULL</span> <span class="o">|</span> <span class="k">NULL</span>   <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span> <span class="n">BTREE</span>      <span class="o">|</span>         <span class="o">|</span>               <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">drop</span> <span class="k">index</span> <span class="n">index_age</span> <span class="k">on</span> <span class="n">stu</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+<span class="n">Records</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Duplicates</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>dml语句</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">stu</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>   <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">id</span>      <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>          <span class="o">|</span> <span class="k">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span> <span class="n">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">age</span>     <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>     <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="k">NULL</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">sex</span>     <span class="o">|</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>    <span class="o">|</span> <span class="n">YES</span>  <span class="o">|</span>     <span class="o">|</span> <span class="n">m</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">stu</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">stuname</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;zhao&#39;</span><span class="p">);</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">1</span> <span class="k">row</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">stu</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">stuname</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="s1">&#39;zhao2&#39;</span><span class="p">),(</span><span class="mi">22</span><span class="p">,</span><span class="s1">&#39;zhao3&#39;</span><span class="p">);</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">2</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+<span class="n">Records</span><span class="p">:</span> <span class="mi">2</span>  <span class="n">Duplicates</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">stu</span> <span class="k">set</span> <span class="n">age</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span><span class="n">stuname</span><span class="o">=</span><span class="s1">&#39;zhao3&#39;</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">1</span> <span class="k">row</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>   <span class="mi">20</span> <span class="o">|</span> <span class="n">zhao</span>    <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>   <span class="mi">23</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">4</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">update</span> <span class="n">stu</span> <span class="k">set</span> <span class="n">sex</span><span class="o">=</span><span class="s1">&#39;f&#39;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">update</span> <span class="n">stu</span> <span class="k">set</span> <span class="n">sex</span><span class="o">=</span><span class="s1">&#39;f&#39;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">1</span> <span class="k">row</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+<span class="k">Rows</span> <span class="n">matched</span><span class="p">:</span> <span class="mi">1</span>  <span class="n">Changed</span><span class="p">:</span> <span class="mi">1</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">delete</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">1</span> <span class="k">row</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>   <span class="mi">23</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">f</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">3</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>dql语句</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span> <span class="k">between</span> <span class="mi">21</span> <span class="k">and</span> <span class="mi">22</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">stuname</span> <span class="k">like</span> <span class="s1">&#39;zhao%&#39;</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>   <span class="mi">23</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">f</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">3</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">stuname</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>   <span class="mi">23</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">f</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">3</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span> <span class="k">in</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">);</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>   <span class="mi">21</span> <span class="o">|</span> <span class="n">zhao2</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>   <span class="mi">22</span> <span class="o">|</span> <span class="n">zhao3</span>   <span class="o">|</span> <span class="n">m</span>    <span class="o">|</span>
+<span class="o">+</span><span class="c1">----+------+---------+------+</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>用户账号</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [test]&gt; flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [test]&gt; drop user &#39;zhao&#39;@&#39;%&#39;;
+MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
+MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;zhao&#39;);
+[root@102 ~]$ mysqladmin -u root -p  password &#39;newpassword&#39;
+</pre></div>
+</div>
+<p>授权</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">grant</span> <span class="k">select</span> <span class="p">,</span><span class="k">delete</span> <span class="k">on</span> <span class="n">test</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">&#39;oracle&#39;</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">37</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">revoke</span> <span class="k">delete</span> <span class="k">on</span> <span class="n">test</span><span class="p">.</span><span class="o">*</span> <span class="k">from</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">grants</span> <span class="k">for</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-----------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Grants</span> <span class="k">for</span> <span class="n">zhao</span><span class="o">@%</span>                                                                                   <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">GRANT</span> <span class="k">USAGE</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="n">PASSWORD</span> <span class="s1">&#39;*2447D497B9A6A15F2776055CB2D1E9F86758182F&#39;</span> <span class="o">|</span>
+<span class="o">|</span> <span class="k">GRANT</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span>                                                              <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------------------------------------------------------------------------------------------------+</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
