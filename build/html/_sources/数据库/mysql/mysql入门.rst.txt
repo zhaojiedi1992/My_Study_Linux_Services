@@ -13,11 +13,11 @@ mariadb的特性
 
 mysql命令的重要选项
 
---print-default     默认选项
---verbose           显示详细信息
--u                  指定用户
--p                  指定密码
--h                  服务器主机
+--print-default         默认选项
+--verbose               显示详细信息
+-u                      指定用户
+-p                      指定密码
+-h                      服务器主机
 
 .. note:: mysql中的用户是username@host构成的支持通配,%代表任意长度任意字符，-匹配任意单个字符。
 
@@ -52,12 +52,44 @@ mysql命令的重要选项
 
     show character set;
     show collation;
+    show table status from mysql\G
+
+查看数据库引擎
 
 创建表
 
 .. code-block:: sql
 
     create table student(id int primary key AUTO_INCREMENT , age int unsigned ,name varchar(30), sex enum('m','f') default 'm'); 
+    MariaDB [test]> desc student;
+    +-------+------------------+------+-----+---------+----------------+
+    | Field | Type             | Null | Key | Default | Extra          |
+    +-------+------------------+------+-----+---------+----------------+
+    | id    | int(11)          | NO   | PRI | NULL    | auto_increment |
+    | age   | int(10) unsigned | YES  |     | NULL    |                |
+    | name  | varchar(30)      | YES  |     | NULL    |                |
+    | sex   | enum('m','f')    | YES  |     | m       |                |
+    +-------+------------------+------+-----+---------+----------------+
+    4 rows in set (0.00 sec)
+
+    MariaDB [test]> create tables t2 select * from student;
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tables t2 select * from student' at line 1
+    MariaDB [test]> create table t2 select * from student;
+    Query OK, 0 rows affected (0.01 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+
+    MariaDB [test]> desc t2;
+    +-------+------------------+------+-----+---------+-------+
+    | Field | Type             | Null | Key | Default | Extra |
+    +-------+------------------+------+-----+---------+-------+
+    | id    | int(11)          | NO   |     | 0       |       |
+    | age   | int(10) unsigned | YES  |     | NULL    |       |
+    | name  | varchar(30)      | YES  |     | NULL    |       |
+    | sex   | enum('m','f')    | YES  |     | m       |       |
+    +-------+------------------+------+-----+---------+-------+
+    4 rows in set (0.00 sec)
+
+.. note:: 上面可以发现通过select来去创建一个表会丢失主键和自动增长的。
 
 表查看类
 
@@ -341,4 +373,163 @@ dql语句
     +-----------------------------------------------------------------------------------------------------+
     2 rows in set (0.00 sec)
 
+为了后续的实验，我们导入一个文件，文件内容如下 
+
+:download:`/files/hellodb_InnoDB.sql` 
+
+.. literalinclude:: /files/hellodb_InnoDB.sql
+   :encoding: utf-8
+   :language: sql
+   :linenos:
+
+排序
+
+.. code-block:: sql
+
+    MariaDB [(none)]> use hellodb
+    Database changed
+    MariaDB [hellodb]> select * from students order by age;
+    +-------+---------------+-----+--------+---------+-----------+
+    | StuID | Name          | Age | Gender | ClassID | TeacherID |
+    +-------+---------------+-----+--------+---------+-----------+
+    |     8 | Lin Daiyu     |  17 | F      |       7 |      NULL |
+    |    14 | Lu Wushuang   |  17 | F      |       3 |      NULL |
+    |    19 | Xue Baochai   |  18 | F      |       6 |      NULL |
+    |    12 | Wen Qingqing  |  19 | F      |       1 |      NULL |
+    |    10 | Yue Lingshan  |  19 | F      |       3 |      NULL |
+    |     7 | Xi Ren        |  19 | F      |       3 |      NULL |
+    |    15 | Duan Yu       |  19 | M      |       4 |      NULL |
+    |    20 | Diao Chan     |  19 | F      |       7 |      NULL |
+    |     9 | Ren Yingying  |  20 | F      |       6 |      NULL |
+    |    22 | Xiao Qiao     |  20 | F      |       1 |      NULL |
+    |    16 | Xu Zhu        |  21 | M      |       1 |      NULL |
+    |     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |
+    |    21 | Huang Yueying |  22 | F      |       6 |      NULL |
+    |     2 | Shi Potian    |  22 | M      |       1 |         7 |
+    |    23 | Ma Chao       |  23 | M      |       4 |      NULL |
+    |    18 | Hua Rong      |  23 | M      |       7 |      NULL |
+    |    11 | Yuan Chengzhi |  23 | M      |       6 |      NULL |
+    |    17 | Lin Chong     |  25 | M      |       4 |      NULL |
+    |     5 | Yu Yutong     |  26 | M      |       3 |         1 |
+    |    24 | Xu Xian       |  27 | M      |    NULL |      NULL |
+    |     4 | Ding Dian     |  32 | M      |       4 |         4 |
+    |    13 | Tian Boguang  |  33 | M      |       2 |      NULL |
+    |     6 | Shi Qing      |  46 | M      |       5 |      NULL |
+    |     3 | Xie Yanke     |  53 | M      |       2 |        16 |
+    |    25 | Sun Dasheng   | 100 | M      |    NULL |      NULL |
+    +-------+---------------+-----+--------+---------+-----------+
+    25 rows in set (0.00 sec)
+
+限制行
+
+.. code-block:: mysql
+
+    MariaDB [hellodb]> select * from students order by age limit 2;
+    +-------+-------------+-----+--------+---------+-----------+
+    | StuID | Name        | Age | Gender | ClassID | TeacherID |
+    +-------+-------------+-----+--------+---------+-----------+
+    |    14 | Lu Wushuang |  17 | F      |       3 |      NULL |
+    |     8 | Lin Daiyu   |  17 | F      |       7 |      NULL |
+    +-------+-------------+-----+--------+---------+-----------+
+    2 rows in set (0.00 sec)
+
+    MariaDB [hellodb]> select * from students order by age limit 2,4;
+    +-------+--------------+-----+--------+---------+-----------+
+    | StuID | Name         | Age | Gender | ClassID | TeacherID |
+    +-------+--------------+-----+--------+---------+-----------+
+    |    19 | Xue Baochai  |  18 | F      |       6 |      NULL |
+    |    15 | Duan Yu      |  19 | M      |       4 |      NULL |
+    |    12 | Wen Qingqing |  19 | F      |       1 |      NULL |
+    |     7 | Xi Ren       |  19 | F      |       3 |      NULL |
+    +-------+--------------+-----+--------+---------+-----------+
+    4 rows in set (0.00 sec)
+
+第二种情况是跳过2个取4个。
+
+
+别名
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select s.name as "姓名" , s.age as "年龄" from students as s  order by age limit 2,4;
+    +--------------+--------+
+    | 姓名         | 年龄   |
+    +--------------+--------+
+    | Xue Baochai  |     18 |
+    | Duan Yu      |     19 |
+    | Wen Qingqing |     19 |
+    | Xi Ren       |     19 |
+    +--------------+--------+
+    4 rows in set (0.00 sec)
+
+模糊匹配
+
+.. code-block:: text
+
+    %通配任意字符任意次数
+    _通配单个字符
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select * from students where name like 'S%'
+        -> ;
+    +-------+-------------+-----+--------+---------+-----------+
+    | StuID | Name        | Age | Gender | ClassID | TeacherID |
+    +-------+-------------+-----+--------+---------+-----------+
+    |     1 | Shi Zhongyu |  22 | M      |       2 |         3 |
+    |     2 | Shi Potian  |  22 | M      |       1 |         7 |
+    |     6 | Shi Qing    |  46 | M      |       5 |      NULL |
+    |    25 | Sun Dasheng | 100 | M      |    NULL |      NULL |
+    +-------+-------------+-----+--------+---------+-----------+
+    4 rows in set (0.00 sec)
+
+空值判断
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select * from students where classid is null;
+    +-------+-------------+-----+--------+---------+-----------+
+    | StuID | Name        | Age | Gender | ClassID | TeacherID |
+    +-------+-------------+-----+--------+---------+-----------+
+    |    24 | Xu Xian     |  27 | M      |    NULL |      NULL |
+    |    25 | Sun Dasheng | 100 | M      |    NULL |      NULL |
+    +-------+-------------+-----+--------+---------+-----------+
+    2 rows in set (0.00 sec)
+
+    MariaDB [hellodb]> select * from students where classid is not null;
+
+.. warning:: 空值判断不能使用=。
+
+
+分组统计
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select courseid,avg(score) from scores group by courseid;
+    +----------+------------+
+    | courseid | avg(score) |
+    +----------+------------+
+    |        1 | 73.6667    |
+    |        2 | 75.2500    |
+    |        3 | 93.0000    |
+    |        4 | 57.0000    |
+    |        5 | 84.0000    |
+    |        6 | 84.0000    |
+    |        7 | 73.0000    |
+    +----------+------------+
+    7 rows in set (0.00 sec)
+
+分组统计后过滤
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select courseid,avg(score) from scores group by courseid having avg(score) > 80;
+    +----------+------------+
+    | courseid | avg(score) |
+    +----------+------------+
+    |        3 | 93.0000    |
+    |        5 | 84.0000    |
+    |        6 | 84.0000    |
+    +----------+------------+
+    3 rows in set (0.00 sec)
 

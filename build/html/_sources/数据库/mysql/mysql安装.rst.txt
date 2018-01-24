@@ -230,7 +230,7 @@ PATH=/usr/local/bin:$PATH
 
     MariaDB [(none)]> 
 
- 数据库安全安装设置
+数据库安全安装设置
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
@@ -471,65 +471,65 @@ yum安装
 
 服务文件准备
 
-.. code-block:: mysql
+.. code-block:: sql
 
-[root@centos151 3306]# vim service/mysqld
-[root@centos151 3306]# cat service/mysqld
+    [root@centos151 3306]# vim service/mysqld
+    [root@centos151 3306]# cat service/mysqld
 
-    #!/bin/bash
+        #!/bin/bash
 
-    port=3306
-    mysql_user="root"
-    mysql_pwd=""
-    cmd_path="/usr/bin/mysql"
-    mysql_basedir="/data/mysql/3306/data"
-    mysql_sock="${mysql_basedir}/${port}/socket/mariadb.sock"
+        port=3306
+        mysql_user="root"
+        mysql_pwd=""
+        cmd_path="/usr/bin/mysql"
+        mysql_basedir="/data/mysql/3306/data"
+        mysql_sock="${mysql_basedir}/${port}/socket/mariadb.sock"
 
-    function_start_mysql()
-    {
-        if [ ! -e "$mysql_sock" ];then
-        printf "Starting MySQL...\n"
-        ${cmd_path}/mysqld_safe --defaults-file=${mysql_basedir}/${port}/etc/my.cnf  &> /dev/null  &
-        else
-        printf "MySQL is running...\n"
-        exit
+        function_start_mysql()
+        {
+            if [ ! -e "$mysql_sock" ];then
+            printf "Starting MySQL...\n"
+            ${cmd_path}/mysqld_safe --defaults-file=${mysql_basedir}/${port}/etc/my.cnf  &> /dev/null  &
+            else
+            printf "MySQL is running...\n"
+            exit
+            fi
+        }
+
+
+        function_stop_mysql()
+        {
+            if [ ! -e "$mysql_sock" ];then
+            printf "MySQL is stopped...\n"
+            exit
+            else
+            printf "Stoping MySQL...\n"
+            ${cmd_path}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S ${mysql_sock} shutdown
         fi
-    }
+        }
 
 
-    function_stop_mysql()
-    {
-        if [ ! -e "$mysql_sock" ];then
-        printf "MySQL is stopped...\n"
-        exit
-        else
-        printf "Stoping MySQL...\n"
-        ${cmd_path}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S ${mysql_sock} shutdown
-    fi
-    }
+        function_restart_mysql()
+        {
+            printf "Restarting MySQL...\n"
+            function_stop_mysql
+            sleep 2
+            function_start_mysql
+        }
 
-
-    function_restart_mysql()
-    {
-        printf "Restarting MySQL...\n"
-        function_stop_mysql
-        sleep 2
-        function_start_mysql
-    }
-
-    case $1 in
-    start)
-        function_start_mysql
-    ;;
-    stop)
-        function_stop_mysql
-    ;;
-    restart)
-        function_restart_mysql
-    ;;
-    *)
-        printf "Usage: ${mysql_basedir}/${port}/bin/mysqld {start|stop|restart}\n"
-    esac
+        case $1 in
+        start)
+            function_start_mysql
+        ;;
+        stop)
+            function_stop_mysql
+        ;;
+        restart)
+            function_restart_mysql
+        ;;
+        *)
+            printf "Usage: ${mysql_basedir}/${port}/bin/mysqld {start|stop|restart}\n"
+        esac
 
     [root@centos151 3306]# cp service/mysqld ../3308/service/
     [root@centos151 3306]# sed -i 's@3306@3307@' ../3307/service/mysqld 

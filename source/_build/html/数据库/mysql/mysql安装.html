@@ -37,6 +37,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="8. 数据库" href="../index.html"/>
+        <link rel="next" title="8.2. mysql终端入门" href="mysql终端入门.html"/>
         <link rel="prev" title="&lt;no title&gt;" href="../sql语句.html"/> 
 
   
@@ -113,8 +114,22 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">8.1.3. 源码安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">8.1.4. 多实例安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">8.1.4.1. 规划</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">8.1.4.2. yum安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">8.1.4.3. 配置存储</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">8.1.4.4. 安装数据库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">8.1.4.5. 开始安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">8.1.4.6. 关闭原有服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">8.1.4.7. 准备其他文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">8.1.4.8. 启动服务测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">8.1.4.9. 后续完善</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">8.2. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">8.3. mysql入门</a></li>
 </ul>
 </li>
 </ul>
@@ -468,6 +483,327 @@ Thanks <span class="k">for</span> using MariaDB!
 </div>
 <div class="section" id="id10">
 <h2>8.1.3. 源码安装<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 下载文件</span>
+wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A//mirrors.tuna.tsinghua.edu.cn/mariadb/ <span class="se">\</span>
+-O mariadb-10.2.12-linux-systemd-x86_64.tar.gz
+<span class="c1"># 解压</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># tar xf mariadb-10.2.12.tar.gz</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cd mariadb-10.2.12/</span>
+<span class="o">[</span>root@centos151 mariadb-10.2.12<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@centos151 bin<span class="o">]</span><span class="c1"># cmake . \</span>
+-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/app/mysql <span class="se">\</span>
+-DMYSQL_DATADIR<span class="o">=</span>/mysqldb/ <span class="se">\</span>
+-DSYSCONFDIR<span class="o">=</span>/etc <span class="se">\</span>
+-DMYSQL_USER<span class="o">=</span>mysql <span class="se">\</span>
+-DWITH_INNOBASE_STORAGE_ENGINE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_ARCHIVE_STORAGE_ENGINE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_BLACKHOLE_STORAGE_ENGINE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_READLINE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_SSL<span class="o">=</span>system <span class="se">\</span>
+-DWITH_ZLIB<span class="o">=</span>system <span class="se">\</span>
+-DWITH_LIBWRAP<span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+-DMYSQL_UNIX_ADDR<span class="o">=</span>/app/mysql/mysql.sock <span class="se">\</span>
+-DDEFAULT_CHARSET<span class="o">=</span>utf8 <span class="se">\</span>
+-DDEFAULT_COLLATION<span class="o">=</span>utf8_general_ci <span class="se">\</span>
+-DENABLED_LOCAL_INFILE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_PARTITION_STORAGE_ENGINE<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
+-DWITH_DEBUG<span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+-DWITHOUT_MROONGA_STORAGE_ENGINE<span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>root@centos151 mariadb-10.2.12<span class="o">]</span><span class="c1"># make &amp;&amp; make install</span>
+<span class="o">[</span>root@centos151 mariadb-10.2.12<span class="o">]</span><span class="c1"># echo &#39;PATH=/app/mysql/bin:$PATH&#39; &gt; /etc/profile.d/mysql.sh</span>
+<span class="o">[</span>root@centos151 mariadb-10.2.12<span class="o">]</span><span class="c1"># source /etc/profile.d/mysql.sh</span>
+<span class="o">[</span>root@centos151 mariadb-10.2.12<span class="o">]</span><span class="c1"># cd /app/mysql</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># scripts/mysql_install_db --basedir=/app/mysql --datadir=/app/mysql/data --user=mysql</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># cp support-files/my-huge.cnf /etc/my.cnf</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 添加如下行到mysqld片段内部</span>
+<span class="nv">basedir</span><span class="o">=</span>/app/mysql
+<span class="nv">datadir</span><span class="o">=</span>/app/mysql/data
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># chown mysql.mysql /app/mysql/ -R</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># chkconfig --add mysql</span>
+<span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># service mysql restart</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>8.1.4. 多实例安装<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>在一个服务器上跑多个实例，每一个实例一个端口。</p>
+<p>这里主要要以yum安装的方法来实现多个实例。</p>
+<div class="section" id="id12">
+<h3>8.1.4.1. 规划<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span>数据存储： /data/mysql/{3306,3307,3308}/data
+端口： 3306，3307，3308
+配置文件：放到各自的目录
+服务启动文件：放到各自目录，给initd创建软连接。
+程序文件： yum安装的那份就可以了。
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>8.1.4.2. yum安装<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># yum install mariadb-server mariadb</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># rpm -ql MariaDB-server</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># mysql</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id14">
+<h3>8.1.4.3. 配置存储<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>安装规划创建必要的目录</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># clear</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># mkdir /data/mysql/{3306,3307,3308}/{data,log,pid,socket,etc,service} -pv</span>
+
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># chown -R mysql.mysql /data/mysql/</span>
+
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># tree /data/mysql</span>
+/data/mysql
+├── <span class="m">3306</span>
+│   ├── data
+│   ├── etc
+│   ├── log
+│   ├── pid
+│   └── socket
+<span class="p">|</span>   └── service
+├── <span class="m">3307</span>
+│   ├── data
+│   ├── etc
+│   ├── log
+│   ├── pid
+│   └── socket
+<span class="p">|</span>   └── service
+└── <span class="m">3308</span>
+    ├── data
+    ├── etc
+    ├── log
+    ├── pid
+    └── socket
+    └── service
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>8.1.4.4. 安装数据库<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>先获取basedir</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="o">@</span><span class="n">centos151</span> <span class="o">~</span><span class="p">]</span><span class="o">#</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;show variables like &quot;basedir&quot;&#39;</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span> <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+<span class="o">|</span> <span class="n">basedir</span>       <span class="o">|</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>8.1.4.5. 开始安装<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/mysql/3306/data --user=mysql --basedir=/usr</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/mysql/3307/data --user=mysql --basedir=/usr</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/mysql/3308/data --user=mysql --basedir=/usr</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>8.1.4.6. 关闭原有服务<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># systemctl disable mariadb</span>
+Removed symlink /etc/systemd/system/multi-user.target.wants/mariadb.service.
+Removed symlink /etc/systemd/system/mysql.service.
+Removed symlink /etc/systemd/system/mysqld.service.
+<span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># systemctl stop mariadb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>8.1.4.7. 准备其他文件<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>配置文件准备</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cp /etc/my.cnf /data/mysql/3306/etc/</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># vim /data/mysql/3306/etc/my.cnf</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cat /data/mysql/3306/etc/my.cnf</span>
+<span class="o">[</span>mysqld<span class="o">]</span>
+<span class="nv">port</span><span class="o">=</span><span class="m">3306</span>
+<span class="nv">datadir</span><span class="o">=</span>/data/mysql/3306/data
+<span class="nv">socket</span><span class="o">=</span>/data/mysql/3306/socket/mariadb.sock
+symbolic-links<span class="o">=</span><span class="m">0</span>
+<span class="o">[</span>mysqld-safe<span class="o">]</span>
+log-error<span class="o">=</span>/data/mysql/3306/log/mariadb.log
+pid-file<span class="o">=</span>/data/mysql/3306/pid/mariadb.pid
+
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cp /data/mysql/3306/etc/my.cnf /data/mysql/3307/etc/</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cp /data/mysql/3306/etc/my.cnf /data/mysql/3308/etc/</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># sed -i &#39;s@3306@3307@&#39; /data/mysql/3307/etc/my.cnf</span>
+<span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># sed -i &#39;s@3306@3308@&#39; /data/mysql/3308/etc/my.cnf</span>
+</pre></div>
+</div>
+<p>服务文件准备</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# vim service/mysqld
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# cat service/mysqld</p>
+<blockquote>
+<div><p>#!/bin/bash</p>
+<p>port=3306
+mysql_user=”root”
+mysql_pwd=””
+cmd_path=”/usr/bin/mysql”
+mysql_basedir=”/data/mysql/3306/data”
+mysql_sock=”${mysql_basedir}/${port}/socket/mariadb.sock”</p>
+<p>function_start_mysql()
+{</p>
+<blockquote>
+<div>if [ ! -e “$mysql_sock” ];then
+printf “Starting MySQL…n”
+${cmd_path}/mysqld_safe –defaults-file=${mysql_basedir}/${port}/etc/my.cnf  &amp;&gt; /dev/null  &amp;
+else
+printf “MySQL is running…n”
+exit
+fi</div></blockquote>
+<p>}</p>
+<p>function_stop_mysql()
+{</p>
+<blockquote>
+<div>if [ ! -e “$mysql_sock” ];then
+printf “MySQL is stopped…n”
+exit
+else
+printf “Stoping MySQL…n”
+${cmd_path}/mysqladmin -u ${mysql_user} -p${mysql_pwd} -S ${mysql_sock} shutdown</div></blockquote>
+<p>fi
+}</p>
+<p>function_restart_mysql()
+{</p>
+<blockquote>
+<div>printf “Restarting MySQL…n”
+function_stop_mysql
+sleep 2
+function_start_mysql</div></blockquote>
+<p>}</p>
+<p>case $1 in
+start)</p>
+<blockquote>
+<div>function_start_mysql</div></blockquote>
+<p>;;
+stop)</p>
+<blockquote>
+<div>function_stop_mysql</div></blockquote>
+<p>;;
+restart)</p>
+<blockquote>
+<div>function_restart_mysql</div></blockquote>
+<p>;;
+<a href="#id19"><span class="problematic" id="id20">*</span></a>)</p>
+<blockquote>
+<div>printf “Usage: ${mysql_basedir}/${port}/bin/mysqld {start|stop|restart}n”</div></blockquote>
+<p>esac</p>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# cp service/mysqld ../3308/service/
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# sed -i ‘s&#64;3306&#64;3307&#64;’ ../3307/service/mysqld
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# sed -i ‘s&#64;3306&#64;3308&#64;’ ../3308/service/mysqld</p>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# chmod  a+x service/mysqld
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# chmod  a+x ../3307/service/mysqld
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos151">root<span>&#64;</span>centos151</a> 3306]# chmod  a+x ../3308/service/mysqld</p>
+</div></blockquote>
+</div>
+<div class="section" id="id21">
+<h3>8.1.4.8. 启动服务测试<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># ../3306/service/mysqld start</span>
+<span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># ../3307/service/mysqld start</span>
+<span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># ../3308/service/mysqld start</span>
+<span class="o">[</span>root@centos151 <span class="m">3306</span><span class="o">]</span><span class="c1"># netstat -tunlp |grep 330</span>
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::3307                 :::*                    LISTEN      <span class="m">60029</span>/mysqld
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::3308                 :::*                    LISTEN      <span class="m">60138</span>/mysqld
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::3306                 :::*                    LISTEN      <span class="m">59696</span>/mysqld
+</pre></div>
+</div>
+</div>
+<div class="section" id="id22">
+<h3>8.1.4.9. 后续完善<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>安全配置</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation -S /data/mysql/3306/socket/mysql.sock</span>
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+    SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we<span class="s1">&#39;ll need the current</span>
+<span class="s1">password for the root user.  If you&#39;</span>ve just installed MariaDB, and
+you haven<span class="s1">&#39;t set the root password yet, the password will be blank,</span>
+<span class="s1">so you should just press enter here.</span>
+
+<span class="s1">Enter current password for root (enter for none):</span>
+<span class="s1">OK, successfully used password, moving on...</span>
+
+<span class="s1">Setting the root password ensures that nobody can log into the MariaDB</span>
+<span class="s1">root user without the proper authorisation.</span>
+
+<span class="s1">Set root password? [Y/n] y</span>
+<span class="s1">New password:</span>
+<span class="s1">Re-enter new password:</span>
+<span class="s1">Password updated successfully!</span>
+<span class="s1">Reloading privilege tables..</span>
+<span class="s1">... Success!</span>
+
+
+<span class="s1">By default, a MariaDB installation has an anonymous user, allowing anyone</span>
+<span class="s1">to log into MariaDB without having to have a user account created for</span>
+<span class="s1">them.  This is intended only for testing, and to make the installation</span>
+<span class="s1">go a bit smoother.  You should remove them before moving into a</span>
+<span class="s1">production environment.</span>
+
+<span class="s1">Remove anonymous users? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Normally, root should only be allowed to connect from &#39;</span>localhost<span class="s1">&#39;.  This</span>
+<span class="s1">ensures that someone cannot guess at the root password from the network.</span>
+
+<span class="s1">Disallow root login remotely? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">By default, MariaDB comes with a database named &#39;</span>test<span class="s1">&#39; that anyone can</span>
+<span class="s1">access.  This is also intended only for testing, and should be removed</span>
+<span class="s1">before moving into a production environment.</span>
+
+<span class="s1">Remove test database and access to it? [Y/n] y</span>
+<span class="s1">- Dropping test database...</span>
+<span class="s1">... Success!</span>
+<span class="s1">- Removing privileges on test database...</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Reloading the privilege tables will ensure that all changes made so far</span>
+<span class="s1">will take effect immediately.</span>
+
+<span class="s1">Reload privilege tables now? [Y/n] y</span>
+<span class="s1">... Success!</span>
+
+<span class="s1">Cleaning up...</span>
+
+<span class="s1">All done!  If you&#39;</span>ve completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks <span class="k">for</span> using MariaDB!
+
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation -S /data/mysql/3307/socket/mysql.sock</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation -S /data/mysql/3308/socket/mysql.sock</span>
+<span class="c1"># 修改下mysqld的密码配置</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># vim 3306/service/mysqld</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># vim 3307/service/mysqld</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># vim 3308/service/mysqld</span>
+</pre></div>
+</div>
+<p>开机启动</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># echo &quot;/data/mysql/3306/service/mysqld start &quot; &gt;&gt; /etc/rc.d/rc.local</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># echo &quot;/data/mysql/3307/service/mysqld start &quot; &gt;&gt; /etc/rc.d/rc.local</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># echo &quot;/data/mysql/3308/service/mysqld start &quot; &gt;&gt; /etc/rc.d/rc.local</span>
+</pre></div>
+</div>
+<p>修改权限</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># chmod 700 3306/service/mysqld</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># chmod 700  3307/service/mysqld</span>
+<span class="o">[</span>root@centos151 mysql<span class="o">]</span><span class="c1"># chmod 700  3308/service/mysqld</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这里可以写成sysv风格的脚本，每个起一个服务名字即可。</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -480,6 +816,8 @@ Thanks <span class="k">for</span> using MariaDB!
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mysql终端入门.html" class="btn btn-neutral float-right" title="8.2. mysql终端入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../sql语句.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

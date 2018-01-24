@@ -13,11 +13,11 @@ mariadb的特性
 
 mysql命令的重要选项
 
---print-default     默认选项
---verbose           显示详细信息
--u                  指定用户
--p                  指定密码
--h                  服务器主机
+--print-default         默认选项
+--verbose               显示详细信息
+-u                      指定用户
+-p                      指定密码
+-h                      服务器主机
 
 .. note:: mysql中的用户是username@host构成的支持通配,%代表任意长度任意字符，-匹配任意单个字符。
 
@@ -52,12 +52,44 @@ mysql命令的重要选项
 
     show character set;
     show collation;
+    show table status from mysql\G
+
+查看数据库引擎
 
 创建表
 
 .. code-block:: sql
 
     create table student(id int primary key AUTO_INCREMENT , age int unsigned ,name varchar(30), sex enum('m','f') default 'm'); 
+    MariaDB [test]> desc student;
+    +-------+------------------+------+-----+---------+----------------+
+    | Field | Type             | Null | Key | Default | Extra          |
+    +-------+------------------+------+-----+---------+----------------+
+    | id    | int(11)          | NO   | PRI | NULL    | auto_increment |
+    | age   | int(10) unsigned | YES  |     | NULL    |                |
+    | name  | varchar(30)      | YES  |     | NULL    |                |
+    | sex   | enum('m','f')    | YES  |     | m       |                |
+    +-------+------------------+------+-----+---------+----------------+
+    4 rows in set (0.00 sec)
+
+    MariaDB [test]> create tables t2 select * from student;
+    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tables t2 select * from student' at line 1
+    MariaDB [test]> create table t2 select * from student;
+    Query OK, 0 rows affected (0.01 sec)
+    Records: 0  Duplicates: 0  Warnings: 0
+
+    MariaDB [test]> desc t2;
+    +-------+------------------+------+-----+---------+-------+
+    | Field | Type             | Null | Key | Default | Extra |
+    +-------+------------------+------+-----+---------+-------+
+    | id    | int(11)          | NO   |     | 0       |       |
+    | age   | int(10) unsigned | YES  |     | NULL    |       |
+    | name  | varchar(30)      | YES  |     | NULL    |       |
+    | sex   | enum('m','f')    | YES  |     | m       |       |
+    +-------+------------------+------+-----+---------+-------+
+    4 rows in set (0.00 sec)
+
+.. note:: 上面可以发现通过select来去创建一个表会丢失主键和自动增长的。
 
 表查看类
 
@@ -340,5 +372,19 @@ dql语句
     | GRANT SELECT ON `test`.* TO 'zhao'@'%'                                                              |
     +-----------------------------------------------------------------------------------------------------+
     2 rows in set (0.00 sec)
+
+为了后续的实验，我们导入一个文件，文件内容如下 
+
+:download:`/files/hellodb_InnoDB.sql` 
+
+.. literalinclude:: /files/hellodb_InnoDB.sql
+   :encoding: utf-8
+   :language: sql
+   :linenos:
+
+排序
+
+.. code-block:: sql
+
 
 
