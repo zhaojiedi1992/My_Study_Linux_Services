@@ -43,8 +43,8 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The master toctree document.
-#master_doc = 'index'
-master_doc = 'index2'
+master_doc = 'index'
+#master_doc = 'index2'
 # General information about the project.
 project = 'My_Study_Linux_Services'
 copyright = '2018, zhaojiedi1992'
@@ -83,6 +83,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+#html_theme = "scrolls"
 html_theme = 'sphinx_rtd_theme'
 highlight_language = 'BASH'
 # Theme options are theme-specific and customize the look and feel of a theme

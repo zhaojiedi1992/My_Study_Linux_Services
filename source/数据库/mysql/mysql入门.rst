@@ -48,7 +48,7 @@ mysql命令的重要选项
 
 查看字符集和排序规则
 
-.. code-block:: sql
+.. code-block:: text
 
     show character set;
     show collation;
@@ -341,7 +341,7 @@ dql语句
 
 用户账号
 
-.. code-block:: sql
+.. code-block:: text
 
     MariaDB [test]> create user 'zhao'@'%' identified by 'oracle';
     Query OK, 0 rows affected (0.00 sec)
@@ -449,7 +449,7 @@ dql语句
 
 别名
 
-.. code-block:: sql
+.. code-block:: text
 
     MariaDB [hellodb]> select s.name as "姓名" , s.age as "年龄" from students as s  order by age limit 2,4;
     +--------------+--------+

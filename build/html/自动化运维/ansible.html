@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="4. 自动化运维" href="index.html"/>
+        <link rel="next" title="4.6. saltstack" href="saltstack.html"/>
+        <link rel="prev" title="4.4. fabric" href="fabric.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -54,7 +57,7 @@
           
 
           
-            <a href="../index2.html" class="icon icon-home"> My_Study_Linux_Services
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
           
 
           
@@ -88,9 +91,68 @@
               
             
             
-              <p class="caption"><span class="caption-text">mariadb多实例的三种实现</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../数据库/mysql/mysql多实例.html">8.4. mariadb多实例安装</a></li>
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">4. 自动化运维</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pssh.html">4.1. pssh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pexpect.html">4.2. pexpect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paramiko.html">4.3. paramiko</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fabric.html">4.4. fabric</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.5. ansible</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.5.1. ansible特性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.5.2. ansible架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.5.3. ansible工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.5.4. 安装软件包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.5.5. 添加管理主机和修改配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.5.6. 使用ansible模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ping">4.5.6.1. ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command">4.5.6.2. command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shell">4.5.6.3. shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#script">4.5.6.4. script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#copy">4.5.6.5. copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fetch">4.5.6.6. fetch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file">4.5.6.7. file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hostname">4.5.6.8. hostname</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cron">4.5.6.9. cron</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yum">4.5.6.10. yum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service">4.5.6.11. service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user">4.5.6.12. user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup">4.5.6.13. setup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#galaxy">4.5.7. galaxy的使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#playbook">4.5.8. playbook的基础使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hello-world">4.5.8.1. hello world</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.5.8.2. 安装服务并启动服务</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vault">4.5.9. vault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#console">4.5.10. console</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.5.11. playbook其他使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">4.5.11.1. 变量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template">4.5.11.2. template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when">4.5.11.3. when</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#with-item">4.5.11.4. with-item</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">4.5.11.5. 迭代变量</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#for">4.5.11.6. for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#if">4.5.11.7. if</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#role">4.5.12. role角色</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="saltstack.html">4.6. saltstack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">10. 版本控制</a></li>
 </ul>
 
             
@@ -105,7 +167,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index2.html">My_Study_Linux_Services</a>
+          <a href="../index.html">My_Study_Linux_Services</a>
         
       </nav>
 
@@ -133,7 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index2.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">4. 自动化运维</a> &raquo;</li>
         
       <li>4.5. ansible</li>
     
@@ -1084,6 +1148,15 @@ user: <span class="nv">name</span><span class="o">=</span>nginx <span class="nv"
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="saltstack.html" class="btn btn-neutral float-right" title="4.6. saltstack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fabric.html" class="btn btn-neutral" title="4.4. fabric" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

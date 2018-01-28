@@ -157,7 +157,7 @@ LoadModule
 Include 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-默认值： Include conf.d/*.conf
+默认值： Include conf.d/\*.conf
 
 这个就是加载conf.d目录下的所有配置文件
 
@@ -440,11 +440,11 @@ centos7的web目录必须是授权的。
 
 .. code-block:: bash
 
-<Directory "/var/www/cgi-bin">
-    <RequireAll>
-        Require all granted
-        Require not ip 192.168.1.106
-    </RequireAll>
-</Directory>
+    <Directory "/var/www/cgi-bin">
+        <RequireAll>
+            Require all granted
+            Require not ip 192.168.1.106
+        </RequireAll>
+    </Directory>
 
 
