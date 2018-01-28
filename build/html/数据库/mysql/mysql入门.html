@@ -114,6 +114,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
 </ul>
 
             
@@ -1104,6 +1105,105 @@ _通配单个字符
 <span class="o">|</span>        <span class="mi">6</span> <span class="o">|</span> <span class="mi">84</span><span class="p">.</span><span class="mi">0000</span>    <span class="o">|</span>
 <span class="o">+</span><span class="c1">----------+------------+</span>
 <span class="mi">3</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>连接</p>
+<div class="highlight-SQL"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">score</span> <span class="k">from</span> <span class="n">students</span> <span class="k">as</span> <span class="n">st</span> <span class="k">left</span> <span class="k">outer</span> <span class="k">join</span> <span class="n">scores</span> <span class="k">as</span> <span class="n">sc</span> <span class="k">on</span> <span class="n">st</span><span class="p">.</span><span class="n">stuid</span><span class="o">=</span><span class="n">sc</span><span class="p">.</span><span class="n">stuid</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+<span class="o">|</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">score</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span>   <span class="o">|</span>    <span class="mi">77</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span>   <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>    <span class="o">|</span>    <span class="mi">47</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>    <span class="o">|</span>    <span class="mi">97</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>     <span class="o">|</span>    <span class="mi">88</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>     <span class="o">|</span>    <span class="mi">75</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>     <span class="o">|</span>    <span class="mi">71</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>     <span class="o">|</span>    <span class="mi">89</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>     <span class="o">|</span>    <span class="mi">39</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>     <span class="o">|</span>    <span class="mi">63</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Qing</span>      <span class="o">|</span>    <span class="mi">96</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>        <span class="o">|</span>    <span class="mi">86</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>        <span class="o">|</span>    <span class="mi">83</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>     <span class="o">|</span>    <span class="mi">57</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>     <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ren</span> <span class="n">Yingying</span>  <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yue</span> <span class="n">Lingshan</span>  <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yuan</span> <span class="n">Chengzhi</span> <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Wen</span> <span class="n">Qingqing</span>  <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Tian</span> <span class="n">Boguang</span>  <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lu</span> <span class="n">Wushuang</span>   <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Duan</span> <span class="n">Yu</span>       <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xu</span> <span class="n">Zhu</span>        <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Chong</span>     <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Hua</span> <span class="n">Rong</span>      <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xue</span> <span class="n">Baochai</span>   <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Diao</span> <span class="n">Chan</span>     <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Huang</span> <span class="n">Yueying</span> <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xiao</span> <span class="n">Qiao</span>     <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ma</span> <span class="n">Chao</span>       <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xu</span> <span class="n">Xian</span>       <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Sun</span> <span class="n">Dasheng</span>   <span class="o">|</span>  <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+-------+</span>
+<span class="mi">32</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">05</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">score</span> <span class="k">from</span> <span class="n">students</span> <span class="k">as</span> <span class="n">st</span> <span class="k">right</span> <span class="k">outer</span> <span class="k">join</span> <span class="n">scores</span> <span class="k">as</span> <span class="n">sc</span> <span class="k">on</span> <span class="n">st</span><span class="p">.</span><span class="n">stuid</span><span class="o">=</span><span class="n">sc</span><span class="p">.</span><span class="n">stuid</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="o">|</span> <span class="n">name</span>        <span class="o">|</span> <span class="n">score</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span> <span class="o">|</span>    <span class="mi">77</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span> <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>  <span class="o">|</span>    <span class="mi">47</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>  <span class="o">|</span>    <span class="mi">97</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>   <span class="o">|</span>    <span class="mi">88</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>   <span class="o">|</span>    <span class="mi">75</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>   <span class="o">|</span>    <span class="mi">71</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>   <span class="o">|</span>    <span class="mi">89</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>   <span class="o">|</span>    <span class="mi">39</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>   <span class="o">|</span>    <span class="mi">63</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Qing</span>    <span class="o">|</span>    <span class="mi">96</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>      <span class="o">|</span>    <span class="mi">86</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>      <span class="o">|</span>    <span class="mi">83</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>   <span class="o">|</span>    <span class="mi">57</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>   <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="mi">15</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+<span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">score</span> <span class="k">from</span> <span class="n">students</span> <span class="k">as</span> <span class="n">st</span>  <span class="k">inner</span> <span class="k">join</span> <span class="n">scores</span> <span class="k">as</span> <span class="n">sc</span> <span class="k">on</span> <span class="n">st</span><span class="p">.</span><span class="n">stuid</span><span class="o">=</span><span class="n">sc</span><span class="p">.</span><span class="n">stuid</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="o">|</span> <span class="n">name</span>        <span class="o">|</span> <span class="n">score</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span> <span class="o">|</span>    <span class="mi">77</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Zhongyu</span> <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>  <span class="o">|</span>    <span class="mi">47</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Potian</span>  <span class="o">|</span>    <span class="mi">97</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>   <span class="o">|</span>    <span class="mi">88</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>   <span class="o">|</span>    <span class="mi">75</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>   <span class="o">|</span>    <span class="mi">71</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>   <span class="o">|</span>    <span class="mi">89</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>   <span class="o">|</span>    <span class="mi">39</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Yu</span> <span class="n">Yutong</span>   <span class="o">|</span>    <span class="mi">63</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Shi</span> <span class="n">Qing</span>    <span class="o">|</span>    <span class="mi">96</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>      <span class="o">|</span>    <span class="mi">86</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Xi</span> <span class="n">Ren</span>      <span class="o">|</span>    <span class="mi">83</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>   <span class="o">|</span>    <span class="mi">57</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Lin</span> <span class="n">Daiyu</span>   <span class="o">|</span>    <span class="mi">93</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------------+-------+</span>
+<span class="mi">15</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>嵌套查询</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">select</span> <span class="n">age</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Xu Xian&#39;</span><span class="p">);</span>
+<span class="o">+</span><span class="c1">-------+--------------+-----+--------+---------+-----------+</span>
+<span class="o">|</span> <span class="n">StuID</span> <span class="o">|</span> <span class="n">Name</span>         <span class="o">|</span> <span class="n">Age</span> <span class="o">|</span> <span class="n">Gender</span> <span class="o">|</span> <span class="n">ClassID</span> <span class="o">|</span> <span class="n">TeacherID</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+--------------+-----+--------+---------+-----------+</span>
+<span class="o">|</span>     <span class="mi">3</span> <span class="o">|</span> <span class="n">Xie</span> <span class="n">Yanke</span>    <span class="o">|</span>  <span class="mi">53</span> <span class="o">|</span> <span class="n">M</span>      <span class="o">|</span>       <span class="mi">2</span> <span class="o">|</span>        <span class="mi">16</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">4</span> <span class="o">|</span> <span class="n">Ding</span> <span class="n">Dian</span>    <span class="o">|</span>  <span class="mi">32</span> <span class="o">|</span> <span class="n">M</span>      <span class="o">|</span>       <span class="mi">4</span> <span class="o">|</span>         <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">6</span> <span class="o">|</span> <span class="n">Shi</span> <span class="n">Qing</span>     <span class="o">|</span>  <span class="mi">46</span> <span class="o">|</span> <span class="n">M</span>      <span class="o">|</span>       <span class="mi">5</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span>    <span class="mi">13</span> <span class="o">|</span> <span class="n">Tian</span> <span class="n">Boguang</span> <span class="o">|</span>  <span class="mi">33</span> <span class="o">|</span> <span class="n">M</span>      <span class="o">|</span>       <span class="mi">2</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">|</span>    <span class="mi">25</span> <span class="o">|</span> <span class="n">Sun</span> <span class="n">Dasheng</span>  <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span> <span class="n">M</span>      <span class="o">|</span>    <span class="k">NULL</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-------+--------------+-----+--------+---------+-----------+</span>
+<span class="mi">5</span> <span class="k">rows</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">03</span> <span class="n">sec</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

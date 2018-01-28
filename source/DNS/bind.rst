@@ -910,7 +910,7 @@ view
 配置view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: bash
+.. code-block:: text
 
     [root@centos7 ~]# cat /etc/named.conf 
     //

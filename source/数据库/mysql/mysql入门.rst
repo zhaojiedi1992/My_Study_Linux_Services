@@ -533,3 +533,106 @@ dql语句
     +----------+------------+
     3 rows in set (0.00 sec)
 
+连接
+
+.. code-block:: SQL
+
+    MariaDB [hellodb]> select st.name, sc.score from students as st left outer join scores as sc on st.stuid=sc.stuid;
+    +---------------+-------+
+    | name          | score |
+    +---------------+-------+
+    | Shi Zhongyu   |    77 |
+    | Shi Zhongyu   |    93 |
+    | Shi Potian    |    47 |
+    | Shi Potian    |    97 |
+    | Xie Yanke     |    88 |
+    | Xie Yanke     |    75 |
+    | Ding Dian     |    71 |
+    | Ding Dian     |    89 |
+    | Yu Yutong     |    39 |
+    | Yu Yutong     |    63 |
+    | Shi Qing      |    96 |
+    | Xi Ren        |    86 |
+    | Xi Ren        |    83 |
+    | Lin Daiyu     |    57 |
+    | Lin Daiyu     |    93 |
+    | Ren Yingying  |  NULL |
+    | Yue Lingshan  |  NULL |
+    | Yuan Chengzhi |  NULL |
+    | Wen Qingqing  |  NULL |
+    | Tian Boguang  |  NULL |
+    | Lu Wushuang   |  NULL |
+    | Duan Yu       |  NULL |
+    | Xu Zhu        |  NULL |
+    | Lin Chong     |  NULL |
+    | Hua Rong      |  NULL |
+    | Xue Baochai   |  NULL |
+    | Diao Chan     |  NULL |
+    | Huang Yueying |  NULL |
+    | Xiao Qiao     |  NULL |
+    | Ma Chao       |  NULL |
+    | Xu Xian       |  NULL |
+    | Sun Dasheng   |  NULL |
+    +---------------+-------+
+    32 rows in set (0.05 sec)
+
+    MariaDB [hellodb]> select st.name, sc.score from students as st right outer join scores as sc on st.stuid=sc.stuid;
+    +-------------+-------+
+    | name        | score |
+    +-------------+-------+
+    | Shi Zhongyu |    77 |
+    | Shi Zhongyu |    93 |
+    | Shi Potian  |    47 |
+    | Shi Potian  |    97 |
+    | Xie Yanke   |    88 |
+    | Xie Yanke   |    75 |
+    | Ding Dian   |    71 |
+    | Ding Dian   |    89 |
+    | Yu Yutong   |    39 |
+    | Yu Yutong   |    63 |
+    | Shi Qing    |    96 |
+    | Xi Ren      |    86 |
+    | Xi Ren      |    83 |
+    | Lin Daiyu   |    57 |
+    | Lin Daiyu   |    93 |
+    +-------------+-------+
+    15 rows in set (0.00 sec)
+
+    MariaDB [hellodb]> select st.name, sc.score from students as st  inner join scores as sc on st.stuid=sc.stuid;
+    +-------------+-------+
+    | name        | score |
+    +-------------+-------+
+    | Shi Zhongyu |    77 |
+    | Shi Zhongyu |    93 |
+    | Shi Potian  |    47 |
+    | Shi Potian  |    97 |
+    | Xie Yanke   |    88 |
+    | Xie Yanke   |    75 |
+    | Ding Dian   |    71 |
+    | Ding Dian   |    89 |
+    | Yu Yutong   |    39 |
+    | Yu Yutong   |    63 |
+    | Shi Qing    |    96 |
+    | Xi Ren      |    86 |
+    | Xi Ren      |    83 |
+    | Lin Daiyu   |    57 |
+    | Lin Daiyu   |    93 |
+    +-------------+-------+
+    15 rows in set (0.00 sec)
+
+嵌套查询
+
+.. code-block:: sql
+
+    MariaDB [hellodb]> select * from students where age > (select age from students where name='Xu Xian');
+    +-------+--------------+-----+--------+---------+-----------+
+    | StuID | Name         | Age | Gender | ClassID | TeacherID |
+    +-------+--------------+-----+--------+---------+-----------+
+    |     3 | Xie Yanke    |  53 | M      |       2 |        16 |
+    |     4 | Ding Dian    |  32 | M      |       4 |         4 |
+    |     6 | Shi Qing     |  46 | M      |       5 |      NULL |
+    |    13 | Tian Boguang |  33 | M      |       2 |      NULL |
+    |    25 | Sun Dasheng  | 100 | M      |    NULL |      NULL |
+    +-------+--------------+-----+--------+---------+-----------+
+    5 rows in set (0.03 sec)
+
