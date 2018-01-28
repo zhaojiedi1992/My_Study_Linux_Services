@@ -35,10 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="7. DNS" href="index.html"/>
-        <link rel="next" title="7.2. unbound" href="unbound.html"/>
-        <link rel="prev" title="7. DNS" href="index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -57,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+            <a href="../index2.html" class="icon icon-home"> My_Study_Linux_Services
           
 
           
@@ -91,100 +88,9 @@
               
             
             
-              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. DNS</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7.1. bind</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dns">7.1.1. dns简介</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">7.1.2. 常见概念</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">7.1.3. 资源记录</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">7.1.3.1. 资源记录类型</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">7.1.3.2. 资源记录格式：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#soa">7.1.3.3. SOA记录：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#mx">7.1.3.4. MX记录</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#a">7.1.3.5. A记录</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ptr">7.1.3.6. PTR记录</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">7.1.3.7. 别名记录</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">7.1.4. DNS软件安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">7.1.5. 正向解析</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">7.1.5.1. 编辑默认配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">7.1.5.2. 添加区域文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">7.1.5.3. 检查配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">7.1.5.4. 重启下dns服务</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">7.1.5.5. 测试</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">7.1.6. 反向解析</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">7.1.7. 主从服务器</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id15">7.1.7.1. 编辑配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">7.1.7.2. 添加区域文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">7.1.7.3. 重启服务</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id18">7.1.7.4. 测试</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">7.1.7.5. 进一步测试</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">7.1.8. 允许远程动态更新</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id21">7.1.8.1. 主服务器修改</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">7.1.8.2. 从服务器来更新</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id23">7.1.8.3. 主服务器测试</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">7.1.9. 启用查询日志记录</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id25">7.1.10. 子域配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id26">7.1.10.1. 环境配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id27">7.1.10.2. 顶级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id28">7.1.10.3. 一级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id29">7.1.10.4. 二级域配置</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id30">7.1.11. 转发服务器</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#view">7.1.12. view</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#acl">7.1.12.1. 定义acl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id31">7.1.12.2. 迁移根区域</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id32">7.1.12.3. 配置view</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id33">7.1.12.4. 添加文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id34">7.1.12.5. 验证</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id35">7.1.13. 互联网dns实现</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id36">7.1.13.1. 绘制架构图</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id37">7.1.13.2. 服务器规划</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ip">7.1.13.3. ip配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id38">7.1.13.4. 安装bind软件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id39">7.1.13.5. 主根配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id40">7.1.13.6. 从根配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id41">7.1.13.7. 主从根测试</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id42">7.1.13.8. 运营商配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id43">7.1.13.9. 运营商测试</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id44">7.1.13.10. 客户端配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id45">7.1.13.11. 一级域的配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id46">7.1.13.12. 顶级域测试</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id47">7.1.13.13. 二级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id48">7.1.13.14. 三级域配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#web">7.1.13.15. web配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id49">7.1.13.16. 客户端最终测试</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id50">7.1.14. 压力测试</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id51">7.1.15. 排错思路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id52">7.1.16. 编译安装主要步骤</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="unbound.html">7.2. unbound</a></li>
-<li class="toctree-l2"><a class="reference internal" href="阿里云dns.html">7.3. 阿里云dns</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">10. 版本控制</a></li>
+              <p class="caption"><span class="caption-text">mariadb多实例的三种实现</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/mysql/mysql多实例.html">8.4. mariadb多实例安装</a></li>
 </ul>
 
             
@@ -199,7 +105,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">My_Study_Linux_Services</a>
+          <a href="../index2.html">My_Study_Linux_Services</a>
         
       </nav>
 
@@ -227,9 +133,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="index.html">7. DNS</a> &raquo;</li>
+      <li><a href="../index2.html">Docs</a> &raquo;</li>
         
       <li>7.1. bind</li>
     
@@ -1802,15 +1706,6 @@ this is <span class="m">192</span>.168.46.156
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="unbound.html" class="btn btn-neutral float-right" title="7.2. unbound" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="7. DNS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

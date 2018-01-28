@@ -43,8 +43,8 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The master toctree document.
-master_doc = 'index'
-
+#master_doc = 'index'
+master_doc = 'index2'
 # General information about the project.
 project = 'My_Study_Linux_Services'
 copyright = '2018, zhaojiedi1992'
