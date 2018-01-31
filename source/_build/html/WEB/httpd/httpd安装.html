@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>httpd的安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9.1. httpd的安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. WEB" href="../index.html"/>
+        <link rel="next" title="9.2. httpd基础配置说明" href="httpd基础配置说明.html"/>
+        <link rel="prev" title="9. WEB" href="../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
@@ -98,8 +101,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">9. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. WEB</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.1. httpd的安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yum">9.1.1. yum安装方式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#centos6httpd2-4">9.1.2. centos6编译安装httpd2.4</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="httpd基础配置说明.html">9.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http支持https.html">9.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">9.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx.html">9.5. nginx</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">11. 集群</a></li>
 </ul>
 
             
@@ -144,7 +159,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>httpd的安装</li>
+          <li><a href="../index.html">9. WEB</a> &raquo;</li>
+        
+      <li>9.1. httpd的安装</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,13 +181,17 @@
            <div itemprop="articleBody">
             
   <div class="section" id="httpd">
-<h1>httpd的安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
+<h1>9.1. httpd的安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="yum">
-<h2>yum安装方式<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
+<h2>9.1.1. yum安装方式<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos6 options<span class="o">]</span>$ yum install httpd
 <span class="o">[</span>root@centos6 options<span class="o">]</span>$ rpm -ql httpd
 </pre></div>
 </div>
+</div>
+<div class="section" id="centos6httpd2-4">
+<h2>9.1.2. centos6编译安装httpd2.4<a class="headerlink" href="#centos6httpd2-4" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="centos6编译安装lamp.html"><span class="doc">centos6编译安装lamp</span></a></p>
 </div>
 </div>
 
@@ -181,6 +202,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="httpd基础配置说明.html" class="btn btn-neutral float-right" title="9.2. httpd基础配置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="9. WEB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>http支持https &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9.3. http支持https &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. WEB" href="../index.html"/>
+        <link rel="next" title="9.4. httpd虚拟主机三种实现方式" href="httpd虚拟主机三种实现方式.html"/>
+        <link rel="prev" title="9.2. httpd基础配置说明" href="httpd基础配置说明.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
@@ -98,7 +101,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">9. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="httpd安装.html">9.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd基础配置说明.html">9.2. httpd基础配置说明</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.3. http支持https</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mod-ssl">9.3.1. 安装mod_ssl模块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ca">9.3.2. 搭建ca服务器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#http">9.3.3. http服务申请证书</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.3.4. http配置文件修改</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.3.5. 测试</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">9.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx.html">9.5. nginx</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
 </ul>
 
@@ -144,7 +161,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>http支持https</li>
+          <li><a href="../index.html">9. WEB</a> &raquo;</li>
+        
+      <li>9.3. http支持https</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,15 +183,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="httphttps">
-<h1>http支持https<a class="headerlink" href="#httphttps" title="Permalink to this headline">¶</a></h1>
+<h1>9.3. http支持https<a class="headerlink" href="#httphttps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mod-ssl">
-<h2>安装mod_ssl模块<a class="headerlink" href="#mod-ssl" title="Permalink to this headline">¶</a></h2>
+<h2>9.3.1. 安装mod_ssl模块<a class="headerlink" href="#mod-ssl" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 html<span class="o">]</span><span class="c1"># yum -y install mod_sll</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="ca">
-<h2>搭建ca服务器<a class="headerlink" href="#ca" title="Permalink to this headline">¶</a></h2>
+<h2>9.3.2. 搭建ca服务器<a class="headerlink" href="#ca" title="Permalink to this headline">¶</a></h2>
 <p>这一步可以不用做，如果已经有ca服务器的话。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>[root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep &#39;$dir&#39;
 certs               = $dir/certs            # Where the issued certs are kept
@@ -215,7 +234,7 @@ Email Address []:
 </div>
 </div>
 <div class="section" id="http">
-<h2>http服务申请证书<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
+<h2>9.3.3. http服务申请证书<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>[root@102 CA]# cd /etc/httpd/
 [root@102 httpd]# ls
 conf  conf.d  conf.modules.d  logs  modules  run
@@ -258,7 +277,7 @@ An optional company name []:
 </div>
 </div>
 <div class="section" id="id1">
-<h2>http配置文件修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>9.3.4. http配置文件修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># vim /etc/httpd/conf.d/ssl.conf</span>
 <span class="c1"># 修改下面3行内容为对应的文件</span>
 SSLCertificateFile /etc/httpd/ssl/www.linuxapnda.tech.crt
@@ -268,7 +287,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
 </div>
 </div>
 <div class="section" id="id2">
-<h2>测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>9.3.5. 测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># curl https://www.linuxpanda.tech --cacert /etc/httpd/ssl/cacert.pem</span>
 </pre></div>
 </div>
@@ -283,6 +302,15 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="httpd虚拟主机三种实现方式.html" class="btn btn-neutral float-right" title="9.4. httpd虚拟主机三种实现方式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="httpd基础配置说明.html" class="btn btn-neutral" title="9.2. httpd基础配置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

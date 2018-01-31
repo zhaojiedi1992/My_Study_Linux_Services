@@ -14,7 +14,7 @@ http支持https
 
 这一步可以不用做，如果已经有ca服务器的话。
 
-.. code-block:: bash
+.. code-block:: text
 
     [root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep '$dir'
     certs		= $dir/certs		# Where the issued certs are kept
@@ -57,7 +57,7 @@ http支持https
 http服务申请证书
 ------------------------------------------------------------------------
 
-.. code-block:: bash
+.. code-block:: text
 
     [root@102 CA]# cd /etc/httpd/
     [root@102 httpd]# ls

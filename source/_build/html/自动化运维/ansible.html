@@ -153,6 +153,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">10. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">11. 集群</a></li>
 </ul>
 
             
@@ -386,7 +387,7 @@ install.log.syslog
 </div>
 <div class="section" id="copy">
 <h3>4.5.6.5. copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
-<p>功能： 复制本地的文件到远程去</p>
+<p>功能： 复制本地的文件到远程主机</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ansible web -m copy -a &#39;src=/root/test.sh dest=/root/test.sh backup=yes owner=zhaojiedi group=root mode=0644&#39;</span>
 <span class="m">172</span>.18.46.6 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
     <span class="s2">&quot;changed&quot;</span>: true,

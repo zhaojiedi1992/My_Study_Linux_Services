@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="9. WEB" href="../index.html"/>
-        <link rel="next" title="9.4. nginx" href="../nginx.html"/>
+        <link rel="next" title="9.4. httpd虚拟主机三种实现方式" href="httpd虚拟主机三种实现方式.html"/>
         <link rel="prev" title="9.2. httpd基础配置说明" href="httpd基础配置说明.html"/> 
 
   
@@ -112,10 +112,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">9.3.5. 测试</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../nginx.html">9.4. nginx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">9.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos6lamp的yum安装.html">9.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos6编译安装lamp.html">9.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx.html">9.7. nginx</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">11. 集群</a></li>
 </ul>
 
             
@@ -192,7 +196,7 @@
 <div class="section" id="ca">
 <h2>9.3.2. 搭建ca服务器<a class="headerlink" href="#ca" title="Permalink to this headline">¶</a></h2>
 <p>这一步可以不用做，如果已经有ca服务器的话。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep &#39;$dir&#39;
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep &#39;$dir&#39;
 certs               = $dir/certs            # Where the issued certs are kept
 crl_dir             = $dir/crl              # Where the issued crl are kept
 database    = $dir/index.txt        # database index file.
@@ -234,7 +238,7 @@ Email Address []:
 </div>
 <div class="section" id="http">
 <h2>9.3.3. http服务申请证书<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@102 CA]# cd /etc/httpd/
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@102 CA]# cd /etc/httpd/
 [root@102 httpd]# ls
 conf  conf.d  conf.modules.d  logs  modules  run
 [root@102 httpd]# mkdir ssl
@@ -304,7 +308,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../nginx.html" class="btn btn-neutral float-right" title="9.4. nginx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="httpd虚拟主机三种实现方式.html" class="btn btn-neutral float-right" title="9.4. httpd虚拟主机三种实现方式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="httpd基础配置说明.html" class="btn btn-neutral" title="9.2. httpd基础配置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

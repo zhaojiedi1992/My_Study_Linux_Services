@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.5. mysql入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>8.6. mysql入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="8. 数据库" href="../index.html"/>
         <link rel="next" title="9. WEB" href="../../WEB/index.html"/>
-        <link rel="prev" title="8.4. mysql终端入门" href="mysql终端入门.html"/> 
+        <link rel="prev" title="8.5. mysql终端入门" href="mysql终端入门.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -104,11 +104,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">8.1. 数据库基础</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sql语句.html">8.2. sql语句</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mysql安装.html">8.3. mysql安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">8.4. mysql终端入门</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.5. mysql入门</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.5.1. 客户端工具</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.5.2. 执行命令</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">8.5.3. 数据库操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql多实例.html">8.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">8.5. mysql终端入门</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.6. mysql入门</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">8.6.1. 客户端工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.6.2. 执行命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">8.6.3. 数据库操作</a></li>
 </ul>
 </li>
 </ul>
@@ -161,7 +162,7 @@
         
           <li><a href="../index.html">8. 数据库</a> &raquo;</li>
         
-      <li>8.5. mysql入门</li>
+      <li>8.6. mysql入门</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,7 +182,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mysql">
-<h1>8.5. mysql入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<h1>8.6. mysql入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <p>mariadb的特性</p>
 <ul class="simple">
 <li>单进程，多线程</li>
@@ -190,7 +191,7 @@
 <li>提供较多测试组件</li>
 </ul>
 <div class="section" id="id1">
-<h2>8.5.1. 客户端工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>8.6.1. 客户端工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>mysql命令的重要选项</p>
 <table class="docutils option-list" frame="void" rules="none">
 <col class="option" />
@@ -220,7 +221,7 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>8.5.2. 执行命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>8.6.2. 执行命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>查看当前用户</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">user</span><span class="p">();</span>
 </pre></div>
@@ -231,14 +232,14 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>8.5.3. 数据库操作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>8.6.3. 数据库操作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>创建数据库和删除数据库</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
 <span class="k">drop</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>查看字符集和排序规则</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span>show character set;
+<div class="highlight-text"><div class="highlight"><pre><span></span>show character set;
 show collation;
 show table status from mysql\G
 </pre></div>
@@ -514,7 +515,7 @@ unsigned
 </pre></div>
 </div>
 <p>用户账号</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span>MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
+<div class="highlight-text"><div class="highlight"><pre><span></span>MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
 MariaDB [test]&gt; flush privileges;
@@ -1032,7 +1033,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </div>
 <p>第二种情况是跳过2个取4个。</p>
 <p>别名</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span>MariaDB [hellodb]&gt; select s.name as &quot;姓名&quot; , s.age as &quot;年龄&quot; from students as s  order by age limit 2,4;
+<div class="highlight-text"><div class="highlight"><pre><span></span>MariaDB [hellodb]&gt; select s.name as &quot;姓名&quot; , s.age as &quot;年龄&quot; from students as s  order by age limit 2,4;
 +--------------+--------+
 | 姓名         | 年龄   |
 +--------------+--------+
@@ -1222,7 +1223,7 @@ _通配单个字符
         <a href="../../WEB/index.html" class="btn btn-neutral float-right" title="9. WEB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mysql终端入门.html" class="btn btn-neutral" title="8.4. mysql终端入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mysql终端入门.html" class="btn btn-neutral" title="8.5. mysql终端入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -307,7 +307,8 @@ userdir_module
     userdir_module (shared)
 
 配置
-.. code-block:: bash
+
+.. code-block:: text
 
     [root@102 conf.d]$ vim /etc/httpd/conf.d/userdir.conf
     <IfModule mod_userdir.c>
@@ -447,4 +448,13 @@ centos7的web目录必须是授权的。
         </RequireAll>
     </Directory>
 
+ProxyPass
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+提供反向代理功能
+
+.. code-block:: bash 
+
+    ProxyPass "/" "http://www.example.com/"
+    ProxyPassReverse "/" "http://www.example.com/"
 

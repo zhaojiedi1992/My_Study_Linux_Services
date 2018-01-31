@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.4. mysql终端入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>8.5. mysql终端入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="8. 数据库" href="../index.html"/>
-        <link rel="next" title="8.5. mysql入门" href="mysql入门.html"/>
-        <link rel="prev" title="8.3. mysql安装" href="mysql安装.html"/> 
+        <link rel="next" title="8.6. mysql入门" href="mysql入门.html"/>
+        <link rel="prev" title="8.4. mariadb多实例安装" href="mysql多实例.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -104,12 +104,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">8.1. 数据库基础</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sql语句.html">8.2. sql语句</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mysql安装.html">8.3. mysql安装</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.4. mysql终端入门</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.4.1. mysql提示符修改</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.4.2. 用户和密码写到配置文件中</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql多实例.html">8.4. mariadb多实例安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.5. mysql终端入门</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">8.5.1. mysql提示符修改</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.5.2. 用户和密码写到配置文件中</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">8.5. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">8.6. mysql入门</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">9. WEB</a></li>
@@ -160,7 +161,7 @@
         
           <li><a href="../index.html">8. 数据库</a> &raquo;</li>
         
-      <li>8.4. mysql终端入门</li>
+      <li>8.5. mysql终端入门</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -180,9 +181,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mysql">
-<h1>8.4. mysql终端入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<h1>8.5. mysql终端入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>8.4.1. mysql提示符修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>8.5.1. mysql提示符修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@iZ2ze640ra8ceysx5817skZ ~<span class="o">]</span><span class="c1"># man mysql # 进入man文档搜索prompt即可找到如下片段内容。</span>
 ┌───────┬──────────────────────────────────────────────────────────┐
 │Option │ Description                                              │
@@ -325,7 +326,7 @@ You can turn off this feature to get a quicker startup with -A
 </div>
 </div>
 <div class="section" id="id2">
-<h2>8.4.2. 用户和密码写到配置文件中<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>8.5.2. 用户和密码写到配置文件中<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>配置前的连接方式</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
 Enter password:
@@ -375,10 +376,10 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mysql入门.html" class="btn btn-neutral float-right" title="8.5. mysql入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mysql入门.html" class="btn btn-neutral float-right" title="8.6. mysql入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mysql安装.html" class="btn btn-neutral" title="8.3. mysql安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mysql多实例.html" class="btn btn-neutral" title="8.4. mariadb多实例安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
