@@ -38,8 +38,8 @@ centos6编译安装lamp
 
     [root@localhost ~]$yum groupinstall "development tools" -y
     [root@localhost yum.repos.d]$yum install pcre-devel openssl-devel expat-devel 
-    [root@localhost yum.repos.d]$cmake ncurses-devel
-    [root@localhost yum.repos.d]$yum installl ibxml2-devel bzip2-devel libmcrypt-devel
+    [root@localhost yum.repos.d]$yum install  ncurses-devel
+    [root@localhost yum.repos.d]$yum installl libxml2-devel bzip2-devel libmcrypt-devel
 
 用户的创建
 -----------------------------------------------------------------
@@ -75,7 +75,7 @@ httpd编译安装
     --enable-mpms-shared=all \
     --with-mpm=prefork
 
-[root@localhost httpd-2.4.29]$log=/root/apache.make.log ; date >> $log ; make && make install ; date >> $log
+    [root@localhost httpd-2.4.29]$log=/root/apache.make.log ; date >> $log ; make && make install ; date >> $log
 
 .. note:: 这里如果出错，请重点关注缺少.h的包，安装对应的devel包，比如如果报找不到expat.h，
             使用yum search expat先搜索开发包，安装expat-devel即可。

@@ -125,8 +125,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../nginx.html">9.7. nginx</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">11. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">11. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -225,8 +227,8 @@ total <span class="m">103312</span>
 <h2>9.6.2. 安装必要的包文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> groupinstall <span class="s2">&quot;development tools&quot;</span> -y
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install pcre-devel openssl-devel expat-devel
-<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$cmake</span> ncurses-devel
-<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> installl ibxml2-devel bzip2-devel libmcrypt-devel
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install  ncurses-devel
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> installl libxml2-devel bzip2-devel libmcrypt-devel
 </pre></div>
 </div>
 </div>
@@ -256,9 +258,10 @@ total <span class="m">103312</span>
 --enable-modules<span class="o">=</span>most <span class="se">\</span>
 --enable-mpms-shared<span class="o">=</span>all <span class="se">\</span>
 --with-mpm<span class="o">=</span>prefork
+
+<span class="o">[</span>root@localhost httpd-2.4.29<span class="o">]</span><span class="nv">$log</span><span class="o">=</span>/root/apache.make.log <span class="p">;</span> date &gt;&gt; <span class="nv">$log</span> <span class="p">;</span> make <span class="o">&amp;&amp;</span> make install <span class="p">;</span> date &gt;&gt; <span class="nv">$log</span>
 </pre></div>
 </div>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;localhost">root<span>&#64;</span>localhost</a> httpd-2.4.29]$log=/root/apache.make.log ; date &gt;&gt; $log ; make &amp;&amp; make install ; date &gt;&gt; $log</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">这里如果出错，请重点关注缺少.h的包，安装对应的devel包，比如如果报找不到expat.h，

@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.1. ftp &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="10. 网络文件共享" href="index.html"/>
+        <link rel="next" title="10.2. ftps" href="ftps.html"/>
+        <link rel="prev" title="10. 网络文件共享" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. 网络文件共享</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.1. ftp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.1.1. ftp安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.1.2. ftp的配置项</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">10.1.2.1. 布尔选项</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.1.2.2. 数值选项</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.1.2.3. 字符串选项</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.1.3. 配置样例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">10.1.3.1. 修改默认端口和被动模式的端口范围</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user1-user2comm">10.1.3.2. 映射user1,user2为comm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user1">10.1.3.3. 禁锢用户只能在自己家目录,但是除了user1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.1.3.4. 禁止系统特定用户登陆ftp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ip5-100k-10">10.1.3.5. 限制每个ip连接的个数为5个，下载速度为100k.最多支持10个连接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">10.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">10.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">10.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">10.5. nfs入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">10.6. samba</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">10. 网络文件共享</a> &raquo;</li>
+        
+      <li>10.1. ftp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/网络文件共享/ftp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ftp">
+<h1>10.1. ftp<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>10.1.1. ftp安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$yum</span> install vsftpd
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.1.2. ftp的配置项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>10.1.2.1. 布尔选项<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">名称</th>
+<th class="head">默认值</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>allow_annon_ssl</td>
+<td>NO</td>
+<td>匿名用户被允许使用安装的ssl连接，需要ssl_enable启用</td>
+</tr>
+<tr class="row-odd"><td>anon_mkdir_write_enable</td>
+<td>NO</td>
+<td>匿名用户被允许在一定条件下创建新目录，需要write_enable启用，且匿名ftp用户对父目录有写权限</td>
+</tr>
+<tr class="row-even"><td>anon_other_write_anble</td>
+<td>NO</td>
+<td>匿名用于被允许写入和创建目录，删除其他用户上传的文件</td>
+</tr>
+<tr class="row-odd"><td>anon_upload_enable</td>
+<td>NO</td>
+<td>匿名用户将被运行上传文件，需要write_enable激活，且在指定目录有写权限</td>
+</tr>
+<tr class="row-even"><td>anon_world_readable_only</td>
+<td>YES</td>
+<td>匿名用户只能下载所有人都能读取的文件</td>
+</tr>
+<tr class="row-odd"><td>anonmous_enable</td>
+<td>YES</td>
+<td>是否启用匿名用户</td>
+</tr>
+<tr class="row-even"><td>ascii_download_enable</td>
+<td>NO</td>
+<td>启用文本模式下载</td>
+</tr>
+<tr class="row-odd"><td>ascii_upload_enable</td>
+<td>NO</td>
+<td>启用文本模式上传</td>
+</tr>
+<tr class="row-even"><td>async_abor_enable</td>
+<td>NO</td>
+<td>异步abor命令启用</td>
+</tr>
+<tr class="row-odd"><td>background</td>
+<td>YES</td>
+<td>启用后vsftpd是监听模式</td>
+</tr>
+<tr class="row-even"><td>check_shell</td>
+<td>YES</td>
+<td>是使用pam_shell模块，只有在/etc/shells中指定的shell类型用户才能登陆</td>
+</tr>
+<tr class="row-odd"><td>chmod_enable</td>
+<td>YES</td>
+<td>运行使用SITE chmod命令，只适用于本地用户</td>
+</tr>
+<tr class="row-even"><td>chown_uploads</td>
+<td>No</td>
+<td>如果启用，所有匿名上传的文件将编程chown_username所有者</td>
+</tr>
+<tr class="row-odd"><td>chroot_list_enable</td>
+<td>NO</td>
+<td>默认是列表文件是/etc/vsftpd/chroot_list,可以使用chroot_list_file重写</td>
+</tr>
+<tr class="row-even"><td>chroot_local_user</td>
+<td>yes</td>
+<td>本地用户被禁锢在自己的家目录</td>
+</tr>
+<tr class="row-odd"><td>connect_from_port_20</td>
+<td>NO</td>
+<td>主动模式启用20端口来数据连接，可以配合其他命令修改20端口</td>
+</tr>
+<tr class="row-even"><td>debug_ssl</td>
+<td>NO</td>
+<td>将openssl的诊断信息写到日志文件去</td>
+</tr>
+<tr class="row-odd"><td>delete_failed_uploads</td>
+<td>NO</td>
+<td>任何上传失败的文件被删除</td>
+</tr>
+<tr class="row-even"><td>deny_email_enable</td>
+<td>NO</td>
+<td>拒绝登陆的电子邮件恢复，默认列表是/etc/vsftpd/banned_emails,可以使用banned_email_file覆盖设置</td>
+</tr>
+<tr class="row-odd"><td>dirlist_enable</td>
+<td>YES</td>
+<td>如果设置no,所有目录列表命令被拒绝</td>
+</tr>
+<tr class="row-even"><td>dirmessage_enable</td>
+<td>no</td>
+<td>如果启用,进入目录扫描目录.message内容给用户显示</td>
+</tr>
+<tr class="row-odd"><td>download_enable</td>
+<td>Yes</td>
+<td>如果设置为NO,下载请求都被拒绝</td>
+</tr>
+<tr class="row-even"><td>dual_log_enable</td>
+<td>no</td>
+<td>如果yes,两种风格日志都写,/var/log/xferlog和/var/log/vsftpd.log</td>
+</tr>
+<tr class="row-odd"><td>force_dot_file</td>
+<td>NO</td>
+<td>如果激活，目录列表不显示..,.这些内容</td>
+</tr>
+<tr class="row-even"><td>force_annon_data_ssl</td>
+<td>NO</td>
+<td>只有ssl_enable启用的时候，所有匿名用户必须使用ssl数据传输</td>
+</tr>
+<tr class="row-odd"><td>force_anon_logins_ssl</td>
+<td>NO</td>
+<td>你有ssl_enable启用的时候，匿名用户强制使用登陆</td>
+</tr>
+<tr class="row-even"><td>force_local_data_ssl</td>
+<td>YES</td>
+<td>只有ssl_enable启用的时候，本地用户数据传输使用ssl数据传输</td>
+</tr>
+<tr class="row-odd"><td>force_local_logins_ssl</td>
+<td>YES</td>
+<td>你有ssl_enable启用的时候，本地用户强制使用登陆</td>
+</tr>
+<tr class="row-even"><td>guest_enable</td>
+<td>NO</td>
+<td>如果启用，将所有非匿名用户归为来宾，映射为guest_username用户</td>
+</tr>
+<tr class="row-odd"><td>hide_ids</td>
+<td>NO</td>
+<td>如果启用，目录列表的所有用户和组信息显示为ftp</td>
+</tr>
+<tr class="row-even"><td>implicit_ssl</td>
+<td>NO</td>
+<td>如果启用，ssl握手第一件事情是希望所有连接支持ssl</td>
+</tr>
+<tr class="row-odd"><td>listen_ipv6</td>
+<td>NO</td>
+<td>监听ipv6地址，和ipv4互斥的</td>
+</tr>
+<tr class="row-even"><td>local_enable</td>
+<td>No</td>
+<td>控制本地用户是否能登陆</td>
+</tr>
+<tr class="row-odd"><td>lock_upload_files</td>
+<td>yes</td>
+<td>启用后，所有上传者对上传文件写锁，所有下载者对下载文件共享读锁</td>
+</tr>
+<tr class="row-even"><td>log_ftp_protocol</td>
+<td>no</td>
+<td>启用后，所有ftp请求和响应记录日志记录，非常有用的调试选项</td>
+</tr>
+<tr class="row-odd"><td>ls_recurse_enable</td>
+<td>no</td>
+<td>启用ls -R命令，来递归访问你的目录</td>
+</tr>
+<tr class="row-even"><td>mdtm_write</td>
+<td>YES</td>
+<td>该设置允许使用MDTM设置文件的修改时间</td>
+</tr>
+<tr class="row-odd"><td>no_anon_password</td>
+<td>NO</td>
+<td>匿名用户将直接登陆</td>
+</tr>
+<tr class="row-even"><td>no_log_lock</td>
+<td>no</td>
+<td>当启用时，可以方式vsftpd的从写日志文件采取文件锁定</td>
+</tr>
+<tr class="row-odd"><td>one_process_model</td>
+<td>NO</td>
+<td>每个连接一个进程安全模式</td>
+</tr>
+<tr class="row-even"><td>password_chroot_enable</td>
+<td>no</td>
+<td>如果启用，根据chroot_local_user，然后根据/etc/passwd的家目录来限制</td>
+</tr>
+<tr class="row-odd"><td>pasv_addr_resolve</td>
+<td>NO</td>
+<td>如果使用主机名，设置YES</td>
+</tr>
+<tr class="row-even"><td>pasv_enable</td>
+<td>YES</td>
+<td>支持被动模式</td>
+</tr>
+<tr class="row-odd"><td>pasv_promiscuous</td>
+<td>yes</td>
+<td>设置yes禁用安全检查</td>
+</tr>
+<tr class="row-even"><td>require_cert</td>
+<td>no</td>
+<td>如果启用，所有客户端需要提供客户端证书</td>
+</tr>
+<tr class="row-odd"><td>require_ssl_reuse</td>
+<td>YES</td>
+<td>要求ssl会话重用</td>
+</tr>
+<tr class="row-even"><td>reverse_lookup_enable</td>
+<td>yes</td>
+<td>方向查找，将ip转为主机名</td>
+</tr>
+<tr class="row-odd"><td>run_as_launching_user</td>
+<td>No</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>secure_email_list_enable</td>
+<td>NO</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>session_support</td>
+<td>no</td>
+<td>会话支持，保持会话</td>
+</tr>
+<tr class="row-even"><td>set_proctitle_enable</td>
+<td>No</td>
+<td>如果启用，将尝试和显示系统进程列表中的会话状态信息</td>
+</tr>
+<tr class="row-odd"><td>ssl_enable</td>
+<td>NO</td>
+<td>设置yes，启用ssl</td>
+</tr>
+<tr class="row-even"><td>ssl_request_cert</td>
+<td>YES</td>
+<td>如果启用</td>
+</tr>
+<tr class="row-odd"><td>ssl_sslv2</td>
+<td>No</td>
+<td>只有ssl_enable启用，启用此项，允许sslv2协议</td>
+</tr>
+<tr class="row-even"><td>ssl_sslv3</td>
+<td>NO</td>
+<td>只有ssl_enable启用，启用此项，允许sslv3协议</td>
+</tr>
+<tr class="row-odd"><td>ssl_tlsv1</td>
+<td>YES</td>
+<td>只有ssl_enable启用，启用此项，允许TLSV1协议</td>
+</tr>
+<tr class="row-even"><td>strict_ssl_read_eof</td>
+<td>NO</td>
+<td>如果启用，需要ssl数据上传通过ssl终止，而不是eof终止</td>
+</tr>
+<tr class="row-odd"><td>strict_ssl_write_shutdown</td>
+<td>NO</td>
+<td>如果启用，需要ssl下载通过ssl终止，</td>
+</tr>
+<tr class="row-even"><td>syslog_enable</td>
+<td>NO</td>
+<td>如果启用，使用系统日志来代替/var/log/vsftpd.log</td>
+</tr>
+<tr class="row-odd"><td>text_userdb_names</td>
+<td>NO</td>
+<td>默认情况下数字id显示目录列表的用户和组字段，开启这个参数得到文本</td>
+</tr>
+<tr class="row-even"><td>tilde_user</td>
+<td>NO</td>
+<td>如果启用，解析路径带有~username这样的路径</td>
+</tr>
+<tr class="row-odd"><td>use_localtime</td>
+<td>NO</td>
+<td>启用后使用本地时区信息，默认是utc时间的</td>
+</tr>
+<tr class="row-even"><td>use_sendfile</td>
+<td>YES</td>
+<td>减少内核和应用数据交换</td>
+</tr>
+<tr class="row-odd"><td>userlist_deny</td>
+<td>YES</td>
+<td>如果userlist_enable是激活的，userlist_file是拒绝用户的</td>
+</tr>
+<tr class="row-even"><td>userlist_enable</td>
+<td>NO</td>
+<td>如果启用，userlist_file中的用户能登陆</td>
+</tr>
+<tr class="row-odd"><td>validate_cert</td>
+<td>NO</td>
+<td>收到的所有ssl客户端证书必须验证确定</td>
+</tr>
+<tr class="row-even"><td>userlist_log</td>
+<td>NO</td>
+<td>如果userlist_enable启用了，可以uselist_log记录失败登陆</td>
+</tr>
+<tr class="row-odd"><td>virtual_use_local_privs</td>
+<td>NO</td>
+<td>如果启用，虚拟用户将是哦那个相同的权限作为本地用户</td>
+</tr>
+<tr class="row-even"><td>write_enable</td>
+<td>NO</td>
+<td>写权限启用</td>
+</tr>
+<tr class="row-odd"><td>xferlog_enable</td>
+<td>NO</td>
+<td>如果启用，文件被防止到/var/log/vsftpd.log,可以使用vsftpd_log_file来覆盖</td>
+</tr>
+<tr class="row-even"><td>xferlog_std_format</td>
+<td>YES</td>
+<td>如果启用，日志文件是哦那个标准的xferlog格式记录，可以修改xferlog_file来修改日志位置，默认是/var/log/xferlog</td>
+</tr>
+<tr class="row-odd"><td>isoate_network</td>
+<td>YES</td>
+<td>如果启用使用clone_newnet隔离不可信进程</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>10.1.2.2. 数值选项<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">名称</th>
+<th class="head">默认值</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>accpet_timeout</td>
+<td>60</td>
+<td>超时时间，客户端建立被动数据连接的超时时间</td>
+</tr>
+<tr class="row-odd"><td>anon_max_rate</td>
+<td>0</td>
+<td>匿名客户端的最大速率</td>
+</tr>
+<tr class="row-even"><td>anon_umask</td>
+<td>077</td>
+<td>匿名用户创建危机的umask</td>
+</tr>
+<tr class="row-odd"><td>chmod_upload_mode</td>
+<td>0600</td>
+<td>修改上传文件的mode</td>
+</tr>
+<tr class="row-even"><td>connect_timeout</td>
+<td>60</td>
+<td>客户端相应主动连接的数据连接超时时间</td>
+</tr>
+<tr class="row-odd"><td>data_connection_timeout</td>
+<td>300</td>
+<td>数据传输的连接超时时间</td>
+</tr>
+<tr class="row-even"><td>delay_failed_login</td>
+<td>1</td>
+<td>报告登陆失败秒数</td>
+</tr>
+<tr class="row-odd"><td>delay_successful_log</td>
+<td>0</td>
+<td>报告登陆成功的描述</td>
+</tr>
+<tr class="row-even"><td>file_open_mode</td>
+<td>0666</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>ftp_data_port</td>
+<td>20</td>
+<td>指定主动模式的连接端口，需要connect_form_port_20启用</td>
+</tr>
+<tr class="row-even"><td>idle_session_timeout</td>
+<td>300</td>
+<td>空闲会话超时时间</td>
+</tr>
+<tr class="row-odd"><td>listen_port</td>
+<td>21</td>
+<td>监听端口</td>
+</tr>
+<tr class="row-even"><td>local_max_rate</td>
+<td>0</td>
+<td>本地最大速率</td>
+</tr>
+<tr class="row-odd"><td>local_umask</td>
+<td>077</td>
+<td>本地用户的umask设置</td>
+</tr>
+<tr class="row-even"><td>max_clients</td>
+<td>2000</td>
+<td>支持的最大客户端个数</td>
+</tr>
+<tr class="row-odd"><td>max_login_fails</td>
+<td>3</td>
+<td>登陆的失败的最大次数，超过次数被杀掉</td>
+</tr>
+<tr class="row-even"><td>max_per_ip</td>
+<td>50</td>
+<td>每个ip最大连接个数</td>
+</tr>
+<tr class="row-odd"><td>pasv_max_port</td>
+<td>0</td>
+<td>被动模式的最大端口</td>
+</tr>
+<tr class="row-even"><td>pasv_min_port</td>
+<td>0</td>
+<td>被动模式的最小端口</td>
+</tr>
+<tr class="row-odd"><td>trans_chunk_size</td>
+<td>0</td>
+<td>传输chunck大小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h3>10.1.2.3. 字符串选项<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">名称</th>
+<th class="head">默认值</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>anon_root</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>表示一个目录，匿名用户登陆后的根目录</td>
+</tr>
+<tr class="row-odd"><td>banned_email_file</td>
+<td>/etc/vsftpd/banned_emails</td>
+<td>不允许匿名的电子邮件文件路径，需要deny_email_enable启用</td>
+</tr>
+<tr class="row-even"><td>banner_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>欢迎文件路径</td>
+</tr>
+<tr class="row-odd"><td>ca_certs_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>ca证书文件</td>
+</tr>
+<tr class="row-even"><td>chown_username</td>
+<td>root</td>
+<td>匿名用户上传的所有者的用户名称，需要chown_uploads配合</td>
+</tr>
+<tr class="row-odd"><td>chown_list_file</td>
+<td>/etc/vsftpd.conf/vsftpd.chroot_list</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>cmds_allowed</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>指定ftp使用的命令</td>
+</tr>
+<tr class="row-odd"><td>cmds_denied</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>不能使用的ftp命令，allowed优先</td>
+</tr>
+<tr class="row-even"><td>deny_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>设置文件名或者目录名不能任何方式访问</td>
+</tr>
+<tr class="row-odd"><td>dsa_cert_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>dsa证书文件</td>
+</tr>
+<tr class="row-even"><td>dsa_private_key_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>如果没有指定，使用dsa证书文件</td>
+</tr>
+<tr class="row-odd"><td>email_password_file</td>
+<td>/etc/vsftpd/email_passwords</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>ftp_username</td>
+<td>ftp</td>
+<td>用户的主目录是匿名的根</td>
+</tr>
+<tr class="row-odd"><td>ftpd_banner</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>ftp的提示信息</td>
+</tr>
+<tr class="row-even"><td>guest_username</td>
+<td>ftp</td>
+<td>来宾映射名字</td>
+</tr>
+<tr class="row-odd"><td>hide_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>指定隐藏文件hide_file = {* MP3，.hidden}</td>
+</tr>
+<tr class="row-even"><td>listen_address</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>提供一个地址</td>
+</tr>
+<tr class="row-odd"><td>listen_address6</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>ip6地址</td>
+</tr>
+<tr class="row-even"><td>local_root</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>代表该目录的vsftpd将试图改变成后本地（即非匿名）登录</td>
+</tr>
+<tr class="row-odd"><td>message_file</td>
+<td>.message</td>
+<td>需要配合dirmessage_enable配合使用</td>
+</tr>
+<tr class="row-even"><td>pam_service_name</td>
+<td>ftp</td>
+<td>pam名字</td>
+</tr>
+<tr class="row-odd"><td>pasv_address</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>被动模式地址</td>
+</tr>
+<tr class="row-even"><td>rsa_cert_file</td>
+<td>/usr/share/ssl/certs/vsftpd.pem</td>
+<td>rsa证书文件</td>
+</tr>
+<tr class="row-odd"><td>ra_private_key_file</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>如果没有指定去rsa-cert_file里面找私钥</td>
+</tr>
+<tr class="row-even"><td>secure_chroot_dir</td>
+<td>/usr/share/empty</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>user_config_dir</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>将用户的配置文件定义到/etc/vsftpd/user_conf文件中</td>
+</tr>
+<tr class="row-even"><td>user_sub_token</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>配合虚拟用户使用，自动为每个虚拟用户的主目录，记录模板</td>
+</tr>
+<tr class="row-odd"><td>userlist_file</td>
+<td>/etc/vsftpd/user_list</td>
+<td>需要userlist_enable启用</td>
+</tr>
+<tr class="row-even"><td>vsftpd_log_file</td>
+<td>/var/log/vsftpd.log</td>
+<td>日志文件</td>
+</tr>
+<tr class="row-odd"><td>xferlog_file</td>
+<td>/var/log/xferlog</td>
+<td>日志文件</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>10.1.3. 配置样例<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>10.1.3.1. 修改默认端口和被动模式的端口范围<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> vsftpd.conf
+<span class="c1"># 添加3行</span>
+<span class="nv">listen_port</span><span class="o">=</span><span class="m">20021</span>
+<span class="nv">pasv_max_port</span><span class="o">=</span><span class="m">20080</span>
+<span class="nv">pasv_min_port</span><span class="o">=</span><span class="m">20050</span>
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$systemctl</span> restart vsftpd
+
+<span class="c1"># 另一个机器测试</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ftp 172.18.46.7 20021</span>
+Connected to <span class="m">172</span>.18.46.7 <span class="o">(</span><span class="m">172</span>.18.46.7<span class="o">)</span>.
+<span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
+Name <span class="o">(</span><span class="m">172</span>.18.46.7:root<span class="o">)</span>: ftp
+<span class="m">331</span> Please specify the password.
+Password:
+<span class="m">230</span> Login successful.
+Remote system <span class="nb">type</span> is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">cd</span> pub
+<span class="m">250</span> Directory successfully changed.
+ftp&gt; git bigfile
+?Invalid <span class="nb">command</span>
+ftp&gt; get bigfile
+local: bigfile remote: bigfile
+<span class="m">227</span> Entering Passive Mode <span class="o">(</span><span class="m">172</span>,18,46,7,78,83<span class="o">)</span>.
+<span class="m">150</span> Opening BINARY mode data connection <span class="k">for</span> bigfile <span class="o">(</span><span class="m">1025507328</span> bytes<span class="o">)</span>.
+<span class="m">226</span> Transfer complete.
+<span class="m">1025507328</span> bytes received in <span class="m">7</span>.68 secs <span class="o">(</span><span class="m">133606</span>.18 Kbytes/sec<span class="o">)</span>
+ftp&gt; quit
+<span class="m">221</span> Goodbye.
+
+<span class="c1"># 服务端查看</span>
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$ss</span> -tun
+Netid  State      Recv-Q Send-Q                          Local Address:Port                                         Peer Address:Port
+tcp    ESTAB      <span class="m">0</span>      <span class="m">52</span>                                <span class="m">172</span>.18.46.7:22                                          <span class="m">172</span>.18.101.69:49932
+tcp    ESTAB      <span class="m">0</span>      <span class="m">0</span>                          ::ffff:172.18.46.7:20021                               ::ffff:172.18.104.253:56238
+tcp    ESTAB      <span class="m">0</span>      <span class="m">3363872</span>                     ::ffff:172.18.46.7:20051                               ::ffff:172.18.104.253:54037
+</pre></div>
+</div>
+</div>
+<div class="section" id="user1-user2comm">
+<h3>10.1.3.2. 映射user1,user2为comm<a class="headerlink" href="#user1-user2comm" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$vim vsftpd.conf</p>
+<blockquote>
+<div><p># 添加如下行
+guest_enable=YES
+guest_username=comm
+local_root=/home/comm
+#这个默认就有，确认下
+local_enable=YES</p>
+<p># 添加用户
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$useradd user1
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$useradd user2
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$useradd comm
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$mkdir /home/comm/pub
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$ll -d /var/ftp/pub
+drwxr-xr-x. 3 root root 4096 Feb  3 12:40 /var/ftp/pub
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$ll -d /var/ftp
+drwxr-xr-x. 3 root root 4096 Aug  3  2017 /var/ftp
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$chmod 555 /home/comm
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-7">root<span>&#64;</span>centos-7</a> vsftpd]$chmod 755 /home/comm/pub</p>
+<p># 测试
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-152">root<span>&#64;</span>centos-152</a> ~]# ftp 172.18.46.7
+Connected to 172.18.46.7 (172.18.46.7).
+220 (vsFTPd 3.0.2)
+Name (172.18.46.7:root): user1
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+227 Entering Passive Mode (172,18,46,7,78,94).
+150 Here comes the directory listing.
+drwxr-xr-x    2 1037     0            4096 Feb 03 13:55 pub
+226 Directory send</p>
+</div></blockquote>
+</div>
+<div class="section" id="user1">
+<h3>10.1.3.3. 禁锢用户只能在自己家目录,但是除了user1<a class="headerlink" href="#user1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$!</span>vim
+vim vsftpd.conf
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$tail</span> -n <span class="m">2</span> vsftpd.conf
+<span class="nv">chroot_list_enable</span><span class="o">=</span>YES
+<span class="nv">chroot_list_file</span><span class="o">=</span>/etc/vsftpd/chroot_list
+
+<span class="c1"># 添加用户</span>
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> /etc/vsftpd/chroot_list
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$cat</span> /etc/vsftpd/chroot_list
+user1
+
+<span class="c1"># 测试</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ftp 172.18.46.7</span>
+Connected to <span class="m">172</span>.18.46.7 <span class="o">(</span><span class="m">172</span>.18.46.7<span class="o">)</span>.
+<span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
+Name <span class="o">(</span><span class="m">172</span>.18.46.7:root<span class="o">)</span>: user1
+<span class="m">331</span> Please specify the password.
+Password:
+<span class="m">500</span> OOPS: vsftpd: refusing to run with writable root inside chroot<span class="o">()</span>
+Login failed.
+<span class="m">421</span> Service not available, remote server has closed connection
+ftp&gt; ls
+Not connected.
+ftp&gt; quit
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ftp 172.18.46.7</span>
+Connected to <span class="m">172</span>.18.46.7 <span class="o">(</span><span class="m">172</span>.18.46.7<span class="o">)</span>.
+<span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
+Name <span class="o">(</span><span class="m">172</span>.18.46.7:root<span class="o">)</span>: user2
+<span class="m">331</span> Please specify the password.
+Password:
+<span class="m">230</span> Login successful.
+Remote system <span class="nb">type</span> is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+<span class="m">227</span> Entering Passive Mode <span class="o">(</span><span class="m">172</span>,18,46,7,78,89<span class="o">)</span>.
+<span class="m">150</span> Here comes the directory listing.
+<span class="m">226</span> Directory send OK.
+ftp&gt; <span class="nb">pwd</span>
+<span class="m">257</span> <span class="s2">&quot;/home/user2&quot;</span>
+</pre></div>
+</div>
+<p>这样就可以让在chroot_list文件中的用户禁锢了</p>
+</div>
+<div class="section" id="id8">
+<h3>10.1.3.4. 禁止系统特定用户登陆ftp<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$echo</span> <span class="s2">&quot;user1&quot;</span> &gt;&gt; /etc/vsftpd/user_list
+</pre></div>
+</div>
+</div>
+<div class="section" id="ip5-100k-10">
+<h3>10.1.3.5. 限制每个ip连接的个数为5个，下载速度为100k.最多支持10个连接<a class="headerlink" href="#ip5-100k-10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> vsftpd.conf
+<span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$tail</span> -n <span class="m">4</span>  vsftpd.conf
+<span class="nv">max_clients</span><span class="o">=</span><span class="m">100</span>
+<span class="nv">max_per_ip</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">anon_max_rate</span><span class="o">=</span><span class="m">102400</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ftps.html" class="btn btn-neutral float-right" title="10.2. ftps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="10. 网络文件共享" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11.5. nfs入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 网络文件共享" href="index.html"/>
+        <link rel="next" title="11.6. samba" href="samba.html"/>
+        <link rel="prev" title="11.4. ftp基于mysql的验证" href="ftp基于mysql的验证.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.5. nfs入门</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">11.5.1. 安装nfs工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.5.2. 启动服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">11.5.3. 共享目录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.5.4. 挂载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.5.5. 配置文件选项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">11.5.6. 自动挂载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">11.5.7. nfs实现伪根挂载</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">11.6. samba</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
+        
+      <li>11.5. nfs入门</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/网络文件共享/nfs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nfs">
+<h1>11.5. nfs入门<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>11.5.1. 安装nfs工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$yum</span> install nfs-utils
+
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># rpm -ql nfs-utils |grep bin</span>
+/sbin/mount.nfs
+/sbin/mount.nfs4
+/sbin/osd_login
+/sbin/rpc.statd
+/sbin/umount.nfs
+/sbin/umount.nfs4
+/usr/sbin/blkmapd
+/usr/sbin/exportfs
+/usr/sbin/mountstats
+/usr/sbin/nfsdcltrack
+/usr/sbin/nfsidmap
+/usr/sbin/nfsiostat
+/usr/sbin/nfsstat
+/usr/sbin/rpc.gssd
+/usr/sbin/rpc.idmapd
+/usr/sbin/rpc.mountd
+/usr/sbin/rpc.nfsd
+/usr/sbin/rpcdebug
+/usr/sbin/showmount
+/usr/sbin/sm-notify
+/usr/sbin/start-statd
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># rpm -ql nfs-utils |grep systemd</span>
+/usr/lib/systemd/scripts/nfs-utils_env.sh
+/usr/lib/systemd/system-generators/nfs-server-generator
+/usr/lib/systemd/system/auth-rpcgss-module.service
+/usr/lib/systemd/system/nfs-blkmap.service
+/usr/lib/systemd/system/nfs-client.target
+/usr/lib/systemd/system/nfs-config.service
+/usr/lib/systemd/system/nfs-idmap.service
+/usr/lib/systemd/system/nfs-idmapd.service
+/usr/lib/systemd/system/nfs-lock.service
+/usr/lib/systemd/system/nfs-mountd.service
+/usr/lib/systemd/system/nfs-secure.service
+/usr/lib/systemd/system/nfs-server.service
+/usr/lib/systemd/system/nfs-utils.service
+/usr/lib/systemd/system/nfs.service
+/usr/lib/systemd/system/nfslock.service
+/usr/lib/systemd/system/proc-fs-nfsd.mount
+/usr/lib/systemd/system/rpc-gssd.service
+/usr/lib/systemd/system/rpc-statd-notify.service
+/usr/lib/systemd/system/rpc-statd.service
+/usr/lib/systemd/system/rpcgssd.service
+/usr/lib/systemd/system/rpcidmapd.service
+/usr/lib/systemd/system/var-lib-nfs-rpc_pipefs.mount
+/usr/share/man/man7/nfs.systemd.7.gz
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>11.5.2. 启动服务<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># rpcinfo</span>
+program version netid     address                service    owner
+    <span class="m">100000</span>    <span class="m">4</span>    tcp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    tcp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    udp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    udp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">2</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">2</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    <span class="nb">local</span>     /var/run/rpcbind.sock  portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    <span class="nb">local</span>     /var/run/rpcbind.sock  portmapper superuser
+
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># systemctl start nfs-server</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># rpcinfo</span>
+program version netid     address                service    owner
+    <span class="m">100000</span>    <span class="m">4</span>    tcp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    tcp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    udp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    udp6      ::.0.111               portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">2</span>    tcp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">2</span>    udp       <span class="m">0</span>.0.0.0.0.111          portmapper superuser
+    <span class="m">100000</span>    <span class="m">4</span>    <span class="nb">local</span>     /var/run/rpcbind.sock  portmapper superuser
+    <span class="m">100000</span>    <span class="m">3</span>    <span class="nb">local</span>     /var/run/rpcbind.sock  portmapper superuser
+    <span class="m">100024</span>    <span class="m">1</span>    udp       <span class="m">0</span>.0.0.0.224.237        status     <span class="m">29</span>
+    <span class="m">100024</span>    <span class="m">1</span>    tcp       <span class="m">0</span>.0.0.0.140.148        status     <span class="m">29</span>
+    <span class="m">100024</span>    <span class="m">1</span>    udp6      ::.146.29              status     <span class="m">29</span>
+    <span class="m">100024</span>    <span class="m">1</span>    tcp6      ::.188.103             status     <span class="m">29</span>
+    <span class="m">100005</span>    <span class="m">1</span>    udp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">1</span>    tcp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">1</span>    udp6      ::.78.80               mountd     superuser
+    <span class="m">100005</span>    <span class="m">1</span>    tcp6      ::.78.80               mountd     superuser
+    <span class="m">100005</span>    <span class="m">2</span>    udp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">2</span>    tcp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">2</span>    udp6      ::.78.80               mountd     superuser
+    <span class="m">100005</span>    <span class="m">2</span>    tcp6      ::.78.80               mountd     superuser
+    <span class="m">100005</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.78.80          mountd     superuser
+    <span class="m">100005</span>    <span class="m">3</span>    udp6      ::.78.80               mountd     superuser
+    <span class="m">100005</span>    <span class="m">3</span>    tcp6      ::.78.80               mountd     superuser
+    <span class="m">100003</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.8.1            nfs        superuser
+    <span class="m">100003</span>    <span class="m">4</span>    tcp       <span class="m">0</span>.0.0.0.8.1            nfs        superuser
+    <span class="m">100227</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.8.1            nfs_acl    superuser
+    <span class="m">100003</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.8.1            nfs        superuser
+    <span class="m">100003</span>    <span class="m">4</span>    udp       <span class="m">0</span>.0.0.0.8.1            nfs        superuser
+    <span class="m">100227</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.8.1            nfs_acl    superuser
+    <span class="m">100003</span>    <span class="m">3</span>    tcp6      ::.8.1                 nfs        superuser
+    <span class="m">100003</span>    <span class="m">4</span>    tcp6      ::.8.1                 nfs        superuser
+    <span class="m">100227</span>    <span class="m">3</span>    tcp6      ::.8.1                 nfs_acl    superuser
+    <span class="m">100003</span>    <span class="m">3</span>    udp6      ::.8.1                 nfs        superuser
+    <span class="m">100003</span>    <span class="m">4</span>    udp6      ::.8.1                 nfs        superuser
+    <span class="m">100227</span>    <span class="m">3</span>    udp6      ::.8.1                 nfs_acl    superuser
+    <span class="m">100021</span>    <span class="m">1</span>    udp       <span class="m">0</span>.0.0.0.221.211        nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">3</span>    udp       <span class="m">0</span>.0.0.0.221.211        nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">4</span>    udp       <span class="m">0</span>.0.0.0.221.211        nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">1</span>    tcp       <span class="m">0</span>.0.0.0.128.74         nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">3</span>    tcp       <span class="m">0</span>.0.0.0.128.74         nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">4</span>    tcp       <span class="m">0</span>.0.0.0.128.74         nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">1</span>    udp6      ::.194.142             nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">3</span>    udp6      ::.194.142             nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">4</span>    udp6      ::.194.142             nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">1</span>    tcp6      ::.165.168             nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">3</span>    tcp6      ::.165.168             nlockmgr   superuser
+    <span class="m">100021</span>    <span class="m">4</span>    tcp6      ::.165.168             nlockmgr   superuser
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>11.5.3. 共享目录<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/nfs1</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/nfs2</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/exports</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># cat /etc/exports</span>
+/data/nfs1 *<span class="o">(</span>rw<span class="o">)</span>
+/data/nfs2 *<span class="o">(</span>rw<span class="o">)</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># exportfs -r</span>
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># cat /etc/export</span>
+cat: /etc/export: No such file or directory
+
+<span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># exportfs -v</span>
+/data/nfs1          &lt;world&gt;<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+/data/nfs2          &lt;world&gt;<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>11.5.4. 挂载<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># showmount -e 192.168.46.155</span>
+Export list <span class="k">for</span> <span class="m">192</span>.168.46.155:
+/data/nfs2 *
+/data/nfs1 *
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir /mnt/nfs1</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir /mnt/nfs2</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount 192.168.46.155:/data/nfs1 /mnt/nfs1</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount 192.168.46.155:/data/nfs2 /mnt/nfs2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>11.5.5. 配置文件选项<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id6">
+<h2>11.5.6. 自动挂载<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>自动挂载分为2种， 相对路径法和绝对路径法。</p>
+<p>相对路径法</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
+<span class="c1"># 添加一行</span>
+/test          auto.test
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.test</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /etc/auto.test</span>
+nfs1       -fstype<span class="o">=</span>nfs,vers<span class="o">=</span><span class="m">3</span>,rw <span class="m">192</span>.168.46.155:/data/nfs1
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart autofs</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ll /test/nfs1</span>
+total <span class="m">0</span>
+</pre></div>
+</div>
+<p>绝对路径法</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
+<span class="c1"># 添加一行</span>
+/-         /etc/auto.test2
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.test2</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /etc/auto.test2</span>
+/data/nfs2      -fstype<span class="o">=</span>nfs,vers<span class="o">=</span><span class="m">3</span>,rw <span class="m">192</span>.168.46.155:/data/nfs2
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart autofs</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ll /data/nfs2</span>
+total <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>11.5.7. nfs实现伪根挂载<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 创建分散的文件夹和文件</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test1/test1 -pv</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test2/test2 -pv</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test3/test3 -pv</span>
+
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># touch /test1/test1/test1</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># touch /test2/test2/test2</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># touch /test3/test3/test3</span>
+
+<span class="c1"># 整合到一块</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /nfsroot</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># cd /nfsroot/</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># mkdir test1 test2 test3</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># mount /test1/test1 test1 -B</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># mount /test2/test2 test2 -B</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># mount /test3/test3 test3 -B</span>
+
+<span class="c1"># 导出配置</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># vim /etc/exports</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># cat /etc/exports</span>
+/nfsroot    *<span class="o">(</span><span class="nv">fsid</span><span class="o">=</span><span class="m">0</span>,ro,crossmnt<span class="o">)</span>
+
+/test1/test1 *<span class="o">(</span>ro<span class="o">)</span>
+/test2/test2 *<span class="o">(</span>rw<span class="o">)</span>
+/test3/test3 *<span class="o">(</span>rw<span class="o">)</span>
+
+<span class="c1"># 导出</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># exportfs -r</span>
+<span class="o">[</span>root@centos-155 nfsroot<span class="o">]</span><span class="c1"># exportfs -v</span>
+/nfsroot            &lt;world&gt;<span class="o">(</span>ro,sync,wdelay,hide,crossmnt,no_subtree_check,fsid<span class="o">=</span><span class="m">0</span>,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+/test1/test1        &lt;world&gt;<span class="o">(</span>ro,sync,wdelay,hide,no_subtree_check,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+/test2/test2        &lt;world&gt;<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+/test3/test3        &lt;world&gt;<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,sec<span class="o">=</span>sys,secure,root_squash,no_all_squash<span class="o">)</span>
+
+<span class="c1"># 另外一个机器测试</span>
+
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount 192.168.46.155:/ /mnt/nfsroot</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># tree /mnt/nfsroot</span>
+/mnt/nfsroot
+├── test1
+│   └── test1
+├── test2
+│   └── test2
+└── test3
+    └── test3
+
+<span class="m">3</span> directories, <span class="m">3</span> files
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我们使用默认挂载过来使用了nfsnobody的用户的，可以考虑使用setfacl来添加nfsnobody的权限。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="samba.html" class="btn btn-neutral float-right" title="11.6. samba" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ftp基于mysql的验证.html" class="btn btn-neutral" title="11.4. ftp基于mysql的验证" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

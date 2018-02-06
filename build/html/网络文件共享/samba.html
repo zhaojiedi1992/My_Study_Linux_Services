@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11.6. samba &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 网络文件共享" href="index.html"/>
+        <link rel="next" title="12. 版本控制" href="../版本控制/index.html"/>
+        <link rel="prev" title="11.5. nfs入门" href="nfs.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.6. samba</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windowslinux">11.6.1. windows共享给linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#window">11.6.1.1. 在window设置共享</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">11.6.1.2. 本机测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">11.6.1.3. linux挂载</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.6.2. samba主要配置项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linuxwindow">11.6.3. linux共享给window</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">11.6.3.1. linux配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">11.6.3.2. windows挂载</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.6.4. samba多用户挂载</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">11.6.4.1. 服务端配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">11.6.4.2. 客户端配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">11.6.4.3. 客户端测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
+        
+      <li>11.6. samba</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/网络文件共享/samba.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="samba">
+<h1>11.6. samba<a class="headerlink" href="#samba" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="windowslinux">
+<h2>11.6.1. windows共享给linux<a class="headerlink" href="#windowslinux" title="Permalink to this headline">¶</a></h2>
+<p>我想把windows机器上’e:迅雷下载’共享出来给linux使用</p>
+<div class="section" id="window">
+<h3>11.6.1.1. 在window设置共享<a class="headerlink" href="#window" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/共享.png" src="../_images/共享.png" />
+<img alt="../_images/共享设置权限.png" src="../_images/共享设置权限.png" />
+<img alt="../_images/共享添加指定用户.png" src="../_images/共享添加指定用户.png" />
+</div>
+<div class="section" id="id1">
+<h3>11.6.1.2. 本机测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/共享windows测试.png" src="../_images/共享windows测试.png" />
+</div>
+<div class="section" id="linux">
+<h3>11.6.1.3. linux挂载<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@centos-155 ~]# yum install samba samba-client cifs-utils samba-common-tools
+[root@centos-155 ~]# rpm -ql samba
+[root@centos-155 ~]# rpm -ql samba-client
+[root@centos-155 ~]# rpm -ql cifs-utils
+[root@centos-155 ~]# smbclient -L 192.168.46.1 -m SMB2 -U zhao
+Enter SAMBA\zhao&#39;s password:
+Domain=[DESKTOP-31DI5AI] OS=[] Server=[]
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    ADMIN$          Disk      远程管理
+    C$              Disk      默认共享
+    D$              Disk      默认共享
+    download        Disk
+    E$              Disk      默认共享
+    F$              Disk      默认共享
+    IPC$            IPC       远程 IPC
+Connection to 192.168.46.1 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+NetBIOS over TCP disabled -- no workgroup available
+
+# 创建挂载密码
+[root@centos-155 mnt]# echo -e &quot;username=zhao\npassword=zhao&quot; &gt;&gt; /etc/samba.pass
+[root@centos-155 mnt]# cat /etc/samba.pass
+username=zhao
+password=zhao
+[root@centos-155 mnt]# chmod 600 /etc/samba.pass
+
+[root@centos-155 mnt]# vim -n 1 /etc/fstab
+# 添加如下行
+//192.168.46.1/download      /mnt/zhao     cifs vers=3.0,credentials=/etc/samba.pass 0 0
+[root@centos-155 ~]# mount -a
+[root@centos-155 ~]# cd /mnt/zhao
+[root@centos-155 zhao]# touch test.txt
+[root@centos-155 zhao]# ll
+total 2528009
+-rwxr-xr-x 1 root root        182 May 28  2015 autorun.inf
+-rwxr-xr-x 1 root root 2588266496 Nov 19 22:42 cn_office_professional_plus_2016_x86_x64_dvd_6969182.iso
+drwxr-xr-x 2 root root          0 Nov 19 22:44 office
+-rwxr-xr-x 1 root root     413248 Aug 17  2015 setup.exe
+-rwxr-xr-x 1 root root          0 Feb  6 10:19 test.txt
+drwxr-xr-x 2 root root          0 Nov 19 21:24 下载合集
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>11.6.2. samba主要配置项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>workgroup                   工作组
+server string               服务器字符串，支持宏定义
+netbios name                netbios名字和主机名无关
+interface                   监听的接口
+host allow                  允许的主机，支持多种格式
+log file                    日志文件，支持宏定义
+max log size                最大日志文件， 超过这个数值就日志滚动日志
+load printers               加载打印机
+cups options                通用unix打印机选项
+path                        指定共享路径
+Comment                     共享描述
+public                      是否guest访问的共享，就是匿名可以访问
+browsable                   是否可以被浏览
+writable                    是否可写
+readonly                    是否只读和public只需要配置一个
+write list                  可写列表，支持用户和组，多个使用逗号分割。样例user1,@group2,+group3
+valid users                 特定用户才能访问
+</pre></div>
+</div>
+</div>
+<div class="section" id="linuxwindow">
+<h2>11.6.3. linux共享给window<a class="headerlink" href="#linuxwindow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>11.6.3.1. linux配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加用户</span>
+
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># useradd panda1</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># useradd panda2</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># useradd panda3</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># smbpasswd -a panda1</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># smbpasswd -a panda2</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># smbpasswd -a panda3</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># groupadd panda</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># usermod -aG panda panda1</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># usermod -aG panda panda2</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># usermod -aG panda panda3</span>
+
+<span class="c1"># 配置文件编辑</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># vim /etc/samba/smb.conf</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># tail -n 6 /etc/samba/smb.conf</span>
+<span class="o">[</span>pub<span class="o">]</span>
+    <span class="nv">comment</span><span class="o">=</span> this is samba pub <span class="k">for</span> windows
+        <span class="nv">path</span> <span class="o">=</span> /data/samba
+    write <span class="nv">list</span> <span class="o">=</span> panda1 ,panda2
+    valid <span class="nv">users</span><span class="o">=</span> +panda
+
+<span class="c1"># 启动服务并查看状态</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># systemctl restart smb</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># systemctl restart nmb</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># netstat -tunlp |grep mb</span>
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:139             <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">4584</span>/smbd
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:445             <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">4584</span>/smbd
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::139                  :::*                    LISTEN      <span class="m">4584</span>/smbd
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::445                  :::*                    LISTEN      <span class="m">4584</span>/smbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">192</span>.168.46.255:137      <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">192</span>.168.46.155:137      <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:137             <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">192</span>.168.46.255:138      <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">192</span>.168.46.155:138      <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+udp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:138             <span class="m">0</span>.0.0.0:*                           <span class="m">4596</span>/nmbd
+
+
+<span class="c1"># 创建目录并授权</span>
+<span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># mkdir /data/samba -pv</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># chown root.panda /data/samba/ -R</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># chmod 2775 /data/samba/ -R</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># echo &quot;this is test&quot; &gt;&gt; /data/samba/test.txt</span>
+
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># systemctl restart smb</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># systemctl restart nmb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="windows">
+<h3>11.6.3.2. windows挂载<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/samba认证.png" src="../_images/samba认证.png" />
+<img alt="../_images/挂载后的界面.png" src="../_images/挂载后的界面.png" />
+<img alt="../_images/输入密码查看文件.png" src="../_images/输入密码查看文件.png" />
+<p>在window环境中，右键新建txt创建一个文件</p>
+<p>在linux环境中，检查权限是否符合期望</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># ll /data/samba</span>
+total <span class="m">4</span>
+-rw-r--r-- <span class="m">1</span> root   panda <span class="m">13</span> Feb  <span class="m">6</span> <span class="m">13</span>:54 test.txt
+-rwxr--r-- <span class="m">1</span> panda2 panda  <span class="m">0</span> Feb  <span class="m">6</span> <span class="m">13</span>:57 新建文本文档.txt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>11.6.4. samba多用户挂载<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>默认samba是单用户挂载的。centos7中可以启用多用户挂载功能，在客户端登陆的不同用户访问
+同一个samba的挂载点，获取不同的权限。</p>
+<div class="section" id="id5">
+<h3>11.6.4.1. 服务端配置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># yum install samba</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># mkdir /multiuser</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># vim /etc/samba/smb.conf</span>
+<span class="c1"># 添加下面几行</span>
+<span class="o">[</span>smbshare<span class="o">]</span>
+    <span class="nv">path</span><span class="o">=</span>/multiuser
+    <span class="nv">writeable</span> <span class="o">=</span>no
+    write <span class="nv">list</span><span class="o">=</span> @admins
+
+<span class="c1"># 创建用户</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># groupadd admins</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># useradd -s /sbin/nologin smbuser1</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># useradd -s /sbin/nologin smbuser2 -G admins</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># useradd -s /sbin/nolgoin smbuser3 -G admins</span>
+
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># smbpasswd -a smbuser1</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># smbpasswd -a smbuser2</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># smbpasswd -a smbuser3</span>
+
+<span class="c1"># 修改权限</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># setfacl -m &quot;u:smbuser1:rwx&quot; /multiuser/</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># setfacl -m &quot;u:smbuser2:rwx&quot; /multiuser/</span>
+<span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># setfacl -m &quot;u:smbuser3:rwx&quot; /multiuser/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>11.6.4.2. 客户端配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install cifs-utils^C</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir /mnt/smb</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># echo &quot;username=smbuser2&quot; &gt; /etc/multiuser</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># echo &quot;password=panda&quot; &gt;&gt; /etc/multiuser</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /etc/multiuser</span>
+<span class="nv">username</span><span class="o">=</span>smbuser2
+<span class="nv">password</span><span class="o">=</span>panda
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># chmod 600 /etc/multiuser</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount -o credentials=/etc/multiuser,multiuser //192.168.46.155/smbshare  /mnt/smb</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab</span>
+//192.168.46.155/smbshare /mnt/smb cifs rw,relatime,vers<span class="o">=</span><span class="m">1</span>.0,multiuser,cache<span class="o">=</span>strict,username<span class="o">=</span>smbuser2,domain<span class="o">=</span>CENTOS-155,uid<span class="o">=</span><span class="m">0</span>,noforceuid,gid<span class="o">=</span><span class="m">0</span>,noforcegid,addr<span class="o">=</span><span class="m">192</span>.168.46.155,unix,posixpaths,serverino,mapposix,acl,rsize<span class="o">=</span><span class="m">1048576</span>,wsize<span class="o">=</span><span class="m">65536</span>,echo_interval<span class="o">=</span><span class="m">60</span>,actimeo<span class="o">=</span><span class="m">1</span> <span class="m">0</span> <span class="m">0</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab &gt;&gt; /etc/fstab</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/fstab</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># umount /mnt/smb</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount -a</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mount |grep smb</span>
+//192.168.46.155/smbshare on /mnt/smb <span class="nb">type</span> cifs <span class="o">(</span>rw,relatime,vers<span class="o">=</span><span class="m">1</span>.0,cache<span class="o">=</span>strict,username<span class="o">=</span>smbuser2,domain<span class="o">=</span>CENTOS-155,uid<span class="o">=</span><span class="m">0</span>,noforceuid,gid<span class="o">=</span><span class="m">0</span>,noforcegid,addr<span class="o">=</span><span class="m">192</span>.168.46.155,unix,posixpaths,serverino,mapposix,acl,rsize<span class="o">=</span><span class="m">1048576</span>,wsize<span class="o">=</span><span class="m">65536</span>,echo_interval<span class="o">=</span><span class="m">60</span>,actimeo<span class="o">=</span><span class="m">1</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>11.6.4.3. 客户端测试<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># su - panda2</span>
+Last login: Tue Feb  <span class="m">6</span> <span class="m">15</span>:06:44 CST <span class="m">2018</span> on pts/0
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ touch /mnt/smb/a.txt
+touch: cannot touch ‘/mnt/smb/a.txt’: Permission denied
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ cifs
+cifscreds    cifs.idmap   cifs.upcall
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ cifs
+cifscreds    cifs.idmap   cifs.upcall
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ cifscreds add -u smbuser2 <span class="m">192</span>.168.46.155
+Password:
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ touch /mnt/smb/a.txt
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ ll
+total <span class="m">0</span>
+<span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ ll /mnt/smb
+total <span class="m">0</span>
+-rw-r--r-- <span class="m">1</span> smbuser2 <span class="m">1014</span> <span class="m">0</span> Feb  <span class="m">6</span> <span class="m">15</span>:07 a.txt
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">上面的实验，能不能访问到samba的关键在于”cifscreds add -u smbuser2 192.168.46.155” 这个命令指定的用户，和当前登陆用户无关</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../版本控制/index.html" class="btn btn-neutral float-right" title="12. 版本控制" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nfs.html" class="btn btn-neutral" title="11.5. nfs入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

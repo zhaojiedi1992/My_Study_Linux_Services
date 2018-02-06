@@ -83,3 +83,30 @@ centos6lamp的yum安装
 打开浏览器输入如下地址： http://192.168.1.107/DiscuzX/upload/ 进行制定就可以了。不需要创建数据库，自动创建的。效果图：
 
 .. image:: /images/web/discuz.png
+
+清除权限
+------------------------------------------------------------------------------------
+
+.. code-block:: bash
+
+    [root@localhost DiscuzX]$setfacl -R -b ./
+
+测试性能
+----------------------------------------------------------------
+
+.. code-block:: bash
+
+    [root@localhost DiscuzX]$ab -c 100 -n 1000 http://192.168.1.107/DiscuzX/upload/
+    Requests per second:    41.67 [#/sec] (mean)
+
+xcache加速
+----------------------------------------------------------------
+
+.. code-block:: bash
+
+    [root@localhost DiscuzX]$yum search xcache-admin
+    [root@localhost DiscuzX]$service httpd restart 
+    [root@localhost DiscuzX]$service php-fpm restart
+    [root@localhost DiscuzX]$ab -c 100 -n 1000 http://192.168.1.107/DiscuzX/upload/
+    Requests per second:    126.14 [#/sec] (mean)
+

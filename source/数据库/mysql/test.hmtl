@@ -1,0 +1,475 @@
+<h1 id="mariadb多实例安装">mariadb多实例安装</h1>
+<p>mariadb多实例实现方式:</p>
+<dl>
+<dt>mysqld_multi</dt>
+<dd><p>这个是使用单独的配置文件来配置多个实例，不过管理实例还是很方便的。</p>
+</dd>
+<dt>多个sysv配置</dt>
+<dd><p>这个方式相当于每个mairadb实例为一个不同的服务而已，每个实例一套sysv脚本。 配置起来比较简单，如果实例过多管理起来比较麻烦。</p>
+</dd>
+<dt>systemd</dt>
+<dd><p>这个是systemd管理的特有的。</p>
+</dd>
+</dl>
+<h2 id="配置前规划">配置前规划</h2>
+<p>上面mairadb的多实例有多种配置方法， 我们先规划如下：</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方案</th>
+<th>主目录</th>
+<th>端口规划</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>方案1</td>
+<td>/data/scheme1/mysql/</td>
+<td>3307,3308</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>方案2</td>
+<td>/data/scheme2/mysql/</td>
+<td>4307,4308</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>方案3</td>
+<td>/data/scheme3/mysql/</td>
+<td>5307,5308</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="配置前的环境设置">配置前的环境设置</h2>
+<p>关闭selinux</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# setenforce 0</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# sed -i <span class="st">&#39;s@SELINUX=.*@SELINUX=disabled@&#39;</span> /etc/sysconfig/selinux</a></code></pre></div>
+<p>关闭防火墙</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# systemctl stop firewalld</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# systemctl disable firewalld</a></code></pre></div>
+<h2 id="安装mariadb">安装mariadb</h2>
+<p>这里我不使用centos默认的版本，使用最新稳定版本10.2。</p>
+<p>上面的基础规划完毕，需要配置下 <a href="https://downloads.mariadb.org/mariadb/repositories/#mirror=neusoft&amp;distro=CentOS&amp;distro_release=centos7-amd64--centos7&amp;version=10.2">mariadb的yum源</a>。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">[<span class="ex">root@centos-158</span> yum.repos.d]# vim mariadb.repo                             # 添加/etc/yum.repos.d/mariadb.repo文件</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">[<span class="ex">root@centos-158</span> yum.repos.d]# cat mariadb.repo                             # 检查这个文件</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">[<span class="ex">root@centos-158</span> yum.repos.d]# cat mariadb.repo </a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># MariaDB 10.2 CentOS repository list - created 2018-01-27 14:09 UTC</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># http://downloads.mariadb.org/mariadb/repositories/</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">[<span class="ex">mariadb</span>]</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="ex">name</span> = MariaDB</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#这个地方的配置是国外的，下载太慢了。 我给改成清华镜像站点的了，这样下载会快点。</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="ex">baseurl</span> =https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.2.12/yum/centos/7Server/x86_64/</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="va">gpgkey=</span>https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="va">gpgcheck=</span>1</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">[<span class="ex">root@centos-158</span> yum.repos.d]# yum install MariaDB-server MariaDB-client -y <span class="co"># 安装server和client</span></a></code></pre></div>
+<div class="note">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<p>这个包名是区分大小写的，使用rpm查询包提供文件的时候注意大小写。</p>
+</div>
+<h2 id="方案1-mysqld_multi">方案1-mysqld_multi</h2>
+<h3 id="创建目录并修改权限">创建目录并修改权限</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mkdir -pv /data/scheme1/mysql/<span class="dt">{3307,3308}</span>/data         # 创建目录</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# chown mysql.mysql /data/scheme1/mysql/330<span class="dt">{7,8}</span> -R      # 修改权限</a></code></pre></div>
+<h3 id="安装数据库">安装数据库</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme1/mysql/3308/data --basedir=/usr --user=mysql  # 安装到数据目录</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme1/mysql/3308/data --basedir=/usr --user=mysql  # 安装到数据目录</a></code></pre></div>
+<h3 id="配置文件">配置文件</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mv /etc/my.conf /etc/my.conf.yumbak                # 重命名文件，别影响接下来的实验，其实不必要的</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# vim /etc/my.conf                                   # 编辑</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">[<span class="ex">root@centos-158</span> ~]# cat /etc/my.conf                                   # 查看</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">[<span class="ex">mysqld_multi</span>]</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="ex">mysqld</span>     = /usr/bin/mysqld_safe</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="ex">mysqladmin</span> = /usr/bin/mysqladmin</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="ex">user</span>       = multi_admin</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="ex">password</span>   = zhaojiedi</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">[<span class="ex">mysqld3307</span>]</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="ex">socket</span>     = /data/scheme1/mysql/3307/mariadb.sock</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="ex">port</span>       = 3307</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="ex">pid-file</span>   = /data/scheme1/mysql/3307/mariadb.pid </a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="ex">datadir</span>    = /data/scheme1/mysql/3307/data </a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="ex">user</span>       = mysql</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">[<span class="ex">mysqld3308</span>]</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="ex">socket</span>     = /data/scheme1/mysql/3308/mariadb.sock</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="ex">port</span>       = 3308</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="ex">pid-file</span>   = /data/scheme1/mysql/3308/mariadb.pid </a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="ex">datadir</span>    = /data/scheme1/mysql/3308/data </a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="ex">user</span>       = mysql</a></code></pre></div>
+<div class="note">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<p>更多的参数官方文档。</p>
+</div>
+<h3 id="启动实例">启动实例</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysqld_multi start 3307                        # 启动指定的实例，这个是在配置mysqld3307片段，实例名字就是3307</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# mysqld_multi start 3308                        # 启动指定的实例，这个是在配置mysqld3307片段，实例名字就是3307</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">[<span class="ex">root@centos-158</span> ~]# netstat -tunlp <span class="kw">|</span><span class="fu">grep</span> 330*                      # 查看服务</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="ex">tcp6</span>       0      0 :::3307                 :::*                    LISTEN      2631/mysqld         </a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="ex">tcp6</span>       0      0 :::3308                 :::*                    LISTEN      2746/mysqld </a></code></pre></div>
+<div class="note">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<p>mysqld_multi start 3307-3308来批量启动，多个矢量还可以逗号分割。</p>
+</div>
+<h3 id="安全初始化脚本运行">安全初始化脚本运行</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysql_secure_installation -S /data/scheme1/mysql/3307/mariadb.sock  # 使用socket连接3307实例</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># 下面内容只跳出重要的输入项列出</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="ex">Enter</span> current password for root (enter for none)<span class="bu">:</span>              # 默认密码空，直接回车即可</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="ex">Set</span> root password? [Y/n] y                                     # 输入y</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="ex">New</span> password:                                                  # 输入root用户密码，注意不是系统密码，是数据库密码</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="ex">Re-enter</span> new password:                                         # 再次确认</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="ex">Remove</span> anonymous users? [Y/n] y                                # 移除匿名用户</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="ex">Disallow</span> root login remotely? [Y/n] y                          # 禁止root用户远程登陆，这个看你具体情况设置</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="ex">Remove</span> test database and access to it? [Y/n] y                 # 移除test数据库</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="ex">Reload</span> privilege tables now? [Y/n] y                           # 刷新权限表</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">[<span class="ex">root@centos-158</span> ~]# mysql_secure_installation -S /data/scheme1/mysql/3308/mariadb.sock  # 使用socket连接3308实例</a></code></pre></div>
+<h3 id="添加多实例管理用户">添加多实例管理用户</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# vim create_user.sql                        # 添加用户脚本</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# cat create_user.sql                        # 检查</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="ex">CREATE</span> USER <span class="st">&#39;multi_admin&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED BY <span class="st">&#39;multi_admin&#39;</span><span class="kw">;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="ex">GRANT</span> SHUTDOWN ON *.* TO <span class="st">&#39;multi_admin&#39;</span>@<span class="st">&#39;localhost&#39;</span><span class="kw">;</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="ex">flush</span> privileges<span class="kw">;</span> </a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">[<span class="ex">root@centos-158</span> ~]# cat create_user.sql <span class="kw">|</span> <span class="ex">mysql</span> -u root -S /data/scheme1/mysql/3307/mariadb.sock -p <span class="co">#执行脚本</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="ex">Enter</span> password: </a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">[<span class="ex">root@centos-158</span> ~]# cat create_user.sql <span class="kw">|</span> <span class="ex">mysql</span> -u root -S /data/scheme1/mysql/3308/mariadb.sock -p <span class="co"># 执行脚本</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="ex">Enter</span> password: </a></code></pre></div>
+<p>更多 <a href="https://dev.mysql.com/doc/refman/5.7/en/mysqld-multi.html">mysqld-multi</a> 使用帮助。</p>
+<h3 id="查看和关闭实例">查看和关闭实例</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysqld_multi report                        # 查看服务状态</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="ex">Reporting</span> MariaDB servers</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="ex">MariaDB</span> server from group: mysqld3307 is running</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="ex">MariaDB</span> server from group: mysqld3308 is running</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">[<span class="ex">root@centos-158</span> ~]# mysqld_multi stop 3307                     # 关闭一个实例</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">[<span class="ex">root@centos-158</span> ~]# mysqld_multi report                        # 查看服务状态</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="ex">Reporting</span> MariaDB servers</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="ex">MariaDB</span> server from group: mysqld3307 is not running</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="ex">MariaDB</span> server from group: mysqld3308 is running</a></code></pre></div>
+<h3 id="开机启动">开机启动</h3>
+<p>直接加入到rc.local中</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# echo <span class="kw">`</span><span class="fu">which</span> mysqld_multi<span class="kw">`</span> start 3307-3308  <span class="op">&gt;&gt;</span> /etc/rc.local        # 开机执行</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# tail -n 1 /etc/rc.local </a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="ex">/usr/bin/mysqld_multi</span> start 3307-3308</a></code></pre></div>
+<p>上面的加入rc.local方式管理上容易混乱，还是写个sysv脚本好些。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1">[<span class="ex">root@centos-158</span> init.d]# cd /etc/rc.d/init.d/</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">[<span class="ex">root@centos-158</span> init.d]# vim mysqld_multi </a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">[<span class="ex">root@centos-158</span> init.d]# cat mysqld_multi </a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#! /bin/bash</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co"># chkconfig: 2345 90 10</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co"># description: mysqld_multi</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co"># See how we were called.</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="va">mysqld_multi=</span>/usr/local/mysql/bin/mysqld_multi</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co"># 实例列表</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="va">instance_list=</span><span class="st">&quot;3307-3308&quot;</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#instance_list=&quot;3307,3308,3309-3310&quot;</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="fu">start()</span><span class="kw">{</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">    <span class="va">$mysqld_multi</span> <span class="ex">start</span> <span class="va">$instance_list</span>  </a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="fu">stop()</span><span class="kw">{</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17">    <span class="va">$mysqld_multi</span> <span class="ex">stop</span> <span class="va">$instance_list</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="fu">status()</span><span class="kw">{</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20">    <span class="va">$mysqld_multi</span> <span class="ex">report</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="kw">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="kw"> in</span></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23">start<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-24" data-line-number="24">    <span class="ex">start</span></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb12-26" data-line-number="26">stop<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-27" data-line-number="27">    <span class="ex">stop</span></a>
+<a class="sourceLine" id="cb12-28" data-line-number="28">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb12-29" data-line-number="29">status<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-30" data-line-number="30">    <span class="ex">status</span></a>
+<a class="sourceLine" id="cb12-31" data-line-number="31">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb12-32" data-line-number="32">restart<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-33" data-line-number="33">    <span class="ex">start</span></a>
+<a class="sourceLine" id="cb12-34" data-line-number="34">    <span class="ex">stop</span></a>
+<a class="sourceLine" id="cb12-35" data-line-number="35">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb12-36" data-line-number="36">*<span class="kw">)</span></a>
+<a class="sourceLine" id="cb12-37" data-line-number="37">    <span class="bu">echo</span> <span class="st">$&quot;Usage: </span><span class="va">$0</span><span class="st"> {start|stop|status}&quot;</span></a>
+<a class="sourceLine" id="cb12-38" data-line-number="38">    <span class="bu">exit</span> 2</a>
+<a class="sourceLine" id="cb12-39" data-line-number="39"><span class="kw">esac</span></a>
+<a class="sourceLine" id="cb12-40" data-line-number="40"></a>
+<a class="sourceLine" id="cb12-41" data-line-number="41">[<span class="ex">root@centos-158</span> init.d]# chkconfig --add mysqld_multi                  # 添加sysv</a>
+<a class="sourceLine" id="cb12-42" data-line-number="42">[<span class="ex">root@centos-158</span> init.d]# chkconfig mysqld_multi on                     # 启用mysqld_multi</a></code></pre></div>
+<h2 id="方案2-多sysv脚本">方案2-多sysv脚本</h2>
+<h3 id="创建目录并修改权限-1">创建目录并修改权限</h3>
+<p>这种方式，需要每个配置文件都要单独存放，可以给目录更详细的规划下</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]#  mkdir -pv /data/scheme2/mysql/<span class="dt">{4307,4308}/{data,etc,log,socket,pid,service}</span>       # 创建目录</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# chown mysql.mysql /data/scheme2/mysql/4307 -R                                      # 修改所有者</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">[<span class="ex">root@centos-158</span> ~]# chown mysql.mysql /data/scheme2/mysql/4308 -R                                      # 修改所有者</a></code></pre></div>
+<h3 id="安装数据库-1">安装数据库</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme2/mysql/4307/data --basedir=/usr --user=mysql  # 安装数据库</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme2/mysql/4308/data --basedir=/usr --user=mysql  # 安装数据库</a></code></pre></div>
+<h3 id="配置配置文件">配置配置文件</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# cd /data/scheme2/mysql/4307/etc/                           # 进入配置目录</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">[<span class="ex">root@centos-158</span> etc]# vim my.cnf                                               # 编辑单独的配置文件              </a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">[<span class="ex">root@centos-158</span> etc]# cat my.cnf                                               # 检查</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">[<span class="ex">mysqld</span>]</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="va">port=</span>4307</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="va">datadir=</span>/data/scheme2/mysql/4307/data</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="va">socket=</span>/data/scheme2/mysql/4307/socket/mariadb.sock</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">[<span class="ex">mysqld-safe</span>]</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="ex">log-error</span>=/data/scheme2/mysql/4307/log/mariadb.log</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="ex">pid-file</span>=/data/scheme2/mysql/4308/pid/mariadb.pid</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">[<span class="ex">root@centos-158</span> etc]# cp my.cnf ../../4308/etc/my.cnf                          # 复制到另一个实例中去</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">[<span class="ex">root@centos-158</span> etc]# sed -i <span class="st">&#39;s@4307@4308@&#39;</span> ../../4308/etc/my.cnf              # 修改配置的端口</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">[<span class="ex">root@centos-158</span> etc]# cat ../../4308/etc/my.cnf                                # 检查</a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">[<span class="ex">mysqld</span>]</a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="va">port=</span>4308</a>
+<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="va">datadir=</span>/data/scheme2/mysql/4308/data</a>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="va">socket=</span>/data/scheme2/mysql/4308/socket/mariadb.sock</a>
+<a class="sourceLine" id="cb15-19" data-line-number="19">[<span class="ex">mysqld-safe</span>]</a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="ex">log-error</span>=/data/scheme2/mysql/4308/log/mariadb.log</a>
+<a class="sourceLine" id="cb15-21" data-line-number="21"><span class="ex">pid-file</span>=/data/scheme2/mysql/4308/pid/mariadb.pid</a></code></pre></div>
+<h3 id="配置服务文件">配置服务文件</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1">[<span class="ex">root@centos-158</span> 4307]# vim service/mysqld.sh                                   # 编辑sysv脚本</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">[<span class="ex">root@centos-158</span> 4307]# cat service/mysqld.sh                                   # 检查</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co"># chkconfig: 2345 91 19</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co"># description: manage mariadb </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="va">port=</span>4307</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="va">mysql_user=</span><span class="st">&quot;root&quot;</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="va">mysql_pwd=</span><span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="va">mysql_basedir=</span><span class="st">&quot;/data/scheme2/mysql&quot;</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#cmd_path=&quot;${mysql_basedir}/${port}/bin&quot;</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="va">cmd_path=</span><span class="st">&quot;/usr/bin&quot;</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="va">mysql_sock=</span><span class="st">&quot;</span><span class="va">${mysql_basedir}</span><span class="st">/</span><span class="va">${port}</span><span class="st">/socket/mariadb.sock&quot;</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="fu">function_start_mysql()</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17">    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span>;<span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18">    <span class="bu">printf</span> <span class="st">&quot;Starting MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19">    <span class="va">cmd=</span><span class="st">&quot;</span><span class="va">${cmd_path}</span><span class="st">/mysqld_safe --defaults-file=</span><span class="va">${mysql_basedir}</span><span class="st">/</span><span class="va">${port}</span><span class="st">/etc/my.cnf&quot;</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20">    <span class="bu">printf</span> <span class="st">&quot;</span><span class="va">$cmd</span><span class="st">\n&quot;</span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21">    <span class="va">${cmd_path}</span><span class="ex">/mysqld_safe</span> --defaults-file=<span class="va">${mysql_basedir}</span>/<span class="va">${port}</span>/etc/my.cnf  <span class="op">&amp;&gt;</span> /dev/null  <span class="kw">&amp;</span></a>
+<a class="sourceLine" id="cb16-22" data-line-number="22">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-23" data-line-number="23">    <span class="bu">printf</span> <span class="st">&quot;MySQL is running...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-24" data-line-number="24">    <span class="bu">exit</span></a>
+<a class="sourceLine" id="cb16-25" data-line-number="25">    <span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-26" data-line-number="26"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-27" data-line-number="27"><span class="fu">function_status_mysql()</span><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-28" data-line-number="28">        <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span> ; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-29" data-line-number="29">                <span class="bu">printf</span> <span class="st">&quot;MySql is running...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-30" data-line-number="30">        <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-31" data-line-number="31">                <span class="bu">printf</span> <span class="st">&quot;MySql is stopped...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-32" data-line-number="32">        <span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-33" data-line-number="33"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb16-35" data-line-number="35"><span class="fu">function_stop_mysql()</span></a>
+<a class="sourceLine" id="cb16-36" data-line-number="36"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-37" data-line-number="37">    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span>;<span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-38" data-line-number="38">    <span class="bu">printf</span> <span class="st">&quot;MySQL is stopped...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-39" data-line-number="39">    <span class="bu">exit</span></a>
+<a class="sourceLine" id="cb16-40" data-line-number="40">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-41" data-line-number="41">    <span class="bu">printf</span> <span class="st">&quot;Stoping MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-42" data-line-number="42">    <span class="va">${cmd_path}</span><span class="ex">/mysqladmin</span> -u <span class="va">${mysql_user}</span> -p<span class="va">${mysql_pwd}</span> -S <span class="va">${mysql_sock}</span> shutdown</a>
+<a class="sourceLine" id="cb16-43" data-line-number="43"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-44" data-line-number="44"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb16-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb16-47" data-line-number="47"><span class="fu">function_restart_mysql()</span></a>
+<a class="sourceLine" id="cb16-48" data-line-number="48"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-49" data-line-number="49">    <span class="bu">printf</span> <span class="st">&quot;Restarting MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-50" data-line-number="50">    <span class="ex">function_stop_mysql</span></a>
+<a class="sourceLine" id="cb16-51" data-line-number="51">    <span class="fu">sleep</span> 2</a>
+<a class="sourceLine" id="cb16-52" data-line-number="52">    <span class="ex">function_start_mysql</span></a>
+<a class="sourceLine" id="cb16-53" data-line-number="53"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-54" data-line-number="54"></a>
+<a class="sourceLine" id="cb16-55" data-line-number="55"><span class="kw">case</span> <span class="va">$1</span><span class="kw"> in</span></a>
+<a class="sourceLine" id="cb16-56" data-line-number="56">start<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-57" data-line-number="57">        <span class="ex">function_start_mysql</span></a>
+<a class="sourceLine" id="cb16-58" data-line-number="58">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-59" data-line-number="59">stop<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-60" data-line-number="60">        <span class="ex">function_stop_mysql</span></a>
+<a class="sourceLine" id="cb16-61" data-line-number="61">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-62" data-line-number="62">restart<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-63" data-line-number="63">        <span class="ex">function_restart_mysql</span></a>
+<a class="sourceLine" id="cb16-64" data-line-number="64">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-65" data-line-number="65">status<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-66" data-line-number="66">        <span class="ex">function_status_mysql</span></a>
+<a class="sourceLine" id="cb16-67" data-line-number="67">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-68" data-line-number="68">*<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-69" data-line-number="69">    <span class="bu">printf</span> <span class="st">&quot;Usage: </span><span class="va">${cmd_path}</span><span class="st">/mysqld {start|stop|restart|status}\n&quot;</span></a>
+<a class="sourceLine" id="cb16-70" data-line-number="70"><span class="kw">esac</span></a>
+<a class="sourceLine" id="cb16-71" data-line-number="71"></a>
+<a class="sourceLine" id="cb16-72" data-line-number="72"></a>
+<a class="sourceLine" id="cb16-73" data-line-number="73">[<span class="ex">root@centos-158</span> 4307]# cp service/mysqld.sh  ../4308/service/mysqld.sh     # 复制一份</a>
+<a class="sourceLine" id="cb16-74" data-line-number="74">[<span class="ex">root@centos-158</span> 4307]# sed -i <span class="st">&#39;s@4307@4308@&#39;</span> ../4308/service/mysqld.sh     # 修改端口</a>
+<a class="sourceLine" id="cb16-75" data-line-number="75">[<span class="ex">root@centos-158</span> 4307]# cat ../4308/service/mysqld.sh                       # 检查</a>
+<a class="sourceLine" id="cb16-76" data-line-number="76"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb16-77" data-line-number="77"><span class="co"># chkconfig: 2345 91 19</span></a>
+<a class="sourceLine" id="cb16-78" data-line-number="78"><span class="co"># description: manage mariadb </span></a>
+<a class="sourceLine" id="cb16-79" data-line-number="79"></a>
+<a class="sourceLine" id="cb16-80" data-line-number="80"><span class="va">port=</span>4308</a>
+<a class="sourceLine" id="cb16-81" data-line-number="81"><span class="va">mysql_user=</span><span class="st">&quot;root&quot;</span></a>
+<a class="sourceLine" id="cb16-82" data-line-number="82"><span class="va">mysql_pwd=</span><span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb16-83" data-line-number="83"><span class="va">mysql_basedir=</span><span class="st">&quot;/data/scheme2/mysql&quot;</span></a>
+<a class="sourceLine" id="cb16-84" data-line-number="84"><span class="co">#cmd_path=&quot;${mysql_basedir}/${port}/bin&quot;</span></a>
+<a class="sourceLine" id="cb16-85" data-line-number="85"><span class="va">cmd_path=</span><span class="st">&quot;/usr/bin&quot;</span></a>
+<a class="sourceLine" id="cb16-86" data-line-number="86"><span class="va">mysql_sock=</span><span class="st">&quot;</span><span class="va">${mysql_basedir}</span><span class="st">/</span><span class="va">${port}</span><span class="st">/socket/mariadb.sock&quot;</span></a>
+<a class="sourceLine" id="cb16-87" data-line-number="87"></a>
+<a class="sourceLine" id="cb16-88" data-line-number="88"><span class="fu">function_start_mysql()</span></a>
+<a class="sourceLine" id="cb16-89" data-line-number="89"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-90" data-line-number="90">    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span>;<span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-91" data-line-number="91">    <span class="bu">printf</span> <span class="st">&quot;Starting MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-92" data-line-number="92">    <span class="va">cmd=</span><span class="st">&quot;</span><span class="va">${cmd_path}</span><span class="st">/mysqld_safe --defaults-file=</span><span class="va">${mysql_basedir}</span><span class="st">/</span><span class="va">${port}</span><span class="st">/etc/my.cnf&quot;</span></a>
+<a class="sourceLine" id="cb16-93" data-line-number="93">    <span class="bu">printf</span> <span class="st">&quot;</span><span class="va">$cmd</span><span class="st">\n&quot;</span></a>
+<a class="sourceLine" id="cb16-94" data-line-number="94">    <span class="va">${cmd_path}</span><span class="ex">/mysqld_safe</span> --defaults-file=<span class="va">${mysql_basedir}</span>/<span class="va">${port}</span>/etc/my.cnf  <span class="op">&amp;&gt;</span> /dev/null  <span class="kw">&amp;</span></a>
+<a class="sourceLine" id="cb16-95" data-line-number="95">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-96" data-line-number="96">    <span class="bu">printf</span> <span class="st">&quot;MySQL is running...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-97" data-line-number="97">    <span class="bu">exit</span></a>
+<a class="sourceLine" id="cb16-98" data-line-number="98">    <span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-99" data-line-number="99"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-100" data-line-number="100"><span class="fu">function_status_mysql()</span><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-101" data-line-number="101">        <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span> ; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-102" data-line-number="102">                <span class="bu">printf</span> <span class="st">&quot;MySql is running...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-103" data-line-number="103">        <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-104" data-line-number="104">                <span class="bu">printf</span> <span class="st">&quot;MySql is stopped...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-105" data-line-number="105">        <span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-106" data-line-number="106"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-107" data-line-number="107"></a>
+<a class="sourceLine" id="cb16-108" data-line-number="108"><span class="fu">function_stop_mysql()</span></a>
+<a class="sourceLine" id="cb16-109" data-line-number="109"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-110" data-line-number="110">    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$mysql_sock</span><span class="st">&quot;</span><span class="bu"> ]</span>;<span class="kw">then</span></a>
+<a class="sourceLine" id="cb16-111" data-line-number="111">    <span class="bu">printf</span> <span class="st">&quot;MySQL is stopped...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-112" data-line-number="112">    <span class="bu">exit</span></a>
+<a class="sourceLine" id="cb16-113" data-line-number="113">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb16-114" data-line-number="114">    <span class="bu">printf</span> <span class="st">&quot;Stoping MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-115" data-line-number="115">    <span class="va">${cmd_path}</span><span class="ex">/mysqladmin</span> -u <span class="va">${mysql_user}</span> -p<span class="va">${mysql_pwd}</span> -S <span class="va">${mysql_sock}</span> shutdown</a>
+<a class="sourceLine" id="cb16-116" data-line-number="116"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb16-117" data-line-number="117"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-118" data-line-number="118"></a>
+<a class="sourceLine" id="cb16-119" data-line-number="119"></a>
+<a class="sourceLine" id="cb16-120" data-line-number="120"><span class="fu">function_restart_mysql()</span></a>
+<a class="sourceLine" id="cb16-121" data-line-number="121"><span class="kw">{</span></a>
+<a class="sourceLine" id="cb16-122" data-line-number="122">    <span class="bu">printf</span> <span class="st">&quot;Restarting MySQL...\n&quot;</span></a>
+<a class="sourceLine" id="cb16-123" data-line-number="123">    <span class="ex">function_stop_mysql</span></a>
+<a class="sourceLine" id="cb16-124" data-line-number="124">    <span class="fu">sleep</span> 2</a>
+<a class="sourceLine" id="cb16-125" data-line-number="125">    <span class="ex">function_start_mysql</span></a>
+<a class="sourceLine" id="cb16-126" data-line-number="126"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-127" data-line-number="127"></a>
+<a class="sourceLine" id="cb16-128" data-line-number="128"><span class="kw">case</span> <span class="va">$1</span><span class="kw"> in</span></a>
+<a class="sourceLine" id="cb16-129" data-line-number="129">start<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-130" data-line-number="130">        <span class="ex">function_start_mysql</span></a>
+<a class="sourceLine" id="cb16-131" data-line-number="131">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-132" data-line-number="132">stop<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-133" data-line-number="133">        <span class="ex">function_stop_mysql</span></a>
+<a class="sourceLine" id="cb16-134" data-line-number="134">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-135" data-line-number="135">restart<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-136" data-line-number="136">        <span class="ex">function_restart_mysql</span></a>
+<a class="sourceLine" id="cb16-137" data-line-number="137">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-138" data-line-number="138">status<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-139" data-line-number="139">        <span class="ex">function_status_mysql</span></a>
+<a class="sourceLine" id="cb16-140" data-line-number="140">        <span class="kw">;;</span></a>
+<a class="sourceLine" id="cb16-141" data-line-number="141">*<span class="kw">)</span></a>
+<a class="sourceLine" id="cb16-142" data-line-number="142">    <span class="bu">printf</span> <span class="st">&quot;Usage: </span><span class="va">${cmd_path}</span><span class="st">/mysqld {start|stop|restart|status}\n&quot;</span></a>
+<a class="sourceLine" id="cb16-143" data-line-number="143"><span class="kw">esac</span></a>
+<a class="sourceLine" id="cb16-144" data-line-number="144"></a>
+<a class="sourceLine" id="cb16-145" data-line-number="145"><span class="co"># 添加执行权限</span></a>
+<a class="sourceLine" id="cb16-146" data-line-number="146">[<span class="ex">root@centos-158</span> 4307]# chmod a+x /data/scheme2/mysql/4307/service/mysqld.sh </a>
+<a class="sourceLine" id="cb16-147" data-line-number="147">[<span class="ex">root@centos-158</span> 4307]# chmod a+x /data/scheme2/mysql/4308/service/mysqld.sh</a></code></pre></div>
+<h3 id="开机启动-1">开机启动</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1">[<span class="ex">root@centos-158</span> 4307]# ln -s /data/scheme2/mysql/4307/service/mysqld.sh /etc/rc.d/init.d/mysql4307     # 添加到init.d目录</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">[<span class="ex">root@centos-158</span> 4307]# chkconfig --add mysql4307                                                       # 添加到sysv</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">[<span class="ex">root@centos-158</span> 4307]# chkconfig mysql4307 on                                                          # 开机启动</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">[<span class="ex">root@centos-158</span> 4307]# cd ../4308</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">[<span class="ex">root@centos-158</span> 4308]# ln -s /data/scheme2/mysql/4308/service/mysqld.sh /etc/rc.d/init.d/mysql4308     # 添加到init.d目录</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">[<span class="ex">root@centos-158</span> 4308]# chkconfig --add mysql4308                                                       # 添加到sysv</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">[<span class="ex">root@centos-158</span> 4308]# chkconfig mysql4308 on                                                          # 开机启动</a></code></pre></div>
+<h3 id="启动服务和查看状态">启动服务和查看状态</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1">[<span class="ex">root@centos-158</span> 4307]# service mysql4307 start                     # 启动实例</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">[<span class="ex">root@centos-158</span> 4307]# service mysql4308 start                     # 启动实例      </a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">[<span class="ex">root@centos-158</span> 4307]# netstat -tunlp <span class="kw">|</span><span class="fu">grep</span> 430                    # 查看状态</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="ex">tcp6</span>       0      0 :::4307                 :::*                    LISTEN      8221/mysqld         </a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="ex">tcp6</span>       0      0 :::4308                 :::*                    LISTEN      8369/mysqld </a></code></pre></div>
+<h3 id="安全初始化">安全初始化</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1">[<span class="ex">root@centos-158</span> 4307]# mysql_secure_installation  -u root  -S /data/scheme2/mysql/4307/socket/mariadb.sock <span class="co"># 安全初始化，参考方案1</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">[<span class="ex">root@centos-158</span> 4307]# mysql_secure_installation  -u root  -S /data/scheme2/mysql/4308/socket/mariadb.sock <span class="co"># 安全初始化，参考方案1</span></a></code></pre></div>
+<h3 id="服务文件修改密码">服务文件修改密码</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1">[<span class="ex">root@centos-158</span> 4307]# vim service/mysqld.sh               # 修改文件的密码项为上面的安装初始化指定的密码</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="va">mysql_pwd=</span><span class="st">&quot;xxxxx&quot;</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">[<span class="ex">root@centos-158</span> 4307]# chmod 750 service/mysqld.sh         # 带有密码设置下权限</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">[<span class="ex">root@centos-158</span> 4307]# cd ../4308                          </a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">[<span class="ex">root@centos-158</span> 4308]# vim service/mysqld.sh               # 修改文件的密码项为上面的安装初始化指定的密码</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="va">mysql_pwd=</span><span class="st">&quot;xxxxx&quot;</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">[<span class="ex">root@centos-158</span> 4308]# chmod 750 service/mysqld.sh         # 带有密码设置下权限</a></code></pre></div>
+<h2 id="方案3-systemd">方案3-systemd</h2>
+<h3 id="创建目录并修改权限-2">创建目录并修改权限</h3>
+<p>这种方式，需要每个配置文件都要单独存放，可以给目录更详细的规划下</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mkdir -pv /data/scheme3/mysql/<span class="dt">{5307,5308}/{data,log,socket,pid}</span>        # 创建目录</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# chown mysql.mysql /data/scheme3/mysql/5307 -R                          # 所有者修改</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">[<span class="ex">root@centos-158</span> ~]# chown mysql.mysql /data/scheme3/mysql/5308 -R                          # 所有者修改</a></code></pre></div>
+<h3 id="安装数据库-2">安装数据库</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme3/mysql/5307/data --basedir=/usr --user=mysql  # 安装数据库</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# mysql_install_db  --datadir=/data/scheme3/mysql/5308/data --basedir=/usr --user=mysql  # 安装数据库</a></code></pre></div>
+<h3 id="配置配置文件-1">配置配置文件</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mv /etc/my.cnf /etc/my.cnf.multi                       # 原有配置文件重名</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">[<span class="ex">root@centos-158</span> system]# cd /etc/my.cnf.d/                                 # 进入conf.d目录</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">[<span class="ex">root@centos-158</span> my.cnf.d]# vim my5307.cnf                                  # 编辑这个文件，名字为my<span class="op">&lt;</span>instance_nam<span class="op">&gt;</span>.cnf</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">[<span class="ex">root@centos-158</span> my.cnf.d]# cat my5307.cnf                                  # 检查</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">[<span class="ex">mysqld</span>]</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="va">datadir=</span>/data/scheme3/mysql/5307/data</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="va">socket=</span>/data/scheme3/mysql/5307/socket/mariadb.sock</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="va">port=</span>5307</a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"><span class="ex">log-error</span>=/data/scheme3/mysql/5307/log/mariadb.log</a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="ex">pid-file</span>=/data/scheme3/mysql/5307/pid/mariadb.pid</a>
+<a class="sourceLine" id="cb23-12" data-line-number="12">[<span class="ex">root@centos-158</span> my.cnf.d]# vim my5308.cnf                                  # 编辑这个文件</a>
+<a class="sourceLine" id="cb23-13" data-line-number="13">[<span class="ex">root@centos-158</span> my.cnf.d]# cat my5308.cnf                                  # 检查</a>
+<a class="sourceLine" id="cb23-14" data-line-number="14">[<span class="ex">mysql</span>]</a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="va">datadir=</span>/data/scheme3/mysql/5308/data</a>
+<a class="sourceLine" id="cb23-16" data-line-number="16"><span class="va">socket=</span>/data/scheme3/mysql/5308/socket/mariadb.sock</a>
+<a class="sourceLine" id="cb23-17" data-line-number="17"><span class="va">port=</span>5308</a>
+<a class="sourceLine" id="cb23-18" data-line-number="18"><span class="ex">log-error</span>=/data/scheme3/mysql/5308/log/mariadb.log</a>
+<a class="sourceLine" id="cb23-19" data-line-number="19"><span class="ex">pid-file</span>=/data/scheme3/mysql/5308/pid/mariadb.pid</a></code></pre></div>
+<h3 id="配置systemd">配置systemd</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" data-line-number="1">[<span class="ex">root@centos-158</span> my.cnf.d]# vim /usr/lib/systemd/system/mariadb@.service        # 修改mariadb@service文件默认项</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co"># 修改如下内容</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="va">ConditionPathExists=</span>/etc/my.cnf.d/my%I.cnf</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="va">ExecStartPre=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;[ ! -e /usr/bin/galera_recovery ] &amp;&amp; VAR= || \</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="st">VAR=</span><span class="kw">`</span><span class="ex">/usr/bin/galera_recovery</span> --defaults-file=/etc/my.cnf.d/my%I.cnf<span class="kw">`</span><span class="st">; [ </span><span class="va">$?</span><span class="st"> -eq 0 ] \</span></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="st">&amp;&amp; systemctl set-environment _WSREP_START_POSITION%I=</span><span class="va">$VAR</span><span class="st"> || exit 1&quot;</span></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb24-9" data-line-number="9"><span class="va">ExecStart=</span>/usr/sbin/mysqld <span class="ex">--defaults-file</span>=/etc/my.cnf.d/my%I.cnf \</a>
+<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="va">$_WSREP_NEW_CLUSTER</span> <span class="va">$_WSREP_START_POSITION</span>%I <span class="va">$MYSQLD_OPTS</span></a></code></pre></div>
+<p>上面的简单的说就是说明下mysqld命令的路径，指定你的实例所在的路径%I代表实例名字。后续启动的systemctl start <a href="mailto:mariadb@5307这个命令中">mariadb@5307这个命令中</a>，5307就是实例名字。</p>
+<p>这个文件有点多， 提供一个下载参考吧。</p>
+<p><span data-role="download">/files/mariadb@.service</span></p>
+<h3 id="启动服务和查看状态-1">启动服务和查看状态</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" data-line-number="1">[<span class="ex">root@centos-158</span> my.cnf.d]# systemctl daemon-reload                 # 重载systemd</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">[<span class="ex">root@centos-158</span> my.cnf.d]# systemctl start mariadb@5307            # 启动实例</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">[<span class="ex">root@centos-158</span> my.cnf.d]# systemctl start mariadb@5308            # 启动实例</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">[<span class="ex">root@centos-158</span> my.cnf.d]# netstat -tunlp <span class="kw">|</span><span class="fu">grep</span> 530                # 查看服务状态</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="ex">tcp6</span>       0      0 :::5307                 :::*                    LISTEN      10267/mysqld        </a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="ex">tcp6</span>       0      0 :::5308                 :::*                    LISTEN      10595/mysqld  </a></code></pre></div>
+<h3 id="开机启动-2">开机启动</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" data-line-number="1">[<span class="ex">root@centos-158</span> my.cnf.d]# systemctl enable  mariadb@5307           # 开机启动这个实例</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="ex">Created</span> symlink from /etc/systemd/system/multi-user.target.wants/mariadb@5307.service to /usr/lib/systemd/system/mariadb@.service.</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">[<span class="ex">root@centos-158</span> my.cnf.d]# systemctl enable  mariadb@5308           # 开机启动这个实例</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="ex">Created</span> symlink from /etc/systemd/system/multi-user.target.wants/mariadb@5308.service to /usr/lib/systemd/system/mariadb@.service.</a></code></pre></div>
+<h3 id="安全初始化-1">安全初始化</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" data-line-number="1">[<span class="ex">root@centos-158</span> ~]# mysql_secure_installation  -u root  -S /data/scheme3/mysql/5307/socket/mariadb.sock    # 安全设置</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">[<span class="ex">root@centos-158</span> ~]# mysql_secure_installation  -u root  -S /data/scheme3/mysql/5308/socket/mariadb.sock    # 安全设置</a></code></pre></div>

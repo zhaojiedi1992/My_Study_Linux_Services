@@ -307,7 +307,8 @@ userdir_module
     userdir_module (shared)
 
 配置
-.. code-block:: bash
+
+.. code-block:: text
 
     [root@102 conf.d]$ vim /etc/httpd/conf.d/userdir.conf
     <IfModule mod_userdir.c>

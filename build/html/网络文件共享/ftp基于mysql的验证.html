@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11.4. ftp基于mysql的验证 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 网络文件共享" href="index.html"/>
+        <link rel="next" title="11.5. nfs入门" href="nfs.html"/>
+        <link rel="prev" title="11.3. ftp基于文件的验证" href="ftp基于文件的验证.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.4. ftp基于mysql的验证</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">11.4.1. 数据库服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">11.4.1.1. 安装软件和安全初始化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">11.4.1.2. 创建数据库对象</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ftp">11.4.2. ftp服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vsftpd">11.4.2.1. 安装vsftpd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pam-mysql">11.4.2.2. 编译pam-mysql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">11.4.2.3. 配置文件</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.4.3. 测试</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">11.6. samba</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
+        
+      <li>11.4. ftp基于mysql的验证</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/网络文件共享/ftp基于mysql的验证.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ftpmysql">
+<h1>11.4. ftp基于mysql的验证<a class="headerlink" href="#ftpmysql" title="Permalink to this headline">¶</a></h1>
+<p>本篇文章主要实现基于mysql的ftp认证，包含3台机器，数据库服务器、ftp服务器、客户机。</p>
+<div class="section" id="id1">
+<h2>11.4.1. 数据库服务器配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>11.4.1.1. 安装软件和安全初始化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart mariadb                                                                             :::3306                                                                                                :::*</span>
+<span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># ss -tunl |grep 3306</span>
+tcp    LISTEN     <span class="m">0</span>      <span class="m">80</span>       :::3306                 :::*
+<span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>11.4.1.2. 创建数据库对象<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MariaDB connection id is <span class="m">27</span>
+Server version: <span class="m">10</span>.2.12-MariaDB MariaDB Server
+
+Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; create database vsftpd<span class="p">;</span>
+Query OK, <span class="m">1</span> row affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show databases<span class="p">;</span>
++--------------------+
+<span class="p">|</span> Database           <span class="p">|</span>
++--------------------+
+<span class="p">|</span> information_schema <span class="p">|</span>
+<span class="p">|</span> mysql              <span class="p">|</span>
+<span class="p">|</span> performance_schema <span class="p">|</span>
+<span class="p">|</span> vsftpd             <span class="p">|</span>
++--------------------+
+<span class="m">5</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant <span class="k">select</span> on vsftpd.* to vsftpd@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;panda&#39;</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; flush privileges<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; use vsftpd<span class="p">;</span>
+Database changed
+
+MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; create table users <span class="o">(</span> id int auto_increment primary key , name char<span class="o">(</span><span class="m">50</span><span class="o">)</span> binary not null , password char<span class="o">(</span><span class="m">50</span><span class="o">)</span> binary not null <span class="o">)</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.01 sec<span class="o">)</span>
+
+MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; insert into users <span class="o">(</span>name,password<span class="o">)</span> values<span class="o">(</span><span class="s1">&#39;panda1&#39;</span> , password<span class="o">(</span><span class="s1">&#39;panda1&#39;</span><span class="o">))</span><span class="p">;</span>
+Query OK, <span class="m">1</span> row affected <span class="o">(</span><span class="m">0</span>.01 sec<span class="o">)</span>
+
+MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; insert into users <span class="o">(</span>name,password<span class="o">)</span> values<span class="o">(</span><span class="s1">&#39;panda2&#39;</span> , password<span class="o">(</span><span class="s1">&#39;panda2&#39;</span><span class="o">))</span><span class="p">;</span>
+Query OK, <span class="m">1</span> row affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; <span class="k">select</span> * from users<span class="p">;</span>
++----+--------+-------------------------------------------+
+<span class="p">|</span> id <span class="p">|</span> name   <span class="p">|</span> password                                  <span class="p">|</span>
++----+--------+-------------------------------------------+
+<span class="p">|</span>  <span class="m">1</span> <span class="p">|</span> panda1 <span class="p">|</span> *27BA6759E5C46E9564CA47033CA0FA65507DB3D0 <span class="p">|</span>
+<span class="p">|</span>  <span class="m">2</span> <span class="p">|</span> panda2 <span class="p">|</span> *9D961D6FF5C5B00850EFF7DA36AC400326748EE0 <span class="p">|</span>
++----+--------+-------------------------------------------+
+<span class="m">2</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ftp">
+<h2>11.4.2. ftp服务器配置<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vsftpd">
+<h3>11.4.2.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># yum install vsftpd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pam-mysql">
+<h3>11.4.2.2. 编译pam-mysql<a class="headerlink" href="#pam-mysql" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装必要的环境包</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum install mariadb-devel pam-devel</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
+
+<span class="c1"># 下载编译安装</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># wget https://jaist.dl.sourceforge.net/project/pam-mysql/pam-mysql/0.7RC1/pam_mysql-0.7RC1.tar.gz</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># tar xf pam_mysql-0.7RC1.tar.gz</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># cat README</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># cat INSTALL</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># ./configure  --with-pam-mods-dir=/lib64/security</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># make &amp;&amp; make install</span>
+
+<span class="c1"># 查看模块</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># ll /lib64/security/ |grep mysql</span>
+-rwxr-xr-x  <span class="m">1</span> root root    <span class="m">882</span> Feb  <span class="m">4</span> <span class="m">06</span>:23 pam_mysql.la
+-rwxr-xr-x  <span class="m">1</span> root root <span class="m">141680</span> Feb  <span class="m">4</span> <span class="m">06</span>:23 pam_mysql.so
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>11.4.2.3. 配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>pam模块配置</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/pam.d/vsftpd.mysql</span>
+<span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># cat /etc/pam.d/vsftpd.mysql</span>
+auth required pam_mysql.so <span class="nv">user</span><span class="o">=</span>vsftpd <span class="nv">passwd</span><span class="o">=</span>panda    <span class="nv">host</span><span class="o">=</span><span class="m">192</span>.168.46.159 <span class="nv">db</span><span class="o">=</span>vsftpd <span class="nv">table</span><span class="o">=</span>users <span class="nv">usercolumn</span><span class="o">=</span>name <span class="nv">passwdcolumn</span><span class="o">=</span>password <span class="nv">crypt</span><span class="o">=</span><span class="m">2</span>
+account required pam_mysql.so <span class="nv">user</span><span class="o">=</span>vsftpd <span class="nv">passwd</span><span class="o">=</span>panda <span class="nv">host</span><span class="o">=</span><span class="m">192</span>.168.46.159 <span class="nv">db</span><span class="o">=</span>vsftpd <span class="nv">table</span><span class="o">=</span>users <span class="nv">usercolumn</span><span class="o">=</span>name <span class="nv">passwdcolumn</span><span class="o">=</span>password <span class="nv">crypt</span><span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+<p>vsftpd配置</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/vsftpd/vsftpd.conf</span>
+<span class="c1"># 添加如下3行</span>
+<span class="nv">guest_enable</span><span class="o">=</span>YES
+<span class="nv">guest_username</span><span class="o">=</span>ftpuser
+<span class="nv">user_config_dir</span><span class="o">=</span>/etc/vsftpd/mysql.users.conf.d/
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># mkdir mysql.users.conf.d</span>
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># cd mysql.users.conf.d/</span>
+<span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># vim panda1</span>
+<span class="o">[</span>rootn@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># cat panda1</span>
+<span class="nv">anon_upload_enable</span><span class="o">=</span>YES
+<span class="nv">anon_mkdir_write_enable</span><span class="o">=</span>YES
+</pre></div>
+</div>
+<p>添加虚拟用户的目录</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># useradd -d /data/ftpuser -s /sbin/nologin ftpuser</span>
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># chmod a-w /data/ftpuser/</span>
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># mkdir /data/ftpuser/{pub,upload}</span>
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># setfacl -m u:ftpuser:rwx /data/ftpuser/upload/</span>
+<span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># setfacl -m u:ftpuser:rx /data/ftpuser/pub/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>11.4.3. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>测试前重启服务</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># ftp 192.168.46.152</span>
+Connected to <span class="m">192</span>.168.46.152 <span class="o">(</span><span class="m">192</span>.168.46.152<span class="o">)</span>.
+<span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
+Name <span class="o">(</span><span class="m">192</span>.168.46.152:root<span class="o">)</span>: panda1
+<span class="m">331</span> Please specify the password.
+Password:
+<span class="m">230</span> Login successful.
+Remote system <span class="nb">type</span> is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">pwd</span>
+<span class="m">257</span> <span class="s2">&quot;/&quot;</span>
+ftp&gt; <span class="nb">cd</span> upload
+<span class="m">250</span> Directory successfully changed.
+ftp&gt; !ls
+panda1
+ftp&gt; lcd /root
+Local directory now /root
+ftp&gt; !ls
+anaconda-ks.cfg  anaconda-ks.cfg.bak  ansible  bigfile      bin  hosts.txt  localhost.localdomain.txt  q  test.sh
+ftp&gt; put bigfile
+local: bigfile remote: bigfile
+<span class="m">227</span> Entering Passive Mode <span class="o">(</span><span class="m">192</span>,168,46,152,163,95<span class="o">)</span>.
+<span class="m">150</span> Ok to send data.
+<span class="m">226</span> Transfer complete.
+<span class="m">1900544</span> bytes sent in <span class="m">0</span>.303 secs <span class="o">(</span><span class="m">6267</span>.05 Kbytes/sec<span class="o">)</span>
+ftp&gt; quit
+<span class="m">221</span> Goodbye.
+<span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># ftp 192.168.46.152</span>
+Connected to <span class="m">192</span>.168.46.152 <span class="o">(</span><span class="m">192</span>.168.46.152<span class="o">)</span>.
+<span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
+Name <span class="o">(</span><span class="m">192</span>.168.46.152:root<span class="o">)</span>: panda2
+<span class="m">331</span> Please specify the password.
+Password:
+<span class="m">230</span> Login successful.
+Remote system <span class="nb">type</span> is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">cd</span> uploads
+<span class="m">550</span> Failed to change directory.
+ftp&gt; <span class="nb">cd</span> upload
+<span class="m">250</span> Directory successfully changed.
+ftp&gt; lcd /root
+Local directory now /root
+ftp&gt; !ls
+anaconda-ks.cfg  anaconda-ks.cfg.bak  ansible  bigfile      bin  hosts.txt  localhost.localdomain.txt  q  test.sh
+ftp&gt; put bigfile
+local: bigfile remote: bigfile
+<span class="m">227</span> Entering Passive Mode <span class="o">(</span><span class="m">192</span>,168,46,152,46,63<span class="o">)</span>.
+<span class="m">550</span> Permission denied.
+ftp&gt; quit
+<span class="m">221</span> Goodbye.
+</pre></div>
+</div>
+<p>可以发现，panda1和panda2都是通过认证成功的用户，只是panda1有自己的额外配置才有了上传权限。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nfs.html" class="btn btn-neutral float-right" title="11.5. nfs入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ftp基于文件的验证.html" class="btn btn-neutral" title="11.3. ftp基于文件的验证" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
