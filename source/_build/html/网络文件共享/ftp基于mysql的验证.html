@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.4. ftp基于mysql的验证 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>11.4. ftp基于mysql的验证 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="10. 网络文件共享" href="index.html"/>
-        <link rel="next" title="10.5. nfs入门" href="nfs.html"/>
-        <link rel="prev" title="10.3. ftp基于文件的验证" href="ftp基于文件的验证.html"/> 
+        <link rel="up" title="11. 网络文件共享" href="index.html"/>
+        <link rel="next" title="11.5. nfs入门" href="nfs.html"/>
+        <link rel="prev" title="11.3. ftp基于文件的验证" href="ftp基于文件的验证.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -102,31 +102,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. 网络文件共享</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ftp.html">10.1. ftp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html">10.2. ftps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">10.3. ftp基于文件的验证</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.4. ftp基于mysql的验证</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">10.4.1. 数据库服务器配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">10.4.1.1. 安装软件和安全初始化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">10.4.1.2. 创建数据库对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.4. ftp基于mysql的验证</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">11.4.1. 数据库服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">11.4.1.1. 安装软件和安全初始化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">11.4.1.2. 创建数据库对象</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ftp">10.4.2. ftp服务器配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#vsftpd">10.4.2.1. 安装vsftpd</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pam-mysql">10.4.2.2. 编译pam-mysql</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">10.4.2.3. 配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ftp">11.4.2. ftp服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vsftpd">11.4.2.1. 安装vsftpd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pam-mysql">11.4.2.2. 编译pam-mysql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">11.4.2.3. 配置文件</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">10.4.3. 测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.4.3. 测试</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html">10.5. nfs入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html">10.6. samba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">11.6. samba</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -171,9 +172,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">10. 网络文件共享</a> &raquo;</li>
+          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
         
-      <li>10.4. ftp基于mysql的验证</li>
+      <li>11.4. ftp基于mysql的验证</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -193,12 +194,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="ftpmysql">
-<h1>10.4. ftp基于mysql的验证<a class="headerlink" href="#ftpmysql" title="Permalink to this headline">¶</a></h1>
+<h1>11.4. ftp基于mysql的验证<a class="headerlink" href="#ftpmysql" title="Permalink to this headline">¶</a></h1>
 <p>本篇文章主要实现基于mysql的ftp认证，包含3台机器，数据库服务器、ftp服务器、客户机。</p>
 <div class="section" id="id1">
-<h2>10.4.1. 数据库服务器配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.1. 数据库服务器配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
-<h3>10.4.1.1. 安装软件和安全初始化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.1.1. 安装软件和安全初始化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart mariadb                                                                             :::3306                                                                                                :::*</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># ss -tunl |grep 3306</span>
@@ -208,7 +209,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">80</span>       
 </div>
 </div>
 <div class="section" id="id3">
-<h3>10.4.1.2. 创建数据库对象<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.1.2. 创建数据库对象<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
@@ -264,15 +265,15 @@ MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; <span class="
 </div>
 </div>
 <div class="section" id="ftp">
-<h2>10.4.2. ftp服务器配置<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.2. ftp服务器配置<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="vsftpd">
-<h3>10.4.2.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.2.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># yum install vsftpd</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="pam-mysql">
-<h3>10.4.2.2. 编译pam-mysql<a class="headerlink" href="#pam-mysql" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.2.2. 编译pam-mysql<a class="headerlink" href="#pam-mysql" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装必要的环境包</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum install mariadb-devel pam-devel</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
@@ -294,7 +295,7 @@ MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; <span class="
 </div>
 </div>
 <div class="section" id="id4">
-<h3>10.4.2.3. 配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.2.3. 配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>pam模块配置</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/pam.d/vsftpd.mysql</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># cat /etc/pam.d/vsftpd.mysql</span>
@@ -327,7 +328,7 @@ account required pam_mysql.so <span class="nv">user</span><span class="o">=</spa
 </div>
 </div>
 <div class="section" id="id5">
-<h2>10.4.3. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.3. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>测试前重启服务</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># ftp 192.168.46.152</span>
 Connected to <span class="m">192</span>.168.46.152 <span class="o">(</span><span class="m">192</span>.168.46.152<span class="o">)</span>.
@@ -395,10 +396,10 @@ ftp&gt; quit
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nfs.html" class="btn btn-neutral float-right" title="10.5. nfs入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nfs.html" class="btn btn-neutral float-right" title="11.5. nfs入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ftp基于文件的验证.html" class="btn btn-neutral" title="10.3. ftp基于文件的验证" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ftp基于文件的验证.html" class="btn btn-neutral" title="11.3. ftp基于文件的验证" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

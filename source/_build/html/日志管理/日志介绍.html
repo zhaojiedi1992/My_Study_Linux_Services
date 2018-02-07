@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>日志介绍 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.1. 日志介绍 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="10. 日志管理" href="index.html"/>
+        <link rel="next" title="10.2. 日志管理系统搭建" href="日志管理系统搭建.html"/>
+        <link rel="prev" title="10. 日志管理" href="index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
@@ -99,9 +102,37 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">10. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. 日志管理</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.1. 日志介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.1.1. 日志基础概念</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">10.1.1.1. 日志的提供程序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.1.1.2. 日志的设施</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.1.1.3. 日志级别</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rsyslog">10.1.2. rsyslog配置文件</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">10.1.2.1. 模块说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">10.1.2.2. 输出位置说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.1.2.3. 默认配置位置的日志记录规则说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">10.1.3. 样例配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sshd">10.1.3.1. 修改sshd的所有日志信息到到单独的文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">10.1.3.2. 修改sshd的所有日志信息到远程主机</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">10.1.3.3. 常见日志文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#journalctl">10.1.3.4. journalctl命令使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">10.1.3.5. 样例使用</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">10.1.4. 日志转储</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html">10.2. 日志管理系统搭建</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">11. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -146,7 +177,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>日志介绍</li>
+          <li><a href="index.html">10. 日志管理</a> &raquo;</li>
+        
+      <li>10.1. 日志介绍</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,12 +199,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>日志介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>10.1. 日志介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>日志主要记录时间、地点、任务和事件。</p>
 <div class="section" id="id2">
-<h2>日志基础概念<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>10.1.1. 日志基础概念<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
-<h3>日志的提供程序<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.1.1. 日志的提供程序<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="21%" />
@@ -206,7 +239,7 @@
 </table>
 </div>
 <div class="section" id="id4">
-<h3>日志的设施<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.1.2. 日志的设施<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="33%" />
@@ -261,7 +294,7 @@
 </table>
 </div>
 <div class="section" id="id5">
-<h3>日志级别<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.1.3. 日志级别<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="33%" />
@@ -302,7 +335,7 @@
 </div>
 </div>
 <div class="section" id="rsyslog">
-<h2>rsyslog配置文件<a class="headerlink" href="#rsyslog" title="Permalink to this headline">¶</a></h2>
+<h2>10.1.2. rsyslog配置文件<a class="headerlink" href="#rsyslog" title="Permalink to this headline">¶</a></h2>
 <p>rsyslog的配置文件主要包括三个大的片段</p>
 <dl class="docutils">
 <dt>全局片段</dt>
@@ -315,7 +348,7 @@
 <dd>规则有选择器和动作构成</dd>
 </dl>
 <div class="section" id="id6">
-<h3>模块说明<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.2.1. 模块说明<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="33%" />
@@ -370,7 +403,7 @@
 </table>
 </div>
 <div class="section" id="id7">
-<h3>输出位置说明<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.2.2. 输出位置说明<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="20%" />
@@ -434,7 +467,7 @@
 </table>
 </div>
 <div class="section" id="id8">
-<h3>默认配置位置的日志记录规则说明<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.2.3. 默认配置位置的日志记录规则说明<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>[root@102 ~]$vim /etc/rsyslog.conf
 #记录所有设置的info级别的信息,但是排除mail,authpriv,cron的信息。
 *.info;mail.none;authpriv.none;cron.none                /var/log/messages
@@ -462,9 +495,9 @@ local7.*                                                /var/log/boot.log
 </div>
 </div>
 <div class="section" id="id9">
-<h2>样例配置<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h2>10.1.3. 样例配置<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="sshd">
-<h3>修改sshd的所有日志信息到到单独的文件<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.3.1. 修改sshd的所有日志信息到到单独的文件<a class="headerlink" href="#sshd" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ~<span class="o">]</span><span class="nv">$vim</span> /etc/rsyslog.d/sshd.conf
 <span class="o">[</span>root@102 ~<span class="o">]</span><span class="nv">$cat</span> /etc/rsyslog.d/sshd.conf
 local1.*                 /var/log/sshd.log
@@ -484,7 +517,7 @@ Feb  <span class="m">1</span> <span class="m">09</span>:42:14 <span class="m">10
 </div>
 </div>
 <div class="section" id="id10">
-<h3>修改sshd的所有日志信息到远程主机<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.3.2. 修改sshd的所有日志信息到远程主机<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span># 这里涉及到2台主机，主要思路先启用服务器端的监听，然后在客户端配置要配置要推送地址
 [root@centos-158 ~]# vim /etc/rsyslog.conf
 # 解注释如下4行
@@ -548,7 +581,7 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
 </div>
 </div>
 <div class="section" id="id11">
-<h3>常见日志文件<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.3.3. 常见日志文件<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="33%" />
@@ -590,7 +623,7 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
 </table>
 </div>
 <div class="section" id="journalctl">
-<h3>journalctl命令使用<a class="headerlink" href="#journalctl" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.3.4. journalctl命令使用<a class="headerlink" href="#journalctl" title="Permalink to this headline">¶</a></h3>
 <p>systemd统一管理所有unit的启动日志，值使用journalctl就可以管理日志。</p>
 <table class="docutils option-list" frame="void" rules="none">
 <col class="option" />
@@ -654,11 +687,11 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
 </table>
 </div>
 <div class="section" id="id12">
-<h3>样例使用<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<h3>10.1.3.5. 样例使用<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 <div class="section" id="id13">
-<h2>日志转储<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<h2>10.1.4. 日志转储<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
 <p>linux的日志转储有logrorate提供，可以安装时间，文件大小来自动滚动日志文件，简化日志管理。</p>
 </div>
 </div>
@@ -670,6 +703,15 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="日志管理系统搭建.html" class="btn btn-neutral float-right" title="10.2. 日志管理系统搭建" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="10. 日志管理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.6. samba &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>11.6. samba &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="10. 网络文件共享" href="index.html"/>
-        <link rel="next" title="11. 版本控制" href="../版本控制/index.html"/>
-        <link rel="prev" title="10.5. nfs入门" href="nfs.html"/> 
+        <link rel="up" title="11. 网络文件共享" href="index.html"/>
+        <link rel="next" title="12. 版本控制" href="../版本控制/index.html"/>
+        <link rel="prev" title="11.5. nfs入门" href="nfs.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -102,37 +102,38 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. 网络文件共享</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ftp.html">10.1. ftp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html">10.2. ftps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">10.3. ftp基于文件的验证</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">10.4. ftp基于mysql的验证</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html">10.5. nfs入门</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.6. samba</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#windowslinux">10.6.1. windows共享给linux</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#window">10.6.1.1. 在window设置共享</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">10.6.1.2. 本机测试</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#linux">10.6.1.3. linux挂载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.6. samba</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windowslinux">11.6.1. windows共享给linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#window">11.6.1.1. 在window设置共享</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">11.6.1.2. 本机测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">11.6.1.3. linux挂载</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">10.6.2. samba主要配置项</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#linuxwindow">10.6.3. linux共享给window</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">10.6.3.1. linux配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#windows">10.6.3.2. windows挂载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.6.2. samba主要配置项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linuxwindow">11.6.3. linux共享给window</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">11.6.3.1. linux配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">11.6.3.2. windows挂载</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">10.6.4. samba多用户挂载</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">10.6.4.1. 服务端配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">10.6.4.2. 客户端配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">10.6.4.3. 客户端测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.6.4. samba多用户挂载</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">11.6.4.1. 服务端配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">11.6.4.2. 客户端配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">11.6.4.3. 客户端测试</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -177,9 +178,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">10. 网络文件共享</a> &raquo;</li>
+          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
         
-      <li>10.6. samba</li>
+      <li>11.6. samba</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -199,22 +200,22 @@
            <div itemprop="articleBody">
             
   <div class="section" id="samba">
-<h1>10.6. samba<a class="headerlink" href="#samba" title="Permalink to this headline">¶</a></h1>
+<h1>11.6. samba<a class="headerlink" href="#samba" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="windowslinux">
-<h2>10.6.1. windows共享给linux<a class="headerlink" href="#windowslinux" title="Permalink to this headline">¶</a></h2>
+<h2>11.6.1. windows共享给linux<a class="headerlink" href="#windowslinux" title="Permalink to this headline">¶</a></h2>
 <p>我想把windows机器上’e:迅雷下载’共享出来给linux使用</p>
 <div class="section" id="window">
-<h3>10.6.1.1. 在window设置共享<a class="headerlink" href="#window" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.1.1. 在window设置共享<a class="headerlink" href="#window" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/共享.png" src="../_images/共享.png" />
 <img alt="../_images/共享设置权限.png" src="../_images/共享设置权限.png" />
 <img alt="../_images/共享添加指定用户.png" src="../_images/共享添加指定用户.png" />
 </div>
 <div class="section" id="id1">
-<h3>10.6.1.2. 本机测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.1.2. 本机测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/共享windows测试.png" src="../_images/共享windows测试.png" />
 </div>
 <div class="section" id="linux">
-<h3>10.6.1.3. linux挂载<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.1.3. linux挂载<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>[root@centos-155 ~]# yum install samba samba-client cifs-utils samba-common-tools
 [root@centos-155 ~]# rpm -ql samba
 [root@centos-155 ~]# rpm -ql samba-client
@@ -261,7 +262,7 @@ drwxr-xr-x 2 root root          0 Nov 19 21:24 下载合集
 </div>
 </div>
 <div class="section" id="id2">
-<h2>10.6.2. samba主要配置项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>11.6.2. samba主要配置项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text"><div class="highlight"><pre><span></span>workgroup                   工作组
 server string               服务器字符串，支持宏定义
 netbios name                netbios名字和主机名无关
@@ -283,9 +284,9 @@ valid users                 特定用户才能访问
 </div>
 </div>
 <div class="section" id="linuxwindow">
-<h2>10.6.3. linux共享给window<a class="headerlink" href="#linuxwindow" title="Permalink to this headline">¶</a></h2>
+<h2>11.6.3. linux共享给window<a class="headerlink" href="#linuxwindow" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
-<h3>10.6.3.1. linux配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.3.1. linux配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加用户</span>
 
 <span class="o">[</span>root@centos-155 mnt<span class="o">]</span><span class="c1"># useradd panda1</span>
@@ -336,7 +337,7 @@ udp        <span class="m">0</span>      <span class="m">0</span> <span class="m
 </div>
 </div>
 <div class="section" id="windows">
-<h3>10.6.3.2. windows挂载<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.3.2. windows挂载<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/samba认证.png" src="../_images/samba认证.png" />
 <img alt="../_images/挂载后的界面.png" src="../_images/挂载后的界面.png" />
 <img alt="../_images/输入密码查看文件.png" src="../_images/输入密码查看文件.png" />
@@ -351,11 +352,11 @@ total <span class="m">4</span>
 </div>
 </div>
 <div class="section" id="id4">
-<h2>10.6.4. samba多用户挂载<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>11.6.4. samba多用户挂载<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>默认samba是单用户挂载的。centos7中可以启用多用户挂载功能，在客户端登陆的不同用户访问
 同一个samba的挂载点，获取不同的权限。</p>
 <div class="section" id="id5">
-<h3>10.6.4.1. 服务端配置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.4.1. 服务端配置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># yum install samba</span>
 <span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># mkdir /multiuser</span>
 <span class="o">[</span>root@centos-155 /<span class="o">]</span><span class="c1"># vim /etc/samba/smb.conf</span>
@@ -383,7 +384,7 @@ total <span class="m">4</span>
 </div>
 </div>
 <div class="section" id="id6">
-<h3>10.6.4.2. 客户端配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.4.2. 客户端配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install cifs-utils^C</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir /mnt/smb</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># echo &quot;username=smbuser2&quot; &gt; /etc/multiuser</span>
@@ -405,7 +406,7 @@ total <span class="m">4</span>
 </div>
 </div>
 <div class="section" id="id7">
-<h3>10.6.4.3. 客户端测试<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>11.6.4.3. 客户端测试<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># su - panda2</span>
 Last login: Tue Feb  <span class="m">6</span> <span class="m">15</span>:06:44 CST <span class="m">2018</span> on pts/0
 <span class="o">[</span>panda2@centos-152 ~<span class="o">]</span>$ touch /mnt/smb/a.txt
@@ -442,10 +443,10 @@ total <span class="m">0</span>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../版本控制/index.html" class="btn btn-neutral float-right" title="11. 版本控制" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../版本控制/index.html" class="btn btn-neutral float-right" title="12. 版本控制" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="nfs.html" class="btn btn-neutral" title="10.5. nfs入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nfs.html" class="btn btn-neutral" title="11.5. nfs入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

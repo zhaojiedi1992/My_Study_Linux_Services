@@ -102,7 +102,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">8. 数据库</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="数据库基础.html">8.1. 数据库基础</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.2. sql语句</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.2. sql语句</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">8.2.1. sql基础</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#select">8.2.1.1. select</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distinct">8.2.1.2. distinct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where">8.2.1.3. where</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#and-or">8.2.1.4. and &amp; or</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#order-by">8.2.1.5. order by</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#insert">8.2.1.6. insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update">8.2.1.7. update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete">8.2.1.8. delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">8.2.1.9. select</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="mysql/mysql安装.html">8.3. mysql安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mysql/mysql多实例.html">8.4. mariadb多实例安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mysql/mysql终端入门.html">8.5. mysql终端入门</a></li>
@@ -181,6 +195,155 @@
             
   <div class="section" id="sql">
 <h1>8.2. sql语句<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>8.2.1. sql基础<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>sql语句分为2个部分，数据操作语言和数据定义语言。</p>
+<p>dml语言</p>
+<ol class="arabic simple">
+<li>select</li>
+<li>update</li>
+<li>delete</li>
+<li>insert</li>
+</ol>
+<p>ddl语句</p>
+<ol class="arabic simple">
+<li>create</li>
+<li>alter</li>
+<li>drop</li>
+<li>truncate</li>
+</ol>
+<div class="section" id="select">
+<h3>8.2.1.1. select<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h3>
+<p>select语句用于从表中选取数据。</p>
+<p>语法</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>select 列名称   from   表名称
+select   *      from   表名称
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">“*”代表通配所有列。</p>
+</div>
+<p>样例</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">LastName</span><span class="p">,</span><span class="n">FirstName</span> <span class="k">FROM</span> <span class="n">Persons</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="distinct">
+<h3>8.2.1.2. distinct<a class="headerlink" href="#distinct" title="Permalink to this headline">¶</a></h3>
+<p>distinct用于返回结果集合的唯一不同的值，也就是相同的只显示一次。</p>
+<p>语法</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>select distinct 列名称   from   表名称
+</pre></div>
+</div>
+<p>样例</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">company</span> <span class="k">FROM</span> <span class="n">Persons</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="where">
+<h3>8.2.1.3. where<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h3>
+<p>where语句配合select语句或者其他语句使用，用于有条件的做对应的处理。</p>
+<p>语法</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
+</pre></div>
+</div>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">操作符号</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>=</td>
+<td>等于</td>
+</tr>
+<tr class="row-odd"><td>&lt;&gt;</td>
+<td>不等于</td>
+</tr>
+<tr class="row-even"><td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr class="row-odd"><td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr class="row-even"><td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+<tr class="row-odd"><td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr class="row-even"><td>BETWEEN</td>
+<td>在某个范围内</td>
+</tr>
+<tr class="row-odd"><td>LIKE</td>
+<td>搜索某种模式</td>
+</tr>
+</tbody>
+</table>
+<p>样例</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">City</span><span class="o">=</span><span class="s1">&#39;Beijing&#39;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">sql语句中关键才是不区分大小写的，但是指定的字符串是区分大小写的，字符串使用单引号。</p>
+</div>
+</div>
+<div class="section" id="and-or">
+<h3>8.2.1.4. and &amp; or<a class="headerlink" href="#and-or" title="Permalink to this headline">¶</a></h3>
+<p>and的功能就是把多个where语句组合起来，每个条件都成立才处理后续。</p>
+<p>or的功能就是把多个where语句组合起来，任何一个条件成立就处理。</p>
+<p>样例</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">FirstName</span><span class="o">=</span><span class="s1">&#39;Thomas&#39;</span> <span class="k">AND</span> <span class="n">LastName</span><span class="o">=</span><span class="s1">&#39;Carter&#39;</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="p">(</span><span class="n">FirstName</span><span class="o">=</span><span class="s1">&#39;Thomas&#39;</span> <span class="k">OR</span> <span class="n">FirstName</span><span class="o">=</span><span class="s1">&#39;William&#39;</span><span class="p">)</span>
+<span class="k">AND</span> <span class="n">LastName</span><span class="o">=</span><span class="s1">&#39;Carter&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="order-by">
+<h3>8.2.1.5. order by<a class="headerlink" href="#order-by" title="Permalink to this headline">¶</a></h3>
+<p>order by 语句用于根据指定列来对查询的结果进行排序。</p>
+<p>样例</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">-- 按照company字母排序（默认升序）</span>
+<span class="k">SELECT</span> <span class="n">Company</span><span class="p">,</span> <span class="n">OrderNumber</span> <span class="k">FROM</span> <span class="n">Orders</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Company</span>
+<span class="c1">-- 按照company排序，如果相同在按照ordernumber排序</span>
+<span class="k">SELECT</span> <span class="n">Company</span><span class="p">,</span> <span class="n">OrderNumber</span> <span class="k">FROM</span> <span class="n">Orders</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Company</span><span class="p">,</span> <span class="n">OrderNumber</span>
+<span class="c1">-- 按照 company排序，指定为降序排</span>
+<span class="k">SELECT</span> <span class="n">Company</span><span class="p">,</span> <span class="n">OrderNumber</span> <span class="k">FROM</span> <span class="n">Orders</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Company</span> <span class="k">DESC</span>
+<span class="c1">-- 按照 company降序排，如果相同就在按照ordernumber排序</span>
+<span class="k">SELECT</span> <span class="n">Company</span><span class="p">,</span> <span class="n">OrderNumber</span> <span class="k">FROM</span> <span class="n">Orders</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Company</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">OrderNumber</span> <span class="k">ASC</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="insert">
+<h3>8.2.1.6. insert<a class="headerlink" href="#insert" title="Permalink to this headline">¶</a></h3>
+<p>insert 语句用于向表中插入新的数据行</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>INSERT INTO 表名称 VALUES (值1, 值2,....)
+INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Persons</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Gates&#39;</span><span class="p">,</span> <span class="s1">&#39;Bill&#39;</span><span class="p">,</span> <span class="s1">&#39;Xuanwumen 10&#39;</span><span class="p">,</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update">
+<h3>8.2.1.7. update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="delete">
+<h3>8.2.1.8. delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id2">
+<h3>8.2.1.9. select<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 </div>
 
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10. 网络文件共享 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>11. 网络文件共享 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="next" title="10.1. ftp" href="ftp.html"/>
-        <link rel="prev" title="9.7. nginx" href="../WEB/nginx.html"/> 
+        <link rel="next" title="11.1. ftp" href="ftp.html"/>
+        <link rel="prev" title="10.2. 日志管理系统搭建" href="../日志管理/日志管理系统搭建.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -101,17 +101,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. 网络文件共享</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ftp.html">10.1. ftp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html">10.2. ftps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">10.3. ftp基于文件的验证</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">10.4. ftp基于mysql的验证</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html">10.5. nfs入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html">10.6. samba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. 网络文件共享</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">11.6. samba</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -156,7 +157,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>10. 网络文件共享</li>
+      <li>11. 网络文件共享</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,52 +177,52 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>10. 网络文件共享<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>11. 网络文件共享<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ftp.html">10.1. ftp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ftp.html#id1">10.1.1. ftp安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp.html#id2">10.1.2. ftp的配置项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp.html#id6">10.1.3. 配置样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ftp.html">11.1. ftp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html#id1">11.1.1. ftp安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html#id2">11.1.2. ftp的配置项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html#id6">11.1.3. 配置样例</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ftps.html">10.2. ftps</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html#vsftpd">10.2.1. 安装vsftpd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html#id1">10.2.2. 修改配置项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html#id2">10.2.3. 创建证书和私钥文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html#id3">10.2.4. 测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ftps.html">11.2. ftps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html#vsftpd">11.2.1. 安装vsftpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html#id1">11.2.2. 修改配置项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html#id2">11.2.3. 创建证书和私钥文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html#id3">11.2.4. 测试</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ftp基于文件的验证.html">10.3. ftp基于文件的验证</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#vsftpd">10.3.1. 安装vsftpd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#db">10.3.2. 制作db文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id1">10.3.3. 添加虚拟映射用户</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id2">10.3.4. 编辑配置文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id3">10.3.5. 测试</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id4">10.3.6. 用户单独配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ftp基于文件的验证.html">11.3. ftp基于文件的验证</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#vsftpd">11.3.1. 安装vsftpd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#db">11.3.2. 制作db文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id1">11.3.3. 添加虚拟映射用户</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id2">11.3.4. 编辑配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id3">11.3.5. 测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于文件的验证.html#id4">11.3.6. 用户单独配置</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ftp基于mysql的验证.html">10.4. ftp基于mysql的验证</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#id1">10.4.1. 数据库服务器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#ftp">10.4.2. ftp服务器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#id5">10.4.3. 测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#id1">11.4.1. 数据库服务器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#ftp">11.4.2. ftp服务器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html#id5">11.4.3. 测试</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="nfs.html">10.5. nfs入门</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id1">10.5.1. 安装nfs工具</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id2">10.5.2. 启动服务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id3">10.5.3. 共享目录</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id4">10.5.4. 挂载</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id5">10.5.5. 配置文件选项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id6">10.5.6. 自动挂载</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html#id7">10.5.7. nfs实现伪根挂载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.html">11.5. nfs入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id1">11.5.1. 安装nfs工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id2">11.5.2. 启动服务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id3">11.5.3. 共享目录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id4">11.5.4. 挂载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id5">11.5.5. 配置文件选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id6">11.5.6. 自动挂载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html#id7">11.5.7. nfs实现伪根挂载</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="samba.html">10.6. samba</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="samba.html#windowslinux">10.6.1. windows共享给linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html#id2">10.6.2. samba主要配置项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html#linuxwindow">10.6.3. linux共享给window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html#id4">10.6.4. samba多用户挂载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samba.html">11.6. samba</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="samba.html#windowslinux">11.6.1. windows共享给linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html#id2">11.6.2. samba主要配置项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html#linuxwindow">11.6.3. linux共享给window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html#id4">11.6.4. samba多用户挂载</a></li>
 </ul>
 </li>
 </ul>
@@ -238,10 +239,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ftp.html" class="btn btn-neutral float-right" title="10.1. ftp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ftp.html" class="btn btn-neutral float-right" title="11.1. ftp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../WEB/nginx.html" class="btn btn-neutral" title="9.7. nginx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../日志管理/日志管理系统搭建.html" class="btn btn-neutral" title="10.2. 日志管理系统搭建" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
