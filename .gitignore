@@ -1,4 +1,5 @@
-/source/_bulid/*
-/source/_static/*
-/source/_templates/*
-/source/.vscode/*
+source/_bulid/*
+source/_static/*
+source/_templates/*
+source/.vscode/*
+build/doctrees/environment.pickle
