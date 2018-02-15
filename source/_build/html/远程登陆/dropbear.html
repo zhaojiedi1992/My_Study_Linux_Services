@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dropbear &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">7. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">9. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">10. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>dropbear</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/远程登陆/dropbear.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dropbear">
+<h1>dropbear<a class="headerlink" href="#dropbear" title="Permalink to this headline">¶</a></h1>
+<p>dropbear是一款基于ssh协议的轻量sshd服务器，与OpenSSH相比，他更简洁，
+更小巧，运行起来占用的内存也更少。每一个普通用户登录，OpenSSH会开两个sshd进程，
+而dropbear只开一个进程，所以其对硬件要求更低，也更利于系统的运行。Dropbear特别用于
+“嵌入”式的Linux（或其他Unix）系统 。</p>
+<div class="section" id="id1">
+<h2>编译环境安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install bzip2 zlib-devel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>下载并解压<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># wget http://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2</span>
+<span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># tar xf dropbear-2017.75.tar.bz2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>编译<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd dropbear-2017.75/</span>
+<span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  ./configure  --prefix=/usr/local/dropbear</span>
+<span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  vim INSTALL</span>
+<span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  make PROGRAMS=&quot;dropbear dbclient dropbearkey dropbearconvert scp&quot;</span>
+<span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  vim INSTALL</span>
+<span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  make PROGRAMS=&quot;dropbear dbclient dropbearkey dropbearconvert scp&quot; install</span>
+</pre></div>
+</div>
+<p>make过程中有几个警告，可以忽略。</p>
+</div>
+<div class="section" id="id4">
+<h2>创建配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># cd /usr/local/dropbear/</span>
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># tree</span>
+.
+├── bin
+│   ├── dbclient
+│   ├── dropbearconvert
+│   ├── dropbearkey
+│   └── scp
+├── sbin
+│   └── dropbear
+└── share
+    └── man
+        ├── man1
+        │   ├── dbclient.1
+        │   ├── dropbearconvert.1
+        │   └── dropbearkey.1
+        └── man8
+            └── dropbear.8
+
+<span class="m">6</span> directories, <span class="m">9</span> files
+
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># echo &#39;PATH=/usr/local/dropbear/bin:/usr/local/dropbear/sbin:$PATH&#39; &gt; /etc/profile.d/dropbear.sh</span>
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># source /etc/profile.d/dropbear.sh</span>
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># mkdir /etc/dropbear</span>
+
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key</span>
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key</span>
+<span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>启动dropbear在指定端口<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost profile.d<span class="o">]</span><span class="c1"># dropbear -p 20022  -FE</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我本机安装有openssh,sshd监听在22号端口，所以这个地方换了一个端口。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>测试<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost bin]# dbclient  -p 20022 root@192.168.46.129
+
+Host &#39;192.168.46.129&#39; is not in the trusted hosts file.
+(ecdsa-sha2-nistp521 fingerprint md5 5e:96:6e:26:f5:30:22:e7:36:33:57:c6:a3:8f:3a:cd)
+Do you want to continue connecting? (y/n) y
+root@192.168.46.129&#39;s password:
+[root@localhost ~]#
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我测试使用的dropbear提供的dbclient，当然使用ssh命令也是可以的。</p>
+</div>
+</div>
+<div class="section" id="sysv">
+<h2>写一个sysv脚本<a class="headerlink" href="#sysv" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#</span>
+<span class="c1"># description: dropbear ssh daemon</span>
+<span class="c1"># chkconfig: 2345 66 33</span>
+<span class="c1">#</span>
+<span class="nv">dsskey</span><span class="o">=</span>/etc/dropbear/dropbear_dss_host_key
+<span class="nv">rsakey</span><span class="o">=</span>/etc/dropbear/dropbear_rsa_host_key
+<span class="nv">lockfile</span><span class="o">=</span>/var/lock/subsys/dropbear
+<span class="nv">pidfile</span><span class="o">=</span>/var/run/dropbear.pid
+<span class="nv">dropbear</span><span class="o">=</span>/usr/local/dropbear/sbin/dropbear
+<span class="nv">dropbearkey</span><span class="o">=</span>/usr/local/dropbear/bin/dropbearkey
+<span class="o">[</span> -r /etc/rc.d/init.d/functions <span class="o">]</span> <span class="o">&amp;&amp;</span> . /etc/rc.d/init.d/functions
+<span class="o">[</span> -r /etc/sysconfig/dropbear <span class="o">]</span> <span class="o">&amp;&amp;</span> . /etc/sysconfig/dropbear
+<span class="nv">keysize</span><span class="o">=</span><span class="si">${</span><span class="nv">keysize</span><span class="k">:-</span><span class="nv">1024</span><span class="si">}</span>
+<span class="nv">port</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="k">:-</span><span class="nv">20022</span><span class="si">}</span>
+gendsskey<span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -d /etc/dropbear <span class="o">]</span> <span class="o">||</span> mkdir /etc/dropbear
+    <span class="nb">echo</span> -n <span class="s2">&quot;Starting generate the dss key: &quot;</span>
+    <span class="nv">$dropbearkey</span> -t dss -f <span class="nv">$dsskey</span> <span class="p">&amp;</span>&gt; /dev/null
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$RETVAL</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+                    success
+                    <span class="nb">echo</span>
+                    <span class="k">return</span> <span class="m">0</span>
+<span class="k">else</span>
+                    failure
+                    <span class="nb">echo</span>
+                    <span class="k">return</span> <span class="m">1</span>
+<span class="k">fi</span>
+    <span class="o">}</span>
+genrsakey<span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -d /etc/dropbear <span class="o">]</span> <span class="o">||</span> mkdir /etc/dropbear
+    <span class="nb">echo</span> -n <span class="s2">&quot;Starting generate the rsa key: &quot;</span>
+    <span class="nv">$dropbearkey</span> -t rsa -s <span class="nv">$keysize</span> -f <span class="nv">$rsakey</span> <span class="p">&amp;</span>&gt; /dev/null
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$RETVAL</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    success
+    <span class="nb">echo</span>
+    <span class="k">return</span> <span class="m">0</span>
+<span class="k">else</span>
+    failure
+    <span class="nb">echo</span>
+    <span class="k">return</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="o">}</span>
+start<span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -e <span class="nv">$dsskey</span> <span class="o">]</span> <span class="o">||</span> gendsskey
+    <span class="o">[</span> -e <span class="nv">$rsakey</span> <span class="o">]</span> <span class="o">||</span> genrsakey
+    <span class="k">if</span> <span class="o">[</span> -e <span class="nv">$lockfile</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> -n <span class="s2">&quot;dropbear daemon is already running: &quot;</span>
+        success
+        <span class="nb">echo</span>
+    <span class="nb">exit</span> <span class="m">0</span>
+<span class="k">fi</span>
+    <span class="nb">echo</span> -n <span class="s2">&quot;Starting dropbear: &quot;</span>
+    daemon --pidfile<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$pidfile</span><span class="s2">&quot;</span> <span class="nv">$dropbear</span> -p <span class="nv">$port</span> -d <span class="nv">$dsskey</span> -r <span class="nv">$rsakey</span>
+    <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+    <span class="nb">echo</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$RETVAL</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    touch <span class="nv">$lockfile</span>
+    <span class="k">return</span> <span class="m">0</span>
+<span class="k">else</span>
+    rm -f <span class="nv">$lockfile</span> <span class="nv">$pidfile</span>
+    <span class="k">return</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="o">}</span>
+stop<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span> ! -e <span class="nv">$lockfile</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> -n <span class="s2">&quot;dropbear service is stopped: &quot;</span>
+        success
+        <span class="nb">echo</span>
+        <span class="nb">exit</span> <span class="m">1</span>
+    <span class="k">fi</span>
+        <span class="nb">echo</span> -n <span class="s2">&quot;Stopping dropbear daemon: &quot;</span>
+        killproc dropbear
+        <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+        <span class="nb">echo</span>
+
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$RETVAL</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        rm -f <span class="nv">$lockfile</span> <span class="nv">$pidfile</span>
+        <span class="k">return</span> <span class="m">0</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="o">}</span>
+status<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span> -e <span class="nv">$lockfile</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;dropbear is running...&quot;</span>
+    <span class="k">else</span>
+        <span class="nb">echo</span> <span class="s2">&quot;dropbear is stopped...&quot;</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+usage<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Usage: dropbear {start|stop|restart|status|gendsskey|genrsakey}&quot;</span>
+<span class="o">}</span>
+<span class="k">case</span> <span class="nv">$1</span> in
+start<span class="o">)</span>
+    start <span class="p">;;</span>
+stop<span class="o">)</span>
+    stop <span class="p">;;</span>
+restart<span class="o">)</span>
+    stop
+    start
+    <span class="p">;;</span>
+status<span class="o">)</span>
+    status
+    <span class="p">;;</span>
+gendsskey<span class="o">)</span>
+    gendsskey
+    <span class="p">;;</span>
+genrsakey<span class="o">)</span>
+    genrsakey
+    <span class="p">;;</span>
+*<span class="o">)</span>
+    usage
+    <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+</div>
+<p>这个脚本来自 <a class="reference external" href="http://blog.chinaunix.net/xmlrpc.php?r=blog/article&amp;uid=29584738&amp;id=4234090">小马子不怕鬼</a> , 写的比我自己那个更全面，就借用下。</p>
+<p><a class="reference download internal" href="../_downloads/dropbear" download=""><code class="xref download docutils literal"><span class="pre">/files/dropbear</span></code></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

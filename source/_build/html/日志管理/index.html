@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10. 日志管理 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9. 日志管理 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,12 +36,12 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="next" title="10.1. 日志介绍" href="日志介绍.html"/>
-        <link rel="prev" title="9.7. nginx" href="../WEB/nginx.html"/> 
+        <link rel="next" title="9.1. 日志介绍" href="日志介绍.html"/>
+        <link rel="prev" title="8.6. centos6编译安装lamp" href="../WEB/httpd/centos6编译安装lamp.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-
+  <script src="../_static/js/baidu.js"></script>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -96,19 +96,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. 日志管理</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="日志介绍.html">10.1. 日志介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html">10.2. 日志管理系统搭建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">7. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. 日志管理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="日志介绍.html">9.1. 日志介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html">9.2. 日志管理系统搭建</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">11. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">10. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
 </ul>
 
             
@@ -147,13 +146,14 @@
 
 
 
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>10. 日志管理</li>
+      <li>9. 日志管理</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -173,23 +173,22 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>10. 日志管理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>9. 日志管理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="日志介绍.html">10.1. 日志介绍</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#id2">10.1.1. 日志基础概念</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#rsyslog">10.1.2. rsyslog配置文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#id9">10.1.3. 样例配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#id13">10.1.4. 日志转储</a></li>
+<li class="toctree-l1"><a class="reference internal" href="日志介绍.html">9.1. 日志介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#id2">9.1.1. 日志基础概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#rsyslog">9.1.2. rsyslog配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志介绍.html#id9">9.1.3. 样例配置</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="日志管理系统搭建.html">10.2. 日志管理系统搭建</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id2">10.2.1. 架构图</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id3">10.2.2. 日志服务器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id4">10.2.3. 应用服务器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id5">10.2.4. 日志服务器测试</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id6">10.2.5. 日志分析服务器配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id7">10.2.6. 完善工作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="日志管理系统搭建.html">9.2. 日志管理系统搭建</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id2">9.2.1. 架构图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id3">9.2.2. 日志服务器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id4">9.2.3. 应用服务器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id5">9.2.4. 日志服务器测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id6">9.2.5. 日志分析服务器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html#id7">9.2.6. 完善工作</a></li>
 </ul>
 </li>
 </ul>
@@ -206,10 +205,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="日志介绍.html" class="btn btn-neutral float-right" title="10.1. 日志介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="日志介绍.html" class="btn btn-neutral float-right" title="9.1. 日志介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../WEB/nginx.html" class="btn btn-neutral" title="9.7. nginx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../WEB/httpd/centos6编译安装lamp.html" class="btn btn-neutral" title="8.6. centos6编译安装lamp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -222,7 +221,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
 
 </footer>
 

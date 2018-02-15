@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.3. mysql安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>7.3. mysql安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,13 +36,13 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="8. 数据库" href="../index.html"/>
-        <link rel="next" title="8.4. mariadb多实例安装" href="mysql多实例.html"/>
-        <link rel="prev" title="8.2. sql语句" href="../sql语句.html"/> 
+        <link rel="up" title="7. 数据库" href="../index.html"/>
+        <link rel="next" title="7.4. mariadb多实例安装" href="mysql多实例.html"/>
+        <link rel="prev" title="7.2. sql语句" href="../sql语句.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-
+  <script src="../../_static/js/baidu.js"></script>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -97,36 +97,37 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../安全监控/index.html">5. 安全监控</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">8. 数据库</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">8.1. 数据库基础</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">8.2. sql语句</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.3. mysql安装</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#yum">8.3.1. yum安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.3.2. 二进制安装</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">8.3.2.1. 原有版本的卸载</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">8.3.2.2. 下载数据</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">8.3.2.3. 创建用户和组</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">8.3.2.4. 安装</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">8.3.2.5. 存储设备准备</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">8.3.2.6. 安装并配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">8.3.2.7. 启动服务</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">8.3.2.8. 数据库安全安装设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">7. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">7.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">7.2. sql语句</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. mysql安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yum">7.3.1. yum安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">7.3.2. 二进制安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">7.3.2.1. 原有版本的卸载</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">7.3.2.2. 下载数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">7.3.2.3. 创建用户和组</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">7.3.2.4. 安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">7.3.2.5. 存储设备准备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">7.3.2.6. 安装并配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">7.3.2.7. 启动服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">7.3.2.8. 数据库安全安装设置</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">8.3.3. 源码安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">7.3.3. 源码安装</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mysql多实例.html">8.4. mariadb多实例安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">8.5. mysql终端入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">8.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql多实例.html">7.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">7.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">7.6. mysql入门</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">10. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">11. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">9. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">10. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">12. 集群</a></li>
 </ul>
 
             
@@ -165,15 +166,16 @@
 
 
 
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../index.html">8. 数据库</a> &raquo;</li>
+          <li><a href="../index.html">7. 数据库</a> &raquo;</li>
         
-      <li>8.3. mysql安装</li>
+      <li>7.3. mysql安装</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -193,9 +195,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mysql">
-<h1>8.3. mysql安装<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<h1>7.3. mysql安装<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="yum">
-<h2>8.3.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
 <p>yum安装是三种安装方式最简单的方式：</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum info mariadb-server</span>
 <span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum install mariadb</span>
@@ -220,15 +222,15 @@ bak  cdrom.repo  epel-7.repo
 </div>
 </div>
 <div class="section" id="id1">
-<h2>8.3.2. 二进制安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.2. 二进制安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
-<h3>8.3.2.1. 原有版本的卸载<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.1. 原有版本的卸载<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># sudo yum remove MariaDB-server MariaDB-client</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
-<h3>8.3.2.2. 下载数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.2. 下载数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://downloads.mariadb.org/">下载地址</a>.</p>
 <img alt="../../_images/下载二进制.png" src="../../_images/下载二进制.png" />
 <div class="admonition note">
@@ -243,14 +245,14 @@ bak  cdrom.repo  epel-7.repo
 </div>
 </div>
 <div class="section" id="id5">
-<h3>8.3.2.3. 创建用户和组<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.3. 创建用户和组<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># groupadd -g 27 -r mysql</span>
 <span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># useradd -r -u 27 -g mysql mysql -s /sbin/nologin</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id6">
-<h3>8.3.2.4. 安装<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.4. 安装<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -265,7 +267,7 @@ PATH=/usr/local/bin:$PATH
 [root&#64;7 local]# source /etc/profile.d/mysql.sh</p>
 </div>
 <div class="section" id="id7">
-<h3>8.3.2.5. 存储设备准备<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.5. 存储设备准备<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">数据库文件占用空间很大的，建议放到lvm上面去，容易扩展，避免导致根分区占用过大。</p>
@@ -372,7 +374,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 </div>
 <div class="section" id="id8">
-<h3>8.3.2.6. 安装并配置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.6. 安装并配置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chmod -R 770 mysql/</span>
 <span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># cd /usr/local/mysql/</span>
 <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ll</span>
@@ -388,7 +390,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 </div>
 <div class="section" id="id9">
-<h3>8.3.2.7. 启动服务<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.7. 启动服务<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span> <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># cp support-files/mysql.server /etc/rc.d/init.d/mysqld</span>
  <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># vim /etc/rc.d/init.d/mysqld</span>
  <span class="c1"># 找到basedir行，修改如下内容</span>
@@ -410,7 +412,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 </div>
 <div class="section" id="id10">
-<h3>8.3.2.8. 数据库安全安装设置<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<h3>7.3.2.8. 数据库安全安装设置<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
 
 NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
@@ -477,7 +479,7 @@ Thanks <span class="k">for</span> using MariaDB!
 </div>
 </div>
 <div class="section" id="id11">
-<h2>8.3.3. 源码安装<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<h2>7.3.3. 源码安装<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 下载文件</span>
 wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A//mirrors.tuna.tsinghua.edu.cn/mariadb/ <span class="se">\</span>
 -O mariadb-10.2.12-linux-systemd-x86_64.tar.gz
@@ -532,10 +534,10 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mysql多实例.html" class="btn btn-neutral float-right" title="8.4. mariadb多实例安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mysql多实例.html" class="btn btn-neutral float-right" title="7.4. mariadb多实例安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../sql语句.html" class="btn btn-neutral" title="8.2. sql语句" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../sql语句.html" class="btn btn-neutral" title="7.2. sql语句" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -548,7 +550,7 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
 
 </footer>
 

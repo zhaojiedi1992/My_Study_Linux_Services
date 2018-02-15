@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.4. vnc &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="6. 远程登陆" href="index.html"/>
+        <link rel="next" title="7. DNS" href="../DNS/index.html"/>
+        <link rel="prev" title="6.3. dropbear" href="dropbear.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 远程登陆</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sshd.html">6.1. sshd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telnet.html">6.2. telnet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dropbear.html">6.3. dropbear</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. vnc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">6.4.1. 图形环境的安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">6.4.2. 安装vncserver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">6.4.3. 配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">6.4.4. 启动服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6.4.5. 测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">11. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">6. 远程登陆</a> &raquo;</li>
+        
+      <li>6.4. vnc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/远程登陆/vnc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="vnc">
+<h1>6.4. vnc<a class="headerlink" href="#vnc" title="Permalink to this headline">¶</a></h1>
+<p>centos6 vncserver的安装</p>
+<p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_030_vncserver.html">vncserver的安装</a></p>
+<div class="section" id="id1">
+<h2>6.4.1. 图形环境的安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;GNOME Desktop&quot;            # 安装gnome桌面环境</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># startx                                      # 启动图形界面</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl set-default  graphical.target     # 设置默认级别为图形</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>6.4.2. 安装vncserver<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install tigervnc-server                 # 安装vncserve</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql tigervnc-server                     # 查看相关文件，没有vncserver对应的服务，只有实例的服务。</span>
+/etc/sysconfig/vncservers
+/usr/bin/vncserver
+/usr/bin/x0vncserver
+/usr/lib/systemd/system/vncserver@.service
+/usr/lib/systemd/system/xvnc.socket
+/usr/lib/systemd/system/xvnc@.service
+/usr/share/man/man1/vncserver.1.gz
+/usr/share/man/man1/x0vncserver.1.gz
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>6.4.3. 配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /usr/lib/systemd/system/vncserver@root.service</span>
+<span class="c1"># 修改如下行</span>
+<span class="nv">User</span><span class="o">=</span>root
+<span class="nv">PIDFile</span><span class="o">=</span>/root/.vnc/%H%i.pid
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vncpasswd</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#64;后面跟的一定是:数值,不能写其他的，否则服务启动不起来，如果配置多个用户的，多copy几份修改下。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>6.4.4. 启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl daemon-reload                     # 重新加载下systemctl配置</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl enable vncserver@:1               # 开机启动</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start vncserver@:1                # 启动服务</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep vnc</span>
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:5901            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">37817</span>/Xvnc
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:6001            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">37817</span>/Xvnc
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::5901                 :::*                    LISTEN      <span class="m">37817</span>/Xvnc
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001                 :::*                    LISTEN      <span class="m">37817</span>/Xvnc
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>6.4.5. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>在测试前，关闭selinux和防火墙</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>systemctl stop firewalld.service
+</pre></div>
+</div>
+<p>使用window环境下的vncview软件来连接，地址为192.168.46.129:5901</p>
+<img alt="../_images/vnc.png" src="../_images/vnc.png" />
+<p>不知道啥情况，我的背景是黑的， 有点郁闷。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DNS/index.html" class="btn btn-neutral float-right" title="7. DNS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dropbear.html" class="btn btn-neutral" title="6.3. dropbear" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

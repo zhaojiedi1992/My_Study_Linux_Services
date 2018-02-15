@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>11.3. ftp基于文件的验证 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.3. ftp基于文件的验证 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,13 +36,13 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="11. 网络文件共享" href="index.html"/>
-        <link rel="next" title="11.4. ftp基于mysql的验证" href="ftp基于mysql的验证.html"/>
-        <link rel="prev" title="11.2. ftps" href="ftps.html"/> 
+        <link rel="up" title="10. 网络文件共享" href="index.html"/>
+        <link rel="next" title="10.4. ftp基于mysql的验证" href="ftp基于mysql的验证.html"/>
+        <link rel="prev" title="10.2. ftps" href="ftps.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-
+  <script src="../_static/js/baidu.js"></script>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -97,31 +97,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 网络文件共享</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ftp.html">11.1. ftp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ftps.html">11.2. ftps</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">11.3. ftp基于文件的验证</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vsftpd">11.3.1. 安装vsftpd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#db">11.3.2. 制作db文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">11.3.3. 添加虚拟映射用户</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">11.3.4. 编辑配置文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">11.3.5. 测试</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">11.3.6. 用户单独配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">7. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">9. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. 网络文件共享</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">10.1. ftp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftps.html">10.2. ftps</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.3. ftp基于文件的验证</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vsftpd">10.3.1. 安装vsftpd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#db">10.3.2. 制作db文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.3.3. 添加虚拟映射用户</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.3.4. 编辑配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.3.5. 测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.3.6. 用户单独配置</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">11.4. ftp基于mysql的验证</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nfs.html">11.5. nfs入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="samba.html">11.6. samba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp基于mysql的验证.html">10.4. ftp基于mysql的验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nfs.html">10.5. nfs入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samba.html">10.6. samba</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
 </ul>
 
             
@@ -160,15 +159,16 @@
 
 
 
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">11. 网络文件共享</a> &raquo;</li>
+          <li><a href="index.html">10. 网络文件共享</a> &raquo;</li>
         
-      <li>11.3. ftp基于文件的验证</li>
+      <li>10.3. ftp基于文件的验证</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -188,16 +188,16 @@
            <div itemprop="articleBody">
             
   <div class="section" id="ftp">
-<h1>11.3. ftp基于文件的验证<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h1>
+<h1>10.3. ftp基于文件的验证<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vsftpd">
-<h2>11.3.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$yum</span> install vsftpd
 <span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$yum</span> install libdb-utils
 </pre></div>
 </div>
 </div>
 <div class="section" id="db">
-<h2>11.3.2. 制作db文件<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.2. 制作db文件<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>root@centos-7 certs<span class="o">]</span><span class="nv">$cd</span> /etc/vsftpd/
 <span class="c1"># 用户一行是用户一行是密码。</span>
 <span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> dbusers.txt
@@ -222,7 +222,7 @@ total <span class="m">32</span>
 </div>
 </div>
 <div class="section" id="id1">
-<h2>11.3.3. 添加虚拟映射用户<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.3. 添加虚拟映射用户<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$useradd</span> -d /data/dbuser -s /sbin/nologin dbuser
 <span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$chmod</span> a-w /data/dbuser/
 <span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$mkdir</span> /data/dbuser/<span class="o">{</span>pub,upload<span class="o">}</span>
@@ -234,7 +234,7 @@ setfacl: /data/dbuser/dupload: No such file or directory
 </div>
 </div>
 <div class="section" id="id2">
-<h2>11.3.4. 编辑配置文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.4. 编辑配置文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>添加pam配置文件</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> /etc/pam.d/vsftpd.db
 <span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$cat</span> /etc/pam.d/vsftpd.db
@@ -252,7 +252,7 @@ account required pam_userdb.so <span class="nv">db</span><span class="o">=</span
 </div>
 </div>
 <div class="section" id="id3">
-<h2>11.3.5. 测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.5. 测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>重启服务</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$systemctl</span> restart vsftpd
 </pre></div>
@@ -273,7 +273,7 @@ ftp&gt; quit
 </div>
 </div>
 <div class="section" id="id4">
-<h2>11.3.6. 用户单独配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>10.3.6. 用户单独配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>编辑配置文件</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 vsftpd<span class="o">]</span><span class="nv">$vim</span> vsftpd.conf
 <span class="c1"># 添加下面一行</span>
@@ -365,10 +365,10 @@ ftp&gt; quit
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ftp基于mysql的验证.html" class="btn btn-neutral float-right" title="11.4. ftp基于mysql的验证" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ftp基于mysql的验证.html" class="btn btn-neutral float-right" title="10.4. ftp基于mysql的验证" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ftps.html" class="btn btn-neutral" title="11.2. ftps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ftps.html" class="btn btn-neutral" title="10.2. ftps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -381,7 +381,7 @@ ftp&gt; quit
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
 
 </footer>
 

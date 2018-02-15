@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CA的搭建 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">7. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">9. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">10. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>CA的搭建</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/杂项/CA的搭建.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ca">
+<h1>CA的搭建<a class="headerlink" href="#ca" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_011_ca.html">另一篇关于ca的文章</a></p>
+<div class="section" id="id2">
+<h2>CA服务器的配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost CA]# cd /etc/pki/CA/
+
+[root@localhost CA]# sed -r  -i &#39;s@#?countryName_default.*@countryName_default=cn@&#39; /etc/pki/tls/openssl.cnf
+[root@localhost CA]# sed -r  -i &#39;s@#?stateOrProvinceName_default.*@stateOrProvinceName_default=henan@&#39; /etc/pki/tls/openssl.cnf
+[root@localhost CA]# sed -r  -i &#39;s@#?localityName_default.*@localityName_default=zhengzhou@&#39; /etc/pki/tls/openssl.cnf
+[root@localhost CA]# sed -r  -i &#39;s@#?0.organizationName_default.*@0.organizationName_default=linuxpanda@&#39; /etc/pki/tls/openssl.cnf
+[root@localhost CA]# sed -r  -i &#39;s@#?organizationalUnitName_default.*@organizationalUnitName_default=opt@&#39; /etc/pki/tls/openssl.cnf
+
+# 在CA目录创建一个Makefile
+[root@localhost CA]# wget http://download.linuxpanda.tech/ca/Makefile
+
+# 先获取make的帮助使用
+[root@localhost CA]# make usage
+This makefile allows you to create:
+make init
+make ca
+make /etc/httpd/ssl/http.key
+make /etc/httpd/ssl/httpd.csr
+make copytoca csr=httpd.csr
+make copytoclient crt=httpd.crt ip=192.168.46.1
+make httpd.csr
+make revoke crt=httpd
+
+# 初始化创建文件
+[root@localhost CA]# make init
+# 创建ca私钥和对应的自签证书
+[root@localhost CA]# make ca
+umask 77 ; \
+/usr/bin/openssl genrsa -out private/cakey.pem 2048 ; \
+/usr/bin/openssl req -utf8 -new -x509 -key private/cakey.pem -out cacert.pem  -days 3650   ;
+Generating RSA private key, 2048 bit long modulus
+......................................................+++
+............+++
+e is 65537 (0x10001)
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [cn]:
+State or Province Name (full name) [henan]:
+Locality Name (eg, city) [zhengzhou]:
+Organization Name (eg, company) [linuxpanda]:
+Organizational Unit Name (eg, section) [opt]:
+Common Name (eg, your name or your server&#39;s hostname) []:ca.linuxpanda.tech
+Email Address []:
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>客户端的配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>这里使用为http配置为例,同样需要那个Makedown文件</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># wget http://download.linuxpanda.tech/ca/Makefile</span>
+
+<span class="c1"># 先获取make的帮助使用</span>
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make usage</span>
+This makefile allows you to create:
+make init
+make ca
+make /etc/httpd/ssl/http.key
+make /etc/httpd/ssl/httpd.csr
+make copytoca <span class="nv">csr</span><span class="o">=</span>httpd.csr
+make copytoclient <span class="nv">crt</span><span class="o">=</span>httpd.crt <span class="nv">ip</span><span class="o">=</span><span class="m">192</span>.168.46.1
+make httpd.csr
+make revoke <span class="nv">crt</span><span class="o">=</span>httpd
+
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># yum install httpd -y</span>
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># mkdir /etc/httpd/ssl</span>
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make /etc/httpd/ssl/httpd.key</span>
+<span class="nb">umask</span> <span class="m">77</span> <span class="p">;</span> <span class="se">\</span>
+/usr/bin/openssl genrsa  <span class="m">2048</span> &gt; /etc/httpd/ssl/httpd.key
+Generating RSA private key, <span class="m">2048</span> bit long modulus
+...........+++
+...............+++
+e is <span class="m">65537</span> <span class="o">(</span>0x10001<span class="o">)</span>
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make /etc/httpd/ssl/httpd.csr</span>
+<span class="nb">umask</span> <span class="m">77</span> <span class="p">;</span> <span class="se">\</span>
+/usr/bin/openssl req -utf8 -new -key /etc/httpd/ssl/httpd.key -out /etc/httpd/ssl/httpd.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter <span class="s1">&#39;.&#39;</span>, the field will be left blank.
+-----
+Country Name <span class="o">(</span><span class="m">2</span> letter code<span class="o">)</span> <span class="o">[</span>cn<span class="o">]</span>:
+State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>henan<span class="o">]</span>:
+Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[</span>zhengzhou<span class="o">]</span>:
+Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>linuxpanda<span class="o">]</span>:
+Organizational Unit Name <span class="o">(</span>eg, section<span class="o">)</span> <span class="o">[</span>opt<span class="o">]</span>:
+Common Name <span class="o">(</span>eg, your name or your server<span class="s1">&#39;s hostname) []:www.linuxpanda.tech</span>
+<span class="s1">Email Address []:</span>
+
+<span class="s1">Please enter the following &#39;</span>extra<span class="s1">&#39; attributes</span>
+<span class="s1">to be sent with your certificate request</span>
+<span class="s1">A challenge password []:</span>
+<span class="s1">An optional company name []:</span>
+
+<span class="s1">[root@localhost CA]# make copytoca crt=/etc/httpd/ssl/httpd.csr</span>
+<span class="s1">scp /etc/httpd/ssl/httpd.csr 192.168.46.129:/etc/pki/CA/csr/</span>
+<span class="s1">root@192.168.46.129&#39;</span>s password:
+httpd.csr                                                           <span class="m">100</span>% <span class="m">1017</span>   <span class="m">319</span>.1KB/s   <span class="m">00</span>:00
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>CA颁发证书<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make httpd.crt</span>
+/usr/bin/openssl ca -utf8 -days <span class="m">365</span> -in csr/httpd.csr -out certs/httpd.crt
+Using configuration from /etc/pki/tls/openssl.cnf
+Check that the request matches the signature
+Signature ok
+Certificate Details:
+        Serial Number: <span class="m">1</span> <span class="o">(</span>0x1<span class="o">)</span>
+        Validity
+            Not Before: Feb <span class="m">13</span> <span class="m">04</span>:49:57 <span class="m">2018</span> GMT
+            Not After : Feb <span class="m">13</span> <span class="m">04</span>:49:57 <span class="m">2019</span> GMT
+        Subject:
+            <span class="nv">countryName</span>               <span class="o">=</span> cn
+            <span class="nv">stateOrProvinceName</span>       <span class="o">=</span> henan
+            <span class="nv">organizationName</span>          <span class="o">=</span> linuxpanda
+            <span class="nv">organizationalUnitName</span>    <span class="o">=</span> opt
+            <span class="nv">commonName</span>                <span class="o">=</span> www.linuxpanda.tech
+        X509v3 extensions:
+            X509v3 Basic Constraints:
+                CA:FALSE
+            Netscape Comment:
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier:
+                EE:92:FF:A7:15:8F:39:DD:65:AC:B4:F1:59:76:04:32:18:9B:25:8E
+            X509v3 Authority Key Identifier:
+                keyid:B0:9B:0B:62:50:40:E3:00:C6:4D:4F:3E:76:F9:E0:6F:A6:18:20:1C
+
+Certificate is to be certified <span class="k">until</span> Feb <span class="m">13</span> <span class="m">04</span>:49:57 <span class="m">2019</span> GMT <span class="o">(</span><span class="m">365</span> days<span class="o">)</span>
+Sign the certificate? <span class="o">[</span>y/n<span class="o">]</span>:y
+
+
+<span class="m">1</span> out of <span class="m">1</span> certificate requests certified, commit? <span class="o">[</span>y/n<span class="o">]</span>y
+Write out database with <span class="m">1</span> new entries
+Data Base Updated
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make copytoclient crt=htttpd.crt ip=192.168.46.2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>CA吊销证书<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make showcrt crt=certs/httpd.crt</span>
+/usr/bin/openssl x509  -in certs/httpd.crt -noout -serial -subject
+<span class="nv">serial</span><span class="o">=</span><span class="m">01</span>
+<span class="nv">subject</span><span class="o">=</span> /C<span class="o">=</span>cn/ST<span class="o">=</span>henan/O<span class="o">=</span>linuxpanda/OU<span class="o">=</span>opt/CN<span class="o">=</span>www.linuxpanda.tech
+
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make revoke crt=certs/httpd.crt</span>
+/usr/bin/openssl ca -revoke certs/httpd.crt <span class="p">;</span> <span class="se">\</span>
+        /usr/bin/openssl ca -gencrl -out crl/ca.crl
+Using configuration from /etc/pki/tls/openssl.cnf
+Revoking Certificate <span class="m">01</span>.
+Data Base Updated
+Using configuration from /etc/pki/tls/openssl.cnf
+<span class="o">[</span>root@localhost CA<span class="o">]</span><span class="c1"># make showcrl</span>
+/usr/bin/openssl crl -in crl/ca.crl -noout -text
+Certificate Revocation List <span class="o">(</span>CRL<span class="o">)</span>:
+        Version <span class="m">2</span> <span class="o">(</span>0x1<span class="o">)</span>
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: /C<span class="o">=</span>cn/ST<span class="o">=</span>henan/L<span class="o">=</span>zhengzhou/O<span class="o">=</span>linuxpanda/OU<span class="o">=</span>opt/CN<span class="o">=</span>ca.linuxpanda.tech
+        Last Update: Feb <span class="m">13</span> <span class="m">04</span>:53:35 <span class="m">2018</span> GMT
+        Next Update: Mar <span class="m">15</span> <span class="m">04</span>:53:35 <span class="m">2018</span> GMT
+        CRL extensions:
+            X509v3 CRL Number:
+                <span class="m">1</span>
+Revoked Certificates:
+    Serial Number: <span class="m">01</span>
+        Revocation Date: Feb <span class="m">13</span> <span class="m">04</span>:53:35 <span class="m">2018</span> GMT
+    Signature Algorithm: sha256WithRSAEncryption
+        <span class="m">48</span>:3e:bb:f4:6c:1a:e3:61:5d:c7:68:db:37:2f:97:e4:18:c7:
+        dc:40:56:7b:60:13:d7:07:9f:5e:e5:7b:0d:f4:33:fc:5a:a9:
+        1d:5f:ee:b9:64:cf:80:bc:a5:0c:fe:e5:ba:9a:f7:cc:1c:54:
+        <span class="m">63</span>:53:d9:44:cc:a5:2c:0b:98:b5:c1:4a:2e:ca:27:3c:c9:4e:
+        f4:af:8b:7a:13:52:78:e1:84:96:1a:e0:64:4b:6b:a4:f2:c0:
+        <span class="m">42</span>:37:f4:23:da:32:04:87:43:aa:97:c7:e9:16:2a:88:df:6a:
+        <span class="m">26</span>:45:74:4e:6b:36:d5:6d:d7:13:82:e4:57:8e:31:5d:71:73:
+        1a:a9:cb:76:c9:48:b1:ca:6a:b9:00:c2:07:4e:35:5b:18:0b:
+        db:e6:0e:df:ef:75:da:ab:58:01:b4:ab:9c:89:85:f5:4c:67:
+        2b:61:3e:e3:f0:bd:7d:39:1a:d3:ce:1d:28:55:a1:cb:92:8f:
+        <span class="m">73</span>:ed:0e:77:7a:ec:56:97:d4:64:05:c8:05:8f:c8:d8:c5:7c:
+        <span class="m">05</span>:24:f8:a4:98:ff:71:48:2d:2d:b3:a5:a2:de:c2:02:62:38:
+        a4:88:96:43:84:e2:9b:a4:a5:09:0f:3c:26:57:6b:f5:53:75:
+        df:08:c1:8a:ab:a7:26:66:b8:1f:21:26:c8:6c:11:27:10:6e:
+        e2:fa:29:7c
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

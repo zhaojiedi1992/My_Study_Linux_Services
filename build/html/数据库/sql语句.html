@@ -42,7 +42,7 @@
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-
+  <script src="../_static/js/baidu.js"></script>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -97,7 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../安全监控/index.html">5. 安全监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">8. 数据库</a><ul class="current">
@@ -112,7 +112,38 @@
 <li class="toctree-l4"><a class="reference internal" href="#insert">8.2.1.6. insert</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#update">8.2.1.7. update</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#delete">8.2.1.8. delete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">8.2.1.9. select</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.2.2. sql中级</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#top">8.2.2.1. top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#like">8.2.2.2. like</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">8.2.2.3. 通配符</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#in">8.2.2.4. in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#between">8.2.2.5. between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aliases">8.2.2.6. aliases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#join">8.2.2.7. join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inner-join">8.2.2.8. inner join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#right-join">8.2.2.9. right join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#left-join">8.2.2.10. left join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#full-join">8.2.2.11. full join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#union">8.2.2.12. union</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-into">8.2.2.13. select into</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-db">8.2.2.14. create db</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-table">8.2.2.15. create table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#constraints">8.2.2.16. constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#not-null">8.2.2.17. not null</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unique">8.2.2.18. unique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#primary-key">8.2.2.19. primary key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#foreign-key">8.2.2.20. foreign key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#check">8.2.2.21. check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default">8.2.2.22. default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-index">8.2.2.23. create index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drop">8.2.2.24. drop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alter">8.2.2.25. alter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#increment">8.2.2.26. increment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view">8.2.2.27. view</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isnull">8.2.2.28. isnull</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">8.2.2.29. 数据类型</a></li>
 </ul>
 </li>
 </ul>
@@ -151,6 +182,7 @@
       <div class="wy-nav-content">
         <div class="rst-content">
           
+
 
 
 
@@ -336,12 +368,635 @@ INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
 </div>
 <div class="section" id="update">
 <h3>8.2.1.7. update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
+<p>update 语句用于更新表中的数据行</p>
+<p>语法：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称 = 某值
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">Person</span> <span class="k">SET</span> <span class="n">Address</span> <span class="o">=</span> <span class="s1">&#39;Zhongshan 23&#39;</span><span class="p">,</span> <span class="n">City</span> <span class="o">=</span> <span class="s1">&#39;Nanjing&#39;</span>
+<span class="k">WHERE</span> <span class="n">LastName</span> <span class="o">=</span> <span class="s1">&#39;Wilson&#39;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="delete">
 <h3>8.2.1.8. delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h3>
+<p>delete 语句用于删除表中的数据行</p>
+<p>语法：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>DELETE FROM 表名称 WHERE 列名称 = 值
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">Person</span> <span class="k">WHERE</span> <span class="n">LastName</span> <span class="o">=</span> <span class="s1">&#39;Wilson&#39;</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="id2">
-<h3>8.2.1.9. select<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h2>8.2.2. sql中级<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="top">
+<h3>8.2.2.1. top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h3>
+<p>top用于从规定的结果集合中去除指定的条数，尤其在大型表来说非常有用</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TOP</span> <span class="nb">number</span><span class="o">|</span><span class="n">percent</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">FROM</span> <span class="k">table_name</span>
+
+<span class="c1">-- oralce语法</span>
+<span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="n">ROWNUM</span> <span class="o">&lt;=</span> <span class="nb">number</span>
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">2</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">50</span> <span class="n">PERCENT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span>
+
+<span class="c1">-- oralce样例</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">ROWNUM</span> <span class="o">&lt;=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="like">
+<h3>8.2.2.2. like<a class="headerlink" href="#like" title="Permalink to this headline">¶</a></h3>
+<p>like操作符用于在where语句中搜索指定模式</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="k">column_name</span> <span class="k">LIKE</span> <span class="n">pattern</span>
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">City</span> <span class="k">LIKE</span> <span class="s1">&#39;N%&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>8.2.2.3. 通配符<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>上面已经使用了”%”通配符了</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">通配符</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%</td>
+<td>替代一个或多个字符</td>
+</tr>
+<tr class="row-odd"><td>_</td>
+<td>仅仅替代一个字符</td>
+</tr>
+<tr class="row-even"><td>[charlist]</td>
+<td>字符列中的任何一个单一字符</td>
+</tr>
+<tr class="row-odd"><td>[^charlist]</td>
+<td>不再字符列中的任何字符</td>
+</tr>
+</tbody>
+</table>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--开头为A,或者L,或者N的</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">City</span> <span class="k">LIKE</span> <span class="s1">&#39;[ALN]%&#39;</span>
+<span class="c1">--包含lond</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">City</span> <span class="k">LIKE</span> <span class="s1">&#39;%lond%&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="in">
+<h3>8.2.2.4. in<a class="headerlink" href="#in" title="Permalink to this headline">¶</a></h3>
+<p>IN 操作符允许我们在 WHERE 子句中规定多个值。</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="k">column_name</span> <span class="k">IN</span> <span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="n">value2</span><span class="p">,...)</span>
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">LastName</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;Adams&#39;</span><span class="p">,</span><span class="s1">&#39;Carter&#39;</span><span class="p">)</span>
+<span class="c1">--等价于</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span> <span class="k">WHERE</span> <span class="n">LastName</span> <span class="o">=</span> <span class="s1">&#39;Adams&#39;</span> <span class="k">or</span> <span class="n">LastName</span> <span class="o">=</span><span class="s1">&#39;Carter&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="between">
+<h3>8.2.2.5. between<a class="headerlink" href="#between" title="Permalink to this headline">¶</a></h3>
+<p>between用于选定介于两个值之间的数据范围，值类型可以是数值的，可以是字符和日期的。</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="k">table_name</span>
+<span class="k">WHERE</span> <span class="k">column_name</span>
+<span class="k">BETWEEN</span> <span class="n">value1</span> <span class="k">AND</span> <span class="n">value2</span>
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">WHERE</span> <span class="n">LastName</span>
+<span class="k">BETWEEN</span> <span class="s1">&#39;Adams&#39;</span> <span class="k">AND</span> <span class="s1">&#39;Carter&#39;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">有些数据对between and 这个语句差异很大的，有些是左开右闭，有些是两个都是闭区间。</p>
+</div>
+</div>
+<div class="section" id="aliases">
+<h3>8.2.2.6. aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
+<p>表和列都是支持别名的。</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--表的</span>
+<span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">FROM</span> <span class="k">table_name</span> <span class="k">AS</span> <span class="n">alias_name</span>
+<span class="c1">--列的</span>
+<span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">AS</span> <span class="n">alias_name</span> <span class="k">FROM</span> <span class="k">table_name</span>
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">po</span><span class="p">.</span><span class="n">OrderID</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span>
+<span class="k">FROM</span> <span class="n">Persons</span> <span class="k">AS</span> <span class="n">p</span><span class="p">,</span> <span class="n">Product_Orders</span> <span class="k">AS</span> <span class="n">po</span>
+<span class="k">WHERE</span> <span class="n">p</span><span class="p">.</span><span class="n">LastName</span><span class="o">=</span><span class="s1">&#39;Adams&#39;</span> <span class="k">AND</span> <span class="n">p</span><span class="p">.</span><span class="n">FirstName</span><span class="o">=</span><span class="s1">&#39;John&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="join">
+<h3>8.2.2.7. join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
+<p>join用于多表连接，获取多个表的数据。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">Persons</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">Orders</span><span class="p">.</span><span class="n">OrderNo</span>
+<span class="k">FROM</span> <span class="n">Persons</span><span class="p">,</span> <span class="n">Orders</span>
+<span class="k">WHERE</span> <span class="n">Persons</span><span class="p">.</span><span class="n">Id_P</span> <span class="o">=</span> <span class="n">Orders</span><span class="p">.</span><span class="n">Id_P</span>
+
+<span class="k">SELECT</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">Persons</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">Orders</span><span class="p">.</span><span class="n">OrderNo</span>
+<span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">Orders</span>
+<span class="k">ON</span> <span class="n">Persons</span><span class="p">.</span><span class="n">Id_P</span> <span class="o">=</span> <span class="n">Orders</span><span class="p">.</span><span class="n">Id_P</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span>
+</pre></div>
+</div>
+<p>下面列出了您可以使用的 JOIN 类型，以及它们之间的差异。</p>
+<ol class="arabic simple">
+<li>JOIN: 如果表中有至少一个匹配，则返回行</li>
+<li>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行</li>
+<li>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行</li>
+<li>FULL JOIN: 只要其中一个表中存在匹配，就返回行</li>
+</ol>
+</div>
+<div class="section" id="inner-join">
+<h3>8.2.2.8. inner join<a class="headerlink" href="#inner-join" title="Permalink to this headline">¶</a></h3>
+<p>inner join 和join 是一样的。</p>
+</div>
+<div class="section" id="right-join">
+<h3>8.2.2.9. right join<a class="headerlink" href="#right-join" title="Permalink to this headline">¶</a></h3>
+<p>RIGHT JOIN 关键字会右表 (table_name2) 那里返回所有的行，即使在左表 (table_name1) 中没有匹配的行。</p>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">table_name1</span>
+<span class="k">RIGHT</span> <span class="k">JOIN</span> <span class="n">table_name2</span>
+<span class="k">ON</span> <span class="n">table_name1</span><span class="p">.</span><span class="k">column_name</span><span class="o">=</span><span class="n">table_name2</span><span class="p">.</span><span class="k">column_name</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="left-join">
+<h3>8.2.2.10. left join<a class="headerlink" href="#left-join" title="Permalink to this headline">¶</a></h3>
+<p>LEFT JOIN 关键字会从左表 (table_name1) 那里返回所有的行，即使在右表 (table_name2) 中没有匹配的行。</p>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">Persons</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">Orders</span><span class="p">.</span><span class="n">OrderNo</span>
+<span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">Orders</span>
+<span class="k">ON</span> <span class="n">Persons</span><span class="p">.</span><span class="n">Id_P</span><span class="o">=</span><span class="n">Orders</span><span class="p">.</span><span class="n">Id_P</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="full-join">
+<h3>8.2.2.11. full join<a class="headerlink" href="#full-join" title="Permalink to this headline">¶</a></h3>
+<p>只要其中某个表存在匹配，FULL JOIN 关键字就会返回行。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">table_name1</span>
+<span class="k">FULL</span> <span class="k">JOIN</span> <span class="n">table_name2</span>
+<span class="k">ON</span> <span class="n">table_name1</span><span class="p">.</span><span class="k">column_name</span><span class="o">=</span><span class="n">table_name2</span><span class="p">.</span><span class="k">column_name</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="union">
+<h3>8.2.2.12. union<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h3>
+<p>union 用于合并2个或者多个查询语句的结果集合</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">多个结果集合需要列数量相同，且对应列数据类型相似。</p>
+</div>
+<p>样例：
+.. code-block:: sql</p>
+<blockquote>
+<div>SELECT E_Name FROM Employees_China
+UNION
+SELECT E_Name FROM Employees_USA
+– UNION ALL 不去重复，union去重的。
+SELECT E_Name FROM Employees_China
+UNION ALL
+SELECT E_Name FROM Employees_USA</div></blockquote>
+</div>
+<div class="section" id="select-into">
+<h3>8.2.2.13. select into<a class="headerlink" href="#select-into" title="Permalink to this headline">¶</a></h3>
+<p>select into 用于从一个表中选取数据，然后插入到另一个表中。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">INTO</span> <span class="n">Persons_backup</span>
+<span class="k">FROM</span> <span class="n">Persons</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-db">
+<h3>8.2.2.14. create db<a class="headerlink" href="#create-db" title="Permalink to this headline">¶</a></h3>
+<p>CREATE DATABASE 用于创建数据库。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">my_db</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-table">
+<h3>8.2.2.15. create table<a class="headerlink" href="#create-table" title="Permalink to this headline">¶</a></h3>
+<p>create table 用于创建表</p>
+<p>语法：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>CREATE TABLE 表名称
+(
+列名称1 数据类型,
+列名称2 数据类型,
+列名称3 数据类型,
+....
+)
+</pre></div>
+</div>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constraints">
+<h3>8.2.2.16. constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h3>
+<p>约束用于限制加入表的数据的类型。</p>
+<p>可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。</p>
+<p>我们将主要探讨以下几种约束：</p>
+<p>-. NOT NULL     非空约束
+-. UNIQUE       唯一约束
+-. PRIMARY KEY  主键约束
+-. FOREIGN KEY  外键约束
+-. CHECK        值检查约束
+-. DEFAULT      默认值
+-. not null     非空约束
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</p>
+</div>
+<div class="section" id="not-null">
+<h3>8.2.2.17. not null<a class="headerlink" href="#not-null" title="Permalink to this headline">¶</a></h3>
+<p>not null 用于约束特定列不能为空。</p>
+<p>样例：
+.. code-block:: sql</p>
+<blockquote>
+<div>CREATE TABLE Persons
+(
+Id_P int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255)
+)</div></blockquote>
+</div>
+<div class="section" id="unique">
+<h3>8.2.2.18. unique<a class="headerlink" href="#unique" title="Permalink to this headline">¶</a></h3>
+<p>unique用于约束列值是唯一的，但是有一个为空，不能有多个空。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--mysql</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">UNIQUE</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--SQL Server / Oracle / MS Access</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">UNIQUE</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--通用方法</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span> <span class="n">uc_PersonID</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">uc_PersonID</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">DROP</span> <span class="k">CONSTRAINT</span> <span class="n">uc_PersonID</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="primary-key">
+<h3>8.2.2.19. primary key<a class="headerlink" href="#primary-key" title="Permalink to this headline">¶</a></h3>
+<p>primary key 用于唯一标示数据库表的每条记录，主键必须是唯一的，不能包含空，只能有一个主键，可以多列组合一个主键。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--MySQL</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--SQL Server / Oracle / MS Access:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span> <span class="n">pk_PersonID</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">pk_PersonID</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">Id_P</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="foreign-key">
+<h3>8.2.2.20. foreign key<a class="headerlink" href="#foreign-key" title="Permalink to this headline">¶</a></h3>
+<p>一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>--MySQL
+CREATE TABLE Orders
+(
+Id_O int NOT NULL,
+OrderNo int NOT NULL,
+Id_P int,
+PRIMARY KEY (Id_O),
+FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+)
+--SQL Server / Oracle / MS Access
+CREATE TABLE Orders
+(
+Id_O int NOT NULL PRIMARY KEY,
+OrderNo int NOT NULL,
+Id_P int FOREIGN KEY REFERENCES Persons(Id_P)
+)
+
+--MySQL / SQL Server / Oracle / MS Access:
+CREATE TABLE Orders
+(
+Id_O int NOT NULL,
+OrderNo int NOT NULL,
+Id_P int,
+PRIMARY KEY (Id_O),
+CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)
+)
+
+--MySQL / SQL Server / Oracle / MS Access:
+ALTER TABLE Orders
+ADD FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)
+如果需要命名 FOREIGN KEY 约束，以及为多个列定义 FOREIGN KEY 约束，请使用下面的 SQL 语法：
+
+--MySQL / SQL Server / Oracle / MS Access:
+ALTER TABLE Orders
+ADD CONSTRAINT fk_PerOrders
+FOREIGN KEY (Id_P)
+REFERENCES Persons(Id_P)
+
+--MySQL:
+ALTER TABLE Orders
+DROP FOREIGN KEY fk_PerOrders
+--SQL Server / Oracle / MS Access:
+ALTER TABLE Orders
+DROP CONSTRAINT fk_PerOrders
+</pre></div>
+</div>
+</div>
+<div class="section" id="check">
+<h3>8.2.2.21. check<a class="headerlink" href="#check" title="Permalink to this headline">¶</a></h3>
+<p>CHECK 约束用于限制列中的值的范围。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--My SQL:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--SQL Server / Oracle / MS Access:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span> <span class="n">chk_Person</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">AND</span> <span class="n">City</span><span class="o">=</span><span class="s1">&#39;Sandnes&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ADD</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">chk_Person</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">AND</span> <span class="n">City</span><span class="o">=</span><span class="s1">&#39;Sandnes&#39;</span><span class="p">)</span>
+
+<span class="c1">--SQL Server / Oracle / MS Access:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">DROP</span> <span class="k">CONSTRAINT</span> <span class="n">chk_Person</span>
+<span class="c1">--MySQL:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">DROP</span> <span class="k">CHECK</span> <span class="n">chk_Person</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default">
+<h3>8.2.2.22. default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
+<p>DEFAULT 约束用于向列中插入默认值。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--My SQL / SQL Server / Oracle / MS Access:</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;Sandnes&#39;</span>
+<span class="p">)</span>
+<span class="c1">--MySQL:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ALTER</span> <span class="n">City</span> <span class="k">SET</span> <span class="k">DEFAULT</span> <span class="s1">&#39;SANDNES&#39;</span>
+<span class="c1">--SQL Server / Oracle / MS Access:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">City</span> <span class="k">SET</span> <span class="k">DEFAULT</span> <span class="s1">&#39;SANDNES&#39;</span>
+
+<span class="c1">--MySQL:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ALTER</span> <span class="n">City</span> <span class="k">DROP</span> <span class="k">DEFAULT</span>
+<span class="c1">--SQL Server / Oracle / MS Access:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">City</span> <span class="k">DROP</span> <span class="k">DEFAULT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-index">
+<h3>8.2.2.23. create index<a class="headerlink" href="#create-index" title="Permalink to this headline">¶</a></h3>
+<p>create index 语句可以在表中创建索引，加快数据的查找。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">PersonIndex</span> <span class="k">ON</span> <span class="n">Person</span> <span class="p">(</span><span class="n">LastName</span><span class="p">)</span>
+<span class="k">CREATE</span> <span class="k">UNIQUE</span> <span class="k">INDEX</span> <span class="n">PersonIndex</span> <span class="k">ON</span> <span class="n">Person</span> <span class="p">(</span><span class="n">LastName</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop">
+<h3>8.2.2.24. drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
+<p>drop 用于删除表中的部分对象</p>
+<p>删除索引</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--用于 Microsoft SQLJet (以及 Microsoft Access) 的语法:</span>
+<span class="k">DROP</span> <span class="k">INDEX</span> <span class="n">index_name</span> <span class="k">ON</span> <span class="k">table_name</span>
+<span class="c1">--用于 MS SQL Server 的语法:</span>
+<span class="k">DROP</span> <span class="k">INDEX</span> <span class="k">table_name</span><span class="p">.</span><span class="n">index_name</span>
+<span class="c1">--用于 IBM DB2 和 Oracle 语法:</span>
+<span class="k">DROP</span> <span class="k">INDEX</span> <span class="n">index_name</span>
+<span class="c1">--用于 MySQL 的语法:</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="k">table_name</span> <span class="k">DROP</span> <span class="k">INDEX</span> <span class="n">index_name</span>
+</pre></div>
+</div>
+<p>删除表</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>drop table 表名称
+</pre></div>
+</div>
+<p>删除数据库</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>drop database 数据库名字
+</pre></div>
+</div>
+<p>truncate表</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>truncate table 表名称
+</pre></div>
+</div>
+</div>
+<div class="section" id="alter">
+<h3>8.2.2.25. alter<a class="headerlink" href="#alter" title="Permalink to this headline">¶</a></h3>
+<p>ALTER TABLE 语句用于在已有的表中添加、修改或删除列。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span> <span class="k">ADD</span> <span class="n">Birthday</span> <span class="nb">date</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span> <span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">Birthday</span> <span class="k">year</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Person</span> <span class="k">DROP</span> <span class="k">COLUMN</span> <span class="n">Birthday</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="increment">
+<h3>8.2.2.26. increment<a class="headerlink" href="#increment" title="Permalink to this headline">¶</a></h3>
+<p>自增会在插入记录的时候自动的创建主键字段的值</p>
+<p>关于自增各个语言的差异还是很大的。</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--mysql</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">P_Id</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">P_Id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--sqlserver</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">P_Id</span> <span class="nb">int</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">IDENTITY</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--access</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">P_Id</span> <span class="nb">int</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">--Oracle</span>
+<span class="k">CREATE</span> <span class="n">SEQUENCE</span> <span class="n">seq_person</span>
+<span class="k">MINVALUE</span> <span class="mi">1</span>
+<span class="k">START</span> <span class="k">WITH</span> <span class="mi">1</span>
+<span class="k">INCREMENT</span> <span class="k">BY</span> <span class="mi">1</span>
+<span class="k">CACHE</span> <span class="mi">10</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Persons</span> <span class="p">(</span><span class="n">P_Id</span><span class="p">,</span><span class="n">FirstName</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="n">seq_person</span><span class="p">.</span><span class="n">nextval</span><span class="p">,</span><span class="s1">&#39;Lars&#39;</span><span class="p">,</span><span class="s1">&#39;Monsen&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">上面的方法中，oracle最为麻烦，插入数据很不方便，可以考虑使用触发器。</p>
+</div>
+</div>
+<div class="section" id="view">
+<h3>8.2.2.27. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h3>
+<p>视图包含行和列，像一个真实的表，</p>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="p">[</span><span class="k">Current</span> <span class="n">Product</span> <span class="n">List</span><span class="p">]</span> <span class="k">AS</span>
+<span class="k">SELECT</span> <span class="n">ProductID</span><span class="p">,</span><span class="n">ProductName</span>
+<span class="k">FROM</span> <span class="n">Products</span>
+<span class="k">WHERE</span> <span class="n">Discontinued</span><span class="o">=</span><span class="k">No</span>
+
+<span class="k">DROP</span> <span class="k">VIEW</span> <span class="n">view_name</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isnull">
+<h3>8.2.2.28. isnull<a class="headerlink" href="#isnull" title="Permalink to this headline">¶</a></h3>
+<p>null代表是未知的，不确定的。</p>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">LastName</span><span class="p">,</span><span class="n">FirstName</span><span class="p">,</span><span class="n">Address</span> <span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">WHERE</span> <span class="n">Address</span> <span class="k">IS</span> <span class="k">NULL</span>
+
+<span class="k">SELECT</span> <span class="n">LastName</span><span class="p">,</span><span class="n">FirstName</span><span class="p">,</span><span class="n">Address</span> <span class="k">FROM</span> <span class="n">Persons</span>
+<span class="k">WHERE</span> <span class="n">Address</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">不能使”列名字=NULL”这种方式的。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>8.2.2.29. 数据类型<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://www.w3school.com.cn/sql/sql_datatypes.asp">数据类型</a></p>
 </div>
 </div>
 </div>
@@ -372,7 +1027,7 @@ INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
 
 </footer>
 

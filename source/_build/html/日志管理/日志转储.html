@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>日志转储 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">5. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">6. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">7. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">8. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">9. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">10. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">11. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">12. 集群</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>日志转储</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/日志管理/日志转储.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>日志转储<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>linux的日志转储有logrorate提供，可以安装时间，文件大小来自动滚动日志文件，简化日志管理。</p>
+<p>logrotate程序提供用于压缩日志文件，发送日志信息到指定的email功能。</p>
+<div class="section" id="logrorate">
+<h2>logrorate的主要配置参数<a class="headerlink" href="#logrorate" title="Permalink to this headline">¶</a></h2>
+<p>参数：</p>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="38%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">参数</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>compress</td>
+<td>启用压缩，默认gzip的</td>
+</tr>
+<tr class="row-odd"><td>compresscmd</td>
+<td>压缩命令，默认是gzip,可以改</td>
+</tr>
+<tr class="row-even"><td>uncompresscmd</td>
+<td>解压命令，默认是gunzip</td>
+</tr>
+<tr class="row-odd"><td>compressext</td>
+<td>压缩扩展</td>
+</tr>
+<tr class="row-even"><td>compressoptions</td>
+<td>压缩选项，比如-9指定压缩级别</td>
+</tr>
+<tr class="row-odd"><td>copy</td>
+<td>复制日志文件，但不要更改原始文件。</td>
+</tr>
+<tr class="row-even"><td>copytruncate</td>
+<td>在创建副本后，将原始日志文件截断，而不是移动旧日志文件，并选择创建新日志文件</td>
+</tr>
+<tr class="row-odd"><td>create mode owner group</td>
+<td>创建新的时候来控制创建文件的权限和所属信息</td>
+</tr>
+<tr class="row-even"><td>daily</td>
+<td>每日去滚动</td>
+</tr>
+<tr class="row-odd"><td>dateext</td>
+<td>使用YYYYMMDD这种后缀，而不是简单的序号，格式收dateformat影响</td>
+</tr>
+<tr class="row-even"><td>dateformat  format_string</td>
+<td>默认值是-%Y%m%d,具体格式参考date命令格式即可</td>
+</tr>
+<tr class="row-odd"><td>delaycompress</td>
+<td>延迟压缩，将前一个日志文件的压缩延迟到下一个旋转周期</td>
+</tr>
+<tr class="row-even"><td>extension ext</td>
+<td>默认是.gz的</td>
+</tr>
+<tr class="row-odd"><td>ifempty</td>
+<td>即使是空的，也要滚动</td>
+</tr>
+<tr class="row-even"><td>include file_or_directory</td>
+<td>从指定的文件来读取配置信息</td>
+</tr>
+<tr class="row-odd"><td>mail address</td>
+<td>当一个日志不存在时，它就被发送到地址</td>
+</tr>
+<tr class="row-even"><td>mailfirst</td>
+<td>在使用邮件命令时，只需发送刚刚旋转的文件，而不是即将到期的文件。</td>
+</tr>
+<tr class="row-odd"><td>maillast</td>
+<td>当使用邮件命令时，要发送即将到期的文件，而不是仅仅旋转的文件（这是默认的）。</td>
+</tr>
+<tr class="row-even"><td>maxage count</td>
+<td>如果count配置3，就是超过3天的可以删掉了。</td>
+</tr>
+<tr class="row-odd"><td>minsize size</td>
+<td>单位bytes，日志文件在大于size字节时旋转</td>
+</tr>
+<tr class="row-even"><td>missingok</td>
+<td>如果缺失，没有错误信息</td>
+</tr>
+<tr class="row-odd"><td>monthly</td>
+<td>每月滚动</td>
+</tr>
+<tr class="row-even"><td>olddir</td>
+<td>日志被移动到目录中进行旋转</td>
+</tr>
+<tr class="row-odd"><td>postrotate/endscript</td>
+<td>滚动后脚本</td>
+</tr>
+<tr class="row-even"><td>prerotate/endscript</td>
+<td>滚动前脚本</td>
+</tr>
+<tr class="row-odd"><td>firstaction/endscript</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>lastaction/endscript</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>rotate count</td>
+<td>保留个数，如果0，就只有一个当前日志了</td>
+</tr>
+<tr class="row-even"><td>size size</td>
+<td>只有超过这个大小才滚动</td>
+</tr>
+<tr class="row-odd"><td>sharedscripts</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>shred</td>
+<td>使用shred删除文件</td>
+</tr>
+<tr class="row-odd"><td>shredcycles count</td>
+<td>删除之前重新文件的次数</td>
+</tr>
+<tr class="row-even"><td>start count</td>
+<td>开始编号</td>
+</tr>
+<tr class="row-odd"><td>weekly</td>
+<td>周滚动</td>
+</tr>
+<tr class="row-even"><td>yearly</td>
+<td>年滚动</td>
+</tr>
+<tr class="row-odd"><td>nocompress</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>nocopy</td>
+<td>-</td>
+</tr>
+<tr class="row-odd"><td>nocopytruncate</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>nocreate</td>
+<td>-</td>
+</tr>
+<tr class="row-odd"><td>nodelaycompress</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>nodateext</td>
+<td>-</td>
+</tr>
+<tr class="row-odd"><td>nomail</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>nomissingok</td>
+<td>-</td>
+</tr>
+<tr class="row-odd"><td>noolddir</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>nosharedscripts</td>
+<td>-</td>
+</tr>
+<tr class="row-odd"><td>noshred</td>
+<td>-</td>
+</tr>
+<tr class="row-even"><td>notifempty</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h2>样例的配置文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>全局的配置文件</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># see &quot;man logrotate&quot; for details
+# rotate log files weekly
+weekly
+
+# keep 4 weeks worth of backlogs
+rotate 4
+
+# create new (empty) log files after rotating old ones
+create
+
+# use date as a suffix of the rotated file
+dateext
+
+# uncomment this if you want your log files compressed
+#compress
+
+# RPM packages drop log rotation information into this directory
+include /etc/logrotate.d
+
+# no packages own wtmp and btmp -- we&#39;ll rotate them here
+/var/log/wtmp {
+    monthly
+    create 0664 root utmp
+        minsize 1M
+    rotate 1
+}
+
+/var/log/btmp {
+    missingok
+    monthly
+    create 0600 root utmp
+    rotate 1
+}
+
+# system-specific logs may be also be configured here.
+</pre></div>
+</div>
+<p>httpd</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost logrotate.d]# cat httpd
+/var/log/httpd/*log {
+    missingok
+    notifempty
+    sharedscripts
+    delaycompress
+    postrotate
+        /bin/systemctl reload httpd.service &gt; /dev/null 2&gt;/dev/null || true
+    endscript
+}
+</pre></div>
+</div>
+<p>bootlog</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost logrotate.d]# cat bootlog
+/var/log/boot.log
+{
+    missingok
+    daily
+    copytruncate
+    rotate 7
+}
+</pre></div>
+</div>
+<p>syslog</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost logrotate.d]# cat syslog
+/var/log/cron
+/var/log/maillog
+/var/log/messages
+/var/log/secure
+/var/log/spooler
+{
+    missingok
+    sharedscripts
+    postrotate
+    /bin/kill -HUP `cat /var/run/syslogd.pid 2&gt; /dev/null` 2&gt; /dev/null || true
+    endscript
+}
+</pre></div>
+</div>
+<p>yum</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost logrotate.d]# cat yum
+/var/log/yum.log {
+    missingok
+    notifempty
+    size 30k
+    yearly
+    create 0600 root root
+}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

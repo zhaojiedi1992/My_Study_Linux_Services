@@ -4,5 +4,7 @@
 .. toctree::
    :maxdepth: 2
 
-   ssh
+   sshd
    telnet
+   dropbear
+   vnc

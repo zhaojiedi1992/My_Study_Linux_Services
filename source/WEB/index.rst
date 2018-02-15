@@ -10,4 +10,4 @@ WEB
    httpd/httpd虚拟主机三种实现方式
    httpd/centos6lamp的yum安装
    httpd/centos6编译安装lamp
-   nginx
+   nginx/*
