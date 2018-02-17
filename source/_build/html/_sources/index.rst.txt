@@ -15,7 +15,7 @@ Linux服务
    Rsync同步/index
    自动化安装/index
    自动化运维/index
-   安全监控/index
+   安全和监控/index
    远程登陆/index
    DNS/index
    数据库/index

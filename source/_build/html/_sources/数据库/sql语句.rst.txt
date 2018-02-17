@@ -150,7 +150,7 @@ update 语句用于更新表中的数据行
 
 语法： 
 
-.. code-block:: sql
+.. code-block:: text
 
     UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
     UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称 = 某值 
@@ -169,7 +169,7 @@ delete 语句用于删除表中的数据行
 
 语法： 
 
-.. code-block:: sql
+.. code-block:: text
 
     DELETE FROM 表名称 WHERE 列名称 = 值
 
@@ -716,19 +716,19 @@ drop 用于删除表中的部分对象
 
 删除表
 
-.. code-block:: sql
+.. code-block:: text
 
     drop table 表名称
 
 删除数据库
 
-.. code-block:: sql
+.. code-block:: text
 
     drop database 数据库名字
 
 truncate表
 
-.. code-block:: sql
+.. code-block:: text
 
     truncate table 表名称
 

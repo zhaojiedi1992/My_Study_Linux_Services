@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.6. centos6编译安装lamp &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9.6. centos6编译安装lamp &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="8. WEB" href="../index.html"/>
-        <link rel="next" title="9. 日志管理" href="../../日志管理/index.html"/>
-        <link rel="prev" title="8.5. centos6lamp的yum安装" href="centos6lamp的yum安装.html"/> 
+        <link rel="up" title="9. WEB" href="../index.html"/>
+        <link rel="next" title="10. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="9.5. centos6lamp的yum安装" href="centos6lamp的yum安装.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -97,36 +97,37 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">5. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">6. DNS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">7. 数据库</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">8. WEB</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="httpd安装.html">8.1. httpd的安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd基础配置说明.html">8.2. httpd基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="http支持https.html">8.3. http支持https</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">8.4. httpd虚拟主机三种实现方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centos6lamp的yum安装.html">8.5. centos6lamp的yum安装</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.6. centos6编译安装lamp</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.6.1. 下载文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.6.2. 安装必要的包文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">8.6.3. 用户的创建</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#httpd">8.6.4. httpd编译安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#http">8.6.5. 测试http和后续</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mariadb">8.6.6. mariadb编译安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">8.6.7. 测试mariadb和后续</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">8.6.8. mariadb编译安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#php">8.6.9. 测试php和后续</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#httpphp">8.6.10. http集成php并测试</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#phpphpmyadmin">8.6.11. 部署php应用软件phpMyAdmin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">8.6.12. 登陆应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">8. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="httpd安装.html">9.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd基础配置说明.html">9.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http支持https.html">9.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">9.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos6lamp的yum安装.html">9.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.6. centos6编译安装lamp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.6.1. 下载文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.6.2. 安装必要的包文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.6.3. 用户的创建</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpd">9.6.4. httpd编译安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#http">9.6.5. 测试http和后续</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mariadb">9.6.6. mariadb编译安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.6.7. 测试mariadb和后续</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">9.6.8. mariadb编译安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#php">9.6.9. 测试php和后续</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpphp">9.6.10. http集成php并测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phpphpmyadmin">9.6.11. 部署php应用软件phpMyAdmin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">9.6.12. 登陆应用</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">9. 日志管理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">10. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">11. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">12. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">10. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">11. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">12. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">13. 集群</a></li>
 </ul>
 
             
@@ -172,9 +173,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../index.html">8. WEB</a> &raquo;</li>
+          <li><a href="../index.html">9. WEB</a> &raquo;</li>
         
-      <li>8.6. centos6编译安装lamp</li>
+      <li>9.6. centos6编译安装lamp</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -194,9 +195,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="centos6lamp">
-<h1>8.6. centos6编译安装lamp<a class="headerlink" href="#centos6lamp" title="Permalink to this headline">¶</a></h1>
+<h1>9.6. centos6编译安装lamp<a class="headerlink" href="#centos6lamp" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>8.6.1. 下载文件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.1. 下载文件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /usr/src
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="nv">$ls</span>
 debug  kernels
@@ -223,7 +224,7 @@ total <span class="m">103312</span>
 </div>
 </div>
 <div class="section" id="id2">
-<h2>8.6.2. 安装必要的包文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.2. 安装必要的包文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> groupinstall <span class="s2">&quot;development tools&quot;</span> -y
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install pcre-devel openssl-devel expat-devel
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install  ncurses-devel
@@ -232,14 +233,14 @@ total <span class="m">103312</span>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>8.6.3. 用户的创建<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.3. 用户的创建<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$useradd</span> apache -r -s /sbin/nologin -c <span class="s2">&quot;Apache&quot;</span>
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$useradd</span> mysql -r -s /sbin/nologin -c <span class="s2">&quot;mysql&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="httpd">
-<h2>8.6.4. httpd编译安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.4. httpd编译安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf httpd-2.4.29.tar.bz2
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf apr-1.6.3.tar.bz2
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf apr-util-1.6.1.tar.bz2
@@ -268,7 +269,7 @@ total <span class="m">103312</span>
 </div>
 </div>
 <div class="section" id="http">
-<h2>8.6.5. 测试http和后续<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.5. 测试http和后续<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost ~]$cd /usr/local/httpd24/bin
 [root@localhost bin]$echo &#39;PATH=/usr/local/httpd24/bin:$PATH&#39; &gt;&gt; /etc/profile.d/lamp.sh
 [root@localhost bin]$source /etc/profile.d/lamp.sh
@@ -299,7 +300,7 @@ tcp    LISTEN     0      128                   :::80                   :::*
 </div>
 </div>
 <div class="section" id="mariadb">
-<h2>8.6.6. mariadb编译安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.6. mariadb编译安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$cd</span> /usr/src/lamp
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$ls</span>
 apr-1.6.3.tar.bz2       httpd-2.4.29          mariadb-10.2.12.tar.gz  wordpress-4.9.1-zh_CN.tar.gz
@@ -334,7 +335,7 @@ Tue Jan <span class="m">30</span> <span class="m">01</span>:40:50 CST <span clas
 </div>
 </div>
 <div class="section" id="id4">
-<h2>8.6.7. 测试mariadb和后续<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.7. 测试mariadb和后续<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/mysql/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$source</span> /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$cd</span> /usr/local/mysql/
@@ -355,7 +356,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">50</span>       
 </div>
 </div>
 <div class="section" id="id5">
-<h2>8.6.8. mariadb编译安装<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.8. mariadb编译安装<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span>./configure <span class="se">\</span>
 --prefix<span class="o">=</span>/usr/local/php <span class="se">\</span>
 --enable-mysqlnd <span class="se">\</span>
@@ -386,7 +387,7 @@ Tue Jan <span class="m">30</span> <span class="m">02</span>:37:07 CST <span clas
 </div>
 </div>
 <div class="section" id="php">
-<h2>8.6.9. 测试php和后续<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.9. 测试php和后续<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/php/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$source</span> /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$cp</span> php.ini-production  /etc/php.ini
@@ -404,7 +405,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 </div>
 <div class="section" id="httpphp">
-<h2>8.6.10. http集成php并测试<a class="headerlink" href="#httpphp" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.10. http集成php并测试<a class="headerlink" href="#httpphp" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i  <span class="s1">&#39;s@#(LoadModule.*mod_proxy.so)@\1@&#39;</span> /usr/local/httpd24/conf/httpd.conf
 <span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i  <span class="s1">&#39;s@#(LoadModule.*mod_proxy_fcgi.so)@\1@&#39;</span> /usr/local/httpd24/conf/httpd.conf
 <span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i <span class="s1">&#39;s@DirectoryIndex index.html@DirectoryIndex index.php index.html@&#39;</span> /usr/local/httpd24/conf/httpd.conf
@@ -431,7 +432,7 @@ phpinfo<span class="o">()</span><span class="p">;</span>
 </div>
 </div>
 <div class="section" id="phpphpmyadmin">
-<h2>8.6.11. 部署php应用软件phpMyAdmin<a class="headerlink" href="#phpphpmyadmin" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.11. 部署php应用软件phpMyAdmin<a class="headerlink" href="#phpphpmyadmin" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$unzip</span> phpMyAdmin-4.7.7-all-languages.zip
 
 <span class="o">[</span>root@localhost lamp<span class="o">]</span>$
@@ -447,7 +448,7 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
 </div>
 </div>
 <div class="section" id="id6">
-<h2>8.6.12. 登陆应用<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2>9.6.12. 登陆应用<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>效果图：</p>
 <img alt="../../_images/phpmyadmin.png" src="../../_images/phpmyadmin.png" />
 </div>
@@ -463,10 +464,10 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="9. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="10. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="centos6lamp的yum安装.html" class="btn btn-neutral" title="8.5. centos6lamp的yum安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="centos6lamp的yum安装.html" class="btn btn-neutral" title="9.5. centos6lamp的yum安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
