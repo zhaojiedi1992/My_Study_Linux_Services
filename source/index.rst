@@ -17,6 +17,7 @@ Linux服务
    自动化运维/index
    安全和监控/index
    远程登陆/index
+   认证/index
    DNS/index
    数据库/index
    WEB/index
@@ -24,4 +25,5 @@ Linux服务
    网络文件共享/index
    版本控制/index
    集群/index
+   杂项/index
    

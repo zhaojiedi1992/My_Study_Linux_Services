@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.4. mariadb多实例安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9.4. mariadb多实例安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="8. 数据库" href="../index.html"/>
-        <link rel="next" title="8.5. mysql终端入门" href="mysql终端入门.html"/>
-        <link rel="prev" title="8.3. mysql安装" href="mysql安装.html"/> 
+        <link rel="up" title="9. 数据库" href="../index.html"/>
+        <link rel="next" title="9.5. mysql终端入门" href="mysql终端入门.html"/>
+        <link rel="prev" title="9.3. mysql安装" href="mysql安装.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -99,58 +99,60 @@
 <li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">8. 数据库</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">8.1. 数据库基础</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">8.2. sql语句</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql安装.html">8.3. mysql安装</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.4. mariadb多实例安装</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.4.1. 配置前规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.4.2. 配置前的环境设置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">8.4.3. 安装mariadb</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mysqld-multi">8.4.4. 方案1-mysqld_multi</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">8.4.4.1. 创建目录并修改权限</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">8.4.4.2. 安装数据库</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">8.4.4.3. 配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">8.4.4.4. 启动实例</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">8.4.4.5. 安全初始化脚本运行</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">8.4.4.6. 添加多实例管理用户</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">8.4.4.7. 查看和关闭实例</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">8.4.4.8. 开机启动</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">9.2. sql语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.4. mariadb多实例安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.4.1. 配置前规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.4.2. 配置前的环境设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.4.3. 安装mariadb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mysqld-multi">9.4.4. 方案1-mysqld_multi</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">9.4.4.1. 创建目录并修改权限</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">9.4.4.2. 安装数据库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">9.4.4.3. 配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">9.4.4.4. 启动实例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">9.4.4.5. 安全初始化脚本运行</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">9.4.4.6. 添加多实例管理用户</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">9.4.4.7. 查看和关闭实例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">9.4.4.8. 开机启动</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#sysv">8.4.5. 方案2-多sysv脚本</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id13">8.4.5.1. 创建目录并修改权限</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id14">8.4.5.2. 安装数据库</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id15">8.4.5.3. 配置配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">8.4.5.4. 配置服务文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">8.4.5.5. 开机启动</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id18">8.4.5.6. 启动服务和查看状态</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">8.4.5.7. 安全初始化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id20">8.4.5.8. 服务文件修改密码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysv">9.4.5. 方案2-多sysv脚本</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">9.4.5.1. 创建目录并修改权限</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">9.4.5.2. 安装数据库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">9.4.5.3. 配置配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">9.4.5.4. 配置服务文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">9.4.5.5. 开机启动</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">9.4.5.6. 启动服务和查看状态</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">9.4.5.7. 安全初始化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">9.4.5.8. 服务文件修改密码</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#systemd">8.4.6. 方案3-systemd</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id21">8.4.6.1. 创建目录并修改权限</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">8.4.6.2. 安装数据库</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id23">8.4.6.3. 配置配置文件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id24">8.4.6.4. 配置systemd</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id25">8.4.6.5. 启动服务和查看状态</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id26">8.4.6.6. 开机启动</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id27">8.4.6.7. 安全初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#systemd">9.4.6. 方案3-systemd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">9.4.6.1. 创建目录并修改权限</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">9.4.6.2. 安装数据库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">9.4.6.3. 配置配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">9.4.6.4. 配置systemd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">9.4.6.5. 启动服务和查看状态</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">9.4.6.6. 开机启动</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">9.4.6.7. 安全初始化</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">8.5. mysql终端入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">8.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql入门.html">9.6. mysql入门</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">10. 日志管理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">11. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">12. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">13. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
 </ul>
 
             
@@ -196,9 +198,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../index.html">8. 数据库</a> &raquo;</li>
+          <li><a href="../index.html">9. 数据库</a> &raquo;</li>
         
-      <li>8.4. mariadb多实例安装</li>
+      <li>9.4. mariadb多实例安装</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -218,7 +220,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mariadb">
-<h1>8.4. mariadb多实例安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h1>
+<h1>9.4. mariadb多实例安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h1>
 <p>mariadb多实例实现方式:</p>
 <dl class="docutils">
 <dt>mysqld_multi</dt>
@@ -230,7 +232,7 @@
 <dd>这个是systemd管理的特有的。</dd>
 </dl>
 <div class="section" id="id1">
-<h2>8.4.1. 配置前规划<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.1. 配置前规划<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>上面mairadb的多实例有多种配置方法， 我们先规划如下：</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -266,7 +268,7 @@
 </table>
 </div>
 <div class="section" id="id2">
-<h2>8.4.2. 配置前的环境设置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.2. 配置前的环境设置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>关闭selinux</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># setenforce 0</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># sed -i &#39;s@SELINUX=.*@SELINUX=disabled@&#39; /etc/sysconfig/selinux</span>
@@ -279,7 +281,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>8.4.3. 安装mariadb<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.3. 安装mariadb<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>这里我不使用centos默认的版本，使用最新稳定版本10.2。</p>
 <p>上面的基础规划完毕，需要配置下 <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/#mirror=neusoft&amp;distro=CentOS&amp;distro_release=centos7-amd64--centos7&amp;version=10.2">mariadb的yum源</a>。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo                             # 添加/etc/yum.repos.d/mariadb.repo文件</span>
@@ -303,23 +305,23 @@
 </div>
 </div>
 <div class="section" id="mysqld-multi">
-<h2>8.4.4. 方案1-mysqld_multi<a class="headerlink" href="#mysqld-multi" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.4. 方案1-mysqld_multi<a class="headerlink" href="#mysqld-multi" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
-<h3>8.4.4.1. 创建目录并修改权限<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.1. 创建目录并修改权限<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mkdir -pv /data/scheme1/mysql/{3307,3308}/data         # 创建目录</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># chown mysql.mysql /data/scheme1/mysql/330{7,8} -R      # 修改权限</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
-<h3>8.4.4.2. 安装数据库<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.2. 安装数据库<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme1/mysql/3308/data --basedir=/usr --user=mysql  # 安装到数据目录</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme1/mysql/3308/data --basedir=/usr --user=mysql  # 安装到数据目录</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id6">
-<h3>8.4.4.3. 配置文件<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.3. 配置文件<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mv /etc/my.conf /etc/my.conf.yumbak                # 重命名文件，别影响接下来的实验，其实不必要的</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># vim /etc/my.conf                                   # 编辑</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># cat /etc/my.conf                                   # 查看</span>
@@ -350,7 +352,7 @@ pid-file   <span class="o">=</span> /data/scheme1/mysql/3308/mariadb.pid
 </div>
 </div>
 <div class="section" id="id7">
-<h3>8.4.4.4. 启动实例<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.4. 启动实例<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysqld_multi start 3307                        # 启动指定的实例，这个是在配置mysqld3307片段，实例名字就是3307</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysqld_multi start 3308                        # 启动指定的实例，这个是在配置mysqld3307片段，实例名字就是3307</span>
 
@@ -365,7 +367,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3308       
 </div>
 </div>
 <div class="section" id="id8">
-<h3>8.4.4.5. 安全初始化脚本运行<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.5. 安全初始化脚本运行<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_secure_installation -S /data/scheme1/mysql/3307/mariadb.sock  # 使用socket连接3307实例</span>
 <span class="c1"># 下面内容只跳出重要的输入项列出</span>
 Enter current password <span class="k">for</span> root <span class="o">(</span>enter <span class="k">for</span> none<span class="o">)</span>:              <span class="c1"># 默认密码空，直接回车即可</span>
@@ -381,7 +383,7 @@ Reload privilege tables now? <span class="o">[</span>Y/n<span class="o">]</span>
 </div>
 </div>
 <div class="section" id="id9">
-<h3>8.4.4.6. 添加多实例管理用户<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.6. 添加多实例管理用户<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># vim create_user.sql                        # 添加用户脚本</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># cat create_user.sql                        # 检查</span>
 CREATE USER <span class="s1">&#39;multi_admin&#39;</span>@<span class="s1">&#39;localhost&#39;</span> IDENTIFIED BY <span class="s1">&#39;multi_admin&#39;</span><span class="p">;</span>
@@ -397,7 +399,7 @@ Enter password:
 <p>更多 <a class="reference external" href="https://dev.mysql.com/doc/refman/5.7/en/mysqld-multi.html">mysqld-multi</a> 使用帮助。</p>
 </div>
 <div class="section" id="id11">
-<h3>8.4.4.7. 查看和关闭实例<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.7. 查看和关闭实例<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysqld_multi report                        # 查看服务状态</span>
 Reporting MariaDB servers
 MariaDB server from group: mysqld3307 is running
@@ -411,7 +413,7 @@ MariaDB server from group: mysqld3308 is running
 </div>
 </div>
 <div class="section" id="id12">
-<h3>8.4.4.8. 开机启动<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.4.8. 开机启动<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>直接加入到rc.local中</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># echo `which mysqld_multi` start 3307-3308  &gt;&gt; /etc/rc.local        # 开机执行</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># tail -n 1 /etc/rc.local</span>
@@ -466,9 +468,9 @@ restart<span class="o">)</span>
 </div>
 </div>
 <div class="section" id="sysv">
-<h2>8.4.5. 方案2-多sysv脚本<a class="headerlink" href="#sysv" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.5. 方案2-多sysv脚本<a class="headerlink" href="#sysv" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id13">
-<h3>8.4.5.1. 创建目录并修改权限<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.1. 创建目录并修改权限<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <p>这种方式，需要每个配置文件都要单独存放，可以给目录更详细的规划下</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1">#  mkdir -pv /data/scheme2/mysql/{4307,4308}/{data,etc,log,socket,pid,service}       # 创建目录</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># chown mysql.mysql /data/scheme2/mysql/4307 -R                                      # 修改所有者</span>
@@ -477,14 +479,14 @@ restart<span class="o">)</span>
 </div>
 </div>
 <div class="section" id="id14">
-<h3>8.4.5.2. 安装数据库<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.2. 安装数据库<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme2/mysql/4307/data --basedir=/usr --user=mysql  # 安装数据库</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme2/mysql/4308/data --basedir=/usr --user=mysql  # 安装数据库</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id15">
-<h3>8.4.5.3. 配置配置文件<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.3. 配置配置文件<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># cd /data/scheme2/mysql/4307/etc/                           # 进入配置目录</span>
 <span class="o">[</span>root@centos-158 etc<span class="o">]</span><span class="c1"># vim my.cnf                                               # 编辑单独的配置文件</span>
 <span class="o">[</span>root@centos-158 etc<span class="o">]</span><span class="c1"># cat my.cnf                                               # 检查</span>
@@ -510,7 +512,7 @@ pid-file<span class="o">=</span>/data/scheme2/mysql/4308/pid/mariadb.pid
 </div>
 </div>
 <div class="section" id="id16">
-<h3>8.4.5.4. 配置服务文件<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.4. 配置服务文件<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># vim service/mysqld.sh                                   # 编辑sysv脚本</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># cat service/mysqld.sh                                   # 检查</span>
 <span class="c1">#!/bin/bash</span>
@@ -662,7 +664,7 @@ status<span class="o">)</span>
 </div>
 </div>
 <div class="section" id="id17">
-<h3>8.4.5.5. 开机启动<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.5. 开机启动<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># ln -s /data/scheme2/mysql/4307/service/mysqld.sh /etc/rc.d/init.d/mysql4307     # 添加到init.d目录</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># chkconfig --add mysql4307                                                       # 添加到sysv</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># chkconfig mysql4307 on                                                          # 开机启动</span>
@@ -676,7 +678,7 @@ status<span class="o">)</span>
 </div>
 </div>
 <div class="section" id="id18">
-<h3>8.4.5.6. 启动服务和查看状态<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.6. 启动服务和查看状态<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># service mysql4307 start                     # 启动实例</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># service mysql4308 start                     # 启动实例</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># netstat -tunlp |grep 430                    # 查看状态</span>
@@ -686,14 +688,14 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::4308       
 </div>
 </div>
 <div class="section" id="id19">
-<h3>8.4.5.7. 安全初始化<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.7. 安全初始化<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># mysql_secure_installation  -u root  -S /data/scheme2/mysql/4307/socket/mariadb.sock # 安全初始化，参考方案1</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># mysql_secure_installation  -u root  -S /data/scheme2/mysql/4308/socket/mariadb.sock # 安全初始化，参考方案1</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id20">
-<h3>8.4.5.8. 服务文件修改密码<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.5.8. 服务文件修改密码<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># vim service/mysqld.sh               # 修改文件的密码项为上面的安装初始化指定的密码</span>
 <span class="nv">mysql_pwd</span><span class="o">=</span><span class="s2">&quot;xxxxx&quot;</span>
 <span class="o">[</span>root@centos-158 <span class="m">4307</span><span class="o">]</span><span class="c1"># chmod 750 service/mysqld.sh         # 带有密码设置下权限</span>
@@ -706,9 +708,9 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::4308       
 </div>
 </div>
 <div class="section" id="systemd">
-<h2>8.4.6. 方案3-systemd<a class="headerlink" href="#systemd" title="Permalink to this headline">¶</a></h2>
+<h2>9.4.6. 方案3-systemd<a class="headerlink" href="#systemd" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id21">
-<h3>8.4.6.1. 创建目录并修改权限<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.1. 创建目录并修改权限<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <p>这种方式，需要每个配置文件都要单独存放，可以给目录更详细的规划下</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mkdir -pv /data/scheme3/mysql/{5307,5308}/{data,log,socket,pid}        # 创建目录</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># chown mysql.mysql /data/scheme3/mysql/5307 -R                          # 所有者修改</span>
@@ -717,14 +719,14 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::4308       
 </div>
 </div>
 <div class="section" id="id22">
-<h3>8.4.6.2. 安装数据库<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.2. 安装数据库<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme3/mysql/5307/data --basedir=/usr --user=mysql  # 安装数据库</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_install_db  --datadir=/data/scheme3/mysql/5308/data --basedir=/usr --user=mysql  # 安装数据库</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id23">
-<h3>8.4.6.3. 配置配置文件<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.3. 配置配置文件<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mv /etc/my.cnf /etc/my.cnf.multi                       # 原有配置文件重名</span>
 <span class="o">[</span>root@centos-158 system<span class="o">]</span><span class="c1"># cd /etc/my.cnf.d/                                 # 进入conf.d目录</span>
 
@@ -748,7 +750,7 @@ pid-file<span class="o">=</span>/data/scheme3/mysql/5308/pid/mariadb.pid
 </div>
 </div>
 <div class="section" id="id24">
-<h3>8.4.6.4. 配置systemd<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.4. 配置systemd<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># vim /usr/lib/systemd/system/mariadb@.service        # 修改mariadb@service文件默认项</span>
 <span class="c1"># 修改如下内容</span>
 <span class="nv">ConditionPathExists</span><span class="o">=</span>/etc/my.cnf.d/my%I.cnf
@@ -766,7 +768,7 @@ pid-file<span class="o">=</span>/data/scheme3/mysql/5308/pid/mariadb.pid
 <p><a class="reference download internal" href="../../_downloads/mariadb@.service" download=""><code class="xref download docutils literal"><span class="pre">/files/mariadb&#64;.service</span></code></a></p>
 </div>
 <div class="section" id="id25">
-<h3>8.4.6.5. 启动服务和查看状态<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.5. 启动服务和查看状态<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># systemctl daemon-reload                 # 重载systemd</span>
 <span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># systemctl start mariadb@5307            # 启动实例</span>
 <span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># systemctl start mariadb@5308            # 启动实例</span>
@@ -777,7 +779,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::5308       
 </div>
 </div>
 <div class="section" id="id26">
-<h3>8.4.6.6. 开机启动<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.6. 开机启动<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># systemctl enable  mariadb@5307           # 开机启动这个实例</span>
 Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb@5307.service to /usr/lib/systemd/system/mariadb@.service.
 <span class="o">[</span>root@centos-158 my.cnf.d<span class="o">]</span><span class="c1"># systemctl enable  mariadb@5308           # 开机启动这个实例</span>
@@ -786,7 +788,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb@5308.se
 </div>
 </div>
 <div class="section" id="id27">
-<h3>8.4.6.7. 安全初始化<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<h3>9.4.6.7. 安全初始化<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_secure_installation  -u root  -S /data/scheme3/mysql/5307/socket/mariadb.sock    # 安全设置</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># mysql_secure_installation  -u root  -S /data/scheme3/mysql/5308/socket/mariadb.sock    # 安全设置</span>
 </pre></div>
@@ -805,10 +807,10 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb@5308.se
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mysql终端入门.html" class="btn btn-neutral float-right" title="8.5. mysql终端入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mysql终端入门.html" class="btn btn-neutral float-right" title="9.5. mysql终端入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mysql安装.html" class="btn btn-neutral" title="8.3. mysql安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mysql安装.html" class="btn btn-neutral" title="9.3. mysql安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
