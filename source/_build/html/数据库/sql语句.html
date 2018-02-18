@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8.2. sql语句 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>9.2. sql语句 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="8. 数据库" href="index.html"/>
-        <link rel="next" title="8.3. mysql安装" href="mysql/mysql安装.html"/>
-        <link rel="prev" title="8.1. 数据库基础" href="数据库基础.html"/> 
+        <link rel="up" title="9. 数据库" href="index.html"/>
+        <link rel="next" title="9.3. mysql安装" href="mysql/mysql安装.html"/>
+        <link rel="prev" title="9.1. 数据库基础" href="数据库基础.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -99,66 +99,68 @@
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. 数据库</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="数据库基础.html">8.1. 数据库基础</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8.2. sql语句</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.2.1. sql基础</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#select">8.2.1.1. select</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#distinct">8.2.1.2. distinct</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#where">8.2.1.3. where</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#and-or">8.2.1.4. and &amp; or</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#order-by">8.2.1.5. order by</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#insert">8.2.1.6. insert</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#update">8.2.1.7. update</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#delete">8.2.1.8. delete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.2. sql语句</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.2.1. sql基础</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#select">9.2.1.1. select</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distinct">9.2.1.2. distinct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where">9.2.1.3. where</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#and-or">9.2.1.4. and &amp; or</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#order-by">9.2.1.5. order by</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#insert">9.2.1.6. insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update">9.2.1.7. update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete">9.2.1.8. delete</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.2.2. sql中级</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#top">8.2.2.1. top</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#like">8.2.2.2. like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">8.2.2.3. 通配符</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#in">8.2.2.4. in</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#between">8.2.2.5. between</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#aliases">8.2.2.6. aliases</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join">8.2.2.7. join</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inner-join">8.2.2.8. inner join</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#right-join">8.2.2.9. right join</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#left-join">8.2.2.10. left join</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#full-join">8.2.2.11. full join</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#union">8.2.2.12. union</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#select-into">8.2.2.13. select into</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-db">8.2.2.14. create db</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-table">8.2.2.15. create table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#constraints">8.2.2.16. constraints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#not-null">8.2.2.17. not null</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#unique">8.2.2.18. unique</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#primary-key">8.2.2.19. primary key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#foreign-key">8.2.2.20. foreign key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#check">8.2.2.21. check</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#default">8.2.2.22. default</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-index">8.2.2.23. create index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#drop">8.2.2.24. drop</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#alter">8.2.2.25. alter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#increment">8.2.2.26. increment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#view">8.2.2.27. view</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#isnull">8.2.2.28. isnull</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">8.2.2.29. 数据类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.2.2. sql中级</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#top">9.2.2.1. top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#like">9.2.2.2. like</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">9.2.2.3. 通配符</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#in">9.2.2.4. in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#between">9.2.2.5. between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aliases">9.2.2.6. aliases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#join">9.2.2.7. join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inner-join">9.2.2.8. inner join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#right-join">9.2.2.9. right join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#left-join">9.2.2.10. left join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#full-join">9.2.2.11. full join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#union">9.2.2.12. union</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-into">9.2.2.13. select into</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-db">9.2.2.14. create db</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-table">9.2.2.15. create table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#constraints">9.2.2.16. constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#not-null">9.2.2.17. not null</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unique">9.2.2.18. unique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#primary-key">9.2.2.19. primary key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#foreign-key">9.2.2.20. foreign key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#check">9.2.2.21. check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default">9.2.2.22. default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-index">9.2.2.23. create index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drop">9.2.2.24. drop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alter">9.2.2.25. alter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#increment">9.2.2.26. increment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view">9.2.2.27. view</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isnull">9.2.2.28. isnull</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">9.2.2.29. 数据类型</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mysql/mysql安装.html">8.3. mysql安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql/mysql多实例.html">8.4. mariadb多实例安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql/mysql终端入门.html">8.5. mysql终端入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysql/mysql入门.html">8.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql/mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql/mysql多实例.html">9.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql/mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql/mysql入门.html">9.6. mysql入门</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">11. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
 </ul>
 
             
@@ -204,9 +206,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">8. 数据库</a> &raquo;</li>
+          <li><a href="index.html">9. 数据库</a> &raquo;</li>
         
-      <li>8.2. sql语句</li>
+      <li>9.2. sql语句</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -226,9 +228,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="sql">
-<h1>8.2. sql语句<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h1>
+<h1>9.2. sql语句<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>8.2.1. sql基础<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>9.2.1. sql基础<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>sql语句分为2个部分，数据操作语言和数据定义语言。</p>
 <p>dml语言</p>
 <ol class="arabic simple">
@@ -245,7 +247,7 @@
 <li>truncate</li>
 </ol>
 <div class="section" id="select">
-<h3>8.2.1.1. select<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.1. select<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h3>
 <p>select语句用于从表中选取数据。</p>
 <p>语法</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>select 列名称   from   表名称
@@ -262,7 +264,7 @@ select   *      from   表名称
 </div>
 </div>
 <div class="section" id="distinct">
-<h3>8.2.1.2. distinct<a class="headerlink" href="#distinct" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.2. distinct<a class="headerlink" href="#distinct" title="Permalink to this headline">¶</a></h3>
 <p>distinct用于返回结果集合的唯一不同的值，也就是相同的只显示一次。</p>
 <p>语法</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>select distinct 列名称   from   表名称
@@ -274,7 +276,7 @@ select   *      from   表名称
 </div>
 </div>
 <div class="section" id="where">
-<h3>8.2.1.3. where<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.3. where<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h3>
 <p>where语句配合select语句或者其他语句使用，用于有条件的做对应的处理。</p>
 <p>语法</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
@@ -327,7 +329,7 @@ select   *      from   表名称
 </div>
 </div>
 <div class="section" id="and-or">
-<h3>8.2.1.4. and &amp; or<a class="headerlink" href="#and-or" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.4. and &amp; or<a class="headerlink" href="#and-or" title="Permalink to this headline">¶</a></h3>
 <p>and的功能就是把多个where语句组合起来，每个条件都成立才处理后续。</p>
 <p>or的功能就是把多个where语句组合起来，任何一个条件成立就处理。</p>
 <p>样例</p>
@@ -339,7 +341,7 @@ select   *      from   表名称
 </div>
 </div>
 <div class="section" id="order-by">
-<h3>8.2.1.5. order by<a class="headerlink" href="#order-by" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.5. order by<a class="headerlink" href="#order-by" title="Permalink to this headline">¶</a></h3>
 <p>order by 语句用于根据指定列来对查询的结果进行排序。</p>
 <p>样例</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">-- 按照company字母排序（默认升序）</span>
@@ -354,7 +356,7 @@ select   *      from   表名称
 </div>
 </div>
 <div class="section" id="insert">
-<h3>8.2.1.6. insert<a class="headerlink" href="#insert" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.6. insert<a class="headerlink" href="#insert" title="Permalink to this headline">¶</a></h3>
 <p>insert 语句用于向表中插入新的数据行</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>INSERT INTO 表名称 VALUES (值1, 值2,....)
@@ -367,7 +369,7 @@ INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
 </div>
 </div>
 <div class="section" id="update">
-<h3>8.2.1.7. update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.7. update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
 <p>update 语句用于更新表中的数据行</p>
 <p>语法：</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
@@ -381,7 +383,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="delete">
-<h3>8.2.1.8. delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.1.8. delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h3>
 <p>delete 语句用于删除表中的数据行</p>
 <p>语法：</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>DELETE FROM 表名称 WHERE 列名称 = 值
@@ -394,9 +396,9 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="id2">
-<h2>8.2.2. sql中级<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>9.2.2. sql中级<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="top">
-<h3>8.2.2.1. top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.1. top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h3>
 <p>top用于从规定的结果集合中去除指定的条数，尤其在大型表来说非常有用</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TOP</span> <span class="nb">number</span><span class="o">|</span><span class="n">percent</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">FROM</span> <span class="k">table_name</span>
@@ -417,7 +419,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="like">
-<h3>8.2.2.2. like<a class="headerlink" href="#like" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.2. like<a class="headerlink" href="#like" title="Permalink to this headline">¶</a></h3>
 <p>like操作符用于在where语句中搜索指定模式</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="k">table_name</span>
@@ -430,7 +432,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="id3">
-<h3>8.2.2.3. 通配符<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.3. 通配符<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>上面已经使用了”%”通配符了</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -466,7 +468,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="in">
-<h3>8.2.2.4. in<a class="headerlink" href="#in" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.4. in<a class="headerlink" href="#in" title="Permalink to this headline">¶</a></h3>
 <p>IN 操作符允许我们在 WHERE 子句中规定多个值。</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -482,7 +484,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="between">
-<h3>8.2.2.5. between<a class="headerlink" href="#between" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.5. between<a class="headerlink" href="#between" title="Permalink to this headline">¶</a></h3>
 <p>between用于选定介于两个值之间的数据范围，值类型可以是数值的，可以是字符和日期的。</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -503,7 +505,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="aliases">
-<h3>8.2.2.6. aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.6. aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
 <p>表和列都是支持别名的。</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--表的</span>
@@ -520,7 +522,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="join">
-<h3>8.2.2.7. join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.7. join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
 <p>join用于多表连接，获取多个表的数据。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">Persons</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">Orders</span><span class="p">.</span><span class="n">OrderNo</span>
 <span class="k">FROM</span> <span class="n">Persons</span><span class="p">,</span> <span class="n">Orders</span>
@@ -542,11 +544,11 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </ol>
 </div>
 <div class="section" id="inner-join">
-<h3>8.2.2.8. inner join<a class="headerlink" href="#inner-join" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.8. inner join<a class="headerlink" href="#inner-join" title="Permalink to this headline">¶</a></h3>
 <p>inner join 和join 是一样的。</p>
 </div>
 <div class="section" id="right-join">
-<h3>8.2.2.9. right join<a class="headerlink" href="#right-join" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.9. right join<a class="headerlink" href="#right-join" title="Permalink to this headline">¶</a></h3>
 <p>RIGHT JOIN 关键字会右表 (table_name2) 那里返回所有的行，即使在左表 (table_name1) 中没有匹配的行。</p>
 <p>样例：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -557,7 +559,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="left-join">
-<h3>8.2.2.10. left join<a class="headerlink" href="#left-join" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.10. left join<a class="headerlink" href="#left-join" title="Permalink to this headline">¶</a></h3>
 <p>LEFT JOIN 关键字会从左表 (table_name1) 那里返回所有的行，即使在右表 (table_name2) 中没有匹配的行。</p>
 <p>样例：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Persons</span><span class="p">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">Persons</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">Orders</span><span class="p">.</span><span class="n">OrderNo</span>
@@ -569,7 +571,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="full-join">
-<h3>8.2.2.11. full join<a class="headerlink" href="#full-join" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.11. full join<a class="headerlink" href="#full-join" title="Permalink to this headline">¶</a></h3>
 <p>只要其中某个表存在匹配，FULL JOIN 关键字就会返回行。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">table_name1</span>
@@ -579,7 +581,7 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 </div>
 <div class="section" id="union">
-<h3>8.2.2.12. union<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.12. union<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h3>
 <p>union 用于合并2个或者多个查询语句的结果集合</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -597,7 +599,7 @@ UNION ALL
 SELECT E_Name FROM Employees_USA</div></blockquote>
 </div>
 <div class="section" id="select-into">
-<h3>8.2.2.13. select into<a class="headerlink" href="#select-into" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.13. select into<a class="headerlink" href="#select-into" title="Permalink to this headline">¶</a></h3>
 <p>select into 用于从一个表中选取数据，然后插入到另一个表中。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
 <span class="k">INTO</span> <span class="n">Persons_backup</span>
@@ -606,14 +608,14 @@ SELECT E_Name FROM Employees_USA</div></blockquote>
 </div>
 </div>
 <div class="section" id="create-db">
-<h3>8.2.2.14. create db<a class="headerlink" href="#create-db" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.14. create db<a class="headerlink" href="#create-db" title="Permalink to this headline">¶</a></h3>
 <p>CREATE DATABASE 用于创建数据库。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">my_db</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="create-table">
-<h3>8.2.2.15. create table<a class="headerlink" href="#create-table" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.15. create table<a class="headerlink" href="#create-table" title="Permalink to this headline">¶</a></h3>
 <p>create table 用于创建表</p>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>CREATE TABLE 表名称
@@ -638,7 +640,7 @@ SELECT E_Name FROM Employees_USA</div></blockquote>
 </div>
 </div>
 <div class="section" id="constraints">
-<h3>8.2.2.16. constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.16. constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h3>
 <p>约束用于限制加入表的数据的类型。</p>
 <p>可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。</p>
 <p>我们将主要探讨以下几种约束：</p>
@@ -652,7 +654,7 @@ SELECT E_Name FROM Employees_USA</div></blockquote>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</p>
 </div>
 <div class="section" id="not-null">
-<h3>8.2.2.17. not null<a class="headerlink" href="#not-null" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.17. not null<a class="headerlink" href="#not-null" title="Permalink to this headline">¶</a></h3>
 <p>not null 用于约束特定列不能为空。</p>
 <p>样例：
 .. code-block:: sql</p>
@@ -667,7 +669,7 @@ City varchar(255)
 )</div></blockquote>
 </div>
 <div class="section" id="unique">
-<h3>8.2.2.18. unique<a class="headerlink" href="#unique" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.18. unique<a class="headerlink" href="#unique" title="Permalink to this headline">¶</a></h3>
 <p>unique用于约束列值是唯一的，但是有一个为空，不能有多个空。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--mysql</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
@@ -707,7 +709,7 @@ City varchar(255)
 </div>
 </div>
 <div class="section" id="primary-key">
-<h3>8.2.2.19. primary key<a class="headerlink" href="#primary-key" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.19. primary key<a class="headerlink" href="#primary-key" title="Permalink to this headline">¶</a></h3>
 <p>primary key 用于唯一标示数据库表的每条记录，主键必须是唯一的，不能包含空，只能有一个主键，可以多列组合一个主键。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--MySQL</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
@@ -744,7 +746,7 @@ City varchar(255)
 </div>
 </div>
 <div class="section" id="foreign-key">
-<h3>8.2.2.20. foreign key<a class="headerlink" href="#foreign-key" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.20. foreign key<a class="headerlink" href="#foreign-key" title="Permalink to this headline">¶</a></h3>
 <p>一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>--MySQL
 CREATE TABLE Orders
@@ -796,7 +798,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="check">
-<h3>8.2.2.21. check<a class="headerlink" href="#check" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.21. check<a class="headerlink" href="#check" title="Permalink to this headline">¶</a></h3>
 <p>CHECK 约束用于限制列中的值的范围。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--My SQL:</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
@@ -847,7 +849,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="default">
-<h3>8.2.2.22. default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.22. default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
 <p>DEFAULT 约束用于向列中插入默认值。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--My SQL / SQL Server / Oracle / MS Access:</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
@@ -875,7 +877,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="create-index">
-<h3>8.2.2.23. create index<a class="headerlink" href="#create-index" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.23. create index<a class="headerlink" href="#create-index" title="Permalink to this headline">¶</a></h3>
 <p>create index 语句可以在表中创建索引，加快数据的查找。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">PersonIndex</span> <span class="k">ON</span> <span class="n">Person</span> <span class="p">(</span><span class="n">LastName</span><span class="p">)</span>
 <span class="k">CREATE</span> <span class="k">UNIQUE</span> <span class="k">INDEX</span> <span class="n">PersonIndex</span> <span class="k">ON</span> <span class="n">Person</span> <span class="p">(</span><span class="n">LastName</span><span class="p">)</span>
@@ -883,7 +885,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="drop">
-<h3>8.2.2.24. drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.24. drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
 <p>drop 用于删除表中的部分对象</p>
 <p>删除索引</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--用于 Microsoft SQLJet (以及 Microsoft Access) 的语法:</span>
@@ -910,7 +912,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="alter">
-<h3>8.2.2.25. alter<a class="headerlink" href="#alter" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.25. alter<a class="headerlink" href="#alter" title="Permalink to this headline">¶</a></h3>
 <p>ALTER TABLE 语句用于在已有的表中添加、修改或删除列。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span> <span class="k">ADD</span> <span class="n">Birthday</span> <span class="nb">date</span>
 <span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">Persons</span> <span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">Birthday</span> <span class="k">year</span>
@@ -919,7 +921,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="increment">
-<h3>8.2.2.26. increment<a class="headerlink" href="#increment" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.26. increment<a class="headerlink" href="#increment" title="Permalink to this headline">¶</a></h3>
 <p>自增会在插入记录的时候自动的创建主键字段的值</p>
 <p>关于自增各个语言的差异还是很大的。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--mysql</span>
@@ -966,7 +968,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="view">
-<h3>8.2.2.27. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.27. view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h3>
 <p>视图包含行和列，像一个真实的表，</p>
 <p>样例：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="p">[</span><span class="k">Current</span> <span class="n">Product</span> <span class="n">List</span><span class="p">]</span> <span class="k">AS</span>
@@ -979,7 +981,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="isnull">
-<h3>8.2.2.28. isnull<a class="headerlink" href="#isnull" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.28. isnull<a class="headerlink" href="#isnull" title="Permalink to this headline">¶</a></h3>
 <p>null代表是未知的，不确定的。</p>
 <p>样例：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">LastName</span><span class="p">,</span><span class="n">FirstName</span><span class="p">,</span><span class="n">Address</span> <span class="k">FROM</span> <span class="n">Persons</span>
@@ -995,7 +997,7 @@ DROP CONSTRAINT fk_PerOrders
 </div>
 </div>
 <div class="section" id="id4">
-<h3>8.2.2.29. 数据类型<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>9.2.2.29. 数据类型<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.w3school.com.cn/sql/sql_datatypes.asp">数据类型</a></p>
 </div>
 </div>
@@ -1011,10 +1013,10 @@ DROP CONSTRAINT fk_PerOrders
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mysql/mysql安装.html" class="btn btn-neutral float-right" title="8.3. mysql安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mysql/mysql安装.html" class="btn btn-neutral float-right" title="9.3. mysql安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="数据库基础.html" class="btn btn-neutral" title="8.1. 数据库基础" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="数据库基础.html" class="btn btn-neutral" title="9.1. 数据库基础" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nis &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>7.2. nis &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="7. 认证" href="index.html"/>
+        <link rel="next" title="8. DNS" href="../DNS/index.html"/>
+        <link rel="prev" title="7.1. pam" href="pam.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,20 +92,39 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">7. DNS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">8. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">9. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">10. 日志管理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">11. 网络文件共享</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">12. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">13. 集群</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. 认证</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pam.html">7.1. pam</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.2. nis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">7.2.1. nis简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7.2.2. nis安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">7.2.3. nis案例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">7.2.4. 设置nis域</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#etc-ypserv-conf">7.2.5. 主要配置文件/etc/ypserv.conf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ip">7.2.6. 设置主机名与ip的对应</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">7.2.7. 启动域查看相关的服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">7.2.8. 创建账号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">7.2.9. 初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">7.2.10. 客户端设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">7.2.11. 参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
 </ul>
 
             
@@ -148,7 +170,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>nis</li>
+          <li><a href="index.html">7. 认证</a> &raquo;</li>
+        
+      <li>7.2. nis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -168,9 +192,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nis">
-<h1>nis<a class="headerlink" href="#nis" title="Permalink to this headline">¶</a></h1>
+<h1>7.2. nis<a class="headerlink" href="#nis" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>nis简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.1. nis简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>nis(Network Infomation Services,网络信息服务)主要用来管理账号问题。</p>
 <p>nis主从工作原理</p>
 <ol class="arabic simple">
@@ -192,13 +216,13 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>nis安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.2. nis安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install yp-tools ypbind ypserv rpcbind</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>nis案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.3. nis案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text"><div class="highlight"><pre><span></span>nis的域名为linuxpanda
 整个网络的信任网络为192.168.46.0/24
 nis主服务器的ip为192.168.46.129，主机名为nis.linuxpanda.tech
@@ -207,7 +231,7 @@ nis客户端的ip为192.168.46.159，主机名为centos-159.linuxpanda.tech
 </div>
 </div>
 <div class="section" id="id4">
-<h2>设置nis域<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.4. 设置nis域<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network</span>
 <span class="c1"># 添加如下2行，用于设置nis域和固定端口</span>
 <span class="nv">NISDOMAIN</span><span class="o">=</span>linuxpanda
@@ -216,7 +240,7 @@ nis客户端的ip为192.168.46.159，主机名为centos-159.linuxpanda.tech
 </div>
 </div>
 <div class="section" id="etc-ypserv-conf">
-<h2>主要配置文件/etc/ypserv.conf<a class="headerlink" href="#etc-ypserv-conf" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.5. 主要配置文件/etc/ypserv.conf<a class="headerlink" href="#etc-ypserv-conf" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/ypserv.conf</span>
 <span class="c1"># 添加行</span>
 dns: no
@@ -226,7 +250,7 @@ dns: no
 </div>
 </div>
 <div class="section" id="ip">
-<h2>设置主机名与ip的对应<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.6. 设置主机名与ip的对应<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
 <span class="c1"># 添加如下2行，一台主机和一个客户端的</span>
 <span class="m">192</span>.168.46.129 nis.linuxpanda.tech centos-129.linuxpanda.tech
@@ -242,7 +266,7 @@ nis.linuxpanda.tech
 </div>
 </div>
 <div class="section" id="id5">
-<h2>启动域查看相关的服务<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.7. 启动域查看相关的服务<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/yppasswdd</span>
 <span class="c1"># 修改内容如下</span>
 <span class="nv">YPPASSWDD_ARGS</span><span class="o">=</span><span class="s2">&quot;--port 1012&quot;</span>
@@ -273,7 +297,7 @@ program vers proto   port  service
 </div>
 </div>
 <div class="section" id="id6">
-<h2>创建账号<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.8. 创建账号<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1001 nis1</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1002 nis2</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1003 nis3</span>
@@ -290,7 +314,7 @@ passwd: all authentication tokens updated successfully.
 </div>
 </div>
 <div class="section" id="id7">
-<h2>初始化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.9. 初始化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># /usr/lib64/yp/ypinit -m</span>
 
 At this point, we have to construct a list of the hosts which will run NIS
@@ -331,7 +355,7 @@ Now you can run ypinit -s nis.linuxpanda.tech on all slave server.
 </div>
 </div>
 <div class="section" id="id8">
-<h2>客户端设置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.10. 客户端设置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装软件包</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install ypbind yp-tools</span>
 root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network</span>
@@ -448,7 +472,7 @@ bak  cdrom.repo
 </div>
 </div>
 <div class="section" id="id9">
-<h2>参考<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h2>7.2.11. 参考<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.linux-nis.org/nis-howto/HOWTO/">nis-howto</a></p>
 <p>鸟哥的私房菜书籍，没法给超链接了。</p>
 </div>
@@ -461,6 +485,15 @@ bak  cdrom.repo
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DNS/index.html" class="btn btn-neutral float-right" title="8. DNS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pam.html" class="btn btn-neutral" title="7.1. pam" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
