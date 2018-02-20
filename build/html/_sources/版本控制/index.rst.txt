@@ -5,5 +5,6 @@
    :maxdepth: 2
    
    git
-   gitlab
    bitbucket
+   gitlab本地部署
+   gitbucket本地部署

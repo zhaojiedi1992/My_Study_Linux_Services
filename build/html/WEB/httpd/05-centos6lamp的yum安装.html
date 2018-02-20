@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.5. centos6lamp的yum安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="10.6. centos6编译安装lamp" href="06-centos编译安装lamp.html"/>
+        <link rel="prev" title="10.4. httpd虚拟主机三种实现方式" href="04-httpd虚拟主机三种实现方式.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.5. centos6lamp的yum安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.5.1. 安装软件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.5.2. 启动服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpphp">10.5.3. 关联http和php</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.5.4. 应用测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.5.5. 清除权限</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.5.6. 测试性能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xcache">10.5.7. xcache加速</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-web实战一.html">10.7. web实战一</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.5. centos6lamp的yum安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/WEB/httpd/05-centos6lamp的yum安装.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="centos6lampyum">
+<h1>10.5. centos6lamp的yum安装<a class="headerlink" href="#centos6lampyum" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>10.5.1. 安装软件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> install mysql-server mysql php-fpm php-mysql httpd mod_proxy_fcgi
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.5.2. 启动服务<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> php-fpm start
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$chkconfig</span> php-fpm on
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> mysqld start
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$chkconfig</span> mysqld on
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> httpd restart
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$chkconfig</span> httpd on
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$netstat</span> -tunlp
+Active Internet connections <span class="o">(</span>only servers<span class="o">)</span>
+Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">127</span>.0.0.1:9000              <span class="m">0</span>.0.0.0:*                   LISTEN      <span class="m">47172</span>/php-fpm
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:3306                <span class="m">0</span>.0.0.0:*                   LISTEN      <span class="m">47373</span>/mysqld
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:22                  <span class="m">0</span>.0.0.0:*                   LISTEN      <span class="m">1833</span>/sshd
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">127</span>.0.0.1:25                <span class="m">0</span>.0.0.0:*                   LISTEN      <span class="m">1347</span>/master
+tcp        <span class="m">0</span>      <span class="m">0</span> :::80                       :::*                        LISTEN      <span class="m">47415</span>/httpd
+tcp        <span class="m">0</span>      <span class="m">0</span> :::22                       :::*                        LISTEN      <span class="m">1833</span>/sshd
+tcp        <span class="m">0</span>      <span class="m">0</span> ::1:25                      :::*                        LISTEN      <span class="m">1347</span>/master
+</pre></div>
+</div>
+</div>
+<div class="section" id="httpphp">
+<h2>10.5.3. 关联http和php<a class="headerlink" href="#httpphp" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$vim</span> conf.d/fcgi.conf
+<span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$cat</span> conf.d/fcgi.conf
+DirectoryIndex index.php
+ProxyRequests Off
+ProxyPassMatch ^/<span class="o">(</span>.*<span class="se">\.</span>php<span class="o">)</span>$ fcgi://127.0.0.1:9000/var/www/html/<span class="nv">$1</span>
+<span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$service</span> httpd restart
+<span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$cd</span> /var/www/html/
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$ls</span>
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$vim</span> index.php
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$cat</span> index.php
+&lt;?php
+
+phpinfo<span class="o">()</span><span class="p">;</span>
+
+?&gt;
+<span class="o">[</span>root@localhost conf<span class="o">]</span><span class="nv">$curl</span> localhost
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>10.5.4. 应用测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /var/www/html/
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$git</span> clone https://gitee.com/ComsenzDiscuz/DiscuzX
+Initialized empty Git repository in /var/www/html/DiscuzX/.git/
+remote: Counting objects: <span class="m">7071</span>, <span class="k">done</span>.
+remote: Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">4813</span>/4813<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">7071</span> <span class="o">(</span>delta <span class="m">2496</span><span class="o">)</span>, reused <span class="m">6604</span> <span class="o">(</span>delta <span class="m">2209</span><span class="o">)</span>
+Receiving objects: <span class="m">100</span>% <span class="o">(</span><span class="m">7071</span>/7071<span class="o">)</span>, <span class="m">11</span>.96 MiB <span class="p">|</span> <span class="m">955</span> KiB/s, <span class="k">done</span>.
+Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">2496</span>/2496<span class="o">)</span>, <span class="k">done</span>.
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$ls</span>
+a.html  DiscuzX  index.php
+<span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$cd</span> DiscuzX/
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ls</span>
+readme  README.md  upload  utility
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$cd</span> upload/
+<span class="o">[</span>root@localhost upload<span class="o">]</span><span class="nv">$pwd</span>
+/var/www/html/DiscuzX/upload
+<span class="o">[</span>root@localhost upload<span class="o">]</span><span class="nv">$cd</span> ..
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ls</span>
+readme  README.md  upload  utility
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$setfacl</span> -R -m <span class="s2">&quot;u:apache:rwx&quot;</span> ./
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$mysql_secure_installation</span>
+</pre></div>
+</div>
+<p>打开浏览器输入如下地址： <a class="reference external" href="http://192.168.1.107/DiscuzX/upload/">http://192.168.1.107/DiscuzX/upload/</a> 进行制定就可以了。不需要创建数据库，自动创建的。效果图：</p>
+<img alt="../../_images/discuz.png" src="../../_images/discuz.png" />
+</div>
+<div class="section" id="id4">
+<h2>10.5.5. 清除权限<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$setfacl</span> -R -b ./
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>10.5.6. 测试性能<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ab</span> -c <span class="m">100</span> -n <span class="m">1000</span> http://192.168.1.107/DiscuzX/upload/
+Requests per second:    <span class="m">41</span>.67 <span class="o">[</span><span class="c1">#/sec] (mean)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xcache">
+<h2>10.5.7. xcache加速<a class="headerlink" href="#xcache" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$yum</span> search xcache-admin
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$service</span> httpd restart
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$service</span> php-fpm restart
+<span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ab</span> -c <span class="m">100</span> -n <span class="m">1000</span> http://192.168.1.107/DiscuzX/upload/
+Requests per second:    <span class="m">126</span>.14 <span class="o">[</span><span class="c1">#/sec] (mean)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="06-centos编译安装lamp.html" class="btn btn-neutral float-right" title="10.6. centos6编译安装lamp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="04-httpd虚拟主机三种实现方式.html" class="btn btn-neutral" title="10.4. httpd虚拟主机三种实现方式" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

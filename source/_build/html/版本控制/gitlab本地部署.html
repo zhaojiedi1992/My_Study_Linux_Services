@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gitlab本地部署 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>gitlab本地部署</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/版本控制/gitlab本地部署.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gitlab">
+<h1>gitlab本地部署<a class="headerlink" href="#gitlab" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>安装和配置必要的依赖<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># yum install postfix</span>
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># systemctl start postfix</span>
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># systemctl enable postfix</span>
+</pre></div>
+</div>
+<p>如果postfix启动不起来，提示no local interface found for ::1。可以修改下
+/etc/postfix/main.cf中inet_interfaces = all。</p>
+</div>
+<div class="section" id="id2">
+<h2>添加gitlab的仓库并安装包<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>执行脚本添加<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash</span>
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># yum -y install gitlab-ce</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这个包大概440M大小，需要一定的等待时间。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>手工添加<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 yum.repos.d<span class="o">]</span><span class="c1"># vim gitlab-ce.repo</span>
+<span class="o">[</span>gitlab-ce<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>Gitlab CE Repository
+<span class="nv">baseurl</span><span class="o">=</span>https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>这个使用清华的镜像，没有使用国外的，下载可能会快点。</p>
+</div>
+<div class="section" id="url">
+<h3>修改配置文件的url<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 src<span class="o">]</span><span class="c1"># vim /etc/gitlab/gitlab.rb</span>
+external_url <span class="s1">&#39;http://localhost&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>启动下gitlab<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>启动gitlab</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 src<span class="o">]</span><span class="c1"># systemctl enable gitlab-runsvdir.service</span>
+<span class="o">[</span>root@centos-7 src<span class="o">]</span><span class="c1"># gitlab-ctl  reconfigure</span>
+</pre></div>
+</div>
+<p>这个配置大概需要10多分钟，耐心等待，我是centos7的系统，安装一直有问题。</p>
+<p>错误修复</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@www ~<span class="o">]</span><span class="c1"># yum install gem</span>
+<span class="o">[</span>root@www ~<span class="o">]</span><span class="c1"># gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</span>
+<span class="o">[</span>root@centos-7 src<span class="o">]</span><span class="c1"># gitlab-ctl  reconfigure</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>测试<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/gitlab登陆.png" src="../_images/gitlab登陆.png" />
+<p>登陆账号root,密码：5iveL!fe</p>
+<img alt="../_images/gitlab修改密码.png" src="../_images/gitlab修改密码.png" />
+<img alt="../_images/gitlab登陆2.png" src="../_images/gitlab登陆2.png" />
+<img alt="../_images/gitlab主页.png" src="../_images/gitlab主页.png" />
+</div>
+<div class="section" id="id7">
+<h2>禁止注册<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>公司内部是禁止注册的，需要的话练习管理员给开账号。</p>
+<img alt="../_images/gitlab禁止注册.png" src="../_images/gitlab禁止注册.png" />
+</div>
+<div class="section" id="id8">
+<h2>参考<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://about.gitlab.com/installation/">官方参考</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

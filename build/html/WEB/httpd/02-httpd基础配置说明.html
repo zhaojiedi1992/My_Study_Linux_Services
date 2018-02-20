@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.2. httpd基础配置说明 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="10.3. http支持https" href="03-http支持https.html"/>
+        <link rel="prev" title="10.1. httpd的安装" href="01-httpd安装.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.2. httpd基础配置说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.2.1. 全局环境配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#servertokens">10.2.1.1. ServerTokens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serverroot">10.2.1.2. ServerRoot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pidfile">10.2.1.3. PidFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timeout">10.2.1.4. Timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalive">10.2.1.5. KeepAlive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maxkeepaliverequests">10.2.1.6. MaxKeepAliveRequests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalivetimeout">10.2.1.7. KeepAliveTimeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#startservers">10.2.1.8. StartServers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minspareservers">10.2.1.9. MinSpareServers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maxspareservers">10.2.1.10. MaxSpareServers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serverlimit">10.2.1.11. ServerLimit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maxclients">10.2.1.12. MaxClients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maxrequestsperchild">10.2.1.13. MaxRequestsPerChild</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minsparethreads">10.2.1.14. MinSpareThreads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maxsparethreads">10.2.1.15. MaxSpareThreads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#threadsperchild">10.2.1.16. ThreadsPerChild</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listen-80">10.2.1.17. Listen 80</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loadmodule">10.2.1.18. LoadModule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#include">10.2.1.19. Include</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-apache">10.2.1.20. User apache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#group-apache">10.2.1.21. Group apache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.2.2. 主服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#serveradmin">10.2.2.1. ServerAdmin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#servername">10.2.2.2. ServerName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usecanonicalname-off">10.2.2.3. UseCanonicalName Off</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentroot-var-www-html">10.2.2.4. DocumentRoot “/var/www/html”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">10.2.2.5. 目录设置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.2.2.6. 认证</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#satisfy">10.2.2.7. Satisfy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#userdir-module">10.2.2.8. userdir_module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#status">10.2.2.9. Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mod-deflate">10.2.2.10. mod_deflate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redirect">10.2.2.11. redirect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hsts">10.2.2.12. hsts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mpm">10.2.2.13. mpm切换</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centos7">10.2.2.14. centos7授权</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxypass">10.2.2.15. ProxyPass</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-web实战一.html">10.7. web实战一</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.2. httpd基础配置说明</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/WEB/httpd/02-httpd基础配置说明.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="httpd">
+<h1>10.2. httpd基础配置说明<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">centos6和centos7版本安装的httpd版本有所不同，这里使用centos安装的2.2做实验。</p>
+</div>
+<div class="section" id="id1">
+<h2>10.2.1. 全局环境配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="servertokens">
+<h3>10.2.1.1. ServerTokens<a class="headerlink" href="#servertokens" title="Permalink to this headline">¶</a></h3>
+<p>默认值： ServerTokens OS</p>
+<p>这个参数是提供一部分http响应头信息的。</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>ServerTokens Prod[uctOnly]
+Server sends (e.g.): Server: Apache
+ServerTokens Major
+Server sends (e.g.): Server: Apache/2
+ServerTokens Minor
+Server sends (e.g.): Server: Apache/2.0
+ServerTokens Min[imal]
+Server sends (e.g.): Server: Apache/2.0.41
+ServerTokens OS
+Server sends (e.g.): Server: Apache/2.0.41 (Unix)
+ServerTokens Full (or not specified)
+Server sends (e.g.): Server: Apache/2.0.41 (Unix) PHP/4.2.2 MyMod/1.2
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这个值建议修改为Prod，也就是值显示Apache即可。</p>
+</div>
+</div>
+<div class="section" id="serverroot">
+<h3>10.2.1.2. ServerRoot<a class="headerlink" href="#serverroot" title="Permalink to this headline">¶</a></h3>
+<p>默认值： ServerRoot “/etc/httpd”</p>
+<p>这个参数是控制httpd的服务配置文件根目录的。后续的pidfile都是相对这个路径的。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这个参数不建议修改，涉及太多。</p>
+</div>
+</div>
+<div class="section" id="pidfile">
+<h3>10.2.1.3. PidFile<a class="headerlink" href="#pidfile" title="Permalink to this headline">¶</a></h3>
+<p>默认值： PidFile run/httpd.pid</p>
+<p>这个配置项是设置pid文件的位置的， 相对于ServerRoot的路径。</p>
+</div>
+<div class="section" id="timeout">
+<h3>10.2.1.4. Timeout<a class="headerlink" href="#timeout" title="Permalink to this headline">¶</a></h3>
+<p>默认值：  Timeout 60</p>
+<p>这个配置项是服务器在请求失败前等待某些事件的时间，单位是秒。</p>
+</div>
+<div class="section" id="keepalive">
+<h3>10.2.1.5. KeepAlive<a class="headerlink" href="#keepalive" title="Permalink to this headline">¶</a></h3>
+<p>默认值：  KeepAlive Off</p>
+<p>这个配置项是服务器是否保持持久连接，默认是off的，一个请求完毕就关闭本次连接了。</p>
+</div>
+<div class="section" id="maxkeepaliverequests">
+<h3>10.2.1.6. MaxKeepAliveRequests<a class="headerlink" href="#maxkeepaliverequests" title="Permalink to this headline">¶</a></h3>
+<p>默认值：  MaxKeepAliveRequests 100</p>
+<p>这个配置项是在最大能持久化连接的个数，只有keepalive启用的时候生效。</p>
+</div>
+<div class="section" id="keepalivetimeout">
+<h3>10.2.1.7. KeepAliveTimeout<a class="headerlink" href="#keepalivetimeout" title="Permalink to this headline">¶</a></h3>
+<p>默认值： KeepAliveTimeout 15</p>
+<p>这个配置项是在最大能持久化连接的时间，单位是秒，只有keepalive启用的时候生效。</p>
+</div>
+<div class="section" id="startservers">
+<h3>10.2.1.8. StartServers<a class="headerlink" href="#startservers" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是在服务启动的进程数量。</p>
+</div>
+<div class="section" id="minspareservers">
+<h3>10.2.1.9. MinSpareServers<a class="headerlink" href="#minspareservers" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最小空闲的进程数量</p>
+</div>
+<div class="section" id="maxspareservers">
+<h3>10.2.1.10. MaxSpareServers<a class="headerlink" href="#maxspareservers" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最大空闲的进程数量</p>
+</div>
+<div class="section" id="serverlimit">
+<h3>10.2.1.11. ServerLimit<a class="headerlink" href="#serverlimit" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最大进程数量</p>
+</div>
+<div class="section" id="maxclients">
+<h3>10.2.1.12. MaxClients<a class="headerlink" href="#maxclients" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最大客户端个数</p>
+</div>
+<div class="section" id="maxrequestsperchild">
+<h3>10.2.1.13. MaxRequestsPerChild<a class="headerlink" href="#maxrequestsperchild" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是每个进程课可以服务的最大请求数量，超过就杀掉，重新创建进程。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">0的代表不限制。</p>
+</div>
+</div>
+<div class="section" id="minsparethreads">
+<h3>10.2.1.14. MinSpareThreads<a class="headerlink" href="#minsparethreads" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最小空闲的线程数量</p>
+</div>
+<div class="section" id="maxsparethreads">
+<h3>10.2.1.15. MaxSpareThreads<a class="headerlink" href="#maxsparethreads" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是最大空闲的线程数量</p>
+</div>
+<div class="section" id="threadsperchild">
+<h3>10.2.1.16. ThreadsPerChild<a class="headerlink" href="#threadsperchild" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是每个进程的线程数量</p>
+</div>
+<div class="section" id="listen-80">
+<h3>10.2.1.17. Listen 80<a class="headerlink" href="#listen-80" title="Permalink to this headline">¶</a></h3>
+<p>默认值： Listen 80</p>
+<p>配置样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># 配置多个监听
+Listen 80
+Listen 8000
+
+# 监听在指定ip的指定端口上
+Listen 192.170.2.1:80
+Listen 192.170.2.5:8000
+
+# 监听在ipv6上
+Listen [2001:db8::a00:20ff:fea7:ccea]:80
+
+# 监听指定的协议
+Listen 192.170.2.1:8443 https
+</pre></div>
+</div>
+</div>
+<div class="section" id="loadmodule">
+<h3>10.2.1.18. LoadModule<a class="headerlink" href="#loadmodule" title="Permalink to this headline">¶</a></h3>
+<p>这个是用于加载模块的。</p>
+</div>
+<div class="section" id="include">
+<h3>10.2.1.19. Include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
+<p>默认值： Include conf.d/*.conf</p>
+<p>这个就是加载conf.d目录下的所有配置文件</p>
+</div>
+<div class="section" id="user-apache">
+<h3>10.2.1.20. User apache<a class="headerlink" href="#user-apache" title="Permalink to this headline">¶</a></h3>
+<p>这个配置是httpd服务启动的用户身份</p>
+</div>
+<div class="section" id="group-apache">
+<h3>10.2.1.21. Group apache<a class="headerlink" href="#group-apache" title="Permalink to this headline">¶</a></h3>
+<p>这个配置是httpd服务启动的组身份</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.2.2. 主服务器配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="serveradmin">
+<h3>10.2.2.1. ServerAdmin<a class="headerlink" href="#serveradmin" title="Permalink to this headline">¶</a></h3>
+<p>这个配置项是服务器出现故障的邮件通知者的邮箱。</p>
+</div>
+<div class="section" id="servername">
+<h3>10.2.2.2. ServerName<a class="headerlink" href="#servername" title="Permalink to this headline">¶</a></h3>
+<p>默认值： ServerName www.example.com:80</p>
+<p>这个配置项是服务器的fqdn名字。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">这项配置建议修改下，不然启动服务老是提示这个问题。</p>
+</div>
+</div>
+<div class="section" id="usecanonicalname-off">
+<h3>10.2.2.3. UseCanonicalName Off<a class="headerlink" href="#usecanonicalname-off" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="documentroot-var-www-html">
+<h3>10.2.2.4. DocumentRoot “/var/www/html”<a class="headerlink" href="#documentroot-var-www-html" title="Permalink to this headline">¶</a></h3>
+<p>默认值： DocumentRoot “/var/www/html”</p>
+<p>这个配置是设置http文档的根目录的，我们访问的主页默认是这个目录下的index.html。</p>
+</div>
+<div class="section" id="id3">
+<h3>10.2.2.5. 目录设置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>样例：</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride None
+&lt;/Directory&gt;
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>FollowSymlinks          是如果目录下有符号连接文件，也是可以访问的。使用-FollowsymLinks禁止符号连接文件查看
+AllowOverride           是否收.htaccess文件控制。
+Indexes                 是否显示索引文件的方式显示文件，类似ftp方式显示。
+Order allow,deny        是设置权限的，那个在后面那个就是默认的，如果下面有特定的设置，按照特定的设置规则走，如果下面的设置规则有冲突，则安装默认的规则来。
+Allow from all          是允许所有主机访问，特定主机写ip，ip/prefix，或者ip/netmask，或者172.18这种方式的。
+DirectoryIndex          默认主页的名字搜索，有先后顺序的。
+AccessFileName .htaccess 默认的权限控制的，放到指定的目录即可。
+ErrorLog logs/error_log 错误日志文件
+LogLevel warn           日志级别
+LogFormat “%h %l %u %t “%r” %&gt;s %b “%{Referer}i” “%{User-Agent}i”” combined   定义一种日志格式
+LogFormat “%h %l %u %t “%r” %&gt;s %b” common                                        定义另一种日志格式
+LogFormat “%{Referer}i -&gt; %U” referer
+LogFormat “%{User-agent}i” agent
+CustomLog logs/access_log combined                                                  使用哪一种日志格式
+Alias /icons/ “/var/www/icons/”                         定义一个目录别名，前面是url路径，后面的是物理真实路径
+ScriptAlias /cgi-bin/ “/var/www/cgi-bin/”               定义一个脚本别名
+ServiceAlias                                            定义一个目录别名</p>
+</div>
+<div class="section" id="id4">
+<h3>10.2.2.6. 认证<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>用户认证</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加指定目录的认证</span>
+<span class="o">[</span>root@102 html<span class="o">]</span>$ vim /etc/httpd/conf/httpd.conf
+&lt;directory <span class="s2">&quot;/var/www/html/dir1&quot;</span>&gt;
+        options None
+        allowoverride none
+        authtype basic
+        authname <span class="s2">&quot;你需要认证下,小伙子&quot;</span>
+        authuserfile /etc/httpd/conf.d/.htpasswd
+        require user h1
+&lt;/directory&gt;
+
+<span class="c1"># 添加密码， 如果有文件了。 不要用-c选项了，命令来自httpd-tools包</span>
+<span class="o">[</span>root@102 html<span class="o">]</span>$ htpasswd -c  /etc/httpd/conf.d/.htpasswd h1
+New password:
+Re-type new password:
+Adding password <span class="k">for</span> user h1
+<span class="o">[</span>root@102 html<span class="o">]</span>$ file /etc/httpd/conf.d/.htpasswd
+/etc/httpd/conf.d/.htpasswd: ASCII text
+<span class="o">[</span>root@102 html<span class="o">]</span>$ cat /etc/httpd/conf.d/.htpasswd
+h1:<span class="nv">$apr1$svPCgcpG$gk1miSEUagwrUhrbsSeYn0</span>
+</pre></div>
+</div>
+<p>组认证</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加指定目录的认证</span>
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ vim /etc/httpd/conf/httpd.conf
+  &lt;directory <span class="s2">&quot;/var/www/html/dir1&quot;</span>&gt;
+          options None
+          allowoverride none
+          authtype basic
+          authname <span class="s2">&quot;你需要认证下,小伙子&quot;</span>
+          authuserfile /etc/httpd/conf.d/.htpasswd
+          authgroupfile /etc/httpd/conf.d/.htgroup
+          require group admin
+  &lt;/directory&gt;
+
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ vim /etc/httpd/conf.d/.htgroup
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ cat /etc/httpd/conf.d/.htgroup
+  admin: h1 h3
+
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ htpasswd  /etc/httpd/conf.d/
+  autoindex.conf  .htgroup        .htpasswd       README          userdir.conf    welcome.conf
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ htpasswd  /etc/httpd/conf.d/
+  autoindex.conf  .htgroup        .htpasswd       README          userdir.conf    welcome.conf
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ htpasswd  /etc/httpd/conf.d/.htpasswd  h2
+  New password:
+  Re-type new password:
+  Adding password <span class="k">for</span> user h2
+  <span class="o">[</span>root@102 html<span class="o">]</span>$ htpasswd  /etc/httpd/conf.d/.htpasswd  h3
+  New password:
+  Re-type new password:
+  Adding password <span class="k">for</span> user h3
+</pre></div>
+</div>
+</div>
+<div class="section" id="satisfy">
+<h3>10.2.2.7. Satisfy<a class="headerlink" href="#satisfy" title="Permalink to this headline">¶</a></h3>
+<p>这个配置默认Satify All,意思是ip和用户认证2个都要满足才能访问，any是只要一个满足就可以访问。</p>
+</div>
+<div class="section" id="userdir-module">
+<h3>10.2.2.8. userdir_module<a class="headerlink" href="#userdir-module" title="Permalink to this headline">¶</a></h3>
+<p>查看是否加载了这个模块</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span>$ httpd -M <span class="p">|</span>grep userdir
+userdir_module <span class="o">(</span>shared<span class="o">)</span>
+</pre></div>
+</div>
+<p>配置</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>   [root@102 conf.d]$ vim /etc/httpd/conf.d/userdir.conf
+   &lt;IfModule mod_userdir.c&gt;
+       UserDir enabled zhao
+       UserDir public_html
+   &lt;/IfModule&gt;
+
+   &lt;Directory &quot;/home/*/public_html&quot;&gt;
+       Require all granted
+   &lt;/Directory&gt;
+
+   [root@102 conf.d]$ su - zhao
+   Last login: Tue Jan  9 09:17:18 CST 2018 on pts/4
+   [zhao@102 ~]$ pwd
+   /home/zhao
+   [zhao@102 ~]$ mkdir public_html
+   [zhao@102 ~]$ echo &quot;test usedir&quot; &gt; public/html/a.txt
+   [root@102 conf.d]$ setfacl -m &quot;u:apache:x&quot; /home/zhao/
+
+如果selinux启用中，还需要额外设置
+
+.. code-block:: bash
+
+   [root@102 conf.d]$ setsebool -P httpd_enable_homedirs true
+   [root@102 conf.d]$ setsebool -semanage fcontext  -a -t httpd_sys_content_t &#39;/home(/.*)?/public_html(/.*)?&#39;
+   [root@102 conf.d]$ restorecon -Rv /home/zhao/public_html/
+</pre></div>
+</div>
+</div>
+<div class="section" id="status">
+<h3>10.2.2.9. Status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h3>
+<p>添加httpd状态信息查看</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span>$ vim status.conf
+<span class="o">[</span>root@102 conf.d<span class="o">]</span>$ cat status.conf
+&lt;Location <span class="s2">&quot;/status&quot;</span>&gt;
+    SetHandler server-status
+    Require ip <span class="m">172</span>.18
+    <span class="c1">#Extendedstatus on</span>
+&lt;/Location&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="mod-deflate">
+<h3>10.2.2.10. mod_deflate<a class="headerlink" href="#mod-deflate" title="Permalink to this headline">¶</a></h3>
+<p>启用压缩功能</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span>$ vim deflate.conf
+Setoutputfilter deflate
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="redirect">
+<h3>10.2.2.11. redirect<a class="headerlink" href="#redirect" title="Permalink to this headline">¶</a></h3>
+<p>重定向功能</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># vim redirect.conf</span>
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># cat redirect.conf</span>
+redirect temp /  https://www.linuxpanda.com/
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># curl http://www.linuxpanda.tech   -I</span>
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># curl http://www.linuxpanda.tech   -L -k -I</span>
+</pre></div>
+</div>
+<p>temp是临时重定向，permanent对应永久重定向</p>
+</div>
+<div class="section" id="hsts">
+<h3>10.2.2.12. hsts<a class="headerlink" href="#hsts" title="Permalink to this headline">¶</a></h3>
+<p>服务端支持hsts后，会给浏览器返回的http头信息中携带hsts字段，浏览器得到这个信息后，在内部做307跳转到https，
+无需要任何网络过程。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># !vim</span>
+vim hsts.conf
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># cat hsts.conf</span>
+Header always <span class="nb">set</span> Strict-Transport-Security <span class="s2">&quot;max-age = 15768000&quot;</span>
+RewriteEngine on
+RewriteRule ^<span class="o">(</span>/.*<span class="o">)</span>$    https://%<span class="si">${</span><span class="nv">HTTP_HOST</span><span class="si">}</span><span class="nv">$1</span> <span class="o">[</span><span class="nv">redirect</span><span class="o">=</span><span class="m">301</span><span class="o">]</span>
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
+
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># curl www.linuxpanda.tech -I</span>
+HTTP/1.1 <span class="m">301</span> Moved Permanently
+Date: Sat, <span class="m">27</span> Jan <span class="m">2018</span> <span class="m">11</span>:11:26 GMT
+Server: Apache/2.4.6 <span class="o">(</span>CentOS<span class="o">)</span> OpenSSL/1.0.2k-fips
+Strict-Transport-Security: max-age <span class="o">=</span> <span class="m">15768000</span>
+Location: https://www.linuxpanda.tech/
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>iso-8859-1
+
+<span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># curl www.linuxpanda.tech -I -L</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mpm">
+<h3>10.2.2.13. mpm切换<a class="headerlink" href="#mpm" title="Permalink to this headline">¶</a></h3>
+<p>这个是http2.4版本有的，centos7默认就是2.4的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 conf.d<span class="o">]</span><span class="c1"># vim /etc/httpd/conf.modules.d/00-mpm.conf</span>
+</pre></div>
+</div>
+<p>这个文件很简单， 注释一个mpm模块，解注释一个mpm即可完成mpm模块的切换，当然还需要重启下服务。</p>
+</div>
+<div class="section" id="centos7">
+<h3>10.2.2.14. centos7授权<a class="headerlink" href="#centos7" title="Permalink to this headline">¶</a></h3>
+<p>centos7的web目录必须是授权的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 给提供web的目录如下片段</span>
+&lt;Directory <span class="s2">&quot;/var/www/cgi-bin&quot;</span>&gt;
+AllowOverride None
+Options None
+Require all granted
+&lt;/Directory&gt;
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Require all granted 是允许所有主机
+Require all denied 是拒绝所有主机
+RequireAll是所有条件都匹配
+REquireAny是任何一个条件匹配就可以
+</pre></div>
+</div>
+<p>运行所有主机，禁止特定的一个主机</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;Directory <span class="s2">&quot;/var/www/cgi-bin&quot;</span>&gt;
+    &lt;RequireAll&gt;
+        Require all granted
+        Require not ip <span class="m">192</span>.168.1.106
+    &lt;/RequireAll&gt;
+&lt;/Directory&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="proxypass">
+<h3>10.2.2.15. ProxyPass<a class="headerlink" href="#proxypass" title="Permalink to this headline">¶</a></h3>
+<p>提供反向代理功能</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>ProxyPass <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+ProxyPassReverse <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;http://www.example.com/&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03-http支持https.html" class="btn btn-neutral float-right" title="10.3. http支持https" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01-httpd安装.html" class="btn btn-neutral" title="10.1. httpd的安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

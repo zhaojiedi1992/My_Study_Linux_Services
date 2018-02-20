@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.7. web实战一 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="10.6. centos6编译安装lamp" href="06-centos编译安装lamp.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.7. web实战一</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.7.1. 架构图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.7.2. 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ansible">10.7.3. ansible的配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.7.3.1. 安装ansible</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.7.3.2. 添加主机</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">10.7.3.3. 配置免密码登陆</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.7.3.4. 设置主机名（可选）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selinux">10.7.3.5. 防火墙和selinux关闭</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dns">10.7.4. dns主机设置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">10.7.4.1. dns配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">10.7.4.2. dns本机测试</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#client">10.7.5. client主机测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nfs">10.7.6. nfs主机配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">10.7.6.1. 添加用户</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">10.7.6.2. 修改权限</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">10.7.6.3. 共享出去</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mysql">10.7.7. mysql主机配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">10.7.7.1. 安装软件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">10.7.7.2. 启动服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">10.7.7.3. 添加应用用户</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">10.7.7.4. 安全初始化</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">10.7.8. web主机配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">10.7.8.1. 安装软件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">10.7.8.2. 挂载目录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#httpd">10.7.8.3. 配置httpd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">10.7.8.4. 本机测试</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">10.7.9. client测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">10.7.10. 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">10.7.11. 参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.7. web实战一</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/WEB/httpd/07-web实战一.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web">
+<h1>10.7. web实战一<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h1>
+<p>这个实战是我在 <a class="reference external" href="http://www.magedu.com/">马哥教育</a> 培训中期，给的实战题目，相对比较简单。</p>
+<div class="section" id="id2">
+<h2>10.7.1. 架构图<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/实战1架构图.png" src="../../_images/实战1架构图.png" />
+<ul class="simple">
+<li>dns完成解析web1,web2来实现负载均衡</li>
+<li>web1,web2使用后台的mysql数据库</li>
+<li>web1,web2的页面数据全部放在nfs数据上，实现自动挂载</li>
+<li>nfs服务器为web1,web2提供网页数据</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>10.7.2. 准备工作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>设置ip信息</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>nmcli con add ifname ens33 con-name ens33 <span class="nb">type</span> ethernet ipv4.method manual <span class="se">\</span>
+ipv4.address <span class="m">192</span>.158.46.150/24 ipv4.gateway <span class="m">192</span>.168.46.1
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">我使用的nmcli修改的ip，当然也是可以手工修改的。</p>
+</div>
+</div>
+<div class="section" id="ansible">
+<h2>10.7.3. ansible的配置<a class="headerlink" href="#ansible" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>10.7.3.1. 安装ansible<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install ansible</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>10.7.3.2. 添加主机<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>需要添加如下内容到/etc/ansible/hosts文件中去。</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[client]</span>
+<span class="na">192.168.46.159</span>
+
+<span class="k">[dns]</span>
+<span class="na">192.168.46.158</span>
+
+<span class="k">[web]</span>
+<span class="na">192.168.46.157</span>
+<span class="na">192.168.46.156</span>
+<span class="k">[db]</span>
+<span class="na">192.168.46.155</span>
+<span class="k">[nfs]</span>
+<span class="na">192.168.46.154</span>
+<span class="k">[self]</span>
+<span class="na">192.168.46.150</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>10.7.3.3. 配置免密码登陆<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>这里我之前写有一个脚本自动完成免密码登陆的脚本，<a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_023_sshgenkey.html">参考我的博客</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat hosts.txt</span>
+<span class="m">192</span>.168.46.150 root oracle
+<span class="m">192</span>.168.46.151 root oracle
+<span class="m">192</span>.168.46.152 root oracle
+<span class="m">192</span>.168.46.153 root oracle
+<span class="m">192</span>.168.46.154 root oracle
+<span class="m">192</span>.168.46.155 root oracle
+<span class="m">192</span>.168.46.156 root oracle
+<span class="m">192</span>.168.46.157 root oracle
+<span class="m">192</span>.168.46.158 root oracle
+<span class="m">192</span>.168.46.159 root oracle
+<span class="m">192</span>.168.46.160 root oracle
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat mima.sh</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1">#================================================</span>
+<span class="c1">#FileName   :expect_ssh.sh</span>
+<span class="c1">#Author     :zhaojiedi</span>
+<span class="c1">#Description:</span>
+<span class="c1">#DateTime   :2018-01-05 08:26:06</span>
+<span class="c1">#Version    :V1.0</span>
+<span class="c1">#Other      :</span>
+<span class="c1">#================================================</span>
+<span class="nv">host_username_password_file</span><span class="o">=</span>hosts.txt
+
+<span class="c1"># install expect</span>
+rpm -q expect <span class="p">&amp;</span>&gt;/dev/null <span class="o">||</span> yum install -yq expect <span class="p">&amp;</span>&gt;/dev/null
+
+<span class="c1"># create id_rsa.pub file</span>
+<span class="nv">pubkey</span><span class="o">=</span>~/.ssh/id_rsa.pub
+<span class="k">if</span> <span class="o">[</span> ! -e <span class="s2">&quot;</span><span class="nv">$pubkey</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+        ssh-keygen  -P <span class="s2">&quot;&quot;</span> -t rsa  -f ~/.ssh/id_rsa
+<span class="k">fi</span>
+<span class="k">while</span> <span class="nb">read</span> host username password <span class="p">;</span> <span class="k">do</span>
+        <span class="nv">con</span><span class="o">=</span><span class="si">${</span><span class="nv">username</span><span class="si">}</span><span class="s2">&quot;@&quot;</span><span class="si">${</span><span class="nv">host</span><span class="si">}</span>
+        <span class="nb">echo</span> <span class="nv">$password</span>
+        expect <span class="s">&lt;&lt;EOF</span>
+<span class="s">        set timeout 20</span>
+<span class="s">        spawn ssh-copy-id $con</span>
+<span class="s">        expect {</span>
+<span class="s">                &quot;yes/no&quot;  { send &quot;yes\n&quot; ; exp_continue }</span>
+<span class="s">                &quot;password:&quot; { send &quot;${password}\n&quot;; exp_continue }</span>
+<span class="s">        }</span>
+<span class="s">EOF</span>
+<span class="k">done</span> &lt; <span class="nv">$host_username_password_file</span>
+
+<span class="c1"># 执行下脚本，自动完成公钥copy工作了</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># bash mima.sh</span>
+
+<span class="c1"># 测试下</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ssh 192.168.46.151 &#39;ip a show ens33&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>10.7.3.4. 设置主机名（可选）<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>我这里的机器全是刚刚克隆出来的虚拟机，为了管理方便设置下主机名，防止误操作。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 创建一个设置主机名的脚本</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim set_hostname.sh</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat set_hostname.sh</span>
+<span class="c1">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">&quot;start&quot;</span>
+hostname
+<span class="nv">name</span><span class="o">=</span>centos-<span class="k">$(</span>ip a show ens33 <span class="p">|</span>grep <span class="s1">&#39;inet.*ens33&#39;</span> <span class="p">|</span> sed -r  -n <span class="s1">&#39;s@.*\.([0-9]{1,3})/.*@\1@p&#39;</span><span class="k">)</span>.linuxpanda.tech
+<span class="nb">echo</span> <span class="nv">$name</span>
+hostnamectl set-hostname <span class="nv">$name</span>
+<span class="nb">echo</span> <span class="s2">&quot;end&quot;</span>
+
+<span class="o">[</span>root@centos-localhost ~<span class="o">]</span><span class="c1"># ansible all -m script -a &#39;/root/set_hostname.sh&#39;</span>
+</pre></div>
+</div>
+<p>这个脚本也是设置了ansible主机的ip。</p>
+</div>
+<div class="section" id="selinux">
+<h3>10.7.3.5. 防火墙和selinux关闭<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 关闭防火墙</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible all -m service -a &#39;name=firewalld enabled=no&#39;</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible all -m service -a &#39;name=firewalld state=stopped&#39;</span>
+
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible all -m shell -a &#39;sed  -i -r &#39;s@SELINUX=.*@SELINUX=disabled@&#39; /etc/sysconfig/selinux&#39;</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible all -m shell -a  &#39;setenforce 0&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果原有selinux就是disabled，使用setenforce 0会报错误的，不用管它。</p>
+</div>
+</div>
+</div>
+<div class="section" id="dns">
+<h2>10.7.4. dns主机设置<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h3>10.7.4.1. dns配置<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># yum install bind bind-utils</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
+<span class="c1"># 注释如下5行</span>
+//      listen-on port <span class="m">53</span> <span class="o">{</span> <span class="m">127</span>.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      listen-on-v6 port <span class="m">53</span> <span class="o">{</span> ::1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      allow-query     <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+//      dnssec-enable yes<span class="p">;</span>
+//      dnssec-validation yes<span class="p">;</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+<span class="c1"># 添加如下内容，注意之后的分号</span>
+zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</span>
+        <span class="nb">type</span> master<span class="p">;</span>
+        file <span class="s2">&quot;linuxpanda.tech.zone&quot;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># cd /var/named/</span>
+<span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># cp -a named.localhost  linuxpanda.tech.zone</span>
+<span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># vim linuxpanda.tech.zone</span>
+<span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># cat linuxpanda.tech.zone</span>
+<span class="nv">$TTL</span> 1D
+@   IN SOA  ns1 admin <span class="o">(</span>
+                    <span class="m">0</span>       <span class="p">;</span> serial
+                    1D      <span class="p">;</span> refresh
+                    1H      <span class="p">;</span> retry
+                    1W      <span class="p">;</span> expire
+                    3H <span class="o">)</span>    <span class="p">;</span> minimum
+    NS      ns1
+ns1     A       <span class="m">192</span>.168.46.158
+web     A       <span class="m">192</span>.168.46.157
+web     A       <span class="m">192</span>.168.46.156
+www     CNAME   web
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>10.7.4.2. dns本机测试<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># dig www.linuxpanda.tech @localhost</span>
+
+<span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-51.el7_4.2 &lt;&lt;&gt;&gt; www.linuxpanda.tech @localhost
+<span class="p">;;</span> global options: +cmd
+<span class="p">;;</span> Got answer:
+<span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opco</span>de: QUERY, status: NOERROR, id: <span class="m">57957</span>
+<span class="p">;;</span> flags: qr aa rd ra<span class="p">;</span> QUERY: <span class="m">1</span>, ANSWER: <span class="m">3</span>, AUTHORITY: <span class="m">1</span>, ADDITIONAL: <span class="m">2</span>
+
+<span class="p">;;</span> OPT PSEUDOSECTION:
+<span class="p">;</span> EDNS: version: <span class="m">0</span>, flags:<span class="p">;</span> udp: <span class="m">4096</span>
+<span class="p">;;</span> QUESTION SECTION:
+<span class="p">;</span>www.linuxpanda.tech.               IN      A
+
+<span class="p">;;</span> ANSWER SECTION:
+www.linuxpanda.tech.        <span class="m">86400</span>   IN      CNAME   web.linuxpanda.tech.
+web.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.156
+web.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.157
+
+<span class="p">;;</span> AUTHORITY SECTION:
+linuxpanda.tech.    <span class="m">86400</span>   IN      NS      ns1.linuxpanda.tech.
+
+<span class="p">;;</span> ADDITIONAL SECTION:
+ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span class="m">192</span>.168.46.158
+
+<span class="p">;;</span> Query time: <span class="m">0</span> msec
+<span class="p">;;</span> SERVER: <span class="m">127</span>.0.0.1#53<span class="o">(</span><span class="m">127</span>.0.0.1<span class="o">)</span>
+<span class="p">;;</span> WHEN: Sun Feb <span class="m">18</span> <span class="m">21</span>:05:05 CST <span class="m">2018</span>
+<span class="p">;;</span> MSG SIZE  rcvd: <span class="m">132</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="client">
+<h2>10.7.5. client主机测试<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 修改客户端的dns指向为我们自己的dns主机</span>
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># nmcli con modify  ens33 ipv4.dns 192.168.46.158</span>
+<span class="c1"># 重启网络，或者重新加载</span>
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># service network restart</span>
+
+<span class="c1"># ping下我们的web主机，看是否能解析出来157，156两个ip</span>
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># ping www.linuxpanda.tech</span>
+PING web.linuxpanda.tech <span class="o">(</span><span class="m">192</span>.168.46.157<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from <span class="m">192</span>.168.46.157 <span class="o">(</span><span class="m">192</span>.168.46.157<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.330 ms
+<span class="m">64</span> bytes from <span class="m">192</span>.168.46.157 <span class="o">(</span><span class="m">192</span>.168.46.157<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.255 ms
+<span class="m">64</span> bytes from <span class="m">192</span>.168.46.157 <span class="o">(</span><span class="m">192</span>.168.46.157<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.292 ms
+
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># ping www.linuxpanda.tech</span>
+PING web.linuxpanda.tech <span class="o">(</span><span class="m">192</span>.168.46.156<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from <span class="m">192</span>.168.46.156 <span class="o">(</span><span class="m">192</span>.168.46.156<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.421 ms
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">ping命令去测试有点不专业的，需要多次测试才能2个地址都出现，这里就不安装dig工具了，毕竟客户端。</p>
+</div>
+</div>
+<div class="section" id="nfs">
+<h2>10.7.6. nfs主机配置<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>10.7.6.1. 添加用户<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># groupadd -g 48 apache</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># useradd -u 48 -g 48 apache</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># id apache</span>
+<span class="nv">uid</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>10.7.6.2. 修改权限<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># chown -R apache.apache /data/html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>10.7.6.3. 共享出去<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install nfs-utils</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># vim /etc/exports</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># cat /etc/exports</span>
+/data/html <span class="m">192</span>.168.46.156<span class="o">(</span>rw,all_squash,anonuid<span class="o">=</span>apache,anongid<span class="o">=</span>apache<span class="o">)</span>
+/data/html <span class="m">192</span>.168.46.156<span class="o">(</span>rw,all_squash,anonuid<span class="o">=</span>apache,anongid<span class="o">=</span>apache<span class="o">)</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># systemctl restart nfsd</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># exportfs -v</span>
+/data/html          <span class="m">192</span>.168.46.156<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,anonuid<span class="o">=</span><span class="m">48</span>,anongid<span class="o">=</span><span class="m">48</span>,sec<span class="o">=</span>sys,secure,root_squash,all_squash<span class="o">)</span>
+/data/html          <span class="m">192</span>.168.46.157<span class="o">(</span>rw,sync,wdelay,hide,no_subtree_check,anonuid<span class="o">=</span><span class="m">48</span>,anongid<span class="o">=</span><span class="m">48</span>,sec<span class="o">=</span>sys,secure,root_squash,all_squash<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mysql">
+<h2>10.7.7. mysql主机配置<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>10.7.7.1. 安装软件<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># yum install mariadb-server mariadb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>10.7.7.2. 启动服务<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+<span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep 3306</span>
+tcp        <span class="m">0</span>      <span class="m">0</span> <span class="m">0</span>.0.0.0:3306            <span class="m">0</span>.0.0.0:*               LISTEN      <span class="m">13680</span>/mysqld
+</pre></div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>10.7.7.3. 添加应用用户<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql"><div class="highlight"><pre><span></span>[root@centos-155 ~]# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 5.5.56-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+
+MariaDB [(none)]&gt; create database web ;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]&gt; grant all on web.* to web@&#39;192.168.46.%&#39; identified by &#39;oracle&#39;;
+Query OK, 0 rows affected (0.05 sec)
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h3>10.7.7.4. 安全初始化<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id18">
+<h2>10.7.8. web主机配置<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<p>这里是2个主机。</p>
+<div class="section" id="id19">
+<h3>10.7.8.1. 安装软件<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible web -m yum -a &#39;name=httpd,php-fpm,php-mysql,mod_fcgid state=installed&#39;</span>
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible web -m service -a &#39;name=httpd state=started&#39;</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ansible web -m service -a &#39;name=php-fpm state=started&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id20">
+<h3>10.7.8.2. 挂载目录<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装必要的挂载相关的软件</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># yum install nfs-utils cifs-utils</span>
+<span class="c1"># 启动rpc服务</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># systemctl restart rpcbind</span>
+<span class="c1"># 查看远程的导出情况</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># showmount -e 192.168.46.154</span>
+Export list <span class="k">for</span> <span class="m">192</span>.168.46.154:
+/data/html <span class="m">192</span>.168.46.157,192.168.46.156
+<span class="c1"># 挂载</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># mount 192.168.46.154:/data/html /var/www/html</span>
+
+<span class="c1"># 自动挂载</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab</span>
+<span class="m">192</span>.168.46.154:/data/html /var/www/html nfs4 rw,relatime,vers<span class="o">=</span><span class="m">4</span>.1,rsize<span class="o">=</span><span class="m">65536</span>,wsize<span class="o">=</span><span class="m">65536</span>,namlen<span class="o">=</span><span class="m">255</span>,hard,proto<span class="o">=</span>tcp,port<span class="o">=</span><span class="m">0</span>,timeo<span class="o">=</span><span class="m">600</span>,retrans<span class="o">=</span><span class="m">2</span>,sec<span class="o">=</span>sys,clientaddr<span class="o">=</span><span class="m">192</span>.168.46.156,local_lock<span class="o">=</span>none,addr<span class="o">=</span><span class="m">192</span>.168.46.154 <span class="m">0</span> <span class="m">0</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># tail -n 1 /etc/mtab &gt;&gt; /etc/fstab</span>
+<span class="c1"># 查看下样例网页</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># cat /var/www/html/index.html</span>
+hellow world
+</pre></div>
+</div>
+</div>
+<div class="section" id="httpd">
+<h3>10.7.8.3. 配置httpd<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h3>
+<p>本部分内容需要在2个机器都要做一遍。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 下载一个样例的php页面</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># wget download.linuxpanda.tech/lamp/index.php.sample -O /var/www/html/index.php</span>
+<span class="c1"># 编辑下样例php页面的数据库连接用户和密码</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># vim /var/www/html/index.php</span>
+<span class="o">[</span>root@centos-156 httpd<span class="o">]</span><span class="c1"># cat /var/www/html/index.php</span>
+&lt;?php
+<span class="nv">$mysqli</span><span class="o">=</span>new mysqli<span class="o">(</span><span class="s2">&quot;192.168.46.155&quot;</span>,<span class="s2">&quot;web&quot;</span>,<span class="s2">&quot;oracle&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="k">if</span><span class="o">(</span>mysqli_connect_errno<span class="o">()){</span>
+<span class="nb">echo</span> <span class="s2">&quot;失败了&quot;</span><span class="p">;</span>
+<span class="nv">$mysqli</span><span class="o">=</span>null<span class="p">;</span>
+exit<span class="p">;</span>
+<span class="o">}</span>
+<span class="nb">echo</span> <span class="s2">&quot;成功了&quot;</span><span class="p">;</span>
+<span class="nv">$mysqli</span>-&gt;close<span class="o">()</span><span class="p">;</span>
+?&gt;
+
+<span class="c1"># fcgi编辑</span>
+<span class="o">[</span>root@centos-156 conf.d<span class="o">]</span><span class="c1"># vim fcgid.conf</span>
+<span class="c1"># 添加如下3行</span>
+DirectoryIndex index.php
+ProxyRequests Off
+ProxyPassMatch ^/<span class="o">(</span>.*<span class="se">\.</span>php<span class="o">)</span>$ fcgi://127.0.0.1:9000/var/www/html/<span class="nv">$1</span>
+<span class="c1"># 重启网络服务</span>
+<span class="o">[</span>root@centos-156 conf.d<span class="o">]</span><span class="c1"># service httpd restart</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id21">
+<h3>10.7.8.4. 本机测试<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p>本部分内容需要在2个机器都要做一遍。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-156 conf.d<span class="o">]</span><span class="c1"># curl localhost/index.php</span>
+成功了
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id22">
+<h2>10.7.9. client测试<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># curl http://www.linuxpanda.tech/index.php</span>
+成功了
+<span class="c1"># 把156的web停掉</span>
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># curl http://www.linuxpanda.tech/index.php</span>
+成功了
+<span class="c1"># 再把157的web停掉</span>
+<span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># curl http://www.linuxpanda.tech/index.php</span>
+curl: <span class="o">(</span><span class="m">7</span><span class="o">)</span> Failed connect to www.linuxpanda.tech:80<span class="p">;</span> Connection refused
+</pre></div>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>10.7.10. 总结<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<p>这个作业，看起来挺简单的，做起来还是遇到些麻烦的。</p>
+<p>需要改进的地方：</p>
+<ol class="arabic simple">
+<li>dns解析太不稳定，如果web1停掉，dns还可能解析到这个停掉的主机，就会导致web没法访问。</li>
+<li>mysql实例后面学习了主从可以考虑完善下。</li>
+<li>lamp没有使用xcache加速下</li>
+<li>本练习都是使用的yum安装的lamp环境，可以考虑使用编译安装方法。</li>
+<li>数据通过nfs共享，本质还是一个磁盘的数据，可以考虑使用rsync来替代nfs。</li>
+<li>数据文件可以考虑放到raid上，来提供文件的访问性能</li>
+</ol>
+</div>
+<div class="section" id="id24">
+<h2>10.7.11. 参考<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://linux.linuxpanda.tech/">我自己在马哥教育笔记1</a></p>
+<p><a class="reference external" href="http://services.linuxpanda.tech/">我自己在马哥教育笔记2</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="06-centos编译安装lamp.html" class="btn btn-neutral" title="10.6. centos6编译安装lamp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
