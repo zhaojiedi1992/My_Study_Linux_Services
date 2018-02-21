@@ -1,0 +1,33 @@
+代理服务器
+==============================================================
+
+安装软件
+-------------------------------------
+
+.. code-block:: bash
+
+    [root@centos-150 ~]# yum install squid
+
+编辑配置文件
+---------------------------
+
+.. code-block:: bash
+
+    [root@centos-150 ~]# vim /etc/squid/squid.conf
+    # 修改http_access deny all为如下内容
+    http_access allow all
+
+启动服务
+---------------------------
+
+.. code-block:: bash
+
+    [root@centos-150 ~]# systemctl start squid
+    [root@centos-150 ~]# netstat -tunlp |grep 3128
+    tcp6       0      0 :::3128                 :::*                    LISTEN      6861/(squid-1)   
+
+客户端设置
+---------------------------
+
+.. image:: /images/杂项/代理设置.png
+

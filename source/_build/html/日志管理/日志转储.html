@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>日志转储 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>11.3. 日志转储 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 日志管理" href="index.html"/>
+        <link rel="next" title="12. 网络文件共享" href="../网络文件共享/index.html"/>
+        <link rel="prev" title="11.2. 日志管理系统搭建" href="日志管理系统搭建.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
@@ -100,7 +103,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">11. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 日志管理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="日志介绍.html">11.1. 日志介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="日志管理系统搭建.html">11.2. 日志管理系统搭建</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.3. 日志转储</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logrorate">11.3.1. logrorate的主要配置参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.3.2. 样例的配置文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
@@ -150,7 +162,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>日志转储</li>
+          <li><a href="index.html">11. 日志管理</a> &raquo;</li>
+        
+      <li>11.3. 日志转储</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,11 +184,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>日志转储<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>11.3. 日志转储<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>linux的日志转储有logrorate提供，可以安装时间，文件大小来自动滚动日志文件，简化日志管理。</p>
 <p>logrotate程序提供用于压缩日志文件，发送日志信息到指定的email功能。</p>
 <div class="section" id="logrorate">
-<h2>logrorate的主要配置参数<a class="headerlink" href="#logrorate" title="Permalink to this headline">¶</a></h2>
+<h2>11.3.1. logrorate的主要配置参数<a class="headerlink" href="#logrorate" title="Permalink to this headline">¶</a></h2>
 <p>参数：</p>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
@@ -332,7 +346,7 @@
 </table>
 </div>
 <div class="section" id="id2">
-<h2>样例的配置文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>11.3.2. 样例的配置文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>全局的配置文件</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># see &quot;man logrotate&quot; for details
 # rotate log files weekly
@@ -432,6 +446,15 @@ include /etc/logrotate.d
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../网络文件共享/index.html" class="btn btn-neutral float-right" title="12. 网络文件共享" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="日志管理系统搭建.html" class="btn btn-neutral" title="11.2. 日志管理系统搭建" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

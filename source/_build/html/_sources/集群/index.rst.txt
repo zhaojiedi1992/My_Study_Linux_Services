@@ -3,6 +3,7 @@
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
    负载均衡/*
    高可用/*

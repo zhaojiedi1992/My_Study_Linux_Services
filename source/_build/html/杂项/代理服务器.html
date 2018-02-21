@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>代理服务器 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -150,7 +150,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>代理服务器</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,7 +169,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
+  <div class="section" id="id1">
+<h1>代理服务器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>安装软件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># yum install squid</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>编辑配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/squid/squid.conf</span>
+<span class="c1"># 修改http_access deny all为如下内容</span>
+http_access allow all
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># systemctl start squid</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep 3128</span>
+tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128                 :::*                    LISTEN      <span class="m">6861</span>/<span class="o">(</span>squid-1<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>客户端设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/代理设置.png" src="../_images/代理设置.png" />
+</div>
+</div>
+
 
            </div>
            <div class="articleComments">

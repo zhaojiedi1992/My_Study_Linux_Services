@@ -1,0 +1,252 @@
+防火墙
+=============================================================
+
+iptables的使用
+---------------------------------------------------
+
+.. code-block:: text 
+
+
+    链操作：
+        -N: new,创建新的链
+        -X: delete,删除一个链
+        -F: flush,清空一个链
+        -P: policy,策略
+        -E: rename,重名
+
+    规则操作： 
+        -A: append,追加一条规则
+        -I: insert,插入一天规则
+        -D: delete, 删除一条规则
+        -R: replace,替换一条规则
+        -Z: zero,清空计数器
+
+    匹配规则： 
+        基本匹配：
+            -s: src,匹配源地址
+            -d: dst,匹配目标地址
+            -i: 指定数据包的流入接口
+            -o: 指定数据的流出接口
+        
+        扩展匹配： 
+            tcp:
+                -p: protocol,指定协议
+                --sports： 源端口
+                --dports:  目标端口
+                --tcp-flags: 标记
+                --sync:     只允许新连接
+            udp:
+                --sports： 源端口
+                --dports:  目标端口
+            icmp:
+                --icmp-type: 8ping出去，0代表进入
+            
+        显式扩展：
+            -m state：
+                NEW: 新连接
+                ESTABLISHED:对一个权限的请求进行回应
+                RELATED: 两个完整连接之间的相互关系
+                INVALID: 无法识别的状态连接
+                UNTRACKED: 未追踪的连接
+
+            -m multiport: 
+                --sports: 22,80,443 指定多个端口
+                --dports: 指定多个端口
+                --ports： 指定端口，不限定是入和出的端口
+            
+            -m iprange: 
+                --src-range: 源地址范围
+                --dst-range: 目标地址范围
+            
+            -m connlimit: 
+                --connlimit-upto n: 限定并发连接数的上限
+                --connlimit-above n: 限定并发连接数的下限
+            
+            -m limit: 
+                --limit: 限制速率
+                --limit-burst: 突发速率限定
+            
+            -m string: 
+                --algo bm|kmp: 指定算法
+                ! --string pattern : 给定要检查的字符串模式
+                
+            -m time: 
+                --datestart YYYY[-MM-DD][Thh:mm:ss]: 起始日期时间
+                --dateend YYYY[-MM-DD][Thh:mm:ss]: 结束日期时间
+                --timestart hh:mm:ss 起始时间
+                --timeend   hh:mm:ss 结束时间
+                ! --monthdays： 匹配一个月中的那些天
+                ! --weekdays: 匹配一周中的那些天
+
+    处理动作： 
+        --j TARGET 其中TARGET有下面几个值
+        ACCEPT  接受
+        DROP    丢弃
+        REJECT  拒绝
+        SNAT    源地址转化
+        DNAT    目标地址转换
+        REDIRECT 重定向
+        LOG  日志
+
+样例
+----------------------------------------------------------
+
+查看所有链
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -nL
+
+查看特定表
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -nL -t nat 
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+
+放行特定ip特定端口访问
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -A INPUT -s 0/0 -d 192.168.46.1 -p tcp --dport 21 -j ACCEPT
+    [root@centos-150 ~]# iptables -A OUTPUT -s 192.168.46.1 -d 0/0 -p tcp --sport 21 -j ACCEPT
+
+
+只能本机ping别人，限制别人ping
+
+.. code-block:: bash 
+
+     [root@centos-150 ~]#iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT
+     [root@centos-150 ~]#iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT 
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+
+修改默认规则
+
+.. code-block:: bash 
+
+    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+

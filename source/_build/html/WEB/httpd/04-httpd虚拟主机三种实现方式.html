@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.1. httpd的安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.4. httpd虚拟主机三种实现方式 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.2. httpd基础配置说明" href="httpd基础配置说明.html"/>
-        <link rel="prev" title="10. WEB" href="../index.html"/> 
+        <link rel="next" title="10.5. centos6lamp的yum安装" href="05-centos6lamp的yum安装.html"/>
+        <link rel="prev" title="10.3. http支持https" href="03-http支持https.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -103,16 +103,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.1. httpd的安装</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#yum">10.1.1. yum安装方式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#centos6httpd2-4">10.1.2. centos6编译安装httpd2.4</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="http支持https.html">10.3. http支持https</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centos6编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-web实战一.html">10.7. web实战一</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
@@ -167,13 +164,13 @@
         
           <li><a href="../index.html">10. WEB</a> &raquo;</li>
         
-      <li>10.1. httpd的安装</li>
+      <li>10.4. httpd虚拟主机三种实现方式</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/WEB/httpd/httpd安装.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/WEB/httpd/04-httpd虚拟主机三种实现方式.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,18 +184,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="httpd">
-<h1>10.1. httpd的安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="yum">
-<h2>10.1.1. yum安装方式<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos6 options<span class="o">]</span>$ yum install httpd
-<span class="o">[</span>root@centos6 options<span class="o">]</span>$ rpm -ql httpd
-</pre></div>
-</div>
-</div>
-<div class="section" id="centos6httpd2-4">
-<h2>10.1.2. centos6编译安装httpd2.4<a class="headerlink" href="#centos6httpd2-4" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="centos6编译安装lamp.html"><span class="doc">centos6编译安装lamp</span></a></p>
-</div>
+<h1>10.4. httpd虚拟主机三种实现方式<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
+<p>这个原来写的有， 也是比较简单，这里就不再重复去写了。给链接了。</p>
+<p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_016_virtualhost.html">httpd虚拟主机三种实现方式</a></p>
 </div>
 
 
@@ -211,10 +199,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="httpd基础配置说明.html" class="btn btn-neutral float-right" title="10.2. httpd基础配置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05-centos6lamp的yum安装.html" class="btn btn-neutral float-right" title="10.5. centos6lamp的yum安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="10. WEB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="03-http支持https.html" class="btn btn-neutral" title="10.3. http支持https" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

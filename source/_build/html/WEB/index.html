@@ -36,7 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="next" title="10.1. httpd的安装" href="httpd/httpd安装.html"/>
+        <link rel="next" title="10.1. httpd的安装" href="httpd/01-httpd安装.html"/>
         <link rel="prev" title="9.6. mysql入门" href="../数据库/mysql/mysql入门.html"/> 
 
   
@@ -102,12 +102,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">10. WEB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd安装.html">10.1. httpd的安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html">10.3. http支持https</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html">10.7. web实战一</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
@@ -183,48 +184,62 @@
 <h1>10. WEB<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="httpd/httpd安装.html">10.1. httpd的安装</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd安装.html#yum">10.1.1. yum安装方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd安装.html#centos6httpd2-4">10.1.2. centos6编译安装httpd2.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/01-httpd安装.html">10.1. httpd的安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/01-httpd安装.html#yum">10.1.1. yum安装方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/01-httpd安装.html#centos6httpd2-4">10.1.2. centos6编译安装httpd2.4</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="httpd/httpd基础配置说明.html">10.2. httpd基础配置说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd基础配置说明.html#id1">10.2.1. 全局环境配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/httpd基础配置说明.html#id2">10.2.2. 主服务器配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/02-httpd基础配置说明.html#id1">10.2.1. 全局环境配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/02-httpd基础配置说明.html#id2">10.2.2. 主服务器配置</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="httpd/http支持https.html">10.3. http支持https</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html#mod-ssl">10.3.1. 安装mod_ssl模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html#ca">10.3.2. 搭建ca服务器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html#http">10.3.3. http服务申请证书</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html#id1">10.3.4. http配置文件修改</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/http支持https.html#id2">10.3.5. 测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/03-http支持https.html">10.3. http支持https</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html#mod-ssl">10.3.1. 安装mod_ssl模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html#ca">10.3.2. 搭建ca服务器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html#http">10.3.3. http服务申请证书</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html#id1">10.3.4. http配置文件修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/03-http支持https.html#id2">10.3.5. 测试</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="httpd/httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="httpd/centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#id1">10.5.1. 安装软件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#id2">10.5.2. 启动服务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#httpphp">10.5.3. 关联http和php</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#id3">10.5.4. 应用测试</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#id4">10.5.5. 清除权限</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#id5">10.5.6. 测试性能</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6lamp的yum安装.html#xcache">10.5.7. xcache加速</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#id1">10.5.1. 安装软件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#id2">10.5.2. 启动服务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#httpphp">10.5.3. 关联http和php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#id3">10.5.4. 应用测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#id4">10.5.5. 清除权限</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#id5">10.5.6. 测试性能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/05-centos6lamp的yum安装.html#xcache">10.5.7. xcache加速</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="httpd/centos6编译安装lamp.html">10.6. centos6编译安装lamp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id1">10.6.1. 下载文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id2">10.6.2. 安装必要的包文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id3">10.6.3. 用户的创建</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#httpd">10.6.4. httpd编译安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#http">10.6.5. 测试http和后续</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#mariadb">10.6.6. mariadb编译安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id4">10.6.7. 测试mariadb和后续</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id5">10.6.8. mariadb编译安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#php">10.6.9. 测试php和后续</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#httpphp">10.6.10. http集成php并测试</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#phpphpmyadmin">10.6.11. 部署php应用软件phpMyAdmin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="httpd/centos6编译安装lamp.html#id6">10.6.12. 登陆应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id1">10.6.1. 下载文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id2">10.6.2. 安装必要的包文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id3">10.6.3. 用户的创建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#httpd">10.6.4. httpd编译安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#http">10.6.5. 测试http和后续</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#mariadb">10.6.6. mariadb编译安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id4">10.6.7. 测试mariadb和后续</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id5">10.6.8. mariadb编译安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#php">10.6.9. 测试php和后续</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#httpphp">10.6.10. http集成php并测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#phpphpmyadmin">10.6.11. 部署php应用软件phpMyAdmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/06-centos编译安装lamp.html#id6">10.6.12. 登陆应用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="httpd/07-web实战一.html">10.7. web实战一</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id2">10.7.1. 架构图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id3">10.7.2. 准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#ansible">10.7.3. ansible的配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#dns">10.7.4. dns主机设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#client">10.7.5. client主机测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#nfs">10.7.6. nfs主机配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#mysql">10.7.7. mysql主机配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id18">10.7.8. web主机配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id22">10.7.9. client测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id23">10.7.10. 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="httpd/07-web实战一.html#id24">10.7.11. 参考</a></li>
 </ul>
 </li>
 </ul>
@@ -241,7 +256,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="httpd/httpd安装.html" class="btn btn-neutral float-right" title="10.1. httpd的安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="httpd/01-httpd安装.html" class="btn btn-neutral float-right" title="10.1. httpd的安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../数据库/mysql/mysql入门.html" class="btn btn-neutral" title="9.6. mysql入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
