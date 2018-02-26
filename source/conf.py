@@ -174,3 +174,11 @@ domain='linuxpanda.tech'
 site_url = 'http://' + project.replace('_','-') + "." + domain +"/"
 extensions = ['sphinx_sitemap']
 
+github_user="zhaojiedi1992"
+
+html_context = {
+  'display_github': True,
+  'github_user': github_user,
+  'github_repo': project,
+  'github_version': '../edit/master/source/',
+}

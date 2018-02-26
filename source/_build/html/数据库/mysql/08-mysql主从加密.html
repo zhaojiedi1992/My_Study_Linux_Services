@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.10. mysql主从加密 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. 数据库" href="../index.html"/>
+        <link rel="next" title="10. WEB" href="../../WEB/index.html"/>
+        <link rel="prev" title="9.9. mysql主从" href="07-mysql主从.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">9.2. sql语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-mysql多实例.html">9.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-mysql入门.html">9.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-mysql管理.html">9.7. mysql管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-mysql备份和恢复.html">9.8. mysql备份和恢复</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-mysql主从.html">9.9. mysql主从</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.10. mysql主从加密</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.10.1. 证书信息准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.10.2. 主服务器配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">9.10.2.1. 从服务器配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">9.10.2.2. 测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">9. 数据库</a> &raquo;</li>
+        
+      <li>9.10. mysql主从加密</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/数据库/mysql/08-mysql主从加密.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysql">
+<h1>9.10. mysql主从加密<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>9.10.1. 证书信息准备<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /etc/my.cnf.d/ssl</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/my.cnf.d/ssl</span>
+
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl genrsa -out cakey.pem  2048</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">4</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1675</span> Feb <span class="m">25</span> <span class="m">17</span>:44 cakey.pem
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># chmod 600 cakey.pem</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl  req -new -x509 -key cakey.pem -days 3650 -out cacert.pem</span>
+
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl req -newkey  rsa:1024 -nodes -days 365 -keyout master.key -out master.csr</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl x509 -req -in master.csr -CA cacert.pem -CAkey cakey.pem -set_serial  01 -out master.crt</span>
+Signature ok
+<span class="nv">subject</span><span class="o">=</span>/C<span class="o">=</span>cn/ST<span class="o">=</span>beijing/L<span class="o">=</span>beijing/O<span class="o">=</span>linuxpanda.tech/OU<span class="o">=</span>dev/CN<span class="o">=</span>master.linuxpanda.tech
+Getting CA Private Key
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl req -newkey  rsa:1024 -nodes -days 365 -keyout slave.key -out slave.csr</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># openssl x509 -req -in slave.csr -CA cacert.pem -CAkey cakey.pem -set_serial  02 -out slave.crt</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">32</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1359</span> Feb <span class="m">25</span> <span class="m">17</span>:45 cacert.pem
+-rw------- <span class="m">1</span> root root <span class="m">1675</span> Feb <span class="m">25</span> <span class="m">17</span>:44 cakey.pem
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1058</span> Feb <span class="m">25</span> <span class="m">17</span>:53 master.crt
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">676</span> Feb <span class="m">25</span> <span class="m">17</span>:50 master.csr
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">916</span> Feb <span class="m">25</span> <span class="m">17</span>:50 master.key
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1058</span> Feb <span class="m">25</span> <span class="m">17</span>:57 slave.crt
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">676</span> Feb <span class="m">25</span> <span class="m">17</span>:56 slave.csr
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">916</span> Feb <span class="m">25</span> <span class="m">17</span>:56 slave.key
+
+
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># scp -r -p /etc/my.cnf.d/ssl 192.168.46.152:/etc/my.cnf.d</span>
+<span class="o">[</span>root@localhost ssl<span class="o">]</span><span class="c1"># scp -r -p /etc/my.cnf.d/ssl 192.168.46.153:/etc/my.cnf.d</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>9.10.2. 主服务器配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 添加如下几行到mysqld片段</span>
+log-bin
+innodb_file_per_table
+<span class="nv">server_id</span> <span class="o">=</span><span class="m">1</span>
+ssl
+ssl-ca<span class="o">=</span>/etc/my.cnf.d/ssl/cacert.pem
+ssl-cert<span class="o">=</span>/etc/my.cnf.d/ssl/master.crt
+ssl-key<span class="o">=</span>/etc/my.cnf.d/ssl/master.key
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show variables like <span class="s1">&#39;%ssl%&#39;</span>
+    -&gt; <span class="p">;</span>
++---------------+------------------------------+
+<span class="p">|</span> Variable_name <span class="p">|</span> Value                        <span class="p">|</span>
++---------------+------------------------------+
+<span class="p">|</span> have_openssl  <span class="p">|</span> YES                          <span class="p">|</span>
+<span class="p">|</span> have_ssl      <span class="p">|</span> YES                          <span class="p">|</span>
+<span class="p">|</span> ssl_ca        <span class="p">|</span> /etc/my.cnf.d/ssl/cacert.pem <span class="p">|</span>
+<span class="p">|</span> ssl_capath    <span class="p">|</span>                              <span class="p">|</span>
+<span class="p">|</span> ssl_cert      <span class="p">|</span> /etc/my.cnf.d/ssl/master.crt <span class="p">|</span>
+<span class="p">|</span> ssl_cipher    <span class="p">|</span>                              <span class="p">|</span>
+<span class="p">|</span> ssl_key       <span class="p">|</span> /etc/my.cnf.d/ssl/master.key <span class="p">|</span>
++---------------+------------------------------+
+<span class="m">7</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant replication slave on *.* to repluser@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;centos&#39;</span> require ssl<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h3>9.10.2.1. 从服务器配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+
+innodb_file_per_table
+log-bin
+<span class="nv">server_id</span><span class="o">=</span><span class="m">2</span>
+
+ssl
+ssl-ca<span class="o">=</span>/etc/my.cnf.d/cacert.pem
+ssl-key<span class="o">=</span>/etc/my.cnf.d/slave.key
+ssl-cert<span class="o">=</span>/etc/my.cnf.d/slave.crt
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; change master to  <span class="nv">master_host</span><span class="o">=</span><span class="s1">&#39;192.168.46.152&#39;</span>, <span class="nv">master_user</span><span class="o">=</span><span class="s1">&#39;repluser&#39;</span>, <span class="nv">master_password</span><span class="o">=</span><span class="s1">&#39;centos&#39;</span>, <span class="nv">master_log_file</span><span class="o">=</span><span class="s1">&#39;mariadb-bin.000001&#39;</span>, <span class="nv">master_log_pos</span><span class="o">=</span><span class="m">245</span>, <span class="nv">master_ssl</span><span class="o">=</span><span class="m">1</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; start slave<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show slave status<span class="se">\G</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>9.10.2.2. 测试<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主测试</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; create database db1<span class="p">;</span>
+Query OK, <span class="m">1</span> row affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 从测试</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show databases<span class="p">;</span>
++--------------------+
+<span class="p">|</span> Database           <span class="p">|</span>
++--------------------+
+<span class="p">|</span> information_schema <span class="p">|</span>
+<span class="p">|</span> db1                <span class="p">|</span>
+<span class="p">|</span> mysql              <span class="p">|</span>
+<span class="p">|</span> performance_schema <span class="p">|</span>
+<span class="p">|</span> <span class="nb">test</span>               <span class="p">|</span>
++--------------------+
+<span class="m">5</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 测试下</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql --ssl-ca=/etc/my.cnf.d/ssl/cacert.pem  --ssl-cert=/etc/my.cnf.d/ssl/slave.crt  --ssl-key=/etc/my.cnf.d/ssl/slave.key  -h 192.168.46.152 -u repluser -p</span>
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MariaDB connection id is <span class="m">4</span>
+Server version: <span class="m">5</span>.5.56-MariaDB MariaDB Server
+
+Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../WEB/index.html" class="btn btn-neutral float-right" title="10. WEB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="07-mysql主从.html" class="btn btn-neutral" title="9.9. mysql主从" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

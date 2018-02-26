@@ -95,7 +95,9 @@ iptables的使用
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -nL
+    [root@centos-150 ~]#
+    [root@centos-150 ~]#  iptables -nL --line-number
+
 
 查看特定表
 
@@ -122,131 +124,48 @@ iptables的使用
 
 .. code-block:: bash 
 
-     [root@centos-150 ~]#iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT
-     [root@centos-150 ~]#iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT 
+     [root@centos-150 ~]# iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT
+     [root@centos-150 ~]# iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT 
 
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
+禁止访问包含有“old”字符的页面
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# iptables -I OUTPUT  -s 192.168.46.7 -d 0/0  -p tcp --sport 80  -m string --algo kmp --string "old"   -j DROP
 
-修改默认规则
 
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
+时间限定
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# iptables -A INPUT -d 192.168.46.7 -p tcp --dport 23 -m iprange --src-range 172.18.46.1-172.18.46.100 \
+    -m time --timestart 09:00:00 --timestop 18:00:00 --weekdays 1,2,3,4,5 -j ACCEPT 
 
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
+允许23端口同一个客户端小于3个并发连接
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# iptables -A INPUT -s 0/0 -d 192.168.46.7 -p tcp --dport 23 -m connlimit ! --connlimit-above 3 -j ACCEPT
 
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-修改默认规则
+允许22，23，80端口访问
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dport 22,23,80 \
+     -m state --state NEW,established -j ACCEPT
 
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
+允许ftp访问
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# modprobe  nf_conntrack_ftp
+    [root@centos-150 ~]# iptables -A INPUT -d 192.168.46.7 -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-修改默认规则
 
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
+每个访问规则添加日志记录
 
 .. code-block:: bash 
 
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
-
-修改默认规则
-
-.. code-block:: bash 
-
-    [root@centos-150 ~]# iptables -t filter -P FORWARD DROP
+    [root@centos-150 ~]# iptables -I FORWARD 2 -s 10.0.0.0/24 -p tcp -m multiport --dports 80,21,22,23 \
+    -m state --state NEW -j LOG --log-prefix "new conn:"
 

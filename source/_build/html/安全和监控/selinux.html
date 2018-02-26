@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>selinux &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>5.3. selinux &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="5. 安全和监控" href="index.html"/>
+        <link rel="next" title="6. 远程登陆" href="../远程登陆/index.html"/>
+        <link rel="prev" title="5.2. 防火墙" href="防火墙.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,12 +92,33 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">5. 安全和监控</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 安全和监控</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aide.html">5.1. aide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="防火墙.html">5.2. 防火墙</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.3. selinux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">5.3.1. selinux的工作模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">5.3.2. 安全性环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.3.3. selinux的启动、关闭和查看</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">5.3.3.1. 查看</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">5.3.3.2. 设置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">5.3.3.3. 永久修改</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">5.3.4. selinux 类型的修改</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chcon">5.3.4.1. chcon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restorecon">5.3.4.2. restorecon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#semanage">5.3.4.3. semanage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
@@ -150,13 +174,17 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>selinux</li>
+          <li><a href="index.html">5. 安全和监控</a> &raquo;</li>
+        
+      <li>5.3. selinux</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/安全和监控/selinux.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/安全和监控/selinux.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -170,11 +198,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="selinux">
-<h1>selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h1>
+<h1>5.3. selinux<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h1>
 <p>selinux使用委任式访问控制（Mandatory Access Control,MAC）,它可以针对特定的程序
 域特定的文件资源来进行权限的管理。</p>
 <div class="section" id="id1">
-<h2>selinux的工作模式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.1. selinux的工作模式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>seliux采用委任式访问控制来管理程序，它控制的主体是程序，目标是文件资源。</p>
 <dl class="docutils">
 <dt>主体</dt>
@@ -188,7 +216,7 @@
 </dl>
 </div>
 <div class="section" id="id2">
-<h2>安全性环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.2. 安全性环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ll -Z anaconda-ks.cfg</span>
 -rw-------. root root system_u:object_r:admin_home_t:s0 anaconda-ks.cfg
 </pre></div>
@@ -212,7 +240,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>selinux的启动、关闭和查看<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.3. selinux的启动、关闭和查看<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>selinux有三种模式。</p>
 <ul class="simple">
 <li>enforcing: 强制模式</li>
@@ -220,14 +248,14 @@
 <li>disabled： 关闭</li>
 </ul>
 <div class="section" id="id4">
-<h3>查看<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.3.1. 查看<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># getenforce</span>
 Disabled
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
-<h3>设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.3.2. 设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># setenforce 1</span>
 </pre></div>
 </div>
@@ -237,22 +265,22 @@ Disabled
 </div>
 </div>
 <div class="section" id="id6">
-<h3>永久修改<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.3.3. 永久修改<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/selinux</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id7">
-<h2>selinux 类型的修改<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h2>5.3.4. selinux 类型的修改<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="chcon">
-<h3>chcon<a class="headerlink" href="#chcon" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.4.1. chcon<a class="headerlink" href="#chcon" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="restorecon">
-<h3>restorecon<a class="headerlink" href="#restorecon" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.4.2. restorecon<a class="headerlink" href="#restorecon" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="semanage">
-<h3>semanage<a class="headerlink" href="#semanage" title="Permalink to this headline">¶</a></h3>
+<h3>5.3.4.3. semanage<a class="headerlink" href="#semanage" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>
@@ -264,6 +292,15 @@ Disabled
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../远程登陆/index.html" class="btn btn-neutral float-right" title="6. 远程登陆" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="防火墙.html" class="btn btn-neutral" title="5.2. 防火墙" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

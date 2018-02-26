@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.8. mysql备份和恢复 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. 数据库" href="../index.html"/>
+        <link rel="next" title="9.9. mysql主从" href="07-mysql主从.html"/>
+        <link rel="prev" title="9.7. mysql管理" href="05-mysql管理.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">9.2. sql语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-mysql多实例.html">9.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-mysql入门.html">9.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-mysql管理.html">9.7. mysql管理</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.8. mysql备份和恢复</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mysqldump">9.8.1. mysqldump备份还原</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">9.8.1.1. mysqldump主要选项</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">9.8.1.2. mysqldump备份还原案例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">9.8.1.3. mysqldump恢复步骤整理</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.8.2. 逻辑卷备份还原</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">9.8.2.1. 基于逻辑卷的备份还原主要步骤</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#percondamysql">9.8.3. 基于perconda的mysql备份还原</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mariadb">9.8.3.1. 安装配置mariadb</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xtrabackup">9.8.3.2. XtraBackup下载</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">9.8.3.3. XtraBackup安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">9.8.3.4. 开始备份</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">9.8.4. 单表备份</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="07-mysql主从.html">9.9. mysql主从</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-mysql主从加密.html">9.10. mysql主从加密</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09-mysql的mha架构.html">9.11. mysql的mha架构</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">9. 数据库</a> &raquo;</li>
+        
+      <li>9.8. mysql备份和恢复</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/数据库/mysql/06-mysql备份和恢复.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysql">
+<h1>9.8. mysql备份和恢复<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mysqldump">
+<h2>9.8.1. mysqldump备份还原<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>9.8.1.1. mysqldump主要选项<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id2">
+<h3>9.8.1.2. mysqldump备份还原案例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装mariadb</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 如下2行到mysqld片段</span>
+innodb_file_per_table
+log-bin
+
+<span class="c1"># 启动</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+<span class="c1"># 导入样例数据库</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql &lt; hellodb_InnoDB.sql</span>
+
+<span class="c1"># 备份数据</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysqldump -A -F -E -R --single-transaction --master-data=1 --flush-privileges --triggers &gt; all$(date +&quot;%F_%T&quot;).sql</span>
+
+<span class="c1"># 模拟数据修改</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; use hellodb<span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; delete from students <span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; create table t1<span class="o">(</span>age int<span class="o">)</span><span class="p">;</span>
+
+<span class="c1"># 锁定数据库</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush tables with <span class="nb">read</span> lock<span class="p">;</span>
+
+<span class="c1"># 分析那些日志需要重做</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; show master logs<span class="p">;</span>
++--------------------+-----------+
+<span class="p">|</span> Log_name           <span class="p">|</span> File_size <span class="p">|</span>
++--------------------+-----------+
+<span class="p">|</span> mariadb-bin.000001 <span class="p">|</span>       <span class="m">264</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000002 <span class="p">|</span>      <span class="m">7700</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000003 <span class="p">|</span>       <span class="m">290</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000004 <span class="p">|</span>       <span class="m">519</span> <span class="p">|</span>
++--------------------+-----------+
+<span class="m">4</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># head -n 25 all2018-02-23_21\:52\:18.sql</span>
+<span class="c1"># 25行中有如下一行</span>
+CHANGE MASTER TO <span class="nv">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">&#39;mariadb-bin.000004&#39;</span>, <span class="nv">MASTER_LOG_POS</span><span class="o">=</span><span class="m">245</span><span class="p">;</span>
+
+<span class="c1"># 刷新日志</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.02 sec<span class="o">)</span>
+
+<span class="c1"># 复制日志到特定的一个目录去</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /backup</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /var/lib/mysql/mariadb-bin.000004 /backup/</span>
+
+<span class="c1"># 导出二进制日志为sql</span>
+<span class="o">[</span>root@localhost backup<span class="o">]</span><span class="c1"># mysqlbinlog  mariadb-bin.000004  --start-position=245  &gt;bin.sql</span>
+<span class="o">[</span>root@localhost backup<span class="o">]</span><span class="c1"># vim bin.sql</span>
+<span class="c1"># 注释掉误操作语句，使用--注释。</span>
+--delete from students
+
+<span class="c1"># 临时关闭日志记录</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="nb">set</span> <span class="nv">sql_log_bin</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
+<span class="c1"># 解锁</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; unlock tables<span class="p">;</span>
+<span class="c1"># 恢复</span>
+MariaDB <span class="o">[</span>test<span class="o">]</span>&gt; <span class="nb">source</span> /root/all2018-02-23_21:52:18.sql
+MariaDB <span class="o">[</span>test<span class="o">]</span>&gt; <span class="nb">source</span> /backup/bin.sql
+
+<span class="c1"># 查看数据</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="k">select</span> * from students<span class="p">;</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="p">|</span> StuID <span class="p">|</span> Name          <span class="p">|</span> Age <span class="p">|</span> Gender <span class="p">|</span> ClassID <span class="p">|</span> TeacherID <span class="p">|</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="p">|</span>     <span class="m">1</span> <span class="p">|</span> Shi Zhongyu   <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>         <span class="m">3</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">2</span> <span class="p">|</span> Shi Potian    <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>         <span class="m">7</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">3</span> <span class="p">|</span> Xie Yanke     <span class="p">|</span>  <span class="m">53</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>        <span class="m">16</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">4</span> <span class="p">|</span> Ding Dian     <span class="p">|</span>  <span class="m">32</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>         <span class="m">4</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">5</span> <span class="p">|</span> Yu Yutong     <span class="p">|</span>  <span class="m">26</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>         <span class="m">1</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">6</span> <span class="p">|</span> Shi Qing      <span class="p">|</span>  <span class="m">46</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">5</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">7</span> <span class="p">|</span> Xi Ren        <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">8</span> <span class="p">|</span> Lin Daiyu     <span class="p">|</span>  <span class="m">17</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">9</span> <span class="p">|</span> Ren Yingying  <span class="p">|</span>  <span class="m">20</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">10</span> <span class="p">|</span> Yue Lingshan  <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">11</span> <span class="p">|</span> Yuan Chengzhi <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">12</span> <span class="p">|</span> Wen Qingqing  <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">13</span> <span class="p">|</span> Tian Boguang  <span class="p">|</span>  <span class="m">33</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">14</span> <span class="p">|</span> Lu Wushuang   <span class="p">|</span>  <span class="m">17</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">15</span> <span class="p">|</span> Duan Yu       <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">16</span> <span class="p">|</span> Xu Zhu        <span class="p">|</span>  <span class="m">21</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">17</span> <span class="p">|</span> Lin Chong     <span class="p">|</span>  <span class="m">25</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">18</span> <span class="p">|</span> Hua Rong      <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">19</span> <span class="p">|</span> Xue Baochai   <span class="p">|</span>  <span class="m">18</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">20</span> <span class="p">|</span> Diao Chan     <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">21</span> <span class="p">|</span> Huang Yueying <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">22</span> <span class="p">|</span> Xiao Qiao     <span class="p">|</span>  <span class="m">20</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">23</span> <span class="p">|</span> Ma Chao       <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">24</span> <span class="p">|</span> Xu Xian       <span class="p">|</span>  <span class="m">27</span> <span class="p">|</span> M      <span class="p">|</span>    NULL <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">25</span> <span class="p">|</span> Sun Dasheng   <span class="p">|</span> <span class="m">100</span> <span class="p">|</span> M      <span class="p">|</span>    NULL <span class="p">|</span>      NULL <span class="p">|</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="m">25</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 启用sql_log_bin</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="nb">set</span> <span class="nv">sql_log_bin</span><span class="o">=</span><span class="m">1</span><span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>9.8.1.3. mysqldump恢复步骤整理<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>完全备份</li>
+<li>模拟数据破坏</li>
+<li>发现问题，初步确定问题位置</li>
+<li>只读，并禁止网络访问</li>
+<li>查看完全备份位置，当前日志位置。确定出需要的二进制日志文件</li>
+<li>根据二进制文件生成sql文件并查找出故障sql语句，修改它。</li>
+<li>去除读锁</li>
+<li>临时禁用sql_log_bin,执行全备份脚本，执行二进制日志导出的sql语句</li>
+<li>开启sql_log_bin，恢复数据库访问</li>
+<li>有必要在做一次全备份</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>9.8.2. 逻辑卷备份还原<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>样例：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加硬盘，添加逻辑卷配置。</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+  ├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+  ├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+  └─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># for i in `find /sys/devices -name scan` ; do echo &#39;- - -&#39; &gt; $i ; done;</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+  ├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+  ├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+  └─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sdb               <span class="m">8</span>:16   <span class="m">0</span>   10G  <span class="m">0</span> disk
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># fdisk /dev/sdb</span>
+Welcome to fdisk <span class="o">(</span>util-linux <span class="m">2</span>.23.2<span class="o">)</span>.
+
+Changes will remain in memory only, <span class="k">until</span> you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x42436c93.
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
+Partition type:
+  p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span>
+  e   extended
+Select <span class="o">(</span>default p<span class="o">)</span>: p
+Partition number <span class="o">(</span><span class="m">1</span>-4, default <span class="m">1</span><span class="o">)</span>:
+First sector <span class="o">(</span><span class="m">2048</span>-20971519, default <span class="m">2048</span><span class="o">)</span>:
+Using default value <span class="m">2048</span>
+Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">2048</span>-20971519, default <span class="m">20971519</span><span class="o">)</span>: +2G
+Partition <span class="m">1</span> of <span class="nb">type</span> Linux and of size <span class="m">2</span> GiB is <span class="nb">set</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n
+Partition type:
+  p   primary <span class="o">(</span><span class="m">1</span> primary, <span class="m">0</span> extended, <span class="m">3</span> free<span class="o">)</span>
+  e   extended
+Select <span class="o">(</span>default p<span class="o">)</span>: p
+Partition number <span class="o">(</span><span class="m">2</span>-4, default <span class="m">2</span><span class="o">)</span>:
+First sector <span class="o">(</span><span class="m">4196352</span>-20971519, default <span class="m">4196352</span><span class="o">)</span>:
+Using default value <span class="m">4196352</span>
+Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">4196352</span>-20971519, default <span class="m">20971519</span><span class="o">)</span>: +1G
+Partition <span class="m">2</span> of <span class="nb">type</span> Linux and of size <span class="m">1</span> GiB is <span class="nb">set</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
+
+Disk /dev/sdb: <span class="m">10</span>.7 GB, <span class="m">10737418240</span> bytes, <span class="m">20971520</span> sectors
+<span class="nv">Units</span> <span class="o">=</span> sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">512</span> bytes
+Disk label type: dos
+Disk identifier: 0x42436c93
+
+  Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            <span class="m">2048</span>     <span class="m">4196351</span>     <span class="m">2097152</span>   <span class="m">83</span>  Linux
+/dev/sdb2         <span class="m">4196352</span>     <span class="m">6293503</span>     <span class="m">1048576</span>   <span class="m">83</span>  Linux
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: t
+Partition number <span class="o">(</span><span class="m">1</span>,2, default <span class="m">2</span><span class="o">)</span>: <span class="m">2</span>
+Hex code <span class="o">(</span><span class="nb">type</span> L to list all codes<span class="o">)</span>: 8e
+Changed <span class="nb">type</span> of partition <span class="s1">&#39;Linux&#39;</span> to <span class="s1">&#39;Linux LVM&#39;</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: t
+Partition number <span class="o">(</span><span class="m">1</span>,2, default <span class="m">2</span><span class="o">)</span>: <span class="m">1</span>
+Hex code <span class="o">(</span><span class="nb">type</span> L to list all codes<span class="o">)</span>: 8e
+Changed <span class="nb">type</span> of partition <span class="s1">&#39;Linux&#39;</span> to <span class="s1">&#39;Linux LVM&#39;</span>
+
+Command <span class="o">(</span>m <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
+The partition table has been altered!
+
+Calling ioctl<span class="o">()</span> to re-read partition table.
+Syncing disks.
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># partprobe</span>
+Warning: Unable to open /dev/sr0 read-write <span class="o">(</span>Read-only file system<span class="o">)</span>.  /dev/sr0 has been opened read-only.
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lsblk</span>
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
+├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
+└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  199G  <span class="m">0</span> part
+  ├─centos-root <span class="m">253</span>:0    <span class="m">0</span>   50G  <span class="m">0</span> lvm  /
+  ├─centos-swap <span class="m">253</span>:1    <span class="m">0</span>    2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+  └─centos-home <span class="m">253</span>:2    <span class="m">0</span>  147G  <span class="m">0</span> lvm  /home
+sdb               <span class="m">8</span>:16   <span class="m">0</span>   10G  <span class="m">0</span> disk
+├─sdb1            <span class="m">8</span>:17   <span class="m">0</span>    2G  <span class="m">0</span> part
+└─sdb2            <span class="m">8</span>:18   <span class="m">0</span>    1G  <span class="m">0</span> part
+sr0              <span class="m">11</span>:0    <span class="m">1</span>  <span class="m">8</span>.1G  <span class="m">0</span> rom  /mnt/cdrom
+
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lvcreate -L 2G -n lv_mysql_data vg_data</span>
+  Logical volume <span class="s2">&quot;lv_mysql_data&quot;</span> created.
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lvcreate -l 40%Free -n lv_mysql_log vg_data</span>
+  Logical volume <span class="s2">&quot;lv_mysql_log&quot;</span> created.
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/{mysqldata,log} -pv</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkfs.xfs /dev/mapper/vg_data-lv_mysql_data</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkfs.xfs /dev/mapper/vg_data-lv_mysql_log</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mount /dev/mapper/vg_data-lv_mysql_data  /data/mysqldata/</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mount /dev/mapper/vg_data-lv_mysql_log /data/mysqllog/</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># tail -n 2 /etc/mtab &gt;&gt; /etc/fstab</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># chown -R mysql.mysql /data/</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 修改如下2行</span>
+<span class="nv">datadir</span><span class="o">=</span>/data/mysqldata
+log-bin<span class="o">=</span>/data/mysqllog/mysql-bin
+
+<span class="c1"># 重启服务</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+
+<span class="c1"># 导入样例数据</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql &lt; hellodb_InnoDB.sql</span>
+
+<span class="c1"># 查看需要的日志文件</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show binary logs<span class="p">;</span>
++------------------+-----------+
+<span class="p">|</span> Log_name         <span class="p">|</span> File_size <span class="p">|</span>
++------------------+-----------+
+<span class="p">|</span> mysql-bin.000001 <span class="p">|</span>     <span class="m">30379</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000002 <span class="p">|</span>   <span class="m">1038814</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000003 <span class="p">|</span>      <span class="m">7655</span> <span class="p">|</span>
++------------------+-----------+
+<span class="m">3</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; flush tables with <span class="nb">read</span> lock<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; flush logs<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.28 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show master logs<span class="p">;</span>
++------------------+-----------+
+<span class="p">|</span> Log_name         <span class="p">|</span> File_size <span class="p">|</span>
++------------------+-----------+
+<span class="p">|</span> mysql-bin.000001 <span class="p">|</span>     <span class="m">30379</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000002 <span class="p">|</span>   <span class="m">1038814</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000003 <span class="p">|</span>      <span class="m">7698</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000004 <span class="p">|</span>       <span class="m">245</span> <span class="p">|</span>
++------------------+-----------+
+<span class="m">4</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql -e &#39;show master logs&#39; &gt;&gt; /backup/master.pos</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /backup/master.pos</span>
+Log_name      File_size
+mysql-bin.000001      <span class="m">30379</span>
+mysql-bin.000002      <span class="m">1038814</span>
+mysql-bin.000003      <span class="m">7698</span>
+mysql-bin.000004      <span class="m">245</span>
+
+<span class="c1"># 创建快照</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvcreate -n lv_mysql_data_snap -l 100%Free -s -p r  /dev/mapper/vg_data-lv_mysql_data</span>
+
+<span class="c1"># 是否读锁</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; unlock tables<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 模拟一些操作</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; delete from hellodb.students<span class="p">;</span>
+Query OK, <span class="m">25</span> rows affected <span class="o">(</span><span class="m">0</span>.07 sec<span class="o">)</span>
+
+<span class="c1"># 挂载快照卷</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /mnt/snap</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount -o nouuid,norecovery /dev/vg_data/lv_mysql_data_snap   /mnt/snap</span>
+mount: /dev/mapper/vg_data-lv_mysql_data_snap is write-protected, mounting read-only
+
+<span class="c1"># 开始备份工作，有必要推送到远端。</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -a /mnt/snap/ /backup/</span>
+
+<span class="c1"># 删除快照卷</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /mnt/snap</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvremove /dev/vg_data/lv_mysql_data_snap</span>
+Do you really want to remove active logical volume vg_data/lv_mysql_data_snap? <span class="o">[</span>y/n<span class="o">]</span>: y
+  Logical volume <span class="s2">&quot;lv_mysql_data_snap&quot;</span> successfully removed
+
+<span class="c1"># 这里数据库被删除的一些模拟操作</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rm -rf /data/mysqldata/*</span>
+
+<span class="c1"># 复制备份文件回来</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /backup/snap/* /data/mysqldata/ -a</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown  mysql.mysql /data/mysqldata/ -R</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; flush tables with <span class="nb">read</span> lock<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+
+<span class="c1"># 在使用二进制恢复到最新时间</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show master logs<span class="p">;</span>
++------------------+-----------+
+<span class="p">|</span> Log_name         <span class="p">|</span> File_size <span class="p">|</span>
++------------------+-----------+
+<span class="p">|</span> mysql-bin.000001 <span class="p">|</span>     <span class="m">30379</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000002 <span class="p">|</span>   <span class="m">1038814</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000003 <span class="p">|</span>      <span class="m">7698</span> <span class="p">|</span>
+<span class="p">|</span> mysql-bin.000004 <span class="p">|</span>       <span class="m">423</span> <span class="p">|</span>
++------------------+-----------+
+<span class="m">4</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /backup/master.pos</span>
+Log_name      File_size
+mysql-bin.000001      <span class="m">30379</span>
+mysql-bin.000002      <span class="m">1038814</span>
+mysql-bin.000003      <span class="m">7698</span>
+mysql-bin.000004      <span class="m">245</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysqlbinlog --start-position=245 /backup/mysql-bin.000004  &gt;bin.sql</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; unlock tables<span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">set</span> <span class="nv">sql_log_bin</span><span class="o">=</span><span class="m">0</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">source</span> /backup/bin.sql
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">set</span> <span class="nv">sql_log_bin</span><span class="o">=</span><span class="m">1</span>
+<span class="c1">#测试正常</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="k">select</span> * from students<span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h3>9.8.2.1. 基于逻辑卷的备份还原主要步骤<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>数据和日志分散开到各自的逻辑卷上去,配置文件修改。</li>
+<li>锁定表</li>
+<li>记录日志文件和位置</li>
+<li>创建快照</li>
+<li>释放锁</li>
+<li>copy文件，删除快照卷</li>
+<li>模拟破坏数据</li>
+<li>copy原有的备份过来，启动服务后里面加读锁</li>
+<li>分析日志，set sql_log_bin=0 并提取出需要redo的sql</li>
+<li>释放锁，执行sql</li>
+<li>set sql_log_bin=0 恢复用户访问</li>
+</ol>
+</div>
+</div>
+<div class="section" id="percondamysql">
+<h2>9.8.3. 基于perconda的mysql备份还原<a class="headerlink" href="#percondamysql" title="Permalink to this headline">¶</a></h2>
+<p>这是使用2个机器， 一个机器备份， 在另一个机器还原。</p>
+<div class="section" id="mariadb">
+<h3>9.8.3.1. 安装配置mariadb<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 在mysqld片段添加如下2行</span>
+log-bin
+innodb_file_per_table
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xtrabackup">
+<h3>9.8.3.2. XtraBackup下载<a class="headerlink" href="#xtrabackup" title="Permalink to this headline">¶</a></h3>
+<p>这个需要在2个机器上都操作。</p>
+<p><a class="reference external" href="https://www.percona.com/downloads/XtraBackup/LATEST/">XtraBackup</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.4.9/binary/redhat/7/x86_64/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>9.8.3.3. XtraBackup安装<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>这个需要在2个机器上都操作。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># yum install percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># rpm -ql percona-xtrabackup-24</span>
+/usr/bin/innobackupex
+/usr/bin/xbcloud
+/usr/bin/xbcloud_osenv
+/usr/bin/xbcrypt
+/usr/bin/xbstream
+/usr/bin/xtrabackup
+/usr/share/doc/percona-xtrabackup-24-2.4.9
+/usr/share/doc/percona-xtrabackup-24-2.4.9/COPYING
+/usr/share/man/man1/innobackupex.1.gz
+/usr/share/man/man1/xbcrypt.1.gz
+/usr/share/man/man1/xbstream.1.gz
+/usr/share/man/man1/xtrabackup.1.gz
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果安装失败，请确保配置了epel源。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>9.8.3.4. 开始备份<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 查看日志信息</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show master logs<span class="p">;</span>
++--------------------+-----------+
+<span class="p">|</span> Log_name           <span class="p">|</span> File_size <span class="p">|</span>
++--------------------+-----------+
+<span class="p">|</span> mariadb-bin.000001 <span class="p">|</span>       <span class="m">245</span> <span class="p">|</span>
++--------------------+-----------+
+<span class="m">1</span> row in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 备份</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># innobackupex --user=root /backup</span>
+<span class="c1"># 查看备份信息</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /backup/2018-02-24_19-37-14/</span>
+backup-my.cnf  ibdata1  mysql  performance_schema  <span class="nb">test</span>  xtrabackup_binlog_info  xtrabackup_checkpoints  xtrabackup_info  xtrabackup_logfile
+
+<span class="c1"># 模拟第一天操作</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1">#  wget http://download.linuxpanda.tech/mysql/hellodb_InnoDB.sql</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="nb">source</span> /root/hellodb_InnoDB.sql
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<span class="p">;</span>
+<span class="c1"># 增量备份</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># innobackupex --incremental /backup/day1  --incremental-basedir=/backup/2018-02-24_19-37-14/</span>
+<span class="c1"># 模拟第二天操作</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; create table t1<span class="o">(</span>id int auto_increment primary key ,name varchar<span class="o">(</span><span class="m">20</span><span class="o">))</span><span class="p">;</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; insert into t1 <span class="o">(</span>name<span class="o">)</span> values <span class="o">(</span><span class="s2">&quot;zhaojiedi&quot;</span><span class="o">)</span>,<span class="o">(</span><span class="s2">&quot;zhaojiedi1992&quot;</span><span class="o">)</span><span class="p">;</span>
+
+
+<span class="c1"># 复制到远程主机</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># scp -r -p /backup    192.168.46.152:/</span>
+
+<span class="c1"># 在另一个机器恢复</span>
+
+<span class="c1"># 整理第一次的全备份</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># innobackupex  --apply-log  --redo-only /backup/2018-02-24_19-37-14/</span>
+<span class="c1"># 整理第二次的增量备份到全备份上去</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># innobackupex  --apply-log  --redo-only  /backup/2018-02-24_19-37-14/ --incremental-dir=/backup/day1/2018-02-24_20-09-38/</span>
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># innobackupex  --copy-back /backup/2018-02-24_19-37-14/</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown mysql.mysql /var/lib/mysql/ -R</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+
+<span class="c1"># 验证下，这个时候只是恢复到增量备份位置，后续日志还没有恢复过来</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql</span>
+Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MariaDB connection id is <span class="m">2</span>
+Server version: <span class="m">5</span>.5.56-MariaDB MariaDB Server
+
+Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; use hellodb<span class="p">;</span>
+Reading table information <span class="k">for</span> completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; show tables<span class="p">;</span>
++-------------------+
+<span class="p">|</span> Tables_in_hellodb <span class="p">|</span>
++-------------------+
+<span class="p">|</span> classes           <span class="p">|</span>
+<span class="p">|</span> coc               <span class="p">|</span>
+<span class="p">|</span> courses           <span class="p">|</span>
+<span class="p">|</span> scores            <span class="p">|</span>
+<span class="p">|</span> students          <span class="p">|</span>
+<span class="p">|</span> teachers          <span class="p">|</span>
+<span class="p">|</span> toc               <span class="p">|</span>
++-------------------+
+<span class="m">7</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; show master logs<span class="p">;</span>
++--------------------+-----------+
+<span class="p">|</span> Log_name           <span class="p">|</span> File_size <span class="p">|</span>
++--------------------+-----------+
+<span class="p">|</span> mariadb-bin.000001 <span class="p">|</span>      <span class="m">7700</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000002 <span class="p">|</span>       <span class="m">290</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000003 <span class="p">|</span>       <span class="m">290</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000004 <span class="p">|</span>       <span class="m">290</span> <span class="p">|</span>
+<span class="p">|</span> mariadb-bin.000005 <span class="p">|</span>       <span class="m">855</span> <span class="p">|</span>
++--------------------+-----------+
+<span class="m">5</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /backup/day1/2018-02-24_20-09-38/xtrabackup_binlog_info</span>
+mariadb-bin.000005    <span class="m">245</span>
+
+<span class="c1"># 查看日志后， 整理sql文件</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># scp bin.sql 192.168.46.152:/backup/</span>
+<span class="c1"># 远程主机指定下</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mysql &lt; /backup/bin.sql</span>
+<span class="c1"># 测试</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; use hellodb<span class="p">;</span>
+Reading table information <span class="k">for</span> completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; show tables<span class="p">;</span>
++-------------------+
+<span class="p">|</span> Tables_in_hellodb <span class="p">|</span>
++-------------------+
+<span class="p">|</span> classes           <span class="p">|</span>
+<span class="p">|</span> coc               <span class="p">|</span>
+<span class="p">|</span> courses           <span class="p">|</span>
+<span class="p">|</span> scores            <span class="p">|</span>
+<span class="p">|</span> students          <span class="p">|</span>
+<span class="p">|</span> t1                <span class="p">|</span>
+<span class="p">|</span> teachers          <span class="p">|</span>
+<span class="p">|</span> toc               <span class="p">|</span>
++-------------------+
+<span class="m">8</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>9.8.4. 单表备份<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>perconda的单表备份不能在5.5的数据库上使用的。这里使用10系列的数据库。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat mariadb.repo</span>
+<span class="o">[</span>mariadb<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>mariadb
+<span class="nv">baseurl</span><span class="o">=</span>http://mirrors.aliyun.com/mariadb/mariadb-10.2.13/yum/rhel74-amd64/
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum clean &amp;&amp; yum makecache;</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum info MariaDB-server</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install MariaDB-server</span>
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># systemctl restart mariadb</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1">#  wget http://download.linuxpanda.tech/mysql/hellodb_InnoDB.sql</span>
+
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># mysql &lt; hellodb_InnoDB.sql</span>
+
+<span class="o">[</span>root@gitlab mysql<span class="o">]</span><span class="c1"># yum install  percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># innobackupex  --include=&#39;hellodb.students&#39; /backup</span>
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># ll /backup/2018-02-24_22-30-34/</span>
+total <span class="m">12308</span>
+-rw-r----- <span class="m">1</span> root root      <span class="m">424</span> Feb <span class="m">24</span> <span class="m">22</span>:30 backup-my.cnf
+drwxr-x--- <span class="m">2</span> root root       <span class="m">46</span> Feb <span class="m">24</span> <span class="m">22</span>:30 hellodb
+-rw-r----- <span class="m">1</span> root root     <span class="m">2795</span> Feb <span class="m">24</span> <span class="m">22</span>:30 ib_buffer_pool
+-rw-r----- <span class="m">1</span> root root <span class="m">12582912</span> Feb <span class="m">24</span> <span class="m">22</span>:30 ibdata1
+drwxr-x--- <span class="m">2</span> root root       <span class="m">20</span> Feb <span class="m">24</span> <span class="m">22</span>:30 <span class="nb">test</span>
+-rw-r----- <span class="m">1</span> root root      <span class="m">113</span> Feb <span class="m">24</span> <span class="m">22</span>:30 xtrabackup_checkpoints
+-rw-r----- <span class="m">1</span> root root      <span class="m">425</span> Feb <span class="m">24</span> <span class="m">22</span>:30 xtrabackup_info
+-rw-r----- <span class="m">1</span> root root     <span class="m">2560</span> Feb <span class="m">24</span> <span class="m">22</span>:30 xtrabackup_logfile
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># mysql -e &#39;show create table hellodb.students&#39; &gt;&gt;/backup/student.sql</span>
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat /backup/student.sql</span>
+Table Create Table
+students      CREATE TABLE <span class="sb">`</span>students<span class="sb">`</span> <span class="o">(</span><span class="se">\n</span>  <span class="sb">`</span>StuID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned NOT NULL AUTO_INCREMENT,<span class="se">\n</span>  <span class="sb">`</span>Name<span class="sb">`</span> varchar<span class="o">(</span><span class="m">50</span><span class="o">)</span> NOT NULL,<span class="se">\n</span>  <span class="sb">`</span>Age<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned NOT NULL,<span class="se">\n</span>  <span class="sb">`</span>Gender<span class="sb">`</span> enum<span class="o">(</span><span class="s1">&#39;F&#39;</span>,<span class="s1">&#39;M&#39;</span><span class="o">)</span> NOT NULL,<span class="se">\n</span>  <span class="sb">`</span>ClassID<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned DEFAULT NULL,<span class="se">\n</span>  <span class="sb">`</span>TeacherID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned DEFAULT NULL,<span class="se">\n</span>  PRIMARY KEY <span class="o">(</span><span class="sb">`</span>StuID<span class="sb">`</span><span class="o">)</span><span class="se">\n</span><span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB <span class="nv">AUTO_INCREMENT</span><span class="o">=</span><span class="m">26</span> DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8
+
+<span class="c1"># 模拟破坏表</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; drop table hellodb.students<span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.30 sec<span class="o">)</span>
+
+<span class="c1"># 开始还原</span>
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># innobackupex  --apply-log  --export /backup/2018-02-24_22-30-34/</span>
+
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># ll /backup/2018-02-24_22-30-34/hellodb/</span>
+total <span class="m">120</span>
+-rw-r--r-- <span class="m">1</span> root root   <span class="m">640</span> Feb <span class="m">24</span> <span class="m">22</span>:35 students.cfg
+-rw-r----- <span class="m">1</span> root root <span class="m">16384</span> Feb <span class="m">24</span> <span class="m">22</span>:35 students.exp
+-rw-r----- <span class="m">1</span> root root  <span class="m">1208</span> Feb <span class="m">24</span> <span class="m">22</span>:30 students.frm
+-rw-r----- <span class="m">1</span> root root <span class="m">98304</span> Feb <span class="m">24</span> <span class="m">22</span>:30 students.ibd
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># sed -n -r &#39;s@\\n@@gp&#39; /backup/student.sql</span>
+CREATE TABLE <span class="sb">`</span>students<span class="sb">`</span> <span class="o">(</span>  <span class="sb">`</span>StuID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned NOT NULL AUTO_INCREMENT,  <span class="sb">`</span>Name<span class="sb">`</span> varchar<span class="o">(</span><span class="m">50</span><span class="o">)</span> NOT NULL,  <span class="sb">`</span>Age<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned NOT NULL,  <span class="sb">`</span>Gender<span class="sb">`</span> enum<span class="o">(</span><span class="s1">&#39;F&#39;</span>,<span class="s1">&#39;M&#39;</span><span class="o">)</span> NOT NULL,  <span class="sb">`</span>ClassID<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned DEFAULT NULL,  <span class="sb">`</span>TeacherID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned DEFAULT NULL,  PRIMARY KEY <span class="o">(</span><span class="sb">`</span>StuID<span class="sb">`</span><span class="o">))</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB <span class="nv">AUTO_INCREMENT</span><span class="o">=</span><span class="m">26</span> DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat /backup/student.sql</span>
+use hellodb<span class="p">;</span>
+CREATE TABLE <span class="sb">`</span>students<span class="sb">`</span> <span class="o">(</span>  <span class="sb">`</span>StuID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned NOT NULL AUTO_INCREMENT,  <span class="sb">`</span>Name<span class="sb">`</span> varchar<span class="o">(</span><span class="m">50</span><span class="o">)</span> NOT NULL,  <span class="sb">`</span>Age<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned NOT NULL,  <span class="sb">`</span>Gender<span class="sb">`</span> enum<span class="o">(</span><span class="s1">&#39;F&#39;</span>,<span class="s1">&#39;M&#39;</span><span class="o">)</span> NOT NULL,  <span class="sb">`</span>ClassID<span class="sb">`</span> tinyint<span class="o">(</span><span class="m">3</span><span class="o">)</span> unsigned DEFAULT NULL,  <span class="sb">`</span>TeacherID<span class="sb">`</span> int<span class="o">(</span><span class="m">10</span><span class="o">)</span> unsigned DEFAULT NULL,  PRIMARY KEY <span class="o">(</span><span class="sb">`</span>StuID<span class="sb">`</span><span class="o">))</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB <span class="nv">AUTO_INCREMENT</span><span class="o">=</span><span class="m">26</span> DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8
+<span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># mysql &lt; /backup/student.sql</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; alter table students discard tablespace<span class="p">;</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /backup/2018-02-24_22-30-34/hellodb/students.{exp,cfg,ibd} /var/lib/mysql/hellodb/</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown -R mysql.mysql /var/lib/mysql/</span>
+
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; alter table students import tablespace<span class="p">;</span>
+<span class="c1"># 检查数据</span>
+MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class="k">select</span> * from students<span class="p">;</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="p">|</span> StuID <span class="p">|</span> Name          <span class="p">|</span> Age <span class="p">|</span> Gender <span class="p">|</span> ClassID <span class="p">|</span> TeacherID <span class="p">|</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="p">|</span>     <span class="m">1</span> <span class="p">|</span> Shi Zhongyu   <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>         <span class="m">3</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">2</span> <span class="p">|</span> Shi Potian    <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>         <span class="m">7</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">3</span> <span class="p">|</span> Xie Yanke     <span class="p">|</span>  <span class="m">53</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>        <span class="m">16</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">4</span> <span class="p">|</span> Ding Dian     <span class="p">|</span>  <span class="m">32</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>         <span class="m">4</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">5</span> <span class="p">|</span> Yu Yutong     <span class="p">|</span>  <span class="m">26</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>         <span class="m">1</span> <span class="p">|</span>
+<span class="p">|</span>     <span class="m">6</span> <span class="p">|</span> Shi Qing      <span class="p">|</span>  <span class="m">46</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">5</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">7</span> <span class="p">|</span> Xi Ren        <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">8</span> <span class="p">|</span> Lin Daiyu     <span class="p">|</span>  <span class="m">17</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>     <span class="m">9</span> <span class="p">|</span> Ren Yingying  <span class="p">|</span>  <span class="m">20</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">10</span> <span class="p">|</span> Yue Lingshan  <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">11</span> <span class="p">|</span> Yuan Chengzhi <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">12</span> <span class="p">|</span> Wen Qingqing  <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">13</span> <span class="p">|</span> Tian Boguang  <span class="p">|</span>  <span class="m">33</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">2</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">14</span> <span class="p">|</span> Lu Wushuang   <span class="p">|</span>  <span class="m">17</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">3</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">15</span> <span class="p">|</span> Duan Yu       <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">16</span> <span class="p">|</span> Xu Zhu        <span class="p">|</span>  <span class="m">21</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">17</span> <span class="p">|</span> Lin Chong     <span class="p">|</span>  <span class="m">25</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">18</span> <span class="p">|</span> Hua Rong      <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">19</span> <span class="p">|</span> Xue Baochai   <span class="p">|</span>  <span class="m">18</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">20</span> <span class="p">|</span> Diao Chan     <span class="p">|</span>  <span class="m">19</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">7</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">21</span> <span class="p">|</span> Huang Yueying <span class="p">|</span>  <span class="m">22</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">6</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">22</span> <span class="p">|</span> Xiao Qiao     <span class="p">|</span>  <span class="m">20</span> <span class="p">|</span> F      <span class="p">|</span>       <span class="m">1</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">23</span> <span class="p">|</span> Ma Chao       <span class="p">|</span>  <span class="m">23</span> <span class="p">|</span> M      <span class="p">|</span>       <span class="m">4</span> <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">24</span> <span class="p">|</span> Xu Xian       <span class="p">|</span>  <span class="m">27</span> <span class="p">|</span> M      <span class="p">|</span>    NULL <span class="p">|</span>      NULL <span class="p">|</span>
+<span class="p">|</span>    <span class="m">25</span> <span class="p">|</span> Sun Dasheng   <span class="p">|</span> <span class="m">100</span> <span class="p">|</span> M      <span class="p">|</span>    NULL <span class="p">|</span>      NULL <span class="p">|</span>
++-------+---------------+-----+--------+---------+-----------+
+<span class="m">25</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="07-mysql主从.html" class="btn btn-neutral float-right" title="9.9. mysql主从" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="05-mysql管理.html" class="btn btn-neutral" title="9.7. mysql管理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

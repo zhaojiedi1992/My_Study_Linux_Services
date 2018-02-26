@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>防火墙 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>5.2. 防火墙 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="5. 安全和监控" href="index.html"/>
+        <link rel="next" title="5.3. selinux" href="selinux.html"/>
+        <link rel="prev" title="5.1. aide" href="aide.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,12 +92,21 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">5. 安全和监控</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 安全和监控</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aide.html">5.1. aide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. 防火墙</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iptables">5.2.1. iptables的使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">5.2.2. 样例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
@@ -150,13 +162,17 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>防火墙</li>
+          <li><a href="index.html">5. 安全和监控</a> &raquo;</li>
+        
+      <li>5.2. 防火墙</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/安全和监控/防火墙.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/安全和监控/防火墙.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -170,9 +186,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>防火墙<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>5.2. 防火墙<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="iptables">
-<h2>iptables的使用<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.1. iptables的使用<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text"><div class="highlight"><pre><span></span>链操作：
     -N: new,创建新的链
     -X: delete,删除一个链
@@ -257,9 +273,10 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>样例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>5.2.2. 样例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>查看所有链</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -nL</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#  iptables -nL --line-number</span>
 </pre></div>
 </div>
 <p>查看特定表</p>
@@ -276,92 +293,36 @@
 </pre></div>
 </div>
 <p>只能本机ping别人，限制别人ping</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT</span>
-<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT</span>
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>禁止访问包含有“old”字符的页面</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I OUTPUT  -s 192.168.46.7 -d 0/0  -p tcp --sport 80  -m string --algo kmp --string &quot;old&quot;   -j DROP</span>
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>时间限定</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -d 192.168.46.7 -p tcp --dport 23 -m iprange --src-range 172.18.46.1-172.18.46.100 \</span>
+-m <span class="nb">time</span> --timestart <span class="m">09</span>:00:00 --timestop <span class="m">18</span>:00:00 --weekdays <span class="m">1</span>,2,3,4,5 -j ACCEPT
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>允许23端口同一个客户端小于3个并发连接</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 0/0 -d 192.168.46.7 -p tcp --dport 23 -m connlimit ! --connlimit-above 3 -j ACCEPT</span>
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>允许22，23，80端口访问</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dport 22,23,80 \</span>
+ -m state --state NEW,established -j ACCEPT
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>允许ftp访问</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># modprobe  nf_conntrack_ftp</span>
+<span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -d 192.168.46.7 -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT</span>
 </pre></div>
 </div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
-</pre></div>
-</div>
-<p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<p>每个访问规则添加日志记录</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I FORWARD 2 -s 10.0.0.0/24 -p tcp -m multiport --dports 80,21,22,23 \</span>
+-m state --state NEW -j LOG --log-prefix <span class="s2">&quot;new conn:&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -374,6 +335,15 @@
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="selinux.html" class="btn btn-neutral float-right" title="5.3. selinux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aide.html" class="btn btn-neutral" title="5.1. aide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

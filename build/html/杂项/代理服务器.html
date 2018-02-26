@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>代理服务器 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>15.2. 代理服务器 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="15. 杂项" href="index.html"/>
+        <link rel="next" title="15.3. 时间服务器" href="时间服务器.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="iscsi服务器.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
@@ -104,7 +107,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">15. 杂项</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">15. 杂项</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">15.1. CA的搭建</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">15.2. 代理服务器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">15.2.1. 安装软件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">15.2.2. 编辑配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">15.2.3. 启动服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">15.2.4. 客户端设置</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="时间服务器.html">15.3. 时间服务器</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -150,13 +164,17 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>代理服务器</li>
+          <li><a href="index.html">15. 杂项</a> &raquo;</li>
+        
+      <li>15.2. 代理服务器</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/杂项/代理服务器.rst.txt" rel="nofollow"> View page source</a>
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/杂项/代理服务器.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
@@ -170,15 +188,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>代理服务器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>15.2. 代理服务器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>安装软件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.1. 安装软件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># yum install squid</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>编辑配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.2. 编辑配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/squid/squid.conf</span>
 <span class="c1"># 修改http_access deny all为如下内容</span>
 http_access allow all
@@ -186,7 +204,7 @@ http_access allow all
 </div>
 </div>
 <div class="section" id="id4">
-<h2>启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.3. 启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># systemctl start squid</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep 3128</span>
 tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128                 :::*                    LISTEN      <span class="m">6861</span>/<span class="o">(</span>squid-1<span class="o">)</span>
@@ -194,7 +212,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
 </div>
 </div>
 <div class="section" id="id5">
-<h2>客户端设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>15.2.4. 客户端设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/代理设置.png" src="../_images/代理设置.png" />
 </div>
 </div>
@@ -206,6 +224,15 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="时间服务器.html" class="btn btn-neutral float-right" title="15.3. 时间服务器" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="iscsi服务器.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

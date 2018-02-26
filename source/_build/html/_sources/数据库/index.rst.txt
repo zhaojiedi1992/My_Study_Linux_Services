@@ -3,11 +3,10 @@
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
    数据库基础
    sql语句
-   mysql/mysql安装
-   mysql/mysql多实例
-   mysql/mysql终端入门
-   mysql/mysql入门
+   mysql/*
+   
 
