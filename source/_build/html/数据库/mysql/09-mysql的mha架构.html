@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.11. mysql的mha架构 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. 数据库" href="../index.html"/>
+        <link rel="next" title="9.12. mysql的galera实现" href="10-mysql的galera实现.html"/>
+        <link rel="prev" title="9.10. mysql主从加密" href="08-mysql主从加密.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">9.2. sql语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-mysql多实例.html">9.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-mysql入门.html">9.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-mysql管理.html">9.7. mysql管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-mysql备份和恢复.html">9.8. mysql备份和恢复</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-mysql主从.html">9.9. mysql主从</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-mysql主从加密.html">9.10. mysql主从加密</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.11. mysql的mha架构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mha">9.11.1. mha工作原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.11.2. 实验架构图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mysql">9.11.3. mysql主从配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.11.4. mysql主从配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.11.5. mha配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.11.6. 免密码配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">9.11.7. mha配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">9.11.8. mha测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">9.11.9. 参考资料</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="10-mysql的galera实现.html">9.12. mysql的galera实现</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">9. 数据库</a> &raquo;</li>
+        
+      <li>9.11. mysql的mha架构</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/数据库/mysql/09-mysql的mha架构.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysqlmha">
+<h1>9.11. mysql的mha架构<a class="headerlink" href="#mysqlmha" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mha">
+<h2>9.11.1. mha工作原理<a class="headerlink" href="#mha" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>9.11.2. 实验架构图<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/mha实验架构图.png" src="../../_images/mha实验架构图.png" />
+<p>本实验的是mha的实现， 需要先搭建一个一主2从的架构，在配置半同步，在配置mha。</p>
+</div>
+<div class="section" id="mysql">
+<h2>9.11.3. mysql主从配置<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">## 主服务器配置下</span>
+
+<span class="o">[</span>root@centos154 ~<span class="o">]</span><span class="c1"># yum install http://download2.linuxpanda.tech/mysql/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 在mysqld片段下添加如下3行</span>
+log-bin
+innodb_file_per_table
+<span class="nv">server_id</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">skip_name_resolve</span><span class="o">=</span><span class="m">1</span>
+
+
+<span class="c1"># 发送配置文件到远程下</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp /etc/my.cnf 192.168.46.153:/etc/</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp /etc/my.cnf 192.168.46.154:/etc/</span>
+
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+
+<span class="c1"># 添加同步用户</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant replication slave on *.* to repluser@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;centos&#39;</span><span class="p">;</span>
+
+<span class="c1"># 备份数据</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># innobackupex  /backup</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp -r -p /backup 192.168.46.153:/</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp -r -p /backup 192.168.46.154:/</span>
+
+<span class="c1">## 从1服务器配置</span>
+
+<span class="o">[</span>root@centos154 ~<span class="o">]</span><span class="c1"># yum install http://download2.linuxpanda.tech/mysql/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 修改下server_id=2</span>
+<span class="nv">server_id</span><span class="o">=</span><span class="m">2</span>
+
+<span class="c1"># 恢复</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># innobackupex  --apply-log /backup/2018-02-27_09-02-09/</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># innobackupex  --copy-back /backup/2018-02-27_09-02-09/</span>
+
+<span class="c1"># 查看日志位置</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># cat /backup/2018-02-27_09-02-09/xtrabackup_binlog_info</span>
+mariadb-bin.000001  <span class="m">400</span>
+
+<span class="c1">#启动服务</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># chown mysql.mysql /var/lib/mysql/ -R</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+
+<span class="c1"># 开始同步</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; change master to <span class="nv">master_host</span><span class="o">=</span><span class="s1">&#39;192.168.46.152&#39;</span> , <span class="nv">master_user</span><span class="o">=</span><span class="s1">&#39;repluser&#39;</span> , <span class="nv">master_password</span><span class="o">=</span><span class="s1">&#39;centos&#39;</span> , <span class="nv">master_log_file</span><span class="o">=</span><span class="s1">&#39;mariadb-bin.000001&#39;</span> , <span class="nv">master_log_pos</span><span class="o">=</span><span class="m">400</span><span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; start slave<span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show slave status<span class="se">\G</span>
+
+<span class="c1">## 从2配置</span>
+<span class="o">[</span>root@centos154 ~<span class="o">]</span><span class="c1"># yum install http://download2.linuxpanda.tech/mysql/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="c1"># 修改下server_id=2</span>
+<span class="nv">server_id</span><span class="o">=</span><span class="m">2</span>
+
+<span class="c1"># 恢复</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># innobackupex  --apply-log /backup/2018-02-27_09-02-09/</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># innobackupex  --copy-back /backup/2018-02-27_09-02-09/</span>
+
+<span class="c1"># 查看日志位置</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># cat /backup/2018-02-27_09-02-09/xtrabackup_binlog_info</span>
+mariadb-bin.000001  <span class="m">400</span>
+
+<span class="c1">#启动服务</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># chown mysql.mysql /var/lib/mysql/ -R</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+
+<span class="c1"># 开始同步</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; change master to <span class="nv">master_host</span><span class="o">=</span><span class="s1">&#39;192.168.46.152&#39;</span> , <span class="nv">master_user</span><span class="o">=</span><span class="s1">&#39;repluser&#39;</span> , <span class="nv">master_password</span><span class="o">=</span><span class="s1">&#39;centos&#39;</span> , <span class="nv">master_log_file</span><span class="o">=</span><span class="s1">&#39;mariadb-bin.000001&#39;</span> , <span class="nv">master_log_pos</span><span class="o">=</span><span class="m">400</span><span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; start slave<span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show slave status<span class="se">\G</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>9.11.4. mysql主从配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; install plugin rpl_semi_sync_master SONAME <span class="s1">&#39;semisync_master.so&#39;</span><span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show global variables like <span class="s1">&#39;%semi%&#39;</span><span class="p">;</span>
++------------------------------------+-------+
+<span class="p">|</span> Variable_name                      <span class="p">|</span> Value <span class="p">|</span>
++------------------------------------+-------+
+<span class="p">|</span> rpl_semi_sync_master_enabled       <span class="p">|</span> OFF   <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_timeout       <span class="p">|</span> <span class="m">10000</span> <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_trace_level   <span class="p">|</span> <span class="m">32</span>    <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_wait_no_slave <span class="p">|</span> ON    <span class="p">|</span>
++------------------------------------+-------+
+<span class="m">4</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">set</span> global <span class="nv">rpl_semi_sync_master_enabled</span><span class="o">=</span><span class="m">1</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show global variables like <span class="s1">&#39;%semi%&#39;</span><span class="p">;</span>
++------------------------------------+-------+
+<span class="p">|</span> Variable_name                      <span class="p">|</span> Value <span class="p">|</span>
++------------------------------------+-------+
+<span class="p">|</span> rpl_semi_sync_master_enabled       <span class="p">|</span> ON    <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_timeout       <span class="p">|</span> <span class="m">10000</span> <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_trace_level   <span class="p">|</span> <span class="m">32</span>    <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_master_wait_no_slave <span class="p">|</span> ON    <span class="p">|</span>
++------------------------------------+-------+
+
+<span class="c1"># 主服务器配置</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; install plugin rpl_semi_sync_slave SONAME <span class="s1">&#39;semisync_slave.so&#39;</span><span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">set</span> global <span class="nv">rpl_semi_sync_slave_enabled</span><span class="o">=</span><span class="m">1</span><span class="p">;</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show global variables like <span class="s1">&#39;%semi%&#39;</span><span class="p">;</span>
++---------------------------------+-------+
+<span class="p">|</span> Variable_name                   <span class="p">|</span> Value <span class="p">|</span>
++---------------------------------+-------+
+<span class="p">|</span> rpl_semi_sync_slave_enabled     <span class="p">|</span> ON    <span class="p">|</span>
+<span class="p">|</span> rpl_semi_sync_slave_trace_level <span class="p">|</span> <span class="m">32</span>    <span class="p">|</span>
++---------------------------------+-------+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>9.11.5. mha配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant all  on *.* to mhauser@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;centos&#39;</span><span class="p">;</span>
+
+<span class="c1"># 在半同步主机上查看</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;  show grants <span class="k">for</span> mhauser@<span class="s1">&#39;192.168.46.%&#39;</span><span class="p">;</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="p">|</span> Grants <span class="k">for</span> mhauser@192.168.46.%                                                                                            <span class="p">|</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="p">|</span> GRANT ALL PRIVILEGES ON *.* TO <span class="s1">&#39;mhauser&#39;</span>@<span class="s1">&#39;192.168.46.%&#39;</span> IDENTIFIED BY PASSWORD <span class="s1">&#39;*128977E278358FF80A246B5046F51043A2B1FCED&#39;</span> <span class="p">|</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="m">1</span> row in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+<span class="c1"># 在从2上查看</span>
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;  show grants <span class="k">for</span> mhauser@<span class="s1">&#39;192.168.46.%&#39;</span><span class="p">;</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="p">|</span> Grants <span class="k">for</span> mhauser@192.168.46.%                                                                                            <span class="p">|</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="p">|</span> GRANT ALL PRIVILEGES ON *.* TO <span class="s1">&#39;mhauser&#39;</span>@<span class="s1">&#39;192.168.46.%&#39;</span> IDENTIFIED BY PASSWORD <span class="s1">&#39;*128977E278358FF80A246B5046F51043A2B1FCED&#39;</span> <span class="p">|</span>
++----------------------------------------------------------------------------------------------------------------------------+
+<span class="m">1</span> row in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>9.11.6. 免密码配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果原有主机有秘钥文件的时候，需要把for语句单独执行一下。</p>
+</div>
+<p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_023_sshgenkey.html">免密码登陆参考</a></p>
+</div>
+<div class="section" id="id6">
+<h2>9.11.7. mha配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://code.google.com/archive/p/mysql-master-ha/downloads">mha下载</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span># 管理安装
+[root@centos-151 src]# wget http://download2.linuxpanda.tech/mysql/mha4mysql-node-0.54-1.el5.noarch.rpm
+[root@centos-151 src]# wget http://download2.linuxpanda.tech/mysql/mha4mysql-manager-0.55-1.el5.noarch.rpm
+[root@centos-151 src]# scp mha4mysql-node-0.54-1.el5.noarch.rpm 192.168.46.152:/tmp                                                                                                       100%   34KB   9.4MB/s   00:00
+[root@centos-151 src]# scp mha4mysql-node-0.54-1.el5.noarch.rpm 192.168.46.153:/tmp                                                                                                           100%   34KB   7.4MB/s   00:00
+[root@centos-151 src]# scp mha4mysql-node-0.54-1.el5.noarch.rpm 192.168.46.154:/tmp
+
+# 1主2从节点安装
+[root@centos-152 ~]# yum install /tmp/mha*.rpm
+[root@centos-153 ~]# yum install /tmp/mha*.rpm
+[root@centos-154 ~]# yum install /tmp/mha*.rpm
+
+# 管理节点配置
+
+[root@centos-151 ~]# mkdir /etc/mha
+[root@centos-151 ~]# vim /etc/mha/app1.cnf
+[root@centos-151 ~]# cat /etc/mha/app1.cnf
+[server default]
+user=mhauser
+password=centos
+manager_workdir=/data/mha/app1/
+manager_log=/data/mha/app1/manager.log
+remote_workdir=/data/mha/app1/
+ssh_user=root
+repl_user=repluser
+repl_password=centos
+ping_interval=1
+
+[server1]
+hostname=192.168.46.152
+candidate_master=1
+
+[server2]
+hostname=192.168.46.153
+candidate_master=1
+
+[server3]
+hostname=192.168.46.154
+
+[root@centos-151 ~]# mkdir /data/mha/app1 -pv
+[root@centos-151 ~]# masterha_check_ssh  --conf=/etc/mha/app1.cnf
+Can&#39;t locate MHA/SSHCheck.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5 .) at /usr/bin/masterha_check_ssh line 25.
+BEGIN failed--compilation aborted at /usr/bin/masterha_check_ssh line 25.
+
+[root@centos-151 ~]# ln -s /usr/lib/perl5/vendor_perl/MHA/ /usr/lib64/perl5/vendor_perl/
+[root@centos-152 ~]# ln -s /usr/lib/perl5/vendor_perl/MHA/ /usr/lib64/perl5/vendor_perl/
+[root@centos-153 ~]# ln -s /usr/lib/perl5/vendor_perl/MHA/ /usr/lib64/perl5/vendor_perl/
+[root@centos-154 ~]# ln -s /usr/lib/perl5/vendor_perl/MHA/ /usr/lib64/perl5/vendor_perl/
+
+# ssh检查
+[root@centos-151 ~]# masterha_check_ssh  --conf=/etc/mha/app1.cnf
+Tue Feb 27 10:49:29 2018 - [warning] Global configuration file /etc/masterha_default.cnf not found. Skipping.
+Tue Feb 27 10:49:29 2018 - [info] Reading application default configurations from /etc/mha/app1.cnf..
+Tue Feb 27 10:49:29 2018 - [info] Reading server configurations from /etc/mha/app1.cnf..
+Tue Feb 27 10:49:29 2018 - [info] Starting SSH connection tests..
+Tue Feb 27 10:49:31 2018 - [debug]
+Tue Feb 27 10:49:30 2018 - [debug]  Connecting via SSH from root@192.168.46.152(192.168.46.152:22) to root@192.168.46.153(192.168.46.153:22)..
+Tue Feb 27 10:49:30 2018 - [debug]   ok.
+Tue Feb 27 10:49:30 2018 - [debug]  Connecting via SSH from root@192.168.46.152(192.168.46.152:22) to root@192.168.46.154(192.168.46.154:22)..
+Tue Feb 27 10:49:30 2018 - [debug]   ok.
+Tue Feb 27 10:49:31 2018 - [debug]
+Tue Feb 27 10:49:30 2018 - [debug]  Connecting via SSH from root@192.168.46.153(192.168.46.153:22) to root@192.168.46.152(192.168.46.152:22)..
+Tue Feb 27 10:49:30 2018 - [debug]   ok.
+Tue Feb 27 10:49:30 2018 - [debug]  Connecting via SSH from root@192.168.46.153(192.168.46.153:22) to root@192.168.46.154(192.168.46.154:22)..
+Tue Feb 27 10:49:31 2018 - [debug]   ok.
+Tue Feb 27 10:49:32 2018 - [debug]
+Tue Feb 27 10:49:31 2018 - [debug]  Connecting via SSH from root@192.168.46.154(192.168.46.154:22) to root@192.168.46.152(192.168.46.152:22)..
+Tue Feb 27 10:49:31 2018 - [debug]   ok.
+Tue Feb 27 10:49:31 2018 - [debug]  Connecting via SSH from root@192.168.46.154(192.168.46.154:22) to root@192.168.46.153(192.168.46.153:22)..
+Tue Feb 27 10:49:31 2018 - [debug]   ok.
+Tue Feb 27 10:49:32 2018 - [info] All SSH connection tests passed successfully.
+
+# 复制检查
+[root@centos-151 ~]# masterha_check_repl  --conf=/etc/mha/app1.cnf
+Tue Feb 27 10:53:03 2018 - [warning] Global configuration file /etc/masterha_default.cnf not found. Skipping.
+Tue Feb 27 10:53:03 2018 - [info] Reading application default configurations from /etc/mha/app1.cnf..
+Tue Feb 27 10:53:03 2018 - [info] Reading server configurations from /etc/mha/app1.cnf..
+Tue Feb 27 10:53:03 2018 - [info] MHA::MasterMonitor version 0.55.
+Tue Feb 27 10:53:05 2018 - [info] Dead Servers:
+Tue Feb 27 10:53:05 2018 - [info] Alive Servers:
+Tue Feb 27 10:53:05 2018 - [info]   192.168.46.152(192.168.46.152:3306)
+Tue Feb 27 10:53:05 2018 - [info]   192.168.46.153(192.168.46.153:3306)
+Tue Feb 27 10:53:05 2018 - [info]   192.168.46.154(192.168.46.154:3306)
+Tue Feb 27 10:53:05 2018 - [info] Alive Slaves:
+Tue Feb 27 10:53:05 2018 - [info]   192.168.46.153(192.168.46.153:3306)  Version=5.5.56-MariaDB (oldest major version between slaves) log-bin:enabled
+Tue Feb 27 10:53:05 2018 - [info]     Replicating from 192.168.46.152(192.168.46.152:3306)
+Tue Feb 27 10:53:05 2018 - [info]     Primary candidate for the new Master (candidate_master is set)
+Tue Feb 27 10:53:05 2018 - [info]   192.168.46.154(192.168.46.154:3306)  Version=5.5.56-MariaDB (oldest major version between slaves) log-bin:enabled
+Tue Feb 27 10:53:05 2018 - [info]     Replicating from 192.168.46.152(192.168.46.152:3306)
+Tue Feb 27 10:53:05 2018 - [info] Current Alive Master: 192.168.46.152(192.168.46.152:3306)
+Tue Feb 27 10:53:05 2018 - [info] Checking slave configurations..
+Tue Feb 27 10:53:05 2018 - [info]  read_only=1 is not set on slave 192.168.46.153(192.168.46.153:3306).
+Tue Feb 27 10:53:05 2018 - [info]  read_only=1 is not set on slave 192.168.46.154(192.168.46.154:3306).
+Tue Feb 27 10:53:05 2018 - [info] Checking replication filtering settings..
+Tue Feb 27 10:53:05 2018 - [info]  binlog_do_db= , binlog_ignore_db=
+Tue Feb 27 10:53:05 2018 - [info]  Replication filtering check ok.
+Tue Feb 27 10:53:05 2018 - [info] Starting SSH connection tests..
+Tue Feb 27 10:53:07 2018 - [info] All SSH connection tests passed successfully.
+Tue Feb 27 10:53:07 2018 - [info] Checking MHA Node version..
+Tue Feb 27 10:53:09 2018 - [info]  Version check ok.
+Tue Feb 27 10:53:09 2018 - [info] Checking SSH publickey authentication settings on the current master..
+Tue Feb 27 10:53:09 2018 - [info] HealthCheck: SSH to 192.168.46.152 is reachable.
+Tue Feb 27 10:53:09 2018 - [info] Master MHA Node version is 0.54.
+Tue Feb 27 10:53:09 2018 - [info] Checking recovery script configurations on the current master..
+Tue Feb 27 10:53:09 2018 - [info]   Executing command: save_binary_logs --command=test --start_pos=4 --binlog_dir=/var/lib/mysql,/var/log/mysql --output_file=/data/mha/app1//save_binary_logs_test --manager_version=0.55 --start_file=mariadb-bin.000003
+Tue Feb 27 10:53:09 2018 - [info]   Connecting to root@192.168.46.152(192.168.46.152)..
+Creating /data/mha/app1 if not exists.. Creating directory /data/mha/app1.. done.
+ok.
+Checking output directory is accessible or not..
+ok.
+Binlog found at /var/lib/mysql, up to mariadb-bin.000003
+Tue Feb 27 10:53:09 2018 - [info] Master setting check done.
+Tue Feb 27 10:53:09 2018 - [info] Checking SSH publickey authentication and checking recovery script configurations on all alive slave servers..
+Tue Feb 27 10:53:09 2018 - [info]   Executing command : apply_diff_relay_logs --command=test --slave_user=&#39;mhauser&#39; --slave_host=192.168.46.153 --slave_ip=192.168.46.153 --slave_port=3306 --workdir=/data/mha/app1/ --target_version=5.5.56-MariaDB --manager_version=0.55 --relay_log_info=/var/lib/mysql/relay-log.info  --relay_dir=/var/lib/mysql/  --slave_pass=xxx
+Tue Feb 27 10:53:09 2018 - [info]   Connecting to root@192.168.46.153(192.168.46.153:22)..
+Creating directory /data/mha/app1/.. done.
+Checking slave recovery environment settings..
+    Opening /var/lib/mysql/relay-log.info ... ok.
+    Relay log found at /var/lib/mysql, up to mariadb-relay-bin.023050
+    Temporary relay log file is /var/lib/mysql/mariadb-relay-bin.023050
+    Testing mysql connection and privileges.. done.
+    Testing mysqlbinlog output.. done.
+    Cleaning up test file(s).. done.
+Tue Feb 27 10:53:10 2018 - [info]   Executing command : apply_diff_relay_logs --command=test --slave_user=&#39;mhauser&#39; --slave_host=192.168.46.154 --slave_ip=192.168.46.154 --slave_port=3306 --workdir=/data/mha/app1/ --target_version=5.5.56-MariaDB --manager_version=0.55 --relay_log_info=/var/lib/mysql/relay-log.info  --relay_dir=/var/lib/mysql/  --slave_pass=xxx
+Tue Feb 27 10:53:10 2018 - [info]   Connecting to root@192.168.46.154(192.168.46.154:22)..
+Creating directory /data/mha/app1/.. done.
+Checking slave recovery environment settings..
+    Opening /var/lib/mysql/relay-log.info ... ok.
+    Relay log found at /var/lib/mysql, up to mariadb-relay-bin.000005
+    Temporary relay log file is /var/lib/mysql/mariadb-relay-bin.000005
+    Testing mysql connection and privileges.. done.
+    Testing mysqlbinlog output.. done.
+    Cleaning up test file(s).. done.
+Tue Feb 27 10:53:10 2018 - [info] Slaves settings check done.
+Tue Feb 27 10:53:10 2018 - [info]
+192.168.46.152 (current master)
++--192.168.46.153
++--192.168.46.154
+
+Tue Feb 27 10:53:10 2018 - [info] Checking replication health on 192.168.46.153..
+Tue Feb 27 10:53:10 2018 - [info]  ok.
+Tue Feb 27 10:53:10 2018 - [info] Checking replication health on 192.168.46.154..
+Tue Feb 27 10:53:10 2018 - [info]  ok.
+Tue Feb 27 10:53:10 2018 - [warning] master_ip_failover_script is not defined.
+Tue Feb 27 10:53:10 2018 - [warning] shutdown_script is not defined.
+Tue Feb 27 10:53:10 2018 - [info] Got exit code 0 (Not master dead).
+
+MySQL Replication Health is OK.
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>9.11.8. mha测试<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># masterha_manager  --conf=/etc/mha/app1.cnf</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl stop mariadb</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /data/mha/app1/manager.log</span>
+<span class="c1"># 这里只列出最后一个部分信息</span>
+----- Failover Report -----
+
+app1: MySQL Master failover <span class="m">192</span>.168.46.152 to <span class="m">192</span>.168.46.153 succeeded
+
+Master <span class="m">192</span>.168.46.152 is down!
+
+Check MHA Manager logs at centos-151.linuxpanda.tech:/data/mha/app1/manager.log <span class="k">for</span> details.
+
+Started automated<span class="o">(</span>non-interactive<span class="o">)</span> failover.
+The latest slave <span class="m">192</span>.168.46.153<span class="o">(</span><span class="m">192</span>.168.46.153:3306<span class="o">)</span> has all relay logs <span class="k">for</span> recovery.
+Selected <span class="m">192</span>.168.46.153 as a new master.
+<span class="m">192</span>.168.46.153: OK: Applying all logs succeeded.
+<span class="m">192</span>.168.46.154: This host has the latest relay log events.
+Generating relay diff files from the latest slave succeeded.
+<span class="m">192</span>.168.46.154: OK: Applying all logs succeeded. Slave started, replicating from <span class="m">192</span>.168.46.153.
+<span class="m">192</span>.168.46.153: Resetting slave info succeeded.
+Master failover to <span class="m">192</span>.168.46.153<span class="o">(</span><span class="m">192</span>.168.46.153:3306<span class="o">)</span> completed successfully.
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>9.11.9. 参考资料<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://download2.linuxpanda.tech/mysql/%e5%9f%ba%e4%ba%8eMHA%e7%9a%84MySQL%e7%9a%84%e9%ab%98%e5%8f%af%e7%94%a8%e8%af%a6%e7%bb%86%e6%80%bb%e7%bb%93%e6%96%87%e6%a1%a3.doc">mha部署文档</a> , 这个文档是我从百度文库下载下来的，考虑到需要下载币，我给提供一个链接地址。</p>
+<p><a class="reference external" href="https://wenku.baidu.com/view/80183c6adaef5ef7bb0d3ce1.html">mha部署文档百度地址</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="10-mysql的galera实现.html" class="btn btn-neutral float-right" title="9.12. mysql的galera实现" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="08-mysql主从加密.html" class="btn btn-neutral" title="9.10. mysql主从加密" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

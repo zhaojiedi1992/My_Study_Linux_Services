@@ -169,3 +169,5 @@ iptables的使用
     [root@centos-150 ~]# iptables -I FORWARD 2 -s 10.0.0.0/24 -p tcp -m multiport --dports 80,21,22,23 \
     -m state --state NEW -j LOG --log-prefix "new conn:"
 
+防火墙案例
+--------------------------------------------------------------------------
