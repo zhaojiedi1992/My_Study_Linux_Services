@@ -102,7 +102,17 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. 防火墙</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#iptables">5.2.1. iptables的使用</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">5.2.2. 样例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">5.2.3. 防火墙案例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.2.3. 防火墙案例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#snat">5.2.3.1. SNAT案例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dnat">5.2.3.2. DNAT案例</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#firewalld-cmd">5.2.4. firewalld-cmd的使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">5.2.4.1. firewalld-cmd基本的使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#firewalld-cmd-rich">5.2.4.2. firewalld-cmd rich规则的使用</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5.2.5. 更多练习</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
@@ -329,6 +339,196 @@
 </div>
 <div class="section" id="id3">
 <h2>5.2.3. 防火墙案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="snat">
+<h3>5.2.3.1. SNAT案例<a class="headerlink" href="#snat" title="Permalink to this headline">¶</a></h3>
+<p>要求如下：</p>
+<ol class="arabic simple">
+<li>时间控制: 在1，3，5上午09：00到12：00 ,下午2：00到16：00不能访问，其他时间都可以访问</li>
+<li>网址限制: 限制huya.com视频播放和douyu.com视频播放</li>
+<li>特例控制: 对于192.168.46.1-192.168.46.4 这些ip不能有任何限制</li>
+<li>snat服务： 要给局域网内部的机器提供nat功能。</li>
+</ol>
+<p>详细部署图：</p>
+<img alt="../_images/snat.png" src="../_images/snat.png" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 各个主机的网关配置为防火墙的网关为192.168.46.151。</span>
+<span class="c1"># 启动防火墙的路由功能</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sysctl  -p</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /proc/sys/net/ipv4/ip_forward</span>
+<span class="m">1</span>
+<span class="c1"># 给局域网主机启用snat服务,这里不要质疑我的为何外网ip是172的。 我这个请求还要被172.18.0.1这个防火墙snat的。</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># iptables -S</span>
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-A FORWARD -m iprange --src-range <span class="m">192</span>.168.46.1-192.168.46.4 -j ACCEPT
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -m string --string <span class="s2">&quot;huya.com&quot;</span> --algo bm --to <span class="m">65535</span> -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -m string --string <span class="s2">&quot;douyu.com&quot;</span> --algo bm --to <span class="m">65535</span> -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD -m <span class="nb">time</span> --timestart <span class="m">01</span>:00:00 --timestop <span class="m">04</span>:00:00 --weekdays Mon,Wed,Fri --datestop <span class="m">2038</span>-01-19T03:14:07 -j ACCEPT
+-A FORWARD -m <span class="nb">time</span> --timestart <span class="m">06</span>:00:00 --timestop <span class="m">10</span>:00:00 --weekdays Mon,Wed,Fri --datestop <span class="m">2038</span>-01-19T03:14:07 -j ACCEPT
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -j REJECT --reject-with icmp-port-unreachable
+</pre></div>
+</div>
+</div>
+<div class="section" id="dnat">
+<h3>5.2.3.2. DNAT案例<a class="headerlink" href="#dnat" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="firewalld-cmd">
+<h2>5.2.4. firewalld-cmd的使用<a class="headerlink" href="#firewalld-cmd" title="Permalink to this headline">¶</a></h2>
+<p>firewalld是centos7新推出的管理netfileter的工具。</p>
+<div class="section" id="id4">
+<h3>5.2.4.1. firewalld-cmd基本的使用<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-test"><div class="highlight"><pre><span></span># 查看预定义的服务列表
+[root@centos-151 ~]# firewall-cmd --get-default-zone
+FirewallD is not running
+[root@centos-151 ~]# systemctl start firewalld
+[root@centos-151 ~]# firewall-cmd --get-default-zone
+public
+
+# 查看预定义的服务配置项
+[root@centos-151 ~]# cat /usr/lib/firewalld/services/http.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;service&gt;
+&lt;short&gt;WWW (HTTP)&lt;/short&gt;
+&lt;description&gt;HTTP is the protocol used to serve Web pages. If you plan to make your Web server publicly available, enable this option. This option is not required for viewing pages locally or developing Web pages.&lt;/description&gt;
+&lt;port protocol=&quot;tcp&quot; port=&quot;80&quot;/&gt;
+&lt;/service&gt;
+
+# 列出所有的可用区域
+[root@centos-151 ~]# firewall-cmd --get-zones
+block dmz drop external home internal public trusted work
+
+# 查询默认的区域
+[root@centos-151 ~]# firewall-cmd --get-default-zone
+public
+
+# 设置默认区域
+[root@centos-151 ~]# firewall-cmd --set-default-zone=dmz
+success
+
+# 列出正在使用的区域
+[root@centos-151 ~]# firewall-cmd --get-active-zones
+dmz
+interfaces: ens33 ens37
+# 添加源地址的浏览到特定区域
+[root@centos-151 ~]# firewall-cmd --add-source=192.168.46.1 --zone public
+success
+
+# 移除特定源地址的流量
+[root@centos-151 ~]# firewall-cmd --remove-source=192.168.46.1 --zone public
+success
+
+# 添加来自于特定接口的流量到特定区域
+[root@centos-151 ~]# firewall-cmd --add-interface=ens33 --zone=dmz
+The interface is under control of NetworkManager, setting zone to &#39;dmz&#39;.
+success
+
+# 改变指定接口到新区域
+[root@centos-151 ~]# firewall-cmd --change-interface=ens33 --zone=public
+The interface is under control of NetworkManager, setting zone to &#39;public&#39;.
+success
+
+# 允许服务流量通过
+[root@centos-151 ~]# firewall-cmd --add-service=http
+success
+
+
+# 允许特定端口和协议的流量
+[root@centos-151 ~]# firewall-cmd --add-port=8080/tcp
+success
+# 移除特定服务
+[root@centos-151 ~]# firewall-cmd --remove-service=http
+success
+
+# 移除特定端口
+[root@centos-151 ~]# firewall-cmd --remove-port=8080/tcp
+success
+
+# 重新加载配置项
+[root@centos-151 ~]# firewall-cmd --reload
+success
+
+# 查看开放的服务
+[root@centos-151 ~]# firewall-cmd --list-services
+ssh
+
+# 查看开放的端口
+[root@centos-151 ~]# firewall-cmd --list-ports
+
+# 列出指定区域的所有配置信息
+
+[root@centos-151 ~]# firewall-cmd --list-all
+dmz (active)
+target: default
+icmp-block-inversion: no
+interfaces: ens37
+sources:
+services: ssh
+ports:
+protocols:
+masquerade: no
+forward-ports:
+source-ports:
+icmp-blocks:
+rich rules:
+</pre></div>
+</div>
+</div>
+<div class="section" id="firewalld-cmd-rich">
+<h3>5.2.4.2. firewalld-cmd rich规则的使用<a class="headerlink" href="#firewalld-cmd-rich" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span># 获取rich规则的帮助
+[root@centos-151 ~]# man 5 firewalld.richlanguage
+[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule family=ipv4 source address=192.168.0.11/32 reject &#39;
+success
+
+# 拒绝从192.168.0.11的所有流量
+[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule family=ipv4 source address=192.168.0.11/32 reject &#39;
+success
+
+# 限制每分钟只有2个连接到ftp服务
+[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule service name=&quot;ftp&quot; limit value=2/m accept &#39;
+success
+
+# 抛弃esp协议的所有数据包
+[root@centos-151 ~]# firewall-cmd --permanent --add-rich-rule=&#39;rule protocol value=esp drop&#39;
+success
+
+# 接受所有192.168.1.0/24子网端口范围7900-7905的tcp流量
+
+[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule service name=&quot;ssh&quot;  log prefix=&quot;ssh &quot; level=&quot;notice&quot; limit value=&quot;3/m&quot; accept &#39;
+success
+
+# 接受ssh新连接，记录日志到syslogde notice级别，每分钟最多接受3条信息
+
+# 从192.168.45.0/24子网的dns连接在5分钟内被拒绝， 并记录日志到audit，每小时最大记录一条信息。
+[root@centos-151 ~]# firewall-cmd --add-rich-rule=&#39;rule family=ipv4 source address=&quot;192.168.45.0/24&quot; service name=&quot;dns&quot; audit limit value=&quot;1/h&quot; reject &#39;
+success
+
+# 检查是否允许伪装，并开启伪装
+[root@centos-151 ~]# firewall-cmd --query-masquerade
+no
+[root@centos-151 ~]# firewall-cmd --add-masquerade
+success
+[root@centos-151 ~]# firewall-cmd --query-masquerade
+yes
+
+# 为内网提供snat 功能
+[root@centos-151 ~]# firewall-cmd --add-rich-rule=&#39;rule family=ipv4 source address=&quot;192.168.0.0/24&quot;  masquerade &#39;
+success
+
+# 转发传入连接9527/tcp到防火墙的80/tcp到public zone 的192.168.0.254去
+
+[root@centos-151 ~]# firewall-cmd --permanent --zone=public --add-forward-port=port=9527:proto=tcp:toport=80:toadd=192.168.0.254
+success
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>5.2.5. 更多练习<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://linux.linuxpanda.tech/%E7%BB%83%E4%B9%A0%E9%A2%98/2018-02-03-%E7%BB%83%E4%B9%A0%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB2.html#fileshare">iptalbes练习</a></p>
 </div>
 </div>
 

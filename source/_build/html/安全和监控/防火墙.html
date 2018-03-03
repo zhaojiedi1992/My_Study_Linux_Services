@@ -102,6 +102,12 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. 防火墙</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#iptables">5.2.1. iptables的使用</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">5.2.2. 样例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.2.3. 防火墙案例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#snat">5.2.3.1. SNAT案例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dnat">5.2.3.2. DNAT案例</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#firewalld-cmd">5.2.4. firewalld-cmd的使用</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
@@ -325,6 +331,47 @@
 -m state --state NEW -j LOG --log-prefix <span class="s2">&quot;new conn:&quot;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="id3">
+<h2>5.2.3. 防火墙案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="snat">
+<h3>5.2.3.1. SNAT案例<a class="headerlink" href="#snat" title="Permalink to this headline">¶</a></h3>
+<p>要求如下：</p>
+<ol class="arabic simple">
+<li>时间控制: 在1，3，5上午09：00到12：00 ,下午2：00到16：00不能访问，其他时间都可以访问</li>
+<li>网址限制: 限制huya.com视频播放和douyu.com视频播放</li>
+<li>特例控制: 对于192.168.46.1-192.168.46.4 这些ip不能有任何限制</li>
+<li>snat服务： 要给局域网内部的机器提供nat功能。</li>
+</ol>
+<p>详细部署图：</p>
+<img alt="../_images/snat.png" src="../_images/snat.png" />
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 各个主机的网关配置为防火墙的网关为192.168.46.151。</span>
+<span class="c1"># 启动防火墙的路由功能</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sysctl  -p</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /proc/sys/net/ipv4/ip_forward</span>
+<span class="m">1</span>
+<span class="c1"># 给局域网主机启用snat服务,这里不要质疑我的为何外网ip是172的。 我这个请求还要被172.18.0.1这个防火墙snat的。</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># iptables -S</span>
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-A FORWARD -m iprange --src-range <span class="m">192</span>.168.46.1-192.168.46.4 -j ACCEPT
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -m string --string <span class="s2">&quot;huya.com&quot;</span> --algo bm --to <span class="m">65535</span> -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -m string --string <span class="s2">&quot;douyu.com&quot;</span> --algo bm --to <span class="m">65535</span> -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD -m <span class="nb">time</span> --timestart <span class="m">01</span>:00:00 --timestop <span class="m">04</span>:00:00 --weekdays Mon,Wed,Fri --datestop <span class="m">2038</span>-01-19T03:14:07 -j ACCEPT
+-A FORWARD -m <span class="nb">time</span> --timestart <span class="m">06</span>:00:00 --timestop <span class="m">10</span>:00:00 --weekdays Mon,Wed,Fri --datestop <span class="m">2038</span>-01-19T03:14:07 -j ACCEPT
+-A FORWARD -s <span class="m">192</span>.168.46.0/24 -j REJECT --reject-with icmp-port-unreachable
+</pre></div>
+</div>
+</div>
+<div class="section" id="dnat">
+<h3>5.2.3.2. DNAT案例<a class="headerlink" href="#dnat" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="firewalld-cmd">
+<h2>5.2.4. firewalld-cmd的使用<a class="headerlink" href="#firewalld-cmd" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
