@@ -36,7 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="next" title="15. 杂项" href="../杂项/index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="负载均衡/01-lvs简介.html"/>
         <link rel="prev" title="13.4. gitbucket本地部署" href="../版本控制/gitbucket本地部署.html"/> 
 
   
@@ -105,7 +105,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">14. 集群</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. 集群</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html">14.1. lvs-nat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html">14.2. lvs-dr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/04-ldirector.html">14.3. ldirectord</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
@@ -178,6 +181,36 @@
   <div class="section" id="id1">
 <h1>14. 集群<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="负载均衡/02-lvs-nat.html">14.1. lvs-nat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#id1">14.1.1. 规划图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#id2">14.1.2. 准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#id4">14.1.3. 网关配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#ip">14.1.4. 启用ip转发功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#web">14.1.5. 配置web页面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#lvs">14.1.6. 配置lvs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#id5">14.1.7. 测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/02-lvs-nat.html#id6">14.1.8. 保存集群</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="负载均衡/03-lvs-dr.html">14.2. lvs-dr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#id1">14.2.1. 规划图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#id2">14.2.2. 准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#id4">14.2.3. 网关配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#ip">14.2.4. 启用ip转发功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#web">14.2.5. 配置web页面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#lvs">14.2.6. 配置lvs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#id5">14.2.7. 测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#id6">14.2.8. 保存集群</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/03-lvs-dr.html#httphttps">14.2.9. 整合http和https</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="负载均衡/04-ldirector.html">14.3. ldirectord</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/04-ldirector.html#id1">14.3.1. 下载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="负载均衡/04-ldirector.html#id2">14.3.2. 配置</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -191,7 +224,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../杂项/index.html" class="btn btn-neutral float-right" title="15. 杂项" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="负载均衡/01-lvs简介.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../版本控制/gitbucket本地部署.html" class="btn btn-neutral" title="13.4. gitbucket本地部署" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

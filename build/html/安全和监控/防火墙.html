@@ -265,9 +265,9 @@
 
         -m time:
             --datestart YYYY[-MM-DD][Thh:mm:ss]: 起始日期时间
-            --dateend YYYY[-MM-DD][Thh:mm:ss]: 结束日期时间
+            --datestop YYYY[-MM-DD][Thh:mm:ss]: 结束日期时间
             --timestart hh:mm:ss 起始时间
-            --timeend   hh:mm:ss 结束时间
+            --timestop   hh:mm:ss 结束时间
             ! --monthdays： 匹配一个月中的那些天
             ! --weekdays: 匹配一周中的那些天
 
@@ -322,8 +322,8 @@
 </pre></div>
 </div>
 <p>允许22，23，80端口访问</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dport 22,23,80 \</span>
- -m state --state NEW,established -j ACCEPT
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dports 22,23,80 \</span>
+ -m state --state NEW,ESTABLISHED -j ACCEPT
 </pre></div>
 </div>
 <p>允许ftp访问</p>
@@ -377,7 +377,7 @@
 </div>
 <div class="section" id="firewalld-cmd">
 <h2>5.2.4. firewalld-cmd的使用<a class="headerlink" href="#firewalld-cmd" title="Permalink to this headline">¶</a></h2>
-<p>firewalld是centos7新推出的管理netfileter的工具。</p>
+<p>firewalld是centos7新推出的管理netfilter的工具。</p>
 <div class="section" id="id4">
 <h3>5.2.4.1. firewalld-cmd基本的使用<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-test"><div class="highlight"><pre><span></span># 查看预定义的服务列表
@@ -497,10 +497,11 @@ success
 
 # 接受所有192.168.1.0/24子网端口范围7900-7905的tcp流量
 
-[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule service name=&quot;ssh&quot;  log prefix=&quot;ssh &quot; level=&quot;notice&quot; limit value=&quot;3/m&quot; accept &#39;
-success
+
 
 # 接受ssh新连接，记录日志到syslogde notice级别，每分钟最多接受3条信息
+[root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule service name=&quot;ssh&quot;  log prefix=&quot;ssh &quot; level=&quot;notice&quot; limit value=&quot;3/m&quot; accept &#39;
+success
 
 # 从192.168.45.0/24子网的dns连接在5分钟内被拒绝， 并记录日志到audit，每小时最大记录一条信息。
 [root@centos-151 ~]# firewall-cmd --add-rich-rule=&#39;rule family=ipv4 source address=&quot;192.168.45.0/24&quot; service name=&quot;dns&quot; audit limit value=&quot;1/h&quot; reject &#39;

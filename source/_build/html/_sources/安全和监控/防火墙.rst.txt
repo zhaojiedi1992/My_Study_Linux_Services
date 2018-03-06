@@ -216,3 +216,163 @@ DNAT案例
 
 firewalld-cmd的使用
 ---------------------------------------------------
+
+firewalld是centos7新推出的管理netfileter的工具。
+
+firewalld-cmd基本的使用
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: test 
+
+    # 查看预定义的服务列表
+    [root@centos-151 ~]# firewall-cmd --get-default-zone
+    FirewallD is not running
+    [root@centos-151 ~]# systemctl start firewalld
+    [root@centos-151 ~]# firewall-cmd --get-default-zone
+    public
+
+    # 查看预定义的服务配置项 
+    [root@centos-151 ~]# cat /usr/lib/firewalld/services/http.xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <service>
+    <short>WWW (HTTP)</short>
+    <description>HTTP is the protocol used to serve Web pages. If you plan to make your Web server publicly available, enable this option. This option is not required for viewing pages locally or developing Web pages.</description>
+    <port protocol="tcp" port="80"/>
+    </service>
+
+    # 列出所有的可用区域
+    [root@centos-151 ~]# firewall-cmd --get-zones 
+    block dmz drop external home internal public trusted work
+
+    # 查询默认的区域
+    [root@centos-151 ~]# firewall-cmd --get-default-zone
+    public
+
+    # 设置默认区域
+    [root@centos-151 ~]# firewall-cmd --set-default-zone=dmz
+    success
+
+    # 列出正在使用的区域
+    [root@centos-151 ~]# firewall-cmd --get-active-zones 
+    dmz
+    interfaces: ens33 ens37
+    # 添加源地址的浏览到特定区域
+    [root@centos-151 ~]# firewall-cmd --add-source=192.168.46.1 --zone public 
+    success
+
+    # 移除特定源地址的流量
+    [root@centos-151 ~]# firewall-cmd --remove-source=192.168.46.1 --zone public 
+    success
+
+    # 添加来自于特定接口的流量到特定区域
+    [root@centos-151 ~]# firewall-cmd --add-interface=ens33 --zone=dmz
+    The interface is under control of NetworkManager, setting zone to 'dmz'.
+    success
+
+    # 改变指定接口到新区域
+    [root@centos-151 ~]# firewall-cmd --change-interface=ens33 --zone=public 
+    The interface is under control of NetworkManager, setting zone to 'public'.
+    success
+
+    # 允许服务流量通过
+    [root@centos-151 ~]# firewall-cmd --add-service=http
+    success
+
+
+    # 允许特定端口和协议的流量
+    [root@centos-151 ~]# firewall-cmd --add-port=8080/tcp
+    success
+    # 移除特定服务
+    [root@centos-151 ~]# firewall-cmd --remove-service=http
+    success
+
+    # 移除特定端口
+    [root@centos-151 ~]# firewall-cmd --remove-port=8080/tcp
+    success
+
+    # 重新加载配置项
+    [root@centos-151 ~]# firewall-cmd --reload 
+    success
+
+    # 查看开放的服务
+    [root@centos-151 ~]# firewall-cmd --list-services 
+    ssh
+
+    # 查看开放的端口
+    [root@centos-151 ~]# firewall-cmd --list-ports 
+
+    # 列出指定区域的所有配置信息
+
+    [root@centos-151 ~]# firewall-cmd --list-all
+    dmz (active)
+    target: default
+    icmp-block-inversion: no
+    interfaces: ens37
+    sources: 
+    services: ssh
+    ports: 
+    protocols: 
+    masquerade: no
+    forward-ports: 
+    source-ports: 
+    icmp-blocks: 
+    rich rules: 
+	
+firewalld-cmd rich规则的使用
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text 
+
+    # 获取rich规则的帮助
+    [root@centos-151 ~]# man 5 firewalld.richlanguage
+    [root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule='rule family=ipv4 source address=192.168.0.11/32 reject '
+    success
+
+    # 拒绝从192.168.0.11的所有流量
+    [root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule='rule family=ipv4 source address=192.168.0.11/32 reject '
+    success
+
+    # 限制每分钟只有2个连接到ftp服务
+    [root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule='rule service name="ftp" limit value=2/m accept '
+    success
+
+    # 抛弃esp协议的所有数据包
+    [root@centos-151 ~]# firewall-cmd --permanent --add-rich-rule='rule protocol value=esp drop'
+    success
+
+    # 接受所有192.168.1.0/24子网端口范围7900-7905的tcp流量
+
+    [root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule='rule service name="ssh"  log prefix="ssh " level="notice" limit value="3/m" accept '
+    success
+
+    # 接受ssh新连接，记录日志到syslogde notice级别，每分钟最多接受3条信息
+
+    # 从192.168.45.0/24子网的dns连接在5分钟内被拒绝， 并记录日志到audit，每小时最大记录一条信息。
+    [root@centos-151 ~]# firewall-cmd --add-rich-rule='rule family=ipv4 source address="192.168.45.0/24" service name="dns" audit limit value="1/h" reject '
+    success
+
+    # 检查是否允许伪装，并开启伪装
+    [root@centos-151 ~]# firewall-cmd --query-masquerade
+    no
+    [root@centos-151 ~]# firewall-cmd --add-masquerade 
+    success
+    [root@centos-151 ~]# firewall-cmd --query-masquerade
+    yes
+
+    # 为内网提供snat 功能
+    [root@centos-151 ~]# firewall-cmd --add-rich-rule='rule family=ipv4 source address="192.168.0.0/24"  masquerade '
+    success
+
+    # 转发传入连接9527/tcp到防火墙的80/tcp到public zone 的192.168.0.254去
+
+    [root@centos-151 ~]# firewall-cmd --permanent --zone=public --add-forward-port=port=9527:proto=tcp:toport=80:toadd=192.168.0.254
+    success
+
+
+更多练习
+--------------------------------------
+
+iptalbes练习_
+
+.. _iptalbes练习: http://linux.linuxpanda.tech/%E7%BB%83%E4%B9%A0%E9%A2%98/2018-02-03-%E7%BB%83%E4%B9%A0%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB2.html#fileshare
+
