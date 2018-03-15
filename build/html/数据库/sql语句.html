@@ -403,6 +403,10 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">Person</span> <span class="k">WHERE</span> <span class="n">LastName</span> <span class="o">=</span> <span class="s1">&#39;Wilson&#39;</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">如果不加限定条件，默认是删除所有行数据， 很危险的。</p>
+</div>
 </div>
 </div>
 <div class="section" id="id2">
@@ -597,16 +601,16 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 <p class="first admonition-title">Note</p>
 <p class="last">多个结果集合需要列数量相同，且对应列数据类型相似。</p>
 </div>
-<p>样例：
-.. code-block:: sql</p>
-<blockquote>
-<div>SELECT E_Name FROM Employees_China
-UNION
-SELECT E_Name FROM Employees_USA
-– UNION ALL 不去重复，union去重的。
-SELECT E_Name FROM Employees_China
-UNION ALL
-SELECT E_Name FROM Employees_USA</div></blockquote>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">E_Name</span> <span class="k">FROM</span> <span class="n">Employees_China</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="n">E_Name</span> <span class="k">FROM</span> <span class="n">Employees_USA</span>
+<span class="c1">-- UNION ALL 不去重复，union去重的。</span>
+<span class="k">SELECT</span> <span class="n">E_Name</span> <span class="k">FROM</span> <span class="n">Employees_China</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="n">E_Name</span> <span class="k">FROM</span> <span class="n">Employees_USA</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="select-into">
 <h3>9.2.2.13. select into<a class="headerlink" href="#select-into" title="Permalink to this headline">¶</a></h3>
@@ -630,21 +634,21 @@ SELECT E_Name FROM Employees_USA</div></blockquote>
 <p>语法：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span>CREATE TABLE 表名称
 (
-列名称1 数据类型,
-列名称2 数据类型,
-列名称3 数据类型,
-....
+    列名称1 数据类型,
+    列名称2 数据类型,
+    列名称3 数据类型,
+    ....
 )
 </pre></div>
 </div>
 <p>样例：</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
 <span class="p">(</span>
-<span class="n">Id_P</span> <span class="nb">int</span><span class="p">,</span>
-<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">Id_P</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -654,33 +658,34 @@ SELECT E_Name FROM Employees_USA</div></blockquote>
 <p>约束用于限制加入表的数据的类型。</p>
 <p>可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。</p>
 <p>我们将主要探讨以下几种约束：</p>
-<p>-. NOT NULL     非空约束
--. UNIQUE       唯一约束
--. PRIMARY KEY  主键约束
--. FOREIGN KEY  外键约束
--. CHECK        值检查约束
--. DEFAULT      默认值
--. not null     非空约束
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</p>
+<ul class="simple">
+<li>NOT NULL     非空约束</li>
+<li>UNIQUE       唯一约束</li>
+<li>PRIMARY KEY  主键约束</li>
+<li>FOREIGN KEY  外键约束</li>
+<li>CHECK        值检查约束</li>
+<li>DEFAULT      默认值</li>
+<li>not null     非空约束</li>
+</ul>
 </div>
 <div class="section" id="not-null">
 <h3>9.2.2.17. not null<a class="headerlink" href="#not-null" title="Permalink to this headline">¶</a></h3>
 <p>not null 用于约束特定列不能为空。</p>
-<p>样例：
-.. code-block:: sql</p>
-<blockquote>
-<div>CREATE TABLE Persons
-(
-Id_P int NOT NULL,
-LastName varchar(255) NOT NULL,
-FirstName varchar(255),
-Address varchar(255),
-City varchar(255)
-)</div></blockquote>
+<p>样例：</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
+<span class="p">(</span>
+<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="unique">
 <h3>9.2.2.18. unique<a class="headerlink" href="#unique" title="Permalink to this headline">¶</a></h3>
-<p>unique用于约束列值是唯一的，但是有一个为空，不能有多个空。</p>
+<p>unique用于约束列值是唯一的，但是可以有一个为空，不能有多个空。</p>
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--mysql</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
 <span class="p">(</span>
@@ -761,29 +766,29 @@ City varchar(255)
 <div class="highlight-sql"><div class="highlight"><pre><span></span>--MySQL
 CREATE TABLE Orders
 (
-Id_O int NOT NULL,
-OrderNo int NOT NULL,
-Id_P int,
-PRIMARY KEY (Id_O),
-FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+    Id_O int NOT NULL,
+    OrderNo int NOT NULL,
+    Id_P int,
+    PRIMARY KEY (Id_O),
+    FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
 )
 --SQL Server / Oracle / MS Access
 CREATE TABLE Orders
 (
-Id_O int NOT NULL PRIMARY KEY,
-OrderNo int NOT NULL,
-Id_P int FOREIGN KEY REFERENCES Persons(Id_P)
+    Id_O int NOT NULL PRIMARY KEY,
+    OrderNo int NOT NULL,
+    Id_P int FOREIGN KEY REFERENCES Persons(Id_P)
 )
 
 --MySQL / SQL Server / Oracle / MS Access:
 CREATE TABLE Orders
 (
-Id_O int NOT NULL,
-OrderNo int NOT NULL,
-Id_P int,
-PRIMARY KEY (Id_O),
-CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
-REFERENCES Persons(Id_P)
+    Id_O int NOT NULL,
+    OrderNo int NOT NULL,
+    Id_P int,
+    PRIMARY KEY (Id_O),
+    CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
+    REFERENCES Persons(Id_P)
 )
 
 --MySQL / SQL Server / Oracle / MS Access:
@@ -813,32 +818,32 @@ DROP CONSTRAINT fk_PerOrders
 <div class="highlight-sql"><div class="highlight"><pre><span></span><span class="c1">--My SQL:</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
 <span class="p">(</span>
-<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">--SQL Server / Oracle / MS Access:</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
 <span class="p">(</span>
-<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
-<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Persons</span>
 <span class="p">(</span>
-<span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
-<span class="k">CONSTRAINT</span> <span class="n">chk_Person</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">AND</span> <span class="n">City</span><span class="o">=</span><span class="s1">&#39;Sandnes&#39;</span><span class="p">)</span>
+    <span class="n">Id_P</span> <span class="nb">int</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">LastName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">FirstName</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">Address</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="n">City</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="k">CONSTRAINT</span> <span class="n">chk_Person</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">Id_P</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">AND</span> <span class="n">City</span><span class="o">=</span><span class="s1">&#39;Sandnes&#39;</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">--MySQL / SQL Server / Oracle / MS Access:</span>

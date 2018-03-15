@@ -541,11 +541,11 @@ hello world
     ---
 
     - hosts: all
-    remote_user: root
+      remote_user: root
     
     tasks:
-        - name: hello world
-        command: echo "hello world"
+    - name: hello world
+      command: echo "hello world"
 
     # 检查
     [root@localhost ansible]# ansible-playbook helloworld.yml  -C
@@ -598,10 +598,10 @@ hello world
     ---
 
     - hosts: all
-    remote_user: root
+      remote_user: root
     
-    tasks:
-        - name: hello world
+      tasks:
+      - name: hello world
         command: echo "hello world"
 
     [root@localhost ansible]# ansible-playbook helloworld.yml  
@@ -629,12 +629,12 @@ hello world
     [root@localhost ansible]# cat httpd.yml 
     ---
     - hosts: all
-    remote_user: root
+      remote_user: root
 
-    tasks:
-        - name: install httpd
+      tasks:
+      - name: install httpd
         yum: name=httpd state=present
-        - name: start httpd
+      - name: start httpd
         service: name=httpd state=started enabled=yes    
     [root@localhost ansible]# ansible-playbook httpd.yml  
 
@@ -710,13 +710,13 @@ vault
     [root@localhost ansible]# cat httpd.yml 
     ---
     - hosts: all
-    remote_user: root
+      remote_user: root
 
-    tasks:
-        - name: install httpd
-        yum: name=httpd state=present
-        - name: start httpd
-        service: name=httpd state=started enabled=yes    
+      tasks:
+      - name: install httpd
+      yum: name=httpd state=present
+      - name: start httpd
+      service: name=httpd state=started enabled=yes    
 
 
 console
@@ -869,10 +869,10 @@ with-item
     [root@localhost ansible]# cat item.yml 
     --- 
     - hosts: all
-    remote_user: root
+      remote_user: root
 
-    tasks: 
-        - name: copy file 
+      tasks: 
+      - name: copy file 
         file: name={{item}} state=touch
         with_items:
             - file1
@@ -889,22 +889,23 @@ with-item
     [root@localhost ansible]# vim diedai.yml 
     [root@localhost ansible]# cat diedai.yml 
     ---
-    - hosts: all
-    remote_user: root
-    tasks:
-      - name: add group
-        group: name={{item}}
-        with_items: 
-          - g1
-          - g2
-          - g3
-      - name: add user
-        user: name={{item.user}} group={{item.group}}
-        with_items:
-          - {user: 'u1' , group: 'g1' } 
-          - {user: 'u2' , group: 'g2' } 
-          - {user: 'u3' , group: 'g3' }
-          
+    - hosts: 192.168.46.158
+      remote_user: root 
+      vars: 
+      - userinfo: 
+        - { user: "u1" , group: "g1" } 
+        - { user: "u1" , group: "g1" } 
+        - { user: "u1" , group: "g1" } 
+  
+      tasks: 
+      - name: add group 
+        group: name={{ item.group }}
+        with_items: "{{ userinfo }}"
+    
+      - name: add user with group 
+        user: name={{ item.user }} groups= {{ item.group }}
+        with_items: "{{ userinfo }}" 
+     
     [root@localhost ansible]# ansible-playbook diedai.yml  
     [root@localhost ansible]# ansible all -m shell -a 'id u1'
 
@@ -921,14 +922,14 @@ for
     [root@localhost ansible]# cat for1.yml 
     ---
     - hosts: centos7
-    remote_user: root
-    vars:
-        ports:
+      remote_user: root
+      vars:
+      - ports:
         - listen_port: 81
         - listen_port: 82
         - listen_port: 83
-    tasks:
-        - name: test for
+      tasks:
+      - name: test for
         template: src=for1.conf.j2 dest=/app/for1.conf
     [root@localhost ansible]# vim templates/
     for1.conf.j2   httpd.conf.j2  

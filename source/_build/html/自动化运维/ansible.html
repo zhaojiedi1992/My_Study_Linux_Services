@@ -719,11 +719,11 @@ lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <
 ---
 
 - hosts: all
-remote_user: root
+  remote_user: root
 
 tasks:
-    - name: hello world
-    command: <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
+- name: hello world
+  command: <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
 
 <span class="c1"># 检查</span>
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook helloworld.yml  -C</span>
@@ -774,10 +774,10 @@ PLAY RECAP *********************************************************************
 ---
 
 - hosts: all
-remote_user: root
+  remote_user: root
 
-tasks:
-    - name: hello world
+  tasks:
+  - name: hello world
     command: <span class="nb">echo</span> <span class="s2">&quot;hello world&quot;</span>
 
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook helloworld.yml</span>
@@ -805,12 +805,12 @@ helloworld.yml  httpd.yml  makehttpd.yml
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat httpd.yml</span>
 ---
 - hosts: all
-remote_user: root
+  remote_user: root
 
-tasks:
-    - name: install httpd
+  tasks:
+  - name: install httpd
     yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
-    - name: start httpd
+  - name: start httpd
     service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook httpd.yml</span>
 
@@ -884,13 +884,13 @@ Decryption successful
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat httpd.yml</span>
 ---
 - hosts: all
-remote_user: root
+  remote_user: root
 
-tasks:
-    - name: install httpd
-    yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
-    - name: start httpd
-    service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
+  tasks:
+  - name: install httpd
+  yum: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>present
+  - name: start httpd
+  service: <span class="nv">name</span><span class="o">=</span>httpd <span class="nv">state</span><span class="o">=</span>started <span class="nv">enabled</span><span class="o">=</span>yes
 </pre></div>
 </div>
 </div>
@@ -1020,10 +1020,10 @@ tasks:
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat item.yml</span>
 ---
 - hosts: all
-remote_user: root
+  remote_user: root
 
-tasks:
-    - name: copy file
+  tasks:
+  - name: copy file
     file: <span class="nv">name</span><span class="o">={{</span>item<span class="o">}}</span> <span class="nv">state</span><span class="o">=</span>touch
     with_items:
         - file1
@@ -1038,21 +1038,22 @@ tasks:
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim diedai.yml</span>
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat diedai.yml</span>
 ---
-- hosts: all
-remote_user: root
-tasks:
+- hosts: <span class="m">192</span>.168.46.158
+  remote_user: root
+  vars:
+  - userinfo:
+    - <span class="o">{</span> user: <span class="s2">&quot;u1&quot;</span> , group: <span class="s2">&quot;g1&quot;</span> <span class="o">}</span>
+    - <span class="o">{</span> user: <span class="s2">&quot;u1&quot;</span> , group: <span class="s2">&quot;g1&quot;</span> <span class="o">}</span>
+    - <span class="o">{</span> user: <span class="s2">&quot;u1&quot;</span> , group: <span class="s2">&quot;g1&quot;</span> <span class="o">}</span>
+
+  tasks:
   - name: add group
-    group: <span class="nv">name</span><span class="o">={{</span>item<span class="o">}}</span>
-    with_items:
-      - g1
-      - g2
-      - g3
-  - name: add user
-    user: <span class="nv">name</span><span class="o">={{</span>item.user<span class="o">}}</span> <span class="nv">group</span><span class="o">={{</span>item.group<span class="o">}}</span>
-    with_items:
-      - <span class="o">{</span>user: <span class="s1">&#39;u1&#39;</span> , group: <span class="s1">&#39;g1&#39;</span> <span class="o">}</span>
-      - <span class="o">{</span>user: <span class="s1">&#39;u2&#39;</span> , group: <span class="s1">&#39;g2&#39;</span> <span class="o">}</span>
-      - <span class="o">{</span>user: <span class="s1">&#39;u3&#39;</span> , group: <span class="s1">&#39;g3&#39;</span> <span class="o">}</span>
+    group: <span class="nv">name</span><span class="o">={{</span> item.group <span class="o">}}</span>
+    with_items: <span class="s2">&quot;{{ userinfo }}&quot;</span>
+
+  - name: add user with group
+    user: <span class="nv">name</span><span class="o">={{</span> item.user <span class="o">}}</span> <span class="nv">groups</span><span class="o">=</span> <span class="o">{{</span> item.group <span class="o">}}</span>
+    with_items: <span class="s2">&quot;{{ userinfo }}&quot;</span>
 
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible-playbook diedai.yml</span>
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># ansible all -m shell -a &#39;id u1&#39;</span>
@@ -1068,14 +1069,14 @@ tasks:
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># cat for1.yml</span>
 ---
 - hosts: centos7
-remote_user: root
-vars:
-    ports:
+  remote_user: root
+  vars:
+  - ports:
     - listen_port: <span class="m">81</span>
     - listen_port: <span class="m">82</span>
     - listen_port: <span class="m">83</span>
-tasks:
-    - name: <span class="nb">test</span> <span class="k">for</span>
+  tasks:
+  - name: <span class="nb">test</span> <span class="k">for</span>
     template: <span class="nv">src</span><span class="o">=</span>for1.conf.j2 <span class="nv">dest</span><span class="o">=</span>/app/for1.conf
 <span class="o">[</span>root@localhost ansible<span class="o">]</span><span class="c1"># vim templates/</span>
 for1.conf.j2   httpd.conf.j2

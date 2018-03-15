@@ -594,7 +594,7 @@ linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpand
 </div>
 <div class="section" id="id14">
 <h2>8.1.7. 主从服务器<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
-<p>上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完整dns的主从配置</p>
+<p>上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完成dns的主从配置</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">在选择主从服务器的时候，注意服务器版本问题，不同版本安装的bind可能会导致不同情况，无法同步问题。</p>
@@ -1021,7 +1021,7 @@ www.zhengzhou.henan.linuxpanda.tech has address <span class="m">192</span>.168.4
 <p>转发类型2种：</p>
 <ul class="simple">
 <li>first： 转发给特定服务器，如果他没有就在找自己找根。</li>
-<li>only: 抓饭给特定服务器，如果他找不到自己不继续找。</li>
+<li>only: 抓发给特定服务器，如果他找不到自己不继续找。</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1287,7 +1287,7 @@ ns1.linuxpanda.tech.        <span class="m">86400</span>   IN      A       <span
 <h3>8.1.13.2. 服务器规划<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
 <p>为了方便后续配置简单设置下主机名如下</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>主根： root1
-从根： root2，ip
+从根： root2
 tech域： tech
 com域：   com
 linuxpanda: linuxpanda
@@ -1314,7 +1314,9 @@ client:client
 <h3>8.1.13.4. 安装bind软件<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h3>
 <p>给所有主机安装bind.</p>
 <p>我这里使用ansible批量安装了。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 ansible<span class="o">]</span><span class="c1"># ansible dns -m yum -a &#39;name=bind,bind-utils&#39;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 给所有主机安装下bind,bind_utils工具</span>
+<span class="o">[</span>root@centos7 ansible<span class="o">]</span><span class="c1"># ansible dns -m yum -a &#39;name=bind,bind-utils&#39;</span>
+<span class="c1"># 编辑下配置文件， 然后copy配置文件到所有目标主机上去，省去后续配置麻烦。</span>
 <span class="o">[</span>root@centos7 ~<span class="o">]</span><span class="c1"># vim /etc/named.conf</span>
 <span class="o">[</span>root@centos7 ~<span class="o">]</span><span class="c1"># ansible dns -m copy -a &#39;src=/etc/named.conf dest=/etc/named.conf&#39;</span>
 </pre></div>
@@ -1322,7 +1324,8 @@ client:client
 </div>
 <div class="section" id="id39">
 <h3>8.1.13.5. 主根配置<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 修改前的</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 自身是根了， 所有就不能有所有的互联网上的根了。替换掉。</span>
+<span class="c1"># 修改前的</span>
 zone <span class="s2">&quot;.&quot;</span> IN <span class="o">{</span>
         <span class="nb">type</span> hint<span class="p">;</span>
         file <span class="s2">&quot;named.ca&quot;</span><span class="p">;</span>
@@ -1350,6 +1353,7 @@ ns2     A   <span class="m">192</span>.168.46.152
 nstech  A      <span class="m">192</span>.168.46.153
 nscom   A      <span class="m">192</span>.168.46.154
 
+<span class="c1"># 主的配置给从发送一份</span>
 <span class="o">[</span>root@centos-151 named<span class="o">]</span><span class="c1"># scp /etc/named.conf  192.168.46.152:/etc/</span>
 <span class="o">[</span>root@centos-151 named<span class="o">]</span><span class="c1"># systemctl restart named</span>
 </pre></div>
@@ -1357,7 +1361,7 @@ nscom   A      <span class="m">192</span>.168.46.154
 </div>
 <div class="section" id="id40">
 <h3>8.1.13.6. 从根配置<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h3>
-<p>上面已经copy过来一个i额named.conf文件， 修改修改下</p>
+<p>上面已经copy过来一个named.conf文件， 修改下。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>zone <span class="s2">&quot;.&quot;</span> IN <span class="o">{</span>
     <span class="nb">type</span> slave<span class="p">;</span>
     masters <span class="o">{</span> <span class="m">192</span>.168.46.151<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
@@ -1368,9 +1372,7 @@ nscom   A      <span class="m">192</span>.168.46.154
 </div>
 <div class="section" id="id41">
 <h3>8.1.13.7. 主从根测试<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 named<span class="o">]</span><span class="c1"># !dig</span>
-dig nstech  @localhost
-
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 named<span class="o">]</span><span class="c1"># dig nstech  @localhost</span>
 <span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; nstech @localhost
 <span class="p">;;</span> global options: +cmd
 <span class="p">;;</span> Got answer:
@@ -1402,7 +1404,7 @@ ns2.                        <span class="m">86400</span>   IN      A       <span
 </div>
 <div class="section" id="id42">
 <h3>8.1.13.8. 运营商配置<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
-<p>运营商为客户提供dns服务，默认的根是13个网络上的，配置在named.caw文件中， 我们修改为我们自己的2个根。</p>
+<p>运营商为客户提供dns服务，默认的根是13个网络上的，配置在named.ca文件中， 我们修改为我们自己的2个根。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># vim named.ca</span>
 <span class="o">[</span>root@centos-158 named<span class="o">]</span><span class="c1"># cat named.ca</span>
 
@@ -1412,6 +1414,7 @@ a.root-servers.net. <span class="m">3600000</span> IN      A       <span class="
 b.root-servers.net. <span class="m">3600000</span> IN      A       <span class="m">192</span>.168.46.152
 </pre></div>
 </div>
+<p>上面我们配置2个根， 一主一丛，这里需要对应的记录直接写入文件中去。</p>
 </div>
 <div class="section" id="id43">
 <h3>8.1.13.9. 运营商测试<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h3>
@@ -1454,6 +1457,7 @@ ns2.                        <span class="m">86400</span>   IN      A       <span
 <span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># nmcli con up ens33</span>
 </pre></div>
 </div>
+<p>测试下</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># dig nstech</span>
 
 <span class="p">;</span> &lt;&lt;&gt;&gt; DiG <span class="m">9</span>.9.4-RedHat-9.9.4-50.el7 &lt;&lt;&gt;&gt; nstech
@@ -1785,21 +1789,21 @@ this is <span class="m">192</span>.168.46.156
 </div>
 <div class="section" id="id52">
 <h2>8.1.16. 编译安装主要步骤<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>账号创建，文件下载，解压</li>
-<li>查看readme，install文档</li>
-<li>dig -t NS . &#64;a.root-servers.net. &gt;named.ca 。640</li>
-<li>./configure &amp;&amp; make &amp;&amp; make install</li>
-<li>PATH , source path</li>
-<li>named.conf文件，named.rfc1912.conf文件</li>
-<li>rndc-confgen -r /dev/urandom</li>
-<li>named -u named -f -g  -d 3 启动服务</li>
-<li>cd contrib/queryperf</li>
-<li>./configure &amp;&amp; make  cp queryperf /user/local/bind9/bin/</li>
-<li>queryperf -h</li>
-<li>做文件，www.linuxpandata.tech A 每行这样。</li>
-<li>queryperf -d test.txt -s 127.0.0.1</li>
-</ol>
+<div class="highlight-text"><div class="highlight"><pre><span></span>1. 账号创建，文件下载，解压
+2. 查看readme，install文档
+3. dig -t NS . @a.root-servers.net. &gt;named.ca 。640
+4. ./configure &amp;&amp; make &amp;&amp; make install
+5. PATH , source path
+6. named.conf文件，named.rfc1912.conf文件
+7. rndc-confgen -r /dev/urandom
+8. named -u named -f -g  -d 3 启动服务
+9. cd contrib/queryperf
+10. ./configure &amp;&amp; make  cp queryperf /user/local/bind9/bin/
+11. queryperf -h
+12. 做文件，www.linuxpandata.tech A 每行这样。
+13. queryperf -d test.txt -s 127.0.0.1
+</pre></div>
+</div>
 </div>
 </div>
 

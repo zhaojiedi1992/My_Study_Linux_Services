@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.9. nginx虚拟主机三种实现方式 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="10.10. nginx支持https" href="04-nginx支持https.html"/>
+        <link rel="prev" title="10.8. nginx基础配置说明" href="02-nginx基础配置说明.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.8. nginx基础配置说明</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.9. nginx虚拟主机三种实现方式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.9.1. 安装nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ip">10.9.2. 方案1-基于多ip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port">10.9.3. 方案1-基于多port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.9.4. 方案1-基于多虚拟主机名</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04-nginx支持https.html">10.10. nginx支持https</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.9. nginx虚拟主机三种实现方式</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/nginx/03-nginx虚拟主机三种实现方式.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginx">
+<h1>10.9. nginx虚拟主机三种实现方式<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
+<p>虚拟主机的实现方式有三种。</p>
+<ul class="simple">
+<li>基于多ip</li>
+<li>基于多端口</li>
+<li>基于多虚拟主机名</li>
+</ul>
+<div class="section" id="id1">
+<h2>10.9.1. 安装nginx<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ip">
+<h2>10.9.2. 方案1-基于多ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 查看ip信息</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ip a</span>
+<span class="m">1</span>: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN qlen <span class="m">1</span>
+    link/loopback <span class="m">00</span>:00:00:00:00:00 brd <span class="m">00</span>:00:00:00:00:00
+    inet <span class="m">127</span>.0.0.1/8 scope host lo
+    valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+    valid_lft forever preferred_lft forever
+<span class="m">2</span>: ens33: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc pfifo_fast state UP qlen <span class="m">1000</span>
+    link/ether <span class="m">00</span>:0c:29:b3:02:e2 brd ff:ff:ff:ff:ff:ff
+    inet <span class="m">192</span>.168.46.151/24 brd <span class="m">192</span>.168.46.255 scope global ens33
+    valid_lft forever preferred_lft forever
+    inet6 fe80::df7e:1d50:d858:d479/64 scope link
+    valid_lft forever preferred_lft forever
+<span class="m">3</span>: ens37: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc pfifo_fast state UP qlen <span class="m">1000</span>
+    link/ether <span class="m">00</span>:0c:29:b3:02:ec brd ff:ff:ff:ff:ff:ff
+    inet <span class="m">172</span>.18.46.151/16 brd <span class="m">172</span>.18.255.255 scope global ens37
+    valid_lft forever preferred_lft forever
+    inet6 fe80::f0f5:59a9:d186:e6a7/64 scope link
+    valid_lft forever preferred_lft forever
+
+<span class="c1"># 构建主页</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># pwd</span>
+/usr/share/nginx
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_ip_1</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_ip_2</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo multi_ip_1 &gt;&gt; multi_ip_1/index.html</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo multi_ip_2 &gt;&gt; multi_ip_2/index.html</span>
+
+<span class="c1"># 编辑配置文件</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/nginx/conf.d/</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># ls</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># vim multi_ip.conf</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cat multi_ip.conf</span>
+server    <span class="o">{</span>
+    listen <span class="m">172</span>.18.46.151:80<span class="p">;</span>
+    root   /usr/share/nginx/multi_ip_1<span class="p">;</span>
+<span class="o">}</span>
+server    <span class="o">{</span>
+    listen <span class="m">192</span>.168.46.151:80<span class="p">;</span>
+    root   /usr/share/nginx/multi_ip_2<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># 测试下</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl 172.18.46.151</span>
+multi_ip_1
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl 192.168.46.151</span>
+multi_ip_2
+</pre></div>
+</div>
+</div>
+<div class="section" id="port">
+<h2>10.9.3. 方案1-基于多port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 编辑配置文件</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cp multi_ip.conf multi_port.conf</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># vim multi_port.conf</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cat multi_port.conf</span>
+server    <span class="o">{</span>
+    listen <span class="m">172</span>.18.46.151:81<span class="p">;</span>
+    root   /usr/share/nginx/multi_port_1<span class="p">;</span>
+<span class="o">}</span>
+server    <span class="o">{</span>
+    listen <span class="m">172</span>.18.46.151:82<span class="p">;</span>
+    root   /usr/share/nginx/multi_port_2<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># 构建主页</span>
+
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cd /usr/share/nginx/</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># ls</span>
+html  modules  multi_ip_1  multi_ip_2
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_port_1</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_port_2</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo &quot;multi_port_1&quot; &gt; multi_port_1/index.html</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo &quot;multi_port_2&quot; &gt; multi_port_2/index.html</span>
+
+<span class="c1"># 测试下</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># curl 172.18.46.151:81</span>
+multi_port_1
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># curl 172.18.46.151:82</span>
+multi_port_2
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.9.4. 方案1-基于多虚拟主机名<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>这种方式是用的比较多的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 其他影响的配置文件备份下</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># mv multi_host.conf{,.bak}</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># mv multi_ip.conf{,.bak}</span>
+
+<span class="c1"># 编辑配置文件</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cp multi_ip.conf multi_host.conf</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># vim multi_host.conf</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cat multi_host.conf</span>
+server    <span class="o">{</span>
+    listen <span class="m">80</span><span class="p">;</span>
+    server_name www.linuxpanda.tech<span class="p">;</span>
+    root   /usr/share/nginx/multi_host_1<span class="p">;</span>
+<span class="o">}</span>
+server    <span class="o">{</span>
+    listen <span class="m">80</span><span class="p">;</span>
+    server_name blog.linuxpanda.tech<span class="p">;</span>
+    root   /usr/share/nginx/multi_host_2<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># 创建主页</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cd /usr/share/nginx/</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># ls</span>
+html  modules  multi_ip_1  multi_ip_2  multi_port_1  multi_port_2
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_host_1</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># mkdir multi_host_2</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo &quot;multi_host_1&quot; &gt; multi_host_1/index.html</span>
+<span class="o">[</span>root@localhost nginx<span class="o">]</span><span class="c1"># echo &quot;multi_host_2&quot; &gt; multi_host_2/index.html</span>
+
+<span class="c1"># 测试</span>
+虚拟主机需要配合dns解析使用的， 我这里就简单点使用hosts文件解析了。
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cat /etc/hosts</span>
+<span class="m">127</span>.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+<span class="m">192</span>.168.46.151 www.linuxpanda.tech blog.linuxpanda.tech
+
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl www.linuxpanda.tech</span>
+multi_host_1
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl blog.linuxpanda.tech</span>
+multi_host_2
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04-nginx支持https.html" class="btn btn-neutral float-right" title="10.10. nginx支持https" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02-nginx基础配置说明.html" class="btn btn-neutral" title="10.8. nginx基础配置说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

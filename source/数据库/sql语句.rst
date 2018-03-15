@@ -179,6 +179,8 @@ delete 语句用于删除表中的数据行
 
     DELETE FROM Person WHERE LastName = 'Wilson' 
 
+.. warning:: 如果不加限定条件，默认是删除所有行数据， 很危险的。
+
 sql中级
 -------------------------------------------------------------------------
 
@@ -385,6 +387,7 @@ union 用于合并2个或者多个查询语句的结果集合
 .. note:: 多个结果集合需要列数量相同，且对应列数据类型相似。
 
 样例： 
+
 .. code-block:: sql
 
     SELECT E_Name FROM Employees_China
@@ -423,22 +426,23 @@ create table 用于创建表
 
     CREATE TABLE 表名称
     (
-    列名称1 数据类型,
-    列名称2 数据类型,
-    列名称3 数据类型,
-    ....
+        列名称1 数据类型,
+        列名称2 数据类型,
+        列名称3 数据类型,
+        ....
     )
+
 样例： 
 
 .. code-block:: sql
 
     CREATE TABLE Persons
     (
-    Id_P int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
+        Id_P int,
+        LastName varchar(255),
+        FirstName varchar(255),
+        Address varchar(255),
+        City varchar(255)
     )
 
 
@@ -450,20 +454,22 @@ constraints
 
 我们将主要探讨以下几种约束：
 
--. NOT NULL     非空约束
--. UNIQUE       唯一约束
--. PRIMARY KEY  主键约束
--. FOREIGN KEY  外键约束
--. CHECK        值检查约束
--. DEFAULT      默认值
--. not null     非空约束
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- NOT NULL     非空约束
+- UNIQUE       唯一约束
+- PRIMARY KEY  主键约束
+- FOREIGN KEY  外键约束
+- CHECK        值检查约束
+- DEFAULT      默认值
+- not null     非空约束
+
+
 
 not null
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 not null 用于约束特定列不能为空。
 
 样例： 
+
 .. code-block:: sql
 
     CREATE TABLE Persons
@@ -474,9 +480,10 @@ not null 用于约束特定列不能为空。
     Address varchar(255),
     City varchar(255)
     )
+    
 unique
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-unique用于约束列值是唯一的，但是有一个为空，不能有多个空。
+unique用于约束列值是唯一的，但是可以有一个为空，不能有多个空。
 
 .. code-block:: sql
 
@@ -562,29 +569,29 @@ foreign key
     --MySQL
     CREATE TABLE Orders
     (
-    Id_O int NOT NULL,
-    OrderNo int NOT NULL,
-    Id_P int,
-    PRIMARY KEY (Id_O),
-    FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+        Id_O int NOT NULL,
+        OrderNo int NOT NULL,
+        Id_P int,
+        PRIMARY KEY (Id_O),
+        FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
     )
     --SQL Server / Oracle / MS Access
     CREATE TABLE Orders
     (
-    Id_O int NOT NULL PRIMARY KEY,
-    OrderNo int NOT NULL,
-    Id_P int FOREIGN KEY REFERENCES Persons(Id_P)
+        Id_O int NOT NULL PRIMARY KEY,
+        OrderNo int NOT NULL,
+        Id_P int FOREIGN KEY REFERENCES Persons(Id_P)
     )
 
     --MySQL / SQL Server / Oracle / MS Access:
     CREATE TABLE Orders
     (
-    Id_O int NOT NULL,
-    OrderNo int NOT NULL,
-    Id_P int,
-    PRIMARY KEY (Id_O),
-    CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
-    REFERENCES Persons(Id_P)
+        Id_O int NOT NULL,
+        OrderNo int NOT NULL,
+        Id_P int,
+        PRIMARY KEY (Id_O),
+        CONSTRAINT fk_PerOrders FOREIGN KEY (Id_P)
+        REFERENCES Persons(Id_P)
     )
 
     --MySQL / SQL Server / Oracle / MS Access:
@@ -615,32 +622,32 @@ CHECK 约束用于限制列中的值的范围。
     --My SQL:
     CREATE TABLE Persons
     (
-    Id_P int NOT NULL,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255),
-    CHECK (Id_P>0)
+        Id_P int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Address varchar(255),
+        City varchar(255),
+        CHECK (Id_P>0)
     )
     --SQL Server / Oracle / MS Access:
     CREATE TABLE Persons
     (
-    Id_P int NOT NULL CHECK (Id_P>0),
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
+        Id_P int NOT NULL CHECK (Id_P>0),
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Address varchar(255),
+        City varchar(255)
     )
 
     --MySQL / SQL Server / Oracle / MS Access:
     CREATE TABLE Persons
     (
-    Id_P int NOT NULL,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255),
-    CONSTRAINT chk_Person CHECK (Id_P>0 AND City='Sandnes')
+        Id_P int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Address varchar(255),
+        City varchar(255),
+        CONSTRAINT chk_Person CHECK (Id_P>0 AND City='Sandnes')
     )
 
     --MySQL / SQL Server / Oracle / MS Access:

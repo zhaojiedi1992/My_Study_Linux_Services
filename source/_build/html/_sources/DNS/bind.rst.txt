@@ -23,9 +23,9 @@ DNS查询类型：
 
 服务器类型： 
 
-- 主dns:      管理和为何负责解析域的服务器
+- 主dns:      管理和负责解析域的服务器
 - 从dns：     从服务器从主服务器复制库
-- 缓存dns：    转发dns
+- 缓存dns：   缓存dns
 
 区域传输： 
 
@@ -39,7 +39,7 @@ client->hosts->local dns cache->dns server -> server cache-> root -> 二级域
 解析答案： 
 
 - 肯定答案： 有对应条目
-- 否定答案： 么有对应条目
+- 否定答案： 没有对应条目
 - 权威答案： 请求的主机就有对应的条目
 - 非权威答案： 请求的主机没有，通过迭代找到的答案
 
@@ -377,7 +377,7 @@ nslookup测试
 主从服务器
 --------------------------------------------------------------------------------------------
 
-上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完整dns的主从配置
+上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完成dns的主从配置
 
 .. note:: 在选择主从服务器的时候，注意服务器版本问题，不同版本安装的bind可能会导致不同情况，无法同步问题。
 
@@ -822,7 +822,7 @@ nslookup测试
 转发类型2种： 
 
 - first： 转发给特定服务器，如果他没有就在找自己找根。
-- only: 抓饭给特定服务器，如果他找不到自己不继续找。
+- only: 抓发给特定服务器，如果他找不到自己不继续找。
 
 .. note:: 请关闭dnssec功能。
 
@@ -1104,7 +1104,7 @@ view
 .. code-block:: text
 
     主根： root1
-    从根： root2，ip
+    从根： root2
     tech域： tech
     com域：   com
     linuxpanda: linuxpanda
@@ -1136,7 +1136,9 @@ ip配置
 
 .. code-block:: bash
 
+    # 给所有主机安装下bind,bind_utils工具
     [root@centos7 ansible]# ansible dns -m yum -a 'name=bind,bind-utils'
+    # 编辑下配置文件， 然后copy配置文件到所有目标主机上去，省去后续配置麻烦。
     [root@centos7 ~]# vim /etc/named.conf 
     [root@centos7 ~]# ansible dns -m copy -a 'src=/etc/named.conf dest=/etc/named.conf'
 
@@ -1145,6 +1147,7 @@ ip配置
 
 .. code-block:: bash
 
+    # 自身是根了， 所有就不能有所有的互联网上的根了。替换掉。
     # 修改前的
     zone "." IN {
             type hint;
@@ -1173,13 +1176,14 @@ ip配置
     nstech  A      192.168.46.153
     nscom   A      192.168.46.154
 
+    # 主的配置给从发送一份
     [root@centos-151 named]# scp /etc/named.conf  192.168.46.152:/etc/
     [root@centos-151 named]# systemctl restart named
 
 从根配置
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-上面已经copy过来一个i额named.conf文件， 修改修改下
+上面已经copy过来一个named.conf文件， 修改下。
 
 .. code-block:: bash
 
@@ -1194,9 +1198,7 @@ ip配置
 
 .. code-block:: bash
 
-    [root@centos-151 named]# !dig
-    dig nstech  @localhost
-
+    [root@centos-151 named]# dig nstech  @localhost
     ; <<>> DiG 9.9.4-RedHat-9.9.4-50.el7 <<>> nstech @localhost
     ;; global options: +cmd
     ;; Got answer:
@@ -1227,7 +1229,7 @@ ip配置
 运营商配置
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-运营商为客户提供dns服务，默认的根是13个网络上的，配置在named.caw文件中， 我们修改为我们自己的2个根。
+运营商为客户提供dns服务，默认的根是13个网络上的，配置在named.ca文件中， 我们修改为我们自己的2个根。
 
 .. code-block:: bash
 
@@ -1238,6 +1240,8 @@ ip配置
     .			518400	IN	NS	b.root-servers.net.
     a.root-servers.net.	3600000	IN	A	192.168.46.151
     b.root-servers.net.	3600000	IN	A	192.168.46.152
+
+上面我们配置2个根， 一主一丛，这里需要对应的记录直接写入文件中去。
 
 运营商测试
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1286,6 +1290,8 @@ ip配置
 
     [root@centos-159 ~]# nmcli con modify ens33 ipv4.gateway 192.168.46.158 ipv4.dns 192.168.46.158
     [root@centos-159 ~]# nmcli con up ens33
+
+测试下
 
 .. code-block:: bash
 
@@ -1642,16 +1648,18 @@ web服务测试
 编译安装主要步骤
 ---------------------------------------------------------
 
-#. 账号创建，文件下载，解压
-#. 查看readme，install文档
-#. dig -t NS . @a.root-servers.net. >named.ca 。640 
-#. ./configure && make && make install 
-#. PATH , source path
-#. named.conf文件，named.rfc1912.conf文件
-#. rndc-confgen -r /dev/urandom
-#. named -u named -f -g  -d 3 启动服务
-#. cd contrib/queryperf
-#. ./configure && make  cp queryperf /user/local/bind9/bin/
-#. queryperf -h 
-#. 做文件，www.linuxpandata.tech A 每行这样。
-#. queryperf -d test.txt -s 127.0.0.1
+.. code-block:: text 
+
+   1. 账号创建，文件下载，解压
+   2. 查看readme，install文档
+   3. dig -t NS . @a.root-servers.net. >named.ca 。640 
+   4. ./configure && make && make install 
+   5. PATH , source path
+   6. named.conf文件，named.rfc1912.conf文件
+   7. rndc-confgen -r /dev/urandom
+   8. named -u named -f -g  -d 3 启动服务
+   9. cd contrib/queryperf
+   10. ./configure && make  cp queryperf /user/local/bind9/bin/
+   11. queryperf -h 
+   12. 做文件，www.linuxpandata.tech A 每行这样。
+   13. queryperf -d test.txt -s 127.0.0.1

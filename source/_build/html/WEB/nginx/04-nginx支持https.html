@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.10. nginx支持https &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="10.9. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.8. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.9. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.10. nginx支持https</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nginx">10.10.1. 安装nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.10.2. 配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.10.3. 测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.10. nginx支持https</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/nginx/04-nginx支持https.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginxhttps">
+<h1>10.10. nginx支持https<a class="headerlink" href="#nginxhttps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="nginx">
+<h2>10.10.1. 安装nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>10.10.2. 配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost conf.d]# cd /etc/pki/tls/certs/
+[root@localhost certs]# ls
+ca-bundle.crt  ca-bundle.trust.crt  make-dummy-cert  Makefile  renew-dummy-cert
+[root@localhost certs]# make www.crt
+umask 77 ; \
+/usr/bin/openssl genrsa -aes128 2048 &gt; www.key
+Generating RSA private key, 2048 bit long modulus
+...................................+++
+..........................+++
+e is 65537 (0x10001)
+Enter pass phrase:
+Verifying - Enter pass phrase:
+umask 77 ; \
+/usr/bin/openssl req -utf8 -new -key www.key -x509 -days 365 -out www.crt
+Enter pass phrase for www.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:cn
+State or Province Name (full name) []:henan
+Locality Name (eg, city) [Default City]:zhenzhou
+Organization Name (eg, company) [Default Company Ltd]:linuxpanda.tech
+Organizational Unit Name (eg, section) []:opt
+Common Name (eg, your name or your server&#39;s hostname) []:www.linuxpanda.tech
+Email Address []:
+[root@localhost certs]# ll
+total 20
+lrwxrwxrwx. 1 root root   49 Jan 11 01:00 ca-bundle.crt -&gt; /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+lrwxrwxrwx. 1 root root   55 Jan 11 01:00 ca-bundle.trust.crt -&gt; /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-rwxr-xr-x. 1 root root  610 Aug  4  2017 make-dummy-cert
+-rw-r--r--. 1 root root 2516 Aug  4  2017 Makefile
+-rwxr-xr-x. 1 root root  829 Aug  4  2017 renew-dummy-cert
+-rw-------  1 root root 1359 Mar 15 18:00 www.crt
+-rw-------  1 root root 1766 Mar 15 17:59 www.key
+[root@localhost certs]# openssl rsa -in www.key -out www2.key
+Enter pass phrase for www.key:
+writing RSA key
+[root@localhost certs]# ll
+total 24
+lrwxrwxrwx. 1 root root   49 Jan 11 01:00 ca-bundle.crt -&gt; /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+lrwxrwxrwx. 1 root root   55 Jan 11 01:00 ca-bundle.trust.crt -&gt; /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt
+-rwxr-xr-x. 1 root root  610 Aug  4  2017 make-dummy-cert
+-rw-r--r--. 1 root root 2516 Aug  4  2017 Makefile
+-rwxr-xr-x. 1 root root  829 Aug  4  2017 renew-dummy-cert
+-rw-r--r--  1 root root 1675 Mar 15 18:00 www2.key
+-rw-------  1 root root 1359 Mar 15 18:00 www.crt
+-rw-------  1 root root 1766 Mar 15 17:59 www.key
+[root@localhost certs]# mkdir /etc/nginx/conf.d/ssl
+[root@localhost certs]# cp www2.key /etc/nginx/conf.d/ssl/www.key
+[root@localhost certs]# cp www.crt /etc/nginx/conf.d/ssl/
+[root@localhost certs]# cd /etc/nginx/conf.d/
+[root@localhost conf.d]# ls
+bak  ssl  vhosts.conf
+[root@localhost conf.d]# vim vhosts.conf
+[root@localhost conf.d]# cat vhosts.conf
+server {
+    listen 443 ssl;
+    server_name www.linuxpanda.tech;
+    root /usr/share/nginx/multi_host_1;
+
+    ssl on ;
+    ssl_certificate /etc/nginx/conf.d/ssl/www.crt;
+    ssl_certificate_key /etc/nginx/conf.d/ssl/www.key;
+    ssl_session_cache  shared:sslcache:20m;
+    ssl_session_timeout 10m;
+
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.10.3. 测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl https://www.linuxpanda.tech -k</span>
+multi_host_1
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03-nginx虚拟主机三种实现方式.html" class="btn btn-neutral" title="10.9. nginx虚拟主机三种实现方式" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -6,7 +6,7 @@ http支持https
 
 .. code-block:: bash
 
-    [root@102 html]# yum -y install mod_sll
+    [root@102 html]# yum -y install mod_ssl
 
 
 搭建ca服务器
