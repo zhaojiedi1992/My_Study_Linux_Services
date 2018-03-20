@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.8. nginx安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>14.4. keepalived &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.9. nginx基础配置说明" href="02-nginx基础配置说明.html"/>
-        <link rel="prev" title="10.7. web实战一" href="../httpd/07-web实战一.html"/> 
+        <link rel="up" title="14. 集群" href="../index.html"/>
+        <link rel="next" title="15. 杂项" href="../../杂项/index.html"/>
+        <link rel="prev" title="14.3. ldirectord" href="01-ldirector.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -102,30 +102,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.8. nginx安装</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#yum">10.8.1. yum安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">10.8.2. 编译安装</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-nginx支持https.html">10.11. nginx支持https</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-nginx常用案例.html">10.13. nginx常用案例</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">14. 集群</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../负载均衡/02-lvs-nat.html">14.1. lvs-nat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../负载均衡/03-lvs-dr.html">14.2. lvs-dr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-ldirector.html">14.3. ldirectord</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">14.4. keepalived</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
 </ul>
 
@@ -172,16 +159,16 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+          <li><a href="../index.html">14. 集群</a> &raquo;</li>
         
-      <li>10.8. nginx安装</li>
+      <li>14.4. keepalived</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/nginx/01-nginx安装.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/集群/高可用/02-keepalived.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -195,25 +182,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nginx">
-<h1>10.8. nginx安装<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="yum">
-<h2>10.8.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>yum install nginx
-</pre></div>
-</div>
-</div>
-<div class="section" id="id1">
-<h2>10.8.2. 编译安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>useradd nginx -r -s /sbin/nologin
-wget <a class="reference external" href="http://nginx.org/download/nginx-1.12.2.tar.gz">http://nginx.org/download/nginx-1.12.2.tar.gz</a>
-tar xf nginx-1.12.2.tar.gz
-cd nginx-1.12.2
-./configure –prefix=/usr/local/nginx –conf-path=/etc/nginx/nginx.conf –error-log-path=/var/log/nginx/error.log –http-log-path=/var/log/nginx/access.log –pid-path=/var/run/nginx.pid –lock-path=/var/run/nginx.lock –user=nginx –group=nginx   –with-http_ssl_module –with-http_v2_module –with-http_dav_module –with-http_stub_status_module –with-threads –with-file-aio</p>
-<p>make &amp;&amp; make install</p>
-</div></blockquote>
-</div>
+  <div class="section" id="keepalived">
+<h1>14.4. keepalived<a class="headerlink" href="#keepalived" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -226,10 +196,10 @@ cd nginx-1.12.2
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02-nginx基础配置说明.html" class="btn btn-neutral float-right" title="10.9. nginx基础配置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../杂项/index.html" class="btn btn-neutral float-right" title="15. 杂项" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../httpd/07-web实战一.html" class="btn btn-neutral" title="10.7. web实战一" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="01-ldirector.html" class="btn btn-neutral" title="14.3. ldirectord" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.8. nginx安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.13. nginx常用案例 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.9. nginx基础配置说明" href="02-nginx基础配置说明.html"/>
-        <link rel="prev" title="10.7. web实战一" href="../httpd/07-web实战一.html"/> 
+        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="10.12. centos7 lnmp的yum安装" href="05-centos7lnmp的yum安装.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -110,16 +110,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.8. nginx安装</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#yum">10.8.1. yum安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">10.8.2. 编译安装</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="01-nginx安装.html">10.8. nginx安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-nginx支持https.html">10.11. nginx支持https</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06-nginx常用案例.html">10.13. nginx常用案例</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.13. nginx常用案例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#http">10.13.1. 反向代理http</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mysql">10.13.2. 反向代理mysql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.13.3. 动静分离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.13.4. 防盗链</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.13.5. 代理服务器的缓存功能</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
@@ -174,14 +177,14 @@
         
           <li><a href="../index.html">10. WEB</a> &raquo;</li>
         
-      <li>10.8. nginx安装</li>
+      <li>10.13. nginx常用案例</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/nginx/01-nginx安装.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/nginx/06-nginx常用案例.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -196,23 +199,110 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nginx">
-<h1>10.8. nginx安装<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="yum">
-<h2>10.8.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>yum install nginx
+<h1>10.13. nginx常用案例<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="http">
+<h2>10.13.1. 反向代理http<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># vim vhosts.conf</span>
+
+    upstream backend <span class="o">{</span>
+        server <span class="m">172</span>.18.46.152    <span class="nv">weight</span><span class="o">=</span><span class="m">5</span><span class="p">;</span>
+        server <span class="m">172</span>.18.46.153<span class="p">;</span>
+
+    <span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen <span class="m">172</span>.18.46.151:80<span class="p">;</span>
+        location / <span class="o">{</span>
+            proxy_pass http://backend<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># for i in {1..10} ; do curl 172.18.46.151; done;</span>
+<span class="m">153</span>
+<span class="m">152</span>
+<span class="m">152</span>
+<span class="m">152</span>
+<span class="m">152</span>
+<span class="m">152</span>
+<span class="m">153</span>
+<span class="m">152</span>
+<span class="m">152</span>
+<span class="m">152</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mysql">
+<h2>10.13.2. 反向代理mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>stream {
+    upstream mysqlsrvs {
+    server 192.168.22.2:3306;
+    server 192.168.22.3:3306;
+    least_conn;
+}
+    server {
+        listen 10.1.0.6:3306;
+        proxy_pass mysqlsrvs;
+    }
+}
 </pre></div>
 </div>
 </div>
 <div class="section" id="id1">
-<h2>10.8.2. 编译安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>useradd nginx -r -s /sbin/nologin
-wget <a class="reference external" href="http://nginx.org/download/nginx-1.12.2.tar.gz">http://nginx.org/download/nginx-1.12.2.tar.gz</a>
-tar xf nginx-1.12.2.tar.gz
-cd nginx-1.12.2
-./configure –prefix=/usr/local/nginx –conf-path=/etc/nginx/nginx.conf –error-log-path=/var/log/nginx/error.log –http-log-path=/var/log/nginx/access.log –pid-path=/var/run/nginx.pid –lock-path=/var/run/nginx.lock –user=nginx –group=nginx   –with-http_ssl_module –with-http_v2_module –with-http_dav_module –with-http_stub_status_module –with-threads –with-file-aio</p>
-<p>make &amp;&amp; make install</p>
-</div></blockquote>
+<h2>10.13.3. 动静分离<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>server {
+        listen 80;
+        server_name www.linuxpanda.tech.com;
+        root /data/web1/;
+        location / {
+                proxy_pass http://172.18.46.152;
+        }
+        location ~* \.php$ {
+                proxy_pass http://172.18.46.153;
+        }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.13.4. 防盗链<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+        server_name www.b.com<span class="p">;</span>
+        root /data/web2<span class="p">;</span>
+        valid_referers none block server_names *.b.com  b.*  ~<span class="se">\.</span>baidu<span class="se">\.</span><span class="p">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="nv">$invalid_referer</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="m">403</span> http://www.magedu.com/<span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>10.13.5. 代理服务器的缓存功能<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>server {
+        listen 80;
+        server_name www.linuxpanda.tech;
+        root /data/web1/;
+
+        proxy_cache proxycache;
+        proxy_cache_key $request_uri;
+        proxy_cache_valid 200 302 301 1h;
+        proxy_cache_valid any 1m;
+
+        add_header X-Via $server_addr;
+        add_header X-Cache $upstream_cache_status;
+        add_header X-Accel $server_name;
+
+        location / {
+                proxy_pass http://192.168.27.17;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location ~* \.php$ {
+                proxy_pass http://192.168.27.6;
+        }
+}
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -226,10 +316,10 @@ cd nginx-1.12.2
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02-nginx基础配置说明.html" class="btn btn-neutral float-right" title="10.9. nginx基础配置说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../httpd/07-web实战一.html" class="btn btn-neutral" title="10.7. web实战一" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="05-centos7lnmp的yum安装.html" class="btn btn-neutral" title="10.12. centos7 lnmp的yum安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
