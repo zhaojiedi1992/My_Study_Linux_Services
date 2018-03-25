@@ -8,5 +8,6 @@
    数据库基础
    sql语句
    mysql/*
+   redis/*
    
 
