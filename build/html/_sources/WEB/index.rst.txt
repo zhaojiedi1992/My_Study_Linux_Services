@@ -7,3 +7,5 @@ WEB
 
    httpd/*
    nginx/*
+   cacheweb/*
+   

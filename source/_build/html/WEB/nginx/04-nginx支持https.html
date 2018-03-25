@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.10. nginx支持https &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.11. nginx支持https &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
-        <link rel="prev" title="10.9. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html"/> 
+        <link rel="next" title="10.12. centos7 lnmp的yum安装" href="05-centos7lnmp的yum安装.html"/>
+        <link rel="prev" title="10.10. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -110,14 +110,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.8. nginx基础配置说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.9. nginx虚拟主机三种实现方式</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.10. nginx支持https</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#nginx">10.10.1. 安装nginx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">10.10.2. 配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">10.10.3. 测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.11. nginx支持https</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nginx">10.11.1. 安装nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.11.2. 配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.11.3. 测试</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-nginx常用案例.html">10.13. nginx常用案例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
@@ -172,7 +175,7 @@
         
           <li><a href="../index.html">10. WEB</a> &raquo;</li>
         
-      <li>10.10. nginx支持https</li>
+      <li>10.11. nginx支持https</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -194,15 +197,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nginxhttps">
-<h1>10.10. nginx支持https<a class="headerlink" href="#nginxhttps" title="Permalink to this headline">¶</a></h1>
+<h1>10.11. nginx支持https<a class="headerlink" href="#nginxhttps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="nginx">
-<h2>10.10.1. 安装nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
+<h2>10.11.1. 安装nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id1">
-<h2>10.10.2. 配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>10.11.2. 配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost conf.d]# cd /etc/pki/tls/certs/
 [root@localhost certs]# ls
 ca-bundle.crt  ca-bundle.trust.crt  make-dummy-cert  Makefile  renew-dummy-cert
@@ -278,7 +281,7 @@ server {
 </div>
 </div>
 <div class="section" id="id2">
-<h2>10.10.3. 测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>10.11.3. 测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># curl https://www.linuxpanda.tech -k</span>
 multi_host_1
 </pre></div>
@@ -296,10 +299,10 @@ multi_host_1
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05-centos7lnmp的yum安装.html" class="btn btn-neutral float-right" title="10.12. centos7 lnmp的yum安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="03-nginx虚拟主机三种实现方式.html" class="btn btn-neutral" title="10.9. nginx虚拟主机三种实现方式" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="03-nginx虚拟主机三种实现方式.html" class="btn btn-neutral" title="10.10. nginx虚拟主机三种实现方式" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

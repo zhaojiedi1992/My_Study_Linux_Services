@@ -1,0 +1,1010 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.14. varnish &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="10.13. nginx常用案例" href="../nginx/06-nginx常用案例.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/04-nginx支持https.html">10.11. nginx支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/06-nginx常用案例.html">10.13. nginx常用案例</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.14. varnish</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.14.1. varnish安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vcl">10.14.2. vcl简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#varnishadm">10.14.3. varnishadm使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.14.4. vcl默认配置查看</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.14.5. 配置案例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.14.5.1. 命中情况</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.14.5.2. 禁用特定网页的缓存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cookie">10.14.5.3. 去除一些特定静态资源的cookie信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ip">10.14.5.4. 记录并设置客户端ip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">10.14.5.5. 对缓存对象进行修剪</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">10.14.5.6. 添加权限控制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.14.5.7. 匹配去刷新缓存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">10.14.5.8. 动静分离</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">10.14.5.9. 后端调度</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">10.14.5.10. 基于cookie的会话绑定</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">10.14.5.11. 健康检查</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">10.14.5.12. varnish常用工具</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.14. varnish</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/cacheweb/01-varnish.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="varnish">
+<h1>10.14. varnish<a class="headerlink" href="#varnish" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>10.14.1. varnish安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install varnish</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># rpm -ql varnish</span>
+/etc/logrotate.d/varnish
+/etc/varnish
+/etc/varnish/default.vcl        <span class="c1"># 默认vcl配置文件，用于配置线程的缓存策略。</span>
+/etc/varnish/varnish.params     <span class="c1"># 用于配置服务工作特性，比如监听地址和端口，缓存机制等。</span>
+/run/varnish.pid
+/usr/bin/varnishadm             <span class="c1"># 常用的命令</span>
+/usr/bin/varnishhist
+/usr/bin/varnishlog
+/usr/bin/varnishncsa
+/usr/bin/varnishstat
+/usr/bin/varnishtest
+/usr/bin/varnishtop
+/usr/lib/systemd/system/varnish.service <span class="c1"># 服务文件</span>
+/usr/lib/systemd/system/varnishlog.service
+/usr/lib/systemd/system/varnishncsa.service
+/usr/sbin/varnish_reload_vcl           <span class="c1"># 重载vcl配置</span>
+/usr/sbin/varnishd
+/usr/share/doc/varnish-4.0.5            <span class="c1"># 帮助文档</span>
+/usr/share/doc/varnish-4.0.5/LICENSE
+/usr/share/doc/varnish-4.0.5/README
+/usr/share/doc/varnish-4.0.5/builtin.vcl
+/usr/share/doc/varnish-4.0.5/changes.rst
+/usr/share/doc/varnish-4.0.5/example.vcl
+/usr/share/man/man1/varnishadm.1.gz
+/usr/share/man/man1/varnishd.1.gz
+/usr/share/man/man1/varnishhist.1.gz
+/usr/share/man/man1/varnishlog.1.gz
+/usr/share/man/man1/varnishncsa.1.gz
+/usr/share/man/man1/varnishstat.1.gz
+/usr/share/man/man1/varnishtest.1.gz
+/usr/share/man/man1/varnishtop.1.gz
+/usr/share/man/man3/vmod_directors.3.gz
+/usr/share/man/man3/vmod_std.3.gz
+/usr/share/man/man7/varnish-cli.7.gz
+/usr/share/man/man7/varnish-counters.7.gz
+/usr/share/man/man7/vcl.7.gz
+/usr/share/man/man7/vsl-query.7.gz
+/usr/share/man/man7/vsl.7.gz
+/var/lib/varnish
+/var/log/varnish
+</pre></div>
+</div>
+</div>
+<div class="section" id="vcl">
+<h2>10.14.2. vcl简介<a class="headerlink" href="#vcl" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="varnishadm">
+<h2>10.14.3. varnishadm使用<a class="headerlink" href="#varnishadm" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 连接varnish管理</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># varnishadm  -S /etc/varnish/secret  -T 127.0.0.1:6082</span>
+<span class="m">200</span>
+-----------------------------
+Varnish Cache CLI <span class="m">1</span>.0
+-----------------------------
+Linux,3.10.0-693.el7.x86_64,x86_64,-smalloc,-smalloc,-hcritbit
+varnish-4.0.5 revision 07eff4c29
+
+Type <span class="s1">&#39;help&#39;</span> <span class="k">for</span> <span class="nb">command</span> list.
+Type <span class="s1">&#39;quit&#39;</span> to close CLI session.
+
+<span class="nb">help</span>      <span class="c1"># 获取帮助</span>
+<span class="m">200</span>
+<span class="nb">help</span> <span class="o">[</span>&lt;command&gt;<span class="o">]</span>                    <span class="c1"># 获取特定命令帮助</span>
+ping <span class="o">[</span>&lt;timestamp&gt;<span class="o">]</span>                  <span class="c1"># 测试主机</span>
+auth &lt;response&gt;                     <span class="c1"># 认证</span>
+quit                                <span class="c1"># 退出</span>
+banner                              <span class="c1"># 欢迎信息再次显示</span>
+status                              <span class="c1"># 状态</span>
+start                               <span class="c1"># 启动</span>
+stop                                <span class="c1"># 停止</span>
+vcl.load &lt;configname&gt; &lt;filename&gt;    <span class="c1"># 加载一个配置，设置一个配置名字</span>
+vcl.inline &lt;configname&gt; &lt;quoted_VCLstring&gt;
+vcl.use &lt;configname&gt;                <span class="c1"># 使用特定配置</span>
+vcl.discard &lt;configname&gt;            <span class="c1"># 卸载特定配置</span>
+vcl.list                            <span class="c1"># 查看vcl列表信息</span>
+param.show <span class="o">[</span>-l<span class="o">]</span> <span class="o">[</span>&lt;param&gt;<span class="o">]</span>           <span class="c1"># 参数查看</span>
+param.set &lt;param&gt; &lt;value&gt;           <span class="c1"># 参数设置</span>
+panic.show                          <span class="c1"># 如果有panic信息，就显示最近的</span>
+panic.clear                         <span class="c1"># 清空panic信息</span>
+storage.list                        <span class="c1"># 存储查看</span>
+vcl.show <span class="o">[</span>-v<span class="o">]</span> &lt;configname&gt;          <span class="c1"># 查看特定配置的信息</span>
+backend.list <span class="o">[</span>&lt;backend_expression&gt;<span class="o">]</span> <span class="c1"># 后端列表</span>
+backend.set_health &lt;backend_expression&gt; &lt;state&gt;  <span class="c1"># 设置后端的健康检查</span>
+ban &lt;field&gt; &lt;operator&gt; &lt;arg&gt; <span class="o">[&amp;&amp;</span> &lt;field&gt; &lt;oper&gt; &lt;arg&gt;<span class="o">]</span>... <span class="c1"># 所有匹配的都会过期</span>
+ban.list                                                  <span class="c1"># 查看ban列表</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.14.4. vcl默认配置查看<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>vcl.show -v boot
+
+vcl 4.0;
+
+#######################################################################
+# Client side
+
+sub vcl_recv {
+
+    // 如果请求方式是pri，直接使用synth构造4.5页面
+    if (req.method == &quot;PRI&quot;) {
+    /* We do not support SPDY or HTTP/2.0 */
+    return (synth(405));
+    }
+    //如果请求方式不是常用的几种请求方法的，直接管道处理
+    if (req.method != &quot;GET&quot; &amp;&amp;
+    req.method != &quot;HEAD&quot; &amp;&amp;
+    req.method != &quot;PUT&quot; &amp;&amp;
+    req.method != &quot;POST&quot; &amp;&amp;
+    req.method != &quot;TRACE&quot; &amp;&amp;
+    req.method != &quot;OPTIONS&quot; &amp;&amp;
+    req.method != &quot;DELETE&quot;) {
+        /* Non-RFC2616 or CONNECT which is weird. */
+        return (pipe);
+    }
+
+    // 如果请求的方法不是get或者head的话，就转移到pass状态代码处理。
+    if (req.method != &quot;GET&quot; &amp;&amp; req.method != &quot;HEAD&quot;) {
+        /* We only deal with GET and HEAD by default */
+        return (pass);
+    }
+    # 如果请求头信息有认证和cookie信息，就转义到pass后台去
+    if (req.http.Authorization || req.http.Cookie) {
+        /* Not cacheable by default */
+        return (pass);
+    }
+    # 默认执行hash
+    return (hash);
+}
+
+sub vcl_pipe {
+    # By default Connection: close is set on all piped requests, to stop
+    # connection reuse from sending future requests directly to the
+    # (potentially) wrong backend. If you do want this to happen, you can undo
+    # it here.
+    # unset bereq.http.connection;
+    return (pipe);
+}
+
+// 直接到后面去取数据
+sub vcl_pass {
+    return (fetch);
+}
+
+sub vcl_hash {
+
+    //hash 请求的url,如果请求的头包含host信息，hash下host,否则hash下ip，然后去查找
+    hash_data(req.url);
+    if (req.http.host) {
+        hash_data(req.http.host);
+    } else {
+        hash_data(server.ip);
+    }
+    return (lookup);
+}
+
+sub vcl_purge {
+    // 构造一个200状态码的purged页面
+    return (synth(200, &quot;Purged&quot;));
+}
+
+sub vcl_hit {
+
+    // 如果对象的ttl大于0 或者ttl加宽限时间大于0 就直接使用缓存即可，否则就后面取数据
+    if (obj.ttl &gt;= 0s) {
+        // A pure unadultered hit, deliver it
+        return (deliver);
+    }
+    if (obj.ttl + obj.grace &gt; 0s) {
+        // Object is in grace, deliver it
+        // Automatically triggers a background fetch
+        return (deliver);
+    }
+    // fetch &amp; deliver once we get the result
+    return (fetch);
+}
+
+sub vcl_miss {
+    //miss的到后面找
+    return (fetch);
+}
+
+sub vcl_deliver {
+    return (deliver);
+}
+
+#######################################################################
+# Housekeeping
+// init,fini 这2个是初始化和结束时候执行， init用于启用变量定义等。
+
+sub vcl_init {
+    return (ok);
+}
+
+sub vcl_fini {
+    return (ok);
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>10.14.5. 配置案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>10.14.5.1. 命中情况<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># cp default.vcl default.vcl.bak</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+<span class="c1"># 修改如下配置</span>
+backend default <span class="o">{</span>
+    .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
+    .port <span class="o">=</span> <span class="s2">&quot;80&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="c1"># 修改如下deliver片段</span>
+sub vcl_deliver <span class="o">{</span>
+    <span class="c1"># Happens when we have all the pieces we need, and are about to send the</span>
+    <span class="c1"># response to the client.</span>
+    <span class="c1">#</span>
+    <span class="c1"># You can do accounting or modifying the final object here.</span>
+    <span class="k">if</span> <span class="o">(</span>obj.hits &gt; <span class="m">0</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="nb">set</span> resp.http.X-Cache <span class="o">=</span> <span class="s2">&quot;Hit via &quot;</span> + server.ip<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="nb">set</span> resp.http.X-Cache <span class="o">=</span> <span class="s2">&quot;Miss From &quot;</span> + server.ip<span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1"># 配置生效</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># clear</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># !varnishadm</span>
+varnishadm  -S /etc/varnish/secret  -T <span class="m">127</span>.0.0.1:6082
+<span class="m">200</span>
+-----------------------------
+Varnish Cache CLI <span class="m">1</span>.0
+-----------------------------
+Linux,3.10.0-693.el7.x86_64,x86_64,-smalloc,-smalloc,-hcritbit
+varnish-4.0.5 revision 07eff4c29
+
+Type <span class="s1">&#39;help&#39;</span> <span class="k">for</span> <span class="nb">command</span> list.
+Type <span class="s1">&#39;quit&#39;</span> to close CLI session.
+
+vcl.load change_hit /etc/varnish/default.vcl
+<span class="m">200</span>
+VCL compiled.
+vcl.use change_hit
+<span class="m">200</span>
+VCL <span class="s1">&#39;change_hit&#39;</span> now active
+
+<span class="c1"># 修改下参数，设置下默认监听端口， 这里测试方便设置为80</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim varnish.params</span>
+<span class="c1"># 修改下端口</span>
+<span class="nv">VARNISH_LISTEN_PORT</span><span class="o">=</span><span class="m">80</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># systemctl restart varnish</span>
+
+<span class="c1"># 测试下，第一次是miss,第二次就是hit了。</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:05:28 GMT
+Content-Type: text/html
+Content-Length: <span class="m">27</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">10</span>:55:32 GMT
+ETag: <span class="s2">&quot;5ab4dd24-1b&quot;</span>
+X-Varnish: <span class="m">2</span>
+Age: <span class="m">0</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Miss From <span class="m">192</span>.168.46.151
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:05:28 GMT
+Content-Type: text/html
+Content-Length: <span class="m">27</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">10</span>:55:32 GMT
+ETag: <span class="s2">&quot;5ab4dd24-1b&quot;</span>
+X-Varnish: <span class="m">5</span> <span class="m">3</span>
+Age: <span class="m">4</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Hit via <span class="m">192</span>.168.46.151
+Connection: keep-alive
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>10.14.5.2. 禁用特定网页的缓存<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 现在后端指定样例页面</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /usr/share/nginx/html/</span>
+<span class="o">[</span>root@centos-152 html<span class="o">]</span><span class="c1"># mkdir login</span>
+<span class="o">[</span>root@centos-152 html<span class="o">]</span><span class="c1"># echo &quot;login page from 152&quot; &gt; login/index.html</span>
+
+<span class="c1"># 设置vcl</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+
+sub vcl_recv <span class="o">{</span>
+    <span class="c1"># Happens before we check if we have this in cache already.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
+    <span class="c1"># rewriting the request, etc.</span>
+    <span class="k">if</span> <span class="o">(</span> req.url ~ <span class="s2">&quot;^/login&quot;</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span>pass<span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+<span class="c1"># 重启下varnish,重启varnish是很危险的操作。我这里方便测试直接重启了。</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># systemctl restart varnish</span>
+
+<span class="c1"># 测试下</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl 192.168.46.151/login/ -I</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:13:14 GMT
+Content-Type: text/html
+Content-Length: <span class="m">20</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:10:20 GMT
+ETag: <span class="s2">&quot;5ab4e09c-14&quot;</span>
+Accept-Ranges: bytes
+X-Varnish: <span class="m">2</span>
+Age: <span class="m">0</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Miss From <span class="m">192</span>.168.46.151
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl 192.168.46.151/login/ -I</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:13:17 GMT
+Content-Type: text/html
+Content-Length: <span class="m">20</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">11</span>:10:20 GMT
+ETag: <span class="s2">&quot;5ab4e09c-14&quot;</span>
+Accept-Ranges: bytes
+X-Varnish: <span class="m">5</span>
+Age: <span class="m">0</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Miss From <span class="m">192</span>.168.46.151
+Connection: keep-alive
+</pre></div>
+</div>
+</div>
+<div class="section" id="cookie">
+<h3>10.14.5.3. 去除一些特定静态资源的cookie信息<a class="headerlink" href="#cookie" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sub vcl_deliver <span class="o">{</span>
+    <span class="c1"># Happens when we have all the pieces we need, and are about to send the</span>
+    <span class="c1"># response to the client.</span>
+    <span class="c1">#</span>
+    <span class="c1"># You can do accounting or modifying the final object here.</span>
+    <span class="k">if</span> <span class="o">(</span>obj.hits &gt; <span class="m">0</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="nb">set</span> resp.http.X-Cache <span class="o">=</span> <span class="s2">&quot;Hit via &quot;</span> + server.ip<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="nb">set</span> resp.http.X-Cache <span class="o">=</span> <span class="s2">&quot;Miss From &quot;</span> + server.ip<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span>req.http.cache-control !~ <span class="s2">&quot;s-maxage&quot;</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>bereq.url  ~ <span class="s2">&quot;(?i)\.(jpg|jpeg|png|gif|css|js)</span>$<span class="s2">&quot;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nb">unset</span> beresq.http.Set-Cookie<span class="p">;</span>
+                <span class="nb">set</span> beresp.ttl <span class="o">=</span> 3600s<span class="p">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ip">
+<h3>10.14.5.4. 记录并设置客户端ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sub vcl_recv <span class="o">{</span>
+    <span class="c1"># Happens before we check if we have this in cache already.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
+    <span class="c1"># rewriting the request, etc.</span>
+    <span class="k">if</span> <span class="o">(</span> req.url ~ <span class="s2">&quot;^/login&quot;</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span>pass<span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+
+<span class="k">if</span> <span class="o">(</span>req.restarts <span class="o">==</span><span class="m">0</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>req.http.X-Forwarded-For<span class="o">)</span> <span class="o">{</span>
+                <span class="nb">set</span> req.http.X-Forwarded-For <span class="o">=</span> req.http.X-Forwarded-For + client.ip<span class="p">;</span>
+
+        <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+                <span class="nb">set</span> req.http.X-Forwarded-For <span class="o">=</span> req.http.X-Forwarded-For + client.ip<span class="p">;</span>
+        <span class="o">}</span>
+
+        <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>10.14.5.5. 对缓存对象进行修剪<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+
+    sub vcl_purge <span class="o">{</span>
+            <span class="k">return</span> <span class="o">(</span>synth<span class="o">(</span><span class="m">200</span>,<span class="s2">&quot;Purged&quot;</span><span class="o">))</span><span class="p">;</span>
+    <span class="o">}</span>
+    sub vcl_recv <span class="o">{</span>
+        <span class="c1"># Happens before we check if we have this in cache already.</span>
+        <span class="c1">#</span>
+        <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
+        <span class="c1"># rewriting the request, etc.</span>
+            <span class="k">if</span> req.method <span class="o">==</span><span class="s2">&quot;PURGE&quot;</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="k">return</span><span class="o">(</span>purge<span class="o">)</span><span class="p">;</span>
+            <span class="o">}</span>
+
+    <span class="o">}</span>
+
+<span class="c1"># 测试步骤， 先请求下， 是miss的， 在请求是hit的， purge下， 在请求就是miss的了。</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">12</span>:49:47 GMT
+Content-Type: text/html
+Content-Length: <span class="m">27</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">10</span>:55:32 GMT
+ETag: <span class="s2">&quot;5ab4dd24-1b&quot;</span>
+X-Varnish: <span class="m">32772</span>
+Age: <span class="m">0</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Miss From <span class="m">192</span>.168.46.151
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">12</span>:49:47 GMT
+Content-Type: text/html
+Content-Length: <span class="m">27</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">10</span>:55:32 GMT
+ETag: <span class="s2">&quot;5ab4dd24-1b&quot;</span>
+X-Varnish: <span class="m">7</span> <span class="m">32773</span>
+Age: <span class="m">2</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Hit via <span class="m">192</span>.168.46.151
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I -X  &quot;PURGE&quot; 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> Purged
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">12</span>:49:53 GMT
+Server: Varnish
+X-Varnish: <span class="m">9</span>
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+Retry-After: <span class="m">5</span>
+Content-Length: <span class="m">236</span>
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> OK
+Server: nginx/1.12.2
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">12</span>:49:58 GMT
+Content-Type: text/html
+Content-Length: <span class="m">27</span>
+Last-Modified: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">10</span>:55:32 GMT
+ETag: <span class="s2">&quot;5ab4dd24-1b&quot;</span>
+X-Varnish: <span class="m">11</span>
+Age: <span class="m">0</span>
+Via: <span class="m">1</span>.1 varnish-v4
+X-Cache: Miss From <span class="m">192</span>.168.46.151
+Connection: keep-alive
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>10.14.5.6. 添加权限控制<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+
+//定义一个权限，下面vcl_recv去匹配
+acl purges <span class="o">{</span>
+        <span class="s2">&quot;127.0.0.1&quot;</span>/8<span class="p">;</span>
+        <span class="s2">&quot;192.168.46.151&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+sub vcl_purge <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span>synth<span class="o">(</span><span class="m">200</span>,<span class="s2">&quot;Purged&quot;</span><span class="o">))</span><span class="p">;</span>
+<span class="o">}</span>
+sub vcl_recv <span class="o">{</span>
+    <span class="c1"># Happens before we check if we have this in cache already.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
+    <span class="c1"># rewriting the request, etc.</span>
+        <span class="k">if</span> <span class="o">(</span>req.method <span class="o">==</span> <span class="s2">&quot;PURGE&quot;</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span>!client.ip ~ purges<span class="o">)</span>
+                <span class="o">{</span>
+                        <span class="k">return</span><span class="o">(</span>synth<span class="o">(</span><span class="m">405</span>,<span class="s2">&quot;not allow form &quot;</span> + client.ip<span class="o">))</span><span class="p">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span><span class="o">(</span>purge<span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="c1"># 测试下</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># curl -I -X &quot;PURGE&quot; 192.168.46.151</span>
+HTTP/1.1 <span class="m">200</span> Purged
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">13</span>:00:14 GMT
+Server: Varnish
+X-Varnish: <span class="m">2</span>
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+Retry-After: <span class="m">5</span>
+Content-Length: <span class="m">236</span>
+Connection: keep-alive
+
+<span class="o">[</span>root@centos-152 html<span class="o">]</span><span class="c1"># curl -I -X &quot;PURGE&quot; 192.168.46.151</span>
+HTTP/1.1 <span class="m">405</span> not allow form <span class="m">192</span>.168.46.152
+Date: Fri, <span class="m">23</span> Mar <span class="m">2018</span> <span class="m">13</span>:00:37 GMT
+Server: Varnish
+X-Varnish: <span class="m">32770</span>
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+Retry-After: <span class="m">5</span>
+Content-Length: <span class="m">309</span>
+Connection: keep-alive
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>10.14.5.7. 匹配去刷新缓存<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 命令行方式</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># varnishadm  -S /etc/varnish/secret  -T 127.0.0.1:6082</span>
+<span class="m">200</span>
+-----------------------------
+Varnish Cache CLI <span class="m">1</span>.0
+-----------------------------
+Linux,3.10.0-693.el7.x86_64,x86_64,-smalloc,-smalloc,-hcritbit
+varnish-4.0.5 revision 07eff4c29
+
+Type <span class="s1">&#39;help&#39;</span> <span class="k">for</span> <span class="nb">command</span> list.
+Type <span class="s1">&#39;quit&#39;</span> to close CLI session.
+
+ban req.url ~ ^/js
+<span class="m">200</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>10.14.5.8. 动静分离<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>backend default <span class="o">{</span>
+    .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
+    .port <span class="o">=</span> <span class="s2">&quot;80&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+backend appsrv <span class="o">{</span>
+    .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
+    .port <span class="o">=</span> <span class="s2">&quot;80&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+
+sub vcl_recv <span class="o">{</span>
+    <span class="c1"># Happens before we check if we have this in cache already.</span>
+    <span class="c1">#</span>
+    <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
+    <span class="c1"># rewriting the request, etc.</span>
+    <span class="k">if</span> <span class="o">(</span> req.url ~ <span class="s2">&quot;\.php</span>$<span class="s2">&quot;</span> <span class="o">)</span>
+        <span class="o">{</span>
+                <span class="nb">set</span> req.backend_hint <span class="o">=</span> appsrv<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+                <span class="nb">set</span> req.backend_hint <span class="o">=</span> default<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>10.14.5.9. 后端调度<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>import directors<span class="p">;</span>
+
+backend web152 <span class="o">{</span>
+        .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
+        .port <span class="o">=</span><span class="s2">&quot;80&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+
+backend web153 <span class="o">{</span>
+        .host <span class="o">=</span> <span class="s2">&quot;192.168.46.153&quot;</span><span class="p">;</span>
+        .port <span class="o">=</span><span class="s2">&quot;80&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+sub vcl_init <span class="o">{</span>
+        new <span class="nv">websrvs</span> <span class="o">=</span> directors.random<span class="o">()</span><span class="p">;</span>
+        websrvs.add_backend<span class="o">(</span>web152<span class="o">)</span><span class="p">;</span>
+        websrvs.add_backend<span class="o">(</span>web153<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+sub vcl_recv <span class="o">{</span>
+
+        <span class="nb">set</span> req.backend_hint <span class="o">=</span> websrvs.backend<span class="o">()</span><span class="p">;</span>
+        <span class="k">if</span> <span class="o">(</span>req.method <span class="o">==</span> <span class="s2">&quot;PURGE&quot;</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span>!client.ip ~ purges<span class="o">)</span>
+                <span class="o">{</span>
+                        <span class="k">return</span><span class="o">(</span>synth<span class="o">(</span><span class="m">405</span>,<span class="s2">&quot;not allow form &quot;</span> + client.ip<span class="o">))</span><span class="p">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span><span class="o">(</span>purge<span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="c1"># 测试下   ，这里发现都是152的结果。 这是因为缓存的原有了</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># for i in {1..10} ; do curl 192.168.46.151 ; sleep 1; done</span>
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-152.linuxpanda.tech
+
+<span class="c1"># 稍稍修改下配置文件，设置下recv都到pass后端去。这样就不会使用缓存了，这里仅仅是测试。</span>
+sub vcl_recv <span class="o">{</span>
+        <span class="nb">set</span> req.backend_hint <span class="o">=</span> websrvs.backend<span class="o">()</span><span class="p">;</span>
+        <span class="k">return</span><span class="o">(</span>pass<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># 测试</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># systemctl restart varnish     # 危险操作，强烈建议使用load，use操作。</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># for i in {1..10} ; do curl 192.168.46.151 ; sleep 1; done</span>
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>10.14.5.10. 基于cookie的会话绑定<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>sub vcl_init {</dt>
+<dd>new cookie_hash = directors.hash();
+cookie_hash.add_backend(web152);
+cookie_hash.add_backend(web153);</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>sub vcl_recv {</dt>
+<dd>set req.backend_hint = cookie_hash.backend(req.http.cookie);</dd>
+</dl>
+<p>}</p>
+<p>上面的代码如果请求都是有cookie的话还好， 如果没有还不清楚是不是仅仅调度到一个服务器上面去。如果是还是需要加额外的逻辑控制的。
+，后面有时间再去查查这个东东。</p>
+</div>
+<div class="section" id="id12">
+<h3>10.14.5.11. 健康检查<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+<span class="c1"># 修改为如下内容</span>
+probe default_probe <span class="o">{</span>
+                .url<span class="o">=</span><span class="s2">&quot;/index.html&quot;</span><span class="p">;</span>
+                .timeout <span class="o">=</span>2s<span class="p">;</span>
+                .interval<span class="o">=</span>1s<span class="p">;</span>
+                .window <span class="o">=</span><span class="m">5</span><span class="p">;</span>
+                .threshold<span class="o">=</span><span class="m">2</span><span class="p">;</span>
+<span class="o">}</span>
+backend web152 <span class="o">{</span>
+        .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
+        .port <span class="o">=</span><span class="s2">&quot;80&quot;</span><span class="p">;</span>
+        .probe <span class="o">=</span> default_probe<span class="p">;</span>
+<span class="o">}</span>
+
+backend web153 <span class="o">{</span>
+        .host <span class="o">=</span> <span class="s2">&quot;192.168.46.153&quot;</span><span class="p">;</span>
+        .port <span class="o">=</span><span class="s2">&quot;80&quot;</span><span class="p">;</span>
+        .probe <span class="o">=</span> default_probe<span class="p">;</span>
+<span class="o">}</span>
+
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># systemctl restart varnish    # 危险操作，强烈建议使用load，use操作。</span>
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># !for</span>
+<span class="k">for</span> i in <span class="o">{</span><span class="m">1</span>..10<span class="o">}</span> <span class="p">;</span> <span class="k">do</span> curl <span class="m">192</span>.168.46.151 <span class="p">;</span> sleep <span class="m">1</span><span class="p">;</span> <span class="k">done</span>
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-152.linuxpanda.tech
+<span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># for i in {1..10} ; do curl 192.168.46.151 ; sleep 1; done</span>
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+centos-153.linuxpanda.tech
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>10.14.5.12. varnish常用工具<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text"><div class="highlight"><pre><span></span># 查看统计信息（非状态信息）
+[root@centos-151 varnish]# varnishstat
+
+# 查看日志信息， 很原始，且实时的， 非历史数据
+[root@centos-151 varnish]# varnishlog
+
+# 常用格式查看
+[root@centos-151 varnish]# varnishncsa
+192.168.46.152 - - [24/Mar/2018:18:49:55 +0800] &quot;GET http://192.168.46.151/ HTTP/1.1&quot; 200 27 &quot;-&quot; &quot;curl/7.29.0&quot;
+
+# 启动ncsa服务，来记录日志，
+[root@centos-151 varnish]# systemctl start varnishncsa
+[root@centos-151 varnish]# cat /var/log/varnish/varnishncsa.log
+192.168.46.152 - - [24/Mar/2018:18:51:35 +0800] &quot;GET http://192.168.46.151/ HTTP/1.1&quot; 200 27 &quot;-&quot; &quot;curl/7.29.0&quot;
+
+# varnish top信息查看
+[root@centos-151 varnish]# varnishtop
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../nginx/06-nginx常用案例.html" class="btn btn-neutral" title="10.13. nginx常用案例" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

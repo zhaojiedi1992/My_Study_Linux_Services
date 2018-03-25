@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.4. zabbix &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="5. 安全和监控" href="index.html"/>
+        <link rel="next" title="6. 远程登陆" href="../远程登陆/index.html"/>
+        <link rel="prev" title="5.3. selinux" href="selinux.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 安全和监控</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aide.html">5.1. aide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="防火墙.html">5.2. 防火墙</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.4. zabbix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">5.4.1. 安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.4.2. 图形安装配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">5. 安全和监控</a> &raquo;</li>
+        
+      <li>5.4. zabbix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/安全和监控/zabbix.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="zabbix">
+<h1>5.4. zabbix<a class="headerlink" href="#zabbix" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>5.4.1. 安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.zabbix.com/download">zabbix安装参考</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p># 安装配置数据库
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# yum install mariadb-server</p>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# systemctl start mariadb
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# mysql_secure_installation</p>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# mysql -uroot -ppanda
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 10
+Server version: 5.5.56-MariaDB MariaDB Server</p>
+<p>Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</p>
+<p>Type ‘help;’ or ‘h’ for help. Type ‘c’ to clear the current input statement.</p>
+<p>MariaDB [(none)]&gt; create database zabbix character set utf8 collate utf8_bin;
+Query OK, 1 row affected (0.00 sec)</p>
+<p>MariaDB [(none)]&gt; grant all privileges on zabbix.* to <a class="reference external" href="mailto:zabbix&#37;&#52;&#48;localhost">zabbix<span>&#64;</span>localhost</a> identified by ‘password’;
+Query OK, 0 rows affected (0.00 sec)</p>
+<p>MariaDB [(none)]&gt; exit
+Bye</p>
+<p># 安装zabbix
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# rpm -i <a class="reference external" href="http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm">http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</a>
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# yum install zabbix-server-mysql zabbix-web-mysql zabbix-agent</p>
+<p># 导库
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -ppassword zabbix</p>
+<p># 配置文件添加密码
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# vim /etc/zabbix/zabbix_server.conf
+DBPassword=password
+# 修改时区信息
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# vim /etc/httpd/conf.d/zabbix.conf
+php_value date.timezone Asia/Shanghai
+# 重启web
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# systemctl start httpd</p>
+</div>
+<div class="section" id="id3">
+<h2>5.4.2. 图形安装配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/zabbix-step1.png" src="../_images/zabbix-step1.png" />
+<img alt="../_images/zabbix-step2.png" src="../_images/zabbix-step2.png" />
+<img alt="../_images/zabbix-step3.png" src="../_images/zabbix-step3.png" />
+<img alt="../_images/zabbix-step4.png" src="../_images/zabbix-step4.png" />
+<img alt="../_images/zabbix-step5.png" src="../_images/zabbix-step5.png" />
+<img alt="../_images/zabbix-step6.png" src="../_images/zabbix-step6.png" />
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../远程登陆/index.html" class="btn btn-neutral float-right" title="6. 远程登陆" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="selinux.html" class="btn btn-neutral" title="5.3. selinux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

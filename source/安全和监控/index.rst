@@ -7,4 +7,6 @@
    aide
    防火墙
    selinux
+   zabbix
+   
    

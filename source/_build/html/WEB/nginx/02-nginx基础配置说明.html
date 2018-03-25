@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10.8. nginx基础配置说明 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.9. nginx基础配置说明 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
         <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
-        <link rel="prev" title="&lt;no title&gt;" href="01-nginx安装.html"/> 
+        <link rel="next" title="10.10. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html"/>
+        <link rel="prev" title="10.8. nginx安装" href="01-nginx安装.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -110,164 +110,169 @@
 <li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.8. nginx基础配置说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">10.8.1. 核心模块</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#user">10.8.1.1. user</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pid">10.8.1.2. pid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#include">10.8.1.3. include</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#load-module">10.8.1.4. load_module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#worker-cpu-affinity">10.8.1.5. worker_cpu_affinity</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#worker-processes">10.8.1.6. worker_processes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#worker-priority">10.8.1.7. worker_priority</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#worker-rlimit-nofile">10.8.1.8. worker_rlimit_nofile</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#worker-connections">10.8.1.9. worker_connections</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#use">10.8.1.10. use</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#accept-mutex">10.8.1.11. accept_mutex</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#daemon">10.8.1.12. daemon</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#master-process">10.8.1.13. master_process</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#error-log">10.8.1.14. error_log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.9. nginx基础配置说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.9.1. 核心模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user">10.9.1.1. user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pid">10.9.1.2. pid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#include">10.9.1.3. include</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-module">10.9.1.4. load_module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-cpu-affinity">10.9.1.5. worker_cpu_affinity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-processes">10.9.1.6. worker_processes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-priority">10.9.1.7. worker_priority</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-rlimit-nofile">10.9.1.8. worker_rlimit_nofile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#worker-connections">10.9.1.9. worker_connections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use">10.9.1.10. use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accept-mutex">10.9.1.11. accept_mutex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#daemon">10.9.1.12. daemon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#master-process">10.9.1.13. master_process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-log">10.9.1.14. error_log</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">10.8.2. 标准模块</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#listen">10.8.2.1. listen</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#server-name">10.8.2.2. server_name</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#root">10.8.2.3. root</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tcp-nodelay">10.8.2.4. tcp_nodelay</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sendfile">10.8.2.5. sendfile</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#server-tokens">10.8.2.6. server_tokens</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#location">10.8.2.7. location</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#alias">10.8.2.8. alias</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#index">10.8.2.9. index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#error-page">10.8.2.10. error_page</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#try-files">10.8.2.11. try_files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keepalive-timeout">10.8.2.12. keepalive_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keepalive-requests">10.8.2.13. keepalive_requests</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keepalive-disable">10.8.2.14. keepalive_disable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#send-timeout">10.8.2.15. send_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#client-body-buffer-size">10.8.2.16. client_body_buffer_size</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#client-body-temp-path">10.8.2.17. client_body_temp_path</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limit-rate">10.8.2.18. limit_rate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limit-except">10.8.2.19. limit_except</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#aio">10.8.2.20. aio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#directio">10.8.2.21. directio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#open-file-cache">10.8.2.22. open_file_cache</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-errors">10.8.2.23. open_file_cache_errors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-min-uses">10.8.2.24. open_file_cache_min_uses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-valid">10.8.2.25. open_file_cache_valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.9.2. 标准模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#listen">10.9.2.1. listen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-name">10.9.2.2. server_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#root">10.9.2.3. root</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tcp-nodelay">10.9.2.4. tcp_nodelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sendfile">10.9.2.5. sendfile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-tokens">10.9.2.6. server_tokens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#location">10.9.2.7. location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alias">10.9.2.8. alias</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#index">10.9.2.9. index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-page">10.9.2.10. error_page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#try-files">10.9.2.11. try_files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalive-timeout">10.9.2.12. keepalive_timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalive-requests">10.9.2.13. keepalive_requests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalive-disable">10.9.2.14. keepalive_disable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#send-timeout">10.9.2.15. send_timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-body-buffer-size">10.9.2.16. client_body_buffer_size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-body-temp-path">10.9.2.17. client_body_temp_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limit-rate">10.9.2.18. limit_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limit-except">10.9.2.19. limit_except</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aio">10.9.2.20. aio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#directio">10.9.2.21. directio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-file-cache">10.9.2.22. open_file_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-errors">10.9.2.23. open_file_cache_errors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-min-uses">10.9.2.24. open_file_cache_min_uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-file-cache-valid">10.9.2.25. open_file_cache_valid</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-access-module">10.8.3. ngx_http_access_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#allow">10.8.3.1. allow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#deny">10.8.3.2. deny</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-access-module">10.9.3. ngx_http_access_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#allow">10.9.3.1. allow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deny">10.9.3.2. deny</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-auth-basic-module">10.8.4. ngx_http_auth_basic_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#auth-basic">10.8.4.1. auth_basic</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#auth-basic-user-file">10.8.4.2. auth_basic_user_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-auth-basic-module">10.9.4. ngx_http_auth_basic_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#auth-basic">10.9.4.1. auth_basic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auth-basic-user-file">10.9.4.2. auth_basic_user_file</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-stub-status-module">10.8.5. ngx_http_stub_status_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">10.8.5.1. auth_basic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-stub-status-module">10.9.5. ngx_http_stub_status_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">10.9.5.1. auth_basic</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-log-module">10.8.6. ngx_http_log_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#log-format">10.8.6.1. log_format</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#access-log">10.8.6.2. access_log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#open-log-file-cache">10.8.6.3. open_log_file_cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-log-module">10.9.6. ngx_http_log_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#log-format">10.9.6.1. log_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#access-log">10.9.6.2. access_log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-log-file-cache">10.9.6.3. open_log_file_cache</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-gzip-module">10.8.7. ngx_http_gzip_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">10.8.7.1. log_format</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-comp-level">10.8.7.2. gzip_comp_level</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-disable">10.8.7.3. gzip_disable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-min-length">10.8.7.4. gzip_min_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-http-version">10.8.7.5. gzip_http_version</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-buffers">10.8.7.6. gzip_buffers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-types">10.8.7.7. gzip_types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-vary">10.8.7.8. gzip_vary</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gzip-proxied">10.8.7.9. gzip_proxied</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-gzip-module">10.9.7. ngx_http_gzip_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.9.7.1. log_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-comp-level">10.9.7.2. gzip_comp_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-disable">10.9.7.3. gzip_disable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-min-length">10.9.7.4. gzip_min_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-http-version">10.9.7.5. gzip_http_version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-buffers">10.9.7.6. gzip_buffers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-types">10.9.7.7. gzip_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-vary">10.9.7.8. gzip_vary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gzip-proxied">10.9.7.9. gzip_proxied</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-ssl-module">10.8.8. ngx_http_ssl_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ssl">10.8.8.1. ssl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ssl-certificate">10.8.8.2. ssl_certificate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ssl-certificate-key">10.8.8.3. ssl_certificate_key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ssl-protocols">10.8.8.4. ssl_protocols</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ssl-session-cache">10.8.8.5. ssl_session_cache</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ssl-session-timeout">10.8.8.6. ssl_session_timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-ssl-module">10.9.8. ngx_http_ssl_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ssl">10.9.8.1. ssl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-certificate">10.9.8.2. ssl_certificate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-certificate-key">10.9.8.3. ssl_certificate_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-protocols">10.9.8.4. ssl_protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-session-cache">10.9.8.5. ssl_session_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-session-timeout">10.9.8.6. ssl_session_timeout</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-rewrite-module">10.8.9. ngx_http_rewrite_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#rewrite">10.8.9.1. rewrite</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#return">10.8.9.2. return</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#rewrite-log">10.8.9.3. rewrite_log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set">10.8.9.4. set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#if">10.8.9.5. if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-rewrite-module">10.9.9. ngx_http_rewrite_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rewrite">10.9.9.1. rewrite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return">10.9.9.2. return</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rewrite-log">10.9.9.3. rewrite_log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set">10.9.9.4. set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#if">10.9.9.5. if</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-referer-module">10.8.10. ngx_http_referer_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#valid-referers">10.8.10.1. valid_referers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-referer-module">10.9.10. ngx_http_referer_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#valid-referers">10.9.10.1. valid_referers</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-proxy-module">10.8.11. ngx_http_proxy_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-pass">10.8.11.1. proxy_pass</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-set-header">10.8.11.2. proxy_set_header</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-path">10.8.11.3. proxy_cache_path</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache">10.8.11.4. proxy_cache</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-key">10.8.11.5. proxy_cache_key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-valid">10.8.11.6. proxy_cache_valid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-use-stale">10.8.11.7. proxy_cache_use_stale;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-method">10.8.11.8. proxy_cache_method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-hide-header">10.8.11.9. proxy_hide_header</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-connect-timeout">10.8.11.10. proxy_connect_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-send-timeout">10.8.11.11. proxy_send_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-read-timeout">10.8.11.12. proxy_read_timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-proxy-module">10.9.11. ngx_http_proxy_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-pass">10.9.11.1. proxy_pass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-set-header">10.9.11.2. proxy_set_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-path">10.9.11.3. proxy_cache_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache">10.9.11.4. proxy_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-key">10.9.11.5. proxy_cache_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-valid">10.9.11.6. proxy_cache_valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-use-stale">10.9.11.7. proxy_cache_use_stale;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-cache-method">10.9.11.8. proxy_cache_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-hide-header">10.9.11.9. proxy_hide_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-connect-timeout">10.9.11.10. proxy_connect_timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-send-timeout">10.9.11.11. proxy_send_timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-read-timeout">10.9.11.12. proxy_read_timeout</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-headers-module">10.8.12. ngx_http_headers_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">10.8.12.1. set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-header">10.8.12.2. add_header</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-trailer">10.8.12.3. add_trailer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-headers-module">10.9.12. ngx_http_headers_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.9.12.1. set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-header">10.9.12.2. add_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-trailer">10.9.12.3. add_trailer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-fastcgi-module">10.8.13. ngx_http_fastcgi_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-pass">10.8.13.1. fastcgi_pass</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-index">10.8.13.2. fastcgi_index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-param">10.8.13.3. fastcgi_param</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-path">10.8.13.4. fastcgi_cache_path</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache">10.8.13.5. fastcgi_cache</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-key">10.8.13.6. fastcgi_cache_key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-method">10.8.13.7. fastcgi_cache_method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-min-uses">10.8.13.8. fastcgi_cache_min_uses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-keep-conn">10.8.13.9. fastcgi_keep_conn</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-valid">10.8.13.10. fastcgi_cache_valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-fastcgi-module">10.9.13. ngx_http_fastcgi_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-pass">10.9.13.1. fastcgi_pass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-index">10.9.13.2. fastcgi_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-param">10.9.13.3. fastcgi_param</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-path">10.9.13.4. fastcgi_cache_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache">10.9.13.5. fastcgi_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-key">10.9.13.6. fastcgi_cache_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-method">10.9.13.7. fastcgi_cache_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-min-uses">10.9.13.8. fastcgi_cache_min_uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-keep-conn">10.9.13.9. fastcgi_keep_conn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fastcgi-cache-valid">10.9.13.10. fastcgi_cache_valid</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-http-upstream-module">10.8.14. ngx_http_upstream_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#upstream">10.8.14.1. upstream</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#server">10.8.14.2. server</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ip-hash">10.8.14.3. ip_hash</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#least-conn">10.8.14.4. least_conn</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hash-key">10.8.14.5. hash key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keepalive">10.8.14.6. keepalive</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#health-check">10.8.14.7. health_check</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#match">10.8.14.8. match</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">10.8.14.9. fastcgi_cache_valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-http-upstream-module">10.9.14. ngx_http_upstream_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#upstream">10.9.14.1. upstream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server">10.9.14.2. server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ip-hash">10.9.14.3. ip_hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#least-conn">10.9.14.4. least_conn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hash-key">10.9.14.5. hash key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keepalive">10.9.14.6. keepalive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#health-check">10.9.14.7. health_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#match">10.9.14.8. match</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">10.9.14.9. fastcgi_cache_valid</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-stream-core-module">10.8.15. ngx_stream_core_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#stream">10.8.15.1. stream</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">10.8.15.2. listen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-stream-core-module">10.9.15. ngx_stream_core_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#stream">10.9.15.1. stream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">10.9.15.2. listen</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ngx-stream-proxy-module">10.8.16. ngx_stream_proxy_module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">10.8.16.1. proxy_pass</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#proxy-timeout">10.8.16.2. proxy_timeout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#porxy-connect-timeout">10.8.16.3. porxy_connect_timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngx-stream-proxy-module">10.9.16. ngx_stream_proxy_module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.9.16.1. proxy_pass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-timeout">10.9.16.2. proxy_timeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#porxy-connect-timeout">10.9.16.3. porxy_connect_timeout</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-nginx支持https.html">10.11. nginx支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-nginx常用案例.html">10.13. nginx常用案例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
@@ -322,7 +327,7 @@
         
           <li><a href="../index.html">10. WEB</a> &raquo;</li>
         
-      <li>10.8. nginx基础配置说明</li>
+      <li>10.9. nginx基础配置说明</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -344,11 +349,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="nginx">
-<h1>10.8. nginx基础配置说明<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
+<h1>10.9. nginx基础配置说明<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>10.8.1. 核心模块<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.1. 核心模块<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="user">
-<h3>10.8.1.1. user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.1. user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     user user [group];
 Default:
 user nobody nobody;
@@ -358,7 +363,7 @@ Context:    main
 <p>默认值是nobody，但是rpm包编译都是指定的nginx了， 即使你没有指定该配置也是nginx。</p>
 </div>
 <div class="section" id="pid">
-<h3>10.8.1.2. pid<a class="headerlink" href="#pid" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.2. pid<a class="headerlink" href="#pid" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     pid file;
 Default:
 pid logs/nginx.pid;
@@ -368,7 +373,7 @@ Context:    main
 <p>这个配置项指定了nginx的master主进程的进程id存储的文件。</p>
 </div>
 <div class="section" id="include">
-<h3>10.8.1.3. include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.3. include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     include file | mask;
 Default:    —
 Context:    any
@@ -377,7 +382,7 @@ Context:    any
 <p>包含特定的配置文件到当前文件中来。</p>
 </div>
 <div class="section" id="load-module">
-<h3>10.8.1.4. load_module<a class="headerlink" href="#load-module" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.4. load_module<a class="headerlink" href="#load-module" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     load_module file;
 Default:    —
 Context:    main
@@ -387,7 +392,7 @@ This directive appeared in version 1.9.11.
 <p>加载特定的模块进来。</p>
 </div>
 <div class="section" id="worker-cpu-affinity">
-<h3>10.8.1.5. worker_cpu_affinity<a class="headerlink" href="#worker-cpu-affinity" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.5. worker_cpu_affinity<a class="headerlink" href="#worker-cpu-affinity" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_cpu_affinity cpumask ...;
 worker_cpu_affinity auto [cpumask];
 Default:    —
@@ -399,7 +404,7 @@ Context:    main
 </div>
 </div>
 <div class="section" id="worker-processes">
-<h3>10.8.1.6. worker_processes<a class="headerlink" href="#worker-processes" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.6. worker_processes<a class="headerlink" href="#worker-processes" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_processes number | auto;
 Default:
 worker_processes 1;
@@ -409,7 +414,7 @@ Context:    main
 <p>定义下worker进程的个数， auto的话就是cpu的个数。</p>
 </div>
 <div class="section" id="worker-priority">
-<h3>10.8.1.7. worker_priority<a class="headerlink" href="#worker-priority" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.7. worker_priority<a class="headerlink" href="#worker-priority" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_priority number;
 Default:
 worker_priority 0;
@@ -419,7 +424,7 @@ Context:    main
 <p>指定工作进程的优先级的， 数值越大，优先级越低。</p>
 </div>
 <div class="section" id="worker-rlimit-nofile">
-<h3>10.8.1.8. worker_rlimit_nofile<a class="headerlink" href="#worker-rlimit-nofile" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.8. worker_rlimit_nofile<a class="headerlink" href="#worker-rlimit-nofile" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_rlimit_nofile number;
 Default:    —
 Context:    main
@@ -428,7 +433,7 @@ Context:    main
 <p>每个worker进程可以打开的文件数量。</p>
 </div>
 <div class="section" id="worker-connections">
-<h3>10.8.1.9. worker_connections<a class="headerlink" href="#worker-connections" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.9. worker_connections<a class="headerlink" href="#worker-connections" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_connections number;
 Default:
 worker_connections 512;
@@ -438,7 +443,7 @@ Context:    events
 <p>工作进程的连接数量。</p>
 </div>
 <div class="section" id="use">
-<h3>10.8.1.10. use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.10. use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     use method;
 Default:    —
 Context:    events
@@ -449,7 +454,7 @@ Context:    events
 <p>指明并发连接请求的处理方法，默认自动选择最优方法</p>
 </div>
 <div class="section" id="accept-mutex">
-<h3>10.8.1.11. accept_mutex<a class="headerlink" href="#accept-mutex" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.11. accept_mutex<a class="headerlink" href="#accept-mutex" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     accept_mutex on | off;
 Default:
 accept_mutex off;
@@ -459,7 +464,7 @@ Context:    events
 <p>处理新连接请求的方法， on代表有新连接的时候，唤醒所有worker进程，但是只有一个获得连接。</p>
 </div>
 <div class="section" id="daemon">
-<h3>10.8.1.12. daemon<a class="headerlink" href="#daemon" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.12. daemon<a class="headerlink" href="#daemon" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     daemon on | off;
 Default:
 daemon on;
@@ -469,7 +474,7 @@ Context:    main
 <p>on代表nginx后台运行的，off代表前台运行。</p>
 </div>
 <div class="section" id="master-process">
-<h3>10.8.1.13. master_process<a class="headerlink" href="#master-process" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.13. master_process<a class="headerlink" href="#master-process" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     master_process on | off;
 Default:
 master_process on;
@@ -479,7 +484,7 @@ Context:    main
 <p>是否以master/worker模型去运行nginx, 默认为on,off将不启动worker。</p>
 </div>
 <div class="section" id="error-log">
-<h3>10.8.1.14. error_log<a class="headerlink" href="#error-log" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.1.14. error_log<a class="headerlink" href="#error-log" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     error_log file [level];
 Default:
 error_log logs/error.log error;
@@ -490,9 +495,9 @@ Context:    main, http, mail, stream, server, location
 </div>
 </div>
 <div class="section" id="id2">
-<h2>10.8.2. 标准模块<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.2. 标准模块<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="listen">
-<h3>10.8.2.1. listen<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.1. listen<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     listen address[:port] [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
 listen port [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
 listen unix:path [default_server] [ssl] [http2 | spdy] [proxy_protocol] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
@@ -504,7 +509,7 @@ Context:    server
 <p>指定监听地址。</p>
 </div>
 <div class="section" id="server-name">
-<h3>10.8.2.2. server_name<a class="headerlink" href="#server-name" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.2. server_name<a class="headerlink" href="#server-name" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     server_name name ...;
 Default:
 server_name &quot;&quot;;
@@ -522,7 +527,7 @@ Context:    server
 </ol>
 </div>
 <div class="section" id="root">
-<h3>10.8.2.3. root<a class="headerlink" href="#root" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.3. root<a class="headerlink" href="#root" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     root path;
 Default:
 root html;
@@ -532,7 +537,7 @@ Context:    http, server, location, if in location
 <p>指定根位置的</p>
 </div>
 <div class="section" id="tcp-nodelay">
-<h3>10.8.2.4. tcp_nodelay<a class="headerlink" href="#tcp-nodelay" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.4. tcp_nodelay<a class="headerlink" href="#tcp-nodelay" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     tcp_nodelay on | off;
 Default:
 tcp_nodelay on;
@@ -542,7 +547,7 @@ Context:    http, server, location
 <p>keepalived模式下是不是延迟发送，将多个请求合并在发送。</p>
 </div>
 <div class="section" id="sendfile">
-<h3>10.8.2.5. sendfile<a class="headerlink" href="#sendfile" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.5. sendfile<a class="headerlink" href="#sendfile" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     sendfile on | off;
 Default:
 sendfile off;
@@ -552,7 +557,7 @@ Context:    http, server, location, if in location
 <p>是否开启sendfile功能， 在内核中封装报文直接发送，默认是off的。</p>
 </div>
 <div class="section" id="server-tokens">
-<h3>10.8.2.6. server_tokens<a class="headerlink" href="#server-tokens" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.6. server_tokens<a class="headerlink" href="#server-tokens" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     server_tokens on | off | build | string;
 Default:
 server_tokens on;
@@ -562,7 +567,7 @@ Context:    http, server, location
 <p>是否在响应报文的server首部显示nginx版本信息。</p>
 </div>
 <div class="section" id="location">
-<h3>10.8.2.7. location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.7. location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     location [ = | ~ | ~* | ^~ ] uri { ... }
 location @name { ... }
 Default:    —
@@ -573,7 +578,7 @@ Context:    server, location
 <p>匹配优先级从高到低： =, ^~, ～/～*, 不带符号</p>
 </div>
 <div class="section" id="alias">
-<h3>10.8.2.8. alias<a class="headerlink" href="#alias" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.8. alias<a class="headerlink" href="#alias" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     alias path;
 Default:    —
 Context:    location
@@ -582,7 +587,7 @@ Context:    location
 <p>定义路径别名的，文档映射的另外一种机制。</p>
 </div>
 <div class="section" id="index">
-<h3>10.8.2.9. index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.9. index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     index file ...;
 Default:
 index index.html;
@@ -592,7 +597,7 @@ Context:    http, server, location
 <p>指定默认网页的，默认值是index.html</p>
 </div>
 <div class="section" id="error-page">
-<h3>10.8.2.10. error_page<a class="headerlink" href="#error-page" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.10. error_page<a class="headerlink" href="#error-page" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     error_page code ... [=[response]] uri;
 Default:    —
 Context:    http, server, location, if in location
@@ -605,7 +610,7 @@ Context:    http, server, location, if in location
 <p>定义错误页的。</p>
 </div>
 <div class="section" id="try-files">
-<h3>10.8.2.11. try_files<a class="headerlink" href="#try-files" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.11. try_files<a class="headerlink" href="#try-files" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     try_files file ... uri;
 try_files file ... =code;
 Default:    —
@@ -619,7 +624,7 @@ Context:    server, location
 <p>是否在响应报文的server首部显示nginx版本信息。</p>
 </div>
 <div class="section" id="keepalive-timeout">
-<h3>10.8.2.12. keepalive_timeout<a class="headerlink" href="#keepalive-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.12. keepalive_timeout<a class="headerlink" href="#keepalive-timeout" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_timeout timeout [header_timeout];
 Default:
 keepalive_timeout 75s;
@@ -629,7 +634,7 @@ Context:    http, server, location
 <p>设定保存连接超时时长，0表示禁止长连接，默认是75s。</p>
 </div>
 <div class="section" id="keepalive-requests">
-<h3>10.8.2.13. keepalive_requests<a class="headerlink" href="#keepalive-requests" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.13. keepalive_requests<a class="headerlink" href="#keepalive-requests" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_requests number;
 Default:
 keepalive_requests 100;
@@ -640,7 +645,7 @@ This directive appeared in version 0.8.0.
 <p>在一次长连接上所运行请求的资源的最大数量，默认是100。</p>
 </div>
 <div class="section" id="keepalive-disable">
-<h3>10.8.2.14. keepalive_disable<a class="headerlink" href="#keepalive-disable" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.14. keepalive_disable<a class="headerlink" href="#keepalive-disable" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_disable none | browser ...;
 Default:
 keepalive_disable msie6;
@@ -650,7 +655,7 @@ Context:    http, server, location
 <p>对特定浏览器禁用长连接。</p>
 </div>
 <div class="section" id="send-timeout">
-<h3>10.8.2.15. send_timeout<a class="headerlink" href="#send-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.15. send_timeout<a class="headerlink" href="#send-timeout" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     send_timeout time;
 Default:
 send_timeout 60s;
@@ -660,7 +665,7 @@ Context:    http, server, location
 <p>向客户端发送响应报文的超时时长，此处是指两次写操作之间的间隔时长，而非整个响应过程的传输时长。</p>
 </div>
 <div class="section" id="client-body-buffer-size">
-<h3>10.8.2.16. client_body_buffer_size<a class="headerlink" href="#client-body-buffer-size" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.16. client_body_buffer_size<a class="headerlink" href="#client-body-buffer-size" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     client_body_buffer_size size;
 Default:
 client_body_buffer_size 8k|16k;
@@ -670,7 +675,7 @@ Context:    http, server, location
 <p>用于接受每个客户端请求报文的body部分的缓冲区大小，默认为16k,超过这个大小就将其暂存到磁盘上的client_body_temp_path位置。</p>
 </div>
 <div class="section" id="client-body-temp-path">
-<h3>10.8.2.17. client_body_temp_path<a class="headerlink" href="#client-body-temp-path" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.17. client_body_temp_path<a class="headerlink" href="#client-body-temp-path" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     client_body_temp_path path [level1 [level2 [level3]]];
 Default:
 client_body_temp_path client_body_temp;
@@ -680,7 +685,7 @@ Context:    http, server, location
 <p>设定用于存储客户端请求报文的body部分的临时存储路径及子目录结构和数量</p>
 </div>
 <div class="section" id="limit-rate">
-<h3>10.8.2.18. limit_rate<a class="headerlink" href="#limit-rate" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.18. limit_rate<a class="headerlink" href="#limit-rate" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     limit_rate_after size;
 Default:
 limit_rate_after 0;
@@ -691,7 +696,7 @@ This directive appeared in version 0.8.0.
 <p>用于限制响应给客户端的传输速率，单位是bytes,0代表不限制。</p>
 </div>
 <div class="section" id="limit-except">
-<h3>10.8.2.19. limit_except<a class="headerlink" href="#limit-except" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.19. limit_except<a class="headerlink" href="#limit-except" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     limit_except method ... { ... }
 Default:    —
 Context:    location
@@ -706,7 +711,7 @@ Context:    location
 <p>限制客户端使用除了特定的请求方法之外的其他方法。</p>
 </div>
 <div class="section" id="aio">
-<h3>10.8.2.20. aio<a class="headerlink" href="#aio" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.20. aio<a class="headerlink" href="#aio" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     aio on | off | threads[=pool];
 Default:
 aio off;
@@ -717,7 +722,7 @@ This directive appeared in version 0.8.11.
 <p>是否启用异步io功能。</p>
 </div>
 <div class="section" id="directio">
-<h3>10.8.2.21. directio<a class="headerlink" href="#directio" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.21. directio<a class="headerlink" href="#directio" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     directio size | off;
 Default:
 directio off;
@@ -728,7 +733,7 @@ This directive appeared in version 0.7.7.
 <p>大于给定的文件大小的死后，直接同步到磁盘，而非写文件。</p>
 </div>
 <div class="section" id="open-file-cache">
-<h3>10.8.2.22. open_file_cache<a class="headerlink" href="#open-file-cache" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.22. open_file_cache<a class="headerlink" href="#open-file-cache" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache off;
 open_file_cache max=N [inactive=time];
 Default:
@@ -744,7 +749,7 @@ Context:    http, server, location
 </ul>
 </div>
 <div class="section" id="open-file-cache-errors">
-<h3>10.8.2.23. open_file_cache_errors<a class="headerlink" href="#open-file-cache-errors" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.23. open_file_cache_errors<a class="headerlink" href="#open-file-cache-errors" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_errors on | off;
 Default:
 open_file_cache_errors off;
@@ -754,7 +759,7 @@ Context:    http, server, location
 <p>是否缓存查找时发生错误的文件一类的信息，默认是off。</p>
 </div>
 <div class="section" id="open-file-cache-min-uses">
-<h3>10.8.2.24. open_file_cache_min_uses<a class="headerlink" href="#open-file-cache-min-uses" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.24. open_file_cache_min_uses<a class="headerlink" href="#open-file-cache-min-uses" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_min_uses number;
 Default:
 open_file_cache_min_uses 1;
@@ -764,7 +769,7 @@ Context:    http, server, location
 <p>在指定的时常内，至少被明智特定的次数才可以归为活动项。</p>
 </div>
 <div class="section" id="open-file-cache-valid">
-<h3>10.8.2.25. open_file_cache_valid<a class="headerlink" href="#open-file-cache-valid" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.2.25. open_file_cache_valid<a class="headerlink" href="#open-file-cache-valid" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_valid time;
 Default:
 open_file_cache_valid 60s;
@@ -775,14 +780,14 @@ Context:    http, server, location
 </div>
 </div>
 <div class="section" id="ngx-http-access-module">
-<h2>10.8.3. ngx_http_access_module<a class="headerlink" href="#ngx-http-access-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.3. ngx_http_access_module<a class="headerlink" href="#ngx-http-access-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="allow">
-<h3>10.8.3.1. allow<a class="headerlink" href="#allow" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.3.1. allow<a class="headerlink" href="#allow" title="Permalink to this headline">¶</a></h3>
 <p>用法： allow address | CIDR | unix: | all;</p>
 <p>用于允许特定主机访问</p>
 </div>
 <div class="section" id="deny">
-<h3>10.8.3.2. deny<a class="headerlink" href="#deny" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.3.2. deny<a class="headerlink" href="#deny" title="Permalink to this headline">¶</a></h3>
 <p>用法： deny address | CIDR | unix: | all;</p>
 <p>用于禁止特定主机访问</p>
 <div class="admonition attention">
@@ -792,14 +797,14 @@ Context:    http, server, location
 </div>
 </div>
 <div class="section" id="ngx-http-auth-basic-module">
-<h2>10.8.4. ngx_http_auth_basic_module<a class="headerlink" href="#ngx-http-auth-basic-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.4. ngx_http_auth_basic_module<a class="headerlink" href="#ngx-http-auth-basic-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="auth-basic">
-<h3>10.8.4.1. auth_basic<a class="headerlink" href="#auth-basic" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.4.1. auth_basic<a class="headerlink" href="#auth-basic" title="Permalink to this headline">¶</a></h3>
 <p>用法：auth_basic string | off;</p>
 <p>提示认证的信息文本内容</p>
 </div>
 <div class="section" id="auth-basic-user-file">
-<h3>10.8.4.2. auth_basic_user_file<a class="headerlink" href="#auth-basic-user-file" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.4.2. auth_basic_user_file<a class="headerlink" href="#auth-basic-user-file" title="Permalink to this headline">¶</a></h3>
 <p>用法：auth_basic_user_file file;</p>
 <p>认证的基本用户文件，口令文件使用htpasswd命令实现（在httpd-tools包里面提供）</p>
 <p>样例：</p>
@@ -812,9 +817,9 @@ auth_basic_user_file /etc/nginx/.ngxpasswd;
 </div>
 </div>
 <div class="section" id="ngx-http-stub-status-module">
-<h2>10.8.5. ngx_http_stub_status_module<a class="headerlink" href="#ngx-http-stub-status-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.5. ngx_http_stub_status_module<a class="headerlink" href="#ngx-http-stub-status-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
-<h3>10.8.5.1. auth_basic<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.5.1. auth_basic<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>提示输出nginx的基本状态信息。</p>
 <p>样例：</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>location /status {
@@ -827,14 +832,14 @@ deny all;
 </div>
 </div>
 <div class="section" id="ngx-http-log-module">
-<h2>10.8.6. ngx_http_log_module<a class="headerlink" href="#ngx-http-log-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.6. ngx_http_log_module<a class="headerlink" href="#ngx-http-log-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="log-format">
-<h3>10.8.6.1. log_format<a class="headerlink" href="#log-format" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.6.1. log_format<a class="headerlink" href="#log-format" title="Permalink to this headline">¶</a></h3>
 <p>用法：log_format name string …;</p>
 <p>日志格式定义</p>
 </div>
 <div class="section" id="access-log">
-<h3>10.8.6.2. access_log<a class="headerlink" href="#access-log" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.6.2. access_log<a class="headerlink" href="#access-log" title="Permalink to this headline">¶</a></h3>
 <p>用法：access_log path [format [buffer=size] [gzip[=level]]
 [flush=time] [if=condition]];</p>
 <p>访问日志文件路径，格式和相关的缓冲区压缩等相关配置。</p>
@@ -847,56 +852,56 @@ access_log /spool/logs/nginx-access.log compression buffer=32k;
 </div>
 </div>
 <div class="section" id="open-log-file-cache">
-<h3>10.8.6.3. open_log_file_cache<a class="headerlink" href="#open-log-file-cache" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.6.3. open_log_file_cache<a class="headerlink" href="#open-log-file-cache" title="Permalink to this headline">¶</a></h3>
 <p>用法 open_log_file_cache max=N [inactive=time]
 [min_uses=N] [valid=time];</p>
 <p>缓存各个日志文件的信息。</p>
 </div>
 </div>
 <div class="section" id="ngx-http-gzip-module">
-<h2>10.8.7. ngx_http_gzip_module<a class="headerlink" href="#ngx-http-gzip-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.7. ngx_http_gzip_module<a class="headerlink" href="#ngx-http-gzip-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
-<h3>10.8.7.1. log_format<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.1. log_format<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip on | off;</p>
 <p>启用或者禁用gzip压缩</p>
 </div>
 <div class="section" id="gzip-comp-level">
-<h3>10.8.7.2. gzip_comp_level<a class="headerlink" href="#gzip-comp-level" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.2. gzip_comp_level<a class="headerlink" href="#gzip-comp-level" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_comp_level level;</p>
 <p>压缩比，默认是1</p>
 </div>
 <div class="section" id="gzip-disable">
-<h3>10.8.7.3. gzip_disable<a class="headerlink" href="#gzip-disable" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.3. gzip_disable<a class="headerlink" href="#gzip-disable" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_disable regex …;</p>
 <p>匹配到特定浏览器客户端不执行压缩功能。</p>
 </div>
 <div class="section" id="gzip-min-length">
-<h3>10.8.7.4. gzip_min_length<a class="headerlink" href="#gzip-min-length" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.4. gzip_min_length<a class="headerlink" href="#gzip-min-length" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_min_length length;</p>
 <p>启用压缩功能的响应报文的大小阈值，低于特定值就不压缩了。</p>
 </div>
 <div class="section" id="gzip-http-version">
-<h3>10.8.7.5. gzip_http_version<a class="headerlink" href="#gzip-http-version" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.5. gzip_http_version<a class="headerlink" href="#gzip-http-version" title="Permalink to this headline">¶</a></h3>
 <p>用法： gzip_http_version 1.0 | 1.1;</p>
 <p>设定启用压缩功能时，协议的最小版本。</p>
 </div>
 <div class="section" id="gzip-buffers">
-<h3>10.8.7.6. gzip_buffers<a class="headerlink" href="#gzip-buffers" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.6. gzip_buffers<a class="headerlink" href="#gzip-buffers" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_buffers number size;</p>
 <p>支持实现压缩功能时缓冲区熟练及每个缓存区的大小。</p>
 </div>
 <div class="section" id="gzip-types">
-<h3>10.8.7.7. gzip_types<a class="headerlink" href="#gzip-types" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.7. gzip_types<a class="headerlink" href="#gzip-types" title="Permalink to this headline">¶</a></h3>
 <p>用法： gzip_types mime-type …;</p>
 <p>那些资源进行压缩</p>
 </div>
 <div class="section" id="gzip-vary">
-<h3>10.8.7.8. gzip_vary<a class="headerlink" href="#gzip-vary" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.8. gzip_vary<a class="headerlink" href="#gzip-vary" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_vary on | off;</p>
 <p>如果启用了压缩，是否在响应报文首部插入“Vary: Accept-Encoding”</p>
 </div>
 <div class="section" id="gzip-proxied">
-<h3>10.8.7.9. gzip_proxied<a class="headerlink" href="#gzip-proxied" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.7.9. gzip_proxied<a class="headerlink" href="#gzip-proxied" title="Permalink to this headline">¶</a></h3>
 <p>用法：gzip_proxied off | expired | no-cache | no-store |
 private | no_last_modified | no_etag | auth | any …;</p>
 <p>充当代理服务器的时候， 对于后端服务器的响应报文何种条件下启动压缩功能。</p>
@@ -911,34 +916,34 @@ gzip_types text/xml text/css application/javascript;
 </div>
 </div>
 <div class="section" id="ngx-http-ssl-module">
-<h2>10.8.8. ngx_http_ssl_module<a class="headerlink" href="#ngx-http-ssl-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.8. ngx_http_ssl_module<a class="headerlink" href="#ngx-http-ssl-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ssl">
-<h3>10.8.8.1. ssl<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.1. ssl<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h3>
 <p>用法：ssl on | off;</p>
 <p>是否启用ssl功能</p>
 </div>
 <div class="section" id="ssl-certificate">
-<h3>10.8.8.2. ssl_certificate<a class="headerlink" href="#ssl-certificate" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.2. ssl_certificate<a class="headerlink" href="#ssl-certificate" title="Permalink to this headline">¶</a></h3>
 <p>用法： ssl_certificate file;</p>
 <p>ssl证书文件</p>
 </div>
 <div class="section" id="ssl-certificate-key">
-<h3>10.8.8.3. ssl_certificate_key<a class="headerlink" href="#ssl-certificate-key" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.3. ssl_certificate_key<a class="headerlink" href="#ssl-certificate-key" title="Permalink to this headline">¶</a></h3>
 <p>用法： ssl_certificate_key file;</p>
 <p>证书私钥</p>
 </div>
 <div class="section" id="ssl-protocols">
-<h3>10.8.8.4. ssl_protocols<a class="headerlink" href="#ssl-protocols" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.4. ssl_protocols<a class="headerlink" href="#ssl-protocols" title="Permalink to this headline">¶</a></h3>
 <p>用法： ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1]</p>
 <p>支持ssl版本协议，默认为后面3个。</p>
 </div>
 <div class="section" id="ssl-session-cache">
-<h3>10.8.8.5. ssl_session_cache<a class="headerlink" href="#ssl-session-cache" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.5. ssl_session_cache<a class="headerlink" href="#ssl-session-cache" title="Permalink to this headline">¶</a></h3>
 <p>用法：ssl_session_cache off | none | [builtin[:size]] [shared:name:size];</p>
 <p>ssl会话缓存</p>
 </div>
 <div class="section" id="ssl-session-timeout">
-<h3>10.8.8.6. ssl_session_timeout<a class="headerlink" href="#ssl-session-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.8.6. ssl_session_timeout<a class="headerlink" href="#ssl-session-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法： ssl_session_timeout time;</p>
 <p>ssl会话超时</p>
 <p>样例：</p>
@@ -957,9 +962,9 @@ ssl_session_timeout 10m;
 </div>
 </div>
 <div class="section" id="ngx-http-rewrite-module">
-<h2>10.8.9. ngx_http_rewrite_module<a class="headerlink" href="#ngx-http-rewrite-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.9. ngx_http_rewrite_module<a class="headerlink" href="#ngx-http-rewrite-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="rewrite">
-<h3>10.8.9.1. rewrite<a class="headerlink" href="#rewrite" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.9.1. rewrite<a class="headerlink" href="#rewrite" title="Permalink to this headline">¶</a></h3>
 <p>用法： rewrite regex replacement [flag]</p>
 <p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为replacement指定的新的URI</p>
 <dl class="docutils">
@@ -977,22 +982,22 @@ ssl_session_timeout 10m;
 </dl>
 </div>
 <div class="section" id="return">
-<h3>10.8.9.2. return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.9.2. return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h3>
 <p>用法： return code [text]; 或者 return code [text]; 或者 return URL;</p>
 <p>停止处理，并返回给客户端指定的响应码。</p>
 </div>
 <div class="section" id="rewrite-log">
-<h3>10.8.9.3. rewrite_log<a class="headerlink" href="#rewrite-log" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.9.3. rewrite_log<a class="headerlink" href="#rewrite-log" title="Permalink to this headline">¶</a></h3>
 <p>用法： rewrite_log on | off;</p>
 <p>是否开启重写日志，发送到error_log</p>
 </div>
 <div class="section" id="set">
-<h3>10.8.9.4. set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.9.4. set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h3>
 <p>用法： set $variable value;</p>
 <p>设置自定义变量</p>
 </div>
 <div class="section" id="if">
-<h3>10.8.9.5. if<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.9.5. if<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h3>
 <p>用法： if (condition) { … }</p>
 <p>针对特定条件判定</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>比较操作符：
@@ -1013,9 +1018,9 @@ ssl_session_timeout 10m;
 </div>
 </div>
 <div class="section" id="ngx-http-referer-module">
-<h2>10.8.10. ngx_http_referer_module<a class="headerlink" href="#ngx-http-referer-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.10. ngx_http_referer_module<a class="headerlink" href="#ngx-http-referer-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="valid-referers">
-<h3>10.8.10.1. valid_referers<a class="headerlink" href="#valid-referers" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.10.1. valid_referers<a class="headerlink" href="#valid-referers" title="Permalink to this headline">¶</a></h3>
 <p>用法：  valid_referers none|blocked|server_names|string …;</p>
 <p>定义referer首部的合法可用值，不能匹配的将是非法值。</p>
 <ul class="simple">
@@ -1035,9 +1040,9 @@ return 403 http://www.magedu.com;
 </div>
 </div>
 <div class="section" id="ngx-http-proxy-module">
-<h2>10.8.11. ngx_http_proxy_module<a class="headerlink" href="#ngx-http-proxy-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.11. ngx_http_proxy_module<a class="headerlink" href="#ngx-http-proxy-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="proxy-pass">
-<h3>10.8.11.1. proxy_pass<a class="headerlink" href="#proxy-pass" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.1. proxy_pass<a class="headerlink" href="#proxy-pass" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_pass URL;</p>
 <p>代理的路径，样例：</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>server {
@@ -1053,27 +1058,27 @@ proxy_pass http://host[:port]; 最后没有/
 <p>使用此功能，可以动静分离， 将静态文件和动态文件分开调度。</p>
 </div>
 <div class="section" id="proxy-set-header">
-<h3>10.8.11.2. proxy_set_header<a class="headerlink" href="#proxy-set-header" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.2. proxy_set_header<a class="headerlink" href="#proxy-set-header" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_set_header field value;</p>
 <p>设定发往后端主机的请求报文的请求首部的值。</p>
 </div>
 <div class="section" id="proxy-cache-path">
-<h3>10.8.11.3. proxy_cache_path<a class="headerlink" href="#proxy-cache-path" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.3. proxy_cache_path<a class="headerlink" href="#proxy-cache-path" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_cache_path;</p>
 <p>用于定义可用于proxy功能的缓存</p>
 </div>
 <div class="section" id="proxy-cache">
-<h3>10.8.11.4. proxy_cache<a class="headerlink" href="#proxy-cache" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.4. proxy_cache<a class="headerlink" href="#proxy-cache" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_cache zone | off; 默认off</p>
 <p>指定调用的缓存，或关闭缓存机制</p>
 </div>
 <div class="section" id="proxy-cache-key">
-<h3>10.8.11.5. proxy_cache_key<a class="headerlink" href="#proxy-cache-key" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.5. proxy_cache_key<a class="headerlink" href="#proxy-cache-key" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_cache_key string;</p>
 <p>缓存中用于键的内容，默认：  proxy_cache_key $scheme$proxy_host$request_uri;</p>
 </div>
 <div class="section" id="proxy-cache-valid">
-<h3>10.8.11.6. proxy_cache_valid<a class="headerlink" href="#proxy-cache-valid" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.6. proxy_cache_valid<a class="headerlink" href="#proxy-cache-valid" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_cache_valid [code …] time;</p>
 <p>定义对特定响应码的响应内容的缓存时长</p>
 <p>样例：</p>
@@ -1085,69 +1090,69 @@ proxy_cache_valid any 1m;
 </div>
 </div>
 <div class="section" id="proxy-cache-use-stale">
-<h3>10.8.11.7. proxy_cache_use_stale;<a class="headerlink" href="#proxy-cache-use-stale" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.7. proxy_cache_use_stale;<a class="headerlink" href="#proxy-cache-use-stale" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_cache_use_stale error | timeout | invalid_header | updating | http_500 | http_502 |
 http_503 | http_504 | http_403 | http_404 | off …</p>
 <p>在被代理的后端服务器出现哪种问题的情况下，可以直接使用过期的响应客户端。</p>
 </div>
 <div class="section" id="proxy-cache-method">
-<h3>10.8.11.8. proxy_cache_method<a class="headerlink" href="#proxy-cache-method" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.8. proxy_cache_method<a class="headerlink" href="#proxy-cache-method" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_cache_methods GET | HEAD | POST …;</p>
 <p>对那些客户端的请求方法对应的响应进行缓存，get和head方法总是被缓存的。</p>
 </div>
 <div class="section" id="proxy-hide-header">
-<h3>10.8.11.9. proxy_hide_header<a class="headerlink" href="#proxy-hide-header" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.9. proxy_hide_header<a class="headerlink" href="#proxy-hide-header" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_hide_header field;</p>
 <p>用于隐藏后端服务器的特定的响应首部</p>
 </div>
 <div class="section" id="proxy-connect-timeout">
-<h3>10.8.11.10. proxy_connect_timeout<a class="headerlink" href="#proxy-connect-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.10. proxy_connect_timeout<a class="headerlink" href="#proxy-connect-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_connect_timeout time;</p>
 <p>与后端服务器建立连接的超时时长，超过返回502错误。</p>
 </div>
 <div class="section" id="proxy-send-timeout">
-<h3>10.8.11.11. proxy_send_timeout<a class="headerlink" href="#proxy-send-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.11. proxy_send_timeout<a class="headerlink" href="#proxy-send-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_send_timeout time</p>
 <p>将请求发送给后端服务器的超时时长。</p>
 </div>
 <div class="section" id="proxy-read-timeout">
-<h3>10.8.11.12. proxy_read_timeout<a class="headerlink" href="#proxy-read-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.11.12. proxy_read_timeout<a class="headerlink" href="#proxy-read-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_read_timeout time;</p>
 <p>等待后端服务器发送响应报文的超时时长</p>
 </div>
 </div>
 <div class="section" id="ngx-http-headers-module">
-<h2>10.8.12. ngx_http_headers_module<a class="headerlink" href="#ngx-http-headers-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.12. ngx_http_headers_module<a class="headerlink" href="#ngx-http-headers-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id5">
-<h3>10.8.12.1. set<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.12.1. set<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>用法： set $variable value;</p>
 <p>设置自定义变量</p>
 </div>
 <div class="section" id="add-header">
-<h3>10.8.12.2. add_header<a class="headerlink" href="#add-header" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.12.2. add_header<a class="headerlink" href="#add-header" title="Permalink to this headline">¶</a></h3>
 <p>用法： add_header name value [always];</p>
 <p>添加自定义头信息</p>
 </div>
 <div class="section" id="add-trailer">
-<h3>10.8.12.3. add_trailer<a class="headerlink" href="#add-trailer" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.12.3. add_trailer<a class="headerlink" href="#add-trailer" title="Permalink to this headline">¶</a></h3>
 <p>用法：add_trailer name value [always];</p>
 <p>add_trailer添加自定义响应信息的尾部</p>
 </div>
 </div>
 <div class="section" id="ngx-http-fastcgi-module">
-<h2>10.8.13. ngx_http_fastcgi_module<a class="headerlink" href="#ngx-http-fastcgi-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.13. ngx_http_fastcgi_module<a class="headerlink" href="#ngx-http-fastcgi-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="fastcgi-pass">
-<h3>10.8.13.1. fastcgi_pass<a class="headerlink" href="#fastcgi-pass" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.1. fastcgi_pass<a class="headerlink" href="#fastcgi-pass" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_pass address;</p>
 <p>后端的fastcgi服务器地址</p>
 </div>
 <div class="section" id="fastcgi-index">
-<h3>10.8.13.2. fastcgi_index<a class="headerlink" href="#fastcgi-index" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.2. fastcgi_index<a class="headerlink" href="#fastcgi-index" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_index name;</p>
 <p>fastcgi 默认主页资源</p>
 </div>
 <div class="section" id="fastcgi-param">
-<h3>10.8.13.3. fastcgi_param<a class="headerlink" href="#fastcgi-param" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.3. fastcgi_param<a class="headerlink" href="#fastcgi-param" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_param parameter value [if_not_empty];</p>
 <p>设置传递给 FastCGI服务器的参数值，可以是文本，变量或组合</p>
 <p>样例：</p>
@@ -1170,7 +1175,7 @@ fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
 </div>
 </div>
 <div class="section" id="fastcgi-cache-path">
-<h3>10.8.13.4. fastcgi_cache_path<a class="headerlink" href="#fastcgi-cache-path" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.4. fastcgi_cache_path<a class="headerlink" href="#fastcgi-cache-path" title="Permalink to this headline">¶</a></h3>
 <p>用法：fastcgi_cache_path path [levels=levels] [use_temp_path=on|off]
 keys_zone=name:size [inactive=time] [max_size=size]
 [manager_files=number] [manager_sleep=time] [manager_threshold=time]
@@ -1180,33 +1185,33 @@ keys_zone=name:size [inactive=time] [max_size=size]
 <p>缓存路径。</p>
 </div>
 <div class="section" id="fastcgi-cache">
-<h3>10.8.13.5. fastcgi_cache<a class="headerlink" href="#fastcgi-cache" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.5. fastcgi_cache<a class="headerlink" href="#fastcgi-cache" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_cache zone | off;</p>
 <p>调用指定的缓存空间来缓存数据</p>
 </div>
 <div class="section" id="fastcgi-cache-key">
-<h3>10.8.13.6. fastcgi_cache_key<a class="headerlink" href="#fastcgi-cache-key" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.6. fastcgi_cache_key<a class="headerlink" href="#fastcgi-cache-key" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_cache_key string;</p>
 <p>定义用作缓存项的key的字符串</p>
 </div>
 <div class="section" id="fastcgi-cache-method">
-<h3>10.8.13.7. fastcgi_cache_method<a class="headerlink" href="#fastcgi-cache-method" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.7. fastcgi_cache_method<a class="headerlink" href="#fastcgi-cache-method" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_cache_methods GET | HEAD | POST …;</p>
 <p>为哪些请求方法使用缓存</p>
 </div>
 <div class="section" id="fastcgi-cache-min-uses">
-<h3>10.8.13.8. fastcgi_cache_min_uses<a class="headerlink" href="#fastcgi-cache-min-uses" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.8. fastcgi_cache_min_uses<a class="headerlink" href="#fastcgi-cache-min-uses" title="Permalink to this headline">¶</a></h3>
 <p>用法：fastcgi_cache_min_uses number;</p>
 <p>缓存空间中的缓存项在inactive定义的非活动时间内至少要被访问到
 此处所指定的次数方可被认作活动项</p>
 </div>
 <div class="section" id="fastcgi-keep-conn">
-<h3>10.8.13.9. fastcgi_keep_conn<a class="headerlink" href="#fastcgi-keep-conn" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.9. fastcgi_keep_conn<a class="headerlink" href="#fastcgi-keep-conn" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_keep_conn on | off;</p>
 <p>收到后端服务器响应后，fastcgi服务器是否关闭连接，建议启用长连接</p>
 </div>
 <div class="section" id="fastcgi-cache-valid">
-<h3>10.8.13.10. fastcgi_cache_valid<a class="headerlink" href="#fastcgi-cache-valid" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.13.10. fastcgi_cache_valid<a class="headerlink" href="#fastcgi-cache-valid" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_cache_valid [code …] time;</p>
 <p>不同的响应码各自的缓存时长</p>
 <p>样例：</p>
@@ -1230,58 +1235,58 @@ keys_zone=name:size [inactive=time] [max_size=size]
 </div>
 </div>
 <div class="section" id="ngx-http-upstream-module">
-<h2>10.8.14. ngx_http_upstream_module<a class="headerlink" href="#ngx-http-upstream-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.14. ngx_http_upstream_module<a class="headerlink" href="#ngx-http-upstream-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="upstream">
-<h3>10.8.14.1. upstream<a class="headerlink" href="#upstream" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.1. upstream<a class="headerlink" href="#upstream" title="Permalink to this headline">¶</a></h3>
 <p>用法： upstream name { … }</p>
 <p>定义后端服务器组，会引入一个新的上下文。</p>
 </div>
 <div class="section" id="server">
-<h3>10.8.14.2. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.2. server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h3>
 <p>用法： server address [parameters];</p>
 <p>定义后端服务器成员，weight定义权重，max_conn最大连接数量，max_fails失败尝试最大次数
 faile_timeout后端标记不可用状态的时长，backup备用，down不可用。</p>
 </div>
 <div class="section" id="ip-hash">
-<h3>10.8.14.3. ip_hash<a class="headerlink" href="#ip-hash" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.3. ip_hash<a class="headerlink" href="#ip-hash" title="Permalink to this headline">¶</a></h3>
 <p>用法： ip_hash</p>
 <p>源地址hash调度算法</p>
 </div>
 <div class="section" id="least-conn">
-<h3>10.8.14.4. least_conn<a class="headerlink" href="#least-conn" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.4. least_conn<a class="headerlink" href="#least-conn" title="Permalink to this headline">¶</a></h3>
 <p>用法： least_conn</p>
 <p>最小连接调度算法</p>
 </div>
 <div class="section" id="hash-key">
-<h3>10.8.14.5. hash key<a class="headerlink" href="#hash-key" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.5. hash key<a class="headerlink" href="#hash-key" title="Permalink to this headline">¶</a></h3>
 <p>用法：hash key [consistent]</p>
 <p>基于特定的key的hash表来实现对请求的调度。</p>
 </div>
 <div class="section" id="keepalive">
-<h3>10.8.14.6. keepalive<a class="headerlink" href="#keepalive" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.6. keepalive<a class="headerlink" href="#keepalive" title="Permalink to this headline">¶</a></h3>
 <p>用法：keepalive 连接数N</p>
 <p>为每个worker进程保留的空闲的长连接数量。</p>
 </div>
 <div class="section" id="health-check">
-<h3>10.8.14.7. health_check<a class="headerlink" href="#health-check" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.7. health_check<a class="headerlink" href="#health-check" title="Permalink to this headline">¶</a></h3>
 <p>用法： health_check [parameters];</p>
 <p>健康性检查，interval检查频率，fails失败次数，passes判定成功次数，uri测试目标，match指定的match配置块。</p>
 </div>
 <div class="section" id="match">
-<h3>10.8.14.8. match<a class="headerlink" href="#match" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.8. match<a class="headerlink" href="#match" title="Permalink to this headline">¶</a></h3>
 <p>用法： match name { … }</p>
 <p>对后端的服务器做健康检查时候，定义其结果判断机制，只能用于http上下文。</p>
 </div>
 <div class="section" id="id6">
-<h3>10.8.14.9. fastcgi_cache_valid<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.14.9. fastcgi_cache_valid<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>用法： fastcgi_cache_valid [code …] time;</p>
 <p>不同的响应码各自的缓存时长</p>
 </div>
 </div>
 <div class="section" id="ngx-stream-core-module">
-<h2>10.8.15. ngx_stream_core_module<a class="headerlink" href="#ngx-stream-core-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.15. ngx_stream_core_module<a class="headerlink" href="#ngx-stream-core-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="stream">
-<h3>10.8.15.1. stream<a class="headerlink" href="#stream" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.15.1. stream<a class="headerlink" href="#stream" title="Permalink to this headline">¶</a></h3>
 <p>用法： stream { … }</p>
 <p>不同的响应码各自的缓存时长</p>
 <p>样例：</p>
@@ -1300,7 +1305,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 </div>
 </div>
 <div class="section" id="id7">
-<h3>10.8.15.2. listen<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.15.2. listen<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>用法： listen address:port [ssl] [udp] [proxy_protocol]
 [backlog=number] [bind] [ipv6only=on|off] [reuseport]
 [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];</p>
@@ -1308,19 +1313,19 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 </div>
 </div>
 <div class="section" id="ngx-stream-proxy-module">
-<h2>10.8.16. ngx_stream_proxy_module<a class="headerlink" href="#ngx-stream-proxy-module" title="Permalink to this headline">¶</a></h2>
+<h2>10.9.16. ngx_stream_proxy_module<a class="headerlink" href="#ngx-stream-proxy-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id8">
-<h3>10.8.16.1. proxy_pass<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.16.1. proxy_pass<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_pass address;</p>
 <p>指定后端服务器地址</p>
 </div>
 <div class="section" id="proxy-timeout">
-<h3>10.8.16.2. proxy_timeout<a class="headerlink" href="#proxy-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.16.2. proxy_timeout<a class="headerlink" href="#proxy-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_timeout timeout;</p>
 <p>无数据传输时候，保存连接状态的超时时长</p>
 </div>
 <div class="section" id="porxy-connect-timeout">
-<h3>10.8.16.3. porxy_connect_timeout<a class="headerlink" href="#porxy-connect-timeout" title="Permalink to this headline">¶</a></h3>
+<h3>10.9.16.3. porxy_connect_timeout<a class="headerlink" href="#porxy-connect-timeout" title="Permalink to this headline">¶</a></h3>
 <p>用法：proxy_connect_timeout time;</p>
 <p>设置nginx与被代理的服务器尝试建立连接的超时时长默认为60s</p>
 <p>样例配置</p>
@@ -1355,10 +1360,10 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="03-nginx虚拟主机三种实现方式.html" class="btn btn-neutral float-right" title="10.10. nginx虚拟主机三种实现方式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="01-nginx安装.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="01-nginx安装.html" class="btn btn-neutral" title="10.8. nginx安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
