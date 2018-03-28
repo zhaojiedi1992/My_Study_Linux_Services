@@ -118,7 +118,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../mysql/12-mysql性能测试.html">9.14. mysql性能测试</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-redis安装和常用类型.html">9.15. redis安装和常用类型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-redis常用配置.html">9.16. redis常用配置</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">9.17. redis主从配置</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.17. redis主从配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.17.1. 安装和基础配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.17.2. 主从配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.17.3. 测试下</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="04-redis高可用.html">9.18. redis高可用</a></li>
 </ul>
 </li>
@@ -197,7 +202,67 @@
            <div itemprop="articleBody">
             
   <div class="section" id="redis">
-<h1>9.17. redis主从配置<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<span id="topics-redisslave"></span><h1>9.17. redis主从配置<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>9.17.1. 安装和基础配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install redis</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install redis</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install redis</span>
+
+<span class="c1"># 设置监听和密码</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/redis.conf</span>
+<span class="c1"># 修改如下2项</span>
+<span class="nb">bind</span> <span class="m">0</span>.0.0.0
+requirepass linuxpanda
+
+<span class="c1"># 推送给其他客户端</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># scp /etc/redis.conf  192.168.46.152:/etc/</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># scp /etc/redis.conf  192.168.46.153:/etc/</span>
+
+<span class="c1"># 启动服务</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart redis</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart redis</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl restart redis</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>9.17.2. 主从配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 一个从节点设置下主节点关联</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/redis.conf</span>
+<span class="c1"># 修改如下2行</span>
+slaveof <span class="m">192</span>.168.46.151 <span class="m">6379</span>
+masterauth linuxpanda
+
+<span class="c1"># 推送给153主机</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp /etc/redis.conf  192.168.46.153:/etc/</span>
+
+<span class="c1"># 重启下redis</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart redis</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl restart redis</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>9.17.3. 测试下<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>root@centos-151 ~<span class="o">]</span><span class="c1"># redis-cli -a linuxpanda</span>
+<span class="m">127</span>.0.0.1:6379&gt; keys *
+<span class="o">(</span>empty list or <span class="nb">set</span><span class="o">)</span>
+<span class="m">127</span>.0.0.1:6379&gt; <span class="nb">set</span> name zhaojiedi
+OK
+<span class="m">127</span>.0.0.1:6379&gt; keys *
+<span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># redis-cli -a linuxpanda</span>
+<span class="m">127</span>.0.0.1:6379&gt; keys *
+<span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># redis-cli -a linuxpanda</span>
+<span class="m">127</span>.0.0.1:6379&gt; keys *
+<span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

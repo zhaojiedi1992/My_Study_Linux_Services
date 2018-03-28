@@ -104,6 +104,16 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.4. zabbix</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">5.4.1. 安装</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">5.4.2. 图形安装配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.4.3. 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#host-group">5.4.4. host group(主机组)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#template">5.4.5. template(模板)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#item">5.4.6. item</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graph">5.4.7. graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#discover">5.4.8. discover(发现)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger">5.4.9. trigger(触发器)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#web">5.4.9.1. 安装web</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -191,38 +201,47 @@
 <div class="section" id="id1">
 <h2>5.4.1. 安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.zabbix.com/download">zabbix安装参考</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装配置数据库</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mysql -uroot -ppanda</span>
+Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MariaDB connection id is <span class="m">10</span>
+Server version: <span class="m">5</span>.5.56-MariaDB MariaDB Server
+
+Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; create database zabbix character <span class="nb">set</span> utf8 collate utf8_bin<span class="p">;</span>
+Query OK, <span class="m">1</span> row affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant all privileges on zabbix.* to zabbix@localhost identified by <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; <span class="nb">exit</span>
+Bye
+
+<span class="c1"># 安装zabbix</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># rpm -i http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install zabbix-server-mysql zabbix-web-mysql zabbix-agent</span>
+
+<span class="c1"># 导库</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -ppassword zabbix</span>
+
+<span class="c1"># 配置文件添加密码</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/zabbix/zabbix_server.conf</span>
+<span class="nv">DBPassword</span><span class="o">=</span>password
+<span class="c1"># 修改时区信息</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/httpd/conf.d/zabbix.conf</span>
+php_value date.timezone Asia/Shanghai
+<span class="c1"># 重启web</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl start httpd</span>
 </pre></div>
 </div>
-<p># 安装配置数据库
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# yum install mariadb-server</p>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# systemctl start mariadb
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# mysql_secure_installation</p>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# mysql -uroot -ppanda
-Welcome to the MariaDB monitor.  Commands end with ; or g.
-Your MariaDB connection id is 10
-Server version: 5.5.56-MariaDB MariaDB Server</p>
-<p>Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</p>
-<p>Type ‘help;’ or ‘h’ for help. Type ‘c’ to clear the current input statement.</p>
-<p>MariaDB [(none)]&gt; create database zabbix character set utf8 collate utf8_bin;
-Query OK, 1 row affected (0.00 sec)</p>
-<p>MariaDB [(none)]&gt; grant all privileges on zabbix.* to <a class="reference external" href="mailto:zabbix&#37;&#52;&#48;localhost">zabbix<span>&#64;</span>localhost</a> identified by ‘password’;
-Query OK, 0 rows affected (0.00 sec)</p>
-<p>MariaDB [(none)]&gt; exit
-Bye</p>
-<p># 安装zabbix
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# rpm -i <a class="reference external" href="http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm">http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</a>
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# yum install zabbix-server-mysql zabbix-web-mysql zabbix-agent</p>
-<p># 导库
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -ppassword zabbix</p>
-<p># 配置文件添加密码
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# vim /etc/zabbix/zabbix_server.conf
-DBPassword=password
-# 修改时区信息
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# vim /etc/httpd/conf.d/zabbix.conf
-php_value date.timezone Asia/Shanghai
-# 重启web
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# systemctl start httpd</p>
 </div>
 <div class="section" id="id3">
 <h2>5.4.2. 图形安装配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
@@ -232,6 +251,128 @@ php_value date.timezone Asia/Shanghai
 <img alt="../_images/zabbix-step4.png" src="../_images/zabbix-step4.png" />
 <img alt="../_images/zabbix-step5.png" src="../_images/zabbix-step5.png" />
 <img alt="../_images/zabbix-step6.png" src="../_images/zabbix-step6.png" />
+</div>
+<div class="section" id="id4">
+<h2>5.4.3. 准备工作<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># rpm -i http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install zabbix-agent</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /etc/zabbix/</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># ls</span>
+zabbix_agentd.conf  zabbix_agentd.d
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># vim zabbix_agentd.conf</span>
+<span class="c1"># 修改如下3行</span>
+<span class="nv">Server</span><span class="o">=</span><span class="m">192</span>.168.46.151
+<span class="nv">ServerActive</span><span class="o">=</span><span class="m">192168</span>.46.151
+<span class="nv">Hostname</span><span class="o">=</span>centos-152.linuxpanda.tech
+
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># rpm -i http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install zabbix-agent</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># cd /etc/zabbix/</span>
+<span class="o">[</span>root@centos-153 zabbix<span class="o">]</span><span class="c1"># ls</span>
+zabbix_agentd.conf  zabbix_agentd.d
+<span class="o">[</span>root@centos-153 zabbix<span class="o">]</span><span class="c1"># vim zabbix_agentd.conf</span>
+<span class="c1"># 修改如下3行</span>
+<span class="nv">Server</span><span class="o">=</span><span class="m">192</span>.168.46.151
+<span class="nv">ServerActive</span><span class="o">=</span><span class="m">192168</span>.46.151
+<span class="nv">Hostname</span><span class="o">=</span>centos-153.linuxpanda.tech
+
+
+<span class="c1"># 启动服务并查看监听</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl restart zabbix-agent</span>
+<span class="o">[</span>root@centos-153 zabbix<span class="o">]</span><span class="c1"># systemctl restart zabbix-agent</span>
+
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># ss -tul</span>
+Netid  State      Recv-Q Send-Q                                       Local Address:Port                                                        Peer Address:Port
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:ssh                                                                    *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                              <span class="m">127</span>.0.0.1:smtp                                                                   *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:zabbix-agent                                                           *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::ssh                                                                   :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                                    ::1:smtp                                                                  :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::zabbix-agent                                                          :::*
+
+<span class="o">[</span>root@centos-153 zabbix<span class="o">]</span><span class="c1"># ss -tul</span>
+Netid  State      Recv-Q Send-Q                                       Local Address:Port                                                        Peer Address:Port
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:ssh                                                                    *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                              <span class="m">127</span>.0.0.1:smtp                                                                   *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:zabbix-agent                                                           *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::ssh                                                                   :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                                    ::1:smtp                                                                  :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::zabbix-agent                                                          :::*
+</pre></div>
+</div>
+</div>
+<div class="section" id="host-group">
+<h2>5.4.4. host group(主机组)<a class="headerlink" href="#host-group" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/group-1.png" src="../_images/group-1.png" />
+<img alt="../_images/group-2.png" src="../_images/group-2.png" />
+</div>
+<div class="section" id="template">
+<h2>5.4.5. template(模板)<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
+<p>创建template</p>
+<img alt="../_images/template-1.png" src="../_images/template-1.png" />
+<img alt="../_images/template-2.png" src="../_images/template-2.png" />
+</div>
+<div class="section" id="item">
+<h2>5.4.6. item<a class="headerlink" href="#item" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/template-3.png" src="../_images/template-3.png" />
+<img alt="../_images/template-4.png" src="../_images/template-4.png" />
+<img alt="../_images/template-5.png" src="../_images/template-5.png" />
+</div>
+<div class="section" id="graph">
+<h2>5.4.7. graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/template-6.png" src="../_images/template-6.png" />
+<img alt="../_images/template-7.png" src="../_images/template-7.png" />
+</div>
+<div class="section" id="discover">
+<h2>5.4.8. discover(发现)<a class="headerlink" href="#discover" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/discover-1.png" src="../_images/discover-1.png" />
+<img alt="../_images/discover-2.png" src="../_images/discover-2.png" />
+<img alt="../_images/discover-3.png" src="../_images/discover-3.png" />
+<p>等会查看图形显示问题</p>
+<img alt="../_images/查看网络监控数据.png" src="../_images/查看网络监控数据.png" />
+</div>
+<div class="section" id="trigger">
+<h2>5.4.9. trigger(触发器)<a class="headerlink" href="#trigger" title="Permalink to this headline">¶</a></h2>
+<p>这里以152的web应用为例说明trigger的使用</p>
+<div class="section" id="web">
+<h3>5.4.9.1. 安装web<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># yum install nginx</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># hostname</span>
+centos-152.linuxpanda.tech
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># hostname &gt; /usr/share/nginx/html/index.html</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># curl localhost</span>
+centos-152.linuxpanda.tech
+</pre></div>
+</div>
+<img alt="../_images/nginx-1.png" src="../_images/nginx-1.png" />
+<img alt="../_images/nginx-2.png" src="../_images/nginx-2.png" />
+<img alt="../_images/nginx-3.png" src="../_images/nginx-3.png" />
+<img alt="../_images/nginx-4.png" src="../_images/nginx-4.png" />
+<img alt="../_images/nginx-5.png" src="../_images/nginx-5.png" />
+<img alt="../_images/nginx-6.png" src="../_images/nginx-6.png" />
+<img alt="../_images/nginx-7.png" src="../_images/nginx-7.png" />
+<img alt="../_images/nginx-8.png" src="../_images/nginx-8.png" />
+<img alt="../_images/nginx-9.png" src="../_images/nginx-9.png" />
+<img alt="../_images/nginx-10.png" src="../_images/nginx-10.png" />
+<img alt="../_images/nginx-11.png" src="../_images/nginx-11.png" />
+<p>停下服务，测试监控</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl stop nginx</span>
+</pre></div>
+</div>
+<img alt="../_images/nginx-12.png" src="../_images/nginx-12.png" />
+<p>配置远程权限</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 配置sudo</span>
+zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span>       NOPASSWD: ALL
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># vim /etc/zabbix/zabbix_agentd.conf</span>
+<span class="nv">EnableRemoteCommands</span><span class="o">=</span><span class="m">1</span>
+
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl start nginx</span>
+<span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl stop nginx</span>
+</pre></div>
+</div>
+<img alt="../_images/nginx-13.png" src="../_images/nginx-13.png" />
+</div>
 </div>
 </div>
 
