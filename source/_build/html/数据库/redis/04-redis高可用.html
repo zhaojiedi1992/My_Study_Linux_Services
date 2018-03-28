@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.18. redis高可用 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="9. 数据库" href="../index.html"/>
+        <link rel="next" title="10. WEB" href="../../WEB/index.html"/>
+        <link rel="prev" title="9.17. redis主从配置" href="03-redis主从配置.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">9. 数据库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../数据库基础.html">9.1. 数据库基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql语句.html">9.2. sql语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/01-mysql安装.html">9.3. mysql安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/02-mysql多实例.html">9.4. mariadb多实例安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/03-mysql终端入门.html">9.5. mysql终端入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/04-mysql入门.html">9.6. mysql入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/05-mysql管理.html">9.7. mysql管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/06-mysql备份和恢复.html">9.8. mysql备份和恢复</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/07-mysql主从.html">9.9. mysql主从</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/08-mysql主从加密.html">9.10. mysql主从加密</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/09-mysql的mha架构.html">9.11. mysql的mha架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/10-mysql的galera实现.html">9.12. mysql的galera实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/11-mysql读写分离.html">9.13. mysql读写分离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mysql/12-mysql性能测试.html">9.14. mysql性能测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-redis安装和常用类型.html">9.15. redis安装和常用类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-redis常用配置.html">9.16. redis常用配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-redis主从配置.html">9.17. redis主从配置</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.18. redis高可用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sentinel">9.18.1. 配置sentinel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.18.2. 测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.18.3. 模拟破坏</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.18.4. 查看是否转移</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">9. 数据库</a> &raquo;</li>
+        
+      <li>9.18. redis高可用</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/数据库/redis/04-redis高可用.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="redis">
+<h1>9.18. redis高可用<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
+<p>redis的高可用使用sentinel实现的， 建议sentinel安装在独立的服务器上。</p>
+<p>需要先配置主从的 <a class="reference internal" href="03-redis主从配置.html#topics-redisslave"><span class="std std-ref">redis主从配置</span></a></p>
+<div class="section" id="sentinel">
+<h2>9.18.1. 配置sentinel<a class="headerlink" href="#sentinel" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/redis-sentinel.conf</span>
+<span class="c1"># 修改如下3行</span>
+<span class="nb">bind</span> <span class="m">0</span>.0.0.0
+sentinel monitor mymaster <span class="m">192</span>.168.46.151 <span class="m">6379</span> <span class="m">2</span>
+sentinel auth-pass  mymaster linuxpanda
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># scp /etc/redis-sentinel.conf 192.168.46.152:/etc/</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># scp /etc/redis-sentinel.conf 192.168.46.153:/etc/</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart redis-sentinel</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart redis-sentinel</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl restart redis-sentinel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>9.18.2. 测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
+
+<span class="m">127</span>.0.0.1:26379&gt; sentinel masters
+<span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+    <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;mymaster&quot;</span>
+    <span class="m">3</span><span class="o">)</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="m">4</span><span class="o">)</span> <span class="s2">&quot;192.168.46.151&quot;</span>
+    <span class="m">5</span><span class="o">)</span> <span class="s2">&quot;port&quot;</span>
+    <span class="m">6</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+    <span class="m">7</span><span class="o">)</span> <span class="s2">&quot;runid&quot;</span>
+    <span class="m">8</span><span class="o">)</span> <span class="s2">&quot;817bed45028e27aad78aaf82380041943a2fedb3&quot;</span>
+    <span class="m">9</span><span class="o">)</span> <span class="s2">&quot;flags&quot;</span>
+<span class="m">10</span><span class="o">)</span> <span class="s2">&quot;master&quot;</span>
+<span class="m">11</span><span class="o">)</span> <span class="s2">&quot;link-pending-commands&quot;</span>
+<span class="m">12</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">13</span><span class="o">)</span> <span class="s2">&quot;link-refcount&quot;</span>
+<span class="m">14</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">15</span><span class="o">)</span> <span class="s2">&quot;last-ping-sent&quot;</span>
+<span class="m">16</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">17</span><span class="o">)</span> <span class="s2">&quot;last-ok-ping-reply&quot;</span>
+<span class="m">18</span><span class="o">)</span> <span class="s2">&quot;953&quot;</span>
+<span class="m">19</span><span class="o">)</span> <span class="s2">&quot;last-ping-reply&quot;</span>
+<span class="m">20</span><span class="o">)</span> <span class="s2">&quot;953&quot;</span>
+<span class="m">21</span><span class="o">)</span> <span class="s2">&quot;down-after-milliseconds&quot;</span>
+<span class="m">22</span><span class="o">)</span> <span class="s2">&quot;30000&quot;</span>
+<span class="m">23</span><span class="o">)</span> <span class="s2">&quot;info-refresh&quot;</span>
+<span class="m">24</span><span class="o">)</span> <span class="s2">&quot;7374&quot;</span>
+<span class="m">25</span><span class="o">)</span> <span class="s2">&quot;role-reported&quot;</span>
+<span class="m">26</span><span class="o">)</span> <span class="s2">&quot;master&quot;</span>
+<span class="m">27</span><span class="o">)</span> <span class="s2">&quot;role-reported-time&quot;</span>
+<span class="m">28</span><span class="o">)</span> <span class="s2">&quot;338609&quot;</span>
+<span class="m">29</span><span class="o">)</span> <span class="s2">&quot;config-epoch&quot;</span>
+<span class="m">30</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">31</span><span class="o">)</span> <span class="s2">&quot;num-slaves&quot;</span>
+<span class="m">32</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">33</span><span class="o">)</span> <span class="s2">&quot;num-other-sentinels&quot;</span>
+<span class="m">34</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">35</span><span class="o">)</span> <span class="s2">&quot;quorum&quot;</span>
+<span class="m">36</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">37</span><span class="o">)</span> <span class="s2">&quot;failover-timeout&quot;</span>
+<span class="m">38</span><span class="o">)</span> <span class="s2">&quot;180000&quot;</span>
+<span class="m">39</span><span class="o">)</span> <span class="s2">&quot;parallel-syncs&quot;</span>
+<span class="m">40</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+
+<span class="m">127</span>.0.0.1:26379&gt; sentinel slaves mymaster
+<span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+    <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;192.168.46.153:6379&quot;</span>
+    <span class="m">3</span><span class="o">)</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="m">4</span><span class="o">)</span> <span class="s2">&quot;192.168.46.153&quot;</span>
+    <span class="m">5</span><span class="o">)</span> <span class="s2">&quot;port&quot;</span>
+    <span class="m">6</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+    <span class="m">7</span><span class="o">)</span> <span class="s2">&quot;runid&quot;</span>
+    <span class="m">8</span><span class="o">)</span> <span class="s2">&quot;0d47a46a0297fde064159b79aba7cc6c7937e6ac&quot;</span>
+    <span class="m">9</span><span class="o">)</span> <span class="s2">&quot;flags&quot;</span>
+<span class="m">10</span><span class="o">)</span> <span class="s2">&quot;slave&quot;</span>
+<span class="m">11</span><span class="o">)</span> <span class="s2">&quot;link-pending-commands&quot;</span>
+<span class="m">12</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">13</span><span class="o">)</span> <span class="s2">&quot;link-refcount&quot;</span>
+<span class="m">14</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">15</span><span class="o">)</span> <span class="s2">&quot;last-ping-sent&quot;</span>
+<span class="m">16</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">17</span><span class="o">)</span> <span class="s2">&quot;last-ok-ping-reply&quot;</span>
+<span class="m">18</span><span class="o">)</span> <span class="s2">&quot;181&quot;</span>
+<span class="m">19</span><span class="o">)</span> <span class="s2">&quot;last-ping-reply&quot;</span>
+<span class="m">20</span><span class="o">)</span> <span class="s2">&quot;181&quot;</span>
+<span class="m">21</span><span class="o">)</span> <span class="s2">&quot;down-after-milliseconds&quot;</span>
+<span class="m">22</span><span class="o">)</span> <span class="s2">&quot;30000&quot;</span>
+<span class="m">23</span><span class="o">)</span> <span class="s2">&quot;info-refresh&quot;</span>
+<span class="m">24</span><span class="o">)</span> <span class="s2">&quot;8016&quot;</span>
+<span class="m">25</span><span class="o">)</span> <span class="s2">&quot;role-reported&quot;</span>
+<span class="m">26</span><span class="o">)</span> <span class="s2">&quot;slave&quot;</span>
+<span class="m">27</span><span class="o">)</span> <span class="s2">&quot;role-reported-time&quot;</span>
+<span class="m">28</span><span class="o">)</span> <span class="s2">&quot;289131&quot;</span>
+<span class="m">29</span><span class="o">)</span> <span class="s2">&quot;master-link-down-time&quot;</span>
+<span class="m">30</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">31</span><span class="o">)</span> <span class="s2">&quot;master-link-status&quot;</span>
+<span class="m">32</span><span class="o">)</span> <span class="s2">&quot;ok&quot;</span>
+<span class="m">33</span><span class="o">)</span> <span class="s2">&quot;master-host&quot;</span>
+<span class="m">34</span><span class="o">)</span> <span class="s2">&quot;192.168.46.151&quot;</span>
+<span class="m">35</span><span class="o">)</span> <span class="s2">&quot;master-port&quot;</span>
+<span class="m">36</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+<span class="m">37</span><span class="o">)</span> <span class="s2">&quot;slave-priority&quot;</span>
+<span class="m">38</span><span class="o">)</span> <span class="s2">&quot;100&quot;</span>
+<span class="m">39</span><span class="o">)</span> <span class="s2">&quot;slave-repl-offset&quot;</span>
+<span class="m">40</span><span class="o">)</span> <span class="s2">&quot;57222&quot;</span>
+<span class="m">2</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+    <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;192.168.46.152:6379&quot;</span>
+    <span class="m">3</span><span class="o">)</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="m">4</span><span class="o">)</span> <span class="s2">&quot;192.168.46.152&quot;</span>
+    <span class="m">5</span><span class="o">)</span> <span class="s2">&quot;port&quot;</span>
+    <span class="m">6</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+    <span class="m">7</span><span class="o">)</span> <span class="s2">&quot;runid&quot;</span>
+    <span class="m">8</span><span class="o">)</span> <span class="s2">&quot;6f247282dab66ec3c6d9923ed8e1641a8f26fa26&quot;</span>
+    <span class="m">9</span><span class="o">)</span> <span class="s2">&quot;flags&quot;</span>
+<span class="m">10</span><span class="o">)</span> <span class="s2">&quot;slave&quot;</span>
+<span class="m">11</span><span class="o">)</span> <span class="s2">&quot;link-pending-commands&quot;</span>
+<span class="m">12</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">13</span><span class="o">)</span> <span class="s2">&quot;link-refcount&quot;</span>
+<span class="m">14</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">15</span><span class="o">)</span> <span class="s2">&quot;last-ping-sent&quot;</span>
+<span class="m">16</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">17</span><span class="o">)</span> <span class="s2">&quot;last-ok-ping-reply&quot;</span>
+<span class="m">18</span><span class="o">)</span> <span class="s2">&quot;181&quot;</span>
+<span class="m">19</span><span class="o">)</span> <span class="s2">&quot;last-ping-reply&quot;</span>
+<span class="m">20</span><span class="o">)</span> <span class="s2">&quot;181&quot;</span>
+<span class="m">21</span><span class="o">)</span> <span class="s2">&quot;down-after-milliseconds&quot;</span>
+<span class="m">22</span><span class="o">)</span> <span class="s2">&quot;30000&quot;</span>
+<span class="m">23</span><span class="o">)</span> <span class="s2">&quot;info-refresh&quot;</span>
+<span class="m">24</span><span class="o">)</span> <span class="s2">&quot;8016&quot;</span>
+<span class="m">25</span><span class="o">)</span> <span class="s2">&quot;role-reported&quot;</span>
+<span class="m">26</span><span class="o">)</span> <span class="s2">&quot;slave&quot;</span>
+<span class="m">27</span><span class="o">)</span> <span class="s2">&quot;role-reported-time&quot;</span>
+<span class="m">28</span><span class="o">)</span> <span class="s2">&quot;289132&quot;</span>
+<span class="m">29</span><span class="o">)</span> <span class="s2">&quot;master-link-down-time&quot;</span>
+<span class="m">30</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">31</span><span class="o">)</span> <span class="s2">&quot;master-link-status&quot;</span>
+<span class="m">32</span><span class="o">)</span> <span class="s2">&quot;ok&quot;</span>
+<span class="m">33</span><span class="o">)</span> <span class="s2">&quot;master-host&quot;</span>
+<span class="m">34</span><span class="o">)</span> <span class="s2">&quot;192.168.46.151&quot;</span>
+<span class="m">35</span><span class="o">)</span> <span class="s2">&quot;master-port&quot;</span>
+<span class="m">36</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+<span class="m">37</span><span class="o">)</span> <span class="s2">&quot;slave-priority&quot;</span>
+<span class="m">38</span><span class="o">)</span> <span class="s2">&quot;100&quot;</span>
+<span class="m">39</span><span class="o">)</span> <span class="s2">&quot;slave-repl-offset&quot;</span>
+<span class="m">40</span><span class="o">)</span> <span class="s2">&quot;57222&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>9.18.3. 模拟破坏<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl stop redis</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>9.18.4. 查看是否转移<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
+<span class="m">127</span>.0.0.1:26379&gt; sentinel masters
+<span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+    <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;mymaster&quot;</span>
+    <span class="m">3</span><span class="o">)</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="m">4</span><span class="o">)</span> <span class="s2">&quot;192.168.46.151&quot;</span>
+    <span class="m">5</span><span class="o">)</span> <span class="s2">&quot;port&quot;</span>
+    <span class="m">6</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+    <span class="m">7</span><span class="o">)</span> <span class="s2">&quot;runid&quot;</span>
+    <span class="m">8</span><span class="o">)</span> <span class="s2">&quot;817bed45028e27aad78aaf82380041943a2fedb3&quot;</span>
+    <span class="m">9</span><span class="o">)</span> <span class="s2">&quot;flags&quot;</span>
+<span class="m">10</span><span class="o">)</span> <span class="s2">&quot;master,disconnected&quot;</span>
+<span class="m">11</span><span class="o">)</span> <span class="s2">&quot;link-pending-commands&quot;</span>
+<span class="m">12</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">13</span><span class="o">)</span> <span class="s2">&quot;link-refcount&quot;</span>
+<span class="m">14</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">15</span><span class="o">)</span> <span class="s2">&quot;last-ping-sent&quot;</span>
+<span class="m">16</span><span class="o">)</span> <span class="s2">&quot;74034&quot;</span>
+<span class="m">17</span><span class="o">)</span> <span class="s2">&quot;last-ok-ping-reply&quot;</span>
+<span class="m">18</span><span class="o">)</span> <span class="s2">&quot;74131&quot;</span>
+<span class="m">19</span><span class="o">)</span> <span class="s2">&quot;last-ping-reply&quot;</span>
+<span class="m">20</span><span class="o">)</span> <span class="s2">&quot;74131&quot;</span>
+<span class="m">21</span><span class="o">)</span> <span class="s2">&quot;down-after-milliseconds&quot;</span>
+<span class="m">22</span><span class="o">)</span> <span class="s2">&quot;30000&quot;</span>
+<span class="m">23</span><span class="o">)</span> <span class="s2">&quot;info-refresh&quot;</span>
+<span class="m">24</span><span class="o">)</span> <span class="s2">&quot;84056&quot;</span>
+<span class="m">25</span><span class="o">)</span> <span class="s2">&quot;role-reported&quot;</span>
+<span class="m">26</span><span class="o">)</span> <span class="s2">&quot;master&quot;</span>
+<span class="m">27</span><span class="o">)</span> <span class="s2">&quot;role-reported-time&quot;</span>
+<span class="m">28</span><span class="o">)</span> <span class="s2">&quot;435933&quot;</span>
+<span class="m">29</span><span class="o">)</span> <span class="s2">&quot;config-epoch&quot;</span>
+<span class="m">30</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">31</span><span class="o">)</span> <span class="s2">&quot;num-slaves&quot;</span>
+<span class="m">32</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">33</span><span class="o">)</span> <span class="s2">&quot;num-other-sentinels&quot;</span>
+<span class="m">34</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">35</span><span class="o">)</span> <span class="s2">&quot;quorum&quot;</span>
+<span class="m">36</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">37</span><span class="o">)</span> <span class="s2">&quot;failover-timeout&quot;</span>
+<span class="m">38</span><span class="o">)</span> <span class="s2">&quot;180000&quot;</span>
+<span class="m">39</span><span class="o">)</span> <span class="s2">&quot;parallel-syncs&quot;</span>
+<span class="m">40</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">127</span>.0.0.1:26379&gt; sentinel masters
+<span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
+    <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;mymaster&quot;</span>
+    <span class="m">3</span><span class="o">)</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="m">4</span><span class="o">)</span> <span class="s2">&quot;192.168.46.153&quot;</span>
+    <span class="m">5</span><span class="o">)</span> <span class="s2">&quot;port&quot;</span>
+    <span class="m">6</span><span class="o">)</span> <span class="s2">&quot;6379&quot;</span>
+    <span class="m">7</span><span class="o">)</span> <span class="s2">&quot;runid&quot;</span>
+    <span class="m">8</span><span class="o">)</span> <span class="s2">&quot;0d47a46a0297fde064159b79aba7cc6c7937e6ac&quot;</span>
+    <span class="m">9</span><span class="o">)</span> <span class="s2">&quot;flags&quot;</span>
+<span class="m">10</span><span class="o">)</span> <span class="s2">&quot;master&quot;</span>
+<span class="m">11</span><span class="o">)</span> <span class="s2">&quot;link-pending-commands&quot;</span>
+<span class="m">12</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">13</span><span class="o">)</span> <span class="s2">&quot;link-refcount&quot;</span>
+<span class="m">14</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">15</span><span class="o">)</span> <span class="s2">&quot;last-ping-sent&quot;</span>
+<span class="m">16</span><span class="o">)</span> <span class="s2">&quot;0&quot;</span>
+<span class="m">17</span><span class="o">)</span> <span class="s2">&quot;last-ok-ping-reply&quot;</span>
+<span class="m">18</span><span class="o">)</span> <span class="s2">&quot;101&quot;</span>
+<span class="m">19</span><span class="o">)</span> <span class="s2">&quot;last-ping-reply&quot;</span>
+<span class="m">20</span><span class="o">)</span> <span class="s2">&quot;101&quot;</span>
+<span class="m">21</span><span class="o">)</span> <span class="s2">&quot;down-after-milliseconds&quot;</span>
+<span class="m">22</span><span class="o">)</span> <span class="s2">&quot;30000&quot;</span>
+<span class="m">23</span><span class="o">)</span> <span class="s2">&quot;info-refresh&quot;</span>
+<span class="m">24</span><span class="o">)</span> <span class="s2">&quot;4385&quot;</span>
+<span class="m">25</span><span class="o">)</span> <span class="s2">&quot;role-reported&quot;</span>
+<span class="m">26</span><span class="o">)</span> <span class="s2">&quot;master&quot;</span>
+<span class="m">27</span><span class="o">)</span> <span class="s2">&quot;role-reported-time&quot;</span>
+<span class="m">28</span><span class="o">)</span> <span class="s2">&quot;4812&quot;</span>
+<span class="m">29</span><span class="o">)</span> <span class="s2">&quot;config-epoch&quot;</span>
+<span class="m">30</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+<span class="m">31</span><span class="o">)</span> <span class="s2">&quot;num-slaves&quot;</span>
+<span class="m">32</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">33</span><span class="o">)</span> <span class="s2">&quot;num-other-sentinels&quot;</span>
+<span class="m">34</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">35</span><span class="o">)</span> <span class="s2">&quot;quorum&quot;</span>
+<span class="m">36</span><span class="o">)</span> <span class="s2">&quot;2&quot;</span>
+<span class="m">37</span><span class="o">)</span> <span class="s2">&quot;failover-timeout&quot;</span>
+<span class="m">38</span><span class="o">)</span> <span class="s2">&quot;180000&quot;</span>
+<span class="m">39</span><span class="o">)</span> <span class="s2">&quot;parallel-syncs&quot;</span>
+<span class="m">40</span><span class="o">)</span> <span class="s2">&quot;1&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../WEB/index.html" class="btn btn-neutral float-right" title="10. WEB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03-redis主从配置.html" class="btn btn-neutral" title="9.17. redis主从配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
