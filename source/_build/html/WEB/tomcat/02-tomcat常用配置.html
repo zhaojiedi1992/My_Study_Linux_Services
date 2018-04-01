@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tomcat常用配置 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>tomcat常用配置</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/tomcat/02-tomcat常用配置.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tomcat">
+<h1>tomcat常用配置<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
+&lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
+&lt;%@ page <span class="nv">import</span><span class="o">=</span><span class="s2">&quot;java.util.*&quot;</span> %&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Test Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;% out.println<span class="o">(</span><span class="s2">&quot;hello world&quot;</span><span class="o">)</span><span class="p">;</span>
+        %&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
+<span class="o">[</span>root@centos-151 test<span class="o">]</span><span class="c1"># curl 192.168.46.151:8080/test/</span>
+
+
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Test Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        hello world
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>主机管理启用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
+<span class="c1"># 添加如下2行</span>
+&lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;admin-gui&quot;</span>/&gt;
+&lt;user <span class="nv">username</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">password</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">roles</span><span class="o">=</span><span class="s2">&quot;admin-gui&quot;</span>/&gt;
+</pre></div>
+</div>
+<p>浏览器访问： <a class="reference external" href="http://192.168.46.151:8080/host-manager/">http://192.168.46.151:8080/host-manager/</a></p>
+<img alt="../../_images/tomcat-host-manager.png" src="../../_images/tomcat-host-manager.png" />
+</div>
+<div class="section" id="app">
+<h2>app管理启用<a class="headerlink" href="#app" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
+<span class="c1"># 添加如下2行</span>
+&lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;manager-gui&quot;</span>/&gt;
+&lt;user <span class="nv">username</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">password</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">roles</span><span class="o">=</span><span class="s2">&quot;manager-gui&quot;</span>/&gt;
+</pre></div>
+</div>
+<p>浏览器访问： <a class="reference external" href="http://192.168.46.151:8080/manager/">http://192.168.46.151:8080/manager/</a></p>
+<img alt="../../_images/tomcat-manager.png" src="../../_images/tomcat-manager.png" />
+</div>
+<div class="section" id="nginxtomcat">
+<h2>nginx代理tomcat<a class="headerlink" href="#nginxtomcat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 nginx<span class="o">]</span><span class="c1"># vim nginx.conf</span>
+<span class="c1"># 在默认的server中添加如下行</span>
+        root          /usr/share/tomcat/webapps/ROOT <span class="p">;</span>
+        index     index.jsp <span class="p">;</span>
+        location ~* <span class="se">\.</span><span class="o">(</span>jsp<span class="p">|</span><span class="k">do</span><span class="o">)</span>$  <span class="o">{</span>
+                proxy_pass http://127.0.0.1:8080<span class="p">;</span>
+        <span class="o">}</span>
+</pre></div>
+</div>
+<p>浏览器测试：<a class="reference external" href="http://192.168.46.151/">http://192.168.46.151/</a></p>
+</div>
+<div class="section" id="httpdtomcat">
+<h2>httpd代理tomcat<a class="headerlink" href="#httpdtomcat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
+        ServerName      www.linuxpanda.tech
+        ProxyRequests Off
+        ProxyVia        On
+        ProxyPreserveHost On
+        &lt;Proxy *&gt;
+                Require all granted
+        &lt;/Proxy&gt;
+        ProxyPass / http://www.linuxpanda.tech:8080/
+        ProxyPassReverse / http://www.linuxpanda.tech:8080/
+        &lt;Location /&gt;
+                Require all granted
+        &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>nginx负载代理tomcat<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 配置后端网页</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
+                    &lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;&lt;title&gt;TomcatA&lt;/title&gt;&lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;h1&gt;&lt;font <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;TomcatA.magedu.com&lt;/font&gt;&lt;/h1&gt;
+                            &lt;table <span class="nv">align</span><span class="o">=</span><span class="s2">&quot;centre&quot;</span> <span class="nv">border</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+                                &lt;tr&gt;
+                                    &lt;td&gt;Session ID&lt;/td&gt;
+                                &lt;% session.setAttribute<span class="o">(</span><span class="s2">&quot;magedu.com&quot;</span>,<span class="s2">&quot;magedu.com&quot;</span><span class="o">)</span><span class="p">;</span> %&gt;
+                                    &lt;td&gt;&lt;%<span class="o">=</span> session.getId<span class="o">()</span> %&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                                &lt;tr&gt;
+                                    &lt;td&gt;Created on&lt;/td&gt;
+                                    &lt;td&gt;&lt;%<span class="o">=</span> session.getCreationTime<span class="o">()</span> %&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp -rp  /usr/share/tomcat/webapps/test/   192.168.46.153:/usr/share/tomcat/webapps/</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
+                    &lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;&lt;title&gt;TomcatB&lt;/title&gt;&lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;h1&gt;&lt;font <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;TomcatB.linuxpanda.tech&lt;/font&gt;&lt;/h1&gt;
+                            &lt;table <span class="nv">align</span><span class="o">=</span><span class="s2">&quot;centre&quot;</span> <span class="nv">border</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+                                &lt;tr&gt;
+                                    &lt;td&gt;Session ID&lt;/td&gt;
+                                &lt;% session.setAttribute<span class="o">(</span><span class="s2">&quot;linuxpanda.tech&quot;</span>,<span class="s2">&quot;linuxpanda.tech&quot;</span><span class="o">)</span><span class="p">;</span> %&gt;
+                                    &lt;td&gt;&lt;%<span class="o">=</span> session.getId<span class="o">()</span> %&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                                &lt;tr&gt;
+                                    &lt;td&gt;Created on&lt;/td&gt;
+                                    &lt;td&gt;&lt;%<span class="o">=</span> session.getCreationTime<span class="o">()</span> %&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+
+<span class="o">[</span>root@centos-151 nginx<span class="o">]</span><span class="c1"># vim nginx.conf</span>
+<span class="c1"># 在默认的server中添加如下行</span>
+upstream webend <span class="o">{</span>
+        server <span class="m">192</span>.168.46.152:8080 <span class="p">;</span>
+        server <span class="m">192</span>.168.46.153:8080 <span class="p">;</span>
+    <span class="o">}</span>
+    <span class="c1">#修改server端配置</span>
+    server <span class="o">{</span>
+        listen       <span class="m">80</span> default_server<span class="p">;</span>
+        listen       <span class="o">[</span>::<span class="o">]</span>:80 default_server<span class="p">;</span>
+        server_name  _<span class="p">;</span>
+        index index.jsp <span class="p">;</span>
+        <span class="c1">#root         /usr/share/nginx/html;</span>
+        root          /usr/share/tomcat/webapps/ROOT <span class="p">;</span>
+
+        <span class="c1"># Load configuration files for the default server block.</span>
+        include /etc/nginx/default.d/*.conf<span class="p">;</span>
+
+        location / <span class="o">{</span>
+        proxy_pass http://webend    <span class="p">;</span>
+        index   index.jsp index.html <span class="p">;</span>
+
+        <span class="o">}</span>
+</pre></div>
+</div>
+<p>浏览器测试：<a class="reference external" href="http://192.168.46.151/test">http://192.168.46.151/test</a></p>
+<img alt="../../_images/tomcat-a.png" src="../../_images/tomcat-a.png" />
+</div>
+<div class="section" id="id4">
+<h2>httpd负载代理tomcat<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
+<span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
+&lt;proxy balancer://webend&gt;
+    ProxySet   <span class="nv">lbmethod</span><span class="o">=</span>byrequests
+    BalancerMember  ajp://192.168.46.152:8009
+    BalancerMember  ajp://192.168.46.153:8009
+&lt;/proxy&gt;
+
+&lt;VirtualHost *:80&gt;
+
+    ServerName www.linuxpanda.tech
+    ProxyVia on
+    ProxyRequests off
+    ProxyPreserveHost on
+
+    ProxyPass /  balancer://webend/
+    ProxyPassReverse /  balance://webend/
+    &lt;Proxy *&gt;
+        Require all granted
+    &lt;/Proxy&gt;
+
+    &lt;Location / &gt;
+        require all granted
+    &lt;/location&gt;
+&lt;/VirtualHost&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>保持会话<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
+Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/&quot;</span> <span class="nv">env</span><span class="o">=</span>BALANCER_ROUTE_CHANGED
+&lt;proxy balancer://webend&gt;
+    ProxySet   <span class="nv">lbmethod</span><span class="o">=</span>byrequests
+    ProxySet   <span class="nv">stickysession</span><span class="o">=</span>ROUTEID
+    BalancerMember  ajp://192.168.46.152:8009 <span class="nv">route</span><span class="o">=</span>TomcatA
+    BalancerMember  ajp://192.168.46.153:8009 <span class="nv">route</span><span class="o">=</span>TomcatB
+&lt;/proxy&gt;
+
+&lt;VirtualHost *:80&gt;
+
+    ServerName www.linuxpanda.tech
+    ProxyVia on
+    ProxyRequests off
+    ProxyPreserveHost on
+
+    ProxyPass /  balancer://webend/
+    ProxyPassReverse /  balance://webend/
+    &lt;Proxy *&gt;
+        Require all granted
+    &lt;/Proxy&gt;
+
+    &lt;Location / &gt;
+        require all granted
+    &lt;/location&gt;
+&lt;/VirtualHost&gt;
+
+<span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
+</pre></div>
+</div>
+<p>浏览器测试：<a class="reference external" href="http://192.168.46.151/test">http://192.168.46.151/test</a></p>
+<img alt="../../_images/tomcat-b.png" src="../../_images/tomcat-b.png" />
+</div>
+<div class="section" id="id6">
+<h2>tomcat会话集群<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-153 tomcat<span class="o">]</span><span class="c1"># vim server.xml</span>
+&lt;Engine <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Catalina&quot;</span> <span class="nv">defaultHost</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span> <span class="nv">jvmRoute</span><span class="o">=</span><span class="s2">&quot;TomcatB&quot;</span> &gt;
+<span class="c1"># 添加如下到/etc/tomcat/service.xml 的engine片段或者host片段中。</span>
+        &lt;Cluster <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.tcp.SimpleTcpCluster&quot;</span>
+                        <span class="nv">channelSendOptions</span><span class="o">=</span><span class="s2">&quot;8&quot;</span>&gt;
+
+                    &lt;Manager <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.session.DeltaManager&quot;</span>
+                        <span class="nv">expireSessionsOnShutdown</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+                        <span class="nv">notifyListenersOnReplication</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>/&gt;
+
+                    &lt;Channel <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.group.GroupChannel&quot;</span>&gt;
+                    &lt;Membership <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.membership.McastService&quot;</span>
+                            <span class="nv">address</span><span class="o">=</span><span class="s2">&quot;228.0.0.4&quot;</span>
+                            <span class="nv">port</span><span class="o">=</span><span class="s2">&quot;45564&quot;</span>
+                            <span class="nv">frequency</span><span class="o">=</span><span class="s2">&quot;500&quot;</span>
+                            <span class="nv">dropTime</span><span class="o">=</span><span class="s2">&quot;3000&quot;</span>/&gt;
+                    &lt;Receiver <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.transport.nio.NioReceiver&quot;</span>
+                        <span class="nv">address</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+                        <span class="nv">port</span><span class="o">=</span><span class="s2">&quot;4000&quot;</span>
+                        <span class="nv">autoBind</span><span class="o">=</span><span class="s2">&quot;100&quot;</span>
+                        <span class="nv">selectorTimeout</span><span class="o">=</span><span class="s2">&quot;5000&quot;</span>
+                        <span class="nv">maxThreads</span><span class="o">=</span><span class="s2">&quot;6&quot;</span>/&gt;
+
+                    &lt;Sender <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.transport.ReplicationTransmitter&quot;</span>&gt;
+                    &lt;Transport <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.transport.nio.PooledParallelSender&quot;</span>/&gt;
+                    &lt;/Sender&gt;
+                    &lt;Interceptor <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.group.interceptors.TcpFailureDetector&quot;</span>/&gt;
+                    &lt;Interceptor <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor&quot;</span>/&gt;
+                    &lt;/Channel&gt;
+
+                    &lt;Valve <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.tcp.ReplicationValve&quot;</span>
+                        <span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;&quot;</span>/&gt;
+                    &lt;Valve <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.session.JvmRouteBinderValve&quot;</span>/&gt;
+
+                    &lt;Deployer <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.deploy.FarmWarDeployer&quot;</span>
+                        <span class="nv">tempDir</span><span class="o">=</span><span class="s2">&quot;/tmp/war-temp/&quot;</span>
+                        <span class="nv">deployDir</span><span class="o">=</span><span class="s2">&quot;/tmp/war-deploy/&quot;</span>
+                        <span class="nv">watchDir</span><span class="o">=</span><span class="s2">&quot;/tmp/war-listen/&quot;</span>
+                        <span class="nv">watchEnabled</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>/&gt;
+
+                    &lt;ClusterListener <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.session.JvmRouteSessionIDBinderListener&quot;</span>/&gt;
+                    &lt;ClusterListener <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.session.ClusterSessionListener&quot;</span>/&gt;
+                    &lt;/Cluster&gt;
+
+<span class="o">[</span>root@centos-152 tomcat<span class="o">]</span><span class="c1"># cp web.xml  /usr/share/tomcat/webapps/test/WEB-INF/</span>
+<span class="o">[</span>root@centos-152 tomcat<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/WEB-INF/web.xml</span>
+<span class="c1"># 添加行</span>
+&lt;distributable/&gt;
+</pre></div>
+</div>
+<p>浏览器测试：<a class="reference external" href="http://192.168.46.151/test">http://192.168.46.151/test</a></p>
+<img alt="../../_images/tomcat-c.png" src="../../_images/tomcat-c.png" />
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

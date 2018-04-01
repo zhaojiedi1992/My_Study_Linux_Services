@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tomcat安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>tomcat安装</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/tomcat/01-tomcat安装.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tomcat">
+<h1>tomcat安装<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jdk">
+<h2>jdk安装<a class="headerlink" href="#jdk" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="yum">
+<h3>yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk.x86_64</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># java -version</span>
+openjdk version <span class="s2">&quot;1.8.0_161&quot;</span>
+OpenJDK Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_161-b14<span class="o">)</span>
+OpenJDK <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.161-b14, mixed mode<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>直接解压包方式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">包下载地址</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
+anaconda-ks.cfg  jdk-8u162-linux-x64.rpm?AuthParam<span class="o">=</span>1522289893_92e84e76f51bb5aa8133b08fcf86150b
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mv jdk-8u162-linux-x64.rpm\?AuthParam\=1522289893_92e84e76f51bb5aa8133b08fcf86150b  jdk-8u162-linux-x64.rpm</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install jdk-8u162-linux-x64.rpm</span>
+
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /usr/java/</span>
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">0</span>
+lrwxrwxrwx <span class="m">1</span> root root  <span class="m">16</span> Mar <span class="m">29</span> <span class="m">10</span>:19 default -&gt; /usr/java/latest
+drwxr-xr-x <span class="m">9</span> root root <span class="m">268</span> Mar <span class="m">29</span> <span class="m">10</span>:19 jdk1.8.0_162
+lrwxrwxrwx <span class="m">1</span> root root  <span class="m">22</span> Mar <span class="m">29</span> <span class="m">10</span>:19 latest -&gt; /usr/java/jdk1.8.0_162
+
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># vim /etc/profile.d/java.sh</span>
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># cat /etc/profile.d/java.sh</span>
+<span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/java/latest
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># source /etc/profile.d/java.sh</span>
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># java -version</span>
+java version <span class="s2">&quot;1.8.0_162&quot;</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_162-b12<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.162-b12, mixed mode<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>tomcat安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>yum安装<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ss -tul</span>
+Netid  State      Recv-Q Send-Q                                       Local Address:Port                                                        Peer Address:Port
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:ssh                                                                    *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                              <span class="m">127</span>.0.0.1:smtp                                                                   *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                      *:zabbix-trapper                                                         *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">50</span>                                                       *:mysql                                                                  *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::http                                                                  :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::ssh                                                                   :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">100</span>                                                    ::1:smtp                                                                  :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>                                                     :::zabbix-trapper                                                        :::*
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

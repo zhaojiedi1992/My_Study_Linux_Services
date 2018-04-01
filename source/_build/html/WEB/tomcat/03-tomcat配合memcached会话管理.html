@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tomcat配合memcached会话管理 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>tomcat配合memcached会话管理</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/tomcat/03-tomcat配合memcached会话管理.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tomcatmemcached">
+<h1>tomcat配合memcached会话管理<a class="headerlink" href="#tomcatmemcached" title="Permalink to this headline">¶</a></h1>
+<p>这里使用192.168.46.151作为调度器，后端使用192.168.46.152，192.168.46.153作为tomcat服务器。</p>
+<div class="section" id="tomcat">
+<h2>tomcat安装<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk.x86_64</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># java -version</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ss -tul</span>
+
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk.x86_64</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># java -version</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># ss -tul</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>前端调度配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install nginx</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/nginx/nginx.conf</span>
+
+    <span class="c1"># 添加和修改如下内容</span>
+    upstream webend  <span class="o">{</span>
+        server <span class="m">192</span>.168.46.152<span class="p">;</span>
+        server <span class="m">192</span>.168.46.153<span class="p">;</span>
+        <span class="o">}</span>
+
+    server <span class="o">{</span>
+        listen       <span class="m">80</span> default_server<span class="p">;</span>
+        listen       <span class="o">[</span>::<span class="o">]</span>:80 default_server<span class="p">;</span>
+        server_name  _<span class="p">;</span>
+        root         /usr/share/nginx/html<span class="p">;</span>
+
+        <span class="c1"># Load configuration files for the default server block.</span>
+        include /etc/nginx/default.d/*.conf<span class="p">;</span>
+
+        location / <span class="o">{</span>
+        proxy_pass http://webend <span class="p">;</span>
+        index index.jsp index.html<span class="p">;</span>
+        <span class="o">}</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ss -tunl</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>后端tomcat样例页准备<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
+&lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;&lt;title&gt;TomcatA&lt;/title&gt;&lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h1&gt;&lt;font <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;TomcatA.linuxpanda.tech&lt;/font&gt;&lt;/h1&gt;
+                                &lt;table <span class="nv">align</span><span class="o">=</span><span class="s2">&quot;centre&quot;</span> <span class="nv">border</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+                                    &lt;tr&gt;
+                                        &lt;td&gt;Session ID&lt;/td&gt;
+                                    &lt;% session.setAttribute<span class="o">(</span><span class="s2">&quot;linuxpanda.tech&quot;</span>,<span class="s2">&quot;linuxpanda.tech&quot;</span><span class="o">)</span><span class="p">;</span> %&gt;
+                                        &lt;td&gt;&lt;%<span class="o">=</span> session.getId<span class="o">()</span> %&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                    &lt;tr&gt;
+                                        &lt;td&gt;Created on&lt;/td&gt;
+                                        &lt;td&gt;&lt;%<span class="o">=</span> session.getCreationTime<span class="o">()</span> %&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/table&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># scp -rp  /usr/share/tomcat/webapps/test/   192.168.46.153:/usr/share/tomcat/webapps/</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
+&lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;&lt;title&gt;TomcatA&lt;/title&gt;&lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h1&gt;&lt;font <span class="nv">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;TomcatB.linuxpanda.tech&lt;/font&gt;&lt;/h1&gt;
+                                &lt;table <span class="nv">align</span><span class="o">=</span><span class="s2">&quot;centre&quot;</span> <span class="nv">border</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+                                    &lt;tr&gt;
+                                        &lt;td&gt;Session ID&lt;/td&gt;
+                                    &lt;% session.setAttribute<span class="o">(</span><span class="s2">&quot;linuxpanda.tech&quot;</span>,<span class="s2">&quot;linuxpanda.tech&quot;</span><span class="o">)</span><span class="p">;</span> %&gt;
+                                        &lt;td&gt;&lt;%<span class="o">=</span> session.getId<span class="o">()</span> %&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                    &lt;tr&gt;
+                                        &lt;td&gt;Created on&lt;/td&gt;
+                                        &lt;td&gt;&lt;%<span class="o">=</span> session.getCreationTime<span class="o">()</span> %&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/table&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+
+<span class="c1"># 启动tomcat</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
+<span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>测试调度情况<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/tomcat-aa.png" src="../../_images/tomcat-aa.png" />
+<p>不断刷新，发现页面和sesssionId,都会不断变化的，chroom浏览器测试有点问题，建议firefox浏览器测试。</p>
+</div>
+<div class="section" id="id4">
+<h2>配置tomcat支持memcached会话管理<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/magro/memcached-session-manager/wiki/SetupAndConfiguration">官方地址参考</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 查看tomcat版本</span>
+<span class="o">[</span>root@centos-152 msm<span class="o">]</span><span class="c1"># yum info tomcat |grep Version</span>
+Version     : <span class="m">7</span>.0.76
+
+<span class="c1"># 先下载下会话管理对应的包</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/de/javakaffee/msm/memcached-session-manager/2.3.0/memcached-session-manager-2.3.0.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/de/javakaffee/msm/memcached-session-manager-tc7/2.3.0/memcached-session-manager-tc7-2.3.0.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/net/spy/spymemcached/2.12.3/spymemcached-2.12.3.jar</span>
+
+<span class="c1"># 下载序列化需要的包</span>
+
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/org/objenesis/objenesis/2.6/objenesis-2.6.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/org/ow2/asm/asm/6.1.1/asm-6.1.1.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/com/esotericsoftware/kryo/4.0.2/kryo-4.0.2.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/de/javakaffee/kryo-serializers/0.42/kryo-serializers-0.42.jar</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://repo1.maven.org/maven2/de/javakaffee/msm/msm-kryo-serializer/2.3.0/msm-kryo-serializer-2.3.0.jar</span>
+<span class="c1"># 查看下载的包</span>
+<span class="o">[</span>root@centos-152 msm<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">1312</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">108252</span> Mar <span class="m">25</span> <span class="m">22</span>:20 asm-6.1.1.jar
+-rw-r--r-- <span class="m">1</span> root root <span class="m">337512</span> Mar <span class="m">21</span> <span class="m">05</span>:02 kryo-4.0.2.jar
+-rw-r--r-- <span class="m">1</span> root root <span class="m">106032</span> Jul <span class="m">17</span>  <span class="m">2017</span> kryo-serializers-0.42.jar
+-rw-r--r-- <span class="m">1</span> root root <span class="m">167266</span> Mar <span class="m">19</span> <span class="m">06</span>:29 memcached-session-manager-2.3.0.jar
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">11704</span> Mar <span class="m">19</span> <span class="m">06</span>:33 memcached-session-manager-tc7-2.3.0.jar
+-rw-r--r-- <span class="m">1</span> root root   <span class="m">5711</span> Jul <span class="m">21</span>  <span class="m">2014</span> minlog-1.3.0.jar
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">38268</span> Mar <span class="m">19</span> <span class="m">06</span>:37 msm-kryo-serializer-2.3.0.jar
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">55684</span> Jun <span class="m">20</span>  <span class="m">2017</span> objenesis-2.6.jar
+-rw-r--r-- <span class="m">1</span> root root  <span class="m">20883</span> May  <span class="m">9</span>  <span class="m">2016</span> reflectasm-1.11.3.jar
+-rw-r--r-- <span class="m">1</span> root root <span class="m">473774</span> May  <span class="m">1</span>  <span class="m">2017</span> spymemcached-2.12.3.jar
+
+
+<span class="c1"># 复制到tomcat的lib目录去</span>
+<span class="o">[</span>root@centos-152 msm<span class="o">]</span><span class="c1"># cp *.jar /usr/share/tomcat/lib/</span>
+<span class="o">[</span>root@centos-152 msm<span class="o">]</span><span class="c1"># scp *.jar 192.168.46.153:/usr/share/tomcat/lib/</span>
+
+<span class="o">[</span>root@centos-152 msm<span class="o">]</span><span class="c1"># vim /etc/tomcat/server.xml</span>
+<span class="c1"># 在默认的Host片段添加如下内容</span>
+&lt;Context <span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span> <span class="nv">docBase</span><span class="o">=</span><span class="s2">&quot;/usr/share/tomcat/webapps/test&quot;</span> <span class="nv">reloadable</span><span class="o">=</span><span class="s2">&quot;&quot;</span> &gt;
+    &lt;Manager <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;de.javakaffee.web.msm.MemcachedBackupSessionManager&quot;</span>
+        <span class="nv">memcachedNodes</span><span class="o">=</span><span class="s2">&quot;n1:192.168.46.152:11211,n2:192.168.46.153:11211&quot;</span>
+        <span class="nv">failoverNodes</span><span class="o">=</span><span class="s2">&quot;n1&quot;</span>
+        <span class="nv">requestUriIgnorePattern</span><span class="o">=</span><span class="s2">&quot;.*\.(ico|png|gif|jpg|css|js)</span>$<span class="s2">&quot;</span>
+        <span class="nv">transcoderFactoryClass</span><span class="o">=</span><span class="s2">&quot;de.javakaffee.web.msm.serializer.kryo.KryoTranscoderFactory&quot;</span>
+        /&gt;
+&lt;/Context&gt;
+</pre></div>
+</div>
+<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-152">root<span>&#64;</span>centos-152</a> msm]# scp /etc/tomcat/server.xml 192.168.46.153:/etc/tomcat/</p>
+<p># 安装memcached
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-152">root<span>&#64;</span>centos-152</a> msm]# yum install memcached
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-152">root<span>&#64;</span>centos-152</a> msm]# systemctl start memcached
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-152">root<span>&#64;</span>centos-152</a> msm]# systemctl restart tomcat
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-153">root<span>&#64;</span>centos-153</a> msm]# yum install memcached
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-153">root<span>&#64;</span>centos-153</a> msm]# systemctl start memcached
+[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-153">root<span>&#64;</span>centos-153</a> msm]# systemctl restart tomcat</p>
+</div>
+<div class="section" id="id6">
+<h2>测试<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/tomcat-aaa.png" src="../../_images/tomcat-aaa.png" />
+<p>再次刷新下</p>
+<img alt="../../_images/tomcat-aaaa.png" src="../../_images/tomcat-aaaa.png" />
+<p>可以发现，sessionId就是不变的， 说明我们使用tomcat配合memcached是成功的，接下来我们停掉node2的memcached再次测试下。</p>
+<img alt="../../_images/tomcat-bbb.png" src="../../_images/tomcat-bbb.png" />
+<p>再次刷新下</p>
+<img alt="../../_images/tomcat-bbbb.png" src="../../_images/tomcat-bbbb.png" />
+<p>可以发现节点变了， 但是会话id还是一样的。 没有问题。</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

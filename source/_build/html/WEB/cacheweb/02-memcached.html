@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10.15. memcached &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="11. 日志管理" href="../../日志管理/index.html"/>
+        <link rel="prev" title="10.14. varnish" href="01-varnish.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/04-nginx支持https.html">10.11. nginx支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/06-nginx常用案例.html">10.13. nginx常用案例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-varnish.html">10.14. varnish</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.15. memcached</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.15.1. memcached安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.15.2. memcached主要样例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.15. memcached</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/WEB/cacheweb/02-memcached.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="memcached">
+<h1>10.15. memcached<a class="headerlink" href="#memcached" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>10.15.1. memcached安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install memcached</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /etc/sysconfig/memcached</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># man memcached</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart memcached</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ss -tunl |grep 11211</span>
+udp    UNCONN     <span class="m">0</span>      <span class="m">0</span>         *:11211                 *:*
+udp    UNCONN     <span class="m">0</span>      <span class="m">0</span>        :::11211                :::*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>       *:11211                 *:*
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      :::11211                :::*
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>10.15.2. memcached主要样例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 使用telnet连上去11211</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># telnet 127.0.0.1 11211</span>
+Trying <span class="m">127</span>.0.0.1...
+Connected to <span class="m">127</span>.0.0.1.
+Escape character is <span class="s1">&#39;^]&#39;</span>.
+<span class="c1"># 获取状态信息</span>
+stats
+STAT pid <span class="m">35307</span>
+STAT uptime <span class="m">397</span>
+STAT <span class="nb">time</span> <span class="m">1522544989</span>
+STAT version <span class="m">1</span>.4.15
+STAT libevent <span class="m">2</span>.0.21-stable
+STAT pointer_size <span class="m">64</span>
+STAT rusage_user <span class="m">0</span>.008725
+STAT rusage_system <span class="m">0</span>.017451
+STAT curr_connections <span class="m">10</span>
+STAT total_connections <span class="m">11</span>
+STAT connection_structures <span class="m">11</span>
+STAT reserved_fds <span class="m">20</span>
+STAT cmd_get <span class="m">0</span>
+STAT cmd_set <span class="m">0</span>
+STAT cmd_flush <span class="m">0</span>
+STAT cmd_touch <span class="m">0</span>
+STAT get_hits <span class="m">0</span>
+STAT get_misses <span class="m">0</span>
+STAT delete_misses <span class="m">0</span>
+STAT delete_hits <span class="m">0</span>
+STAT incr_misses <span class="m">0</span>
+STAT incr_hits <span class="m">0</span>
+STAT decr_misses <span class="m">0</span>
+STAT decr_hits <span class="m">0</span>
+STAT cas_misses <span class="m">0</span>
+STAT cas_hits <span class="m">0</span>
+STAT cas_badval <span class="m">0</span>
+STAT touch_hits <span class="m">0</span>
+STAT touch_misses <span class="m">0</span>
+STAT auth_cmds <span class="m">0</span>
+STAT auth_errors <span class="m">0</span>
+STAT bytes_read <span class="m">8</span>
+STAT bytes_written <span class="m">0</span>
+STAT limit_maxbytes <span class="m">67108864</span>
+STAT accepting_conns <span class="m">1</span>
+STAT listen_disabled_num <span class="m">0</span>
+STAT threads <span class="m">4</span>
+STAT conn_yields <span class="m">0</span>
+STAT hash_power_level <span class="m">16</span>
+STAT hash_bytes <span class="m">524288</span>
+STAT hash_is_expanding <span class="m">0</span>
+STAT bytes <span class="m">0</span>
+STAT curr_items <span class="m">0</span>
+STAT total_items <span class="m">0</span>
+STAT expired_unfetched <span class="m">0</span>
+STAT evicted_unfetched <span class="m">0</span>
+STAT evictions <span class="m">0</span>
+STAT reclaimed <span class="m">0</span>
+END
+
+<span class="c1"># 添加key</span>
+add mykey <span class="m">0</span> <span class="m">60</span> <span class="m">9</span>
+ilinux.io
+STORED
+<span class="c1"># 获取value</span>
+get mykey
+VALUE mykey <span class="m">0</span> <span class="m">9</span>
+ilinux.io
+END
+
+<span class="c1"># 手工启动memcached</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># memcached -u memcached -m 128 -vvv</span>
+slab class   <span class="m">1</span>: chunk size        <span class="m">96</span> perslab   <span class="m">10922</span>
+slab class   <span class="m">2</span>: chunk size       <span class="m">120</span> perslab    <span class="m">8738</span>
+slab class   <span class="m">3</span>: chunk size       <span class="m">152</span> perslab    <span class="m">6898</span>
+slab class   <span class="m">4</span>: chunk size       <span class="m">192</span> perslab    <span class="m">5461</span>
+slab class   <span class="m">5</span>: chunk size       <span class="m">240</span> perslab    <span class="m">4369</span>
+slab class   <span class="m">6</span>: chunk size       <span class="m">304</span> perslab    <span class="m">3449</span>
+slab class   <span class="m">7</span>: chunk size       <span class="m">384</span> perslab    <span class="m">2730</span>
+slab class   <span class="m">8</span>: chunk size       <span class="m">480</span> perslab    <span class="m">2184</span>
+slab class   <span class="m">9</span>: chunk size       <span class="m">600</span> perslab    <span class="m">1747</span>
+slab class  <span class="m">10</span>: chunk size       <span class="m">752</span> perslab    <span class="m">1394</span>
+slab class  <span class="m">11</span>: chunk size       <span class="m">944</span> perslab    <span class="m">1110</span>
+slab class  <span class="m">12</span>: chunk size      <span class="m">1184</span> perslab     <span class="m">885</span>
+slab class  <span class="m">13</span>: chunk size      <span class="m">1480</span> perslab     <span class="m">708</span>
+slab class  <span class="m">14</span>: chunk size      <span class="m">1856</span> perslab     <span class="m">564</span>
+slab class  <span class="m">15</span>: chunk size      <span class="m">2320</span> perslab     <span class="m">451</span>
+slab class  <span class="m">16</span>: chunk size      <span class="m">2904</span> perslab     <span class="m">361</span>
+slab class  <span class="m">17</span>: chunk size      <span class="m">3632</span> perslab     <span class="m">288</span>
+slab class  <span class="m">18</span>: chunk size      <span class="m">4544</span> perslab     <span class="m">230</span>
+slab class  <span class="m">19</span>: chunk size      <span class="m">5680</span> perslab     <span class="m">184</span>
+slab class  <span class="m">20</span>: chunk size      <span class="m">7104</span> perslab     <span class="m">147</span>
+slab class  <span class="m">21</span>: chunk size      <span class="m">8880</span> perslab     <span class="m">118</span>
+slab class  <span class="m">22</span>: chunk size     <span class="m">11104</span> perslab      <span class="m">94</span>
+slab class  <span class="m">23</span>: chunk size     <span class="m">13880</span> perslab      <span class="m">75</span>
+slab class  <span class="m">24</span>: chunk size     <span class="m">17352</span> perslab      <span class="m">60</span>
+slab class  <span class="m">25</span>: chunk size     <span class="m">21696</span> perslab      <span class="m">48</span>
+slab class  <span class="m">26</span>: chunk size     <span class="m">27120</span> perslab      <span class="m">38</span>
+slab class  <span class="m">27</span>: chunk size     <span class="m">33904</span> perslab      <span class="m">30</span>
+slab class  <span class="m">28</span>: chunk size     <span class="m">42384</span> perslab      <span class="m">24</span>
+slab class  <span class="m">29</span>: chunk size     <span class="m">52984</span> perslab      <span class="m">19</span>
+slab class  <span class="m">30</span>: chunk size     <span class="m">66232</span> perslab      <span class="m">15</span>
+slab class  <span class="m">31</span>: chunk size     <span class="m">82792</span> perslab      <span class="m">12</span>
+slab class  <span class="m">32</span>: chunk size    <span class="m">103496</span> perslab      <span class="m">10</span>
+slab class  <span class="m">33</span>: chunk size    <span class="m">129376</span> perslab       <span class="m">8</span>
+slab class  <span class="m">34</span>: chunk size    <span class="m">161720</span> perslab       <span class="m">6</span>
+slab class  <span class="m">35</span>: chunk size    <span class="m">202152</span> perslab       <span class="m">5</span>
+slab class  <span class="m">36</span>: chunk size    <span class="m">252696</span> perslab       <span class="m">4</span>
+slab class  <span class="m">37</span>: chunk size    <span class="m">315872</span> perslab       <span class="m">3</span>
+slab class  <span class="m">38</span>: chunk size    <span class="m">394840</span> perslab       <span class="m">2</span>
+slab class  <span class="m">39</span>: chunk size    <span class="m">493552</span> perslab       <span class="m">2</span>
+slab class  <span class="m">40</span>: chunk size    <span class="m">616944</span> perslab       <span class="m">1</span>
+slab class  <span class="m">41</span>: chunk size    <span class="m">771184</span> perslab       <span class="m">1</span>
+slab class  <span class="m">42</span>: chunk size   <span class="m">1048576</span> perslab       <span class="m">1</span>
+&lt;<span class="m">26</span> server listening <span class="o">(</span>auto-negotiate<span class="o">)</span>
+&lt;<span class="m">27</span> server listening <span class="o">(</span>auto-negotiate<span class="o">)</span>
+&lt;<span class="m">28</span> send buffer was <span class="m">212992</span>, now <span class="m">268435456</span>
+&lt;<span class="m">29</span> send buffer was <span class="m">212992</span>, now <span class="m">268435456</span>
+&lt;<span class="m">28</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">29</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">28</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">29</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">28</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">29</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">28</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+&lt;<span class="m">29</span> server listening <span class="o">(</span>udp<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../日志管理/index.html" class="btn btn-neutral float-right" title="11. 日志管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01-varnish.html" class="btn btn-neutral" title="10.14. varnish" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
