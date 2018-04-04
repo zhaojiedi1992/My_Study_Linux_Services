@@ -3,8 +3,10 @@
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
    日志介绍
    日志管理系统搭建
    日志转储
+   elk/*
    

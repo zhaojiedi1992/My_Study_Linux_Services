@@ -8,4 +8,5 @@ WEB
    httpd/*
    nginx/*
    cacheweb/*
+   tomcat/*
    

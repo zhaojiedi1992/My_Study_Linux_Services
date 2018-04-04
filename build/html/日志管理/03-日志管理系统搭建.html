@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11.3. 日志管理系统搭建 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 日志管理" href="index.html"/>
+        <link rel="next" title="11.4. elk入门" href="04-elk入门.html"/>
+        <link rel="prev" title="11.2. 日志转储" href="02-日志转储.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/baidu.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 日志管理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-日志介绍.html">11.1. 日志介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-日志转储.html">11.2. 日志转储</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.3. 日志管理系统搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.3.1. 架构图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">11.3.2. 日志服务器配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">11.3.3. 应用服务器配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.3.4. 日志服务器测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">11.3.5. 日志分析服务器配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">11.3.6. 完善工作</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04-elk入门.html">11.4. elk入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html">11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">11. 日志管理</a> &raquo;</li>
+        
+      <li>11.3. 日志管理系统搭建</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/日志管理/03-日志管理系统搭建.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>11.3. 日志管理系统搭建<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>这个文章主要介绍使用日志服务器收集多个服务器的日志信息到mysql数据库中，然后使用
+分析工具来分析日志和监控。</p>
+<div class="section" id="id2">
+<h2>11.3.1. 架构图<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/日志分析平台架构图.png" src="../_images/日志分析平台架构图.png" />
+</div>
+<div class="section" id="id3">
+<h2>11.3.2. 日志服务器配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$yum</span> install rsyslog-mysql mariadb-server
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$systemctl</span> restart mariadb
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$ss</span> -tunl <span class="p">|</span>grep <span class="m">3306</span>
+tcp    LISTEN     <span class="m">0</span>      <span class="m">50</span>        *:3306                  *:*
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$mysql_secure_installation</span>
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$mysql</span> -u root -p &lt;/usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql
+<span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$mysql</span> -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MariaDB connection id is <span class="m">13</span>
+Server version: <span class="m">5</span>.5.56-MariaDB MariaDB Server
+
+Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2000</span>, <span class="m">2017</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; use Syslog
+Reading table information <span class="k">for</span> completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB <span class="o">[</span>Syslog<span class="o">]</span>&gt; show tables<span class="p">;</span>
++------------------------+
+<span class="p">|</span> Tables_in_Syslog       <span class="p">|</span>
++------------------------+
+<span class="p">|</span> SystemEvents           <span class="p">|</span>
+<span class="p">|</span> SystemEventsProperties <span class="p">|</span>
++------------------------+
+<span class="m">2</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+
+MariaDB <span class="o">[</span>Syslog<span class="o">]</span>&gt; grant all on Syslog.* to syslog@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;syslog&#39;</span><span class="p">;</span>
+Query OK, <span class="m">0</span> rows affected <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>11.3.3. 应用服务器配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># app1上操作</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># yum install rsyslog-mysql</span>
+
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># rpm -ql rsyslog-mysql</span>
+/usr/lib64/rsyslog/ommysql.so
+/usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql
+<span class="nv">$ModLoad</span> ommysql
+*.info            :ommysql:192.168.46.7,Syslog,syslog,syslog
+<span class="o">[</span>root@centos-158 yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart rsyslog</span>
+
+<span class="c1"># 复制一份到app2</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># scp /etc/rsyslog.conf  192.168.46.159:/etc/</span>
+<span class="c1"># app2安装包</span>
+<span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install rsyslog-mysql</span>
+<span class="c1"># 重启服务</span>
+<span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart rsyslog</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>11.3.4. 日志服务器测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># app1的服务器发送一个日志</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># logger auth.*  &quot;this is a test&quot;</span>
+<span class="c1"># app2的服务器发送一个日志</span>
+<span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># logger auth.*   &quot;this is another test&quot;</span>
+
+
+<span class="c1"># 日志服务器查看下</span>
+MariaDB <span class="o">[</span>Syslog<span class="o">]</span>&gt; <span class="k">select</span> message,fromhost,facility  from SystemEvents where message like <span class="s1">&#39;%test%&#39;</span><span class="p">;</span>
++-----------------------------+------------+----------+
+<span class="p">|</span> message                     <span class="p">|</span> fromhost   <span class="p">|</span> facility <span class="p">|</span>
++-----------------------------+------------+----------+
+<span class="p">|</span> auth.* this is a <span class="nb">test</span>       <span class="p">|</span> centos-158 <span class="p">|</span>        <span class="m">1</span> <span class="p">|</span>
+<span class="p">|</span> auth.* this is another <span class="nb">test</span> <span class="p">|</span> centos-159 <span class="p">|</span>        <span class="m">1</span> <span class="p">|</span>
++-----------------------------+------------+----------+
+<span class="m">2</span> rows in <span class="nb">set</span> <span class="o">(</span><span class="m">0</span>.00 sec<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>11.3.5. 日志分析服务器配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install httpd php php-mysql php-gd</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ss -tunl |grep 80</span>
+tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      :::80                   :::*
+<span class="o">[</span>root@centos-152 /<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># wget http://download.adiscon.com/loganalyzer/loganalyzer-4.1.6.tar.gz</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># tar xf loganalyzer-4.1.6.tar.gz</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># mv loganalyzer-4.1.6 /var/www/html/log</span>
+<span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># cd /var/www/html/log</span>
+<span class="o">[</span>root@centos-152 log<span class="o">]</span><span class="c1"># cat contrib/*</span>
+<span class="c1">#!/bin/sh</span>
+
+touch config.php
+chmod <span class="m">666</span> config.php
+<span class="c1">#!/bin/sh</span>
+chmod <span class="m">644</span> config.php
+<span class="o">[</span>root@centos-152 log<span class="o">]</span><span class="c1"># touch src/config.php</span>
+<span class="o">[</span>root@centos-152 log<span class="o">]</span><span class="c1"># chmod 666 src/config.php</span>
+</pre></div>
+</div>
+<p>接下来打开浏览器输入http://192.168.46.152/log/src进行访问</p>
+<p>具体步骤如下</p>
+<img alt="../_images/step1.png" src="../_images/step1.png" />
+<img alt="../_images/step2.png" src="../_images/step2.png" />
+<img alt="../_images/step3.png" src="../_images/step3.png" />
+<img alt="../_images/step4.png" src="../_images/step4.png" />
+<img alt="../_images/step5.png" src="../_images/step5.png" />
+<img alt="../_images/step6.png" src="../_images/step6.png" />
+<img alt="../_images/step7.png" src="../_images/step7.png" />
+</div>
+<div class="section" id="id7">
+<h2>11.3.6. 完善工作<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 log<span class="o">]</span><span class="c1"># chmod 644 src/config.php</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04-elk入门.html" class="btn btn-neutral float-right" title="11.4. elk入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02-日志转储.html" class="btn btn-neutral" title="11.2. 日志转储" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

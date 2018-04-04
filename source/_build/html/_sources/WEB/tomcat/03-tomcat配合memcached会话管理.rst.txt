@@ -172,15 +172,15 @@ tomcat安装
             transcoderFactoryClass="de.javakaffee.web.msm.serializer.kryo.KryoTranscoderFactory"
             />
     </Context>
-[root@centos-152 msm]# scp /etc/tomcat/server.xml 192.168.46.153:/etc/tomcat/
+    [root@centos-152 msm]# scp /etc/tomcat/server.xml 192.168.46.153:/etc/tomcat/
 
-# 安装memcached
-[root@centos-152 msm]# yum install memcached
-[root@centos-152 msm]# systemctl start memcached
-[root@centos-152 msm]# systemctl restart tomcat 
-[root@centos-153 msm]# yum install memcached
-[root@centos-153 msm]# systemctl start memcached
-[root@centos-153 msm]# systemctl restart tomcat 
+    # 安装memcached
+    [root@centos-152 msm]# yum install memcached
+    [root@centos-152 msm]# systemctl start memcached
+    [root@centos-152 msm]# systemctl restart tomcat 
+    [root@centos-153 msm]# yum install memcached
+    [root@centos-153 msm]# systemctl start memcached
+    [root@centos-153 msm]# systemctl restart tomcat 
 
 
 测试

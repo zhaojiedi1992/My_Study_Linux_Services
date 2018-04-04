@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tomcat常用配置 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.17. tomcat常用配置 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="10.18. tomcat配合memcached会话管理" href="03-tomcat配合memcached会话管理.html"/>
+        <link rel="prev" title="10.16. tomcat安装" href="01-tomcat安装.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
@@ -99,7 +102,39 @@
 <li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">10. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/04-nginx支持https.html">10.11. nginx支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/06-nginx常用案例.html">10.13. nginx常用案例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cacheweb/01-varnish.html">10.14. varnish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cacheweb/02-memcached.html">10.15. memcached</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-tomcat安装.html">10.16. tomcat安装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.17. tomcat常用配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.17.1. 部署</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.17.2. 主机管理启用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app">10.17.3. app管理启用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nginxtomcat">10.17.4. nginx代理tomcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpdtomcat">10.17.5. httpd代理tomcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.17.6. nginx负载代理tomcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.17.7. httpd负载代理tomcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.17.8. 保持会话</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.17.9. tomcat会话集群</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="03-tomcat配合memcached会话管理.html">10.18. tomcat配合memcached会话管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-tomcat配合redis会话管理.html">10.19. tomcat配合redis会话管理</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
@@ -150,7 +185,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>tomcat常用配置</li>
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.17. tomcat常用配置</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,9 +209,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="tomcat">
-<h1>tomcat常用配置<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<h1>10.17. tomcat常用配置<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.1. 部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
@@ -206,7 +243,7 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>主机管理启用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.2. 主机管理启用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
 <span class="c1"># 添加如下2行</span>
 &lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;admin-gui&quot;</span>/&gt;
@@ -217,7 +254,7 @@
 <img alt="../../_images/tomcat-host-manager.png" src="../../_images/tomcat-host-manager.png" />
 </div>
 <div class="section" id="app">
-<h2>app管理启用<a class="headerlink" href="#app" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.3. app管理启用<a class="headerlink" href="#app" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
 <span class="c1"># 添加如下2行</span>
 &lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;manager-gui&quot;</span>/&gt;
@@ -228,7 +265,7 @@
 <img alt="../../_images/tomcat-manager.png" src="../../_images/tomcat-manager.png" />
 </div>
 <div class="section" id="nginxtomcat">
-<h2>nginx代理tomcat<a class="headerlink" href="#nginxtomcat" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.4. nginx代理tomcat<a class="headerlink" href="#nginxtomcat" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 nginx<span class="o">]</span><span class="c1"># vim nginx.conf</span>
 <span class="c1"># 在默认的server中添加如下行</span>
         root          /usr/share/tomcat/webapps/ROOT <span class="p">;</span>
@@ -241,7 +278,7 @@
 <p>浏览器测试：<a class="reference external" href="http://192.168.46.151/">http://192.168.46.151/</a></p>
 </div>
 <div class="section" id="httpdtomcat">
-<h2>httpd代理tomcat<a class="headerlink" href="#httpdtomcat" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.5. httpd代理tomcat<a class="headerlink" href="#httpdtomcat" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
         ServerName      www.linuxpanda.tech
         ProxyRequests Off
@@ -260,7 +297,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>nginx负载代理tomcat<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.6. nginx负载代理tomcat<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 配置后端网页</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
@@ -334,7 +371,7 @@ upstream webend <span class="o">{</span>
 <img alt="../../_images/tomcat-a.png" src="../../_images/tomcat-a.png" />
 </div>
 <div class="section" id="id4">
-<h2>httpd负载代理tomcat<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.7. httpd负载代理tomcat<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
 <span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
 &lt;proxy balancer://webend&gt;
@@ -364,7 +401,7 @@ upstream webend <span class="o">{</span>
 </div>
 </div>
 <div class="section" id="id5">
-<h2>保持会话<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.8. 保持会话<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
 Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/&quot;</span> <span class="nv">env</span><span class="o">=</span>BALANCER_ROUTE_CHANGED
 &lt;proxy balancer://webend&gt;
@@ -399,7 +436,7 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
 <img alt="../../_images/tomcat-b.png" src="../../_images/tomcat-b.png" />
 </div>
 <div class="section" id="id6">
-<h2>tomcat会话集群<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2>10.17.9. tomcat会话集群<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-153 tomcat<span class="o">]</span><span class="c1"># vim server.xml</span>
 &lt;Engine <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Catalina&quot;</span> <span class="nv">defaultHost</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span> <span class="nv">jvmRoute</span><span class="o">=</span><span class="s2">&quot;TomcatB&quot;</span> &gt;
 <span class="c1"># 添加如下到/etc/tomcat/service.xml 的engine片段或者host片段中。</span>
@@ -462,6 +499,15 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03-tomcat配合memcached会话管理.html" class="btn btn-neutral float-right" title="10.18. tomcat配合memcached会话管理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01-tomcat安装.html" class="btn btn-neutral" title="10.16. tomcat安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

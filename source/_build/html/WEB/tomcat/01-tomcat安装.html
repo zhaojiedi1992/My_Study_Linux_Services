@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tomcat安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>10.16. tomcat安装 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="10. WEB" href="../index.html"/>
+        <link rel="next" title="10.17. tomcat常用配置" href="02-tomcat常用配置.html"/>
+        <link rel="prev" title="10.15. memcached" href="../cacheweb/02-memcached.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../自动化安装/index.html">3. 自动化安装</a></li>
@@ -99,7 +102,39 @@
 <li class="toctree-l1"><a class="reference internal" href="../../认证/index.html">7. 认证</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../数据库/index.html">9. 数据库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">10. WEB</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">10. WEB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../httpd/01-httpd安装.html">10.1. httpd的安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/02-httpd基础配置说明.html">10.2. httpd基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/03-http支持https.html">10.3. http支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/04-httpd虚拟主机三种实现方式.html">10.4. httpd虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/05-centos6lamp的yum安装.html">10.5. centos6lamp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/06-centos编译安装lamp.html">10.6. centos6编译安装lamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../httpd/07-web实战一.html">10.7. web实战一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/01-nginx安装.html">10.8. nginx安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/02-nginx基础配置说明.html">10.9. nginx基础配置说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/03-nginx虚拟主机三种实现方式.html">10.10. nginx虚拟主机三种实现方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/04-nginx支持https.html">10.11. nginx支持https</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/05-centos7lnmp的yum安装.html">10.12. centos7 lnmp的yum安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nginx/06-nginx常用案例.html">10.13. nginx常用案例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cacheweb/01-varnish.html">10.14. varnish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cacheweb/02-memcached.html">10.15. memcached</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.16. tomcat安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jdk">10.16.1. jdk安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yum">10.16.1.1. yum安装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">10.16.1.2. 直接解压包方式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.16.2. tomcat安装</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">10.16.2.1. yum安装</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02-tomcat常用配置.html">10.17. tomcat常用配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-tomcat配合memcached会话管理.html">10.18. tomcat配合memcached会话管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-tomcat配合redis会话管理.html">10.19. tomcat配合redis会话管理</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../日志管理/index.html">11. 日志管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../版本控制/index.html">13. 版本控制</a></li>
@@ -150,7 +185,9 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>tomcat安装</li>
+          <li><a href="../index.html">10. WEB</a> &raquo;</li>
+        
+      <li>10.16. tomcat安装</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,11 +209,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="tomcat">
-<h1>tomcat安装<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<h1>10.16. tomcat安装<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="jdk">
-<h2>jdk安装<a class="headerlink" href="#jdk" title="Permalink to this headline">¶</a></h2>
+<h2>10.16.1. jdk安装<a class="headerlink" href="#jdk" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="yum">
-<h3>yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
+<h3>10.16.1.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk.x86_64</span>
 
@@ -188,7 +225,7 @@ OpenJDK <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <s
 </div>
 </div>
 <div class="section" id="id1">
-<h3>直接解压包方式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>10.16.1.2. 直接解压包方式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">包下载地址</a></p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
@@ -217,9 +254,9 @@ Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">6
 </div>
 </div>
 <div class="section" id="id3">
-<h2>tomcat安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>10.16.2. tomcat安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
-<h3>yum安装<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>10.16.2.1. yum安装<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
@@ -246,6 +283,15 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02-tomcat常用配置.html" class="btn btn-neutral float-right" title="10.17. tomcat常用配置" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cacheweb/02-memcached.html" class="btn btn-neutral" title="10.15. memcached" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
