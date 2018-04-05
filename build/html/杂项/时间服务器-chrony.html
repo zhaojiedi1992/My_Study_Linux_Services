@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>15.3. 时间服务器-chrony &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>17.3. 时间服务器-chrony &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="15. 杂项" href="index.html"/>
-        <link rel="next" title="15.4. 时间服务器-ntp" href="时间服务器-ntp.html"/>
-        <link rel="prev" title="15.2. 代理服务器" href="代理服务器.html"/> 
+        <link rel="up" title="17. 杂项" href="index.html"/>
+        <link rel="next" title="17.4. 时间服务器-ntp" href="时间服务器-ntp.html"/>
+        <link rel="prev" title="17.2. 代理服务器" href="代理服务器.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -107,16 +107,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">15. 杂项</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">15.1. CA的搭建</a></li>
-<li class="toctree-l2"><a class="reference internal" href="代理服务器.html">15.2. 代理服务器</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">15.3. 时间服务器-chrony</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">15.3.1. 服务端配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">15.3.2. 客户端配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">15.3.3. 客户端测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">17. 杂项</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">17.1. CA的搭建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="代理服务器.html">17.2. 代理服务器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">17.3. 时间服务器-chrony</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">17.3.1. 服务端配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">17.3.2. 客户端配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">17.3.3. 客户端测试</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="时间服务器-ntp.html">15.4. 时间服务器-ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="时间服务器-ntp.html">17.4. 时间服务器-ntp</a></li>
 </ul>
 </li>
 </ul>
@@ -164,9 +166,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">15. 杂项</a> &raquo;</li>
+          <li><a href="index.html">17. 杂项</a> &raquo;</li>
         
-      <li>15.3. 时间服务器-chrony</li>
+      <li>17.3. 时间服务器-chrony</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -188,9 +190,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="chrony">
-<span id="topics-time"></span><h1>15.3. 时间服务器-chrony<a class="headerlink" href="#chrony" title="Permalink to this headline">¶</a></h1>
+<span id="topics-time"></span><h1>17.3. 时间服务器-chrony<a class="headerlink" href="#chrony" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>15.3.1. 服务端配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>17.3.1. 服务端配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install chrony</span>
 <span class="c1"># 添加如下1行</span>
 server s1b.time.edu.cn       iburst
@@ -206,7 +208,7 @@ udp6       <span class="m">0</span>      <span class="m">0</span> ::1:323       
 </div>
 </div>
 <div class="section" id="id2">
-<h2>15.3.2. 客户端配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>17.3.2. 客户端配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># yum install chrony</span>
 <span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># vim /etc/chrony.conf</span>
 <span class="c1"># 添加行</span>
@@ -218,7 +220,7 @@ server <span class="m">192</span>.168.46.151 iburst
 </div>
 </div>
 <div class="section" id="id3">
-<h2>15.3.3. 客户端测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>17.3.3. 客户端测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-158 ~<span class="o">]</span><span class="c1"># chronyc  sources  -V</span>
 <span class="m">210</span> Number of <span class="nv">sources</span> <span class="o">=</span> <span class="m">1</span>
 MS Name/IP address         Stratum Poll Reach LastRx Last <span class="nv">sample</span>
@@ -241,10 +243,10 @@ Mon Mar  <span class="m">5</span> <span class="m">09</span>:59:02 CST <span clas
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="时间服务器-ntp.html" class="btn btn-neutral float-right" title="15.4. 时间服务器-ntp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="时间服务器-ntp.html" class="btn btn-neutral float-right" title="17.4. 时间服务器-ntp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="代理服务器.html" class="btn btn-neutral" title="15.2. 代理服务器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="代理服务器.html" class="btn btn-neutral" title="17.2. 代理服务器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

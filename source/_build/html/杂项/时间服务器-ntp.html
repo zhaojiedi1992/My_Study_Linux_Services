@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>15.4. 时间服务器-ntp &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>17.4. 时间服务器-ntp &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -36,9 +36,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="15. 杂项" href="index.html"/>
+        <link rel="up" title="17. 杂项" href="index.html"/>
         <link rel="next" title="&lt;no title&gt;" href="邮件服务器.html"/>
-        <link rel="prev" title="15.3. 时间服务器-chrony" href="时间服务器-chrony.html"/> 
+        <link rel="prev" title="17.3. 时间服务器-chrony" href="时间服务器-chrony.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -107,20 +107,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">15. 杂项</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">15.1. CA的搭建</a></li>
-<li class="toctree-l2"><a class="reference internal" href="代理服务器.html">15.2. 代理服务器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="时间服务器-chrony.html">15.3. 时间服务器-chrony</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">15.4. 时间服务器-ntp</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">15.4.1. ntp通信协议</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">15.4.2. ntp的安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">15.4.3. ntp的配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">15.4.3.1. 权限控制</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#nftp">15.4.3.2. 上层nftp服务器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">17. 杂项</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">17.1. CA的搭建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="代理服务器.html">17.2. 代理服务器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="时间服务器-chrony.html">17.3. 时间服务器-chrony</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">17.4. 时间服务器-ntp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">17.4.1. ntp通信协议</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">17.4.2. ntp的安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">17.4.3. ntp的配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">17.4.3.1. 权限控制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nftp">17.4.3.2. 上层nftp服务器</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">15.4.4. ntp的启动</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">15.4.5. ntp的客户端</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">17.4.4. ntp的启动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">17.4.5. ntp的客户端</a></li>
 </ul>
 </li>
 </ul>
@@ -170,9 +172,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">15. 杂项</a> &raquo;</li>
+          <li><a href="index.html">17. 杂项</a> &raquo;</li>
         
-      <li>15.4. 时间服务器-ntp</li>
+      <li>17.4. 时间服务器-ntp</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -194,10 +196,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="ntp">
-<h1>15.4. 时间服务器-ntp<a class="headerlink" href="#ntp" title="Permalink to this headline">¶</a></h1>
+<h1>17.4. 时间服务器-ntp<a class="headerlink" href="#ntp" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_022_ntp.html">时间服务器搭建</a></p>
 <div class="section" id="id2">
-<h2>15.4.1. ntp通信协议<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>17.4.1. ntp通信协议<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>linux操作系统计时是从1970年1月1日开机计算的总秒数。</p>
 <p>ntp工作原理：</p>
 <ol class="arabic simple">
@@ -208,15 +210,15 @@
 </ol>
 </div>
 <div class="section" id="id3">
-<h2>15.4.2. ntp的安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>17.4.2. ntp的安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost pam.d<span class="o">]</span><span class="c1"># yum install ntp</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id4">
-<h2>15.4.3. ntp的配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>17.4.3. ntp的配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id5">
-<h3>15.4.3.1. 权限控制<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>17.4.3.1. 权限控制<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>ntp.conf里面使用restrict来控制权限，设置那些用户可以来获取时间信息。</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>restrict [ip地址] mask [掩码] [参数]
 
@@ -230,14 +232,14 @@
 </div>
 </div>
 <div class="section" id="nftp">
-<h3>15.4.3.2. 上层nftp服务器<a class="headerlink" href="#nftp" title="Permalink to this headline">¶</a></h3>
+<h3>17.4.3.2. 上层nftp服务器<a class="headerlink" href="#nftp" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>server [ip 或者主机名] [prefer]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id6">
-<h2>15.4.4. ntp的启动<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2>17.4.4. ntp的启动<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 etc<span class="o">]</span><span class="c1"># systemctl restart ntpd</span>
 <span class="o">[</span>root@centos-159 etc<span class="o">]</span><span class="c1"># systemctl enable ntpd</span>
 <span class="o">[</span>root@localhost pam.d<span class="o">]</span><span class="c1"># netstat -tunlp  |grep ntp</span>
@@ -252,7 +254,7 @@ udp6       <span class="m">0</span>      <span class="m">0</span> :::123        
 </div>
 </div>
 <div class="section" id="id7">
-<h2>15.4.5. ntp的客户端<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h2>17.4.5. ntp的客户端<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 ~<span class="o">]</span><span class="c1"># yum install ntp</span>
 <span class="o">[</span>root@centos-159 etc<span class="o">]</span><span class="c1"># vim /etc/ntp.conf</span>
 <span class="c1"># 添加server行，注释原有server行</span>
@@ -287,7 +289,7 @@ nis.linuxpanda. .INIT.          <span class="m">16</span> u   <span class="m">23
         <a href="邮件服务器.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="时间服务器-chrony.html" class="btn btn-neutral" title="15.3. 时间服务器-chrony" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="时间服务器-chrony.html" class="btn btn-neutral" title="17.3. 时间服务器-chrony" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

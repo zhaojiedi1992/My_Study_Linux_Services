@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>elk入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>11.4. elk入门 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -35,7 +35,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
+        <link rel="up" title="11. 日志管理" href="index.html"/>
+        <link rel="next" title="11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台" href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html"/>
+        <link rel="prev" title="11.3. 日志管理系统搭建" href="03-日志管理系统搭建.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,7 +92,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
@@ -100,11 +103,42 @@
 <li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">11. 日志管理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. 日志管理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-日志介绍.html">11.1. 日志介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-日志转储.html">11.2. 日志转储</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-日志管理系统搭建.html">11.3. 日志管理系统搭建</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.4. elk入门</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">11.4.1. 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">11.4.2. 安装elk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">11.4.3. 修改配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#elasticsearch">11.4.4. 测试elasticsearch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">11.4.5. 插入数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">11.4.6. 查询数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#elasticsearch-head">11.4.7. elasticsearch-head插件安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">11.4.8. elasticsearch-head插件配置测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logstash">11.4.9. logstash配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">11.4.9.1. 配置从标准输入到标准输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">11.4.9.2. 配置从文件输入到标准输出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtergrok">11.4.9.3. filter的grok使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filterdate">11.4.9.4. filter的date使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geoip">11.4.9.5. geoip使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redislogstash">11.4.9.6. redis配合logstash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logstashels">11.4.9.7. logstash写数据到els</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filebeat">11.4.10. 使用filebeat收集数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kibana">11.4.11. kibana使用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html">11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">15. 杂项</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">17. 杂项</a></li>
 </ul>
 
             
@@ -150,7 +184,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>elk入门</li>
+          <li><a href="index.html">11. 日志管理</a> &raquo;</li>
+        
+      <li>11.4. elk入门</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,7 +208,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="elk">
-<h1>elk入门<a class="headerlink" href="#elk" title="Permalink to this headline">¶</a></h1>
+<h1>11.4. elk入门<a class="headerlink" href="#elk" title="Permalink to this headline">¶</a></h1>
 <p>ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成。官方网站：<a class="reference external" href="https://www.elastic.co/products">https://www.elastic.co/products</a> ,Logstash非常重量级，且效率很低
 ，吃内存厉害，Beats是一个轻量化版本的logStatsh。</p>
 <ul class="simple">
@@ -193,7 +229,7 @@
 <li>文档(document)相当于数据库中的行</li>
 </ul>
 <div class="section" id="id2">
-<h2>准备工作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.1. 准备工作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>hosts文件解析配置</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /etc/hosts</span>
@@ -221,7 +257,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>安装elk<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.2. 安装elk<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.elastic.co/cn/downloads">elk官方下载地址</a></p>
 <p>官方下载的实在是太慢了。 好在清华大学镜像站点提供了镜像，美滋滋。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
@@ -234,7 +270,7 @@
 </div>
 </div>
 <div class="section" id="id5">
-<h2>修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.3. 修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/elasticsearch/</span>
 <span class="o">[</span>root@centos-151 elasticsearch<span class="o">]</span><span class="c1"># ls</span>
 elasticsearch.yml  jvm.options  log4j2.properties  scripts
@@ -276,7 +312,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 </div>
 <div class="section" id="elasticsearch">
-<h2>测试elasticsearch<a class="headerlink" href="#elasticsearch" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.4. 测试elasticsearch<a class="headerlink" href="#elasticsearch" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl http://c151:9200/</span>
 <span class="o">{</span>
 <span class="s2">&quot;name&quot;</span> : <span class="s2">&quot;c151&quot;</span>,
@@ -334,16 +370,15 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 </div>
 <div class="section" id="id6">
-<h2>插入数据<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<h2>11.4.5. 插入数据<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/1&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;zhaojiedi&quot;, &quot;publisher&quot;: &quot;zhao&quot;}&#39;</span>
+curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/2&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;xiaojia&quot;, &quot;publisher&quot;: &quot;zhao&quot;}&#39;</span>
+curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/3&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;zhao&quot;, &quot;publisher&quot;: &quot;zhaojiedi&quot;}&#39;</span>
 </pre></div>
 </div>
-<p>curl -XPUT ‘<a class="reference external" href="http://c151:9200/book/it/1">http://c151:9200/book/it/1</a>’ -d ‘{“name”: “zhaojiedi”, “publisher”: “zhao”}’
-curl -XPUT ‘<a class="reference external" href="http://c151:9200/book/it/2">http://c151:9200/book/it/2</a>’ -d ‘{“name”: “xiaojia”, “publisher”: “zhao”}’
-curl -XPUT ‘<a class="reference external" href="http://c151:9200/book/it/3">http://c151:9200/book/it/3</a>’ -d ‘{“name”: “zhao”, “publisher”: “zhaojiedi”}’</p>
 </div>
 <div class="section" id="id7">
-<h2>查询数据<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.6. 查询数据<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl  &#39;http://c151:9200/_search?q=zhao&amp;pretty=true&#39;</span>
 <span class="o">{</span>
 <span class="s2">&quot;took&quot;</span> : <span class="m">7</span>,
@@ -396,48 +431,48 @@ curl -XPUT ‘<a class="reference external" href="http://c151:9200/book/it/3">ht
 <p>手工去写这个查询语句是很麻烦的，官方提供了web查询方式的。</p>
 </div>
 <div class="section" id="elasticsearch-head">
-<h2>elasticsearch-head插件安装<a class="headerlink" href="#elasticsearch-head" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.7. elasticsearch-head插件安装<a class="headerlink" href="#elasticsearch-head" title="Permalink to this headline">¶</a></h2>
 <p>参考 <a class="reference external" href="https://github.com/mobz/elasticsearch-head">elasticsearch-head</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/elasticsearch/elasticsearch.yml</span>
+<span class="c1"># 添加如下2行</span>
+http.cors.enabled: <span class="nb">true</span>
+http.cors.allow-origin: <span class="s2">&quot;*&quot;</span>
+
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install git npm</span>
+
+<span class="o">[</span>root@centos-151 elasticsearch<span class="o">]</span><span class="c1"># cd /usr/local/</span>
+<span class="o">[</span>root@centos-151 local<span class="o">]</span><span class="c1"># ls</span>
+bin  etc  games  include  lib  lib64  libexec  sbin  share  src
+<span class="o">[</span>root@centos-151 local<span class="o">]</span><span class="c1"># git clone https://github.com/mobz/elasticsearch-head</span>
+<span class="o">[</span>root@centos-151 local<span class="o">]</span><span class="c1"># ls</span>
+bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  src
+<span class="o">[</span>root@centos-151 local<span class="o">]</span><span class="c1"># cd elasticsearch-head/</span>
+<span class="o">[</span>root@centos-151 phantomjs<span class="o">]</span><span class="c1"># yum install lbzip2 bzip2</span>
+<span class="o">[</span>root@centos-151 elasticsearch-head<span class="o">]</span><span class="c1"># npm install -g cnpm --registry=https://registry.npm.taobao.org</span>
+<span class="o">[</span>root@centos-151 elasticsearch-head<span class="o">]</span><span class="c1"># cnpm install</span>
+<span class="o">[</span>root@centos-151 elasticsearch-head<span class="o">]</span><span class="c1"># npm run start</span>
 </pre></div>
 </div>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# vim /etc/elasticsearch/elasticsearch.yml
-# 添加如下2行
-http.cors.enabled: true
-http.cors.allow-origin: “*”</p>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> ~]# yum install git npm</p>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> elasticsearch]# cd /usr/local/
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> local]# ls
-bin  etc  games  include  lib  lib64  libexec  sbin  share  src
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> local]# git clone <a class="reference external" href="https://github.com/mobz/elasticsearch-head">https://github.com/mobz/elasticsearch-head</a>
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> local]# ls
-bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  src
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> local]# cd elasticsearch-head/
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> phantomjs]# yum install lbzip2 bzip2
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> elasticsearch-head]# npm install -g cnpm –registry=https://registry.npm.taobao.org
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> elasticsearch-head]# cnpm install
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-151">root<span>&#64;</span>centos-151</a> elasticsearch-head]# npm run start</p>
 </div>
 <div class="section" id="id9">
-<h2>elasticsearch-head插件配置测试<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.8. elasticsearch-head插件配置测试<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>浏览器输入 <a class="reference external" href="http://192.168.46.151:9100/">http://192.168.46.151:9100/</a></p>
-<img alt="images/logs/elk-01.png" src="images/logs/elk-01.png" />
-<img alt="images/logs/elk-02.png" src="images/logs/elk-02.png" />
+<img alt="../_images/elk-01.png" src="../_images/elk-01.png" />
+<img alt="../_images/elk-02.png" src="../_images/elk-02.png" />
 </div>
 <div class="section" id="logstash">
-<h2>logstash配置<a class="headerlink" href="#logstash" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<p>[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-154">root<span>&#64;</span>centos-154</a> ~]# yum install logstash
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-154">root<span>&#64;</span>centos-154</a> ~]# rpm -ql logstash <a href="#id10"><span class="problematic" id="id11">|</span></a>wc -l
-11293
-[<a class="reference external" href="mailto:root&#37;&#52;&#48;centos-154">root<span>&#64;</span>centos-154</a> ~]# rpm -ql logstash <a href="#id12"><span class="problematic" id="id13">|</span></a>grep logstash$
+<h2>11.4.9. logstash配置<a class="headerlink" href="#logstash" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install logstash</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># rpm -ql logstash |wc -l</span>
+<span class="m">11293</span>
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># rpm -ql logstash |grep logstash$</span>
 /usr/share/logstash/bin/logstash
 /var/lib/logstash
-/var/log/logstash</p>
-<div class="section" id="id14">
-<h3>配置从标准输入到标准输出<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+/var/log/logstash
+</pre></div>
+</div>
+<div class="section" id="id10">
+<h3>11.4.9.1. 配置从标准输入到标准输出<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/conf.d/</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># vim sample.conf</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cat sample.conf</span>
@@ -477,8 +512,8 @@ zhaojiedi
 </pre></div>
 </div>
 </div>
-<div class="section" id="id15">
-<h3>配置从文件输入到标准输出<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>11.4.9.2. 配置从文件输入到标准输出<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install httpd</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># systemctl start httpd</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># curl 192.168.46.154</span>
@@ -516,7 +551,7 @@ Could not find log4j2 configuration at path /usr/share/logstash/config/log4j2.pr
 <p>这个是提取到messsage了， 但是太笼统了，我们需要让它切开为各个属性的。</p>
 </div>
 <div class="section" id="filtergrok">
-<h3>filter的grok使用<a class="headerlink" href="#filtergrok" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.9.3. filter的grok使用<a class="headerlink" href="#filtergrok" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
 vim sample.conf
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cat sample.conf</span>
@@ -574,7 +609,7 @@ Could not find log4j2 configuration at path /usr/share/logstash/config/log4j2.pr
 </div>
 </div>
 <div class="section" id="filterdate">
-<h3>filter的date使用<a class="headerlink" href="#filterdate" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.9.4. filter的date使用<a class="headerlink" href="#filterdate" title="Permalink to this headline">¶</a></h3>
 <p>默认你的日期字符串是不能被识别出来是日期的， 你需要指定你的字符串是日期就需要date过滤器。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
 vim sample.conf
@@ -610,7 +645,7 @@ output <span class="o">{</span>
 </div>
 </div>
 <div class="section" id="geoip">
-<h3>geoip使用<a class="headerlink" href="#geoip" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.9.5. geoip使用<a class="headerlink" href="#geoip" title="Permalink to this headline">¶</a></h3>
 <p>这个很厉害的，根据ip可以获取到地理位置的，城市信息和经纬度信息。</p>
 <p>geoip下载</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/</span>
@@ -675,7 +710,7 @@ total <span class="m">59936</span>
 <p>我们可以看到它识别出来223.5.5.5这个阿里云的dns为杭州的啦。</p>
 </div>
 <div class="section" id="redislogstash">
-<h3>redis配合logstash<a class="headerlink" href="#redislogstash" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.9.6. redis配合logstash<a class="headerlink" href="#redislogstash" title="Permalink to this headline">¶</a></h3>
 <p>redis作为输入</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>input {
         redis {
@@ -760,7 +795,7 @@ OK
 </div>
 </div>
 <div class="section" id="logstashels">
-<h3>logstash写数据到els<a class="headerlink" href="#logstashels" title="Permalink to this headline">¶</a></h3>
+<h3>11.4.9.7. logstash写数据到els<a class="headerlink" href="#logstashels" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text"><div class="highlight"><pre><span></span>output {
     elasticsearch {
         hosts =&gt; [&quot;http://192.168.46.151:9200/&quot;,&quot;http://192.168.46.152:9200/&quot;,&quot;http://192.168.46.153:9200/&quot;]
@@ -773,7 +808,7 @@ OK
 </div>
 </div>
 <div class="section" id="filebeat">
-<h2>使用filebeat收集数据<a class="headerlink" href="#filebeat" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.10. 使用filebeat收集数据<a class="headerlink" href="#filebeat" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install filebeat</span>
 <span class="o">[</span>root@centos-154 filebeat<span class="o">]</span><span class="c1"># vim filebeat.yml</span>
 <span class="c1"># 修改如下几行内容</span>
@@ -789,7 +824,7 @@ green open filebeat-2018.04.04 HXRGZ6sKRGaM4GDFGwf2Zg <span class="m">5</span> <
 </div>
 </div>
 <div class="section" id="kibana">
-<h2>kibana使用<a class="headerlink" href="#kibana" title="Permalink to this headline">¶</a></h2>
+<h2>11.4.11. kibana使用<a class="headerlink" href="#kibana" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 filebeat<span class="o">]</span><span class="c1"># vim /etc/kibana/kibana.yml</span>
 <span class="c1"># 修改如下2行</span>
 elasticsearch.url: <span class="s2">&quot;http://192.168.46.151:9200&quot;</span>
@@ -811,6 +846,15 @@ server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html" class="btn btn-neutral float-right" title="11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03-日志管理系统搭建.html" class="btn btn-neutral" title="11.3. 日志管理系统搭建" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

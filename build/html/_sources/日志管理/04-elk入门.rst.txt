@@ -186,10 +186,9 @@ elk官方下载地址_
 
 .. code-block:: bash 
 
-
-curl -XPUT 'http://c151:9200/book/it/1' -d '{"name": "zhaojiedi", "publisher": "zhao"}'
-curl -XPUT 'http://c151:9200/book/it/2' -d '{"name": "xiaojia", "publisher": "zhao"}'
-curl -XPUT 'http://c151:9200/book/it/3' -d '{"name": "zhao", "publisher": "zhaojiedi"}'
+    curl -XPUT 'http://c151:9200/book/it/1' -d '{"name": "zhaojiedi", "publisher": "zhao"}'
+    curl -XPUT 'http://c151:9200/book/it/2' -d '{"name": "xiaojia", "publisher": "zhao"}'
+    curl -XPUT 'http://c151:9200/book/it/3' -d '{"name": "zhao", "publisher": "zhaojiedi"}'
 
 查询数据
 -----------------------------------------------
@@ -256,33 +255,33 @@ elasticsearch-head插件安装
 
 .. code-block:: bash 
 
-[root@centos-151 ~]# vim /etc/elasticsearch/elasticsearch.yml 
-# 添加如下2行
-http.cors.enabled: true
-http.cors.allow-origin: "*"
+    [root@centos-151 ~]# vim /etc/elasticsearch/elasticsearch.yml 
+    # 添加如下2行
+    http.cors.enabled: true
+    http.cors.allow-origin: "*"
 
-[root@centos-151 ~]# yum install git npm 
+    [root@centos-151 ~]# yum install git npm 
 
-[root@centos-151 elasticsearch]# cd /usr/local/
-[root@centos-151 local]# ls
-bin  etc  games  include  lib  lib64  libexec  sbin  share  src
-[root@centos-151 local]# git clone https://github.com/mobz/elasticsearch-head
-[root@centos-151 local]# ls
-bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  src
-[root@centos-151 local]# cd elasticsearch-head/
-[root@centos-151 phantomjs]# yum install lbzip2 bzip2
-[root@centos-151 elasticsearch-head]# npm install -g cnpm --registry=https://registry.npm.taobao.org
-[root@centos-151 elasticsearch-head]# cnpm install 
-[root@centos-151 elasticsearch-head]# npm run start 
+    [root@centos-151 elasticsearch]# cd /usr/local/
+    [root@centos-151 local]# ls
+    bin  etc  games  include  lib  lib64  libexec  sbin  share  src
+    [root@centos-151 local]# git clone https://github.com/mobz/elasticsearch-head
+    [root@centos-151 local]# ls
+    bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  src
+    [root@centos-151 local]# cd elasticsearch-head/
+    [root@centos-151 phantomjs]# yum install lbzip2 bzip2
+    [root@centos-151 elasticsearch-head]# npm install -g cnpm --registry=https://registry.npm.taobao.org
+    [root@centos-151 elasticsearch-head]# cnpm install 
+    [root@centos-151 elasticsearch-head]# npm run start 
 
 elasticsearch-head插件配置测试
 --------------------------------------------
 
 浏览器输入 http://192.168.46.151:9100/
 
-.. image:: /images/logs/elk-01.png
+.. image:: /images/log/elk-01.png
 
-.. image:: /images/logs/elk-02.png
+.. image:: /images/log/elk-02.png
 
 
 logstash配置
@@ -290,13 +289,13 @@ logstash配置
 
 .. code-block:: bash 
 
-[root@centos-154 ~]# yum install logstash 
-[root@centos-154 ~]# rpm -ql logstash |wc -l 
-11293
-[root@centos-154 ~]# rpm -ql logstash |grep logstash$
-/usr/share/logstash/bin/logstash
-/var/lib/logstash
-/var/log/logstash
+    [root@centos-154 ~]# yum install logstash 
+    [root@centos-154 ~]# rpm -ql logstash |wc -l 
+    11293
+    [root@centos-154 ~]# rpm -ql logstash |grep logstash$
+    /usr/share/logstash/bin/logstash
+    /var/lib/logstash
+    /var/log/logstash
 
 配置从标准输入到标准输出
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
