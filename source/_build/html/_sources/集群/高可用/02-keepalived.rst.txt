@@ -9,7 +9,7 @@ keepalived
 安装配置ip漂移
 ---------------------------------------------------
 
-.. code-block:: 
+.. code-block:: bash
 
     # 备份原有的
     [root@centos-151 ~]# yum install keepalived 

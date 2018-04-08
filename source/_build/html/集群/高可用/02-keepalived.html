@@ -206,6 +206,154 @@
 </div>
 <div class="section" id="ip">
 <h2>14.5.2. 安装配置ip漂移<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 备份原有的</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install keepalived</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/keepalived/</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># ls</span>
+keepalived.conf
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># cp keepalived.conf{,.bak}</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">8</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">3598</span> Mar <span class="m">20</span> <span class="m">09</span>:38 keepalived.conf
+-rw-r--r-- <span class="m">1</span> root root <span class="m">3598</span> Mar <span class="m">20</span> <span class="m">09</span>:41 keepalived.conf.bak
+
+<span class="c1"># 修改配置</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># vim keepalived.conf</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># cat keepalived.conf</span>
+! Configuration File <span class="k">for</span> keepalived
+
+global_defs <span class="o">{</span>
+notification_email <span class="o">{</span>
+    root@localhost
+<span class="o">}</span>
+notification_email_from keepalived@localhost
+smtp_server <span class="m">127</span>.0.0.1
+smtp_connect_timeout <span class="m">30</span>
+router_id LVS_DEVEL
+vrrp_mcast_group4 <span class="m">224</span>.1.1.1
+<span class="o">}</span>
+
+vrrp_instance VI_1 <span class="o">{</span>
+    state MASTER
+    interface ens37
+    virtual_router_id <span class="m">51</span>
+    priority <span class="m">100</span>
+    advert_int <span class="m">1</span>
+    authentication <span class="o">{</span>
+        auth_type PASS
+        auth_pass <span class="m">1111</span>
+    <span class="o">}</span>
+    virtual_ipaddress <span class="o">{</span>
+    <span class="m">172</span>.18.46.100/16
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="c1"># 复制到远程主机并修改</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># cp keepalived.conf 192.168.46.154:/etc/keepalived/</span>
+cp: cannot create regular file ‘192.168.46.154:/etc/keepalived/’: No such file or directory
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># scp keepalived.conf 192.168.46.154:/etc/keepalived/</span>
+The authenticity of host <span class="s1">&#39;192.168.46.154 (192.168.46.154)&#39;</span> can<span class="s1">&#39;t be established.</span>
+<span class="s1">ECDSA key fingerprint is SHA256:CCHUJxa/IGrB0CXKtvPHaiVK+pJAp3xY0djGwCkmQVM.</span>
+<span class="s1">ECDSA key fingerprint is MD5:54:dd:11:2f:d4:8d:31:18:39:15:5a:ec:9a:9a:43:da.</span>
+<span class="s1">Are you sure you want to continue connecting (yes/no)? yes</span>
+<span class="s1">Warning: Permanently added &#39;</span><span class="m">192</span>.168.46.154<span class="s1">&#39; (ECDSA) to the list of known hosts.</span>
+<span class="s1">root@192.168.46.154&#39;</span>s password:
+keepalived.conf
+
+<span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># cat /etc/keepalived/keepalived.conf</span>
+! Configuration File <span class="k">for</span> keepalived
+
+global_defs <span class="o">{</span>
+notification_email <span class="o">{</span>
+    root@localhost
+<span class="o">}</span>
+notification_email_from keepalived@localhost
+smtp_server <span class="m">127</span>.0.0.1
+smtp_connect_timeout <span class="m">30</span>
+router_id LVS_DEVEL_2
+vrrp_mcast_group4 <span class="m">224</span>.1.1.1
+<span class="o">}</span>
+
+vrrp_instance VI_1 <span class="o">{</span>
+    state BACKUP
+    interface ens37
+    virtual_router_id <span class="m">51</span>
+    priority <span class="m">80</span>
+    advert_int <span class="m">1</span>
+    authentication <span class="o">{</span>
+        auth_type PASS
+        auth_pass <span class="m">1111</span>
+    <span class="o">}</span>
+    virtual_ipaddress <span class="o">{</span>
+    <span class="m">172</span>.18.46.100/16
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+
+<span class="c1"># 启动服务并抓包</span>
+
+<span class="c1"># 启动151</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># systemctl restart keepalived</span>
+<span class="o">[</span>root@centos-154 keepalived<span class="o">]</span><span class="c1"># systemctl restart keepalived</span>
+
+<span class="c1"># 抓包</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># tcpdump -i ens37 -nn host 224.1.1.1</span>
+tcpdump: verbose output suppressed, use -v or -vv <span class="k">for</span> full protocol decode
+listening on ens37, link-type EN10MB <span class="o">(</span>Ethernet<span class="o">)</span>, capture size <span class="m">262144</span> bytes
+<span class="m">09</span>:56:45.609383 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: igmp v2 report <span class="m">224</span>.1.1.1
+<span class="m">09</span>:56:46.609380 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:47.613899 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:48.508630 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: igmp v2 report <span class="m">224</span>.1.1.1
+<span class="m">09</span>:56:48.615603 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:49.617331 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:50.619132 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:51.620877 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:52.621399 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:53.398894 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: igmp v2 report <span class="m">224</span>.1.1.1
+<span class="m">09</span>:56:53.623045 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:54.624785 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:54.902075 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: igmp v2 report <span class="m">224</span>.1.1.1
+<span class="m">09</span>:56:55.626201 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:56.628140 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:57.630579 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:58.632492 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:56:59.633962 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:00.636156 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:01.637809 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:02.397616 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: igmp v2 report <span class="m">224</span>.1.1.1
+<span class="m">09</span>:57:02.639238 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:03.640875 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:04.642235 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:05.643316 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:06.645263 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:57:07.647454 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+
+<span class="c1"># 关闭151</span>
+<span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># systemctl stop keepalived</span>
+
+<span class="c1"># 抓包，可以看到主动关闭151发送0优先级， 154机器的优先级是80，就占有ip了。</span>
+<span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># tcpdump -i ens37 -nn host 224.1.1.1</span>
+tcpdump: verbose output suppressed, use -v or -vv <span class="k">for</span> full protocol decode
+listening on ens37, link-type EN10MB <span class="o">(</span>Ethernet<span class="o">)</span>, capture size <span class="m">262144</span> bytes
+<span class="m">09</span>:59:34.884048 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:35.885537 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:36.887106 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:37.888805 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:38.890461 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:39.892321 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:40.893758 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:41.895278 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">100</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:42.195050 IP <span class="m">172</span>.18.46.151 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">0</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:42.884235 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:43.886181 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:44.887932 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:45.889441 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:46.891284 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+<span class="m">09</span>:59:47.892750 IP <span class="m">172</span>.18.105.131 &gt; <span class="m">224</span>.1.1.1: VRRPv2, Advertisement, vrid <span class="m">51</span>, prio <span class="m">80</span>, authtype simple, intvl 1s, length <span class="m">20</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="id2">
 <h2>14.5.3. 启动日志功能<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
