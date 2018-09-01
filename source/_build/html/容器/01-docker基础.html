@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="15. 容器" href="index.html"/>
-        <link rel="next" title="16. 虚拟化" href="../虚拟化/index.html"/>
-        <link rel="prev" title="15. 容器" href="index.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15.2. dockerfile使用" href="02-dockerfile使用.html" />
+    <link rel="prev" title="15. 容器" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -133,6 +124,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="02-dockerfile使用.html">15.2. dockerfile使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-docker私有仓库构建.html">15.3. docker私有仓库构建</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
@@ -148,7 +141,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -156,11 +149,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -209,7 +202,7 @@
 <h1>15.1. docker基础<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>15.1.1. docker安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
 <span class="o">[</span>root@centos-151 yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
 bak  CentOS-Base.repo  epel.repo  mariadb.repo.bak
 <span class="o">[</span>root@centos-151 yum.repos.d<span class="o">]</span><span class="c1"># wget http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span>
@@ -223,7 +216,7 @@ bak  CentOS-Base.repo  epel.repo  mariadb.repo.bak
 <div class="section" id="id2">
 <h2>15.1.2. docker基础信息获取<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>获取version</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker version</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker version</span>
 Client:
 Version:         <span class="m">1</span>.13.1
 API version:     <span class="m">1</span>.26
@@ -245,7 +238,7 @@ Experimental:    <span class="nb">false</span>
 </pre></div>
 </div>
 <p>获取info</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@centos-151 ~]# docker info
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>[root@centos-151 ~]# docker info
 Containers: 0
 Running: 0
 Paused: 0
@@ -297,7 +290,7 @@ Registries: docker.io (secure)
 </div>
 <div class="section" id="id3">
 <h2>15.1.3. docker常用命令<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>docker run 运行一个容器
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docker run 运行一个容器
 docker create 创建，需要在配合start命令
 docker start 启动一个创建好的容器
 docker stop 停止容器
@@ -317,7 +310,7 @@ docker images 查看已有镜像信息
 docker rm     删除容器
 </pre></div>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker</span>
 build      diff       <span class="nb">history</span>    inspect    logs       port       restart    search     stats      top        <span class="nb">wait</span>
 commit     events     image      <span class="nb">kill</span>       network    ps         rm         secret     stop       unpause
 container  <span class="nb">exec</span>       images     load       node       pull       rmi        service    swarm      update
@@ -328,7 +321,7 @@ create     <span class="nb">help</span>       info       <span class="nb">logout
 </div>
 <div class="section" id="docker-run">
 <h2>15.1.4. docker run常用命令<a class="headerlink" href="#docker-run" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>[root@centos-151 ~]# docker help run
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[root@centos-151 ~]# docker help run
 
 Usage:      docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
@@ -449,7 +442,7 @@ Options:
 <h3>15.1.5.1. docker加速器配置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/进入加速器配置.png" src="../_images/进入加速器配置.png" />
 <img alt="../_images/加速器配置.png" src="../_images/加速器配置.png" />
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sudo mkdir -p /etc/docker</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sudo mkdir -p /etc/docker</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;</span>
 &gt; <span class="o">{</span>
 &gt;   <span class="s2">&quot;registry-mirrors&quot;</span>: <span class="o">[</span><span class="s2">&quot;https://mdobwrbd.mirror.aliyuncs.com&quot;</span><span class="o">]</span>
@@ -473,7 +466,7 @@ Options:
 </div>
 <div class="section" id="pull">
 <h3>15.1.5.2. 镜像拉取(pull)<a class="headerlink" href="#pull" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull alpine</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull alpine</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull busybox</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull cirros</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull centos</span>
@@ -520,7 +513,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 </div>
 <div class="section" id="push">
 <h3>15.1.5.3. 镜像推送(push)<a class="headerlink" href="#push" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span># 拉取镜像
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span># 拉取镜像
 [root@centos-151 ~]# docker pull nginx:1.12-alpine
 
 # 运行镜像
@@ -564,7 +557,7 @@ location /test {
 <img alt="../_images/镜像管理详细页面.png" src="../_images/镜像管理详细页面.png" />
 <img alt="../_images/版本情况.png" src="../_images/版本情况.png" />
 <p>在另一个主机上面pull下来，测试</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 docker<span class="o">]</span><span class="c1"># docker pull registry.cn-beijing.aliyuncs.com/zhaojiedi1992/test:v1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 docker<span class="o">]</span><span class="c1"># docker pull registry.cn-beijing.aliyuncs.com/zhaojiedi1992/test:v1</span>
 <span class="o">[</span>root@centos-152 docker<span class="o">]</span><span class="c1"># docker image ls</span>
 REPOSITORY                                            TAG                 IMAGE ID            CREATED             SIZE
 registry.cn-beijing.aliyuncs.com/zhaojiedi1992/test   v1                  f51a8135583c        <span class="m">27</span> minutes ago      <span class="m">15</span>.5 MB
@@ -577,14 +570,14 @@ hello linuxpanda.tech
 </div>
 <div class="section" id="save">
 <h3>15.1.5.4. 镜像保存(save)<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 yum.repos.d<span class="o">]</span><span class="c1"># docker save busybox alpine | gzip &gt; tree.tgz</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 yum.repos.d<span class="o">]</span><span class="c1"># docker save busybox alpine | gzip &gt; tree.tgz</span>
 <span class="o">[</span>root@centos-151 yum.repos.d<span class="o">]</span><span class="c1"># scp tree.tgz  192.168.46.152:/root</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="load">
 <h3>15.1.5.5. 镜像加载(load)<a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># docker help load</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># docker help load</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># docker image load -i tree.tgz</span>
 3e596351c689: Loading layer <span class="o">[==================================================</span>&gt;<span class="o">]</span>  <span class="m">1</span>.36 MB/1.36 MB
 Loaded image: docker.io/busybox:latest
@@ -617,7 +610,7 @@ docker.io/alpine    latest              3fd9065eaf02        <span class="m">2</s
 </ul>
 <div class="section" id="id7">
 <h3>15.1.7.1. 查看网络列表<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker network ls</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker network ls</span>
 NETWORK ID          NAME                DRIVER              SCOPE
 e00b7e276b12        bridge              bridge              <span class="nb">local</span>
 42c62865be61        host                host                <span class="nb">local</span>
@@ -627,7 +620,7 @@ ccb7572950be        none                null                <span class="nb">loc
 </div>
 <div class="section" id="bridge">
 <h3>15.1.7.2. bridge<a class="headerlink" href="#bridge" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name busybox10 -it busybox</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name busybox10 -it busybox</span>
 / <span class="c1"># ifconfig</span>
 eth0      Link encap:Ethernet  HWaddr <span class="m">02</span>:42:AC:11:00:05
         inet addr:172.17.0.5  Bcast:0.0.0.0  Mask:255.255.0.0
@@ -654,7 +647,7 @@ lo        Link encap:Local Loopback
 </div>
 <div class="section" id="closed">
 <h3>15.1.7.3. closed<a class="headerlink" href="#closed" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name busybox11 -it --network none busybox</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name busybox11 -it --network none busybox</span>
 / <span class="c1"># ifconfig</span>
 lo        Link encap:Local Loopback
         inet addr:127.0.0.1  Mask:255.0.0.0
@@ -671,7 +664,7 @@ lo        Link encap:Local Loopback
 </div>
 <div class="section" id="joined">
 <h3>15.1.7.4. joined<a class="headerlink" href="#joined" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx11 -d  --rm nginx:1.12-alpine</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx11 -d  --rm nginx:1.12-alpine</span>
 cf5e89cddf175152472d25d51d52ae1e136bc5887682f24203bb178487674103
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker inspect  nginx11 |grep -i ipa</span>
             <span class="s2">&quot;SecondaryIPAddresses&quot;</span>: null,
@@ -715,7 +708,7 @@ Commercial support is available at
 </div>
 <div class="section" id="opened">
 <h3>15.1.7.5. opened<a class="headerlink" href="#opened" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx15 -d  --network host nginx:1.12-alpine</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx15 -d  --network host nginx:1.12-alpine</span>
 f0fd0f9069cab8126c53cde3baa8d76a94e89abd709a7864b96bfeb400628677
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker inspect nginx15 |grep -i ipa</span>
             <span class="s2">&quot;SecondaryIPAddresses&quot;</span>: null,
@@ -753,7 +746,7 @@ Commercial support is available at
 </div>
 <div class="section" id="id8">
 <h3>15.1.7.6. docker端口映射<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx17 -d  -p 80:80 nginx:1.12-alpine</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker run --name nginx17 -d  -p 80:80 nginx:1.12-alpine</span>
 dda9ec45687aa71d552a32e65bb7d703a1b2170ea57416543a67e2055e1f5052
 
 
@@ -796,15 +789,13 @@ Commercial support is available at
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../虚拟化/index.html" class="btn btn-neutral float-right" title="16. 虚拟化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="02-dockerfile使用.html" class="btn btn-neutral float-right" title="15.2. dockerfile使用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="15. 容器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -820,7 +811,7 @@ Commercial support is available at
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -839,6 +830,7 @@ Commercial support is available at
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -851,19 +843,13 @@ Commercial support is available at
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

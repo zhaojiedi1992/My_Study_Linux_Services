@@ -8,5 +8,5 @@
    防火墙
    selinux
    zabbix
-   
+   ldap
    

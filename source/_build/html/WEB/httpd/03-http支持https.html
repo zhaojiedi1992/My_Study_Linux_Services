@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.4. httpd虚拟主机三种实现方式" href="04-httpd虚拟主机三种实现方式.html"/>
-        <link rel="prev" title="10.2. httpd基础配置说明" href="02-httpd基础配置说明.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.4. httpd虚拟主机三种实现方式" href="04-httpd虚拟主机三种实现方式.html" />
+    <link rel="prev" title="10.2. httpd基础配置说明" href="02-httpd基础配置说明.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -149,7 +140,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -157,11 +148,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -210,14 +201,14 @@
 <h1>10.3. http支持https<a class="headerlink" href="#httphttps" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="mod-ssl">
 <h2>10.3.1. 安装mod_ssl模块<a class="headerlink" href="#mod-ssl" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 html<span class="o">]</span><span class="c1"># yum -y install mod_ssl</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 html<span class="o">]</span><span class="c1"># yum -y install mod_ssl</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="ca">
 <h2>10.3.2. 搭建ca服务器<a class="headerlink" href="#ca" title="Permalink to this headline">¶</a></h2>
 <p>这一步可以不用做，如果已经有ca服务器的话。</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>[root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep &#39;$dir&#39;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[root@102 CA]# cat /etc/pki/tls/openssl.cnf  |grep &#39;$dir&#39;
 certs               = $dir/certs            # Where the issued certs are kept
 crl_dir             = $dir/crl              # Where the issued crl are kept
 database    = $dir/index.txt        # database index file.
@@ -259,7 +250,7 @@ Email Address []:
 </div>
 <div class="section" id="http">
 <h2>10.3.3. http服务申请证书<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>[root@102 CA]# cd /etc/httpd/
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[root@102 CA]# cd /etc/httpd/
 [root@102 httpd]# ls
 conf  conf.d  conf.modules.d  logs  modules  run
 [root@102 httpd]# mkdir ssl
@@ -302,7 +293,7 @@ An optional company name []:
 </div>
 <div class="section" id="id1">
 <h2>10.3.4. http配置文件修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># vim /etc/httpd/conf.d/ssl.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># vim /etc/httpd/conf.d/ssl.conf</span>
 <span class="c1"># 修改下面3行内容为对应的文件</span>
 SSLCertificateFile /etc/httpd/ssl/www.linuxapnda.tech.crt
 SSLCertificateKeyFile /etc/httpd/ssl/www.linuxpanda.tech.key
@@ -312,7 +303,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
 </div>
 <div class="section" id="id2">
 <h2>10.3.5. 测试<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># curl https://www.linuxpanda.tech --cacert /etc/httpd/ssl/cacert.pem</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@102 ssl<span class="o">]</span><span class="c1"># curl https://www.linuxpanda.tech --cacert /etc/httpd/ssl/cacert.pem</span>
 </pre></div>
 </div>
 <p>浏览器模式，需要把对应的ca文件复制到主机上， 修改文件名为crt的，然后双击安装到收信人的根证书机构。</p>
@@ -321,9 +312,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -345,7 +334,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -364,6 +353,7 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -376,19 +366,13 @@ SSLCertificateChainFile /etc/httpd/ssl/cacert.pem
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

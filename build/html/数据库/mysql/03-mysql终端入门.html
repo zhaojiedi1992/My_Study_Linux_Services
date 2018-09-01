@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.6. mysql入门" href="04-mysql入门.html"/>
-        <link rel="prev" title="9.4. mariadb多实例安装" href="02-mysql多实例.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.6. mysql入门" href="04-mysql入门.html" />
+    <link rel="prev" title="9.4. mariadb多实例安装" href="02-mysql多实例.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -145,7 +136,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -153,11 +144,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -206,7 +197,7 @@
 <h1>9.5. mysql终端入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>9.5.1. mysql提示符修改<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@iZ2ze640ra8ceysx5817skZ ~<span class="o">]</span><span class="c1"># man mysql # 进入man文档搜索prompt即可找到如下片段内容。</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@iZ2ze640ra8ceysx5817skZ ~<span class="o">]</span><span class="c1"># man mysql # 进入man文档搜索prompt即可找到如下片段内容。</span>
 ┌───────┬──────────────────────────────────────────────────────────┐
 │Option │ Description                                              │
 ├───────┼──────────────────────────────────────────────────────────┤
@@ -289,7 +280,7 @@ You can <span class="nb">set</span> the prompt in several ways:
 </pre></div>
 </div>
 <p>我这里采用永久修改的办法，编辑配置文件方式。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@iZ2ze640ra8ceysx5817skZ ~<span class="o">]</span><span class="c1"># mysql --prompt=&quot;\R:\m:\s (\u@\h)[\d][\c]&gt;&quot; -u root -p</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@iZ2ze640ra8ceysx5817skZ ~<span class="o">]</span><span class="c1"># mysql --prompt=&quot;\R:\m:\s (\u@\h)[\d][\c]&gt;&quot; -u root -p</span>
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
 Your MariaDB connection id is <span class="m">426</span>
@@ -350,7 +341,7 @@ You can turn off this feature to get a quicker startup with -A
 <div class="section" id="id2">
 <h2>9.5.2. 用户和密码写到配置文件中<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>配置前的连接方式</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
 Your MariaDB connection id is <span class="m">21</span>
@@ -373,7 +364,7 @@ user=root
 password=oracle</dd>
 </dl>
 <p>测试</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># mysql</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 init.d<span class="o">]</span><span class="c1"># mysql</span>
 Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
 Your MariaDB connection id is <span class="m">12</span>
 Server version: <span class="m">10</span>.2.12-MariaDB-log Source distribution
@@ -390,9 +381,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -414,7 +403,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -433,6 +422,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -445,19 +435,13 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

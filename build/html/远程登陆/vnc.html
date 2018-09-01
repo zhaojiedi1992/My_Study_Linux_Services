@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="6. 远程登陆" href="index.html"/>
-        <link rel="next" title="7. 认证" href="../认证/index.html"/>
-        <link rel="prev" title="6.3. dropbear" href="dropbear.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. 认证" href="../认证/index.html" />
+    <link rel="prev" title="6.3. dropbear" href="dropbear.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -134,7 +125,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -142,11 +133,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -197,7 +188,7 @@
 <p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_030_vncserver.html">vncserver的安装</a></p>
 <div class="section" id="id1">
 <h2>6.4.1. 图形环境的安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;GNOME Desktop&quot;            # 安装gnome桌面环境</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;GNOME Desktop&quot;            # 安装gnome桌面环境</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># startx                                      # 启动图形界面</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl set-default  graphical.target     # 设置默认级别为图形</span>
 </pre></div>
@@ -205,7 +196,7 @@
 </div>
 <div class="section" id="id2">
 <h2>6.4.2. 安装vncserver<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install tigervnc-server                 # 安装vncserve</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install tigervnc-server                 # 安装vncserve</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql tigervnc-server                     # 查看相关文件，没有vncserver对应的服务，只有实例的服务。</span>
 /etc/sysconfig/vncservers
 /usr/bin/vncserver
@@ -220,7 +211,7 @@
 </div>
 <div class="section" id="id3">
 <h2>6.4.3. 配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /usr/lib/systemd/system/vncserver@root.service</span>
 <span class="c1"># 修改如下行</span>
 <span class="nv">User</span><span class="o">=</span>root
@@ -235,7 +226,7 @@
 </div>
 <div class="section" id="id4">
 <h2>6.4.4. 启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl daemon-reload                     # 重新加载下systemctl配置</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl daemon-reload                     # 重新加载下systemctl配置</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl enable vncserver@:1               # 开机启动</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start vncserver@:1                # 启动服务</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep vnc</span>
@@ -249,7 +240,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001       
 <div class="section" id="id5">
 <h2>6.4.5. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>在测试前，关闭selinux和防火墙</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>systemctl stop firewalld.service
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl stop firewalld.service
 </pre></div>
 </div>
 <p>使用window环境下的vncview软件来连接，地址为192.168.46.129:5901</p>
@@ -260,9 +251,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001       
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -284,7 +273,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001       
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -303,6 +292,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001       
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -315,19 +305,13 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::6001       
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

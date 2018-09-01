@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="15. 容器" href="index.html"/>
-        <link rel="next" title="15.3. docker私有仓库构建" href="03-docker私有仓库构建.html"/>
-        <link rel="prev" title="15.1. docker基础" href="01-docker基础.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15.3. docker私有仓库构建" href="03-docker私有仓库构建.html" />
+    <link rel="prev" title="15.1. docker基础" href="01-docker基础.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -130,7 +121,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -138,11 +129,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -192,7 +183,7 @@
 <p><a class="reference external" href="https://docs.docker.com/engine/reference/builder/#escape">dockerfile官方参考</a></p>
 <div class="section" id="id2">
 <h2>15.2.1. 主要命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>FROM            指明镜像的从那个镜像的基础上。
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FROM            指明镜像的从那个镜像的基础上。
 ARG:            指明build阶段的变量
 ENV:            指明run阶段的变量
 LABEL:          指明当前指向的一些元数据信息，如果作者信息，镜像生成日期。
@@ -215,7 +206,7 @@ ONBUILD:        在别人FROM你的这个镜像的时候执行
 <div class="section" id="nginx">
 <h2>15.2.2. 制作nginx镜像<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
 <p>我们从centos镜像的基础上面制作nginx的镜像</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull centos</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker pull centos</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># docker image ls</span>
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 docker.io/centos    latest              e934aafc2206        <span class="m">11</span> hours ago        <span class="m">199</span> MB
@@ -284,9 +275,7 @@ docker.io/centos    latest              e934aafc2206        <span class="m">15</
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -308,7 +297,7 @@ docker.io/centos    latest              e934aafc2206        <span class="m">15</
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -327,6 +316,7 @@ docker.io/centos    latest              e934aafc2206        <span class="m">15</
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -339,19 +329,13 @@ docker.io/centos    latest              e934aafc2206        <span class="m">15</
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

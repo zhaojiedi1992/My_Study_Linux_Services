@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="7. 认证" href="index.html"/>
-        <link rel="next" title="8. DNS" href="../DNS/index.html"/>
-        <link rel="prev" title="7.1. pam" href="pam.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. DNS" href="../DNS/index.html" />
+    <link rel="prev" title="7.1. pam" href="pam.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -138,7 +129,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -146,11 +137,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -221,13 +212,13 @@
 </div>
 <div class="section" id="id2">
 <h2>7.2.2. nis安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install yp-tools ypbind ypserv rpcbind</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install yp-tools ypbind ypserv rpcbind</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
 <h2>7.2.3. nis案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>nis的域名为linuxpanda
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nis的域名为linuxpanda
 整个网络的信任网络为192.168.46.0/24
 nis主服务器的ip为192.168.46.129，主机名为nis.linuxpanda.tech
 nis客户端的ip为192.168.46.159，主机名为centos-159.linuxpanda.tech
@@ -236,7 +227,7 @@ nis客户端的ip为192.168.46.159，主机名为centos-159.linuxpanda.tech
 </div>
 <div class="section" id="id4">
 <h2>7.2.4. 设置nis域<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network</span>
 <span class="c1"># 添加如下2行，用于设置nis域和固定端口</span>
 <span class="nv">NISDOMAIN</span><span class="o">=</span>linuxpanda
 <span class="nv">YPSERV_ARGS</span><span class="o">=</span><span class="s2">&quot;-p 1011&quot;</span>
@@ -245,7 +236,7 @@ nis客户端的ip为192.168.46.159，主机名为centos-159.linuxpanda.tech
 </div>
 <div class="section" id="etc-ypserv-conf">
 <h2>7.2.5. 主要配置文件/etc/ypserv.conf<a class="headerlink" href="#etc-ypserv-conf" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/ypserv.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/ypserv.conf</span>
 <span class="c1"># 添加行</span>
 dns: no
 <span class="m">192</span>.168.46.0/255.255.255.0    : * : * : none
@@ -255,7 +246,7 @@ dns: no
 </div>
 <div class="section" id="ip">
 <h2>7.2.6. 设置主机名与ip的对应<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
 <span class="c1"># 添加如下2行，一台主机和一个客户端的</span>
 <span class="m">192</span>.168.46.129 nis.linuxpanda.tech centos-129.linuxpanda.tech
 <span class="m">192</span>.168.46.159 centos-159.linuxpanda.tech
@@ -271,7 +262,7 @@ nis.linuxpanda.tech
 </div>
 <div class="section" id="id5">
 <h2>7.2.7. 启动域查看相关的服务<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/yppasswdd</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/yppasswdd</span>
 <span class="c1"># 修改内容如下</span>
 <span class="nv">YPPASSWDD_ARGS</span><span class="o">=</span><span class="s2">&quot;--port 1012&quot;</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start rpcbind ypserv yppasswdd</span>
@@ -302,7 +293,7 @@ program vers proto   port  service
 </div>
 <div class="section" id="id6">
 <h2>7.2.8. 创建账号<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1001 nis1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1001 nis1</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1002 nis2</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 1003 nis3</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo &#39;oracle&#39; | passwd --stdin nis1</span>
@@ -319,7 +310,7 @@ passwd: all authentication tokens updated successfully.
 </div>
 <div class="section" id="id7">
 <h2>7.2.9. 初始化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># /usr/lib64/yp/ypinit -m</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># /usr/lib64/yp/ypinit -m</span>
 
 At this point, we have to construct a list of the hosts which will run NIS
 servers.  nis.linuxpanda.tech is in the list of NIS server hosts.  Please <span class="k">continue</span> to add
@@ -360,7 +351,7 @@ Now you can run ypinit -s nis.linuxpanda.tech on all slave server.
 </div>
 <div class="section" id="id8">
 <h2>7.2.10. 客户端设置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装软件包</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装软件包</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install ypbind yp-tools</span>
 root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network</span>
 <span class="c1"># 添加1行</span>
@@ -484,9 +475,7 @@ bak  cdrom.repo
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -508,7 +497,7 @@ bak  cdrom.repo
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -527,6 +516,7 @@ bak  cdrom.repo
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -539,19 +529,13 @@ bak  cdrom.repo
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

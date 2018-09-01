@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.6. centos6编译安装lamp" href="06-centos编译安装lamp.html"/>
-        <link rel="prev" title="10.4. httpd虚拟主机三种实现方式" href="04-httpd虚拟主机三种实现方式.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.6. centos6编译安装lamp" href="06-centos编译安装lamp.html" />
+    <link rel="prev" title="10.4. httpd虚拟主机三种实现方式" href="04-httpd虚拟主机三种实现方式.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -151,7 +142,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -159,11 +150,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -212,13 +203,13 @@
 <h1>10.5. centos6lamp的yum安装<a class="headerlink" href="#centos6lampyum" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>10.5.1. 安装软件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> install mysql-server mysql php-fpm php-mysql httpd mod_proxy_fcgi
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> install mysql-server mysql php-fpm php-mysql httpd mod_proxy_fcgi
 </pre></div>
 </div>
 </div>
 <div class="section" id="id2">
 <h2>10.5.2. 启动服务<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> php-fpm start
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> php-fpm start
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$chkconfig</span> php-fpm on
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$service</span> mysqld start
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$chkconfig</span> mysqld on
@@ -240,7 +231,7 @@ tcp        <span class="m">0</span>      <span class="m">0</span> ::1:25        
 </div>
 <div class="section" id="httpphp">
 <h2>10.5.3. 关联http和php<a class="headerlink" href="#httpphp" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$vim</span> conf.d/fcgi.conf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$vim</span> conf.d/fcgi.conf
 <span class="o">[</span>root@localhost httpd<span class="o">]</span><span class="nv">$cat</span> conf.d/fcgi.conf
 DirectoryIndex index.php
 ProxyRequests Off
@@ -261,7 +252,7 @@ phpinfo<span class="o">()</span><span class="p">;</span>
 </div>
 <div class="section" id="id3">
 <h2>10.5.4. 应用测试<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /var/www/html/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /var/www/html/
 <span class="o">[</span>root@localhost html<span class="o">]</span><span class="nv">$git</span> clone https://gitee.com/ComsenzDiscuz/DiscuzX
 Initialized empty Git repository in /var/www/html/DiscuzX/.git/
 remote: Counting objects: <span class="m">7071</span>, <span class="k">done</span>.
@@ -289,20 +280,20 @@ readme  README.md  upload  utility
 </div>
 <div class="section" id="id4">
 <h2>10.5.5. 清除权限<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$setfacl</span> -R -b ./
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$setfacl</span> -R -b ./
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>10.5.6. 测试性能<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ab</span> -c <span class="m">100</span> -n <span class="m">1000</span> http://192.168.1.107/DiscuzX/upload/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ab</span> -c <span class="m">100</span> -n <span class="m">1000</span> http://192.168.1.107/DiscuzX/upload/
 Requests per second:    <span class="m">41</span>.67 <span class="o">[</span><span class="c1">#/sec] (mean)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="xcache">
 <h2>10.5.7. xcache加速<a class="headerlink" href="#xcache" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$yum</span> search xcache-admin
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$yum</span> search xcache-admin
 <span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$service</span> httpd restart
 <span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$service</span> php-fpm restart
 <span class="o">[</span>root@localhost DiscuzX<span class="o">]</span><span class="nv">$ab</span> -c <span class="m">100</span> -n <span class="m">1000</span> http://192.168.1.107/DiscuzX/upload/
@@ -314,9 +305,7 @@ Requests per second:    <span class="m">126</span>.14 <span class="o">[</span><s
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -338,7 +327,7 @@ Requests per second:    <span class="m">126</span>.14 <span class="o">[</span><s
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -357,6 +346,7 @@ Requests per second:    <span class="m">126</span>.14 <span class="o">[</span><s
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -369,19 +359,13 @@ Requests per second:    <span class="m">126</span>.14 <span class="o">[</span><s
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

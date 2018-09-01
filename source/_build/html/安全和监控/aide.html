@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="5. 安全和监控" href="index.html"/>
-        <link rel="next" title="5.2. 防火墙" href="防火墙.html"/>
-        <link rel="prev" title="5. 安全和监控" href="index.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.2. 防火墙" href="防火墙.html" />
+    <link rel="prev" title="5. 安全和监控" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -110,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="防火墙.html">5.2. 防火墙</a></li>
 <li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zabbix.html">5.4. zabbix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">5.5. ldap</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
@@ -135,7 +127,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -143,11 +135,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -203,13 +195,13 @@
 </div>
 <div class="section" id="id2">
 <h2>5.1.2. aide的安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ yum install aide
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ yum install aide
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
 <h2>5.1.3. aide的配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ vim /etc/aide.conf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ vim /etc/aide.conf
 这行后面的都删除， 我这里只关注boot目录的变换情况
 /boot/   CONTENT_EX
 </pre></div>
@@ -217,20 +209,20 @@
 </div>
 <div class="section" id="id4">
 <h2>5.1.4. 初始化<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ aide --init
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 aide<span class="o">]</span>$ aide --init
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>5.1.5. 模拟文件变化<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 boot<span class="o">]</span>$ touch t1 &gt;&gt;/boot/t1.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 boot<span class="o">]</span>$ touch t1 &gt;&gt;/boot/t1.txt
 <span class="o">[</span>root@centos74 boot<span class="o">]</span>$ mkdir t2
 </pre></div>
 </div>
 </div>
 <div class="section" id="id6">
 <h2>5.1.6. 检查信息<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 boot<span class="o">]</span>$ <span class="nb">cd</span> /var/lib/aide/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 boot<span class="o">]</span>$ <span class="nb">cd</span> /var/lib/aide/
 <span class="o">[</span>root@centos74 aide<span class="o">]</span>$ mv aide.db.new.gz aide.db.gz
 <span class="o">[</span>root@centos74 aide<span class="o">]</span>$ aide --check
 AIDE <span class="m">0</span>.15.1 found differences between database and filesystem!!
@@ -254,9 +246,7 @@ added: /boot/t2
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -278,7 +268,7 @@ added: /boot/t2
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -297,6 +287,7 @@ added: /boot/t2
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -309,19 +300,13 @@ added: /boot/t2
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

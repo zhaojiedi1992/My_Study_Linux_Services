@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="5. 安全和监控" href="index.html"/>
-        <link rel="next" title="5.4. zabbix" href="zabbix.html"/>
-        <link rel="prev" title="5.2. 防火墙" href="防火墙.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.4. zabbix" href="zabbix.html" />
+    <link rel="prev" title="5.2. 防火墙" href="防火墙.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -118,6 +109,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="zabbix.html">5.4. zabbix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">5.5. ldap</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
@@ -143,7 +135,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -151,11 +143,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -220,12 +212,12 @@
 </div>
 <div class="section" id="id2">
 <h2>5.3.2. 安全性环境<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ll -Z anaconda-ks.cfg</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># ll -Z anaconda-ks.cfg</span>
 -rw-------. root root system_u:object_r:admin_home_t:s0 anaconda-ks.cfg
 </pre></div>
 </div>
 <p>安全性环境主要用冒号分割三个字段</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Identify：role:type
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Identify：role:type
 身份识别:角色:类型
 
 身份识别：
@@ -252,14 +244,14 @@
 </ul>
 <div class="section" id="id4">
 <h3>5.3.3.1. 查看<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># getenforce</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># getenforce</span>
 Disabled
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
 <h3>5.3.3.2. 设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># setenforce 1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># setenforce 1</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -269,7 +261,7 @@ Disabled
 </div>
 <div class="section" id="id6">
 <h3>5.3.3.3. 永久修改<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/selinux</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/selinux</span>
 </pre></div>
 </div>
 </div>
@@ -291,9 +283,7 @@ Disabled
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -315,7 +305,7 @@ Disabled
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -334,6 +324,7 @@ Disabled
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -346,19 +337,13 @@ Disabled
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.13. nginx常用案例" href="06-nginx常用案例.html"/>
-        <link rel="prev" title="10.11. nginx支持https" href="04-nginx支持https.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.13. nginx常用案例" href="06-nginx常用案例.html" />
+    <link rel="prev" title="10.11. nginx支持https" href="04-nginx支持https.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -149,7 +140,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -157,11 +148,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -210,13 +201,13 @@
 <h1>10.12. centos7 lnmp的yum安装<a class="headerlink" href="#centos7-lnmpyum" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>10.12.1. 安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx mariadb-server php-fpm php-mbstring mysql-php</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx mariadb-server php-fpm php-mbstring mysql-php</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="pma">
 <h2>10.12.2. 下载pma<a class="headerlink" href="#pma" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/src/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/src/</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1">#wget http://download.linuxpanda.tech/lamp/wordpress-4.9.1-zh_CN.tar.gz</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># tar xf wordpress-4.9.1-zh_CN.tar.gz -C /usr/share/nginx/</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># ln -s wordpress wp</span>
@@ -225,7 +216,7 @@
 </div>
 <div class="section" id="id2">
 <h2>10.12.3. 配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># vim /etc/nginx/conf.d/vhosts.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># vim /etc/nginx/conf.d/vhosts.conf</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cat /etc/nginx/conf.d/vhosts.conf</span>
 server <span class="o">{</span>
     server_name pma.linuxpanda.tech<span class="p">;</span>
@@ -239,7 +230,7 @@ extension=mysql.so</p>
 </div>
 <div class="section" id="id3">
 <h2>10.12.4. 启动服务<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># systemctl start php-fpm</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># systemctl start php-fpm</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
 </pre></div>
 </div>
@@ -252,9 +243,7 @@ extension=mysql.so</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -276,7 +265,7 @@ extension=mysql.so</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -295,6 +284,7 @@ extension=mysql.so</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -307,19 +297,13 @@ extension=mysql.so</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

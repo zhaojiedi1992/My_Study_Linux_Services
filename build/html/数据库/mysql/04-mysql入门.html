@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.7. mysql管理" href="05-mysql管理.html"/>
-        <link rel="prev" title="9.5. mysql终端入门" href="03-mysql终端入门.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.7. mysql管理" href="05-mysql管理.html" />
+    <link rel="prev" title="9.5. mysql终端入门" href="03-mysql终端入门.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -146,7 +137,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -154,11 +145,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -245,30 +236,30 @@
 <div class="section" id="id2">
 <h2>9.6.2. 执行命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>查看当前用户</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">user</span><span class="p">();</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">user</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>查看服务器版本</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">version</span><span class="p">()</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">version</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
 <h2>9.6.3. 数据库操作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>创建数据库和删除数据库</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
 <span class="k">drop</span> <span class="k">database</span> <span class="n">t2</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>查看字符集和排序规则</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>show character set;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>show character set;
 show collation;
 show table status from mysql\G
 </pre></div>
 </div>
 <p>查看数据库引擎</p>
 <p>创建表</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">AUTO_INCREMENT</span> <span class="p">,</span> <span class="n">age</span> <span class="nb">int</span> <span class="n">unsigned</span> <span class="p">,</span><span class="n">name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="k">default</span> <span class="s1">&#39;m&#39;</span><span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">student</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span> <span class="n">AUTO_INCREMENT</span> <span class="p">,</span> <span class="n">age</span> <span class="nb">int</span> <span class="n">unsigned</span> <span class="p">,</span><span class="n">name</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">sex</span> <span class="n">enum</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="k">default</span> <span class="s1">&#39;m&#39;</span><span class="p">);</span>
 <span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
 <span class="o">|</span> <span class="n">Field</span> <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
@@ -303,7 +294,7 @@ show table status from mysql\G
 <p class="last">上面可以发现通过select来去创建一个表会丢失主键和自动增长的。</p>
 </div>
 <p>表查看类</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">tables</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">tables</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">----------------+</span>
 <span class="o">|</span> <span class="n">Tables_in_test</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">----------------+</span>
@@ -340,7 +331,7 @@ show table status from mysql\G
 </pre></div>
 </div>
 <p>数据类型</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>tinyint
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tinyint
 smallint
 mediumint
 int
@@ -367,7 +358,7 @@ year(4)
 </pre></div>
 </div>
 <p>修饰符</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>null
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>null
 not null
 default
 primary key
@@ -378,7 +369,7 @@ unsigned
 </pre></div>
 </div>
 <p>字段修改</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">student</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
 <span class="o">|</span> <span class="n">Field</span> <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
 <span class="o">+</span><span class="c1">-------+------------------+------+-----+---------+----------------+</span>
@@ -425,7 +416,7 @@ unsigned
 </pre></div>
 </div>
 <p>索引</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">index</span> <span class="n">index_age</span> <span class="k">on</span> <span class="n">stu</span><span class="p">(</span><span class="n">age</span><span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">create</span> <span class="k">index</span> <span class="n">index_age</span> <span class="k">on</span> <span class="n">stu</span><span class="p">(</span><span class="n">age</span><span class="p">);</span>
 <span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">23</span> <span class="n">sec</span><span class="p">)</span>
 <span class="n">Records</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Duplicates</span><span class="p">:</span> <span class="mi">0</span>  <span class="n">Warnings</span><span class="p">:</span> <span class="mi">0</span>
 
@@ -444,7 +435,7 @@ unsigned
 </pre></div>
 </div>
 <p>dml语句</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">stu</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">desc</span> <span class="n">stu</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
 <span class="o">|</span> <span class="n">Field</span>   <span class="o">|</span> <span class="k">Type</span>             <span class="o">|</span> <span class="k">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
 <span class="o">+</span><span class="c1">---------+------------------+------+-----+---------+----------------+</span>
@@ -497,7 +488,7 @@ unsigned
 </pre></div>
 </div>
 <p>dql语句</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span> <span class="k">between</span> <span class="mi">21</span> <span class="k">and</span> <span class="mi">22</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span> <span class="k">between</span> <span class="mi">21</span> <span class="k">and</span> <span class="mi">22</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">----+------+---------+------+</span>
 <span class="o">|</span> <span class="n">id</span> <span class="o">|</span> <span class="n">age</span>  <span class="o">|</span> <span class="n">stuname</span> <span class="o">|</span> <span class="n">sex</span>  <span class="o">|</span>
 <span class="o">+</span><span class="c1">----+------+---------+------+</span>
@@ -537,7 +528,7 @@ unsigned
 </pre></div>
 </div>
 <p>用户账号</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MariaDB [test]&gt; create user &#39;zhao&#39;@&#39;%&#39; identified by &#39;oracle&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
 MariaDB [test]&gt; flush privileges;
@@ -550,7 +541,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </div>
 <p>授权</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">grant</span> <span class="k">select</span> <span class="p">,</span><span class="k">delete</span> <span class="k">on</span> <span class="n">test</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">&#39;oracle&#39;</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">grant</span> <span class="k">select</span> <span class="p">,</span><span class="k">delete</span> <span class="k">on</span> <span class="n">test</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">&#39;oracle&#39;</span><span class="p">;</span>
 <span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">37</span> <span class="n">sec</span><span class="p">)</span>
 
 <span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">revoke</span> <span class="k">delete</span> <span class="k">on</span> <span class="n">test</span><span class="p">.</span><span class="o">*</span> <span class="k">from</span> <span class="s1">&#39;zhao&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
@@ -567,8 +558,8 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </div>
 <p>为了后续的实验，我们导入一个文件，文件内容如下</p>
-<p><a class="reference download internal" href="../../_downloads/hellodb_InnoDB.sql" download=""><code class="xref download docutils literal"><span class="pre">/files/hellodb_InnoDB.sql</span></code></a></p>
-<div class="highlight-sql"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+<p><a class="reference download internal" href="../../_downloads/hellodb_InnoDB.sql" download=""><code class="xref download docutils literal notranslate"><span class="pre">/files/hellodb_InnoDB.sql</span></code></a></p>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
   4
@@ -996,7 +987,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </td></tr></table></div>
 <p>排序</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="n">use</span> <span class="n">hellodb</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[(</span><span class="k">none</span><span class="p">)]</span><span class="o">&gt;</span> <span class="n">use</span> <span class="n">hellodb</span>
 <span class="k">Database</span> <span class="n">changed</span>
 <span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-------+---------------+-----+--------+---------+-----------+</span>
@@ -1032,7 +1023,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </div>
 <p>限制行</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span> <span class="k">limit</span> <span class="mi">2</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span> <span class="k">limit</span> <span class="mi">2</span><span class="p">;</span>
 <span class="o">+-------+-------------+-----+--------+---------+-----------+</span>
 <span class="o">|</span> <span class="n">StuID</span> <span class="o">|</span> <span class="n">Name</span>        <span class="o">|</span> <span class="n">Age</span> <span class="o">|</span> <span class="n">Gender</span> <span class="o">|</span> <span class="n">ClassID</span> <span class="o">|</span> <span class="n">TeacherID</span> <span class="o">|</span>
 <span class="o">+-------+-------------+-----+--------+---------+-----------+</span>
@@ -1055,7 +1046,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </div>
 <p>第二种情况是跳过2个取4个。</p>
 <p>别名</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>MariaDB [hellodb]&gt; select s.name as &quot;姓名&quot; , s.age as &quot;年龄&quot; from students as s  order by age limit 2,4;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MariaDB [hellodb]&gt; select s.name as &quot;姓名&quot; , s.age as &quot;年龄&quot; from students as s  order by age limit 2,4;
 +--------------+--------+
 | 姓名         | 年龄   |
 +--------------+--------+
@@ -1068,11 +1059,11 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </div>
 <p>模糊匹配</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>%通配任意字符任意次数
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%通配任意字符任意次数
 _通配单个字符
 </pre></div>
 </div>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;S%&#39;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;S%&#39;</span>
     <span class="o">-&gt;</span> <span class="p">;</span>
 <span class="o">+</span><span class="c1">-------+-------------+-----+--------+---------+-----------+</span>
 <span class="o">|</span> <span class="n">StuID</span> <span class="o">|</span> <span class="n">Name</span>        <span class="o">|</span> <span class="n">Age</span> <span class="o">|</span> <span class="n">Gender</span> <span class="o">|</span> <span class="n">ClassID</span> <span class="o">|</span> <span class="n">TeacherID</span> <span class="o">|</span>
@@ -1086,7 +1077,7 @@ _通配单个字符
 </pre></div>
 </div>
 <p>空值判断</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">classid</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">classid</span> <span class="k">is</span> <span class="k">null</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-------+-------------+-----+--------+---------+-----------+</span>
 <span class="o">|</span> <span class="n">StuID</span> <span class="o">|</span> <span class="n">Name</span>        <span class="o">|</span> <span class="n">Age</span> <span class="o">|</span> <span class="n">Gender</span> <span class="o">|</span> <span class="n">ClassID</span> <span class="o">|</span> <span class="n">TeacherID</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">-------+-------------+-----+--------+---------+-----------+</span>
@@ -1103,7 +1094,7 @@ _通配单个字符
 <p class="last">空值判断不能使用=。</p>
 </div>
 <p>分组统计</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">courseid</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">from</span> <span class="n">scores</span> <span class="k">group</span> <span class="k">by</span> <span class="n">courseid</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">courseid</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">from</span> <span class="n">scores</span> <span class="k">group</span> <span class="k">by</span> <span class="n">courseid</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">----------+------------+</span>
 <span class="o">|</span> <span class="n">courseid</span> <span class="o">|</span> <span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">----------+------------+</span>
@@ -1119,7 +1110,7 @@ _通配单个字符
 </pre></div>
 </div>
 <p>分组统计后过滤</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">courseid</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">from</span> <span class="n">scores</span> <span class="k">group</span> <span class="k">by</span> <span class="n">courseid</span> <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">;</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">courseid</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">from</span> <span class="n">scores</span> <span class="k">group</span> <span class="k">by</span> <span class="n">courseid</span> <span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">----------+------------+</span>
 <span class="o">|</span> <span class="n">courseid</span> <span class="o">|</span> <span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">----------+------------+</span>
@@ -1131,7 +1122,7 @@ _通配单个字符
 </pre></div>
 </div>
 <p>连接</p>
-<div class="highlight-SQL"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">score</span> <span class="k">from</span> <span class="n">students</span> <span class="k">as</span> <span class="n">st</span> <span class="k">left</span> <span class="k">outer</span> <span class="k">join</span> <span class="n">scores</span> <span class="k">as</span> <span class="n">sc</span> <span class="k">on</span> <span class="n">st</span><span class="p">.</span><span class="n">stuid</span><span class="o">=</span><span class="n">sc</span><span class="p">.</span><span class="n">stuid</span><span class="p">;</span>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">score</span> <span class="k">from</span> <span class="n">students</span> <span class="k">as</span> <span class="n">st</span> <span class="k">left</span> <span class="k">outer</span> <span class="k">join</span> <span class="n">scores</span> <span class="k">as</span> <span class="n">sc</span> <span class="k">on</span> <span class="n">st</span><span class="p">.</span><span class="n">stuid</span><span class="o">=</span><span class="n">sc</span><span class="p">.</span><span class="n">stuid</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">---------------+-------+</span>
 <span class="o">|</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">score</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">---------------+-------+</span>
@@ -1216,7 +1207,7 @@ _通配单个字符
 </pre></div>
 </div>
 <p>嵌套查询</p>
-<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">select</span> <span class="n">age</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Xu Xian&#39;</span><span class="p">);</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">select</span> <span class="n">age</span> <span class="k">from</span> <span class="n">students</span> <span class="k">where</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Xu Xian&#39;</span><span class="p">);</span>
 <span class="o">+</span><span class="c1">-------+--------------+-----+--------+---------+-----------+</span>
 <span class="o">|</span> <span class="n">StuID</span> <span class="o">|</span> <span class="n">Name</span>         <span class="o">|</span> <span class="n">Age</span> <span class="o">|</span> <span class="n">Gender</span> <span class="o">|</span> <span class="n">ClassID</span> <span class="o">|</span> <span class="n">TeacherID</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">-------+--------------+-----+--------+---------+-----------+</span>
@@ -1234,9 +1225,7 @@ _通配单个字符
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1258,7 +1247,7 @@ _通配单个字符
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1277,6 +1266,7 @@ _通配单个字符
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1289,19 +1279,13 @@ _通配单个字符
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="5. 安全和监控" href="index.html"/>
-        <link rel="next" title="5.3. selinux" href="selinux.html"/>
-        <link rel="prev" title="5.1. aide" href="aide.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.3. selinux" href="selinux.html" />
+    <link rel="prev" title="5.1. aide" href="aide.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -117,6 +108,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zabbix.html">5.4. zabbix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">5.5. ldap</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
@@ -142,7 +134,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -150,11 +142,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -203,7 +195,7 @@
 <h1>5.2. 防火墙<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="iptables">
 <h2>5.2.1. iptables的使用<a class="headerlink" href="#iptables" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>链操作：
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>链操作：
     -N: new,创建新的链
     -X: delete,删除一个链
     -F: flush,清空一个链
@@ -289,53 +281,53 @@
 <div class="section" id="id2">
 <h2>5.2.2. 样例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>查看所有链</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1">#  iptables -nL --line-number</span>
 </pre></div>
 </div>
 <p>查看特定表</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -nL -t nat</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -nL -t nat</span>
 </pre></div>
 </div>
 <p>修改默认规则</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -t filter -P FORWARD DROP</span>
 </pre></div>
 </div>
 <p>放行特定ip特定端口访问</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 0/0 -d 192.168.46.1 -p tcp --dport 21 -j ACCEPT</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 0/0 -d 192.168.46.1 -p tcp --dport 21 -j ACCEPT</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A OUTPUT -s 192.168.46.1 -d 0/0 -p tcp --sport 21 -j ACCEPT</span>
 </pre></div>
 </div>
 <p>只能本机ping别人，限制别人ping</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A OUTPUT -p icmp --icmp-type 8 -s 192.168.168.150 -j ACCEPT</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -p icmp --icmp-type 0 -s 0/0 -j ACCEPT</span>
 </pre></div>
 </div>
 <p>禁止访问包含有“old”字符的页面</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I OUTPUT  -s 192.168.46.7 -d 0/0  -p tcp --sport 80  -m string --algo kmp --string &quot;old&quot;   -j DROP</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I OUTPUT  -s 192.168.46.7 -d 0/0  -p tcp --sport 80  -m string --algo kmp --string &quot;old&quot;   -j DROP</span>
 </pre></div>
 </div>
 <p>时间限定</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -d 192.168.46.7 -p tcp --dport 23 -m iprange --src-range 172.18.46.1-172.18.46.100 \</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -d 192.168.46.7 -p tcp --dport 23 -m iprange --src-range 172.18.46.1-172.18.46.100 \</span>
 -m <span class="nb">time</span> --timestart <span class="m">09</span>:00:00 --timestop <span class="m">18</span>:00:00 --weekdays <span class="m">1</span>,2,3,4,5 -j ACCEPT
 </pre></div>
 </div>
 <p>允许23端口同一个客户端小于3个并发连接</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 0/0 -d 192.168.46.7 -p tcp --dport 23 -m connlimit ! --connlimit-above 3 -j ACCEPT</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 0/0 -d 192.168.46.7 -p tcp --dport 23 -m connlimit ! --connlimit-above 3 -j ACCEPT</span>
 </pre></div>
 </div>
 <p>允许22，23，80端口访问</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dports 22,23,80 \</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -s 192.168.46.0/24 -d 192.168.46.7 -p tcp -m multiport --dports 22,23,80 \</span>
  -m state --state NEW,ESTABLISHED -j ACCEPT
 </pre></div>
 </div>
 <p>允许ftp访问</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># modprobe  nf_conntrack_ftp</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># modprobe  nf_conntrack_ftp</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -A INPUT -d 192.168.46.7 -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT</span>
 </pre></div>
 </div>
 <p>每个访问规则添加日志记录</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I FORWARD 2 -s 10.0.0.0/24 -p tcp -m multiport --dports 80,21,22,23 \</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># iptables -I FORWARD 2 -s 10.0.0.0/24 -p tcp -m multiport --dports 80,21,22,23 \</span>
 -m state --state NEW -j LOG --log-prefix <span class="s2">&quot;new conn:&quot;</span>
 </pre></div>
 </div>
@@ -353,7 +345,7 @@
 </ol>
 <p>详细部署图：</p>
 <img alt="../_images/snat.png" src="../_images/snat.png" />
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 各个主机的网关配置为防火墙的网关为192.168.46.151。</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 各个主机的网关配置为防火墙的网关为192.168.46.151。</span>
 <span class="c1"># 启动防火墙的路由功能</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># sysctl  -p</span>
@@ -383,7 +375,7 @@
 <p>firewalld是centos7新推出的管理netfilter的工具。</p>
 <div class="section" id="id4">
 <h3>5.2.4.1. firewalld-cmd基本的使用<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-test"><div class="highlight"><pre><span></span># 查看预定义的服务列表
+<div class="highlight-test notranslate"><div class="highlight"><pre><span></span># 查看预定义的服务列表
 [root@centos-151 ~]# firewall-cmd --get-default-zone
 FirewallD is not running
 [root@centos-151 ~]# systemctl start firewalld
@@ -481,7 +473,7 @@ rich rules:
 </div>
 <div class="section" id="firewalld-cmd-rich">
 <h3>5.2.4.2. firewalld-cmd rich规则的使用<a class="headerlink" href="#firewalld-cmd-rich" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span># 获取rich规则的帮助
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 获取rich规则的帮助
 [root@centos-151 ~]# man 5 firewalld.richlanguage
 [root@centos-151 ~]# firewall-cmd --permanent --zone=work --add-rich-rule=&#39;rule family=ipv4 source address=192.168.0.11/32 reject &#39;
 success
@@ -538,9 +530,7 @@ success
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -562,7 +552,7 @@ success
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -581,6 +571,7 @@ success
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -593,19 +584,13 @@ success
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.9. mysql主从" href="07-mysql主从.html"/>
-        <link rel="prev" title="9.7. mysql管理" href="05-mysql管理.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.9. mysql主从" href="07-mysql主从.html" />
+    <link rel="prev" title="9.7. mysql管理" href="05-mysql管理.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -161,7 +152,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -169,11 +160,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -227,7 +218,7 @@
 </div>
 <div class="section" id="id2">
 <h3>9.8.1.2. mysqldump备份还原案例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装mariadb</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装mariadb</span>
 
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
@@ -350,7 +341,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; flush logs<s
 <div class="section" id="id4">
 <h2>9.8.2. 逻辑卷备份还原<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>样例：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 添加硬盘，添加逻辑卷配置。</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 添加硬盘，添加逻辑卷配置。</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># lsblk</span>
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
@@ -595,7 +586,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class=
 <p>这是使用2个机器， 一个机器备份， 在另一个机器还原。</p>
 <div class="section" id="mariadb">
 <h3>9.8.3.1. 安装配置mariadb<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
 <span class="c1"># 在mysqld片段添加如下2行</span>
 log-bin
@@ -608,7 +599,7 @@ innodb_file_per_table
 <h3>9.8.3.2. XtraBackup下载<a class="headerlink" href="#xtrabackup" title="Permalink to this headline">¶</a></h3>
 <p>这个需要在2个机器上都操作。</p>
 <p><a class="reference external" href="https://www.percona.com/downloads/XtraBackup/LATEST/">XtraBackup</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/src</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.4.9/binary/redhat/7/x86_64/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
 </pre></div>
 </div>
@@ -616,7 +607,7 @@ innodb_file_per_table
 <div class="section" id="id7">
 <h3>9.8.3.3. XtraBackup安装<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>这个需要在2个机器上都操作。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># yum install percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># yum install percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># rpm -ql percona-xtrabackup-24</span>
 /usr/bin/innobackupex
 /usr/bin/xbcloud
@@ -639,7 +630,7 @@ innodb_file_per_table
 </div>
 <div class="section" id="id8">
 <h3>9.8.3.4. 开始备份<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 查看日志信息</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查看日志信息</span>
 MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show master logs<span class="p">;</span>
 +--------------------+-----------+
 <span class="p">|</span> Log_name           <span class="p">|</span> File_size <span class="p">|</span>
@@ -759,7 +750,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; show tables<
 <div class="section" id="id9">
 <h2>9.8.4. 单表备份<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>perconda的单表备份不能在5.5的数据库上使用的。这里使用10系列的数据库。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat mariadb.repo</span>
 <span class="o">[</span>mariadb<span class="o">]</span>
 <span class="nv">name</span><span class="o">=</span>mariadb
@@ -857,9 +848,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class=
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -881,7 +870,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class=
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -900,6 +889,7 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class=
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -912,19 +902,13 @@ MariaDB <span class="o">[</span>hellodb<span class="o">]</span>&gt; <span class=
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

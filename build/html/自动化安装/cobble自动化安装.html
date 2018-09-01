@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="3. 自动化安装" href="index.html"/>
-        <link rel="next" title="4. 自动化运维" href="../自动化运维/index.html"/>
-        <link rel="prev" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. 自动化运维" href="../自动化运维/index.html" />
+    <link rel="prev" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -137,7 +128,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -145,11 +136,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -202,7 +193,7 @@
 <div class="section" id="id1">
 <h2>3.3.1. 安装前准备<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>关闭防火墙和selinux</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl stop firewalld</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl stop firewalld</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl disable firewalld</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># getenforce</span>
 Enforcing
@@ -214,7 +205,7 @@ Enforcing
 </div>
 <div class="section" id="id2">
 <h2>3.3.2. 安装软件包<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install cobbler-web cobbler dhcp -y</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install cobbler-web cobbler dhcp -y</span>
 
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl start cobblerd</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl enable cobblerd</span>
@@ -232,7 +223,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service t
 <div class="section" id="cobbler">
 <h2>3.3.3. cobbler目录介绍<a class="headerlink" href="#cobbler" title="Permalink to this headline">¶</a></h2>
 <p>一些cobbler重要目录：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>/etc/cobbler/dhcp.template                      # dhcp模板文件
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/etc/cobbler/dhcp.template                      # dhcp模板文件
 /etc/cobbler/iso                                # iso模板配置文件
 /etc/cobbler/iso/buildiso.template              # 构建iso模板
 /etc/cobbler/modules.conf                       # 模块配置文件
@@ -256,7 +247,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service t
 </div>
 <div class="section" id="id3">
 <h2>3.3.4. cobbler常用命令<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>cobbler check               # 核对当前设置是否有问题
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cobbler check               # 核对当前设置是否有问题
 cobbler list                # 列出所有元素
 cobbler report              # 列出元素的详细信息
 cobbler sync                # 同步配置到数据目录
@@ -269,7 +260,7 @@ cobbler profile             # 查看配置信息
 </div>
 <div class="section" id="id4">
 <h2>3.3.5. cobbler重要参数设置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>default_password_crypted    # 默认root密码
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>default_password_crypted    # 默认root密码
 manage_dhcp                 # 是否cobbler管理dhcp
 manage_tftpd                # 是否cobbler管理tftpd
 next_server                 # tftp服务器的ip地址
@@ -279,7 +270,7 @@ server                      # cobbler服务器的ip地址
 </div>
 <div class="section" id="id5">
 <h2>3.3.6. 修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cobbler check</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cobbler check</span>
 The following are potential configuration items that you may want to fix:
 
 <span class="m">1</span> : The <span class="s1">&#39;server&#39;</span> field in /etc/cobbler/settings must be <span class="nb">set</span> to something other than localhost, or kickstarting features will not work.  This should be a resolvable hostname or IP <span class="k">for</span> the boot server as reachable by all machines that will use it.
@@ -297,7 +288,7 @@ Restart cobblerd and <span class="k">then</span> run <span class="s1">&#39;cobbl
 </pre></div>
 </div>
 <p>上面提示了几个错误，主要总结下如下</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>server字段在/etc/cobbler/settings配置文件没有设置为本机的ip
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server字段在/etc/cobbler/settings配置文件没有设置为本机的ip
 next_server字段没有设置为指定ip
 selinux是启用的（这个我们是关闭的，不管他）
 启用tftp服务
@@ -313,7 +304,7 @@ fencing工具没有发现
 接下来我们对这个上面的几个错误进行修改。
 </pre></div>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^server&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># cat settings  |grep &quot;^server&quot;</span>
 server: <span class="m">127</span>.0.0.1
 <span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># ip address show ens33 |grep inet</span>
     inet <span class="m">192</span>.168.46.7/24 brd <span class="m">192</span>.168.46.255 scope global ens33
@@ -368,7 +359,7 @@ Restart cobblerd and <span class="k">then</span> run <span class="s1">&#39;cobbl
 <div class="section" id="id6">
 <h2>3.3.7. 导入镜像<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>我们在原有centos7光盘的基础上挂载一个centos6</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># lsblk</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost cobbler<span class="o">]</span><span class="c1"># lsblk</span>
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
 ├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
@@ -424,7 +415,7 @@ centos-7.4-x86_64
 <div class="section" id="web">
 <h2>3.3.9. 关于web界面的<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h2>
 <p>web的额外配置</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># vim /etc/cobbler/modules.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># vim /etc/cobbler/modules.conf</span>
 <span class="c1"># 修改如下信息</span>
 <span class="nv">module</span> <span class="o">=</span> authn_pam
 <span class="o">[</span>root@localhost html<span class="o">]</span><span class="c1"># yum install cobbler-web</span>
@@ -447,9 +438,7 @@ centos-7.4-x86_64
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -471,7 +460,7 @@ centos-7.4-x86_64
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -490,6 +479,7 @@ centos-7.4-x86_64
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -502,19 +492,13 @@ centos-7.4-x86_64
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

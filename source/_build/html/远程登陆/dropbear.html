@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="6. 远程登陆" href="index.html"/>
-        <link rel="next" title="6.4. vnc" href="vnc.html"/>
-        <link rel="prev" title="6.2. telnet" href="telnet.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.4. vnc" href="vnc.html" />
+    <link rel="prev" title="6.2. telnet" href="telnet.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -136,7 +127,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -144,11 +135,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -201,14 +192,14 @@
 “嵌入”式的Linux（或其他Unix）系统 。</p>
 <div class="section" id="id1">
 <h2>6.3.1. 编译环境安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install bzip2 zlib-devel</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id2">
 <h2>6.3.2. 下载并解压<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd /usr/src</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># wget http://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2</span>
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># tar xf dropbear-2017.75.tar.bz2</span>
 </pre></div>
@@ -216,7 +207,7 @@
 </div>
 <div class="section" id="id3">
 <h2>6.3.3. 编译<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd dropbear-2017.75/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># cd dropbear-2017.75/</span>
 <span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  ./configure  --prefix=/usr/local/dropbear</span>
 <span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  vim INSTALL</span>
 <span class="o">[</span>root@localhost dropbear-2017.75<span class="o">]</span><span class="c1">#  make PROGRAMS=&quot;dropbear dbclient dropbearkey dropbearconvert scp&quot;</span>
@@ -228,7 +219,7 @@
 </div>
 <div class="section" id="id4">
 <h2>6.3.4. 创建配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># cd /usr/local/dropbear/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># cd /usr/local/dropbear/</span>
 <span class="o">[</span>root@localhost dropbear<span class="o">]</span><span class="c1"># tree</span>
 .
 ├── bin
@@ -261,7 +252,7 @@
 </div>
 <div class="section" id="id5">
 <h2>6.3.5. 启动dropbear在指定端口<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost profile.d<span class="o">]</span><span class="c1"># dropbear -p 20022  -FE</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost profile.d<span class="o">]</span><span class="c1"># dropbear -p 20022  -FE</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -271,7 +262,7 @@
 </div>
 <div class="section" id="id6">
 <h2>6.3.6. 测试<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>[root@localhost bin]# dbclient  -p 20022 root@192.168.46.129
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>[root@localhost bin]# dbclient  -p 20022 root@192.168.46.129
 
 Host &#39;192.168.46.129&#39; is not in the trusted hosts file.
 (ecdsa-sha2-nistp521 fingerprint md5 5e:96:6e:26:f5:30:22:e7:36:33:57:c6:a3:8f:3a:cd)
@@ -287,7 +278,7 @@ root@192.168.46.129&#39;s password:
 </div>
 <div class="section" id="sysv">
 <h2>6.3.7. 写一个sysv脚本<a class="headerlink" href="#sysv" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#</span>
 <span class="c1"># description: dropbear ssh daemon</span>
 <span class="c1"># chkconfig: 2345 66 33</span>
@@ -407,15 +398,13 @@ genrsakey<span class="o">)</span>
 </pre></div>
 </div>
 <p>这个脚本来自 <a class="reference external" href="http://blog.chinaunix.net/xmlrpc.php?r=blog/article&amp;uid=29584738&amp;id=4234090">小马子不怕鬼</a> , 写的比我自己那个更全面，就借用下。</p>
-<p><a class="reference download internal" href="../_downloads/dropbear" download=""><code class="xref download docutils literal"><span class="pre">/files/dropbear</span></code></a></p>
+<p><a class="reference download internal" href="../_downloads/dropbear" download=""><code class="xref download docutils literal notranslate"><span class="pre">/files/dropbear</span></code></a></p>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -437,7 +426,7 @@ genrsakey<span class="o">)</span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -456,6 +445,7 @@ genrsakey<span class="o">)</span>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -468,19 +458,13 @@ genrsakey<span class="o">)</span>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

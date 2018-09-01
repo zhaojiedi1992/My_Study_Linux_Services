@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.11. nginx支持https" href="04-nginx支持https.html"/>
-        <link rel="prev" title="10.9. nginx基础配置说明" href="02-nginx基础配置说明.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.11. nginx支持https" href="04-nginx支持https.html" />
+    <link rel="prev" title="10.9. nginx基础配置说明" href="02-nginx基础配置说明.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -148,7 +139,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -156,11 +147,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -215,13 +206,13 @@
 </ul>
 <div class="section" id="id1">
 <h2>10.10.1. 安装nginx<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install nginx</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="ip">
 <h2>10.10.2. 方案1-基于多ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 查看ip信息</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 查看ip信息</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ip a</span>
 <span class="m">1</span>: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN qlen <span class="m">1</span>
     link/loopback <span class="m">00</span>:00:00:00:00:00 brd <span class="m">00</span>:00:00:00:00:00
@@ -275,7 +266,7 @@ multi_ip_2
 </div>
 <div class="section" id="port">
 <h2>10.10.3. 方案1-基于多port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 编辑配置文件</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 编辑配置文件</span>
 <span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cp multi_ip.conf multi_port.conf</span>
 <span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># vim multi_port.conf</span>
 <span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># cat multi_port.conf</span>
@@ -310,7 +301,7 @@ multi_port_2
 <div class="section" id="id2">
 <h2>10.10.4. 方案1-基于多虚拟主机名<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>这种方式是用的比较多的。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 其他影响的配置文件备份下</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 其他影响的配置文件备份下</span>
 <span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># mv multi_host.conf{,.bak}</span>
 <span class="o">[</span>root@localhost conf.d<span class="o">]</span><span class="c1"># mv multi_ip.conf{,.bak}</span>
 
@@ -357,9 +348,7 @@ multi_host_2
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -381,7 +370,7 @@ multi_host_2
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -400,6 +389,7 @@ multi_host_2
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -412,19 +402,13 @@ multi_host_2
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

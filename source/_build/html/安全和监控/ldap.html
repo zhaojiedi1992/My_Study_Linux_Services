@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.5. ldap &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. 远程登陆" href="../远程登陆/index.html" />
+    <link rel="prev" title="5.4. zabbix" href="zabbix.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My_Study_Linux_Services
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux基础服务</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../自动化运维/index.html">4. 自动化运维</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 安全和监控</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aide.html">5.1. aide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="防火墙.html">5.2. 防火墙</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selinux.html">5.3. selinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zabbix.html">5.4. zabbix</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.5. ldap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">5.5.1. ldap简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">5.5.2. ldap名词</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.5.3. 选择一个域名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openldap">5.5.4. 安装 OpenLDAP 服务端</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldaproot">5.5.5. 设置ldap的管理员用户root的密码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schema">5.5.6. 添加基础的schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.5.7. 设置根域和数据库超级管理员</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5.5.8. 创建用户节点、组节点和数据库超级管理员</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">5.5.9. 防火墙设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldapadmin">5.5.10. 使用ldapadmin连接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../认证/index.html">7. 认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DNS/index.html">8. DNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../数据库/index.html">9. 数据库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WEB/index.html">10. WEB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../日志管理/index.html">11. 日志管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../网络文件共享/index.html">12. 网络文件共享</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../版本控制/index.html">13. 版本控制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">17. 杂项</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My_Study_Linux_Services</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">5. 安全和监控</a> &raquo;</li>
+        
+      <li>5.5. ldap</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/zhaojiedi1992/My_Study_Linux_Services/blob/../edit/master/source/安全和监控/ldap.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ldap">
+<h1>5.5. ldap<a class="headerlink" href="#ldap" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>5.5.1. ldap简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id2">
+<h2>5.5.2. ldap名词<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id3">
+<h2>5.5.3. 选择一个域名<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>这里我的主机已经有个域名为sonar.aibeike.com 了。 这里就不修改了。 如果你的主机没有可以配置为ldap.aibeike.com。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim /etc/hosts
+<span class="m">127</span>.0.0.1 localhost sonar.aibeike.com
+ping sonar.aibeike.com
+</pre></div>
+</div>
+</div>
+<div class="section" id="openldap">
+<h2>5.5.4. 安装 OpenLDAP 服务端<a class="headerlink" href="#openldap" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum -y openldap-servers openldap-clients
+cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+chown ldap.ldap /var/lib/ldap/DB_CONFIG
+systemctl start slapd
+systemctl <span class="nb">enable</span> slapd
+</pre></div>
+</div>
+</div>
+<div class="section" id="ldaproot">
+<h2>5.5.5. 设置ldap的管理员用户root的密码<a class="headerlink" href="#ldaproot" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@ldap ~<span class="o">]</span><span class="c1"># slappasswd</span>
+New password:
+Re-enter new password:
+<span class="o">{</span>SSHA<span class="o">}</span>xxxxxxxxxxxxxxxxxxxxxxxx
+
+vim chrootpw.ldif
+<span class="c1"># 内容如下4行,其中最后一行为上面设定的值</span>
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">0</span><span class="o">}</span>config,cn<span class="o">=</span>config
+changetype: modify
+add: olcRootPW
+olcRootPW: <span class="o">{</span>SSHA<span class="o">}</span>xxxxxxxxxxxxxxxxxxxxxxxx
+
+<span class="c1"># 导入</span>
+<span class="o">[</span>root@ldap ~<span class="o">]</span><span class="c1"># ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif</span>
+SASL/EXTERNAL authentication started
+SASL username: <span class="nv">gidNumber</span><span class="o">=</span><span class="m">0</span>+uidNumber<span class="o">=</span><span class="m">0</span>,cn<span class="o">=</span>peercred,cn<span class="o">=</span>external,cn<span class="o">=</span>auth
+SASL SSF: <span class="m">0</span>
+modifying entry <span class="s2">&quot;olcDatabase={0}config,cn=config&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schema">
+<h2>5.5.6. 添加基础的schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>5.5.7. 设置根域和数据库超级管理员<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>这里的“根域”可以和这台服务器 FQDN 中的根域不同，此处我们设置为 dc=aibeike,dc=com。</p>
+<p>数据库管理员和上面设置过的 OpenLDAP 超级管理员并非同一管理员，而且这里设置的管理员目前尚未创建。此处的设置同样需要一个用 slappasswd 命令生成的密码，为了方便管理，我们使用刚刚生成的密码，不再重新生成。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim domain-dbadmin.ldif
+<span class="c1"># 添加如下内容</span>
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">1</span><span class="o">}</span>monitor,cn<span class="o">=</span>config
+changetype: modify
+replace: olcAccess
+olcAccess: <span class="o">{</span><span class="m">0</span><span class="o">}</span>to *
+by dn.base<span class="o">=</span><span class="s2">&quot;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&quot;</span> <span class="nb">read</span>
+by dn.base<span class="o">=</span><span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> <span class="nb">read</span>
+by * none
+
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">2</span><span class="o">}</span>hdb,cn<span class="o">=</span>config
+changetype: modify
+replace: olcSuffix
+olcSuffix: <span class="nv">dc</span><span class="o">=</span>aibeike,dc<span class="o">=</span>com
+
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">2</span><span class="o">}</span>hdb,cn<span class="o">=</span>config
+changetype: modify
+replace: olcRootDN
+olcRootDN: <span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>aibeike,dc<span class="o">=</span>com
+
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">2</span><span class="o">}</span>hdb,cn<span class="o">=</span>config
+changetype: modify
+add: olcRootPW
+olcRootPW: <span class="o">{</span>SSHA<span class="o">}</span>xxxxxxxxxxxxxxxxxxxxxxxx
+
+dn: <span class="nv">olcDatabase</span><span class="o">={</span><span class="m">2</span><span class="o">}</span>hdb,cn<span class="o">=</span>config
+changetype: modify
+add: olcAccess
+olcAccess: <span class="o">{</span><span class="m">0</span><span class="o">}</span>to <span class="nv">attrs</span><span class="o">=</span>userPassword,shadowLastChange
+by <span class="nv">dn</span><span class="o">=</span><span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> write
+by anonymous auth
+by self write
+by * none
+olcAccess: <span class="o">{</span><span class="m">1</span><span class="o">}</span>to dn.base<span class="o">=</span><span class="s2">&quot;&quot;</span>
+by * <span class="nb">read</span>
+olcAccess: <span class="o">{</span><span class="m">2</span><span class="o">}</span>to *
+by <span class="nv">dn</span><span class="o">=</span><span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> write
+by * <span class="nb">read</span>
+
+
+<span class="c1"># 导入</span>
+ldapmodify -Y EXTERNAL -H ldapi:/// -f domain-dbadmin.ldif
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>5.5.8. 创建用户节点、组节点和数据库超级管理员<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>vim basedomain.ldif
+# 内容如下
+dn: dc=aibeike,dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: Example Inc.
+dc: aibeike</p>
+<p>dn: ou=user,dc=aibeike,dc=com
+objectClass: organizationalUnit
+ou: user</p>
+<p>dn: ou=group,dc=aibeike,dc=com
+objectClass: organizationalUnit
+ou: group</p>
+<p>dn: cn=admin,dc=aibeike,dc=com
+objectClass: organizationalRole
+cn: admin
+description: Directory Administrator</p>
+<p># 导入，需要输入数据库超级管理员的密码
+ldapadd -x -D cn=admin,dc=aibeike,dc=com -W -f basedomain.ldif
+Enter LDAP Password:</p>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h2>5.5.9. 防火墙设置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firewall-cmd --add-service<span class="o">=</span>ldap --permanent
+success
+firewall-cmd --reload
+
+<span class="c1"># 或者禁用</span>
+systemctl stop firewalld
+systemctl disable firewalld
+</pre></div>
+</div>
+</div>
+<div class="section" id="ldapadmin">
+<h2>5.5.10. 使用ldapadmin连接<a class="headerlink" href="#ldapadmin" title="Permalink to this headline">¶</a></h2>
+<img alt="images/ladp/连接ldap.png" src="images/ladp/连接ldap.png" />
+<img alt="images/ladp/主页ldap.png" src="images/ladp/主页ldap.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../远程登陆/index.html" class="btn btn-neutral float-right" title="6. 远程登陆" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zabbix.html" class="btn btn-neutral" title="5.4. zabbix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

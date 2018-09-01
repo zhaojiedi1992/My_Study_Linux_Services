@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.17. tomcat常用配置" href="02-tomcat常用配置.html"/>
-        <link rel="prev" title="10.15. memcached" href="../cacheweb/02-memcached.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.17. tomcat常用配置" href="02-tomcat常用配置.html" />
+    <link rel="prev" title="10.15. memcached" href="../cacheweb/02-memcached.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -153,7 +144,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -161,11 +152,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -216,7 +207,7 @@
 <h2>10.16.1. jdk安装<a class="headerlink" href="#jdk" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="yum">
 <h3>10.16.1.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum search openjdk</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk.x86_64</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># java -version</span>
@@ -229,7 +220,7 @@ OpenJDK <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <s
 <div class="section" id="id1">
 <h3>10.16.1.2. 直接解压包方式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">包下载地址</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
 anaconda-ks.cfg  jdk-8u162-linux-x64.rpm?AuthParam<span class="o">=</span>1522289893_92e84e76f51bb5aa8133b08fcf86150b
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mv jdk-8u162-linux-x64.rpm\?AuthParam\=1522289893_92e84e76f51bb5aa8133b08fcf86150b  jdk-8u162-linux-x64.rpm</span>
@@ -259,7 +250,7 @@ Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">6
 <h2>10.16.2. tomcat安装<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
 <h3>10.16.2.1. yum安装<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install tomcat  tomcat-lib  tomcat-admin-webapps  tomcat-webapps  tomcat-docs-webapp</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl restart tomcat</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ss -tul</span>
@@ -280,9 +271,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -304,7 +293,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -323,6 +312,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -335,19 +325,13 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

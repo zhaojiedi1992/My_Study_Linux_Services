@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.12. mysql的galera实现" href="10-mysql的galera实现.html"/>
-        <link rel="prev" title="9.10. mysql主从加密" href="08-mysql主从加密.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.12. mysql的galera实现" href="10-mysql的galera实现.html" />
+    <link rel="prev" title="9.10. mysql主从加密" href="08-mysql主从加密.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -152,7 +143,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -160,11 +151,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -221,7 +212,7 @@
 </div>
 <div class="section" id="mysql">
 <h2>9.11.3. mysql主从配置<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">## 主服务器配置下</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## 主服务器配置下</span>
 
 <span class="o">[</span>root@centos154 ~<span class="o">]</span><span class="c1"># yum install http://download2.linuxpanda.tech/mysql/percona-xtrabackup-24-2.4.9-1.el7.x86_64.rpm</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
@@ -301,7 +292,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show slave st
 </div>
 <div class="section" id="id2">
 <h2>9.11.4. mysql主从配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
 MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; install plugin rpl_semi_sync_master SONAME <span class="s1">&#39;semisync_master.so&#39;</span><span class="p">;</span>
 MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show global variables like <span class="s1">&#39;%semi%&#39;</span><span class="p">;</span>
 +------------------------------------+-------+
@@ -342,7 +333,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show global v
 </div>
 <div class="section" id="id3">
 <h2>9.11.5. mha配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 主服务器配置</span>
 MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; grant all  on *.* to mhauser@<span class="s1">&#39;192.168.46.%&#39;</span> identified by <span class="s1">&#39;centos&#39;</span><span class="p">;</span>
 
 <span class="c1"># 在半同步主机上查看</span>
@@ -367,7 +358,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;  show grants 
 </div>
 <div class="section" id="id4">
 <h2>9.11.6. 免密码配置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
 <span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># ssh-keygen  &amp;&amp; for host in 192.168.46.151 192.168.46.152 192.168.46.153 192.168.46.154 ; do ssh-copy-id $host ; done;</span>
@@ -382,7 +373,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt;  show grants 
 <div class="section" id="id6">
 <h2>9.11.7. mha配置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://code.google.com/archive/p/mysql-master-ha/downloads">mha下载</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span># 管理安装
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span># 管理安装
 [root@centos-151 src]# wget http://download2.linuxpanda.tech/mysql/mha4mysql-node-0.54-1.el5.noarch.rpm
 [root@centos-151 src]# wget http://download2.linuxpanda.tech/mysql/mha4mysql-manager-0.55-1.el5.noarch.rpm
 [root@centos-151 src]# scp mha4mysql-node-0.54-1.el5.noarch.rpm 192.168.46.152:/tmp                                                                                                       100%   34KB   9.4MB/s   00:00
@@ -535,7 +526,7 @@ MySQL Replication Health is OK.
 </div>
 <div class="section" id="id8">
 <h2>9.11.8. mha测试<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># masterha_manager  --conf=/etc/mha/app1.cnf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># masterha_manager  --conf=/etc/mha/app1.cnf</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># systemctl stop mariadb</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /data/mha/app1/manager.log</span>
@@ -569,9 +560,7 @@ Master failover to <span class="m">192</span>.168.46.153<span class="o">(</span>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -593,7 +582,7 @@ Master failover to <span class="m">192</span>.168.46.153<span class="o">(</span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -612,6 +601,7 @@ Master failover to <span class="m">192</span>.168.46.153<span class="o">(</span>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -624,19 +614,13 @@ Master failover to <span class="m">192</span>.168.46.153<span class="o">(</span>
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

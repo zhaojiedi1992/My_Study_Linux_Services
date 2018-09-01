@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="3. 自动化安装" href="index.html"/>
-        <link rel="next" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html"/>
-        <link rel="prev" title="3. 自动化安装" href="index.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.2. pxe+kickstart自动化安装" href="pxe+kickstart自动化安装.html" />
+    <link rel="prev" title="3. 自动化安装" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -132,7 +123,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -140,11 +131,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -195,7 +186,7 @@
 <h2>3.1.1. 制作ks文件<a class="headerlink" href="#ks" title="Permalink to this headline">¶</a></h2>
 <p>ks的文件制作是比较麻烦的，但是我们在系统安装完毕的时候会生成当前系统的默认安装配置”/root/anaconda-ks.cfg”，
 我们可以直接在这个文件的基础上稍作修改即可。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls</span>
 anaconda-ks.cfg  install.log  install.log.syslog
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp anaconda-ks.cfg  anaconda-ks.cfg.bak</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim anaconda-ks.cfg</span>
@@ -260,7 +251,7 @@ touch /root/post.file
 <p>这里为了方便看出我修改了那些。提供一个vimdiff命令对比图：</p>
 <img alt="../_images/ks.png" src="../_images/ks.png" />
 <p>ks的主要几项说明</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>cdrom                         # 光盘启动
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cdrom                         # 光盘启动
 reboot                        # 安装完毕自动重启
 text                          # 字符安装
 firstboot --disable           # 第一次启动初始化工作禁用
@@ -273,7 +264,7 @@ zerombr                       # 清空mbr信息
 </div>
 <div class="section" id="id2">
 <h2>3.1.2. 创建自制目录<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/cdrom /mnt/cdrom                         # 挂载光盘</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/cdrom /mnt/cdrom                         # 挂载光盘</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /app -pv                                      # 创建一个光盘刻录目录</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -av /mnt/cdrom /app/centos6                      # 把原有光盘数据copy过来</span>
 <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /app/centos6/                                    # 进入工作目录</span>
@@ -359,9 +350,7 @@ label <span class="nb">local</span>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -383,7 +372,7 @@ label <span class="nb">local</span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -402,6 +391,7 @@ label <span class="nb">local</span>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -414,19 +404,13 @@ label <span class="nb">local</span>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

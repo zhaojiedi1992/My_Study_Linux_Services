@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="14. 集群" href="../index.html"/>
-        <link rel="next" title="15. 容器" href="../../容器/index.html"/>
-        <link rel="prev" title="14.4. ldirectord" href="01-ldirector.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="15. 容器" href="../../容器/index.html" />
+    <link rel="prev" title="14.4. ldirectord" href="01-ldirector.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -141,7 +132,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -149,11 +140,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -206,7 +197,7 @@
 </div>
 <div class="section" id="ip">
 <h2>14.5.2. 安装配置ip漂移<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 备份原有的</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 备份原有的</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install keepalived</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/keepalived/</span>
 <span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># ls</span>
@@ -357,7 +348,7 @@ listening on ens37, link-type EN10MB <span class="o">(</span>Ethernet<span class
 </div>
 <div class="section" id="id2">
 <h2>14.5.3. 启动日志功能<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 修改日志设置</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 修改日志设置</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/keepalived</span>
 <span class="nv">KEEPALIVED_OPTIONS</span><span class="o">=</span><span class="s2">&quot;-D -S 3&quot;</span>
 
@@ -411,7 +402,7 @@ Mar <span class="m">20</span> <span class="m">10</span>:06:15 centos-154 Keepali
 </div>
 <div class="section" id="id3">
 <h2>14.5.4. 状态切换脚本通知<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 准备脚本</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 准备脚本</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /root/</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim notify.sh</span>
@@ -530,7 +521,7 @@ Status: RO
 </div>
 <div class="section" id="lvs">
 <h3>14.5.5.2. 配置2个lvs<a class="headerlink" href="#lvs" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 151机器的</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 151机器的</span>
 <span class="o">[</span>root@centos-151 keepalived<span class="o">]</span><span class="c1"># cat keepalived.conf</span>
 ! Configuration File <span class="k">for</span> keepalived
 
@@ -688,7 +679,7 @@ TCP  <span class="m">172</span>.18.46.100:80 rr persistent <span class="m">50</s
 </div>
 <div class="section" id="rs">
 <h3>14.5.5.3. 配置2个RS<a class="headerlink" href="#rs" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 在152上执行脚本</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在152上执行脚本</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># rz</span>
 
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
@@ -760,7 +751,7 @@ rs153
 </div>
 <div class="section" id="id5">
 <h3>14.5.5.4. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># for i in {1..100} ; do sleep 2 ; curl 10.0.46.100; done</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># for i in {1..100} ; do sleep 2 ; curl 10.0.46.100; done</span>
 rs152
 rs153
 rs152
@@ -827,9 +818,7 @@ sorry page
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -851,7 +840,7 @@ sorry page
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -870,6 +859,7 @@ sorry page
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -882,19 +872,13 @@ sorry page
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

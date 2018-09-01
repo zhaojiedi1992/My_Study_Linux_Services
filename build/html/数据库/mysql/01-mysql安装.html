@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.4. mariadb多实例安装" href="02-mysql多实例.html"/>
-        <link rel="prev" title="9.2. sql语句" href="../sql语句.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.4. mariadb多实例安装" href="02-mysql多实例.html" />
+    <link rel="prev" title="9.2. sql语句" href="../sql语句.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -156,7 +147,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -164,11 +155,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -218,13 +209,13 @@
 <div class="section" id="yum">
 <h2>9.3.1. yum安装<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
 <p>yum安装是三种安装方式最简单的方式：</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum info mariadb-server</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum info mariadb-server</span>
 <span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># yum install mariadb</span>
 </pre></div>
 </div>
 <p>上面方式可能下载的版本比较旧，如果想安装最新稳定版本，去这里选择 Maraidb-repo,按照下图提示操作，添加repo文件即可。</p>
 <img alt="../../_images/yum配置.png" src="../../_images/yum配置.png" />
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
 <span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
 bak  cdrom.repo  epel-7.repo
 <span class="o">[</span>root@7 yum.repos.d<span class="o">]</span><span class="c1"># vim mariadb.repo</span>
@@ -244,7 +235,7 @@ bak  cdrom.repo  epel-7.repo
 <h2>9.3.2. 二进制安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
 <h3>9.3.2.1. 原有版本的卸载<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># sudo yum remove MariaDB-server MariaDB-client</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 ~<span class="o">]</span><span class="c1"># sudo yum remove MariaDB-server MariaDB-client</span>
 </pre></div>
 </div>
 </div>
@@ -256,7 +247,7 @@ bak  cdrom.repo  epel-7.repo
 <p class="first admonition-title">Note</p>
 <p class="last">centos7的下载systemd的，centos6下载第二个。</p>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># cd /usr/src</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># cd /usr/src</span>
 <span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A/.edu.cn/mariadb/     \</span>
  -O mariadb-10.2.12-linux-systemd-x86_64.tar.gz
 <span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># tar xf mariadb-10.2.12-linux-systemd-x86_64.tar.gz  -C /usr/local/</span>
@@ -265,14 +256,14 @@ bak  cdrom.repo  epel-7.repo
 </div>
 <div class="section" id="id5">
 <h3>9.3.2.3. 创建用户和组<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># groupadd -g 27 -r mysql</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># groupadd -g 27 -r mysql</span>
 <span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># useradd -r -u 27 -g mysql mysql -s /sbin/nologin</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id6">
 <h3>9.3.2.4. 安装<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <p>[root&#64;7 src]# cd /usr/local/
@@ -291,7 +282,7 @@ PATH=/usr/local/bin:$PATH
 <p class="first admonition-title">Note</p>
 <p class="last">数据库文件占用空间很大的，建议放到lvm上面去，容易扩展，避免导致根分区占用过大。</p>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda               <span class="m">8</span>:0    <span class="m">0</span>  200G  <span class="m">0</span> disk
 ├─sda1            <span class="m">8</span>:1    <span class="m">0</span>    1G  <span class="m">0</span> part /boot
@@ -394,7 +385,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 <div class="section" id="id8">
 <h3>9.3.2.6. 安装并配置<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chmod -R 770 mysql/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># chmod -R 770 mysql/</span>
 <span class="o">[</span>root@7 data<span class="o">]</span><span class="c1"># cd /usr/local/mysql/</span>
 <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ll</span>
 <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># ./scripts/mysql_install_db --datadir=/data/mysql --user=mysql    # 安装库</span>
@@ -410,7 +401,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 <div class="section" id="id9">
 <h3>9.3.2.7. 启动服务<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span> <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># cp support-files/mysql.server /etc/rc.d/init.d/mysqld</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> <span class="o">[</span>root@7 mysql<span class="o">]</span><span class="c1"># cp support-files/mysql.server /etc/rc.d/init.d/mysqld</span>
  <span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># vim /etc/rc.d/init.d/mysqld</span>
  <span class="c1"># 找到basedir行，修改如下内容</span>
  <span class="nv">basedir</span><span class="o">=</span>/usr/local/mysql
@@ -432,7 +423,7 @@ drwxr-xr-x. <span class="m">2</span> mysql mysql <span class="m">6</span> Jan <s
 </div>
 <div class="section" id="id10">
 <h3>9.3.2.8. 数据库安全安装设置<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos7 mysql<span class="o">]</span><span class="c1"># mysql_secure_installation</span>
 
 NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
     SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
@@ -499,7 +490,7 @@ Thanks <span class="k">for</span> using MariaDB!
 </div>
 <div class="section" id="id11">
 <h2>9.3.3. 源码安装<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 下载文件</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 下载文件</span>
 wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A//mirrors.tuna.tsinghua.edu.cn/mariadb/ <span class="se">\</span>
 -O mariadb-10.2.12-linux-systemd-x86_64.tar.gz
 <span class="c1"># 解压</span>
@@ -545,9 +536,7 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -569,7 +558,7 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -588,6 +577,7 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -600,19 +590,13 @@ wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-sys
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

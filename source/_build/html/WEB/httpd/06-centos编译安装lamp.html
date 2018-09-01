@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.7. web实战一" href="07-web实战一.html"/>
-        <link rel="prev" title="10.5. centos6lamp的yum安装" href="05-centos6lamp的yum安装.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.7. web实战一" href="07-web实战一.html" />
+    <link rel="prev" title="10.5. centos6lamp的yum安装" href="05-centos6lamp的yum安装.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -156,7 +147,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -164,11 +155,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -217,7 +208,7 @@
 <h1>10.6. centos6编译安装lamp<a class="headerlink" href="#centos6lamp" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>10.6.1. 下载文件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /usr/src
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$cd</span> /usr/src
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="nv">$ls</span>
 debug  kernels
 <span class="o">[</span>root@localhost src<span class="o">]</span><span class="nv">$mkdir</span> lamp
@@ -244,7 +235,7 @@ total <span class="m">103312</span>
 </div>
 <div class="section" id="id2">
 <h2>10.6.2. 安装必要的包文件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> groupinstall <span class="s2">&quot;development tools&quot;</span> -y
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="nv">$yum</span> groupinstall <span class="s2">&quot;development tools&quot;</span> -y
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install pcre-devel openssl-devel expat-devel
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> install  ncurses-devel
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="nv">$yum</span> installl libxml2-devel bzip2-devel libmcrypt-devel
@@ -253,14 +244,14 @@ total <span class="m">103312</span>
 </div>
 <div class="section" id="id3">
 <h2>10.6.3. 用户的创建<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$useradd</span> apache -r -s /sbin/nologin -c <span class="s2">&quot;Apache&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$useradd</span> apache -r -s /sbin/nologin -c <span class="s2">&quot;Apache&quot;</span>
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$useradd</span> mysql -r -s /sbin/nologin -c <span class="s2">&quot;mysql&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="httpd">
 <h2>10.6.4. httpd编译安装<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf httpd-2.4.29.tar.bz2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf httpd-2.4.29.tar.bz2
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf apr-1.6.3.tar.bz2
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$tar</span> xf apr-util-1.6.1.tar.bz2
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$mv</span> apr-1.6.3 httpd-2.4.29/srclib/apr
@@ -289,7 +280,7 @@ total <span class="m">103312</span>
 </div>
 <div class="section" id="http">
 <h2>10.6.5. 测试http和后续<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>[root@localhost ~]$cd /usr/local/httpd24/bin
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[root@localhost ~]$cd /usr/local/httpd24/bin
 [root@localhost bin]$echo &#39;PATH=/usr/local/httpd24/bin:$PATH&#39; &gt;&gt; /etc/profile.d/lamp.sh
 [root@localhost bin]$source /etc/profile.d/lamp.sh
 [root@localhost bin]sed -i &#39;s@User daemon@User apache&#39; ../conf/httpd.conf
@@ -320,7 +311,7 @@ tcp    LISTEN     0      128                   :::80                   :::*
 </div>
 <div class="section" id="mariadb">
 <h2>10.6.6. mariadb编译安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$cd</span> /usr/src/lamp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$cd</span> /usr/src/lamp
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$ls</span>
 apr-1.6.3.tar.bz2       httpd-2.4.29          mariadb-10.2.12.tar.gz  wordpress-4.9.1-zh_CN.tar.gz
 apr-util-1.6.1.tar.bz2  httpd-2.4.29.tar.bz2  php-7.2.1.tar.bz2
@@ -355,7 +346,7 @@ Tue Jan <span class="m">30</span> <span class="m">01</span>:40:50 CST <span clas
 </div>
 <div class="section" id="id4">
 <h2>10.6.7. 测试mariadb和后续<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/mysql/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/mysql/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$source</span> /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost mariadb-10.2.12<span class="o">]</span><span class="nv">$cd</span> /usr/local/mysql/
 <span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="nv">$scripts</span>/mysql_install_db --datadir<span class="o">=</span>/data/mysql/data --basedir<span class="o">=</span>/usr/local/mysql --user<span class="o">=</span>mysql
@@ -376,7 +367,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">50</span>       
 </div>
 <div class="section" id="id5">
 <h2>10.6.8. mariadb编译安装<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span>./configure <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span>./configure <span class="se">\</span>
 --prefix<span class="o">=</span>/usr/local/php <span class="se">\</span>
 --enable-mysqlnd <span class="se">\</span>
 --with-mysqli<span class="o">=</span>mysqlnd <span class="se">\</span>
@@ -407,7 +398,7 @@ Tue Jan <span class="m">30</span> <span class="m">02</span>:37:07 CST <span clas
 </div>
 <div class="section" id="php">
 <h2>10.6.9. 测试php和后续<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/php/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$echo</span> <span class="s1">&#39;PATH=/usr/local/php/bin:$PATH&#39;</span> &gt;&gt; /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$source</span> /etc/profile.d/lamp.sh
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$cp</span> php.ini-production  /etc/php.ini
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nv">$cp</span> sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
@@ -425,7 +416,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 <div class="section" id="httpphp">
 <h2>10.6.10. http集成php并测试<a class="headerlink" href="#httpphp" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i  <span class="s1">&#39;s@#(LoadModule.*mod_proxy.so)@\1@&#39;</span> /usr/local/httpd24/conf/httpd.conf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i  <span class="s1">&#39;s@#(LoadModule.*mod_proxy.so)@\1@&#39;</span> /usr/local/httpd24/conf/httpd.conf
 <span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i  <span class="s1">&#39;s@#(LoadModule.*mod_proxy_fcgi.so)@\1@&#39;</span> /usr/local/httpd24/conf/httpd.conf
 <span class="o">[</span>root@localhost httpd24<span class="o">]</span><span class="nv">$sed</span> -r -i <span class="s1">&#39;s@DirectoryIndex index.html@DirectoryIndex index.php index.html@&#39;</span> /usr/local/httpd24/conf/httpd.conf
 <span class="o">[</span>root@localhost php-7.2.1<span class="o">]</span><span class="nb">echo</span> <span class="s2">&quot;AddType application/x-httpd-php .php&quot;</span> &gt;&gt; /usr/local/httpd24/conf/httpd.conf
@@ -452,7 +443,7 @@ phpinfo<span class="o">()</span><span class="p">;</span>
 </div>
 <div class="section" id="phpphpmyadmin">
 <h2>10.6.11. 部署php应用软件phpMyAdmin<a class="headerlink" href="#phpphpmyadmin" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$unzip</span> phpMyAdmin-4.7.7-all-languages.zip
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$unzip</span> phpMyAdmin-4.7.7-all-languages.zip
 
 <span class="o">[</span>root@localhost lamp<span class="o">]</span>$
 <span class="o">[</span>root@localhost lamp<span class="o">]</span><span class="nv">$mv</span> phpMyAdmin-4.7.7-all-languages /usr/local/
@@ -475,9 +466,7 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -499,7 +488,7 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -518,6 +507,7 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -530,19 +520,13 @@ bin/     etc/     games/   httpd24/ include/ lib/     lib64/   libexec/ mysql/  
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

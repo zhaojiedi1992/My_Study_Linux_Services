@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="9.13. mysql读写分离" href="11-mysql读写分离.html"/>
-        <link rel="prev" title="9.11. mysql的mha架构" href="09-mysql的mha架构.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.13. mysql读写分离" href="11-mysql读写分离.html" />
+    <link rel="prev" title="9.11. mysql的mha架构" href="09-mysql的mha架构.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -148,7 +139,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -156,11 +147,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -212,7 +203,7 @@
 </div>
 <div class="section" id="id1">
 <h2>9.12.2. 安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># yum配置</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># yum配置</span>
 <span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># cat /etc/yum.repos.d/mariadb.repo</span>
 <span class="o">[</span>mariadb<span class="o">]</span>
 <span class="nv">name</span><span class="o">=</span>mariadb
@@ -226,7 +217,7 @@
 </div>
 <div class="section" id="id2">
 <h2>9.12.3. 配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf.d/server.cnf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># vim /etc/my.cnf.d/server.cnf</span>
 <span class="c1"># 在galera片段添加如下几行</span>
 <span class="nv">wsrep_provider</span><span class="o">=</span>/usr/lib64/galera/libgalera_smm.so
 <span class="nv">wsrep_cluster_address</span><span class="o">=</span><span class="s2">&quot;gcomm://192.168.46.151,192.168.46.152,192.168.46.153&quot;</span>
@@ -242,7 +233,7 @@ bind-address<span class="o">=</span><span class="m">0</span>.0.0.0
 </div>
 <div class="section" id="id3">
 <h2>9.12.4. 启动<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># /etc/init.d/mysql start --wsrep-new-cluster</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos151 ~<span class="o">]</span><span class="c1"># /etc/init.d/mysql start --wsrep-new-cluster</span>
 Starting MariaDB.180227 <span class="m">14</span>:52:34 mysqld_safe Logging to <span class="s1">&#39;/var/lib/mysql/centos151.linuxpanda.tech.err&#39;</span>.
 <span class="m">180227</span> <span class="m">14</span>:52:34 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
 . SUCCESS!
@@ -261,7 +252,7 @@ Starting MariaDB.180227 <span class="m">15</span>:01:47 mysqld_safe Logging to <
 </div>
 <div class="section" id="id4">
 <h2>9.12.5. 测试<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show variables like <span class="s1">&#39;%wsrep%&#39;</span><span class="se">\G</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show variables like <span class="s1">&#39;%wsrep%&#39;</span><span class="se">\G</span>
 MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show status  like <span class="s1">&#39;%wsrep%&#39;</span><span class="se">\G</span>
 
 <span class="c1"># 创建一个数据库</span>
@@ -300,9 +291,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show database
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -324,7 +313,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show database
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -343,6 +332,7 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show database
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -355,19 +345,13 @@ MariaDB <span class="o">[(</span>none<span class="o">)]</span>&gt; show database
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

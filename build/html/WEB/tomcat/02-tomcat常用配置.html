@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.18. tomcat配合memcached会话管理" href="03-tomcat配合memcached会话管理.html"/>
-        <link rel="prev" title="10.16. tomcat安装" href="01-tomcat安装.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.18. tomcat配合memcached会话管理" href="03-tomcat配合memcached会话管理.html" />
+    <link rel="prev" title="10.16. tomcat安装" href="01-tomcat安装.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -153,7 +144,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -161,11 +152,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -214,7 +205,7 @@
 <h1>10.17. tomcat常用配置<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>10.17.1. 部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
 &lt;%@ page <span class="nv">language</span><span class="o">=</span><span class="s2">&quot;java&quot;</span> %&gt;
@@ -246,7 +237,7 @@
 </div>
 <div class="section" id="id2">
 <h2>10.17.2. 主机管理启用<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
 <span class="c1"># 添加如下2行</span>
 &lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;admin-gui&quot;</span>/&gt;
 &lt;user <span class="nv">username</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">password</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">roles</span><span class="o">=</span><span class="s2">&quot;admin-gui&quot;</span>/&gt;
@@ -257,7 +248,7 @@
 </div>
 <div class="section" id="app">
 <h2>10.17.3. app管理启用<a class="headerlink" href="#app" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 tomcat<span class="o">]</span><span class="c1"># vim tomcat-users.xml</span>
 <span class="c1"># 添加如下2行</span>
 &lt;role <span class="nv">rolename</span><span class="o">=</span><span class="s2">&quot;manager-gui&quot;</span>/&gt;
 &lt;user <span class="nv">username</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">password</span><span class="o">=</span><span class="s2">&quot;tomcat&quot;</span> <span class="nv">roles</span><span class="o">=</span><span class="s2">&quot;manager-gui&quot;</span>/&gt;
@@ -268,7 +259,7 @@
 </div>
 <div class="section" id="nginxtomcat">
 <h2>10.17.4. nginx代理tomcat<a class="headerlink" href="#nginxtomcat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 nginx<span class="o">]</span><span class="c1"># vim nginx.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 nginx<span class="o">]</span><span class="c1"># vim nginx.conf</span>
 <span class="c1"># 在默认的server中添加如下行</span>
         root          /usr/share/tomcat/webapps/ROOT <span class="p">;</span>
         index     index.jsp <span class="p">;</span>
@@ -281,7 +272,7 @@
 </div>
 <div class="section" id="httpdtomcat">
 <h2>10.17.5. httpd代理tomcat<a class="headerlink" href="#httpdtomcat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;VirtualHost *:80&gt;
         ServerName      www.linuxpanda.tech
         ProxyRequests Off
         ProxyVia        On
@@ -300,7 +291,7 @@
 </div>
 <div class="section" id="id3">
 <h2>10.17.6. nginx负载代理tomcat<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 配置后端网页</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 配置后端网页</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mkdir -pv /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF,META-INF}</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /usr/share/tomcat/webapps/test/index.jsp</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cat /usr/share/tomcat/webapps/test/index.jsp</span>
@@ -374,7 +365,7 @@ upstream webend <span class="o">{</span>
 </div>
 <div class="section" id="id4">
 <h2>10.17.7. httpd负载代理tomcat<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># systemctl restart httpd</span>
 <span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
 &lt;proxy balancer://webend&gt;
     ProxySet   <span class="nv">lbmethod</span><span class="o">=</span>byrequests
@@ -404,7 +395,7 @@ upstream webend <span class="o">{</span>
 </div>
 <div class="section" id="id5">
 <h2>10.17.8. 保持会话<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 conf.d<span class="o">]</span><span class="c1"># cat vhost.conf</span>
 Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/&quot;</span> <span class="nv">env</span><span class="o">=</span>BALANCER_ROUTE_CHANGED
 &lt;proxy balancer://webend&gt;
     ProxySet   <span class="nv">lbmethod</span><span class="o">=</span>byrequests
@@ -439,7 +430,7 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
 </div>
 <div class="section" id="id6">
 <h2>10.17.9. tomcat会话集群<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-153 tomcat<span class="o">]</span><span class="c1"># vim server.xml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-153 tomcat<span class="o">]</span><span class="c1"># vim server.xml</span>
 &lt;Engine <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Catalina&quot;</span> <span class="nv">defaultHost</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span> <span class="nv">jvmRoute</span><span class="o">=</span><span class="s2">&quot;TomcatB&quot;</span> &gt;
 <span class="c1"># 添加如下到/etc/tomcat/service.xml 的engine片段或者host片段中。</span>
         &lt;Cluster <span class="nv">className</span><span class="o">=</span><span class="s2">&quot;org.apache.catalina.ha.tcp.SimpleTcpCluster&quot;</span>
@@ -496,9 +487,7 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -520,7 +509,7 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -539,6 +528,7 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -551,19 +541,13 @@ Header add Set-Cookie <span class="s2">&quot;ROUTEID=.%{BALANCER_WORKER_ROUTE}e;
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

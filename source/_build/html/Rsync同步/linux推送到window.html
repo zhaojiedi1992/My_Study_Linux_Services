@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="2. Rsync同步" href="index.html"/>
-        <link rel="next" title="2.4. window推送到linux" href="window推送到linux.html"/>
-        <link rel="prev" title="2.2. linux同步到linux" href="linux推送到linux.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.4. window推送到linux" href="window推送到linux.html" />
+    <link rel="prev" title="2.2. linux同步到linux" href="linux推送到linux.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -151,7 +142,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -159,11 +150,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -247,7 +238,7 @@
 <h2>2.3.3. 编辑rsyncd的配置文件<a class="headerlink" href="#rsyncd" title="Permalink to this headline">¶</a></h2>
 <p>rsyncd的配置文件在“C:cygwin64etcrsyncd.conf”(需要自己创建conf文件)</p>
 <p>使用记事本编辑这个conf文件</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>uid = test
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uid = test
 gid = None
 user chroot = no
 max connections = 200
@@ -273,7 +264,7 @@ secrets file = /etc/rsyncd.pass
 <div class="section" id="id3">
 <h3>2.3.3.1. 创建服务器密码文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>上面指定了密码文件位置为/etc/rsync.pass，我们需要创建这个文件。</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>web:web
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>web:web
 </pre></div>
 </div>
 <p>使用cygwin64Terminal修改这个密码文件的权限为600。</p>
@@ -281,7 +272,7 @@ secrets file = /etc/rsyncd.pass
 </div>
 <div class="section" id="rsync">
 <h3>2.3.3.2. 启动rsync服务<a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 使用cygwin64Terminal 去启动rsync的服务进程</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用cygwin64Terminal 去启动rsync的服务进程</span>
 rsync --daemon
 psaux aux <span class="p">|</span>grep rsync
 </pre></div>
@@ -290,7 +281,7 @@ psaux aux <span class="p">|</span>grep rsync
 <div class="section" id="id4">
 <h3>2.3.3.3. 创建一个同步目录<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>这个目录用于后面客户端给推送</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ mkdir /app/web
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ mkdir /app/web
 </pre></div>
 </div>
 </div>
@@ -305,14 +296,14 @@ psaux aux <span class="p">|</span>grep rsync
 <div class="section" id="id7">
 <h3>2.3.4.1. 安装rsync软件<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>查看是否安装</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web <span class="o">]</span>$ rpm -ql rsync
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web <span class="o">]</span>$ rpm -ql rsync
 <span class="o">[</span>root@localhost web<span class="o">]</span>$ yum -y install rsync
 </pre></div>
 </div>
 </div>
 <div class="section" id="id8">
 <h3>2.3.4.2. 先验证下服务端是否可以访问<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># telnet 192.168.1.104 873</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># telnet 192.168.1.104 873</span>
 Trying <span class="m">192</span>.168.1.104...
 Connected to <span class="m">192</span>.168.1.104.
 Escape character is <span class="s1">&#39;^]&#39;</span>.
@@ -325,7 +316,7 @@ Escape character is <span class="s1">&#39;^]&#39;</span>.
 <h3>2.3.4.3. 创建同步密码文件<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <p>由于我们的服务端有密码配置，客户端需要密码才能同步我们服务端的数据，且ip在服务端的运行范围内。</p>
 <p>密码文件格式： passwd</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 ~<span class="o">]</span>$ <span class="o">(</span><span class="nb">umask</span> <span class="m">066</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;web&quot;</span> &gt; /etc/rsync.pass<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 ~<span class="o">]</span>$ <span class="o">(</span><span class="nb">umask</span> <span class="m">066</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;web&quot;</span> &gt; /etc/rsync.pass<span class="o">)</span>
 <span class="o">[</span>root@centos66 ~<span class="o">]</span>$ cat /etc/rsync.pass
 web
 <span class="o">[</span>root@centos66 ~<span class="o">]</span>$ ll /etc/rsync.pass
@@ -339,7 +330,7 @@ web
 </div>
 <div class="section" id="id10">
 <h3>2.3.4.4. 初步测试同步<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># rsync -avz web@192.168.1.104::web --password-file=/etc/rsync.pass /app/web</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost web<span class="o">]</span><span class="c1"># rsync -avz web@192.168.1.104::web --password-file=/etc/rsync.pass /app/web</span>
 receiving incremental file list
 file has vanished: <span class="s2">&quot;/proc&quot;</span> <span class="o">(</span>in web<span class="o">)</span>
 file has vanished: <span class="s2">&quot;/cygdrive/c&quot;</span> <span class="o">(</span>in web<span class="o">)</span>
@@ -367,11 +358,11 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
 <div class="section" id="id11">
 <h2>2.3.5. 写脚本完成自动拉取服务器数据<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <p>安装inotify-tool工具</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 yum.repos.d<span class="o">]</span>$ yum install inotify-tools
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos66 yum.repos.d<span class="o">]</span>$ yum install inotify-tools
 </pre></div>
 </div>
 <p>编写rsync脚本</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="nv">user</span><span class="o">=</span>web
 <span class="nv">remote_module</span><span class="o">=</span>web
@@ -402,9 +393,7 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -426,7 +415,7 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -445,6 +434,7 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -457,19 +447,13 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

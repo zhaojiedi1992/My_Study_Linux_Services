@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="9. 数据库" href="../index.html"/>
-        <link rel="next" title="10. WEB" href="../../WEB/index.html"/>
-        <link rel="prev" title="9.17. redis主从配置" href="03-redis主从配置.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10. WEB" href="../../WEB/index.html" />
+    <link rel="prev" title="9.17. redis主从配置" href="03-redis主从配置.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -147,7 +138,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -155,11 +146,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -210,7 +201,7 @@
 <p>需要先配置主从的 <a class="reference internal" href="03-redis主从配置.html#topics-redisslave"><span class="std std-ref">redis主从配置</span></a></p>
 <div class="section" id="sentinel">
 <h2>9.18.1. 配置sentinel<a class="headerlink" href="#sentinel" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/redis-sentinel.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/redis-sentinel.conf</span>
 <span class="c1"># 修改如下3行</span>
 <span class="nb">bind</span> <span class="m">0</span>.0.0.0
 sentinel monitor mymaster <span class="m">192</span>.168.46.151 <span class="m">6379</span> <span class="m">2</span>
@@ -227,7 +218,7 @@ sentinel auth-pass  mymaster linuxpanda
 </div>
 <div class="section" id="id1">
 <h2>9.18.2. 测试<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
 
 <span class="m">127</span>.0.0.1:26379&gt; sentinel masters
 <span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
@@ -357,13 +348,13 @@ sentinel auth-pass  mymaster linuxpanda
 </div>
 <div class="section" id="id2">
 <h2>9.18.3. 模拟破坏<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl stop redis</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl stop redis</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
 <h2>9.18.4. 查看是否转移<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># redis-cli -p 26379</span>
 <span class="m">127</span>.0.0.1:26379&gt; sentinel masters
 <span class="m">1</span><span class="o">)</span>  <span class="m">1</span><span class="o">)</span> <span class="s2">&quot;name&quot;</span>
     <span class="m">2</span><span class="o">)</span> <span class="s2">&quot;mymaster&quot;</span>
@@ -453,9 +444,7 @@ sentinel auth-pass  mymaster linuxpanda
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -477,7 +466,7 @@ sentinel auth-pass  mymaster linuxpanda
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -496,6 +485,7 @@ sentinel auth-pass  mymaster linuxpanda
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -508,19 +498,13 @@ sentinel auth-pass  mymaster linuxpanda
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

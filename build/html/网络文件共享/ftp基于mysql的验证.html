@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="12. 网络文件共享" href="index.html"/>
-        <link rel="next" title="12.5. nfs入门" href="nfs.html"/>
-        <link rel="prev" title="12.3. ftp基于文件的验证" href="ftp基于文件的验证.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.5. nfs入门" href="nfs.html" />
+    <link rel="prev" title="12.3. ftp基于文件的验证" href="ftp基于文件的验证.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -143,7 +134,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -151,11 +142,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -207,7 +198,7 @@
 <h2>12.4.1. 数据库服务器配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
 <h3>12.4.1.1. 安装软件和安全初始化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># systemctl restart mariadb                                                                             :::3306                                                                                                :::*</span>
 <span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># ss -tunl |grep 3306</span>
 tcp    LISTEN     <span class="m">0</span>      <span class="m">80</span>       :::3306                 :::*
@@ -217,7 +208,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">80</span>       
 </div>
 <div class="section" id="id3">
 <h3>12.4.1.2. 创建数据库对象<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-159 yum.repos.d<span class="o">]</span><span class="c1"># mysql -u root -p</span>
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
 Your MariaDB connection id is <span class="m">27</span>
@@ -275,13 +266,13 @@ MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; <span class="
 <h2>12.4.2. ftp服务器配置<a class="headerlink" href="#ftp" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="vsftpd">
 <h3>12.4.2.1. 安装vsftpd<a class="headerlink" href="#vsftpd" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># yum install vsftpd</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 src<span class="o">]</span><span class="c1"># yum install vsftpd</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="pam-mysql">
 <h3>12.4.2.2. 编译pam-mysql<a class="headerlink" href="#pam-mysql" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装必要的环境包</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装必要的环境包</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum install mariadb-devel pam-devel</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># yum groupinstall &quot;development tools&quot;</span>
 
@@ -304,14 +295,14 @@ MariaDB <span class="o">[</span>vsftpd<span class="o">]</span>&gt; <span class="
 <div class="section" id="id4">
 <h3>12.4.2.3. 配置文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>pam模块配置</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/pam.d/vsftpd.mysql</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/pam.d/vsftpd.mysql</span>
 <span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># cat /etc/pam.d/vsftpd.mysql</span>
 auth required pam_mysql.so <span class="nv">user</span><span class="o">=</span>vsftpd <span class="nv">passwd</span><span class="o">=</span>panda    <span class="nv">host</span><span class="o">=</span><span class="m">192</span>.168.46.159 <span class="nv">db</span><span class="o">=</span>vsftpd <span class="nv">table</span><span class="o">=</span>users <span class="nv">usercolumn</span><span class="o">=</span>name <span class="nv">passwdcolumn</span><span class="o">=</span>password <span class="nv">crypt</span><span class="o">=</span><span class="m">2</span>
 account required pam_mysql.so <span class="nv">user</span><span class="o">=</span>vsftpd <span class="nv">passwd</span><span class="o">=</span>panda <span class="nv">host</span><span class="o">=</span><span class="m">192</span>.168.46.159 <span class="nv">db</span><span class="o">=</span>vsftpd <span class="nv">table</span><span class="o">=</span>users <span class="nv">usercolumn</span><span class="o">=</span>name <span class="nv">passwdcolumn</span><span class="o">=</span>password <span class="nv">crypt</span><span class="o">=</span><span class="m">2</span>
 </pre></div>
 </div>
 <p>vsftpd配置</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/vsftpd/vsftpd.conf</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 pam_mysql-0.7RC1<span class="o">]</span><span class="c1"># vim /etc/vsftpd/vsftpd.conf</span>
 <span class="c1"># 添加如下3行</span>
 <span class="nv">guest_enable</span><span class="o">=</span>YES
 <span class="nv">guest_username</span><span class="o">=</span>ftpuser
@@ -325,7 +316,7 @@ account required pam_mysql.so <span class="nv">user</span><span class="o">=</spa
 </pre></div>
 </div>
 <p>添加虚拟用户的目录</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># useradd -d /data/ftpuser -s /sbin/nologin ftpuser</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># useradd -d /data/ftpuser -s /sbin/nologin ftpuser</span>
 <span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># chmod a-w /data/ftpuser/</span>
 <span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># mkdir /data/ftpuser/{pub,upload}</span>
 <span class="o">[</span>root@centos-152 vsftpd<span class="o">]</span><span class="c1"># setfacl -m u:ftpuser:rwx /data/ftpuser/upload/</span>
@@ -337,7 +328,7 @@ account required pam_mysql.so <span class="nv">user</span><span class="o">=</spa
 <div class="section" id="id5">
 <h2>12.4.3. 测试<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>测试前重启服务</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># ftp 192.168.46.152</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 mysql.users.conf.d<span class="o">]</span><span class="c1"># ftp 192.168.46.152</span>
 Connected to <span class="m">192</span>.168.46.152 <span class="o">(</span><span class="m">192</span>.168.46.152<span class="o">)</span>.
 <span class="m">220</span> <span class="o">(</span>vsFTPd <span class="m">3</span>.0.2<span class="o">)</span>
 Name <span class="o">(</span><span class="m">192</span>.168.46.152:root<span class="o">)</span>: panda1
@@ -395,9 +386,7 @@ ftp&gt; quit
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -419,7 +408,7 @@ ftp&gt; quit
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -438,6 +427,7 @@ ftp&gt; quit
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -450,19 +440,13 @@ ftp&gt; quit
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="12. 网络文件共享" href="index.html"/>
-        <link rel="next" title="12.6. samba" href="samba.html"/>
-        <link rel="prev" title="12.4. ftp基于mysql的验证" href="ftp基于mysql的验证.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12.6. samba" href="samba.html" />
+    <link rel="prev" title="12.4. ftp基于mysql的验证" href="ftp基于mysql的验证.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -138,7 +129,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -146,11 +137,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -199,7 +190,7 @@
 <h1>12.5. nfs入门<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>12.5.1. 安装nfs工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$yum</span> install nfs-utils
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="nv">$yum</span> install nfs-utils
 
 <span class="o">[</span>root@centos-7 ~<span class="o">]</span><span class="c1"># rpm -ql nfs-utils |grep bin</span>
 /sbin/mount.nfs
@@ -252,7 +243,7 @@
 </div>
 <div class="section" id="id2">
 <h2>12.5.2. 启动服务<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># rpcinfo</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># rpcinfo</span>
 program version netid     address                service    owner
     <span class="m">100000</span>    <span class="m">4</span>    tcp6      ::.0.111               portmapper superuser
     <span class="m">100000</span>    <span class="m">3</span>    tcp6      ::.0.111               portmapper superuser
@@ -327,7 +318,7 @@ program version netid     address                service    owner
 </div>
 <div class="section" id="id3">
 <h2>12.5.3. 共享目录<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/nfs1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/nfs1</span>
 <span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># mkdir /data/nfs2</span>
 <span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/exports</span>
 <span class="o">[</span>root@centos-155 yum.repos.d<span class="o">]</span><span class="c1"># cat /etc/exports</span>
@@ -345,7 +336,7 @@ cat: /etc/export: No such file or directory
 </div>
 <div class="section" id="id4">
 <h2>12.5.4. 挂载<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># showmount -e 192.168.46.155</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># showmount -e 192.168.46.155</span>
 Export list <span class="k">for</span> <span class="m">192</span>.168.46.155:
 /data/nfs2 *
 /data/nfs1 *
@@ -363,7 +354,7 @@ Export list <span class="k">for</span> <span class="m">192</span>.168.46.155:
 <h2>12.5.6. 自动挂载<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>自动挂载分为2种， 相对路径法和绝对路径法。</p>
 <p>相对路径法</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
 <span class="c1"># 添加一行</span>
 /test          auto.test
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.test</span>
@@ -375,7 +366,7 @@ total <span class="m">0</span>
 </pre></div>
 </div>
 <p>绝对路径法</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.master</span>
 <span class="c1"># 添加一行</span>
 /-         /etc/auto.test2
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># vim /etc/auto.test2</span>
@@ -389,7 +380,7 @@ total <span class="m">0</span>
 </div>
 <div class="section" id="id7">
 <h2>12.5.7. nfs实现伪根挂载<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 创建分散的文件夹和文件</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建分散的文件夹和文件</span>
 <span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test1/test1 -pv</span>
 <span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test2/test2 -pv</span>
 <span class="o">[</span>root@centos-155 ~<span class="o">]</span><span class="c1"># mkdir /test3/test3 -pv</span>
@@ -447,9 +438,7 @@ total <span class="m">0</span>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -471,7 +460,7 @@ total <span class="m">0</span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -490,6 +479,7 @@ total <span class="m">0</span>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -502,19 +492,13 @@ total <span class="m">0</span>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

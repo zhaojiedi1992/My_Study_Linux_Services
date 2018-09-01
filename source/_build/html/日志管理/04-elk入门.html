@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="11. 日志管理" href="index.html"/>
-        <link rel="next" title="11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台" href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html"/>
-        <link rel="prev" title="11.3. 日志管理系统搭建" href="03-日志管理系统搭建.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11.5. ELK(ElasticSearch,Filebeat, Logstash, Kibana)搭建实时日志分析平台" href="05-ELK(ElasticSearch,filebeat, Logstash, Kibana)搭建实时日志分析平台.html" />
+    <link rel="prev" title="11.3. 日志管理系统搭建" href="03-日志管理系统搭建.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -150,7 +141,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -158,11 +149,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -231,7 +222,7 @@
 <div class="section" id="id2">
 <h2>11.4.1. 准备工作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>hosts文件解析配置</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/hosts</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cat /etc/hosts</span>
 <span class="m">127</span>.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
@@ -249,7 +240,7 @@
 <p>关闭防火墙和selinux</p>
 <p><a class="reference internal" href="../杂项/时间服务器-chrony.html#topics-time"><span class="std std-ref">时间服务器-chrony</span></a></p>
 <p>安装jdk环境</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk-devel</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk-devel</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk-devel</span>
 <span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk-devel</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install java-1.8.0-openjdk-devel</span>
@@ -260,7 +251,7 @@
 <h2>11.4.2. 安装elk<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.elastic.co/cn/downloads">elk官方下载地址</a></p>
 <p>官方下载的实在是太慢了。 好在清华大学镜像站点提供了镜像，美滋滋。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
 <span class="o">[</span>root@centos-153 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum-config-manager --add-repo=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/5.x/yum/</span>
@@ -271,7 +262,7 @@
 </div>
 <div class="section" id="id5">
 <h2>11.4.3. 修改配置文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/elasticsearch/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># cd /etc/elasticsearch/</span>
 <span class="o">[</span>root@centos-151 elasticsearch<span class="o">]</span><span class="c1"># ls</span>
 elasticsearch.yml  jvm.options  log4j2.properties  scripts
 <span class="o">[</span>root@centos-151 elasticsearch<span class="o">]</span><span class="c1"># vim elasticsearch.yml</span>
@@ -313,7 +304,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 <div class="section" id="elasticsearch">
 <h2>11.4.4. 测试elasticsearch<a class="headerlink" href="#elasticsearch" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl http://c151:9200/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl http://c151:9200/</span>
 <span class="o">{</span>
 <span class="s2">&quot;name&quot;</span> : <span class="s2">&quot;c151&quot;</span>,
 <span class="s2">&quot;cluster_name&quot;</span> : <span class="s2">&quot;my-application&quot;</span>,
@@ -371,7 +362,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 </div>
 <div class="section" id="id6">
 <h2>11.4.5. 插入数据<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/1&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;zhaojiedi&quot;, &quot;publisher&quot;: &quot;zhao&quot;}&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/1&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;zhaojiedi&quot;, &quot;publisher&quot;: &quot;zhao&quot;}&#39;</span>
 curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/2&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;xiaojia&quot;, &quot;publisher&quot;: &quot;zhao&quot;}&#39;</span>
 curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/3&#39;</span> -d <span class="s1">&#39;{&quot;name&quot;: &quot;zhao&quot;, &quot;publisher&quot;: &quot;zhaojiedi&quot;}&#39;</span>
 </pre></div>
@@ -379,7 +370,7 @@ curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/3&#39;</span> -d <span
 </div>
 <div class="section" id="id7">
 <h2>11.4.6. 查询数据<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl  &#39;http://c151:9200/_search?q=zhao&amp;pretty=true&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># curl  &#39;http://c151:9200/_search?q=zhao&amp;pretty=true&#39;</span>
 <span class="o">{</span>
 <span class="s2">&quot;took&quot;</span> : <span class="m">7</span>,
 <span class="s2">&quot;timed_out&quot;</span> : false,
@@ -433,7 +424,7 @@ curl -XPUT <span class="s1">&#39;http://c151:9200/book/it/3&#39;</span> -d <span
 <div class="section" id="elasticsearch-head">
 <h2>11.4.7. elasticsearch-head插件安装<a class="headerlink" href="#elasticsearch-head" title="Permalink to this headline">¶</a></h2>
 <p>参考 <a class="reference external" href="https://github.com/mobz/elasticsearch-head">elasticsearch-head</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/elasticsearch/elasticsearch.yml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># vim /etc/elasticsearch/elasticsearch.yml</span>
 <span class="c1"># 添加如下2行</span>
 http.cors.enabled: <span class="nb">true</span>
 http.cors.allow-origin: <span class="s2">&quot;*&quot;</span>
@@ -462,7 +453,7 @@ bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  
 </div>
 <div class="section" id="logstash">
 <h2>11.4.9. logstash配置<a class="headerlink" href="#logstash" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install logstash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># yum install logstash</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># rpm -ql logstash |wc -l</span>
 <span class="m">11293</span>
 <span class="o">[</span>root@centos-154 ~<span class="o">]</span><span class="c1"># rpm -ql logstash |grep logstash$</span>
@@ -473,7 +464,7 @@ bin  elasticsearch-head  etc  games  include  lib  lib64  libexec  sbin  share  
 </div>
 <div class="section" id="id10">
 <h3>11.4.9.1. 配置从标准输入到标准输出<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/conf.d/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/conf.d/</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># vim sample.conf</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cat sample.conf</span>
 input <span class="o">{</span>
@@ -514,7 +505,7 @@ zhaojiedi
 </div>
 <div class="section" id="id11">
 <h3>11.4.9.2. 配置从文件输入到标准输出<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install httpd</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install httpd</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># systemctl start httpd</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># curl 192.168.46.154</span>
 sorry page
@@ -552,7 +543,7 @@ Could not find log4j2 configuration at path /usr/share/logstash/config/log4j2.pr
 </div>
 <div class="section" id="filtergrok">
 <h3>11.4.9.3. filter的grok使用<a class="headerlink" href="#filtergrok" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
 vim sample.conf
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cat sample.conf</span>
 input <span class="o">{</span>
@@ -611,7 +602,7 @@ Could not find log4j2 configuration at path /usr/share/logstash/config/log4j2.pr
 <div class="section" id="filterdate">
 <h3>11.4.9.4. filter的date使用<a class="headerlink" href="#filterdate" title="Permalink to this headline">¶</a></h3>
 <p>默认你的日期字符串是不能被识别出来是日期的， 你需要指定你的字符串是日期就需要date过滤器。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># !vim</span>
 vim sample.conf
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cat sample.conf</span>
 input <span class="o">{</span>
@@ -648,7 +639,7 @@ output <span class="o">{</span>
 <h3>11.4.9.5. geoip使用<a class="headerlink" href="#geoip" title="Permalink to this headline">¶</a></h3>
 <p>这个很厉害的，根据ip可以获取到地理位置的，城市信息和经纬度信息。</p>
 <p>geoip下载</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># cd /etc/logstash/</span>
 <span class="o">[</span>root@centos-154 logstash<span class="o">]</span><span class="c1"># wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz</span>
 <span class="o">[</span>root@centos-154 logstash<span class="o">]</span><span class="c1"># tar xf GeoLite2-City.tar.gz</span>
 <span class="o">[</span>root@centos-154 logstash<span class="o">]</span><span class="c1"># ls</span>
@@ -712,7 +703,7 @@ total <span class="m">59936</span>
 <div class="section" id="redislogstash">
 <h3>11.4.9.6. redis配合logstash<a class="headerlink" href="#redislogstash" title="Permalink to this headline">¶</a></h3>
 <p>redis作为输入</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>input {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>input {
         redis {
                 batch_count =&gt; 1
                 data_type =&gt; &quot;list&quot;
@@ -725,7 +716,7 @@ total <span class="m">59936</span>
 </pre></div>
 </div>
 <p>redis作为输出</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install redis</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install redis</span>
 <span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># vim /etc/redis.conf</span>
 <span class="c1"># 修改如下2行</span>
 requirepass redis
@@ -796,7 +787,7 @@ OK
 </div>
 <div class="section" id="logstashels">
 <h3>11.4.9.7. logstash写数据到els<a class="headerlink" href="#logstashels" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>output {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>output {
     elasticsearch {
         hosts =&gt; [&quot;http://192.168.46.151:9200/&quot;,&quot;http://192.168.46.152:9200/&quot;,&quot;http://192.168.46.153:9200/&quot;]
         index =&gt; &quot;logstash-%{+YYYY.MM.dd}&quot;
@@ -809,7 +800,7 @@ OK
 </div>
 <div class="section" id="filebeat">
 <h2>11.4.10. 使用filebeat收集数据<a class="headerlink" href="#filebeat" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install filebeat</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 conf.d<span class="o">]</span><span class="c1"># yum install filebeat</span>
 <span class="o">[</span>root@centos-154 filebeat<span class="o">]</span><span class="c1"># vim filebeat.yml</span>
 <span class="c1"># 修改如下几行内容</span>
 hosts: <span class="o">[</span><span class="s2">&quot;192.168.46.151:9200&quot;</span>,<span class="s2">&quot;192.168.46.152:9200&quot;</span>,<span class="s2">&quot;192.168.46.153:9200&quot;</span><span class="o">]</span>
@@ -825,7 +816,7 @@ green open filebeat-2018.04.04 HXRGZ6sKRGaM4GDFGwf2Zg <span class="m">5</span> <
 </div>
 <div class="section" id="kibana">
 <h2>11.4.11. kibana使用<a class="headerlink" href="#kibana" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 filebeat<span class="o">]</span><span class="c1"># vim /etc/kibana/kibana.yml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-154 filebeat<span class="o">]</span><span class="c1"># vim /etc/kibana/kibana.yml</span>
 <span class="c1"># 修改如下2行</span>
 elasticsearch.url: <span class="s2">&quot;http://192.168.46.151:9200&quot;</span>
 server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
@@ -841,9 +832,7 @@ server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -865,7 +854,7 @@ server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -884,6 +873,7 @@ server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -896,19 +886,13 @@ server.host: <span class="s2">&quot;192.168.46.154&quot;</span>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

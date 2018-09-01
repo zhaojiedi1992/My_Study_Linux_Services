@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.10. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html"/>
-        <link rel="prev" title="10.8. nginx安装" href="01-nginx安装.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.10. nginx虚拟主机三种实现方式" href="03-nginx虚拟主机三种实现方式.html" />
+    <link rel="prev" title="10.8. nginx安装" href="01-nginx安装.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -299,7 +290,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -307,11 +298,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -362,7 +353,7 @@
 <h2>10.9.1. 核心模块<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="user">
 <h3>10.9.1.1. user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     user user [group];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     user user [group];
 Default:
 user nobody nobody;
 Context:    main
@@ -372,7 +363,7 @@ Context:    main
 </div>
 <div class="section" id="pid">
 <h3>10.9.1.2. pid<a class="headerlink" href="#pid" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     pid file;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     pid file;
 Default:
 pid logs/nginx.pid;
 Context:    main
@@ -382,7 +373,7 @@ Context:    main
 </div>
 <div class="section" id="include">
 <h3>10.9.1.3. include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     include file | mask;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     include file | mask;
 Default:    —
 Context:    any
 </pre></div>
@@ -391,7 +382,7 @@ Context:    any
 </div>
 <div class="section" id="load-module">
 <h3>10.9.1.4. load_module<a class="headerlink" href="#load-module" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     load_module file;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     load_module file;
 Default:    —
 Context:    main
 This directive appeared in version 1.9.11.
@@ -401,7 +392,7 @@ This directive appeared in version 1.9.11.
 </div>
 <div class="section" id="worker-cpu-affinity">
 <h3>10.9.1.5. worker_cpu_affinity<a class="headerlink" href="#worker-cpu-affinity" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_cpu_affinity cpumask ...;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     worker_cpu_affinity cpumask ...;
 worker_cpu_affinity auto [cpumask];
 Default:    —
 Context:    main
@@ -413,7 +404,7 @@ Context:    main
 </div>
 <div class="section" id="worker-processes">
 <h3>10.9.1.6. worker_processes<a class="headerlink" href="#worker-processes" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_processes number | auto;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     worker_processes number | auto;
 Default:
 worker_processes 1;
 Context:    main
@@ -423,7 +414,7 @@ Context:    main
 </div>
 <div class="section" id="worker-priority">
 <h3>10.9.1.7. worker_priority<a class="headerlink" href="#worker-priority" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_priority number;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     worker_priority number;
 Default:
 worker_priority 0;
 Context:    main
@@ -433,7 +424,7 @@ Context:    main
 </div>
 <div class="section" id="worker-rlimit-nofile">
 <h3>10.9.1.8. worker_rlimit_nofile<a class="headerlink" href="#worker-rlimit-nofile" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_rlimit_nofile number;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     worker_rlimit_nofile number;
 Default:    —
 Context:    main
 </pre></div>
@@ -442,7 +433,7 @@ Context:    main
 </div>
 <div class="section" id="worker-connections">
 <h3>10.9.1.9. worker_connections<a class="headerlink" href="#worker-connections" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     worker_connections number;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     worker_connections number;
 Default:
 worker_connections 512;
 Context:    events
@@ -452,7 +443,7 @@ Context:    events
 </div>
 <div class="section" id="use">
 <h3>10.9.1.10. use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     use method;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     use method;
 Default:    —
 Context:    events
 样例：
@@ -463,7 +454,7 @@ Context:    events
 </div>
 <div class="section" id="accept-mutex">
 <h3>10.9.1.11. accept_mutex<a class="headerlink" href="#accept-mutex" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     accept_mutex on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     accept_mutex on | off;
 Default:
 accept_mutex off;
 Context:    events
@@ -473,7 +464,7 @@ Context:    events
 </div>
 <div class="section" id="daemon">
 <h3>10.9.1.12. daemon<a class="headerlink" href="#daemon" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     daemon on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     daemon on | off;
 Default:
 daemon on;
 Context:    main
@@ -483,7 +474,7 @@ Context:    main
 </div>
 <div class="section" id="master-process">
 <h3>10.9.1.13. master_process<a class="headerlink" href="#master-process" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     master_process on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     master_process on | off;
 Default:
 master_process on;
 Context:    main
@@ -493,7 +484,7 @@ Context:    main
 </div>
 <div class="section" id="error-log">
 <h3>10.9.1.14. error_log<a class="headerlink" href="#error-log" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     error_log file [level];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     error_log file [level];
 Default:
 error_log logs/error.log error;
 Context:    main, http, mail, stream, server, location
@@ -506,7 +497,7 @@ Context:    main, http, mail, stream, server, location
 <h2>10.9.2. 标准模块<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="listen">
 <h3>10.9.2.1. listen<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     listen address[:port] [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     listen address[:port] [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
 listen port [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
 listen unix:path [default_server] [ssl] [http2 | spdy] [proxy_protocol] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
 Default:
@@ -518,7 +509,7 @@ Context:    server
 </div>
 <div class="section" id="server-name">
 <h3>10.9.2.2. server_name<a class="headerlink" href="#server-name" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     server_name name ...;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     server_name name ...;
 Default:
 server_name &quot;&quot;;
 Context:    server
@@ -536,7 +527,7 @@ Context:    server
 </div>
 <div class="section" id="root">
 <h3>10.9.2.3. root<a class="headerlink" href="#root" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     root path;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     root path;
 Default:
 root html;
 Context:    http, server, location, if in location
@@ -546,7 +537,7 @@ Context:    http, server, location, if in location
 </div>
 <div class="section" id="tcp-nodelay">
 <h3>10.9.2.4. tcp_nodelay<a class="headerlink" href="#tcp-nodelay" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     tcp_nodelay on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     tcp_nodelay on | off;
 Default:
 tcp_nodelay on;
 Context:    http, server, location
@@ -556,7 +547,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="sendfile">
 <h3>10.9.2.5. sendfile<a class="headerlink" href="#sendfile" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     sendfile on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     sendfile on | off;
 Default:
 sendfile off;
 Context:    http, server, location, if in location
@@ -566,7 +557,7 @@ Context:    http, server, location, if in location
 </div>
 <div class="section" id="server-tokens">
 <h3>10.9.2.6. server_tokens<a class="headerlink" href="#server-tokens" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     server_tokens on | off | build | string;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     server_tokens on | off | build | string;
 Default:
 server_tokens on;
 Context:    http, server, location
@@ -576,7 +567,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="location">
 <h3>10.9.2.7. location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     location [ = | ~ | ~* | ^~ ] uri { ... }
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     location [ = | ~ | ~* | ^~ ] uri { ... }
 location @name { ... }
 Default:    —
 Context:    server, location
@@ -587,7 +578,7 @@ Context:    server, location
 </div>
 <div class="section" id="alias">
 <h3>10.9.2.8. alias<a class="headerlink" href="#alias" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     alias path;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     alias path;
 Default:    —
 Context:    location
 </pre></div>
@@ -596,7 +587,7 @@ Context:    location
 </div>
 <div class="section" id="index">
 <h3>10.9.2.9. index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     index file ...;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     index file ...;
 Default:
 index index.html;
 Context:    http, server, location
@@ -606,7 +597,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="error-page">
 <h3>10.9.2.10. error_page<a class="headerlink" href="#error-page" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     error_page code ... [=[response]] uri;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     error_page code ... [=[response]] uri;
 Default:    —
 Context:    http, server, location, if in location
 样例配置：
@@ -619,7 +610,7 @@ Context:    http, server, location, if in location
 </div>
 <div class="section" id="try-files">
 <h3>10.9.2.11. try_files<a class="headerlink" href="#try-files" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     try_files file ... uri;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     try_files file ... uri;
 try_files file ... =code;
 Default:    —
 Context:    server, location
@@ -633,7 +624,7 @@ Context:    server, location
 </div>
 <div class="section" id="keepalive-timeout">
 <h3>10.9.2.12. keepalive_timeout<a class="headerlink" href="#keepalive-timeout" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_timeout timeout [header_timeout];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     keepalive_timeout timeout [header_timeout];
 Default:
 keepalive_timeout 75s;
 Context:    http, server, location
@@ -643,7 +634,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="keepalive-requests">
 <h3>10.9.2.13. keepalive_requests<a class="headerlink" href="#keepalive-requests" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_requests number;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     keepalive_requests number;
 Default:
 keepalive_requests 100;
 Context:    http, server, location
@@ -654,7 +645,7 @@ This directive appeared in version 0.8.0.
 </div>
 <div class="section" id="keepalive-disable">
 <h3>10.9.2.14. keepalive_disable<a class="headerlink" href="#keepalive-disable" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     keepalive_disable none | browser ...;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     keepalive_disable none | browser ...;
 Default:
 keepalive_disable msie6;
 Context:    http, server, location
@@ -664,7 +655,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="send-timeout">
 <h3>10.9.2.15. send_timeout<a class="headerlink" href="#send-timeout" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     send_timeout time;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     send_timeout time;
 Default:
 send_timeout 60s;
 Context:    http, server, location
@@ -674,7 +665,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="client-body-buffer-size">
 <h3>10.9.2.16. client_body_buffer_size<a class="headerlink" href="#client-body-buffer-size" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     client_body_buffer_size size;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     client_body_buffer_size size;
 Default:
 client_body_buffer_size 8k|16k;
 Context:    http, server, location
@@ -684,7 +675,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="client-body-temp-path">
 <h3>10.9.2.17. client_body_temp_path<a class="headerlink" href="#client-body-temp-path" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     client_body_temp_path path [level1 [level2 [level3]]];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     client_body_temp_path path [level1 [level2 [level3]]];
 Default:
 client_body_temp_path client_body_temp;
 Context:    http, server, location
@@ -694,7 +685,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="limit-rate">
 <h3>10.9.2.18. limit_rate<a class="headerlink" href="#limit-rate" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     limit_rate_after size;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     limit_rate_after size;
 Default:
 limit_rate_after 0;
 Context:    http, server, location, if in location
@@ -705,7 +696,7 @@ This directive appeared in version 0.8.0.
 </div>
 <div class="section" id="limit-except">
 <h3>10.9.2.19. limit_except<a class="headerlink" href="#limit-except" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     limit_except method ... { ... }
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     limit_except method ... { ... }
 Default:    —
 Context:    location
 样例：
@@ -720,7 +711,7 @@ Context:    location
 </div>
 <div class="section" id="aio">
 <h3>10.9.2.20. aio<a class="headerlink" href="#aio" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     aio on | off | threads[=pool];
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     aio on | off | threads[=pool];
 Default:
 aio off;
 Context:    http, server, location
@@ -731,7 +722,7 @@ This directive appeared in version 0.8.11.
 </div>
 <div class="section" id="directio">
 <h3>10.9.2.21. directio<a class="headerlink" href="#directio" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     directio size | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     directio size | off;
 Default:
 directio off;
 Context:    http, server, location
@@ -742,7 +733,7 @@ This directive appeared in version 0.7.7.
 </div>
 <div class="section" id="open-file-cache">
 <h3>10.9.2.22. open_file_cache<a class="headerlink" href="#open-file-cache" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     open_file_cache off;
 open_file_cache max=N [inactive=time];
 Default:
 open_file_cache off;
@@ -758,7 +749,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="open-file-cache-errors">
 <h3>10.9.2.23. open_file_cache_errors<a class="headerlink" href="#open-file-cache-errors" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_errors on | off;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_errors on | off;
 Default:
 open_file_cache_errors off;
 Context:    http, server, location
@@ -768,7 +759,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="open-file-cache-min-uses">
 <h3>10.9.2.24. open_file_cache_min_uses<a class="headerlink" href="#open-file-cache-min-uses" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_min_uses number;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_min_uses number;
 Default:
 open_file_cache_min_uses 1;
 Context:    http, server, location
@@ -778,7 +769,7 @@ Context:    http, server, location
 </div>
 <div class="section" id="open-file-cache-valid">
 <h3>10.9.2.25. open_file_cache_valid<a class="headerlink" href="#open-file-cache-valid" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_valid time;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Syntax:     open_file_cache_valid time;
 Default:
 open_file_cache_valid 60s;
 Context:    http, server, location
@@ -816,7 +807,7 @@ Context:    http, server, location
 <p>用法：auth_basic_user_file file;</p>
 <p>认证的基本用户文件，口令文件使用htpasswd命令实现（在httpd-tools包里面提供）</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>location /admin/ {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>location /admin/ {
 auth_basic &quot;Admin Area&quot;;
 auth_basic_user_file /etc/nginx/.ngxpasswd;
 }
@@ -830,7 +821,7 @@ auth_basic_user_file /etc/nginx/.ngxpasswd;
 <h3>10.9.5.1. auth_basic<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>提示输出nginx的基本状态信息。</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>location /status {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>location /status {
 stub_status;
 allow 172.16.0.0/16;
 deny all;
@@ -852,7 +843,7 @@ deny all;
 [flush=time] [if=condition]];</p>
 <p>访问日志文件路径，格式和相关的缓冲区压缩等相关配置。</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>log_format compression &#39;$remote_addr-$remote_user [$time_local] &#39;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>log_format compression &#39;$remote_addr-$remote_user [$time_local] &#39;
 &#39;&quot;$request&quot; $status $bytes_sent &#39;
 &#39;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &quot;$gzip_ratio&quot;&#39;;
 access_log /spool/logs/nginx-access.log compression buffer=32k;
@@ -914,7 +905,7 @@ access_log /spool/logs/nginx-access.log compression buffer=32k;
 private | no_last_modified | no_etag | auth | any …;</p>
 <p>充当代理服务器的时候， 对于后端服务器的响应报文何种条件下启动压缩功能。</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>gzip on;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gzip on;
 gzip_comp_level 6;
 gzip_min_length 64;
 gzip_proxied any;
@@ -955,7 +946,7 @@ gzip_types text/xml text/css application/javascript;
 <p>用法： ssl_session_timeout time;</p>
 <p>ssl会话超时</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>server {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server {
 listen 443 ssl;
 server_name www.linuxpanda.com;
 root /vhosts/ssl/htdocs;
@@ -1008,7 +999,7 @@ ssl_session_timeout 10m;
 <h3>10.9.9.5. if<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h3>
 <p>用法： if (condition) { … }</p>
 <p>针对特定条件判定</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>比较操作符：
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>比较操作符：
     = 相同
     != 不同
     ~：模式匹配，区分字符大小写
@@ -1039,7 +1030,7 @@ ssl_session_timeout 10m;
 <li>regular expression: 正则表达式模式匹配到的字符串，要使用~开头。</li>
 </ul>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>valid_referers none block server_names *.linuxpanda.tech;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>valid_referers none block server_names *.linuxpanda.tech;
 if ($invalid_referer) {
 return 403 http://www.magedu.com;
 }
@@ -1053,7 +1044,7 @@ return 403 http://www.magedu.com;
 <h3>10.9.11.1. proxy_pass<a class="headerlink" href="#proxy-pass" title="Permalink to this headline">¶</a></h3>
 <p>用法： proxy_pass URL;</p>
 <p>代理的路径，样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>server {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server {
 ...
 server_name HOSTNAME;
 location /uri/ {
@@ -1090,7 +1081,7 @@ proxy_pass http://host[:port]; 最后没有/
 <p>用法： proxy_cache_valid [code …] time;</p>
 <p>定义对特定响应码的响应内容的缓存时长</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>proxy_cache proxycache;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>proxy_cache proxycache;
 proxy_cache_key $request_uri;
 proxy_cache_valid 200 302 301 1h;
 proxy_cache_valid any 1m;
@@ -1164,7 +1155,7 @@ http_503 | http_504 | http_403 | http_404 | off …</p>
 <p>用法： fastcgi_param parameter value [if_not_empty];</p>
 <p>设置传递给 FastCGI服务器的参数值，可以是文本，变量或组合</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>location ~* \.php$ {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>location ~* \.php$ {
 fastcgi_pass 后端fpm服务器IP:9000;
 fastcgi_index index.php;
 fastcgi_param SCRIPT_FILENAME
@@ -1223,7 +1214,7 @@ keys_zone=name:size [inactive=time] [max_size=size]
 <p>用法： fastcgi_cache_valid [code …] time;</p>
 <p>不同的响应码各自的缓存时长</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>http {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>http {
     fastcgi_cache_path /var/cache/nginx/fcgi_cache
     levels=1:2:1 keys_zone=fcgicache:20m inactive=120s;
     ...
@@ -1298,7 +1289,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 <p>用法： stream { … }</p>
 <p>不同的响应码各自的缓存时长</p>
 <p>样例：</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>stream {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>stream {
     upstream mysqlsrvs {
     server 192.168.22.2:3306;
     server 192.168.22.3:3306;
@@ -1337,7 +1328,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 <p>用法：proxy_connect_timeout time;</p>
 <p>设置nginx与被代理的服务器尝试建立连接的超时时长默认为60s</p>
 <p>样例配置</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>stream {
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>stream {
 
     upstream mysqlsrvs {
     server 192.168.0.10:3306;
@@ -1360,9 +1351,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1384,7 +1373,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1403,6 +1392,7 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1415,19 +1405,13 @@ faile_timeout后端标记不可用状态的时长，backup备用，down不可用
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

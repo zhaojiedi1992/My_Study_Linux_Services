@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="5. 安全和监控" href="index.html"/>
-        <link rel="next" title="6. 远程登陆" href="../远程登陆/index.html"/>
-        <link rel="prev" title="5.3. selinux" href="selinux.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.5. ldap" href="ldap.html" />
+    <link rel="prev" title="5.3. selinux" href="selinux.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -116,6 +107,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">5.5. ldap</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../远程登陆/index.html">6. 远程登陆</a></li>
@@ -141,7 +133,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -149,11 +141,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -203,7 +195,7 @@
 <div class="section" id="id1">
 <h2>5.4.1. 安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.zabbix.com/download">zabbix安装参考</a></p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 安装配置数据库</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装配置数据库</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install mariadb-server</span>
 
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># systemctl start mariadb</span>
@@ -256,7 +248,7 @@ php_value date.timezone Asia/Shanghai
 </div>
 <div class="section" id="id4">
 <h2>5.4.3. 准备工作<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># rpm -i http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># rpm -i http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install zabbix-agent</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /etc/zabbix/</span>
 <span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># ls</span>
@@ -338,7 +330,7 @@ tcp    LISTEN     <span class="m">0</span>      <span class="m">128</span>      
 <p>这里以152的web应用为例说明trigger的使用</p>
 <div class="section" id="web">
 <h3>5.4.9.1. 安装web<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># yum install nginx</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># yum install nginx</span>
 <span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl restart nginx</span>
 <span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># hostname</span>
 centos-152.linuxpanda.tech
@@ -359,12 +351,12 @@ centos-152.linuxpanda.tech
 <img alt="../_images/nginx-10.png" src="../_images/nginx-10.png" />
 <img alt="../_images/nginx-11.png" src="../_images/nginx-11.png" />
 <p>停下服务，测试监控</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl stop nginx</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># systemctl stop nginx</span>
 </pre></div>
 </div>
 <img alt="../_images/nginx-12.png" src="../_images/nginx-12.png" />
 <p>配置远程权限</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 配置sudo</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 配置sudo</span>
 zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span>       NOPASSWD: ALL
 <span class="o">[</span>root@centos-152 zabbix<span class="o">]</span><span class="c1"># vim /etc/zabbix/zabbix_agentd.conf</span>
 <span class="nv">EnableRemoteCommands</span><span class="o">=</span><span class="m">1</span>
@@ -380,15 +372,13 @@ zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../远程登陆/index.html" class="btn btn-neutral float-right" title="6. 远程登陆" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ldap.html" class="btn btn-neutral float-right" title="5.5. ldap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="selinux.html" class="btn btn-neutral" title="5.3. selinux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -404,7 +394,7 @@ zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -423,6 +413,7 @@ zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -435,19 +426,13 @@ zabbix  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

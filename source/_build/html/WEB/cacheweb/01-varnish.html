@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="10. WEB" href="../index.html"/>
-        <link rel="next" title="10.15. memcached" href="02-memcached.html"/>
-        <link rel="prev" title="10.13. nginx常用案例" href="../nginx/06-nginx常用案例.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.15. memcached" href="02-memcached.html" />
+    <link rel="prev" title="10.13. nginx常用案例" href="../nginx/06-nginx常用案例.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
-  <script src="../../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -163,7 +154,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">My_Study_Linux_Services</a>
@@ -171,11 +162,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -224,7 +215,7 @@
 <h1>10.14. varnish<a class="headerlink" href="#varnish" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>10.14.1. varnish安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install varnish</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># yum install varnish</span>
 <span class="o">[</span>root@centos-151 ~<span class="o">]</span><span class="c1"># rpm -ql varnish</span>
 /etc/logrotate.d/varnish
 /etc/varnish
@@ -274,7 +265,7 @@
 </div>
 <div class="section" id="varnishadm">
 <h2>10.14.3. varnishadm使用<a class="headerlink" href="#varnishadm" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 连接varnish管理</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 连接varnish管理</span>
 <span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># varnishadm  -S /etc/varnish/secret  -T 127.0.0.1:6082</span>
 <span class="m">200</span>
 -----------------------------
@@ -316,7 +307,7 @@ ban.list                                                  <span class="c1"># 查
 </div>
 <div class="section" id="id2">
 <h2>10.14.4. vcl默认配置查看<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text"><div class="highlight"><pre><span></span>vcl.show -v boot
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>vcl.show -v boot
 
 vcl 4.0;
 
@@ -430,7 +421,7 @@ sub vcl_fini {
 <h2>10.14.5. 配置案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
 <h3>10.14.5.1. 命中情况<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># cp default.vcl default.vcl.bak</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># cp default.vcl default.vcl.bak</span>
 <span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
 <span class="c1"># 修改如下配置</span>
 backend default <span class="o">{</span>
@@ -511,7 +502,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="id5">
 <h3>10.14.5.2. 禁用特定网页的缓存<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 现在后端指定样例页面</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 现在后端指定样例页面</span>
 <span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># cd /usr/share/nginx/html/</span>
 <span class="o">[</span>root@centos-152 html<span class="o">]</span><span class="c1"># mkdir login</span>
 <span class="o">[</span>root@centos-152 html<span class="o">]</span><span class="c1"># echo &quot;login page from 152&quot; &gt; login/index.html</span>
@@ -567,7 +558,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="cookie">
 <h3>10.14.5.3. 去除一些特定静态资源的cookie信息<a class="headerlink" href="#cookie" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sub vcl_deliver <span class="o">{</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sub vcl_deliver <span class="o">{</span>
     <span class="c1"># Happens when we have all the pieces we need, and are about to send the</span>
     <span class="c1"># response to the client.</span>
     <span class="c1">#</span>
@@ -590,7 +581,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="ip">
 <h3>10.14.5.4. 记录并设置客户端ip<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sub vcl_recv <span class="o">{</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sub vcl_recv <span class="o">{</span>
     <span class="c1"># Happens before we check if we have this in cache already.</span>
     <span class="c1">#</span>
     <span class="c1"># Typically you clean up the request here, removing cookies you don&#39;t need,</span>
@@ -613,7 +604,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="id6">
 <h3>10.14.5.5. 对缓存对象进行修剪<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
 
     sub vcl_purge <span class="o">{</span>
             <span class="k">return</span> <span class="o">(</span>synth<span class="o">(</span><span class="m">200</span>,<span class="s2">&quot;Purged&quot;</span><span class="o">))</span><span class="p">;</span>
@@ -686,7 +677,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="id7">
 <h3>10.14.5.6. 添加权限控制<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
 
 //定义一个权限，下面vcl_recv去匹配
 acl purges <span class="o">{</span>
@@ -736,7 +727,7 @@ Connection: keep-alive
 </div>
 <div class="section" id="id8">
 <h3>10.14.5.7. 匹配去刷新缓存<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 命令行方式</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 命令行方式</span>
 <span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># varnishadm  -S /etc/varnish/secret  -T 127.0.0.1:6082</span>
 <span class="m">200</span>
 -----------------------------
@@ -755,7 +746,7 @@ ban req.url ~ ^/js
 </div>
 <div class="section" id="id9">
 <h3>10.14.5.8. 动静分离<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>backend default <span class="o">{</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>backend default <span class="o">{</span>
     .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
     .port <span class="o">=</span> <span class="s2">&quot;80&quot;</span><span class="p">;</span>
 <span class="o">}</span>
@@ -782,7 +773,7 @@ sub vcl_recv <span class="o">{</span>
 </div>
 <div class="section" id="id10">
 <h3>10.14.5.9. 后端调度<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>import directors<span class="p">;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import directors<span class="p">;</span>
 
 backend web152 <span class="o">{</span>
         .host <span class="o">=</span> <span class="s2">&quot;192.168.46.152&quot;</span><span class="p">;</span>
@@ -849,7 +840,7 @@ centos-152.linuxpanda.tech
 </div>
 <div class="section" id="id11">
 <h3>10.14.5.10. 基于cookie的会话绑定<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -869,7 +860,7 @@ cookie_hash.add_backend(web153);</dd>
 </div>
 <div class="section" id="id12">
 <h3>10.14.5.11. 健康检查<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-151 varnish<span class="o">]</span><span class="c1"># vim default.vcl</span>
 <span class="c1"># 修改为如下内容</span>
 probe default_probe <span class="o">{</span>
                 .url<span class="o">=</span><span class="s2">&quot;/index.html&quot;</span><span class="p">;</span>
@@ -919,7 +910,7 @@ centos-153.linuxpanda.tech
 </div>
 <div class="section" id="id13">
 <h3>10.14.5.12. varnish常用工具<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-text"><div class="highlight"><pre><span></span># 查看统计信息（非状态信息）
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 查看统计信息（非状态信息）
 [root@centos-151 varnish]# varnishstat
 
 # 查看日志信息， 很原始，且实时的， 非历史数据
@@ -944,9 +935,7 @@ centos-153.linuxpanda.tech
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -968,7 +957,7 @@ centos-153.linuxpanda.tech
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -987,6 +976,7 @@ centos-153.linuxpanda.tech
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -999,19 +989,13 @@ centos-153.linuxpanda.tech
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

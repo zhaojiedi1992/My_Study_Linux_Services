@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Linux_Services v0.1 documentation" href="../index.html"/>
-        <link rel="up" title="1. dhcp服务" href="index.html"/>
-        <link rel="next" title="2. Rsync同步" href="../Rsync同步/index.html"/>
-        <link rel="prev" title="1. dhcp服务" href="index.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Rsync同步" href="../Rsync同步/index.html" />
+    <link rel="prev" title="1. dhcp服务" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
-  <script src="../_static/js/baidu.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -139,7 +130,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">My_Study_Linux_Services</a>
@@ -147,11 +138,11 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
-
 
 
 
@@ -214,7 +205,7 @@
 <h2>1.1.2. 配置yum源、禁用selinux和防火墙<a class="headerlink" href="#yumselinux" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>1.1.2.1. 查看网络配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat ifcfg-eth0</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cat ifcfg-eth0</span>
 <span class="nv">DEVICE</span><span class="o">=</span>eth0
 <span class="nv">TYPE</span><span class="o">=</span>Ethernet
 <span class="nv">ONBOOT</span><span class="o">=</span>yes
@@ -235,7 +226,7 @@
 </div>
 <div class="section" id="yum">
 <h3>1.1.2.2. yum 配置<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost network-scripts<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
 CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-fasttrack.repo  CentOS-Media.repo  CentOS-Vault.repo
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cd</span>
@@ -265,7 +256,7 @@ mount: block device /dev/sr0 is write-protected, mounting read-only
 </div>
 <div class="section" id="selinux">
 <h3>1.1.2.3. selinux和防火墙关闭<a class="headerlink" href="#selinux" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># sed -i &#39;s@SELINUX=enforcing@SELINUX=disabled@&#39; /etc/sysconfig/selinux</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># sed -i &#39;s@SELINUX=enforcing@SELINUX=disabled@&#39; /etc/sysconfig/selinux</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># setenforce 0</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># service iptables stop</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># chkconfig iptables off</span>
@@ -274,14 +265,14 @@ mount: block device /dev/sr0 is write-protected, mounting read-only
 </div>
 <div class="section" id="vim">
 <h3>1.1.2.4. vim安装<a class="headerlink" href="#vim" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install vim -y            # 安装vim</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install vim -y            # 安装vim</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id2">
 <h2>1.1.3. dhcp的安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install dhcp -y           # 安装dhcp</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install dhcp -y           # 安装dhcp</span>
 <span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># rpm -ql dhcp                  # 查看dhcp服务</span>
 </pre></div>
 </div>
@@ -290,7 +281,7 @@ mount: block device /dev/sr0 is write-protected, mounting read-only
 <h2>1.1.4. dhcp的配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>dhcp的8种报文</p>
 <img alt="../_images/dhcp报文.png" src="../_images/dhcp报文.png" />
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cd /etc/dhcp                         # 进入dhcp工作目录</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cd /etc/dhcp                         # 进入dhcp工作目录</span>
 <span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cp /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample dhcpd.conf</span>
 <span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># vim dhcpd.conf                       # 编辑主配置文件</span>
 <span class="o">[</span>root@localhost dhcp<span class="o">]</span><span class="c1"># cat dhcpd.conf                       # 查看dhcp文件</span>
@@ -331,7 +322,7 @@ Starting dhcpd:                                            <span class="o">[</sp
 <div class="section" id="id4">
 <h2>1.1.5. dhcp的测试<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>在另外一个虚拟机里面测试</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># dhclient -d                                         # 前台执行dhcp命令</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># dhclient -d                                         # 前台执行dhcp命令</span>
 Internet Systems Consortium DHCP Client <span class="m">4</span>.2.5
 Copyright <span class="m">2004</span>-2013 Internet Systems Consortium.
 All rights reserved.
@@ -364,7 +355,7 @@ bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">408
 </div>
 <div class="section" id="id5">
 <h2>1.1.7. dhcp的主要文件<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql dhcp                                # 查看dhcp server的主要文件</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ql dhcp                                # 查看dhcp server的主要文件</span>
 /etc/dhcp                                                       <span class="c1"># dhcp主配置目录</span>
 /etc/dhcp/dhcpd.conf                                            <span class="c1"># dhcpd的主配置文件</span>
 /etc/rc.d/init.d/dhcpd                                          <span class="c1"># dhcpd的init文件</span>
@@ -381,9 +372,7 @@ bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">408
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -405,7 +394,7 @@ bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">408
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>  个人博客 <a href="http://www.linuxpanda.tech/topic/"> LinuxPanda </a> . 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -424,6 +413,7 @@ bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">408
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
             VERSION:'v0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -436,19 +426,13 @@ bound to <span class="m">192</span>.168.46.100 -- renewal in <span class="m">408
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
