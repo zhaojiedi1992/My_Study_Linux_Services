@@ -103,7 +103,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#id4">5.5.7. 设置根域和数据库超级管理员</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">5.5.8. 创建用户节点、组节点和数据库超级管理员</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">5.5.9. 防火墙设置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ldapadmin">5.5.10. 使用ldapadmin连接</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#log">5.5.10. 配置log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldapadmin">5.5.11. 使用ldapadmin连接</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">5.5.12. 常用查询命令</a></li>
 </ul>
 </li>
 </ul>
@@ -119,7 +121,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">17. 杂项</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../优化/index.html">17. 优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">18. 杂项</a></li>
 </ul>
 
             
@@ -333,10 +336,66 @@ systemctl disable firewalld
 </pre></div>
 </div>
 </div>
+<div class="section" id="log">
+<h2>5.5.10. 配置log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim log.ldif
+<span class="c1"># 添加如下4行</span>
+dn: <span class="nv">cn</span><span class="o">=</span>config
+changetype: modify
+add: olcLogLevel
+olcLogLevel: <span class="m">32</span>
+
+<span class="c1"># 导入</span>
+ldapmodify -Y EXTERNAL -H ldapi:/// -f log.ldif
+
+mkdir -p /var/log/slapd
+chown ldap:ldap /var/log/slapd/
+<span class="nb">echo</span> <span class="s2">&quot;local4.* /var/log/slapd/slapd.log&quot;</span> &gt;&gt; /etc/rsyslog.conf
+systemctl restart rsyslog
+systemctl restart slapd
+<span class="c1"># 查看</span>
+tail -n <span class="m">4</span> /var/log/slapd/slapd.log
+</pre></div>
+</div>
+</div>
 <div class="section" id="ldapadmin">
-<h2>5.5.10. 使用ldapadmin连接<a class="headerlink" href="#ldapadmin" title="Permalink to this headline">¶</a></h2>
+<h2>5.5.11. 使用ldapadmin连接<a class="headerlink" href="#ldapadmin" title="Permalink to this headline">¶</a></h2>
 <img alt="images/ladp/连接ldap.png" src="images/ladp/连接ldap.png" />
 <img alt="images/ladp/主页ldap.png" src="images/ladp/主页ldap.png" />
+</div>
+<div class="section" id="id7">
+<h2>5.5.12. 常用查询命令<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ldapsearch  -LLL -W -x -H ldap://sonar.aibeike.com -D<span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> -b <span class="s2">&quot;dc=aibeike,dc=com&quot;</span>
+Enter LDAP Password:
+dn: <span class="nv">dc</span><span class="o">=</span>aibeike,dc<span class="o">=</span>com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Example Inc.
+dc: aibeike
+
+dn: <span class="nv">ou</span><span class="o">=</span>user,dc<span class="o">=</span>aibeike,dc<span class="o">=</span>com
+objectClass: organizationalUnit
+ou: user
+
+dn: <span class="nv">ou</span><span class="o">=</span>group,dc<span class="o">=</span>aibeike,dc<span class="o">=</span>com
+objectClass: organizationalUnit
+ou: group
+
+dn: <span class="nv">cn</span><span class="o">=</span>admin,dc<span class="o">=</span>aibeike,dc<span class="o">=</span>com
+objectClass: organizationalRole
+cn: admin
+description: Directory Administrator
+
+ldapsearch  -LLL -wxxxxxxxxxxx -x -H ldap://sonar.aibeike.com -D<span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> -b <span class="s2">&quot;dc=aibeike,dc=com&quot;</span> <span class="s2">&quot;(uid=*)&quot;</span>
+
+<span class="c1"># 查询特定用户</span>
+ldapsearch  -LLL -W -x -H <span class="s2">&quot;ldap://sonar.aibeike.com&quot;</span> -D <span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> -b <span class="s2">&quot;dc=aibeike,dc=com&quot;</span>  <span class="s2">&quot;(uid=test4)&quot;</span>
+
+<span class="c1"># 备份</span>
+ldapsearch  -LLL -W -x -H <span class="s2">&quot;ldap://sonar.aibeike.com&quot;</span> -D <span class="s2">&quot;cn=admin,dc=aibeike,dc=com&quot;</span> -b <span class="s2">&quot;dc=aibeike,dc=com&quot;</span>  &gt;/root/ldap.bak
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -360,7 +419,7 @@ systemctl disable firewalld
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, zhaojiedi1992.
+        &copy; Copyright 2018, zhaojiedi1992
 
     </p>
   </div>
@@ -379,20 +438,13 @@ systemctl disable firewalld
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'v0.1',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 

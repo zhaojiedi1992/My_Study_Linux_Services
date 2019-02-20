@@ -1,0 +1,99 @@
+ab
+========================================
+
+ab是apache超文本传输协议（http)的性能测试工具， 其设计意图是秒回当前所安装的apache的执行性能，主要是显示apache的每秒可以处理多少请求，
+ab非常使用，不仅可以对apache服务器进行网站访问测试.
+
+网站压测的几个基础概念
+--------------------------------
+
+吞吐量（requestes per second)
+    服务器并发处理能力的量化描述，单位为 请求数量/每秒， 指的是某个并发用户数下单位时间内处理的请求数量，称之为最大吞吐率。 
+
+并发连接数（ the number of concurrent connections) 
+    某个时刻服务器所能接受的请求数目
+
+并发用户数（ the number of concurrent users) 
+    某个时刻服务器所能接受的用户数量
+
+用户平均请求等待时间（time per request) 
+    计算方式为： 处理所有请求的总时间/(总请求数/并发数)
+
+服务器平均请求等待时间(time per request)
+    计算方法： 处理王所有请求的时间/总请求数
+
+下载ab工具
+----------------------------------------------
+
+.. code-block:: bash 
+
+    [root@localhost ~]# yum provides ab  
+    [root@localhost ~]# yum install httpd-tools
+
+快速使用
+--------------------------------------------
+
+.. code-block:: bash 
+
+    [root@localhost ~]# ab -n 100 -c 10 http://test.com/
+    This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
+    Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+    Licensed to The Apache Software Foundation, http://www.apache.org/
+
+    Benchmarking test.com (be patient).....done
+
+    # 这个片段说明web server信息。 
+    Server Software:        nginx/1.13.12
+    Server Hostname:        test.com
+    Server Port:            80
+
+    # 请求的路径和内容大小
+    Document Path:          /
+    Document Length:        162 bytes
+
+
+    # 并发数
+    Concurrency Level:      10  
+    # 整个测试时间
+    Time taken for tests:   4.211 seconds
+    # 总请求数
+    Complete requests:      100
+    # 失败的请求
+    Failed requests:        0
+    # 
+    Write errors:           0
+    # 非2xx的响应个数
+    Non-2xx responses:      100
+    # 总传输的大小
+    Total transferred:      40600 bytes
+    # html 传输的大小
+    HTML transferred:       16200 bytes
+    # 每秒的请求数，吞吐率
+    Requests per second:    23.75 [#/sec] (mean)
+    # 用户平均等待时间
+    Time per request:       421.109 [ms] (mean)
+    # 服务器平均请求处理时间
+    Time per request:       42.111 [ms] (mean, across all concurrent requests)
+    # 传输速率
+    Transfer rate:          9.42 [Kbytes/sec] received
+
+    # 连接时间， 连接，处理，等待，总时间
+    Connection Times (ms)
+                min  mean[+/-sd] median   max
+    Connect:      186  190   2.3    190     194
+    Processing:   187  192   2.6    192     197
+    Waiting:      187  191   2.6    192     197
+    Total:        374  381   4.9    382     390
+
+    # 请求的百分进度信息
+
+    Percentage of the requests served within a certain time (ms)
+    50%    382
+    66%    383
+    75%    384
+    80%    387
+    90%    389
+    95%    389
+    98%    390
+    99%    390
+    100%    390 (longest request)

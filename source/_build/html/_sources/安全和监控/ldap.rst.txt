@@ -160,7 +160,28 @@ ldap名词
     systemctl stop firewalld
     systemctl disable firewalld
 
+配置log
+------------------------------
 
+.. code-block:: bash 
+
+    vim log.ldif 
+    # 添加如下4行
+    dn: cn=config
+    changetype: modify
+    add: olcLogLevel
+    olcLogLevel: 32
+
+    # 导入
+    ldapmodify -Y EXTERNAL -H ldapi:/// -f log.ldif
+
+    mkdir -p /var/log/slapd
+    chown ldap:ldap /var/log/slapd/
+    echo "local4.* /var/log/slapd/slapd.log" >> /etc/rsyslog.conf
+    systemctl restart rsyslog
+    systemctl restart slapd 
+    # 查看
+    tail -n 4 /var/log/slapd/slapd.log 
 
 使用ldapadmin连接
 --------------------------------
@@ -169,3 +190,42 @@ ldap名词
 
 .. image:: /images/ladp/主页ldap.png
 
+
+
+
+
+
+常用查询命令
+-----------------------------------------
+
+.. code-block:: bash 
+
+    ldapsearch  -LLL -W -x -H ldap://sonar.aibeike.com -D"cn=admin,dc=aibeike,dc=com" -b "dc=aibeike,dc=com"      
+    Enter LDAP Password: 
+    dn: dc=aibeike,dc=com
+    objectClass: top
+    objectClass: dcObject
+    objectClass: organization
+    o: Example Inc.
+    dc: aibeike
+
+    dn: ou=user,dc=aibeike,dc=com
+    objectClass: organizationalUnit
+    ou: user
+
+    dn: ou=group,dc=aibeike,dc=com
+    objectClass: organizationalUnit
+    ou: group
+
+    dn: cn=admin,dc=aibeike,dc=com
+    objectClass: organizationalRole
+    cn: admin
+    description: Directory Administrator
+
+    ldapsearch  -LLL -wxxxxxxxxxxx -x -H ldap://sonar.aibeike.com -D"cn=admin,dc=aibeike,dc=com" -b "dc=aibeike,dc=com" "(uid=*)" 
+
+    # 查询特定用户
+    ldapsearch  -LLL -W -x -H "ldap://sonar.aibeike.com" -D "cn=admin,dc=aibeike,dc=com" -b "dc=aibeike,dc=com"  "(uid=test4)"
+
+    # 备份
+    ldapsearch  -LLL -W -x -H "ldap://sonar.aibeike.com" -D "cn=admin,dc=aibeike,dc=com" -b "dc=aibeike,dc=com"  >/root/ldap.bak

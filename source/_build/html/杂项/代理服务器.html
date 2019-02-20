@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>17.2. 代理服务器 &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>18.2. 代理服务器 &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17.3. 时间服务器-chrony" href="时间服务器-chrony.html" />
+    <link rel="next" title="18.3. 时间服务器-chrony" href="时间服务器-chrony.html" />
     <link rel="prev" title="&lt;no title&gt;" href="iscsi服务器.html" /> 
 
   
@@ -100,17 +100,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../集群/index.html">14. 集群</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">17. 杂项</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">17.1. CA的搭建</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">17.2. 代理服务器</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">17.2.1. 安装软件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">17.2.2. 编辑配置文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">17.2.3. 启动服务</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">17.2.4. 客户端设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../优化/index.html">17. 优化</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">18. 杂项</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CA的搭建.html">18.1. CA的搭建</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">18.2. 代理服务器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">18.2.1. 安装软件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">18.2.2. 编辑配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">18.2.3. 启动服务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">18.2.4. 客户端设置</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="时间服务器-chrony.html">17.3. 时间服务器-chrony</a></li>
-<li class="toctree-l2"><a class="reference internal" href="时间服务器-ntp.html">17.4. 时间服务器-ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="时间服务器-chrony.html">18.3. 时间服务器-chrony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="时间服务器-ntp.html">18.4. 时间服务器-ntp</a></li>
 </ul>
 </li>
 </ul>
@@ -158,9 +159,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">17. 杂项</a> &raquo;</li>
+          <li><a href="index.html">18. 杂项</a> &raquo;</li>
         
-      <li>17.2. 代理服务器</li>
+      <li>18.2. 代理服务器</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,15 +183,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>17.2. 代理服务器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>18.2. 代理服务器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id2">
-<h2>17.2.1. 安装软件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>18.2.1. 安装软件<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># yum install squid</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id3">
-<h2>17.2.2. 编辑配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>18.2.2. 编辑配置文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># vim /etc/squid/squid.conf</span>
 <span class="c1"># 修改http_access deny all为如下内容</span>
 http_access allow all
@@ -198,7 +199,7 @@ http_access allow all
 </div>
 </div>
 <div class="section" id="id4">
-<h2>17.2.3. 启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>18.2.3. 启动服务<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># systemctl start squid</span>
 <span class="o">[</span>root@centos-150 ~<span class="o">]</span><span class="c1"># netstat -tunlp |grep 3128</span>
 tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128                 :::*                    LISTEN      <span class="m">6861</span>/<span class="o">(</span>squid-1<span class="o">)</span>
@@ -206,7 +207,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
 </div>
 </div>
 <div class="section" id="id5">
-<h2>17.2.4. 客户端设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>18.2.4. 客户端设置<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/代理设置.png" src="../_images/代理设置.png" />
 </div>
 </div>
@@ -219,7 +220,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="时间服务器-chrony.html" class="btn btn-neutral float-right" title="17.3. 时间服务器-chrony" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="时间服务器-chrony.html" class="btn btn-neutral float-right" title="18.3. 时间服务器-chrony" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="iscsi服务器.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -231,7 +232,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, zhaojiedi1992.
+        &copy; Copyright 2018, zhaojiedi1992
 
     </p>
   </div>
@@ -250,20 +251,13 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3128       
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'v0.1',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
 
   
 
