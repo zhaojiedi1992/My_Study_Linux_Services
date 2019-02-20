@@ -1,0 +1,102 @@
+fio
+===============================
+
+fio是一款测试磁盘的工具， 用来对硬件进行压力测试和验证， 支持13中i/o引擎， 包括sync、mmap
+、libaio、posixaio、SG v3 、splice、null 、network、syslet、quasi、solarisaio。
+
+fio的安装
+-------------------------------
+
+.. code-block:: bash 
+
+    yum install fio 
+
+主要选项说明
+---------------------------------
+
+-filename       指定设备
+-direct         测试过程是否绕过机器自带的buffer。
+-rw             指定读写操作
+-bs             单次io的快文件大小
+-bsrange        指定数据块的大小范围
+-size           测试的总大小
+-numjobs        线程数量
+-runtime        执行测试时间
+-ioengine       io引擎使用的引擎
+-rwmixwrite     在混合读写的模式下，写占比
+-group_report   汇总每个进程的信息 
+-lockmeme       只使用特定的内存进行测试
+-zero_buffers   用0初始化系统buffer
+-nrfiles        每个进程生成文件的数量
+
+使用样例
+-----------------------------------------------------
+
+.. code-block:: bash 
+
+    [root@localhost ~]# fio --name=randrw --ioengine=libaio --iodepth=1 --rw=randrw --bs=4k --direct=0 --size=512M --numjobs=2 --runtime=240 --group_reporting          
+    randrw: (g=0): rw=randrw, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
+    ...
+    # fio的版本信息i
+    fio-3.1
+    # numjobs=2 指定2个线程
+    Starting 2 processes
+
+    randrw: Laying out IO file (1 file / 512MiB)
+    randrw: Laying out IO file (1 file / 512MiB)
+    Jobs: 1 (f=1): [m(1),_(1)][100.0%][r=16.0MiB/s,w=16.4MiB/s][r=4342,w=4201 IOPS][eta 00m:00s]
+    randrw: (groupid=0, jobs=2): err= 0: pid=25803: Sat Feb  2 16:20:57 2019
+    # iops 表示每秒执行的平均io
+    # bw 表示平均带宽速率
+
+    read: IOPS=7478, BW=29.2MiB/s (30.6MB/s)(512MiB/17533msec)
+
+    # slat 提交延迟，提交io操作需要的时间 , 单位usec
+        slat (usec): min=18, max=14344, avg=225.05, stdev=172.91
+        # 完成延迟，表示从提交到完成io部分的时间。
+        clat (nsec): min=0, max=1242.3k, avg=1483.65, stdev=5527.58
+        # lat 总延迟
+        lat (usec): min=21, max=14348, avg=227.36, stdev=173.24
+        clat percentiles (nsec):
+        |  1.00th=[  1080],  5.00th=[  1144], 10.00th=[  1176], 20.00th=[  1208],
+        | 30.00th=[  1240], 40.00th=[  1272], 50.00th=[  1288], 60.00th=[  1320],
+        | 70.00th=[  1352], 80.00th=[  1448], 90.00th=[  1592], 95.00th=[  1720],
+        | 99.00th=[  2352], 99.50th=[ 10304], 99.90th=[ 26240], 99.95th=[ 47872],
+        | 99.99th=[119296]
+    bw (  KiB/s): min= 7709, max=33178, per=54.15%, avg=16197.16, stdev=5754.47, samples=63
+    iops        : min= 1927, max= 8294, avg=4048.92, stdev=1438.64, samples=63
+    write: IOPS=7473, BW=29.2MiB/s (30.6MB/s)(512MiB/17533msec)
+        slat (nsec): min=0, max=1400.7k, avg=12401.49, stdev=24990.11
+        clat (nsec): min=0, max=1074.7k, avg=686.86, stdev=4097.04
+        lat (nsec): min=1, max=1403.7k, avg=13265.30, stdev=25803.09
+        clat percentiles (nsec):
+        |  1.00th=[   438],  5.00th=[   446], 10.00th=[   454], 20.00th=[   470],
+        | 30.00th=[   478], 40.00th=[   482], 50.00th=[   490], 60.00th=[   502],
+        | 70.00th=[   516], 80.00th=[   548], 90.00th=[  1080], 95.00th=[  1304],
+        | 99.00th=[  1736], 99.50th=[  2096], 99.90th=[ 18816], 99.95th=[ 46848],
+        | 99.99th=[148480]
+    bw (  KiB/s): min= 7119, max=33771, per=54.16%, avg=16189.49, stdev=5878.14, samples=63
+    iops        : min= 1779, max= 8442, avg=4047.00, stdev=1469.53, samples=63
+    lat (nsec)   : 2=0.01%, 4=0.01%, 500=28.49%, 750=15.14%, 1000=1.17%
+    lat (usec)   : 2=53.90%, 4=0.83%, 10=0.07%, 20=0.28%, 50=0.07%
+    lat (usec)   : 100=0.03%, 250=0.01%, 500=0.01%, 1000=0.01%
+    lat (msec)   : 2=0.01%
+    cpu          : usr=2.67%, sys=45.16%, ctx=120818, majf=0, minf=55
+    # io深度
+    IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+    # io提交
+        submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+        # io完成
+        complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+        # io发出的读写修正请求数
+        issued rwt: total=131115,131029,0, short=0,0,0, dropped=0,0,0
+        # 指定延迟目标所需的io深度
+        latency   : target=0, window=0, percentile=100.00%, depth=1
+
+    Run status group 0 (all jobs):
+    READ: bw=29.2MiB/s (30.6MB/s), 29.2MiB/s-29.2MiB/s (30.6MB/s-30.6MB/s), io=512MiB (537MB), run=17533-17533msec
+    WRITE: bw=29.2MiB/s (30.6MB/s), 29.2MiB/s-29.2MiB/s (30.6MB/s-30.6MB/s), io=512MiB (537MB), run=17533-17533msec
+
+    Disk stats (read/write):
+        dm-0: ios=130973/91837, merge=0/0, ticks=24452/16817, in_queue=41323, util=99.83%, aggrios=131115/91858, aggrmerge=0/60, aggrticks=24545/16724, aggrin_queue=41147, aggrutil=99.68%
+    sda: ios=131115/91858, merge=0/60, ticks=24545/16724, in_queue=41147, util=99.68%
