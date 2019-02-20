@@ -97,3 +97,13 @@ ab非常使用，不仅可以对apache服务器进行网站访问测试.
     98%    390
     99%    390
     100%    390 (longest request)
+
+
+其他web压测工具
+--------------------------
+
+`webbench <http://home.tiscali.cz/~cz210552/webbench.html>`_
+
+`siege <https://www.joedog.org/siege-home/>`_ 
+
+`http_load <https://acme.com/software/http_load/>`_ 
