@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; My_Study_Linux_Services v0.1 documentation</title>
+  <title>18.3. sysbench &mdash; My_Study_Linux_Services v0.1 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="04-mysqlslap.html" />
+    <link rel="next" title="18.4. mysqlslap" href="04-mysqlslap.html" />
     <link rel="prev" title="18.2. fio" href="02-fio.html" /> 
 
   
@@ -83,7 +83,7 @@
             
             
               <p class="caption"><span class="caption-text">Linux基础服务</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../DHCP/index.html">1. dhcp服务</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Rsync同步/index.html">2. Rsync同步</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../自动化安装/index.html">3. 自动化安装</a></li>
@@ -101,8 +101,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../容器/index.html">15. 容器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../优化/index.html">17. 优化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">18. 压测工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">19. 杂项</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">18. 压测工具</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-ab.html">18.1. ab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-fio.html">18.2. fio</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">18.3. sysbench</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">18.3.1. sysbench的安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">18.3.2. sysbench的命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysbench-cpu">18.3.3. sysbench 测试cpu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04-mysqlslap.html">18.4. mysqlslap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../大数据/index.html">19. 压测工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../杂项/index.html">20. 杂项</a></li>
 </ul>
 
             
@@ -150,7 +162,7 @@
         
           <li><a href="index.html">18. 压测工具</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>18.3. sysbench</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -171,7 +183,132 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
+  <div class="section" id="sysbench">
+<h1>18.3. sysbench<a class="headerlink" href="#sysbench" title="Permalink to this headline">¶</a></h1>
+<p>sysbench 是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种不同参数下的数据库负载情况，主要包括以下几种方式的测试：</p>
+<ul class="simple">
+<li>cpu</li>
+<li>io</li>
+<li>schedule</li>
+<li>mem</li>
+<li>thread</li>
+<li>database</li>
+</ul>
+<div class="section" id="id1">
+<h2>18.3.1. sysbench的安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum -y install epel-release
+yum install sysbench
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>18.3.2. sysbench的命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sysbench  --help</span>
+Usage:
+sysbench <span class="o">[</span>options<span class="o">]</span>... <span class="o">[</span>testname<span class="o">]</span> <span class="o">[</span>command<span class="o">]</span>
+
+Commands implemented by most tests: prepare run cleanup <span class="nb">help</span>
+
+<span class="c1"># 通用的选项</span>
+General options:
+--threads<span class="o">=</span>N                     使用的线程数量，默认为1
+--events<span class="o">=</span>N                      事件的最大数量，默认为0，不限制
+--time<span class="o">=</span>N                        最大执行时间， 单位是秒，默认为0，不限制
+--forced-shutdown<span class="o">=</span>STRING        超过max-time强制中断，默认是off.
+--thread-stack-size<span class="o">=</span>SIZE        每个线程的堆栈大小
+--rate<span class="o">=</span>N                        平均速率
+--report-interval<span class="o">=</span>N             报告中间统计信息的间隔，0代表禁止。
+--report-checkpoints<span class="o">=[</span>LIST,...<span class="o">]</span> 转储完全统计信息并在指定时间点复位所有计数器，参数是都好分割值的列表，表示从必须执行报告检查点的测试开始所经过的时间，默认是关闭的。
+--debug<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>                打印debug调试信息，默认是off.
+--validate<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>             在可能情况下执行验证检查。
+--help<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>                 输出帮助信息，并退出
+--version<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>              打印版本信息
+--config-file<span class="o">=</span>FILENAME          配置文件
+--tx-rate<span class="o">=</span>N                     deprecated <span class="nb">alias</span> <span class="k">for</span> --rate <span class="o">[</span><span class="m">0</span><span class="o">]</span>
+--max-requests<span class="o">=</span>N                deprecated <span class="nb">alias</span> <span class="k">for</span> --events <span class="o">[</span><span class="m">0</span><span class="o">]</span>
+--max-time<span class="o">=</span>N                    deprecated <span class="nb">alias</span> <span class="k">for</span> --time <span class="o">[</span><span class="m">0</span><span class="o">]</span>
+--num-threads<span class="o">=</span>N                 deprecated <span class="nb">alias</span> <span class="k">for</span> --threads <span class="o">[</span><span class="m">1</span><span class="o">]</span>
+
+
+Pseudo-Random Numbers Generator options:
+--rand-type<span class="o">=</span>STRING 分布的随机数，uniform,gaussian,special。
+--rand-spec-iter<span class="o">=</span>N 产生随机数的迭代次数
+--rand-spec-pct<span class="o">=</span>N  值的百分比，默认是1
+--rand-spec-res<span class="o">=</span>N  special的百分占比
+--rand-seed<span class="o">=</span>N      随机数发生器的种子
+--rand-pareto-h<span class="o">=</span>N  参数h用于pareto分布。
+
+Log options:
+--verbosity<span class="o">=</span>N 日志级别 默认为3， 5代表调试，0表示仅仅重要
+
+--percentile<span class="o">=</span>N       在延迟统计数据中计算的百分点。
+--histogram<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span> 在报告中打印滞后时间直方图。
+
+General database options:
+
+--db-driver<span class="o">=</span>STRING  指定数据库的驱动使用mysql,pgsql
+--db-ps-mode<span class="o">=</span>STRING
+--db-debug<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span> 打印数据库的debug信息。
+
+
+Compiled-in database drivers:
+mysql - MySQL driver
+pgsql - PostgreSQL driver
+
+mysql options:
+--mysql-host<span class="o">=[</span>LIST,...<span class="o">]</span>          主机
+--mysql-port<span class="o">=[</span>LIST,...<span class="o">]</span>          端口
+--mysql-socket<span class="o">=[</span>LIST,...<span class="o">]</span>        socket文件
+--mysql-user<span class="o">=</span>STRING              用户
+--mysql-password<span class="o">=</span>STRING          密码
+--mysql-db<span class="o">=</span>STRING                数据库名字
+--mysql-ssl<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>             使用ssl连接
+--mysql-ssl-cipher<span class="o">=</span>STRING        use specific cipher <span class="k">for</span> SSL connections <span class="o">[]</span>
+--mysql-compression<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>     使用压缩，默认off
+--mysql-debug<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>           追踪客户端库调用，off
+--mysql-ignore-errors<span class="o">=[</span>LIST,...<span class="o">]</span> 指定的错误忽略。
+--mysql-dry-run<span class="o">[=</span>on<span class="p">|</span>off<span class="o">]</span>         Dry run, pretend that all MySQL client API calls are successful without executing them <span class="o">[</span>off<span class="o">]</span>
+
+pgsql options:
+--pgsql-host<span class="o">=</span>STRING     主机
+--pgsql-port<span class="o">=</span>N          端口
+--pgsql-user<span class="o">=</span>STRING     用户名
+--pgsql-password<span class="o">=</span>STRING 密码
+--pgsql-db<span class="o">=</span>STRING       数据库名字
+
+Compiled-in tests:
+fileio - 文件io测试
+cpu -cpu性能测试
+memory - 内存测试
+threads -线程测试
+mutex - Mutex performance test多线程测试
+
+See <span class="s1">&#39;sysbench &lt;testname&gt; help&#39;</span> <span class="k">for</span> a list of options <span class="k">for</span> each test.
+</pre></div>
+</div>
+</div>
+<div class="section" id="sysbench-cpu">
+<h2>18.3.3. sysbench 测试cpu<a class="headerlink" href="#sysbench-cpu" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sysbench  --threads<span class="o">=</span><span class="m">12</span> --events<span class="o">=</span><span class="m">10000</span> --debug<span class="o">=</span>on --cpu-max-prime<span class="o">=</span><span class="m">20000</span> cpu run
+
+CPU speed:
+    events per second:   <span class="m">614</span>.81
+
+General statistics:
+    total time:                          <span class="m">10</span>.0095s    总的时间
+    total number of events:              <span class="m">6155</span>        总的
+
+Latency <span class="o">(</span>ms<span class="o">)</span>:
+        min:                                  <span class="m">3</span>.01
+        avg:                                 <span class="m">19</span>.43
+        max:                                <span class="m">125</span>.20
+        95th percentile:                     <span class="m">64</span>.47
+        sum:                             <span class="m">119613</span>.29
+</pre></div>
+</div>
+</div>
+</div>
+
 
            </div>
            
@@ -180,7 +317,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="04-mysqlslap.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="04-mysqlslap.html" class="btn btn-neutral float-right" title="18.4. mysqlslap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="02-fio.html" class="btn btn-neutral" title="18.2. fio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
