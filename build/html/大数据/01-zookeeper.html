@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="20. 杂项" href="../杂项/index.html" />
-    <link rel="prev" title="19. 压测工具" href="index.html" /> 
+    <link rel="prev" title="19. 大数据" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -102,7 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../优化/index.html">17. 优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../压测工具/index.html">18. 压测工具</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">19. 压测工具</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">19. 大数据</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">19.1. zookeeper</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">19.1.1. zookeeper能提供什么</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">19.1.2. zookeeper的基本概念</a><ul>
@@ -121,6 +121,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id13">19.1.3.5. 队列管理</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">19.1.4. zookeeper的安装</a></li>
 </ul>
 </li>
 </ul>
@@ -171,7 +172,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">19. 压测工具</a> &raquo;</li>
+          <li><a href="index.html">19. 大数据</a> &raquo;</li>
         
       <li>19.1. zookeeper</li>
     
@@ -202,7 +203,7 @@
 <h2>19.1.1. zookeeper能提供什么<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>简单的说zookeeper = 文件系统 + 通知机制 。</p>
 <p>文件系统说的是zookeeper存储数据以linux文件系统类似的方式组织。 通知机制说的是客户端监听它说关系的znode节点，当节点变化，zk会通知客户端。</p>
-<p>zk中的节点不是目录或者文件， 而叫znode, znode可以看做目录使用和文件使用。 zk的znode按照是否持久，是否有序分为如下4中类型。</p>
+<p>zk中的节点不是目录或者文件， 而叫znode, znode可以看做目录使用和文件使用。 zk的znode按照是否持久，是否有序分为如下4种类型。</p>
 <ul class="simple">
 <li>持久节点</li>
 <li>持久顺序节点</li>
@@ -219,33 +220,33 @@
 </div>
 <div class="section" id="id4">
 <h3>19.1.2.2. 工作原理<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>zk的核心是原子广播， 这个机制保证了各个server之间的同步，实现这个机制的协议叫做zab协议， zab协议有2个模式，分别是选主和同步。 当服务浮动或者leader崩溃的时候，zab进入选主模式，
+<p>zk的核心是原子广播， 这个机制保证了各个server之间的同步，实现这个机制的协议叫做zab协议， zab协议有2个模式，分别是选主和同步。 当服务启动或者leader崩溃的时候，zab进入选主模式，
 当leader选举出来，选主模式就结束了，状态同步确保了leader和server具有相同的状态。</p>
-<p>为了保证食事务的顺序一致性， zk采用地政的事务id(zxid)来标识事务， 所有的提议都会加上zxid，它是一个64位的数字，高32位标识leader信息， 低32位标识递增计数。</p>
+<p>为了保证食事务的顺序一致性， zk采用的事务id(zxid)来标识事务， 所有的提议都会加上zxid，它是一个64位的数字，高32位标识leader信息， 低32位标识递增计数。</p>
 </div>
 <div class="section" id="id5">
 <h3>19.1.2.3. 选主流程<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>zk的选主分情况的， 一个是全新集群的选主和运行中的集群再选举。
 全新集群集群选主有分为2种， 顺序启动和一起启动2种情况。</p>
 <dl class="docutils">
-<dt>全新集群顺序启动： 这里已5个节点为例， 启动顺序为node01到node05依次启动，</dt>
-<dd><p class="first">node01启动，找集群中leader， 没有，发起选举提议， 并把票投给了自己， 未过半，继续looking状态。
-node02启动， 找集群的leader， 没有， 发起选举提议， 票给自己， node01,node02各个都一票， 发起重新投票， node01需要把票投给编号比自己大的。 node02 2票，</p>
-<blockquote>
-<div>node01 0票， 为过半， 继续looking状态。</div></blockquote>
-<dl class="docutils">
-<dt>node03启动， 找集群的leader，没有，发起选举提议， 票给自己， node03 1票， node02 2票， 都没有过半，重启投票，票给大的节点， node03 3票， 其他无票。node03 选为主节点。</dt>
-<dd>node01， node02成为follower节点。</dd>
-</dl>
-<p class="last">node04启动， 找集群的leader， 有， 成为follower节点。
-node05启动， 找集群的leader, 有， 成为follower节点。</p>
+<dt>全新集群顺序启动：</dt>
+<dd><p class="first">这里已5个节点为例， 启动顺序为node01到node05依次启动，</p>
+<p>node01启动，找集群中leader， 没有，发起选举提议， 并把票投给了自己， 未过半，继续looking状态。</p>
+<p>node02启动， 找集群的leader， 没有， 发起选举提议， 票给自己， node01,node02各个都一票， 发起重新投票， node01需要把票投给编号比自己大的。 node02 2票，
+node01 0票， 为过半， 继续looking状态。</p>
+<p>node03启动， 找集群的leader，没有，发起选举提议， 票给自己， node03 1票， node02 2票， 都没有过半，重启投票，票给大的节点， node03 3票， 其他无票。node03 选为主节点。
+node01， node02成为follower节点。</p>
+<p>node04启动， 找集群的leader， 有， 成为follower节点。</p>
+<p class="last">node05启动， 找集群的leader, 有， 成为follower节点。</p>
 </dd>
-<dt>全新集群一起启动： 这里已5个节点的为例， 启动顺序一样的情况（内部还是有序的，只是时间相差很少。）</dt>
-<dd>5个节点一起启动， 发动投票，情况也是比较多， 投票未过半就只能再投票， 如果触发再投票，越小的节点票数越少， 所以对应node01来说， 无论怎么投票都是无法拿到3票的。
+<dt>全新集群一起启动：</dt>
+<dd>这里已5个节点的为例， 启动顺序一样的情况（内部还是有序的，只是时间相差很少。）
+5个节点一起启动， 发动投票，情况也是比较多， 投票未过半就只能再投票， 如果触发再投票，越小的节点票数越少， 所以对应node01来说， 无论怎么投票都是无法拿到3票的。
 node02来说， 最多能拿到自身一票和node01给自身的一票，也是无法达到3票的， node03来说， 还是可以拿到3票的， 几率还是比较低的。
 全新的集群一起启动， 节点编号在半数以下的节点是无法成为主节点的， 只有半数以上的节点能成为主节点， 编号越高几率越高。</dd>
+<dt>运行中的集群再选主：</dt>
+<dd>这里主要参考如下几个指标zxid,数据最新，servierid最大。</dd>
 </dl>
-<p>运行中的集群再选主： 这里主要参考如下几个指标zxid,数据最新，servierid最大。</p>
 </div>
 <div class="section" id="id6">
 <h3>19.1.2.4. 同步流程<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
@@ -296,24 +297,72 @@ node02来说， 最多能拿到自身一票和node01给自身的一票，也是�
 <div class="section" id="id11">
 <h3>19.1.3.3. 集群管理<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>集群中主要2个事情需要zk来做， 服务器节点的退出和上线（上下线感知）， 选举集群的master节点。</p>
-<p>上下线感知： 所有的服务器节点约定一个父目录，并在其下创建**临时目录**，然后每个节点都会监听这个父目录的**子节点个数**变化消息， 一旦机器挂了，zk上对应的数据就会删除（临时节点在断开连接时候自动删除节点）
-这样父目录的子节点个数会变动， 监听此事件的所有服务器都会受到zk的通知。</p>
-<p>选举master: 机器的master选举需要考虑的因素很多， 这里说一个相对简单的选举master方式， 所有服务器节点在一个父目录下创建临时的顺序编号的目录节点，每次选举就去编号最小的机器作为master就好。</p>
+<dl class="docutils">
+<dt>上下线感知：</dt>
+<dd>所有的服务器节点约定一个父目录，并在其下创建 <em>临时目录</em> ，然后每个节点都会监听这个父目录的 <em>子节点个数</em> 变化消息， 一旦机器挂了，zk上对应的数据就会删除（临时节点在断开连接时候自动删除节点）
+这样父目录的子节点个数会变动， 监听此事件的所有服务器都会受到zk的通知。</dd>
+<dt>选举master:</dt>
+<dd>机器的master选举需要考虑的因素很多， 这里说一个相对简单的选举master方式， 所有服务器节点在一个父目录下创建临时的顺序编号的目录节点，每次选举就去编号最小的机器作为master就好。</dd>
+</dl>
 </div>
 <div class="section" id="id12">
 <h3>19.1.3.4. 分布式锁<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>分布式中主要有3种锁，读锁、写锁、顺序锁。</p>
-<p>读锁： 使用zk的临时的顺序编号就可以了， 每个client过来都会在特定目录下创建一个临时的节点，断开自动删除自身节点。
-写锁： 使用zk的临时的节点就可以了， client过来会在尝试在特定的目录下创建一个临时节点，如果能成功就可以继续写操作， 如果失败需要监听此节点的删除事件，如果收到通知就继续前面操作。
-顺序锁： 使用zk的临时顺序节点就可以了， client过来会在特定的目录下面创建一个临时顺序节点，zk来控制最小的顺序获得锁，一直循环下去。</p>
+<dl class="docutils">
+<dt>读锁：</dt>
+<dd>使用zk的临时的顺序编号就可以了， 每个client过来都会在特定目录下创建一个临时的节点，断开自动删除自身节点。</dd>
+<dt>写锁：</dt>
+<dd>使用zk的临时的节点就可以了， client过来会在尝试在特定的目录下创建一个临时节点，如果能成功就可以继续写操作， 如果失败需要监听此节点的删除事件，如果收到通知就继续前面操作。</dd>
+<dt>顺序锁：</dt>
+<dd>使用zk的临时顺序节点就可以了， client过来会在特定的目录下面创建一个临时顺序节点，zk来控制最小的顺序获得锁，一直循环下去。</dd>
+</dl>
 </div>
 <div class="section" id="id13">
 <h3>19.1.3.5. 队列管理<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<p>这里有2种队列， 一个是同步队列， 一个是fifo队列。
-同步队列： 所有client约定一个目录下，都创建一个临时的顺序节点，都监听父目录， 如果节点个数达到对应的个数的时候， 就说明所有节点到达了， 就可以继续处理接下里的同步工作了。
-fifo队列： 这个基本上面的顺序锁差不多， 需要入列有编号， 出列有编号。 client过来的时候会在特定目录下创建一个临时的编号节点， 因为zk的节点编号从小到大， 只有zk每次选择节点的时候选择到具体的最小编号的就可以</p>
-<blockquote>
-<div>保证fifo的。</div></blockquote>
+<p>这里有2种队列， 一个是同步队列， 一个是fifo队列。</p>
+<dl class="docutils">
+<dt>同步队列：</dt>
+<dd>所有client约定一个目录下，都创建一个临时的顺序节点，都监听父目录， 如果节点个数达到对应的个数的时候， 就说明所有节点到达了， 就可以继续处理接下里的同步工作了。</dd>
+<dt>fifo队列:</dt>
+<dd>这个基本上面的顺序锁差不多， 需要入列有编号， 出列有编号。 client过来的时候会在特定目录下创建一个临时的编号节点， 因为zk的节点编号从小到大， 只有zk每次选择节点的时候选择到具体的最小编号的就可以
+保证fifo的。</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>19.1.4. zookeeper的安装<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装java</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
+anaconda-ks.cfg  jdk-8u162-linux-x64.rpm?AuthParam<span class="o">=</span>1522289893_92e84e76f51bb5aa8133b08fcf86150b
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mv jdk-8u162-linux-x64.rpm\?AuthParam\=1522289893_92e84e76f51bb5aa8133b08fcf86150b  jdk-8u162-linux-x64.rpm</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install jdk-8u162-linux-x64.rpm</span>
+<span class="c1"># 验证java</span>
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># java -version</span>
+java version <span class="s2">&quot;1.8.0_162&quot;</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_162-b12<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.162-b12, mixed mode<span class="o">)</span>
+
+wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz -P /usr/local/src/
+tar zxvf zookeeper-3.4.8.tar.gz -C /opt
+<span class="nb">cd</span> /opt <span class="o">&amp;&amp;</span> mv zookeeper-3.4.8 zookeeper
+<span class="nb">cd</span> zookeeper
+cp conf/zoo_sample.cfg conf/zoo.cfg
+vim conf/zoo.cfg
+<span class="c1"># 主要修改如下几项</span>
+<span class="nv">dataDir</span><span class="o">=</span>/opt/zookeeper/data
+<span class="c1"># 新增如下几行</span>
+server.1<span class="o">=</span> <span class="m">192</span>.168.1.151:2888:3888
+server.2<span class="o">=</span> <span class="m">192</span>.168.1.152:2888:3888
+server.3<span class="o">=</span> <span class="m">192</span>.168.1.153:2888:3888
+
+<span class="c1"># 启动前确保对应的目录都是存在的。</span>
+<span class="nb">echo</span> <span class="s2">&quot;1&quot;</span> &gt; /opt/zookeeper/data/myid
+<span class="c1"># 启动</span>
+/opt/zookeeper/bin/zkServer.sh start
+<span class="c1"># 查看状态</span>
+/opt/zookeeper/bin/zkServer.sh status
+</pre></div>
 </div>
 </div>
 </div>
@@ -329,7 +378,7 @@ fifo队列： 这个基本上面的顺序锁差不多， 需要入列有编号�
         <a href="../杂项/index.html" class="btn btn-neutral float-right" title="20. 杂项" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="19. 压测工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="19. 大数据" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
