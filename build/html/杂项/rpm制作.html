@@ -114,7 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id4">20.2.4. 准备资料</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spec">20.2.5. 编写spec文件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">20.2.6. 测试构建</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">20.2.7. 其他完善</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">20.2.7. 其他完善</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="代理服务器.html">20.3. 代理服务器</a></li>
@@ -225,88 +225,108 @@ wget https://nginx.org/download/nginx-1.13.1.tar.gz -O ~/rpmbuild/SOURCES/nginx-
 </div>
 <div class="section" id="spec">
 <h2>20.2.5. 编写spec文件<a class="headerlink" href="#spec" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p># 定义用户和组
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+<span class="c1"># 定义用户和组</span>
 %define nginx_user nginx
 %define nginx_group nginx
-%define BASE_CONFIGURE_ARGS $(echo “–prefix=%{_sysconfdir}/nginx –sbin-path=%{_sbindir}/nginx –modules-path=%{_libdir}/nginx/modules –conf-path=%{_sysconfdir}/nginx/nginx.conf –error-log-path=%{_localstatedir}/log/nginx/error.log –http-log-path=%{_localstatedir}/log/nginx/access.log –pid-path=%{_localstatedir}/run/nginx.pid –lock-path=%{_localstatedir}/run/nginx.lock –http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp –http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp –http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp –http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp –http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp –user=%{nginx_user} –group=%{nginx_group} –with-compat –with-file-aio –with-threads –with-http_addition_module –with-http_auth_request_module –with-http_dav_module –with-http_flv_module –with-http_gunzip_module –with-http_gzip_static_module –with-http_mp4_module –with-http_random_index_module –with-http_realip_module –with-http_secure_link_module –with-http_slice_module –with-http_ssl_module –with-http_stub_status_module –with-http_sub_module –with-http_v2_module –with-mail –with-mail_ssl_module –with-stream –with-stream_realip_module –with-stream_ssl_module –with-stream_ssl_preread_module”)
-##########################################</p>
-<p># 元数据
+%define BASE_CONFIGURE_ARGS <span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;--prefix=%{_sysconfdir}/nginx --sbin-path=%{_sbindir}/nginx --modules-path=%{_libdir}/nginx/modules --conf-path=%{_sysconfdir}/nginx/nginx.conf --error-log-path=%{_localstatedir}/log/nginx/error.log --http-log-path=%{_localstatedir}/log/nginx/access.log --pid-path=%{_localstatedir}/run/nginx.pid --lock-path=%{_localstatedir}/run/nginx.lock --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp --user=%{nginx_user} --group=%{nginx_group} --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module&quot;</span><span class="k">)</span>
+<span class="c1">##########################################</span>
+
+<span class="c1">##########################################</span>
+<span class="c1"># 元数据</span>
 Name:   nginx
-Version: 1.13.1
-Release:        1%{?dist}
-Summary: High performance web server</p>
-<p>Group:   System Environment/Daemons
+Version: <span class="m">1</span>.13.1
+Release:        <span class="m">1</span>%<span class="o">{</span>?dist<span class="o">}</span>
+Summary: High performance web server
+
+Group:   System Environment/Daemons
 License: GPL
-URL:     <a class="reference external" href="http://nginx.org/">http://nginx.org/</a>
-Source0: <a class="reference external" href="http://nginx.org/download">http://nginx.org/download</a>/%{name}-%{version}.tar.gz</p>
-<p>BuildRequires: zlib-devel pcre-devel
-Requires(pre): shadow-utils
+URL:     http://nginx.org/
+Source0: http://nginx.org/download/%<span class="o">{</span>name<span class="o">}</span>-%<span class="o">{</span>version<span class="o">}</span>.tar.gz
+
+BuildRequires: zlib-devel pcre-devel
+Requires<span class="o">(</span>pre<span class="o">)</span>: shadow-utils
 Requires: systemd
-Requires: openssl &gt;= 1.0.1</p>
-<p>%description
-nginx [engine x] is an HTTP and reverse proxy server, as well as
-a mail proxy server.</p>
-<p>%prep
-%setup -q</p>
-<p>%build
-./configure %{BASE_CONFIGURE_ARGS}</p>
-<p>make %{?_smp_mflags}</p>
-<p>%install
-make install DESTDIR=%{buildroot}</p>
-<p>%files
-%config(noreplace)   /etc/nginx/fastcgi.conf
-%config(noreplace)   /etc/nginx/fastcgi.conf.default
-%config(noreplace)   /etc/nginx/fastcgi_params
-%config(noreplace)   /etc/nginx/fastcgi_params.default
-%config(noreplace)   /etc/nginx/html/50x.html
-%config(noreplace)   /etc/nginx/html/index.html
-%config(noreplace)   /etc/nginx/koi-utf
-%config(noreplace)   /etc/nginx/koi-win
-%config(noreplace)   /etc/nginx/mime.types
-%config(noreplace)   /etc/nginx/mime.types.default
-%config(noreplace)   /etc/nginx/nginx.conf
-%config(noreplace)   /etc/nginx/nginx.conf.default
-%config(noreplace)   /etc/nginx/scgi_params
-%config(noreplace)   /etc/nginx/scgi_params.default
-%config(noreplace)   /etc/nginx/uwsgi_params
-%config(noreplace)   /etc/nginx/uwsgi_params.default
-%config(noreplace)   /etc/nginx/win-utf
-%config(noreplace)   /usr/sbin/nginx
-%doc</p>
-<p>%changelog
-* Sat Oct  1 2019  zhaojiedi1992 &lt;<a class="reference external" href="mailto:zhaojiedi1992&#37;&#52;&#48;outlook&#46;com">zhaojiedi1992<span>&#64;</span>outlook<span>&#46;</span>com</a>&gt;
-- 1.13.1
-- init</p>
-<p>%pre
-# Add the “nginx” user
-getent group %{nginx_group} &gt;/dev/null || groupadd -r %{nginx_group}
-getent passwd %{nginx_user} &gt;/dev/null || </p>
-<blockquote>
-<div>useradd -r -g %{nginx_group} -s /sbin/nologin -c “nginx user”  %{nginx_user}</div></blockquote>
-<p>exit 0</p>
-<p>%post
+Requires: openssl &gt;<span class="o">=</span> <span class="m">1</span>.0.1
+
+%description
+nginx <span class="o">[</span>engine x<span class="o">]</span> is an HTTP and reverse proxy server, as well as
+a mail proxy server.
+
+<span class="c1">##########################################</span>
+
+%prep
+%setup -q
+
+
+%build
+./configure %<span class="o">{</span>BASE_CONFIGURE_ARGS<span class="o">}</span>
+
+make %<span class="o">{</span>?_smp_mflags<span class="o">}</span>
+
+
+%install
+make install <span class="nv">DESTDIR</span><span class="o">=</span>%<span class="o">{</span>buildroot<span class="o">}</span>
+
+
+%files
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/fastcgi.conf
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/fastcgi.conf.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/fastcgi_params
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/fastcgi_params.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/html/50x.html
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/html/index.html
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/koi-utf
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/koi-win
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/mime.types
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/mime.types.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/nginx.conf
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/nginx.conf.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/scgi_params
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/scgi_params.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/uwsgi_params
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/uwsgi_params.default
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /etc/nginx/win-utf
+%config<span class="o">(</span>noreplace<span class="o">)</span>   /usr/sbin/nginx
+%doc
+
+
+
+%changelog
+* Sat Oct  <span class="m">1</span> <span class="m">2019</span>  zhaojiedi1992 &lt;zhaojiedi1992@outlook.com&gt;
+- <span class="m">1</span>.13.1
+- init
+
+%pre
+<span class="c1"># Add the &quot;nginx&quot; user</span>
+getent group %<span class="o">{</span>nginx_group<span class="o">}</span> &gt;/dev/null <span class="o">||</span> groupadd -r %<span class="o">{</span>nginx_group<span class="o">}</span>
+getent passwd %<span class="o">{</span>nginx_user<span class="o">}</span> &gt;/dev/null <span class="o">||</span> <span class="se">\</span>
+    useradd -r -g %<span class="o">{</span>nginx_group<span class="o">}</span> -s /sbin/nologin <span class="se">\</span>
+    -c <span class="s2">&quot;nginx user&quot;</span>  %<span class="o">{</span>nginx_user<span class="o">}</span>
+<span class="nb">exit</span> <span class="m">0</span>
+
+%post
 mkdir /var/log/nginx
 mkdir /var/cache/nginx/client_temp -pv
 touch /var/log/nginx/access.log
 touch /var/log/nginx/error.log
-chmod 777 /var/log/nginx/access.log</p>
-</div></blockquote>
+chmod <span class="m">777</span> /var/log/nginx/access.log
+</pre></div>
+</div>
 </div>
 <div class="section" id="id5">
 <h2>20.2.6. 测试构建<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rpmbuild  -bb nginx.spec
+yum reinstall /home/rpm/rpmbuild/RPMS/x86_64/nginx-1.13.1-1.el7.x86_64.rpm -y
+rpm -ql <span class="p">|</span>grep nginx
+netstat -tunlp <span class="p">|</span>grep <span class="m">80</span>
+/usr/sbin/nginx
+netstat -tunlp <span class="p">|</span>grep <span class="m">80</span>
 </pre></div>
 </div>
-<p>rpmbuild  -bb nginx.spec
-yum reinstall /home/rpm/rpmbuild/RPMS/x86_64/nginx-1.13.1-1.el7.x86_64.rpm -y
-rpm -ql <a href="#id6"><span class="problematic" id="id7">|</span></a>grep nginx
-netstat -tunlp <a href="#id8"><span class="problematic" id="id9">|</span></a>grep 80
-/usr/sbin/nginx
-netstat -tunlp <a href="#id10"><span class="problematic" id="id11">|</span></a>grep 80</p>
 </div>
-<div class="section" id="id12">
-<h2>20.2.7. 其他完善<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>20.2.7. 其他完善<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>service文件</p>
 <p>日志滚动</p>
 <p>man文档</p>

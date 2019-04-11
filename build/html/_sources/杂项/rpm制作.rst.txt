@@ -43,6 +43,8 @@ rpm制作
 编写spec文件
 --------------------------------------
 
+.. code-block:: bash
+
     ##########################################
     # 定义用户和组
     %define nginx_user nginx
@@ -135,12 +137,12 @@ rpm制作
 
 .. code-block:: bash 
 
-rpmbuild  -bb nginx.spec 
-yum reinstall /home/rpm/rpmbuild/RPMS/x86_64/nginx-1.13.1-1.el7.x86_64.rpm -y 
-rpm -ql |grep nginx 
-netstat -tunlp |grep 80
-/usr/sbin/nginx 
-netstat -tunlp |grep 80
+    rpmbuild  -bb nginx.spec 
+    yum reinstall /home/rpm/rpmbuild/RPMS/x86_64/nginx-1.13.1-1.el7.x86_64.rpm -y 
+    rpm -ql |grep nginx 
+    netstat -tunlp |grep 80
+    /usr/sbin/nginx 
+    netstat -tunlp |grep 80
 
 
 其他完善
