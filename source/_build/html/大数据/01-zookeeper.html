@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="20. 杂项" href="../杂项/index.html" />
-    <link rel="prev" title="19. 压测工具" href="index.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="19. 大数据" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -102,7 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../虚拟化/index.html">16. 虚拟化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../优化/index.html">17. 优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../压测工具/index.html">18. 压测工具</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">19. 压测工具</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">19. 大数据</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">19.1. zookeeper</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">19.1.1. zookeeper能提供什么</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">19.1.2. zookeeper的基本概念</a><ul>
@@ -172,7 +174,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">19. 压测工具</a> &raquo;</li>
+          <li><a href="index.html">19. 大数据</a> &raquo;</li>
         
       <li>19.1. zookeeper</li>
     
@@ -331,6 +333,39 @@ node02来说， 最多能拿到自身一票和node01给自身的一票，也是�
 </div>
 <div class="section" id="id14">
 <h2>19.1.4. zookeeper的安装<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装java</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># ls</span>
+anaconda-ks.cfg  jdk-8u162-linux-x64.rpm?AuthParam<span class="o">=</span>1522289893_92e84e76f51bb5aa8133b08fcf86150b
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># mv jdk-8u162-linux-x64.rpm\?AuthParam\=1522289893_92e84e76f51bb5aa8133b08fcf86150b  jdk-8u162-linux-x64.rpm</span>
+<span class="o">[</span>root@centos-152 ~<span class="o">]</span><span class="c1"># yum install jdk-8u162-linux-x64.rpm</span>
+<span class="c1"># 验证java</span>
+<span class="o">[</span>root@centos-152 java<span class="o">]</span><span class="c1"># java -version</span>
+java version <span class="s2">&quot;1.8.0_162&quot;</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_162-b12<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.162-b12, mixed mode<span class="o">)</span>
+
+wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz -P /usr/local/src/
+tar zxvf zookeeper-3.4.8.tar.gz -C /opt
+<span class="nb">cd</span> /opt <span class="o">&amp;&amp;</span> mv zookeeper-3.4.8 zookeeper
+<span class="nb">cd</span> zookeeper
+cp conf/zoo_sample.cfg conf/zoo.cfg
+vim conf/zoo.cfg
+<span class="c1"># 主要修改如下几项</span>
+<span class="nv">dataDir</span><span class="o">=</span>/opt/zookeeper/data
+<span class="c1"># 新增如下几行</span>
+server.1<span class="o">=</span> <span class="m">192</span>.168.1.151:2888:3888
+server.2<span class="o">=</span> <span class="m">192</span>.168.1.152:2888:3888
+server.3<span class="o">=</span> <span class="m">192</span>.168.1.153:2888:3888
+
+<span class="c1"># 启动前确保对应的目录都是存在的。</span>
+<span class="nb">echo</span> <span class="s2">&quot;1&quot;</span> &gt; /opt/zookeeper/data/myid
+<span class="c1"># 启动</span>
+/opt/zookeeper/bin/zkServer.sh start
+<span class="c1"># 查看状态</span>
+/opt/zookeeper/bin/zkServer.sh status
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -345,7 +380,7 @@ node02来说， 最多能拿到自身一票和node01给自身的一票，也是�
         <a href="../杂项/index.html" class="btn btn-neutral float-right" title="20. 杂项" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="19. 压测工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="19. 大数据" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -371,25 +406,16 @@ node02来说， 最多能拿到自身一票和node01给自身的一票，也是�
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -143,6 +143,36 @@ fifo队列:
 zookeeper的安装
 -----------------------------------------------------
 
-        
+.. code-block:: bash 
 
+    # 安装java
+    [root@centos-152 ~]# wget http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b
+    [root@centos-152 ~]# ls
+    anaconda-ks.cfg  jdk-8u162-linux-x64.rpm?AuthParam=1522289893_92e84e76f51bb5aa8133b08fcf86150b
+    [root@centos-152 ~]# mv jdk-8u162-linux-x64.rpm\?AuthParam\=1522289893_92e84e76f51bb5aa8133b08fcf86150b  jdk-8u162-linux-x64.rpm
+    [root@centos-152 ~]# yum install jdk-8u162-linux-x64.rpm 
+    # 验证java
+    [root@centos-152 java]# java -version
+    java version "1.8.0_162"
+    Java(TM) SE Runtime Environment (build 1.8.0_162-b12)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.162-b12, mixed mode)
 
+    wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz -P /usr/local/src/
+    tar zxvf zookeeper-3.4.8.tar.gz -C /opt
+    cd /opt && mv zookeeper-3.4.8 zookeeper
+    cd zookeeper
+    cp conf/zoo_sample.cfg conf/zoo.cfg
+    vim conf/zoo.cfg
+    # 主要修改如下几项
+    dataDir=/opt/zookeeper/data
+    # 新增如下几行
+    server.1= 192.168.1.151:2888:3888
+    server.2= 192.168.1.152:2888:3888
+    server.3= 192.168.1.153:2888:3888
+
+    # 启动前确保对应的目录都是存在的。 
+    echo "1" > /opt/zookeeper/data/myid
+    # 启动
+    /opt/zookeeper/bin/zkServer.sh start
+    # 查看状态
+    /opt/zookeeper/bin/zkServer.sh status
