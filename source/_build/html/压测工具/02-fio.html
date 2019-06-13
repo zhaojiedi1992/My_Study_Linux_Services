@@ -197,54 +197,50 @@
 </div>
 <div class="section" id="id2">
 <h2>18.2.2. 主要选项说明<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-f<var>ilename</var></span></kbd></td>
-<td>指定设备</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-d<var>irect</var></span></kbd></td>
-<td>测试过程是否绕过机器自带的buffer。</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-r<var>w</var></span></kbd></td>
-<td>指定读写操作</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-b<var>s</var></span></kbd></td>
-<td>单次io的快文件大小</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-b<var>srange</var></span></kbd></td>
-<td>指定数据块的大小范围</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-s<var>ize</var></span></kbd></td>
-<td>测试的总大小</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-n<var>umjobs</var></span></kbd></td>
-<td>线程数量</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-r<var>untime</var></span></kbd></td>
-<td>执行测试时间</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-i<var>oengine</var></span></kbd></td>
-<td>io引擎使用的引擎</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-r<var>wmixwrite</var></span></kbd></td>
-<td>在混合读写的模式下，写占比</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-g<var>roup_report</var></span></kbd></td>
-<td>汇总每个进程的信息</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-l<var>ockmeme</var></span></kbd></td>
-<td>只使用特定的内存进行测试</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-z<var>ero_buffers</var></span></kbd></td>
-<td>用0初始化系统buffer</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-n<var>rfiles</var></span></kbd></td>
-<td>每个进程生成文件的数量</td></tr>
-</tbody>
-</table>
+<dl class="option-list">
+<dt><kbd><span class="option">-f<var>ilename</var></span></kbd></dt>
+<dd><p>指定设备</p>
+</dd>
+<dt><kbd><span class="option">-d<var>irect</var></span></kbd></dt>
+<dd><p>测试过程是否绕过机器自带的buffer。</p>
+</dd>
+<dt><kbd><span class="option">-r<var>w</var></span></kbd></dt>
+<dd><p>指定读写操作</p>
+</dd>
+<dt><kbd><span class="option">-b<var>s</var></span></kbd></dt>
+<dd><p>单次io的快文件大小</p>
+</dd>
+<dt><kbd><span class="option">-b<var>srange</var></span></kbd></dt>
+<dd><p>指定数据块的大小范围</p>
+</dd>
+<dt><kbd><span class="option">-s<var>ize</var></span></kbd></dt>
+<dd><p>测试的总大小</p>
+</dd>
+<dt><kbd><span class="option">-n<var>umjobs</var></span></kbd></dt>
+<dd><p>线程数量</p>
+</dd>
+<dt><kbd><span class="option">-r<var>untime</var></span></kbd></dt>
+<dd><p>执行测试时间</p>
+</dd>
+<dt><kbd><span class="option">-i<var>oengine</var></span></kbd></dt>
+<dd><p>io引擎使用的引擎</p>
+</dd>
+<dt><kbd><span class="option">-r<var>wmixwrite</var></span></kbd></dt>
+<dd><p>在混合读写的模式下，写占比</p>
+</dd>
+<dt><kbd><span class="option">-g<var>roup_report</var></span></kbd></dt>
+<dd><p>汇总每个进程的信息</p>
+</dd>
+<dt><kbd><span class="option">-l<var>ockmeme</var></span></kbd></dt>
+<dd><p>只使用特定的内存进行测试</p>
+</dd>
+<dt><kbd><span class="option">-z<var>ero_buffers</var></span></kbd></dt>
+<dd><p>用0初始化系统buffer</p>
+</dd>
+<dt><kbd><span class="option">-n<var>rfiles</var></span></kbd></dt>
+<dd><p>每个进程生成文件的数量</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="id3">
 <h2>18.2.3. 使用样例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>

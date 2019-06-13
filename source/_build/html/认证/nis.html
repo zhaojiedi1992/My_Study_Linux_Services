@@ -198,20 +198,20 @@
 <p>nis(Network Infomation Services,网络信息服务)主要用来管理账号问题。</p>
 <p>nis主从工作原理</p>
 <ol class="arabic simple">
-<li>nis主服务器先将本身的账号密码相关文件制作成数据库文件</li>
-<li>nis主服务器可以告知nis从服务器进行更新</li>
-<li>nis主动前往nis主服务器去的更新后的数据库文件</li>
-<li>如果出现账号heels密码变动，需要重新制作数据库文件并同步</li>
+<li><p>nis主服务器先将本身的账号密码相关文件制作成数据库文件</p></li>
+<li><p>nis主服务器可以告知nis从服务器进行更新</p></li>
+<li><p>nis主动前往nis主服务器去的更新后的数据库文件</p></li>
+<li><p>如果出现账号heels密码变动，需要重新制作数据库文件并同步</p></li>
 </ol>
 <p>nis客户端工作原理</p>
 <ol class="arabic simple">
-<li>如果有登陆需求时候，会先查询本机器的/etc/passwd,/etc/shadow等文件</li>
-<li>若在本机找不到数据，才开始向整个nis网络的主机广播查询</li>
-<li>每个nis服务器，不管主从，都可以响应，基本上是先响应者优先</li>
+<li><p>如果有登陆需求时候，会先查询本机器的/etc/passwd,/etc/shadow等文件</p></li>
+<li><p>若在本机找不到数据，才开始向整个nis网络的主机广播查询</p></li>
+<li><p>每个nis服务器，不管主从，都可以响应，基本上是先响应者优先</p></li>
 </ol>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">从客户端工作原理上可以看出来，先找本机的，我们想集中认证，应该把普通用户从系统拿掉，
+<p class="admonition-title">Note</p>
+<p>从客户端工作原理上可以看出来，先找本机的，我们想集中认证，应该把普通用户从系统拿掉，
 只保留系统的用户。</p>
 </div>
 </div>

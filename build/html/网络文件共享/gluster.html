@@ -175,11 +175,9 @@
 <div class="highlight-language notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt># 安装gluster服务</dt>
-<dd><dl class="first last docutils">
-<dt>wget -P /etc/yum.repos.d <a class="reference external" href="http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.rep">http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.rep</a></dt>
-<dd><p class="first">61  yum install centos-release-gluster
+<dl>
+<dt># 安装gluster服务</dt><dd><dl>
+<dt>wget -P /etc/yum.repos.d <a class="reference external" href="http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.rep">http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.rep</a></dt><dd><p>61  yum install centos-release-gluster
 62  yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma
 63  systemctl start glusterd.service
 64  systemctl enable glusterd.service’
@@ -201,8 +199,9 @@
 # 客户端安装驱动
 75  yum install -y glusterfs glusterfs-fuse
 # 挂载测试</p>
-<blockquote class="last">
-<div>mount -t glusterfs node01:models /mnt/gfs</div></blockquote>
+<blockquote>
+<div><p>mount -t glusterfs node01:models /mnt/gfs</p>
+</div></blockquote>
 </dd>
 </dl>
 </dd>

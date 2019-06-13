@@ -203,39 +203,34 @@
 <h1>9.6. mysql入门<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
 <p>mariadb的特性</p>
 <ul class="simple">
-<li>单进程，多线程</li>
-<li>插件式存储引擎</li>
-<li>开源</li>
-<li>提供较多测试组件</li>
+<li><p>单进程，多线程</p></li>
+<li><p>插件式存储引擎</p></li>
+<li><p>开源</p></li>
+<li><p>提供较多测试组件</p></li>
 </ul>
 <div class="section" id="id1">
 <h2>9.6.1. 客户端工具<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>mysql命令的重要选项</p>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--print-default</span></kbd></td>
-</tr>
-<tr><td>&#160;</td><td>默认选项</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--verbose</span></kbd></td>
-<td>显示详细信息</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-u</span></kbd></td>
-<td>指定用户</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-p</span></kbd></td>
-<td>指定密码</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-h</span></kbd></td>
-<td>服务器主机</td></tr>
-</tbody>
-</table>
+<dl class="option-list">
+<dt><kbd><span class="option">--print-default</span></kbd></dt>
+<dd><p>默认选项</p>
+</dd>
+<dt><kbd><span class="option">--verbose</span></kbd></dt>
+<dd><p>显示详细信息</p>
+</dd>
+<dt><kbd><span class="option">-u</span></kbd></dt>
+<dd><p>指定用户</p>
+</dd>
+<dt><kbd><span class="option">-p</span></kbd></dt>
+<dd><p>指定密码</p>
+</dd>
+<dt><kbd><span class="option">-h</span></kbd></dt>
+<dd><p>服务器主机</p>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">mysql中的用户是username&#64;host构成的支持通配,%代表任意长度任意字符，-匹配任意单个字符。</p>
+<p class="admonition-title">Note</p>
+<p>mysql中的用户是username&#64;host构成的支持通配,%代表任意长度任意字符，-匹配任意单个字符。</p>
 </div>
 </div>
 <div class="section" id="id2">
@@ -295,8 +290,8 @@ show table status from mysql\G
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">上面可以发现通过select来去创建一个表会丢失主键和自动增长的。</p>
+<p class="admonition-title">Note</p>
+<p>上面可以发现通过select来去创建一个表会丢失主键和自动增长的。</p>
 </div>
 <p>表查看类</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">test</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">tables</span><span class="p">;</span>
@@ -563,7 +558,7 @@ MariaDB [test]&gt; set password for &#39;zhao&#39;@&#39;%&#39; = password(&#39;z
 </pre></div>
 </div>
 <p>为了后续的实验，我们导入一个文件，文件内容如下</p>
-<p><a class="reference download internal" download="" href="../../_downloads/21f12032e6a89717f5a4740cd1af7ecb/hellodb_InnoDB.sql"><code class="xref download docutils literal notranslate"><span class="pre">/files/hellodb_InnoDB.sql</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/9644709a6bc0d6931148032dcb26f08d/hellodb_InnoDB.sql"><code class="xref download docutils literal notranslate"><span class="pre">/files/hellodb_InnoDB.sql</span></code></a></p>
 <div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
@@ -1095,8 +1090,8 @@ _通配单个字符
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">空值判断不能使用=。</p>
+<p class="admonition-title">Warning</p>
+<p>空值判断不能使用=。</p>
 </div>
 <p>分组统计</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">MariaDB</span> <span class="p">[</span><span class="n">hellodb</span><span class="p">]</span><span class="o">&gt;</span> <span class="k">select</span> <span class="n">courseid</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">from</span> <span class="n">scores</span> <span class="k">group</span> <span class="k">by</span> <span class="n">courseid</span><span class="p">;</span>

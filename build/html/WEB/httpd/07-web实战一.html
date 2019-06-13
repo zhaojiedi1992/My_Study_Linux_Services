@@ -243,10 +243,10 @@
 <h2>10.7.1. 架构图<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <img alt="../../_images/实战1架构图.png" src="../../_images/实战1架构图.png" />
 <ul class="simple">
-<li>dns完成解析web1,web2来实现负载均衡</li>
-<li>web1,web2使用后台的mysql数据库</li>
-<li>web1,web2的页面数据全部放在nfs数据上，实现自动挂载</li>
-<li>nfs服务器为web1,web2提供网页数据</li>
+<li><p>dns完成解析web1,web2来实现负载均衡</p></li>
+<li><p>web1,web2使用后台的mysql数据库</p></li>
+<li><p>web1,web2的页面数据全部放在nfs数据上，实现自动挂载</p></li>
+<li><p>nfs服务器为web1,web2提供网页数据</p></li>
 </ul>
 </div>
 <div class="section" id="id3">
@@ -257,8 +257,8 @@ ipv4.address <span class="m">192</span>.158.46.150/24 ipv4.gateway <span class="
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">我使用的nmcli修改的ip，当然也是可以手工修改的。</p>
+<p class="admonition-title">Note</p>
+<p>我使用的nmcli修改的ip，当然也是可以手工修改的。</p>
 </div>
 </div>
 <div class="section" id="ansible">
@@ -376,8 +376,8 @@ hostnamectl set-hostname <span class="nv">$name</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">如果原有selinux就是disabled，使用setenforce 0会报错误的，不用管它。</p>
+<p class="admonition-title">Note</p>
+<p>如果原有selinux就是disabled，使用setenforce 0会报错误的，不用管它。</p>
 </div>
 </div>
 </div>
@@ -472,8 +472,8 @@ PING web.linuxpanda.tech <span class="o">(</span><span class="m">192</span>.168.
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">ping命令去测试有点不专业的，需要多次测试才能2个地址都出现，这里就不安装dig工具了，毕竟客户端。</p>
+<p class="admonition-title">Note</p>
+<p>ping命令去测试有点不专业的，需要多次测试才能2个地址都出现，这里就不安装dig工具了，毕竟客户端。</p>
 </div>
 </div>
 <div class="section" id="nfs">
@@ -644,12 +644,12 @@ curl: <span class="o">(</span><span class="m">7</span><span class="o">)</span> F
 <p>这个作业，看起来挺简单的，做起来还是遇到些麻烦的。</p>
 <p>需要改进的地方：</p>
 <ol class="arabic simple">
-<li>dns解析太不稳定，如果web1停掉，dns还可能解析到这个停掉的主机，就会导致web没法访问。</li>
-<li>mysql实例后面学习了主从可以考虑完善下。</li>
-<li>lamp没有使用xcache加速下</li>
-<li>本练习都是使用的yum安装的lamp环境，可以考虑使用编译安装方法。</li>
-<li>数据通过nfs共享，本质还是一个磁盘的数据，可以考虑使用rsync来替代nfs。</li>
-<li>数据文件可以考虑放到raid上，来提供文件的访问性能</li>
+<li><p>dns解析太不稳定，如果web1停掉，dns还可能解析到这个停掉的主机，就会导致web没法访问。</p></li>
+<li><p>mysql实例后面学习了主从可以考虑完善下。</p></li>
+<li><p>lamp没有使用xcache加速下</p></li>
+<li><p>本练习都是使用的yum安装的lamp环境，可以考虑使用编译安装方法。</p></li>
+<li><p>数据通过nfs共享，本质还是一个磁盘的数据，可以考虑使用rsync来替代nfs。</p></li>
+<li><p>数据文件可以考虑放到raid上，来提供文件的访问性能</p></li>
 </ol>
 </div>
 <div class="section" id="id24">

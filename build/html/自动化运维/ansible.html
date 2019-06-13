@@ -229,18 +229,18 @@
 <div class="section" id="id1">
 <h2>4.5.1. ansible特性<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>模块化：调用特定的模块，完成特定任务</li>
-<li>有Paramiko，PyYAML，Jinja2（模板语言）三个关键模块</li>
-<li>支持自定义模块</li>
-<li>基于Python语言实现</li>
-<li>部署简单，基于python和SSH(默认已安装)，agentless</li>
-<li>安全，基于OpenSSH</li>
-<li>支持playbook编排任务</li>
-<li>幂等性：一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况</li>
-<li>无需代理不依赖PKI（无需ssl）</li>
-<li>可使用任何编程语言写模块</li>
-<li>YAML格式，编排任务，支持丰富的数据结构</li>
-<li>较强大的多层解决方案</li>
+<li><p>模块化：调用特定的模块，完成特定任务</p></li>
+<li><p>有Paramiko，PyYAML，Jinja2（模板语言）三个关键模块</p></li>
+<li><p>支持自定义模块</p></li>
+<li><p>基于Python语言实现</p></li>
+<li><p>部署简单，基于python和SSH(默认已安装)，agentless</p></li>
+<li><p>安全，基于OpenSSH</p></li>
+<li><p>支持playbook编排任务</p></li>
+<li><p>幂等性：一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况</p></li>
+<li><p>无需代理不依赖PKI（无需ssl）</p></li>
+<li><p>可使用任何编程语言写模块</p></li>
+<li><p>YAML格式，编排任务，支持丰富的数据结构</p></li>
+<li><p>较强大的多层解决方案</p></li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -308,8 +308,8 @@
 </div>
 <p>上面我们的出错了。 是因为我们没有配置ssh免密码登陆的原因。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">如果不想配置主机信任，使用ansibile需要配合-k选项输入密码，
+<p class="admonition-title">Note</p>
+<p>如果不想配置主机信任，使用ansibile需要配合-k选项输入密码，
 如果使用了sudo需要再配合-K选项输入sudo密码</p>
 </div>
 <p>配置ssh免密码登陆：</p>
@@ -336,8 +336,8 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这个ping模块不是走的icmp协议，走的ssh协议。</p>
+<p class="admonition-title">Note</p>
+<p>这个ping模块不是走的icmp协议，走的ssh协议。</p>
 </div>
 </div>
 <div class="section" id="command">
@@ -353,8 +353,8 @@ install.log.syslog
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">在命令中使用了”&lt;”, “&gt;”, “|”, “;”和”&amp;”符号的时候，需要改用shell模块的。</p>
+<p class="admonition-title">Warning</p>
+<p>在命令中使用了”&lt;”, “&gt;”, “|”, “;”和”&amp;”符号的时候，需要改用shell模块的。</p>
 </div>
 </div>
 <div class="section" id="shell">
@@ -511,12 +511,12 @@ lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <
 </div>
 <p>file模块的state主要有下面几个值</p>
 <ul class="simple">
-<li>directory</li>
-<li>file</li>
-<li>link</li>
-<li>absent</li>
-<li>hard</li>
-<li>touch</li>
+<li><p>directory</p></li>
+<li><p>file</p></li>
+<li><p>link</p></li>
+<li><p>absent</p></li>
+<li><p>hard</p></li>
+<li><p>touch</p></li>
 </ul>
 </div>
 <div class="section" id="hostname">
@@ -599,10 +599,10 @@ lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <
 </div>
 <p>service的状态比较多：</p>
 <ul class="simple">
-<li>started</li>
-<li>stop</li>
-<li>restarted</li>
-<li>reloaded</li>
+<li><p>started</p></li>
+<li><p>stop</p></li>
+<li><p>restarted</p></li>
+<li><p>reloaded</p></li>
 </ul>
 </div>
 <div class="section" id="user">
@@ -686,8 +686,8 @@ lrwxrwxrwx  <span class="m">1</span> root root   <span class="m">14</span> Jan <
 </div>
 <p>setup模块提供了远程主机的信息， 我们后面可以使用这个信息做分支处理的。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">setup模块提供的的信息都是内置变量，方便我们引用变量。</p>
+<p class="admonition-title">Note</p>
+<p>setup模块提供的的信息都是内置变量，方便我们引用变量。</p>
 </div>
 </div>
 </div>
@@ -1007,8 +1007,8 @@ tasks:
 </div>
 <p>上面的那个ansible_distribution_major_version变量是从setup模块来的， 如果主版本是7上面的那个template就执行， 其他的不执行。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这个就是setup模块内置的变量，可以直接使用。</p>
+<p class="admonition-title">Note</p>
+<p>这个就是setup模块内置的变量，可以直接使用。</p>
 </div>
 </div>
 <div class="section" id="with-item">

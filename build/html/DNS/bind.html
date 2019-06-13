@@ -262,8 +262,8 @@
 <h2>8.1.1. dns简介<a class="headerlink" href="#dns" title="Permalink to this headline">¶</a></h2>
 <p>DNS（domain name service ）是域名解析服务，工作在应用层，是c/s结构，监听于53端口。</p>
 <ul class="simple">
-<li>tcp 53: 用于区域传输</li>
-<li>ucp 53: 用于查询</li>
+<li><p>tcp 53: 用于区域传输</p></li>
+<li><p>ucp 53: 用于查询</p></li>
 </ul>
 </div>
 <div class="section" id="id1">
@@ -271,28 +271,28 @@
 <p>BIND(Bekerley Internet Name Domain) 是伯克利互联网名称域。提供了DNS服务。</p>
 <p>DNS查询类型：</p>
 <ul class="simple">
-<li>递归查询</li>
-<li>迭代查询</li>
+<li><p>递归查询</p></li>
+<li><p>迭代查询</p></li>
 </ul>
 <p>服务器类型：</p>
 <ul class="simple">
-<li>主dns:      管理和负责解析域的服务器</li>
-<li>从dns：     从服务器从主服务器复制库</li>
-<li>缓存dns：   缓存dns</li>
+<li><p>主dns:      管理和负责解析域的服务器</p></li>
+<li><p>从dns：     从服务器从主服务器复制库</p></li>
+<li><p>缓存dns：   缓存dns</p></li>
 </ul>
 <p>区域传输：</p>
 <ul class="simple">
-<li>完全传输：   传输整个库</li>
-<li>增量传输：    传递变化的部分内容</li>
+<li><p>完全传输：   传输整个库</p></li>
+<li><p>增量传输：    传递变化的部分内容</p></li>
 </ul>
 <p>解析流程：</p>
 <p>client-&gt;hosts-&gt;local dns cache-&gt;dns server -&gt; server cache-&gt; root -&gt; 二级域</p>
 <p>解析答案：</p>
 <ul class="simple">
-<li>肯定答案： 有对应条目</li>
-<li>否定答案： 没有对应条目</li>
-<li>权威答案： 请求的主机就有对应的条目</li>
-<li>非权威答案： 请求的主机没有，通过迭代找到的答案</li>
+<li><p>肯定答案： 有对应条目</p></li>
+<li><p>否定答案： 没有对应条目</p></li>
+<li><p>权威答案： 请求的主机就有对应的条目</p></li>
+<li><p>非权威答案： 请求的主机没有，通过迭代找到的答案</p></li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -300,13 +300,13 @@
 <div class="section" id="id3">
 <h3>8.1.3.1. 资源记录类型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>A:            ipv4</li>
-<li>AAAA:         ipv6</li>
-<li>PTR:          ip-&gt;fqdn</li>
-<li>SOA:          起始授权记录</li>
-<li>NS:           域名</li>
-<li>CNAME:        别名</li>
-<li>MX:           邮件</li>
+<li><p>A:            ipv4</p></li>
+<li><p>AAAA:         ipv6</p></li>
+<li><p>PTR:          ip-&gt;fqdn</p></li>
+<li><p>SOA:          起始授权记录</p></li>
+<li><p>NS:           域名</p></li>
+<li><p>CNAME:        别名</p></li>
+<li><p>MX:           邮件</p></li>
 </ul>
 </div>
 <div class="section" id="id4">
@@ -334,8 +334,8 @@
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">SOA记录必须是第一条记录。</p>
+<p class="admonition-title">Warning</p>
+<p>SOA记录必须是第一条记录。</p>
 </div>
 </div>
 <div class="section" id="mx">
@@ -411,8 +411,8 @@ zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</s
 </div>
 <p>主要配置含义：</p>
 <ul class="simple">
-<li>listen-on：是监听配置，我们注释掉之后就是监听本机所有ip了，</li>
-<li>allow-query: 这个是允许那个主机查询，注释掉就是允许所有的，如果只是想本网使用可以修改为192.168.46.0/24即可。</li>
+<li><p>listen-on：是监听配置，我们注释掉之后就是监听本机所有ip了，</p></li>
+<li><p>allow-query: 这个是允许那个主机查询，注释掉就是允许所有的，如果只是想本网使用可以修改为192.168.46.0/24即可。</p></li>
 </ul>
 <p>如果不修改listen-on选项，默认只是鉴定在127.0.0.1上的。</p>
 </div>
@@ -474,8 +474,8 @@ www.linuxpanda.tech has address <span class="m">192</span>.168.46.7
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这里指定了localhost做为dns，如果不想指定，在/etc/resolve.conf文件添加ip即可。</p>
+<p class="admonition-title">Note</p>
+<p>这里指定了localhost做为dns，如果不想指定，在/etc/resolve.conf文件添加ip即可。</p>
 </div>
 <p>dig方式测试</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># dig ns1.linuxpanda.tech @localhost                      # 使用dig测试</span>
@@ -520,8 +520,8 @@ Address: <span class="m">192</span>.168.46.7
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">自己创建的zone文件，请确保named用户有读取权限。</p>
+<p class="admonition-title">Note</p>
+<p>自己创建的zone文件，请确保named用户有读取权限。</p>
 </div>
 </div>
 </div>
@@ -536,8 +536,8 @@ zone <span class="s2">&quot;46.168.192.in-addr.arpa&quot;</span> IN <span class=
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">一定注意{}后面的;号了。最容易忘记了。</p>
+<p class="admonition-title">Warning</p>
+<p>一定注意{}后面的;号了。最容易忘记了。</p>
 </div>
 <p>添加区域文件</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@localhost named<span class="o">]</span><span class="c1"># cp named.loopback  192.168.46.zone -p               # 创建一个区域文件</span>
@@ -594,8 +594,8 @@ linuxpanda.tech.    <span class="m">86400</span>   IN      SOA     ns1.linuxpand
 <h2>8.1.7. 主从服务器<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
 <p>上面我们在192.168.46.7的服务器上面配置了dns，下面以192.168.46.101作为7的从dns来完成dns的主从配置</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">在选择主从服务器的时候，注意服务器版本问题，不同版本安装的bind可能会导致不同情况，无法同步问题。</p>
+<p class="admonition-title">Note</p>
+<p>在选择主从服务器的时候，注意服务器版本问题，不同版本安装的bind可能会导致不同情况，无法同步问题。</p>
 </div>
 <div class="section" id="id15">
 <h3>8.1.7.1. 编辑配置文件<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
@@ -640,8 +640,8 @@ zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</s
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">从服务器的必须要在主dns添加记录的。</p>
+<p class="admonition-title">Note</p>
+<p>从服务器的必须要在主dns添加记录的。</p>
 </div>
 </div>
 <div class="section" id="id17">
@@ -655,8 +655,8 @@ slaves/linuxpanda.tech.slave.zone: data
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">centos7环境下从文件都是data的了，不再是文本了。</p>
+<p class="admonition-title">Note</p>
+<p>centos7环境下从文件都是data的了，不再是文本了。</p>
 </div>
 </div>
 <div class="section" id="id18">
@@ -752,8 +752,8 @@ Jan <span class="m">18</span> <span class="m">01</span>:49:23 station named<span
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">如果从DNS服务器没法同步，请检查服务器配置和2个服务器的日志信息</p>
+<p class="admonition-title">Note</p>
+<p>如果从DNS服务器没法同步，请检查服务器配置和2个服务器的日志信息</p>
 </div>
 </div>
 </div>
@@ -803,8 +803,8 @@ ftp.linuxpanda.tech.        <span class="m">9000</span>    IN      A       <span
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">动态更新后，从服务器也会自动更新的，但是序号是没有增加的。</p>
+<p class="admonition-title">Note</p>
+<p>动态更新后，从服务器也会自动更新的，但是序号是没有增加的。</p>
 </div>
 </div>
 </div>
@@ -838,9 +838,9 @@ query logging is OFF
 <h2>8.1.10. 子域配置<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
 <p>配置子域需要的服务器也比较多。 简单规划下。</p>
 <ul class="simple">
-<li>192.168.46.7 : linuxpanda.tech</li>
-<li>192.168.46.101 : henan.linuxpanda.tech</li>
-<li>192.168.46.102 : zhengzhou.henan.linuxpanda.tech</li>
+<li><p>192.168.46.7 : linuxpanda.tech</p></li>
+<li><p>192.168.46.101 : henan.linuxpanda.tech</p></li>
+<li><p>192.168.46.102 : zhengzhou.henan.linuxpanda.tech</p></li>
 </ul>
 <p>我这里linuxpanda.tech 就认为是我自己的顶级域。 henan就是二级域，zhengzhou就是三级域。</p>
 <div class="section" id="id26">
@@ -1013,17 +1013,17 @@ www.zhengzhou.henan.linuxpanda.tech has address <span class="m">192</span>.168.4
 <h2>8.1.11. 转发服务器<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
 <p>转发分为2种：</p>
 <ul class="simple">
-<li>全局转发： 全局配置文件设置</li>
-<li>特定域转发： 特定域内配置</li>
+<li><p>全局转发： 全局配置文件设置</p></li>
+<li><p>特定域转发： 特定域内配置</p></li>
 </ul>
 <p>转发类型2种：</p>
 <ul class="simple">
-<li>first： 转发给特定服务器，如果他没有就在找自己找根。</li>
-<li>only: 抓发给特定服务器，如果他找不到自己不继续找。</li>
+<li><p>first： 转发给特定服务器，如果他没有就在找自己找根。</p></li>
+<li><p>only: 抓发给特定服务器，如果他找不到自己不继续找。</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">请关闭dnssec功能。</p>
+<p class="admonition-title">Note</p>
+<p>请关闭dnssec功能。</p>
 </div>
 <p>我这里接着上面的实验基础上的， 上面我做了3级别的域 linuxpanda.tech ,henan.linuxpanda.tech ,zhengzhou.henan.linuxpanda.tech</p>
 <p>给henan.linxupanda.tech配置特定域转发</p>
@@ -1051,8 +1051,8 @@ zone <span class="s2">&quot;linuxpanda.tech&quot;</span> IN <span class="o">{</s
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">修改配置文件后需要重启服务或者使用rndc reload重新加载配置文件。</p>
+<p class="admonition-title">Note</p>
+<p>修改配置文件后需要重启服务或者使用rndc reload重新加载配置文件。</p>
 </div>
 <p>测试</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 我们先测试我内部的服务器的dns主机</span>
@@ -1776,13 +1776,13 @@ this is <span class="m">192</span>.168.46.156
 <div class="section" id="id51">
 <h2>8.1.15. 排错思路<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>查看日志信息</li>
-<li>rndc querylog 启动日志临时获取查询详细信息</li>
-<li>查看监听</li>
-<li>查看zone权限配置</li>
-<li>查看named.conf文件的allow-query和安全设置</li>
-<li>使用named-checkconf和named-checkzone工具</li>
-<li>dns配置是否正确。</li>
+<li><p>查看日志信息</p></li>
+<li><p>rndc querylog 启动日志临时获取查询详细信息</p></li>
+<li><p>查看监听</p></li>
+<li><p>查看zone权限配置</p></li>
+<li><p>查看named.conf文件的allow-query和安全设置</p></li>
+<li><p>使用named-checkconf和named-checkzone工具</p></li>
+<li><p>dns配置是否正确。</p></li>
 </ol>
 </div>
 <div class="section" id="id52">

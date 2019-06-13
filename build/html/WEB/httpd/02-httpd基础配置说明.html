@@ -242,8 +242,8 @@
   <div class="section" id="httpd">
 <h1>10.2. httpd基础配置说明<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">centos6和centos7版本安装的httpd版本有所不同，这里使用centos安装的2.2做实验。</p>
+<p class="admonition-title">Note</p>
+<p>centos6和centos7版本安装的httpd版本有所不同，这里使用centos安装的2.2做实验。</p>
 </div>
 <div class="section" id="id1">
 <h2>10.2.1. 全局环境配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
@@ -266,8 +266,8 @@ Server sends (e.g.): Server: Apache/2.0.41 (Unix) PHP/4.2.2 MyMod/1.2
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这个值建议修改为Prod，也就是值显示Apache即可。</p>
+<p class="admonition-title">Note</p>
+<p>这个值建议修改为Prod，也就是值显示Apache即可。</p>
 </div>
 </div>
 <div class="section" id="serverroot">
@@ -275,8 +275,8 @@ Server sends (e.g.): Server: Apache/2.0.41 (Unix) PHP/4.2.2 MyMod/1.2
 <p>默认值： ServerRoot “/etc/httpd”</p>
 <p>这个参数是控制httpd的服务配置文件根目录的。后续的pidfile都是相对这个路径的。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这个参数不建议修改，涉及太多。</p>
+<p class="admonition-title">Note</p>
+<p>这个参数不建议修改，涉及太多。</p>
 </div>
 </div>
 <div class="section" id="pidfile">
@@ -328,8 +328,8 @@ Server sends (e.g.): Server: Apache/2.0.41 (Unix) PHP/4.2.2 MyMod/1.2
 <h3>10.2.1.13. MaxRequestsPerChild<a class="headerlink" href="#maxrequestsperchild" title="Permalink to this headline">¶</a></h3>
 <p>这个配置项是每个进程课可以服务的最大请求数量，超过就杀掉，重新创建进程。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">0的代表不限制。</p>
+<p class="admonition-title">Note</p>
+<p>0的代表不限制。</p>
 </div>
 </div>
 <div class="section" id="minsparethreads">
@@ -393,8 +393,8 @@ Listen 192.170.2.1:8443 https
 <p>默认值： ServerName www.example.com:80</p>
 <p>这个配置项是服务器的fqdn名字。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这项配置建议修改下，不然启动服务老是提示这个问题。</p>
+<p class="admonition-title">Note</p>
+<p>这项配置建议修改下，不然启动服务老是提示这个问题。</p>
 </div>
 </div>
 <div class="section" id="usecanonicalname-off">

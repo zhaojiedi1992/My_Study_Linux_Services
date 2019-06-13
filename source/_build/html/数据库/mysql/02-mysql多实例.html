@@ -234,47 +234,47 @@
   <div class="section" id="mariadb">
 <h1>9.4. mariadb多实例安装<a class="headerlink" href="#mariadb" title="Permalink to this headline">¶</a></h1>
 <p>mariadb多实例实现方式:</p>
-<dl class="docutils">
-<dt>mysqld_multi</dt>
-<dd>这个是使用单独的配置文件来配置多个实例，不过管理实例还是很方便的。</dd>
-<dt>多个sysv配置</dt>
-<dd>这个方式相当于每个mairadb实例为一个不同的服务而已，每个实例一套sysv脚本。
-配置起来比较简单，如果实例过多管理起来比较麻烦。</dd>
-<dt>systemd</dt>
-<dd>这个是systemd管理的特有的。</dd>
+<dl class="simple">
+<dt>mysqld_multi</dt><dd><p>这个是使用单独的配置文件来配置多个实例，不过管理实例还是很方便的。</p>
+</dd>
+<dt>多个sysv配置</dt><dd><p>这个方式相当于每个mairadb实例为一个不同的服务而已，每个实例一套sysv脚本。
+配置起来比较简单，如果实例过多管理起来比较麻烦。</p>
+</dd>
+<dt>systemd</dt><dd><p>这个是systemd管理的特有的。</p>
+</dd>
 </dl>
 <div class="section" id="id1">
 <h2>9.4.1. 配置前规划<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>上面mairadb的多实例有多种配置方法， 我们先规划如下：</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">方案</th>
-<th class="head">主目录</th>
-<th class="head">端口规划</th>
-<th class="head">其他</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>方案</p></th>
+<th class="head"><p>主目录</p></th>
+<th class="head"><p>端口规划</p></th>
+<th class="head"><p>其他</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>方案1</td>
-<td>/data/scheme1/mysql/</td>
-<td>3307,3308</td>
-<td>&#160;</td>
+<tbody>
+<tr class="row-even"><td><p>方案1</p></td>
+<td><p>/data/scheme1/mysql/</p></td>
+<td><p>3307,3308</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>方案2</td>
-<td>/data/scheme2/mysql/</td>
-<td>4307,4308</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>方案2</p></td>
+<td><p>/data/scheme2/mysql/</p></td>
+<td><p>4307,4308</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>方案3</td>
-<td>/data/scheme3/mysql/</td>
-<td>5307,5308</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>方案3</p></td>
+<td><p>/data/scheme3/mysql/</p></td>
+<td><p>5307,5308</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -312,8 +312,8 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这个包名是区分大小写的，使用rpm查询包提供文件的时候注意大小写。</p>
+<p class="admonition-title">Note</p>
+<p>这个包名是区分大小写的，使用rpm查询包提供文件的时候注意大小写。</p>
 </div>
 </div>
 <div class="section" id="mysqld-multi">
@@ -359,8 +359,8 @@ pid-file   <span class="o">=</span> /data/scheme1/mysql/3308/mariadb.pid
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">更多的参数官方文档。</p>
+<p class="admonition-title">Note</p>
+<p>更多的参数官方文档。</p>
 </div>
 </div>
 <div class="section" id="id7">
@@ -374,8 +374,8 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::3308       
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">mysqld_multi start 3307-3308来批量启动，多个矢量还可以逗号分割。</p>
+<p class="admonition-title">Note</p>
+<p>mysqld_multi start 3307-3308来批量启动，多个矢量还可以逗号分割。</p>
 </div>
 </div>
 <div class="section" id="id8">
@@ -777,7 +777,7 @@ pid-file<span class="o">=</span>/data/scheme3/mysql/5308/pid/mariadb.pid
 </div>
 <p>上面的简单的说就是说明下mysqld命令的路径，指定你的实例所在的路径%I代表实例名字。后续启动的systemctl start mariadb&#64;5307这个命令中，5307就是实例名字。</p>
 <p>这个文件有点多， 提供一个下载参考吧。</p>
-<p><a class="reference download internal" download="" href="../../_downloads/804c21ec2a739fba0d4fdf09a2808d60/mariadb&#64;.service"><code class="xref download docutils literal notranslate"><span class="pre">/files/mariadb&#64;.service</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/b1e3a191605c5ff75c56038c781ccd5c/mariadb&#64;.service"><code class="xref download docutils literal notranslate"><span class="pre">/files/mariadb&#64;.service</span></code></a></p>
 </div>
 <div class="section" id="id25">
 <h3>9.4.6.5. 启动服务和查看状态<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>

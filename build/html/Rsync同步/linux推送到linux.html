@@ -207,9 +207,9 @@
 <div class="section" id="id1">
 <h2>2.2.1. 环境介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>2个机器</li>
-<li>centos7(172.18.46.7),centos6(172.18.46.6)</li>
-<li>centos7(/app/web)===&gt;centos6(/app/web)</li>
+<li><p>2个机器</p></li>
+<li><p>centos7(172.18.46.7),centos6(172.18.46.6)</p></li>
+<li><p>centos7(/app/web)===&gt;centos6(/app/web)</p></li>
 </ul>
 <p>我们要完成的功能是centos7开发人员生成的web数据放到centos7的/app/web目录后，centos6能自动拉取centos7的目录保持一致。</p>
 <p>rsync我们知道是分客户端和服务端的，那具体对于上面的情况可以怎么安排呢？</p>
@@ -217,8 +217,8 @@
 <p>方案2： 我们在centos6上搭建服务端，centos7作为客户端，然后centos7主动把自己的文件推送到centos6上去。</p>
 <p>我们下面的文章主要按照方案2来实施。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">不管如何，拉取和推送都是在客户端完成的。</p>
+<p class="admonition-title">Note</p>
+<p>不管如何，拉取和推送都是在客户端完成的。</p>
 </div>
 </div>
 <div class="section" id="id2">
@@ -257,8 +257,8 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::873        
 </pre></div>
 </div>
 <div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">rsyncd服务监听在873端口，如果有防火墙请放行或者关闭。</p>
+<p class="admonition-title">Attention</p>
+<p>rsyncd服务监听在873端口，如果有防火墙请放行或者关闭。</p>
 </div>
 </div>
 <div class="section" id="rsyncd">
@@ -341,8 +341,8 @@ web
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这里我们只需要指定密码即可，不用用户名。</p>
+<p class="admonition-title">Note</p>
+<p>这里我们只需要指定密码即可，不用用户名。</p>
 </div>
 </div>
 <div class="section" id="id10">

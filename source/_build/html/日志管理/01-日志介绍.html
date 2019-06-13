@@ -210,130 +210,130 @@
 <h2>11.1.1. 日志基础概念<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>11.1.1.1. 日志的提供程序<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="21%" />
-<col width="21%" />
-<col width="29%" />
-<col width="29%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">系统</th>
-<th class="head">包</th>
-<th class="head">提供程序</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>系统</p></th>
+<th class="head"><p>包</p></th>
+<th class="head"><p>提供程序</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>redhat5</td>
-<td>sysklogd</td>
-<td>syslogd,klogd</td>
-<td>syslog记录应用，klogd记录内核</td>
+<tbody>
+<tr class="row-even"><td><p>redhat5</p></td>
+<td><p>sysklogd</p></td>
+<td><p>syslogd,klogd</p></td>
+<td><p>syslog记录应用，klogd记录内核</p></td>
 </tr>
-<tr class="row-odd"><td>centos6</td>
-<td>rsyslog</td>
-<td>rsyslogd</td>
-<td>兼容sysklogd,多线程，支持mysql数据库</td>
+<tr class="row-odd"><td><p>centos6</p></td>
+<td><p>rsyslog</p></td>
+<td><p>rsyslogd</p></td>
+<td><p>兼容sysklogd,多线程，支持mysql数据库</p></td>
 </tr>
-<tr class="row-even"><td>centos7</td>
-<td>rsyslog</td>
-<td>同上</td>
-<td>同上</td>
+<tr class="row-even"><td><p>centos7</p></td>
+<td><p>rsyslog</p></td>
+<td><p>同上</p></td>
+<td><p>同上</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id4">
 <h3>11.1.1.2. 日志的设施<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="33%" />
-<col width="67%" />
+<col style="width: 33%" />
+<col style="width: 67%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">设施</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>设施</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>LOG_AUTH</td>
-<td>安全和认证（弃用）</td>
+<tbody>
+<tr class="row-even"><td><p>LOG_AUTH</p></td>
+<td><p>安全和认证（弃用）</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_AUTHPRIV</td>
-<td>安全和认证</td>
+<tr class="row-odd"><td><p>LOG_AUTHPRIV</p></td>
+<td><p>安全和认证</p></td>
 </tr>
-<tr class="row-even"><td>LOG_CRON</td>
-<td>计划任务的,包含cron,at</td>
+<tr class="row-even"><td><p>LOG_CRON</p></td>
+<td><p>计划任务的,包含cron,at</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_DAEMON</td>
-<td>系统守护</td>
+<tr class="row-odd"><td><p>LOG_DAEMON</p></td>
+<td><p>系统守护</p></td>
 </tr>
-<tr class="row-even"><td>LOG_FTP</td>
-<td>ftp</td>
+<tr class="row-even"><td><p>LOG_FTP</p></td>
+<td><p>ftp</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_KERN</td>
-<td>内核</td>
+<tr class="row-odd"><td><p>LOG_KERN</p></td>
+<td><p>内核</p></td>
 </tr>
-<tr class="row-even"><td>LOG_LOCAL[0-7]</td>
-<td>自定义</td>
+<tr class="row-even"><td><p>LOG_LOCAL[0-7]</p></td>
+<td><p>自定义</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_LPR</td>
-<td>打印机</td>
+<tr class="row-odd"><td><p>LOG_LPR</p></td>
+<td><p>打印机</p></td>
 </tr>
-<tr class="row-even"><td>LOG_MAIL</td>
-<td>邮件</td>
+<tr class="row-even"><td><p>LOG_MAIL</p></td>
+<td><p>邮件</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_NEWS</td>
-<td>新闻</td>
+<tr class="row-odd"><td><p>LOG_NEWS</p></td>
+<td><p>新闻</p></td>
 </tr>
-<tr class="row-even"><td>LOG_SYSLOG</td>
-<td>syslogd</td>
+<tr class="row-even"><td><p>LOG_SYSLOG</p></td>
+<td><p>syslogd</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_USER</td>
-<td>用户</td>
+<tr class="row-odd"><td><p>LOG_USER</p></td>
+<td><p>用户</p></td>
 </tr>
-<tr class="row-even"><td>LOG_UUCP</td>
-<td>unix to unix cp</td>
+<tr class="row-even"><td><p>LOG_UUCP</p></td>
+<td><p>unix to unix cp</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id5">
 <h3>11.1.1.3. 日志级别<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="33%" />
-<col width="67%" />
+<col style="width: 33%" />
+<col style="width: 67%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">级别</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>级别</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>LOG_EMERG</td>
-<td>系统恐慌</td>
+<tbody>
+<tr class="row-even"><td><p>LOG_EMERG</p></td>
+<td><p>系统恐慌</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_ALERT</td>
-<td>必须立即采取措施解决</td>
+<tr class="row-odd"><td><p>LOG_ALERT</p></td>
+<td><p>必须立即采取措施解决</p></td>
 </tr>
-<tr class="row-even"><td>LOG_CRIT</td>
-<td>严格问题</td>
+<tr class="row-even"><td><p>LOG_CRIT</p></td>
+<td><p>严格问题</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_ERR</td>
-<td>错误</td>
+<tr class="row-odd"><td><p>LOG_ERR</p></td>
+<td><p>错误</p></td>
 </tr>
-<tr class="row-even"><td>LOG_WARNING</td>
-<td>警告</td>
+<tr class="row-even"><td><p>LOG_WARNING</p></td>
+<td><p>警告</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_NOTICE</td>
-<td>正常通知</td>
+<tr class="row-odd"><td><p>LOG_NOTICE</p></td>
+<td><p>正常通知</p></td>
 </tr>
-<tr class="row-even"><td>LOG_INFO</td>
-<td>普通信息</td>
+<tr class="row-even"><td><p>LOG_INFO</p></td>
+<td><p>普通信息</p></td>
 </tr>
-<tr class="row-odd"><td>LOG_DEBUG</td>
-<td>调试级别</td>
+<tr class="row-odd"><td><p>LOG_DEBUG</p></td>
+<td><p>调试级别</p></td>
 </tr>
 </tbody>
 </table>
@@ -342,131 +342,131 @@
 <div class="section" id="rsyslog">
 <h2>11.1.2. rsyslog配置文件<a class="headerlink" href="#rsyslog" title="Permalink to this headline">¶</a></h2>
 <p>rsyslog的配置文件主要包括三个大的片段</p>
-<dl class="docutils">
-<dt>全局片段</dt>
-<dd>全局设置，加载模块。</dd>
-<dt>模板片段</dt>
-<dd>运行你指定日志消息的格式</dd>
-<dt>输出通道</dt>
-<dd>给通道定义个规则，在输出上设置</dd>
-<dt>规则</dt>
-<dd>规则有选择器和动作构成</dd>
+<dl class="simple">
+<dt>全局片段</dt><dd><p>全局设置，加载模块。</p>
+</dd>
+<dt>模板片段</dt><dd><p>运行你指定日志消息的格式</p>
+</dd>
+<dt>输出通道</dt><dd><p>给通道定义个规则，在输出上设置</p>
+</dd>
+<dt>规则</dt><dd><p>规则有选择器和动作构成</p>
+</dd>
 </dl>
 <div class="section" id="id6">
 <h3>11.1.2.1. 模块说明<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="33%" />
-<col width="67%" />
+<col style="width: 33%" />
+<col style="width: 67%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">模块名</th>
-<th class="head">功能</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>模块名</p></th>
+<th class="head"><p>功能</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>omsnmp</td>
-<td>snmp陷阱输出模块</td>
+<tbody>
+<tr class="row-even"><td><p>omsnmp</p></td>
+<td><p>snmp陷阱输出模块</p></td>
 </tr>
-<tr class="row-odd"><td>ommysql</td>
-<td>mysql输出模块</td>
+<tr class="row-odd"><td><p>ommysql</p></td>
+<td><p>mysql输出模块</p></td>
 </tr>
-<tr class="row-even"><td>omrelp</td>
-<td>可靠的relp协议输出模块</td>
+<tr class="row-even"><td><p>omrelp</p></td>
+<td><p>可靠的relp协议输出模块</p></td>
 </tr>
-<tr class="row-odd"><td>ompgsql</td>
-<td>postgresql输出模块</td>
+<tr class="row-odd"><td><p>ompgsql</p></td>
+<td><p>postgresql输出模块</p></td>
 </tr>
-<tr class="row-even"><td>omlibdbi</td>
-<td>通用数据库输出模块</td>
+<tr class="row-even"><td><p>omlibdbi</p></td>
+<td><p>通用数据库输出模块</p></td>
 </tr>
-<tr class="row-odd"><td>imfile</td>
-<td>文件输入模块</td>
+<tr class="row-odd"><td><p>imfile</p></td>
+<td><p>文件输入模块</p></td>
 </tr>
-<tr class="row-even"><td>imudp</td>
-<td>udp syslog的输入插件</td>
+<tr class="row-even"><td><p>imudp</p></td>
+<td><p>udp syslog的输入插件</p></td>
 </tr>
-<tr class="row-odd"><td>imtcp</td>
-<td>tcp syslog的输入插件</td>
+<tr class="row-odd"><td><p>imtcp</p></td>
+<td><p>tcp syslog的输入插件</p></td>
 </tr>
-<tr class="row-even"><td>imrelp</td>
-<td>可靠的relp协议输入模块</td>
+<tr class="row-even"><td><p>imrelp</p></td>
+<td><p>可靠的relp协议输入模块</p></td>
 </tr>
-<tr class="row-odd"><td>impgsapi</td>
-<td>tcp和gss-enable的输入插件</td>
+<tr class="row-odd"><td><p>impgsapi</p></td>
+<td><p>tcp和gss-enable的输入插件</p></td>
 </tr>
-<tr class="row-even"><td>immark</td>
-<td>支持掩码消息</td>
+<tr class="row-even"><td><p>immark</p></td>
+<td><p>支持掩码消息</p></td>
 </tr>
-<tr class="row-odd"><td>imklog</td>
-<td>内核日志</td>
+<tr class="row-odd"><td><p>imklog</p></td>
+<td><p>内核日志</p></td>
 </tr>
-<tr class="row-even"><td>imuxsock</td>
-<td>unix套接字</td>
+<tr class="row-even"><td><p>imuxsock</p></td>
+<td><p>unix套接字</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id7">
 <h3>11.1.2.2. 输出位置说明<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="40%" />
-<col width="40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 40%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">输出位置</th>
-<th class="head">样例</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>输出位置</p></th>
+<th class="head"><p>样例</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>文件</td>
-<td>/var/log/sample.log</td>
-<td>直接输出到指定的文件去</td>
+<tbody>
+<tr class="row-even"><td><p>文件</p></td>
+<td><p>/var/log/sample.log</p></td>
+<td><p>直接输出到指定的文件去</p></td>
 </tr>
-<tr class="row-odd"><td>管道</td>
-<td><div class="first last line-block">
+<tr class="row-odd"><td><p>管道</p></td>
+<td><div class="line-block">
 <div class="line">command</div>
 </div>
 </td>
-<td>直接重定向到某个命令</td>
+<td><p>直接重定向到某个命令</p></td>
 </tr>
-<tr class="row-even"><td>终端</td>
-<td>/dev/console</td>
-<td>直接输出的指定的登陆终端</td>
+<tr class="row-even"><td><p>终端</p></td>
+<td><p>/dev/console</p></td>
+<td><p>直接输出的指定的登陆终端</p></td>
 </tr>
-<tr class="row-odd"><td>远程主机</td>
-<td>&#64;192.168.0.1</td>
-<td>直接输出到远程指定主机</td>
+<tr class="row-odd"><td><p>远程主机</p></td>
+<td><p>&#64;192.168.0.1</p></td>
+<td><p>直接输出到远程指定主机</p></td>
 </tr>
-<tr class="row-even"><td>用户列表</td>
-<td>root,zhaojiedi1992</td>
-<td>直接输出到2个用户对应的登陆终端</td>
+<tr class="row-even"><td><p>用户列表</p></td>
+<td><p>root,zhaojiedi1992</p></td>
+<td><p>直接输出到2个用户对应的登陆终端</p></td>
 </tr>
-<tr class="row-odd"><td>所有用户</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>所有用户</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>直接给所有登陆用户发送</td>
+<td><p>直接给所有登陆用户发送</p></td>
 </tr>
-<tr class="row-even"><td>数据库表</td>
-<td>192.168.0.1,dbname,username,password</td>
-<td>连接指定主机的数据库表</td>
+<tr class="row-even"><td><p>数据库表</p></td>
+<td><p>192.168.0.1,dbname,username,password</p></td>
+<td><p>连接指定主机的数据库表</p></td>
 </tr>
-<tr class="row-odd"><td>丢弃</td>
-<td>~</td>
-<td>丢弃日志，不记录</td>
+<tr class="row-odd"><td><p>丢弃</p></td>
+<td><p>~</p></td>
+<td><p>丢弃日志，不记录</p></td>
 </tr>
-<tr class="row-even"><td>输出通道</td>
-<td>&#160;</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>输出通道</p></td>
+<td></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>shell执行</td>
-<td>^execute_file; template</td>
-<td>模板作为字一个参数去执行脚本</td>
+<tr class="row-odd"><td><p>shell执行</p></td>
+<td><p>^execute_file; template</p></td>
+<td><p>模板作为字一个参数去执行脚本</p></td>
 </tr>
 </tbody>
 </table>
@@ -581,48 +581,48 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">如果网络不稳定，可以使用&#64;&#64;替换&#64;,&#64;&#64;使用的tcp协议，&#64;使用的udp协议。</p>
+<p class="admonition-title">Note</p>
+<p>如果网络不稳定，可以使用&#64;&#64;替换&#64;,&#64;&#64;使用的tcp协议，&#64;使用的udp协议。</p>
 </div>
 </div>
 <div class="section" id="id11">
 <h3>11.1.3.3. 常见日志文件<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">文件</th>
-<th class="head">功能</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>文件</p></th>
+<th class="head"><p>功能</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>/var/log/message</td>
-<td>包含大部分的日志信息</td>
-<td>&#160;</td>
+<tbody>
+<tr class="row-even"><td><p>/var/log/message</p></td>
+<td><p>包含大部分的日志信息</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>/var/log/btmp</td>
-<td>失败登陆的日志信息</td>
-<td>使用lastb命令查看</td>
+<tr class="row-odd"><td><p>/var/log/btmp</p></td>
+<td><p>失败登陆的日志信息</p></td>
+<td><p>使用lastb命令查看</p></td>
 </tr>
-<tr class="row-even"><td>/var/log/wtpm</td>
-<td>成功登陆的日志信息</td>
-<td>使用last命令查看</td>
+<tr class="row-even"><td><p>/var/log/wtpm</p></td>
+<td><p>成功登陆的日志信息</p></td>
+<td><p>使用last命令查看</p></td>
 </tr>
-<tr class="row-odd"><td>/var/log/lastlog</td>
-<td>每个用户最近一次登陆的日志信息</td>
-<td>使用lastlog命令查看</td>
+<tr class="row-odd"><td><p>/var/log/lastlog</p></td>
+<td><p>每个用户最近一次登陆的日志信息</p></td>
+<td><p>使用lastlog命令查看</p></td>
 </tr>
-<tr class="row-even"><td>/var/log/dmesg</td>
-<td>系统引导过程中的日志信息</td>
-<td>使用dmesg命令查看</td>
+<tr class="row-even"><td><p>/var/log/dmesg</p></td>
+<td><p>系统引导过程中的日志信息</p></td>
+<td><p>使用dmesg命令查看</p></td>
 </tr>
-<tr class="row-odd"><td>/var/log/anaconda</td>
-<td>anaconada的日志信息</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>/var/log/anaconda</p></td>
+<td><p>anaconada的日志信息</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -630,66 +630,62 @@ Feb  1 10:24:15 102 sshd[37196]: Connection closed by ::1 port 40016 [preauth]
 <div class="section" id="journalctl">
 <h3>11.1.3.4. journalctl命令使用<a class="headerlink" href="#journalctl" title="Permalink to this headline">¶</a></h3>
 <p>systemd统一管理所有unit的启动日志，值使用journalctl就可以管理日志。</p>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-a</span></kbd></td>
-<td>显示所有字段</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-f</span></kbd></td>
-<td>最新的信息</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-e</span></kbd></td>
-<td>跳到最后一页</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-n</span></kbd></td>
-<td>显示最近的几行</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-r</span></kbd></td>
-<td>反转输出，新的放前面</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-o</span></kbd></td>
-<td>指定输出格式</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--utc</span></kbd></td>
-<td>时间为utc时间</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-k</span></kbd></td>
-<td>显示内核信息</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-p</span></kbd></td>
-<td>设置level</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-S</span></kbd></td>
-<td>开始时间</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--since</span></kbd></td>
-<td>开始时间，日志格式‘2012-10-30 18:17:16’</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-U</span></kbd></td>
-<td>开始时间</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--until</span></kbd></td>
-<td>开始时间，日志格式‘2012-10-30 18:17:16’</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-F</span></kbd></td>
-<td>指定的字段</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--disk-usage</span></kbd></td>
-<td>当前日志占用系统空间情况</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--no-pager</span></kbd></td>
-<td>不分页</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-f</span></kbd></td>
-<td>实时滚动显示</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-u</span></kbd></td>
-<td>指定服务进程</td></tr>
-</tbody>
-</table>
+<dl class="option-list">
+<dt><kbd><span class="option">-a</span></kbd></dt>
+<dd><p>显示所有字段</p>
+</dd>
+<dt><kbd><span class="option">-f</span></kbd></dt>
+<dd><p>最新的信息</p>
+</dd>
+<dt><kbd><span class="option">-e</span></kbd></dt>
+<dd><p>跳到最后一页</p>
+</dd>
+<dt><kbd><span class="option">-n</span></kbd></dt>
+<dd><p>显示最近的几行</p>
+</dd>
+<dt><kbd><span class="option">-r</span></kbd></dt>
+<dd><p>反转输出，新的放前面</p>
+</dd>
+<dt><kbd><span class="option">-o</span></kbd></dt>
+<dd><p>指定输出格式</p>
+</dd>
+<dt><kbd><span class="option">--utc</span></kbd></dt>
+<dd><p>时间为utc时间</p>
+</dd>
+<dt><kbd><span class="option">-k</span></kbd></dt>
+<dd><p>显示内核信息</p>
+</dd>
+<dt><kbd><span class="option">-p</span></kbd></dt>
+<dd><p>设置level</p>
+</dd>
+<dt><kbd><span class="option">-S</span></kbd></dt>
+<dd><p>开始时间</p>
+</dd>
+<dt><kbd><span class="option">--since</span></kbd></dt>
+<dd><p>开始时间，日志格式‘2012-10-30 18:17:16’</p>
+</dd>
+<dt><kbd><span class="option">-U</span></kbd></dt>
+<dd><p>开始时间</p>
+</dd>
+<dt><kbd><span class="option">--until</span></kbd></dt>
+<dd><p>开始时间，日志格式‘2012-10-30 18:17:16’</p>
+</dd>
+<dt><kbd><span class="option">-F</span></kbd></dt>
+<dd><p>指定的字段</p>
+</dd>
+<dt><kbd><span class="option">--disk-usage</span></kbd></dt>
+<dd><p>当前日志占用系统空间情况</p>
+</dd>
+<dt><kbd><span class="option">--no-pager</span></kbd></dt>
+<dd><p>不分页</p>
+</dd>
+<dt><kbd><span class="option">-f</span></kbd></dt>
+<dd><p>实时滚动显示</p>
+</dd>
+<dt><kbd><span class="option">-u</span></kbd></dt>
+<dd><p>指定服务进程</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="id12">
 <h3>11.1.3.5. 样例使用<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>

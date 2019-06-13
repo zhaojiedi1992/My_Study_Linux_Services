@@ -249,8 +249,8 @@ bak  cdrom.repo  epel-7.repo
 <p><a class="reference external" href="https://downloads.mariadb.org/">下载地址</a>.</p>
 <img alt="../../_images/下载二进制.png" src="../../_images/下载二进制.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">centos7的下载systemd的，centos6下载第二个。</p>
+<p class="admonition-title">Note</p>
+<p>centos7的下载systemd的，centos6下载第二个。</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># cd /usr/src</span>
 <span class="o">[</span>root@7 src<span class="o">]</span><span class="c1"># wget https://downloads.mariadb.org/interstitial/mariadb-10.2.12/bintar-linux-systemd-x86_64/mariadb-10.2.12-linux-systemd-x86_64.tar.gz/from/http%3A/.edu.cn/mariadb/     \</span>
@@ -284,8 +284,8 @@ PATH=/usr/local/bin:$PATH
 <div class="section" id="id7">
 <h3>9.3.2.5. 存储设备准备<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">数据库文件占用空间很大的，建议放到lvm上面去，容易扩展，避免导致根分区占用过大。</p>
+<p class="admonition-title">Note</p>
+<p>数据库文件占用空间很大的，建议放到lvm上面去，容易扩展，避免导致根分区占用过大。</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@7 local<span class="o">]</span><span class="c1"># lsblk</span>
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT

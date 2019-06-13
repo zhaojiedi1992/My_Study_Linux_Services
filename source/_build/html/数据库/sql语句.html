@@ -246,17 +246,17 @@
 <p>sql语句分为2个部分，数据操作语言和数据定义语言。</p>
 <p>dml语言</p>
 <ol class="arabic simple">
-<li>select</li>
-<li>update</li>
-<li>delete</li>
-<li>insert</li>
+<li><p>select</p></li>
+<li><p>update</p></li>
+<li><p>delete</p></li>
+<li><p>insert</p></li>
 </ol>
 <p>ddl语句</p>
 <ol class="arabic simple">
-<li>create</li>
-<li>alter</li>
-<li>drop</li>
-<li>truncate</li>
+<li><p>create</p></li>
+<li><p>alter</p></li>
+<li><p>drop</p></li>
+<li><p>truncate</p></li>
 </ol>
 <div class="section" id="select">
 <h3>9.2.1.1. select<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h3>
@@ -267,8 +267,8 @@ select   *      from   表名称
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">“*”代表通配所有列。</p>
+<p class="admonition-title">Note</p>
+<p>“*”代表通配所有列。</p>
 </div>
 <p>样例</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">LastName</span><span class="p">,</span><span class="n">FirstName</span> <span class="k">FROM</span> <span class="n">Persons</span>
@@ -294,40 +294,40 @@ select   *      from   表名称
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
 </pre></div>
 </div>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="43%" />
-<col width="57%" />
+<col style="width: 43%" />
+<col style="width: 57%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">操作符号</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>操作符号</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>=</td>
-<td>等于</td>
+<tbody>
+<tr class="row-even"><td><p>=</p></td>
+<td><p>等于</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;&gt;</td>
-<td>不等于</td>
+<tr class="row-odd"><td><p>&lt;&gt;</p></td>
+<td><p>不等于</p></td>
 </tr>
-<tr class="row-even"><td>&gt;</td>
-<td>大于</td>
+<tr class="row-even"><td><p>&gt;</p></td>
+<td><p>大于</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;</td>
-<td>小于</td>
+<tr class="row-odd"><td><p>&lt;</p></td>
+<td><p>小于</p></td>
 </tr>
-<tr class="row-even"><td>&gt;=</td>
-<td>大于等于</td>
+<tr class="row-even"><td><p>&gt;=</p></td>
+<td><p>大于等于</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;=</td>
-<td>小于等于</td>
+<tr class="row-odd"><td><p>&lt;=</p></td>
+<td><p>小于等于</p></td>
 </tr>
-<tr class="row-even"><td>BETWEEN</td>
-<td>在某个范围内</td>
+<tr class="row-even"><td><p>BETWEEN</p></td>
+<td><p>在某个范围内</p></td>
 </tr>
-<tr class="row-odd"><td>LIKE</td>
-<td>搜索某种模式</td>
+<tr class="row-odd"><td><p>LIKE</p></td>
+<td><p>搜索某种模式</p></td>
 </tr>
 </tbody>
 </table>
@@ -336,8 +336,8 @@ select   *      from   表名称
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">sql语句中关键才是不区分大小写的，但是指定的字符串是区分大小写的，字符串使用单引号。</p>
+<p class="admonition-title">Warning</p>
+<p>sql语句中关键才是不区分大小写的，但是指定的字符串是区分大小写的，字符串使用单引号。</p>
 </div>
 </div>
 <div class="section" id="and-or">
@@ -406,8 +406,8 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">如果不加限定条件，默认是删除所有行数据， 很危险的。</p>
+<p class="admonition-title">Warning</p>
+<p>如果不加限定条件，默认是删除所有行数据， 很危险的。</p>
 </div>
 </div>
 </div>
@@ -450,28 +450,28 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 <div class="section" id="id3">
 <h3>9.2.2.3. 通配符<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>上面已经使用了”%”通配符了</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="43%" />
-<col width="57%" />
+<col style="width: 43%" />
+<col style="width: 57%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">通配符</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>通配符</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>%</td>
-<td>替代一个或多个字符</td>
+<tbody>
+<tr class="row-even"><td><p>%</p></td>
+<td><p>替代一个或多个字符</p></td>
 </tr>
-<tr class="row-odd"><td>_</td>
-<td>仅仅替代一个字符</td>
+<tr class="row-odd"><td><p>_</p></td>
+<td><p>仅仅替代一个字符</p></td>
 </tr>
-<tr class="row-even"><td>[charlist]</td>
-<td>字符列中的任何一个单一字符</td>
+<tr class="row-even"><td><p>[charlist]</p></td>
+<td><p>字符列中的任何一个单一字符</p></td>
 </tr>
-<tr class="row-odd"><td>[^charlist]</td>
-<td>不再字符列中的任何字符</td>
+<tr class="row-odd"><td><p>[^charlist]</p></td>
+<td><p>不再字符列中的任何字符</p></td>
 </tr>
 </tbody>
 </table>
@@ -516,8 +516,8 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </pre></div>
 </div>
 <div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">有些数据对between and 这个语句差异很大的，有些是左开右闭，有些是两个都是闭区间。</p>
+<p class="admonition-title">Important</p>
+<p>有些数据对between and 这个语句差异很大的，有些是左开右闭，有些是两个都是闭区间。</p>
 </div>
 </div>
 <div class="section" id="aliases">
@@ -553,10 +553,10 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 </div>
 <p>下面列出了您可以使用的 JOIN 类型，以及它们之间的差异。</p>
 <ol class="arabic simple">
-<li>JOIN: 如果表中有至少一个匹配，则返回行</li>
-<li>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行</li>
-<li>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行</li>
-<li>FULL JOIN: 只要其中一个表中存在匹配，就返回行</li>
+<li><p>JOIN: 如果表中有至少一个匹配，则返回行</p></li>
+<li><p>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行</p></li>
+<li><p>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行</p></li>
+<li><p>FULL JOIN: 只要其中一个表中存在匹配，就返回行</p></li>
 </ol>
 </div>
 <div class="section" id="inner-join">
@@ -600,8 +600,8 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 <h3>9.2.2.12. union<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h3>
 <p>union 用于合并2个或者多个查询语句的结果集合</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">多个结果集合需要列数量相同，且对应列数据类型相似。</p>
+<p class="admonition-title">Note</p>
+<p>多个结果集合需要列数量相同，且对应列数据类型相似。</p>
 </div>
 <p>样例：</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">E_Name</span> <span class="k">FROM</span> <span class="n">Employees_China</span>
@@ -661,13 +661,13 @@ UPDATE 表名称 SET 列名称1 = 新值1 ,列名称2 = 新值2  WHERE 列名称
 <p>可以在创建表时规定约束（通过 CREATE TABLE 语句），或者在表创建之后也可以（通过 ALTER TABLE 语句）。</p>
 <p>我们将主要探讨以下几种约束：</p>
 <ul class="simple">
-<li>NOT NULL     非空约束</li>
-<li>UNIQUE       唯一约束</li>
-<li>PRIMARY KEY  主键约束</li>
-<li>FOREIGN KEY  外键约束</li>
-<li>CHECK        值检查约束</li>
-<li>DEFAULT      默认值</li>
-<li>not null     非空约束</li>
+<li><p>NOT NULL     非空约束</p></li>
+<li><p>UNIQUE       唯一约束</p></li>
+<li><p>PRIMARY KEY  主键约束</p></li>
+<li><p>FOREIGN KEY  外键约束</p></li>
+<li><p>CHECK        值检查约束</p></li>
+<li><p>DEFAULT      默认值</p></li>
+<li><p>not null     非空约束</p></li>
 </ul>
 </div>
 <div class="section" id="not-null">
@@ -980,8 +980,8 @@ DROP CONSTRAINT fk_PerOrders
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">上面的方法中，oracle最为麻烦，插入数据很不方便，可以考虑使用触发器。</p>
+<p class="admonition-title">Note</p>
+<p>上面的方法中，oracle最为麻烦，插入数据很不方便，可以考虑使用触发器。</p>
 </div>
 </div>
 <div class="section" id="view">
@@ -1009,8 +1009,8 @@ DROP CONSTRAINT fk_PerOrders
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">不能使”列名字=NULL”这种方式的。</p>
+<p class="admonition-title">Warning</p>
+<p>不能使”列名字=NULL”这种方式的。</p>
 </div>
 </div>
 <div class="section" id="id4">

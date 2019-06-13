@@ -204,15 +204,15 @@
 <div class="section" id="id1">
 <h2>5.3.1. selinux的工作模式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>selinux采用委任式访问控制来管理程序，它控制的主体是程序，目标是文件资源。</p>
-<dl class="docutils">
-<dt>主体</dt>
-<dd>selinux主要管理的是程序</dd>
-<dt>目标</dt>
-<dd>主体程序访问的目标资源一般就是文件系统</dd>
-<dt>策略</dt>
-<dd>不同策略有详细的规则来指定不同的服务开放某些资源的访问与否</dd>
-<dt>安全上下文</dt>
-<dd>主体与目标的安全性环境必须一致才能顺利访问目标</dd>
+<dl class="simple">
+<dt>主体</dt><dd><p>selinux主要管理的是程序</p>
+</dd>
+<dt>目标</dt><dd><p>主体程序访问的目标资源一般就是文件系统</p>
+</dd>
+<dt>策略</dt><dd><p>不同策略有详细的规则来指定不同的服务开放某些资源的访问与否</p>
+</dd>
+<dt>安全上下文</dt><dd><p>主体与目标的安全性环境必须一致才能顺利访问目标</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="id2">
@@ -243,9 +243,9 @@
 <h2>5.3.3. selinux的启动、关闭和查看<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>selinux有三种模式。</p>
 <ul class="simple">
-<li>enforcing: 强制模式</li>
-<li>permissive: 宽容模式</li>
-<li>disabled： 关闭</li>
+<li><p>enforcing: 强制模式</p></li>
+<li><p>permissive: 宽容模式</p></li>
+<li><p>disabled： 关闭</p></li>
 </ul>
 <div class="section" id="id4">
 <h3>5.3.3.1. 查看<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
@@ -260,8 +260,8 @@ Disabled
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">setenforce无法在disabled模式切换到其他模式</p>
+<p class="admonition-title">Note</p>
+<p>setenforce无法在disabled模式切换到其他模式</p>
 </div>
 </div>
 <div class="section" id="id6">

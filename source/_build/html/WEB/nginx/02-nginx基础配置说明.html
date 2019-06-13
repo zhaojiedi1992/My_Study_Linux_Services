@@ -523,11 +523,11 @@ Context:    server
 <p>指定主机名字</p>
 <p>匹配优先级机制从高到低：</p>
 <ol class="arabic simple">
-<li>首先是字符串精确匹配 如：www.magedu.com</li>
-<li>左侧*通配符 如：*.magedu.com</li>
-<li>右侧*通配符 如：www.magedu.*</li>
-<li>正则表达式 如： ~^.*.magedu.com$</li>
-<li>default_server</li>
+<li><p>首先是字符串精确匹配 如：www.magedu.com</p></li>
+<li><p>左侧*通配符 如：*.magedu.com</p></li>
+<li><p>右侧*通配符 如：www.magedu.*</p></li>
+<li><p>正则表达式 如： ~^.*.magedu.com$</p></li>
+<li><p>default_server</p></li>
 </ol>
 </div>
 <div class="section" id="root">
@@ -747,9 +747,9 @@ Context:    http, server, location
 </div>
 <p>是否打开文件缓存，需要配合open_file_cache max=N使用，可以缓存的信息如下：</p>
 <ul class="simple">
-<li>文件元数据信息</li>
-<li>打开的目录结构</li>
-<li>没有找到的或者没有访问权限的文件的相关信息。</li>
+<li><p>文件元数据信息</p></li>
+<li><p>打开的目录结构</p></li>
+<li><p>没有找到的或者没有访问权限的文件的相关信息。</p></li>
 </ul>
 </div>
 <div class="section" id="open-file-cache-errors">
@@ -795,8 +795,8 @@ Context:    http, server, location
 <p>用法： deny address | CIDR | unix: | all;</p>
 <p>用于禁止特定主机访问</p>
 <div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">这里的allow、deny和apache中不一样，如果有一条匹配就返回对应结果。</p>
+<p class="admonition-title">Attention</p>
+<p>这里的allow、deny和apache中不一样，如果有一条匹配就返回对应结果。</p>
 </div>
 </div>
 </div>
@@ -971,18 +971,18 @@ ssl_session_timeout 10m;
 <h3>10.9.9.1. rewrite<a class="headerlink" href="#rewrite" title="Permalink to this headline">¶</a></h3>
 <p>用法： rewrite regex replacement [flag]</p>
 <p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为replacement指定的新的URI</p>
-<dl class="docutils">
-<dt>last</dt>
-<dd>重写完成后停止对当前URI在当前location中后续的其它重写操作，而后对新的URI启动新一轮重写检查；提前重
-启新一轮循环，不建议在location中使用</dd>
-<dt>break</dt>
-<dd>重写完成后停止对当前URI在当前location中后续的其它重写操作，而后直接跳转至重写规则配置块之后的其它
-配置；结束循环，建议在location中使用。</dd>
-<dt>redirect</dt>
-<dd>临时重定向，重写完成后以临时重定向方式直接返回重写后生成的新URI给客户端，由客户端重新发起请求；
-使用相对路径,或者http://或https://开头，状态码：302</dd>
-<dt>permanent</dt>
-<dd>重写完成后以永久重定向方式直接返回重写后生成的新URI给客户端，由客户端重新发起请求，状态码：301</dd>
+<dl class="simple">
+<dt>last</dt><dd><p>重写完成后停止对当前URI在当前location中后续的其它重写操作，而后对新的URI启动新一轮重写检查；提前重
+启新一轮循环，不建议在location中使用</p>
+</dd>
+<dt>break</dt><dd><p>重写完成后停止对当前URI在当前location中后续的其它重写操作，而后直接跳转至重写规则配置块之后的其它
+配置；结束循环，建议在location中使用。</p>
+</dd>
+<dt>redirect</dt><dd><p>临时重定向，重写完成后以临时重定向方式直接返回重写后生成的新URI给客户端，由客户端重新发起请求；
+使用相对路径,或者http://或https://开头，状态码：302</p>
+</dd>
+<dt>permanent</dt><dd><p>重写完成后以永久重定向方式直接返回重写后生成的新URI给客户端，由客户端重新发起请求，状态码：301</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="return">
@@ -1028,11 +1028,11 @@ ssl_session_timeout 10m;
 <p>用法：  valid_referers none|blocked|server_names|string …;</p>
 <p>定义referer首部的合法可用值，不能匹配的将是非法值。</p>
 <ul class="simple">
-<li>node: 报文首部没有referer首部</li>
-<li>blocked: 请求报文没有referer首部，但无有效值</li>
-<li>server_names: 主机名或者主机名模式</li>
-<li>arbitray_string:任意字符串，但可以使用*作为通配符</li>
-<li>regular expression: 正则表达式模式匹配到的字符串，要使用~开头。</li>
+<li><p>node: 报文首部没有referer首部</p></li>
+<li><p>blocked: 请求报文没有referer首部，但无有效值</p></li>
+<li><p>server_names: 主机名或者主机名模式</p></li>
+<li><p>arbitray_string:任意字符串，但可以使用*作为通配符</p></li>
+<li><p>regular expression: 正则表达式模式匹配到的字符串，要使用~开头。</p></li>
 </ul>
 <p>样例：</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>valid_referers none block server_names *.linuxpanda.tech;

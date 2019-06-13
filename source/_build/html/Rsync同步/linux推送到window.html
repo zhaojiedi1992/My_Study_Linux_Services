@@ -211,9 +211,9 @@
 <div class="section" id="id1">
 <h2>2.3.1. 环境介绍<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>2个机器</li>
-<li>centos7(192.168.1.109)，windows10(192.168.1.104)</li>
-<li>centos(/app/web)===&gt;window(c:appweb)</li>
+<li><p>2个机器</p></li>
+<li><p>centos7(192.168.1.109)，windows10(192.168.1.104)</p></li>
+<li><p>centos(/app/web)===&gt;window(c:appweb)</p></li>
 </ul>
 <p>我们要完成的功能是centos7的数据更新后，自动推送到window机器上面。</p>
 <p>这里我们选择windows作为服务端，centos7作为客户端，然后centos7去监控本地数据推送给window数据。</p>
@@ -263,8 +263,8 @@ secrets file = /etc/rsyncd.pass
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">我的uid是test，你的根据你的情况进行修改，如果不知道可以打开cygwin64Terminal终端，输入 echo $USER查看。</p>
+<p class="admonition-title">Note</p>
+<p>我的uid是test，你的根据你的情况进行修改，如果不知道可以打开cygwin64Terminal终端，输入 echo $USER查看。</p>
 </div>
 <div class="section" id="id3">
 <h3>2.3.3.1. 创建服务器密码文件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
@@ -329,8 +329,8 @@ web
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这里我们只需要指定密码即可，不用用户名。</p>
+<p class="admonition-title">Note</p>
+<p>这里我们只需要指定密码即可，不用用户名。</p>
 </div>
 </div>
 <div class="section" id="id10">
@@ -355,8 +355,8 @@ dr-xr-xr-x. <span class="m">2</span> <span class="m">197609</span> <span class="
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">这里我不知道为何也罢cygdrive和dev这个目录同步过来了。 不知道为啥的.</p>
+<p class="admonition-title">Note</p>
+<p>这里我不知道为何也罢cygdrive和dev这个目录同步过来了。 不知道为啥的.</p>
 </div>
 </div>
 </div>

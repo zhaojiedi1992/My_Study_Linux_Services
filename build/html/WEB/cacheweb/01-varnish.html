@@ -848,16 +848,16 @@ centos-152.linuxpanda.tech
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>sub vcl_init {</dt>
-<dd>new cookie_hash = directors.hash();
+<dl class="simple">
+<dt>sub vcl_init {</dt><dd><p>new cookie_hash = directors.hash();
 cookie_hash.add_backend(web152);
-cookie_hash.add_backend(web153);</dd>
+cookie_hash.add_backend(web153);</p>
+</dd>
 </dl>
 <p>}</p>
-<dl class="docutils">
-<dt>sub vcl_recv {</dt>
-<dd>set req.backend_hint = cookie_hash.backend(req.http.cookie);</dd>
+<dl class="simple">
+<dt>sub vcl_recv {</dt><dd><p>set req.backend_hint = cookie_hash.backend(req.http.cookie);</p>
+</dd>
 </dl>
 <p>}</p>
 <p>上面的代码如果请求都是有cookie的话还好， 如果没有还不清楚是不是仅仅调度到一个服务器上面去。如果是还是需要加额外的逻辑控制的。

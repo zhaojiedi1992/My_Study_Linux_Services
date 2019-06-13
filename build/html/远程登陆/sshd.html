@@ -203,153 +203,153 @@ openssh-server-7.4p1-11.el7.x86_64
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">默认情况下大部分linux机器都会安装这个软件来提供sshd功能的。</p>
+<p class="admonition-title">Note</p>
+<p>默认情况下大部分linux机器都会安装这个软件来提供sshd功能的。</p>
 </div>
 </div>
 <div class="section" id="id3">
 <h2>6.1.3. sshd的主要配置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>配置比较多， 这里只列出重要配置</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="23%" />
-<col width="38%" />
-<col width="38%" />
+<col style="width: 23%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">参数</th>
-<th class="head">默认值</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>默认值</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Port</td>
-<td>22</td>
-<td>指定监听端口，这个配置可以写多行，用于监听多个端口</td>
+<tbody>
+<tr class="row-even"><td><p>Port</p></td>
+<td><p>22</p></td>
+<td><p>指定监听端口，这个配置可以写多行，用于监听多个端口</p></td>
 </tr>
-<tr class="row-odd"><td>Protocol</td>
-<td>2</td>
-<td>ssh协议的版本，可以修改2,1来支持1和2两个版本</td>
+<tr class="row-odd"><td><p>Protocol</p></td>
+<td><p>2</p></td>
+<td><p>ssh协议的版本，可以修改2,1来支持1和2两个版本</p></td>
 </tr>
-<tr class="row-even"><td>ListenAddress</td>
-<td>0.0.0.0</td>
-<td>指定简单的ip地址，默认是主机上所有的ip地址</td>
+<tr class="row-even"><td><p>ListenAddress</p></td>
+<td><p>0.0.0.0</p></td>
+<td><p>指定简单的ip地址，默认是主机上所有的ip地址</p></td>
 </tr>
-<tr class="row-odd"><td>PidFile</td>
-<td>/var/run/sshd.pid</td>
-<td>pid文件</td>
+<tr class="row-odd"><td><p>PidFile</p></td>
+<td><p>/var/run/sshd.pid</p></td>
+<td><p>pid文件</p></td>
 </tr>
-<tr class="row-even"><td>LoginGraceTime</td>
-<td>2m</td>
-<td>输入密码阶段，多少时间没有输入就终端的时间</td>
+<tr class="row-even"><td><p>LoginGraceTime</p></td>
+<td><p>2m</p></td>
+<td><p>输入密码阶段，多少时间没有输入就终端的时间</p></td>
 </tr>
-<tr class="row-odd"><td>Compression</td>
-<td>delayed</td>
-<td>指定合适开始使用压缩数据模式进行传输</td>
+<tr class="row-odd"><td><p>Compression</p></td>
+<td><p>delayed</p></td>
+<td><p>指定合适开始使用压缩数据模式进行传输</p></td>
 </tr>
-<tr class="row-even"><td>HostKey</td>
-<td>/etc/ssh/ssh_host_key</td>
-<td>ssh v1的私钥</td>
+<tr class="row-even"><td><p>HostKey</p></td>
+<td><p>/etc/ssh/ssh_host_key</p></td>
+<td><p>ssh v1的私钥</p></td>
 </tr>
-<tr class="row-odd"><td>HostKey</td>
-<td>/etc/ssh/ssh_host_rsa_key</td>
-<td>ssh v2 rsa的私钥</td>
+<tr class="row-odd"><td><p>HostKey</p></td>
+<td><p>/etc/ssh/ssh_host_rsa_key</p></td>
+<td><p>ssh v2 rsa的私钥</p></td>
 </tr>
-<tr class="row-even"><td>HostKey</td>
-<td>/etc/ssh/ssh_host_dsa_key</td>
-<td>ssh v2 dsa的私钥</td>
+<tr class="row-even"><td><p>HostKey</p></td>
+<td><p>/etc/ssh/ssh_host_dsa_key</p></td>
+<td><p>ssh v2 dsa的私钥</p></td>
 </tr>
-<tr class="row-odd"><td>SyslogFacility</td>
-<td>AuthPRIV</td>
-<td>日志记录的设施，可以修改为LOCAL1-6,</td>
+<tr class="row-odd"><td><p>SyslogFacility</p></td>
+<td><p>AuthPRIV</p></td>
+<td><p>日志记录的设施，可以修改为LOCAL1-6,</p></td>
 </tr>
-<tr class="row-even"><td>LogLevel</td>
-<td>INFO</td>
-<td>日志级别</td>
+<tr class="row-even"><td><p>LogLevel</p></td>
+<td><p>INFO</p></td>
+<td><p>日志级别</p></td>
 </tr>
-<tr class="row-odd"><td>PermitRootLogin</td>
-<td>yes</td>
-<td>是否运行root登陆</td>
+<tr class="row-odd"><td><p>PermitRootLogin</p></td>
+<td><p>yes</p></td>
+<td><p>是否运行root登陆</p></td>
 </tr>
-<tr class="row-even"><td>StrictMode</td>
-<td>yes</td>
-<td>如果用户家目录的.ssh目录权限不对，可能无法登陆</td>
+<tr class="row-even"><td><p>StrictMode</p></td>
+<td><p>yes</p></td>
+<td><p>如果用户家目录的.ssh目录权限不对，可能无法登陆</p></td>
 </tr>
-<tr class="row-odd"><td>Pubkeyauthentication</td>
-<td>yes</td>
-<td>支持公钥认证</td>
+<tr class="row-odd"><td><p>Pubkeyauthentication</p></td>
+<td><p>yes</p></td>
+<td><p>支持公钥认证</p></td>
 </tr>
-<tr class="row-even"><td>AuthorizedKeysFile</td>
-<td>.ssh/autorized_keys</td>
-<td>授权的keys</td>
+<tr class="row-even"><td><p>AuthorizedKeysFile</p></td>
+<td><p>.ssh/autorized_keys</p></td>
+<td><p>授权的keys</p></td>
 </tr>
-<tr class="row-odd"><td>PasswordAuthentication</td>
-<td>yes</td>
-<td>支持密码认证</td>
+<tr class="row-odd"><td><p>PasswordAuthentication</p></td>
+<td><p>yes</p></td>
+<td><p>支持密码认证</p></td>
 </tr>
-<tr class="row-even"><td>PermitEmptyPasswords</td>
-<td>no</td>
-<td>空密码支持</td>
+<tr class="row-even"><td><p>PermitEmptyPasswords</p></td>
+<td><p>no</p></td>
+<td><p>空密码支持</p></td>
 </tr>
-<tr class="row-odd"><td>RhostaAuthtication</td>
-<td>no</td>
-<td>不使用.rhosts认证</td>
+<tr class="row-odd"><td><p>RhostaAuthtication</p></td>
+<td><p>no</p></td>
+<td><p>不使用.rhosts认证</p></td>
 </tr>
-<tr class="row-even"><td>IgnoreRhosts</td>
-<td>yes</td>
-<td>是否取消.rhosts认证</td>
+<tr class="row-even"><td><p>IgnoreRhosts</p></td>
+<td><p>yes</p></td>
+<td><p>是否取消.rhosts认证</p></td>
 </tr>
-<tr class="row-odd"><td>RhostsRSAAUthentication</td>
-<td>no</td>
-<td>配合rsa使用的，这个不用了</td>
+<tr class="row-odd"><td><p>RhostsRSAAUthentication</p></td>
+<td><p>no</p></td>
+<td><p>配合rsa使用的，这个不用了</p></td>
 </tr>
-<tr class="row-even"><td>HostbaseAuthentication</td>
-<td>no</td>
-<td>配合rsa使用，这个参数不用了</td>
+<tr class="row-even"><td><p>HostbaseAuthentication</p></td>
+<td><p>no</p></td>
+<td><p>配合rsa使用，这个参数不用了</p></td>
 </tr>
-<tr class="row-odd"><td>IgnoreUserKnowHosts</td>
-<td>no</td>
-<td>是否忽略用户的家目录的know_hosts文件</td>
+<tr class="row-odd"><td><p>IgnoreUserKnowHosts</p></td>
+<td><p>no</p></td>
+<td><p>是否忽略用户的家目录的know_hosts文件</p></td>
 </tr>
-<tr class="row-even"><td>CallengeResponseAuthentication</td>
-<td>no</td>
-<td>是否login.conf规定的认证都可以，建议no,</td>
+<tr class="row-even"><td><p>CallengeResponseAuthentication</p></td>
+<td><p>no</p></td>
+<td><p>是否login.conf规定的认证都可以，建议no,</p></td>
 </tr>
-<tr class="row-odd"><td>UsePam</td>
-<td>yes</td>
-<td>使用pam认证</td>
+<tr class="row-odd"><td><p>UsePam</p></td>
+<td><p>yes</p></td>
+<td><p>使用pam认证</p></td>
 </tr>
-<tr class="row-even"><td>PrintMotd</td>
-<td>yes</td>
-<td>登陆成功后是否有提示信息，默认是打印/etc/motd文件</td>
+<tr class="row-even"><td><p>PrintMotd</p></td>
+<td><p>yes</p></td>
+<td><p>登陆成功后是否有提示信息，默认是打印/etc/motd文件</p></td>
 </tr>
-<tr class="row-odd"><td>PrintLastLog</td>
-<td>yes</td>
-<td>打印上一次登陆信息</td>
+<tr class="row-odd"><td><p>PrintLastLog</p></td>
+<td><p>yes</p></td>
+<td><p>打印上一次登陆信息</p></td>
 </tr>
-<tr class="row-even"><td>TCPKeepAlive</td>
-<td>yes</td>
-<td>发送tcp包连接判断</td>
+<tr class="row-even"><td><p>TCPKeepAlive</p></td>
+<td><p>yes</p></td>
+<td><p>发送tcp包连接判断</p></td>
 </tr>
-<tr class="row-odd"><td>UserPrivilegeSeparation</td>
-<td>yes</td>
-<td>是否使用较低的权限用户来启动sshd</td>
+<tr class="row-odd"><td><p>UserPrivilegeSeparation</p></td>
+<td><p>yes</p></td>
+<td><p>是否使用较低的权限用户来启动sshd</p></td>
 </tr>
-<tr class="row-even"><td>MaxStartups</td>
-<td>10</td>
-<td>同时运行的尚未登陆的连接界面个数</td>
+<tr class="row-even"><td><p>MaxStartups</p></td>
+<td><p>10</p></td>
+<td><p>同时运行的尚未登陆的连接界面个数</p></td>
 </tr>
-<tr class="row-odd"><td>DenyUses</td>
-<td>-</td>
-<td>限制特定用户，*代表所有用户，含root</td>
+<tr class="row-odd"><td><p>DenyUses</p></td>
+<td><p>-</p></td>
+<td><p>限制特定用户，*代表所有用户，含root</p></td>
 </tr>
-<tr class="row-even"><td>DenyGroup</td>
-<td>-</td>
-<td>限制特定的组</td>
+<tr class="row-even"><td><p>DenyGroup</p></td>
+<td><p>-</p></td>
+<td><p>限制特定的组</p></td>
 </tr>
-<tr class="row-odd"><td>UserDns</td>
-<td>yes</td>
-<td>dns反差客户端的主机名，内网设置no连接更快</td>
+<tr class="row-odd"><td><p>UserDns</p></td>
+<td><p>yes</p></td>
+<td><p>dns反差客户端的主机名，内网设置no连接更快</p></td>
 </tr>
 </tbody>
 </table>
@@ -357,8 +357,8 @@ openssh-server-7.4p1-11.el7.x86_64
 <div class="section" id="id4">
 <h2>6.1.4. 免密码登陆<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">你想用那个机器A的用户A远程到机器B的用户B,只需要copy机器A的用户A的公钥追加到机器B的
+<p class="admonition-title">Note</p>
+<p>你想用那个机器A的用户A远程到机器B的用户B,只需要copy机器A的用户A的公钥追加到机器B的
 用户B的.ssh/autorized_keys文件中去。</p>
 </div>
 <p><a class="reference external" href="http://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_023_sshgenkey.html">详细的免密码登陆</a></p>

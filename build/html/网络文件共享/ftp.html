@@ -211,593 +211,593 @@
 <h2>12.1.2. ftp的配置项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>12.1.2.1. 布尔选项<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="27%" />
-<col width="27%" />
-<col width="45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 45%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">名称</th>
-<th class="head">默认值</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>默认值</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>allow_annon_ssl</td>
-<td>NO</td>
-<td>匿名用户被允许使用安装的ssl连接，需要ssl_enable启用</td>
-</tr>
-<tr class="row-odd"><td>anon_mkdir_write_enable</td>
-<td>NO</td>
-<td>匿名用户被允许在一定条件下创建新目录，需要write_enable启用，且匿名ftp用户对父目录有写权限</td>
-</tr>
-<tr class="row-even"><td>anon_other_write_anble</td>
-<td>NO</td>
-<td>匿名用于被允许写入和创建目录，删除其他用户上传的文件</td>
-</tr>
-<tr class="row-odd"><td>anon_upload_enable</td>
-<td>NO</td>
-<td>匿名用户将被运行上传文件，需要write_enable激活，且在指定目录有写权限</td>
-</tr>
-<tr class="row-even"><td>anon_world_readable_only</td>
-<td>YES</td>
-<td>匿名用户只能下载所有人都能读取的文件</td>
-</tr>
-<tr class="row-odd"><td>anonmous_enable</td>
-<td>YES</td>
-<td>是否启用匿名用户</td>
-</tr>
-<tr class="row-even"><td>ascii_download_enable</td>
-<td>NO</td>
-<td>启用文本模式下载</td>
-</tr>
-<tr class="row-odd"><td>ascii_upload_enable</td>
-<td>NO</td>
-<td>启用文本模式上传</td>
-</tr>
-<tr class="row-even"><td>async_abor_enable</td>
-<td>NO</td>
-<td>异步abor命令启用</td>
-</tr>
-<tr class="row-odd"><td>background</td>
-<td>YES</td>
-<td>启用后vsftpd是监听模式</td>
-</tr>
-<tr class="row-even"><td>check_shell</td>
-<td>YES</td>
-<td>是使用pam_shell模块，只有在/etc/shells中指定的shell类型用户才能登陆</td>
-</tr>
-<tr class="row-odd"><td>chmod_enable</td>
-<td>YES</td>
-<td>运行使用SITE chmod命令，只适用于本地用户</td>
-</tr>
-<tr class="row-even"><td>chown_uploads</td>
-<td>No</td>
-<td>如果启用，所有匿名上传的文件将编程chown_username所有者</td>
-</tr>
-<tr class="row-odd"><td>chroot_list_enable</td>
-<td>NO</td>
-<td>默认是列表文件是/etc/vsftpd/chroot_list,可以使用chroot_list_file重写</td>
-</tr>
-<tr class="row-even"><td>chroot_local_user</td>
-<td>yes</td>
-<td>本地用户被禁锢在自己的家目录</td>
-</tr>
-<tr class="row-odd"><td>connect_from_port_20</td>
-<td>NO</td>
-<td>主动模式启用20端口来数据连接，可以配合其他命令修改20端口</td>
-</tr>
-<tr class="row-even"><td>debug_ssl</td>
-<td>NO</td>
-<td>将openssl的诊断信息写到日志文件去</td>
-</tr>
-<tr class="row-odd"><td>delete_failed_uploads</td>
-<td>NO</td>
-<td>任何上传失败的文件被删除</td>
-</tr>
-<tr class="row-even"><td>deny_email_enable</td>
-<td>NO</td>
-<td>拒绝登陆的电子邮件恢复，默认列表是/etc/vsftpd/banned_emails,可以使用banned_email_file覆盖设置</td>
-</tr>
-<tr class="row-odd"><td>dirlist_enable</td>
-<td>YES</td>
-<td>如果设置no,所有目录列表命令被拒绝</td>
-</tr>
-<tr class="row-even"><td>dirmessage_enable</td>
-<td>no</td>
-<td>如果启用,进入目录扫描目录.message内容给用户显示</td>
-</tr>
-<tr class="row-odd"><td>download_enable</td>
-<td>Yes</td>
-<td>如果设置为NO,下载请求都被拒绝</td>
-</tr>
-<tr class="row-even"><td>dual_log_enable</td>
-<td>no</td>
-<td>如果yes,两种风格日志都写,/var/log/xferlog和/var/log/vsftpd.log</td>
-</tr>
-<tr class="row-odd"><td>force_dot_file</td>
-<td>NO</td>
-<td>如果激活，目录列表不显示..,.这些内容</td>
-</tr>
-<tr class="row-even"><td>force_annon_data_ssl</td>
-<td>NO</td>
-<td>只有ssl_enable启用的时候，所有匿名用户必须使用ssl数据传输</td>
-</tr>
-<tr class="row-odd"><td>force_anon_logins_ssl</td>
-<td>NO</td>
-<td>你有ssl_enable启用的时候，匿名用户强制使用登陆</td>
+<tbody>
+<tr class="row-even"><td><p>allow_annon_ssl</p></td>
+<td><p>NO</p></td>
+<td><p>匿名用户被允许使用安装的ssl连接，需要ssl_enable启用</p></td>
+</tr>
+<tr class="row-odd"><td><p>anon_mkdir_write_enable</p></td>
+<td><p>NO</p></td>
+<td><p>匿名用户被允许在一定条件下创建新目录，需要write_enable启用，且匿名ftp用户对父目录有写权限</p></td>
+</tr>
+<tr class="row-even"><td><p>anon_other_write_anble</p></td>
+<td><p>NO</p></td>
+<td><p>匿名用于被允许写入和创建目录，删除其他用户上传的文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>anon_upload_enable</p></td>
+<td><p>NO</p></td>
+<td><p>匿名用户将被运行上传文件，需要write_enable激活，且在指定目录有写权限</p></td>
+</tr>
+<tr class="row-even"><td><p>anon_world_readable_only</p></td>
+<td><p>YES</p></td>
+<td><p>匿名用户只能下载所有人都能读取的文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>anonmous_enable</p></td>
+<td><p>YES</p></td>
+<td><p>是否启用匿名用户</p></td>
+</tr>
+<tr class="row-even"><td><p>ascii_download_enable</p></td>
+<td><p>NO</p></td>
+<td><p>启用文本模式下载</p></td>
+</tr>
+<tr class="row-odd"><td><p>ascii_upload_enable</p></td>
+<td><p>NO</p></td>
+<td><p>启用文本模式上传</p></td>
+</tr>
+<tr class="row-even"><td><p>async_abor_enable</p></td>
+<td><p>NO</p></td>
+<td><p>异步abor命令启用</p></td>
+</tr>
+<tr class="row-odd"><td><p>background</p></td>
+<td><p>YES</p></td>
+<td><p>启用后vsftpd是监听模式</p></td>
+</tr>
+<tr class="row-even"><td><p>check_shell</p></td>
+<td><p>YES</p></td>
+<td><p>是使用pam_shell模块，只有在/etc/shells中指定的shell类型用户才能登陆</p></td>
+</tr>
+<tr class="row-odd"><td><p>chmod_enable</p></td>
+<td><p>YES</p></td>
+<td><p>运行使用SITE chmod命令，只适用于本地用户</p></td>
+</tr>
+<tr class="row-even"><td><p>chown_uploads</p></td>
+<td><p>No</p></td>
+<td><p>如果启用，所有匿名上传的文件将编程chown_username所有者</p></td>
+</tr>
+<tr class="row-odd"><td><p>chroot_list_enable</p></td>
+<td><p>NO</p></td>
+<td><p>默认是列表文件是/etc/vsftpd/chroot_list,可以使用chroot_list_file重写</p></td>
+</tr>
+<tr class="row-even"><td><p>chroot_local_user</p></td>
+<td><p>yes</p></td>
+<td><p>本地用户被禁锢在自己的家目录</p></td>
+</tr>
+<tr class="row-odd"><td><p>connect_from_port_20</p></td>
+<td><p>NO</p></td>
+<td><p>主动模式启用20端口来数据连接，可以配合其他命令修改20端口</p></td>
+</tr>
+<tr class="row-even"><td><p>debug_ssl</p></td>
+<td><p>NO</p></td>
+<td><p>将openssl的诊断信息写到日志文件去</p></td>
+</tr>
+<tr class="row-odd"><td><p>delete_failed_uploads</p></td>
+<td><p>NO</p></td>
+<td><p>任何上传失败的文件被删除</p></td>
+</tr>
+<tr class="row-even"><td><p>deny_email_enable</p></td>
+<td><p>NO</p></td>
+<td><p>拒绝登陆的电子邮件恢复，默认列表是/etc/vsftpd/banned_emails,可以使用banned_email_file覆盖设置</p></td>
+</tr>
+<tr class="row-odd"><td><p>dirlist_enable</p></td>
+<td><p>YES</p></td>
+<td><p>如果设置no,所有目录列表命令被拒绝</p></td>
+</tr>
+<tr class="row-even"><td><p>dirmessage_enable</p></td>
+<td><p>no</p></td>
+<td><p>如果启用,进入目录扫描目录.message内容给用户显示</p></td>
+</tr>
+<tr class="row-odd"><td><p>download_enable</p></td>
+<td><p>Yes</p></td>
+<td><p>如果设置为NO,下载请求都被拒绝</p></td>
+</tr>
+<tr class="row-even"><td><p>dual_log_enable</p></td>
+<td><p>no</p></td>
+<td><p>如果yes,两种风格日志都写,/var/log/xferlog和/var/log/vsftpd.log</p></td>
+</tr>
+<tr class="row-odd"><td><p>force_dot_file</p></td>
+<td><p>NO</p></td>
+<td><p>如果激活，目录列表不显示..,.这些内容</p></td>
+</tr>
+<tr class="row-even"><td><p>force_annon_data_ssl</p></td>
+<td><p>NO</p></td>
+<td><p>只有ssl_enable启用的时候，所有匿名用户必须使用ssl数据传输</p></td>
+</tr>
+<tr class="row-odd"><td><p>force_anon_logins_ssl</p></td>
+<td><p>NO</p></td>
+<td><p>你有ssl_enable启用的时候，匿名用户强制使用登陆</p></td>
 </tr>
-<tr class="row-even"><td>force_local_data_ssl</td>
-<td>YES</td>
-<td>只有ssl_enable启用的时候，本地用户数据传输使用ssl数据传输</td>
+<tr class="row-even"><td><p>force_local_data_ssl</p></td>
+<td><p>YES</p></td>
+<td><p>只有ssl_enable启用的时候，本地用户数据传输使用ssl数据传输</p></td>
 </tr>
-<tr class="row-odd"><td>force_local_logins_ssl</td>
-<td>YES</td>
-<td>你有ssl_enable启用的时候，本地用户强制使用登陆</td>
+<tr class="row-odd"><td><p>force_local_logins_ssl</p></td>
+<td><p>YES</p></td>
+<td><p>你有ssl_enable启用的时候，本地用户强制使用登陆</p></td>
 </tr>
-<tr class="row-even"><td>guest_enable</td>
-<td>NO</td>
-<td>如果启用，将所有非匿名用户归为来宾，映射为guest_username用户</td>
+<tr class="row-even"><td><p>guest_enable</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，将所有非匿名用户归为来宾，映射为guest_username用户</p></td>
 </tr>
-<tr class="row-odd"><td>hide_ids</td>
-<td>NO</td>
-<td>如果启用，目录列表的所有用户和组信息显示为ftp</td>
+<tr class="row-odd"><td><p>hide_ids</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，目录列表的所有用户和组信息显示为ftp</p></td>
 </tr>
-<tr class="row-even"><td>implicit_ssl</td>
-<td>NO</td>
-<td>如果启用，ssl握手第一件事情是希望所有连接支持ssl</td>
+<tr class="row-even"><td><p>implicit_ssl</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，ssl握手第一件事情是希望所有连接支持ssl</p></td>
 </tr>
-<tr class="row-odd"><td>listen_ipv6</td>
-<td>NO</td>
-<td>监听ipv6地址，和ipv4互斥的</td>
+<tr class="row-odd"><td><p>listen_ipv6</p></td>
+<td><p>NO</p></td>
+<td><p>监听ipv6地址，和ipv4互斥的</p></td>
 </tr>
-<tr class="row-even"><td>local_enable</td>
-<td>No</td>
-<td>控制本地用户是否能登陆</td>
+<tr class="row-even"><td><p>local_enable</p></td>
+<td><p>No</p></td>
+<td><p>控制本地用户是否能登陆</p></td>
 </tr>
-<tr class="row-odd"><td>lock_upload_files</td>
-<td>yes</td>
-<td>启用后，所有上传者对上传文件写锁，所有下载者对下载文件共享读锁</td>
+<tr class="row-odd"><td><p>lock_upload_files</p></td>
+<td><p>yes</p></td>
+<td><p>启用后，所有上传者对上传文件写锁，所有下载者对下载文件共享读锁</p></td>
 </tr>
-<tr class="row-even"><td>log_ftp_protocol</td>
-<td>no</td>
-<td>启用后，所有ftp请求和响应记录日志记录，非常有用的调试选项</td>
+<tr class="row-even"><td><p>log_ftp_protocol</p></td>
+<td><p>no</p></td>
+<td><p>启用后，所有ftp请求和响应记录日志记录，非常有用的调试选项</p></td>
 </tr>
-<tr class="row-odd"><td>ls_recurse_enable</td>
-<td>no</td>
-<td>启用ls -R命令，来递归访问你的目录</td>
+<tr class="row-odd"><td><p>ls_recurse_enable</p></td>
+<td><p>no</p></td>
+<td><p>启用ls -R命令，来递归访问你的目录</p></td>
 </tr>
-<tr class="row-even"><td>mdtm_write</td>
-<td>YES</td>
-<td>该设置允许使用MDTM设置文件的修改时间</td>
+<tr class="row-even"><td><p>mdtm_write</p></td>
+<td><p>YES</p></td>
+<td><p>该设置允许使用MDTM设置文件的修改时间</p></td>
 </tr>
-<tr class="row-odd"><td>no_anon_password</td>
-<td>NO</td>
-<td>匿名用户将直接登陆</td>
+<tr class="row-odd"><td><p>no_anon_password</p></td>
+<td><p>NO</p></td>
+<td><p>匿名用户将直接登陆</p></td>
 </tr>
-<tr class="row-even"><td>no_log_lock</td>
-<td>no</td>
-<td>当启用时，可以方式vsftpd的从写日志文件采取文件锁定</td>
+<tr class="row-even"><td><p>no_log_lock</p></td>
+<td><p>no</p></td>
+<td><p>当启用时，可以方式vsftpd的从写日志文件采取文件锁定</p></td>
 </tr>
-<tr class="row-odd"><td>one_process_model</td>
-<td>NO</td>
-<td>每个连接一个进程安全模式</td>
+<tr class="row-odd"><td><p>one_process_model</p></td>
+<td><p>NO</p></td>
+<td><p>每个连接一个进程安全模式</p></td>
 </tr>
-<tr class="row-even"><td>password_chroot_enable</td>
-<td>no</td>
-<td>如果启用，根据chroot_local_user，然后根据/etc/passwd的家目录来限制</td>
+<tr class="row-even"><td><p>password_chroot_enable</p></td>
+<td><p>no</p></td>
+<td><p>如果启用，根据chroot_local_user，然后根据/etc/passwd的家目录来限制</p></td>
 </tr>
-<tr class="row-odd"><td>pasv_addr_resolve</td>
-<td>NO</td>
-<td>如果使用主机名，设置YES</td>
+<tr class="row-odd"><td><p>pasv_addr_resolve</p></td>
+<td><p>NO</p></td>
+<td><p>如果使用主机名，设置YES</p></td>
 </tr>
-<tr class="row-even"><td>pasv_enable</td>
-<td>YES</td>
-<td>支持被动模式</td>
+<tr class="row-even"><td><p>pasv_enable</p></td>
+<td><p>YES</p></td>
+<td><p>支持被动模式</p></td>
 </tr>
-<tr class="row-odd"><td>pasv_promiscuous</td>
-<td>yes</td>
-<td>设置yes禁用安全检查</td>
+<tr class="row-odd"><td><p>pasv_promiscuous</p></td>
+<td><p>yes</p></td>
+<td><p>设置yes禁用安全检查</p></td>
 </tr>
-<tr class="row-even"><td>require_cert</td>
-<td>no</td>
-<td>如果启用，所有客户端需要提供客户端证书</td>
+<tr class="row-even"><td><p>require_cert</p></td>
+<td><p>no</p></td>
+<td><p>如果启用，所有客户端需要提供客户端证书</p></td>
 </tr>
-<tr class="row-odd"><td>require_ssl_reuse</td>
-<td>YES</td>
-<td>要求ssl会话重用</td>
+<tr class="row-odd"><td><p>require_ssl_reuse</p></td>
+<td><p>YES</p></td>
+<td><p>要求ssl会话重用</p></td>
 </tr>
-<tr class="row-even"><td>reverse_lookup_enable</td>
-<td>yes</td>
-<td>方向查找，将ip转为主机名</td>
+<tr class="row-even"><td><p>reverse_lookup_enable</p></td>
+<td><p>yes</p></td>
+<td><p>方向查找，将ip转为主机名</p></td>
 </tr>
-<tr class="row-odd"><td>run_as_launching_user</td>
-<td>No</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>run_as_launching_user</p></td>
+<td><p>No</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>secure_email_list_enable</td>
-<td>NO</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>secure_email_list_enable</p></td>
+<td><p>NO</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>session_support</td>
-<td>no</td>
-<td>会话支持，保持会话</td>
+<tr class="row-odd"><td><p>session_support</p></td>
+<td><p>no</p></td>
+<td><p>会话支持，保持会话</p></td>
 </tr>
-<tr class="row-even"><td>set_proctitle_enable</td>
-<td>No</td>
-<td>如果启用，将尝试和显示系统进程列表中的会话状态信息</td>
+<tr class="row-even"><td><p>set_proctitle_enable</p></td>
+<td><p>No</p></td>
+<td><p>如果启用，将尝试和显示系统进程列表中的会话状态信息</p></td>
 </tr>
-<tr class="row-odd"><td>ssl_enable</td>
-<td>NO</td>
-<td>设置yes，启用ssl</td>
+<tr class="row-odd"><td><p>ssl_enable</p></td>
+<td><p>NO</p></td>
+<td><p>设置yes，启用ssl</p></td>
 </tr>
-<tr class="row-even"><td>ssl_request_cert</td>
-<td>YES</td>
-<td>如果启用</td>
+<tr class="row-even"><td><p>ssl_request_cert</p></td>
+<td><p>YES</p></td>
+<td><p>如果启用</p></td>
 </tr>
-<tr class="row-odd"><td>ssl_sslv2</td>
-<td>No</td>
-<td>只有ssl_enable启用，启用此项，允许sslv2协议</td>
+<tr class="row-odd"><td><p>ssl_sslv2</p></td>
+<td><p>No</p></td>
+<td><p>只有ssl_enable启用，启用此项，允许sslv2协议</p></td>
 </tr>
-<tr class="row-even"><td>ssl_sslv3</td>
-<td>NO</td>
-<td>只有ssl_enable启用，启用此项，允许sslv3协议</td>
+<tr class="row-even"><td><p>ssl_sslv3</p></td>
+<td><p>NO</p></td>
+<td><p>只有ssl_enable启用，启用此项，允许sslv3协议</p></td>
 </tr>
-<tr class="row-odd"><td>ssl_tlsv1</td>
-<td>YES</td>
-<td>只有ssl_enable启用，启用此项，允许TLSV1协议</td>
+<tr class="row-odd"><td><p>ssl_tlsv1</p></td>
+<td><p>YES</p></td>
+<td><p>只有ssl_enable启用，启用此项，允许TLSV1协议</p></td>
 </tr>
-<tr class="row-even"><td>strict_ssl_read_eof</td>
-<td>NO</td>
-<td>如果启用，需要ssl数据上传通过ssl终止，而不是eof终止</td>
+<tr class="row-even"><td><p>strict_ssl_read_eof</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，需要ssl数据上传通过ssl终止，而不是eof终止</p></td>
 </tr>
-<tr class="row-odd"><td>strict_ssl_write_shutdown</td>
-<td>NO</td>
-<td>如果启用，需要ssl下载通过ssl终止，</td>
+<tr class="row-odd"><td><p>strict_ssl_write_shutdown</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，需要ssl下载通过ssl终止，</p></td>
 </tr>
-<tr class="row-even"><td>syslog_enable</td>
-<td>NO</td>
-<td>如果启用，使用系统日志来代替/var/log/vsftpd.log</td>
+<tr class="row-even"><td><p>syslog_enable</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，使用系统日志来代替/var/log/vsftpd.log</p></td>
 </tr>
-<tr class="row-odd"><td>text_userdb_names</td>
-<td>NO</td>
-<td>默认情况下数字id显示目录列表的用户和组字段，开启这个参数得到文本</td>
+<tr class="row-odd"><td><p>text_userdb_names</p></td>
+<td><p>NO</p></td>
+<td><p>默认情况下数字id显示目录列表的用户和组字段，开启这个参数得到文本</p></td>
 </tr>
-<tr class="row-even"><td>tilde_user</td>
-<td>NO</td>
-<td>如果启用，解析路径带有~username这样的路径</td>
+<tr class="row-even"><td><p>tilde_user</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，解析路径带有~username这样的路径</p></td>
 </tr>
-<tr class="row-odd"><td>use_localtime</td>
-<td>NO</td>
-<td>启用后使用本地时区信息，默认是utc时间的</td>
+<tr class="row-odd"><td><p>use_localtime</p></td>
+<td><p>NO</p></td>
+<td><p>启用后使用本地时区信息，默认是utc时间的</p></td>
 </tr>
-<tr class="row-even"><td>use_sendfile</td>
-<td>YES</td>
-<td>减少内核和应用数据交换</td>
+<tr class="row-even"><td><p>use_sendfile</p></td>
+<td><p>YES</p></td>
+<td><p>减少内核和应用数据交换</p></td>
 </tr>
-<tr class="row-odd"><td>userlist_deny</td>
-<td>YES</td>
-<td>如果userlist_enable是激活的，userlist_file是拒绝用户的</td>
+<tr class="row-odd"><td><p>userlist_deny</p></td>
+<td><p>YES</p></td>
+<td><p>如果userlist_enable是激活的，userlist_file是拒绝用户的</p></td>
 </tr>
-<tr class="row-even"><td>userlist_enable</td>
-<td>NO</td>
-<td>如果启用，userlist_file中的用户能登陆</td>
+<tr class="row-even"><td><p>userlist_enable</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，userlist_file中的用户能登陆</p></td>
 </tr>
-<tr class="row-odd"><td>validate_cert</td>
-<td>NO</td>
-<td>收到的所有ssl客户端证书必须验证确定</td>
+<tr class="row-odd"><td><p>validate_cert</p></td>
+<td><p>NO</p></td>
+<td><p>收到的所有ssl客户端证书必须验证确定</p></td>
 </tr>
-<tr class="row-even"><td>userlist_log</td>
-<td>NO</td>
-<td>如果userlist_enable启用了，可以uselist_log记录失败登陆</td>
+<tr class="row-even"><td><p>userlist_log</p></td>
+<td><p>NO</p></td>
+<td><p>如果userlist_enable启用了，可以uselist_log记录失败登陆</p></td>
 </tr>
-<tr class="row-odd"><td>virtual_use_local_privs</td>
-<td>NO</td>
-<td>如果启用，虚拟用户将是哦那个相同的权限作为本地用户</td>
+<tr class="row-odd"><td><p>virtual_use_local_privs</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，虚拟用户将是哦那个相同的权限作为本地用户</p></td>
 </tr>
-<tr class="row-even"><td>write_enable</td>
-<td>NO</td>
-<td>写权限启用</td>
+<tr class="row-even"><td><p>write_enable</p></td>
+<td><p>NO</p></td>
+<td><p>写权限启用</p></td>
 </tr>
-<tr class="row-odd"><td>xferlog_enable</td>
-<td>NO</td>
-<td>如果启用，文件被防止到/var/log/vsftpd.log,可以使用vsftpd_log_file来覆盖</td>
+<tr class="row-odd"><td><p>xferlog_enable</p></td>
+<td><p>NO</p></td>
+<td><p>如果启用，文件被防止到/var/log/vsftpd.log,可以使用vsftpd_log_file来覆盖</p></td>
 </tr>
-<tr class="row-even"><td>xferlog_std_format</td>
-<td>YES</td>
-<td>如果启用，日志文件是哦那个标准的xferlog格式记录，可以修改xferlog_file来修改日志位置，默认是/var/log/xferlog</td>
+<tr class="row-even"><td><p>xferlog_std_format</p></td>
+<td><p>YES</p></td>
+<td><p>如果启用，日志文件是哦那个标准的xferlog格式记录，可以修改xferlog_file来修改日志位置，默认是/var/log/xferlog</p></td>
 </tr>
-<tr class="row-odd"><td>isoate_network</td>
-<td>YES</td>
-<td>如果启用使用clone_newnet隔离不可信进程</td>
+<tr class="row-odd"><td><p>isoate_network</p></td>
+<td><p>YES</p></td>
+<td><p>如果启用使用clone_newnet隔离不可信进程</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id4">
 <h3>12.1.2.2. 数值选项<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="27%" />
-<col width="27%" />
-<col width="45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 45%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">名称</th>
-<th class="head">默认值</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>默认值</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>accpet_timeout</td>
-<td>60</td>
-<td>超时时间，客户端建立被动数据连接的超时时间</td>
+<tbody>
+<tr class="row-even"><td><p>accpet_timeout</p></td>
+<td><p>60</p></td>
+<td><p>超时时间，客户端建立被动数据连接的超时时间</p></td>
 </tr>
-<tr class="row-odd"><td>anon_max_rate</td>
-<td>0</td>
-<td>匿名客户端的最大速率</td>
+<tr class="row-odd"><td><p>anon_max_rate</p></td>
+<td><p>0</p></td>
+<td><p>匿名客户端的最大速率</p></td>
 </tr>
-<tr class="row-even"><td>anon_umask</td>
-<td>077</td>
-<td>匿名用户创建危机的umask</td>
+<tr class="row-even"><td><p>anon_umask</p></td>
+<td><p>077</p></td>
+<td><p>匿名用户创建危机的umask</p></td>
 </tr>
-<tr class="row-odd"><td>chmod_upload_mode</td>
-<td>0600</td>
-<td>修改上传文件的mode</td>
+<tr class="row-odd"><td><p>chmod_upload_mode</p></td>
+<td><p>0600</p></td>
+<td><p>修改上传文件的mode</p></td>
 </tr>
-<tr class="row-even"><td>connect_timeout</td>
-<td>60</td>
-<td>客户端相应主动连接的数据连接超时时间</td>
+<tr class="row-even"><td><p>connect_timeout</p></td>
+<td><p>60</p></td>
+<td><p>客户端相应主动连接的数据连接超时时间</p></td>
 </tr>
-<tr class="row-odd"><td>data_connection_timeout</td>
-<td>300</td>
-<td>数据传输的连接超时时间</td>
+<tr class="row-odd"><td><p>data_connection_timeout</p></td>
+<td><p>300</p></td>
+<td><p>数据传输的连接超时时间</p></td>
 </tr>
-<tr class="row-even"><td>delay_failed_login</td>
-<td>1</td>
-<td>报告登陆失败秒数</td>
+<tr class="row-even"><td><p>delay_failed_login</p></td>
+<td><p>1</p></td>
+<td><p>报告登陆失败秒数</p></td>
 </tr>
-<tr class="row-odd"><td>delay_successful_log</td>
-<td>0</td>
-<td>报告登陆成功的描述</td>
+<tr class="row-odd"><td><p>delay_successful_log</p></td>
+<td><p>0</p></td>
+<td><p>报告登陆成功的描述</p></td>
 </tr>
-<tr class="row-even"><td>file_open_mode</td>
-<td>0666</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>file_open_mode</p></td>
+<td><p>0666</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>ftp_data_port</td>
-<td>20</td>
-<td>指定主动模式的连接端口，需要connect_form_port_20启用</td>
+<tr class="row-odd"><td><p>ftp_data_port</p></td>
+<td><p>20</p></td>
+<td><p>指定主动模式的连接端口，需要connect_form_port_20启用</p></td>
 </tr>
-<tr class="row-even"><td>idle_session_timeout</td>
-<td>300</td>
-<td>空闲会话超时时间</td>
+<tr class="row-even"><td><p>idle_session_timeout</p></td>
+<td><p>300</p></td>
+<td><p>空闲会话超时时间</p></td>
 </tr>
-<tr class="row-odd"><td>listen_port</td>
-<td>21</td>
-<td>监听端口</td>
+<tr class="row-odd"><td><p>listen_port</p></td>
+<td><p>21</p></td>
+<td><p>监听端口</p></td>
 </tr>
-<tr class="row-even"><td>local_max_rate</td>
-<td>0</td>
-<td>本地最大速率</td>
+<tr class="row-even"><td><p>local_max_rate</p></td>
+<td><p>0</p></td>
+<td><p>本地最大速率</p></td>
 </tr>
-<tr class="row-odd"><td>local_umask</td>
-<td>077</td>
-<td>本地用户的umask设置</td>
+<tr class="row-odd"><td><p>local_umask</p></td>
+<td><p>077</p></td>
+<td><p>本地用户的umask设置</p></td>
 </tr>
-<tr class="row-even"><td>max_clients</td>
-<td>2000</td>
-<td>支持的最大客户端个数</td>
+<tr class="row-even"><td><p>max_clients</p></td>
+<td><p>2000</p></td>
+<td><p>支持的最大客户端个数</p></td>
 </tr>
-<tr class="row-odd"><td>max_login_fails</td>
-<td>3</td>
-<td>登陆的失败的最大次数，超过次数被杀掉</td>
+<tr class="row-odd"><td><p>max_login_fails</p></td>
+<td><p>3</p></td>
+<td><p>登陆的失败的最大次数，超过次数被杀掉</p></td>
 </tr>
-<tr class="row-even"><td>max_per_ip</td>
-<td>50</td>
-<td>每个ip最大连接个数</td>
+<tr class="row-even"><td><p>max_per_ip</p></td>
+<td><p>50</p></td>
+<td><p>每个ip最大连接个数</p></td>
 </tr>
-<tr class="row-odd"><td>pasv_max_port</td>
-<td>0</td>
-<td>被动模式的最大端口</td>
+<tr class="row-odd"><td><p>pasv_max_port</p></td>
+<td><p>0</p></td>
+<td><p>被动模式的最大端口</p></td>
 </tr>
-<tr class="row-even"><td>pasv_min_port</td>
-<td>0</td>
-<td>被动模式的最小端口</td>
+<tr class="row-even"><td><p>pasv_min_port</p></td>
+<td><p>0</p></td>
+<td><p>被动模式的最小端口</p></td>
 </tr>
-<tr class="row-odd"><td>trans_chunk_size</td>
-<td>0</td>
-<td>传输chunck大小</td>
+<tr class="row-odd"><td><p>trans_chunk_size</p></td>
+<td><p>0</p></td>
+<td><p>传输chunck大小</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="id5">
 <h3>12.1.2.3. 字符串选项<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="27%" />
-<col width="27%" />
-<col width="45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 45%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">名称</th>
-<th class="head">默认值</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>默认值</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>anon_root</td>
-<td><ul class="first last simple">
+<tbody>
+<tr class="row-even"><td><p>anon_root</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>表示一个目录，匿名用户登陆后的根目录</td>
+<td><p>表示一个目录，匿名用户登陆后的根目录</p></td>
 </tr>
-<tr class="row-odd"><td>banned_email_file</td>
-<td>/etc/vsftpd/banned_emails</td>
-<td>不允许匿名的电子邮件文件路径，需要deny_email_enable启用</td>
+<tr class="row-odd"><td><p>banned_email_file</p></td>
+<td><p>/etc/vsftpd/banned_emails</p></td>
+<td><p>不允许匿名的电子邮件文件路径，需要deny_email_enable启用</p></td>
 </tr>
-<tr class="row-even"><td>banner_file</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>banner_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>欢迎文件路径</td>
+<td><p>欢迎文件路径</p></td>
 </tr>
-<tr class="row-odd"><td>ca_certs_file</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>ca_certs_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>ca证书文件</td>
+<td><p>ca证书文件</p></td>
 </tr>
-<tr class="row-even"><td>chown_username</td>
-<td>root</td>
-<td>匿名用户上传的所有者的用户名称，需要chown_uploads配合</td>
+<tr class="row-even"><td><p>chown_username</p></td>
+<td><p>root</p></td>
+<td><p>匿名用户上传的所有者的用户名称，需要chown_uploads配合</p></td>
 </tr>
-<tr class="row-odd"><td>chown_list_file</td>
-<td>/etc/vsftpd.conf/vsftpd.chroot_list</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>chown_list_file</p></td>
+<td><p>/etc/vsftpd.conf/vsftpd.chroot_list</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>cmds_allowed</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>cmds_allowed</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>指定ftp使用的命令</td>
+<td><p>指定ftp使用的命令</p></td>
 </tr>
-<tr class="row-odd"><td>cmds_denied</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>cmds_denied</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>不能使用的ftp命令，allowed优先</td>
+<td><p>不能使用的ftp命令，allowed优先</p></td>
 </tr>
-<tr class="row-even"><td>deny_file</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>deny_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>设置文件名或者目录名不能任何方式访问</td>
+<td><p>设置文件名或者目录名不能任何方式访问</p></td>
 </tr>
-<tr class="row-odd"><td>dsa_cert_file</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>dsa_cert_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>dsa证书文件</td>
+<td><p>dsa证书文件</p></td>
 </tr>
-<tr class="row-even"><td>dsa_private_key_file</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>dsa_private_key_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>如果没有指定，使用dsa证书文件</td>
+<td><p>如果没有指定，使用dsa证书文件</p></td>
 </tr>
-<tr class="row-odd"><td>email_password_file</td>
-<td>/etc/vsftpd/email_passwords</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>email_password_file</p></td>
+<td><p>/etc/vsftpd/email_passwords</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>ftp_username</td>
-<td>ftp</td>
-<td>用户的主目录是匿名的根</td>
+<tr class="row-even"><td><p>ftp_username</p></td>
+<td><p>ftp</p></td>
+<td><p>用户的主目录是匿名的根</p></td>
 </tr>
-<tr class="row-odd"><td>ftpd_banner</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>ftpd_banner</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>ftp的提示信息</td>
+<td><p>ftp的提示信息</p></td>
 </tr>
-<tr class="row-even"><td>guest_username</td>
-<td>ftp</td>
-<td>来宾映射名字</td>
+<tr class="row-even"><td><p>guest_username</p></td>
+<td><p>ftp</p></td>
+<td><p>来宾映射名字</p></td>
 </tr>
-<tr class="row-odd"><td>hide_file</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>hide_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>指定隐藏文件hide_file = {* MP3，.hidden}</td>
+<td><p>指定隐藏文件hide_file = {* MP3，.hidden}</p></td>
 </tr>
-<tr class="row-even"><td>listen_address</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>listen_address</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>提供一个地址</td>
+<td><p>提供一个地址</p></td>
 </tr>
-<tr class="row-odd"><td>listen_address6</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>listen_address6</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>ip6地址</td>
+<td><p>ip6地址</p></td>
 </tr>
-<tr class="row-even"><td>local_root</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>local_root</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>代表该目录的vsftpd将试图改变成后本地（即非匿名）登录</td>
+<td><p>代表该目录的vsftpd将试图改变成后本地（即非匿名）登录</p></td>
 </tr>
-<tr class="row-odd"><td>message_file</td>
-<td>.message</td>
-<td>需要配合dirmessage_enable配合使用</td>
+<tr class="row-odd"><td><p>message_file</p></td>
+<td><p>.message</p></td>
+<td><p>需要配合dirmessage_enable配合使用</p></td>
 </tr>
-<tr class="row-even"><td>pam_service_name</td>
-<td>ftp</td>
-<td>pam名字</td>
+<tr class="row-even"><td><p>pam_service_name</p></td>
+<td><p>ftp</p></td>
+<td><p>pam名字</p></td>
 </tr>
-<tr class="row-odd"><td>pasv_address</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>pasv_address</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>被动模式地址</td>
+<td><p>被动模式地址</p></td>
 </tr>
-<tr class="row-even"><td>rsa_cert_file</td>
-<td>/usr/share/ssl/certs/vsftpd.pem</td>
-<td>rsa证书文件</td>
+<tr class="row-even"><td><p>rsa_cert_file</p></td>
+<td><p>/usr/share/ssl/certs/vsftpd.pem</p></td>
+<td><p>rsa证书文件</p></td>
 </tr>
-<tr class="row-odd"><td>ra_private_key_file</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>ra_private_key_file</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>如果没有指定去rsa-cert_file里面找私钥</td>
+<td><p>如果没有指定去rsa-cert_file里面找私钥</p></td>
 </tr>
-<tr class="row-even"><td>secure_chroot_dir</td>
-<td>/usr/share/empty</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>secure_chroot_dir</p></td>
+<td><p>/usr/share/empty</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>user_config_dir</td>
-<td><ul class="first last simple">
+<tr class="row-odd"><td><p>user_config_dir</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>将用户的配置文件定义到/etc/vsftpd/user_conf文件中</td>
+<td><p>将用户的配置文件定义到/etc/vsftpd/user_conf文件中</p></td>
 </tr>
-<tr class="row-even"><td>user_sub_token</td>
-<td><ul class="first last simple">
+<tr class="row-even"><td><p>user_sub_token</p></td>
+<td><ul class="simple">
 <li></li>
 </ul>
 </td>
-<td>配合虚拟用户使用，自动为每个虚拟用户的主目录，记录模板</td>
+<td><p>配合虚拟用户使用，自动为每个虚拟用户的主目录，记录模板</p></td>
 </tr>
-<tr class="row-odd"><td>userlist_file</td>
-<td>/etc/vsftpd/user_list</td>
-<td>需要userlist_enable启用</td>
+<tr class="row-odd"><td><p>userlist_file</p></td>
+<td><p>/etc/vsftpd/user_list</p></td>
+<td><p>需要userlist_enable启用</p></td>
 </tr>
-<tr class="row-even"><td>vsftpd_log_file</td>
-<td>/var/log/vsftpd.log</td>
-<td>日志文件</td>
+<tr class="row-even"><td><p>vsftpd_log_file</p></td>
+<td><p>/var/log/vsftpd.log</p></td>
+<td><p>日志文件</p></td>
 </tr>
-<tr class="row-odd"><td>xferlog_file</td>
-<td>/var/log/xferlog</td>
-<td>日志文件</td>
+<tr class="row-odd"><td><p>xferlog_file</p></td>
+<td><p>/var/log/xferlog</p></td>
+<td><p>日志文件</p></td>
 </tr>
 </tbody>
 </table>

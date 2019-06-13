@@ -193,18 +193,18 @@
 <h2>2.1.1. rsync简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Rsync是一个很棒的小工具，在你的机器上很容易设置。而不是有一个脚本的FTP会话，或其他形式的文件传输脚本  rsync只复制文件的差异，实际上差异就是已经改变的文件，如果你想要的安全可以通过ssh。但它的意思是：</p>
 <ul class="simple">
-<li>区别 - 只传输实际更改的文件，而不是整个文件。这使得更新速度更快，尤其是在像调制解调器这样的慢速链路上。即使只更改了一个字节，FTP也会传输整个文件。</li>
-<li>压缩 - 差异的细小部分随即进行压缩，进一步节省文件传输时间并减少网络负载。</li>
-<li>安全外壳 - 你的安全意识就是这样，你应该都使用它。来自rsync的流通过ssh协议来加密会话，而不是rsh，这也是一个选项。</li>
+<li><p>区别 - 只传输实际更改的文件，而不是整个文件。这使得更新速度更快，尤其是在像调制解调器这样的慢速链路上。即使只更改了一个字节，FTP也会传输整个文件。</p></li>
+<li><p>压缩 - 差异的细小部分随即进行压缩，进一步节省文件传输时间并减少网络负载。</p></li>
+<li><p>安全外壳 - 你的安全意识就是这样，你应该都使用它。来自rsync的流通过ssh协议来加密会话，而不是rsh，这也是一个选项。</p></li>
 </ul>
 <p>作为备份/镜像工具，rsync是相当通用的，提供了超出上述的许多功能。以下是一些rsync的其他主要功能：</p>
 <ul class="simple">
-<li>支持复制链接，设备，所有者，组和权限</li>
-<li>排除和排除类似于GNU tar的选项</li>
-<li>CVS排除模式，用于忽略CVS将忽略的相同文件</li>
-<li>不需要root权限</li>
-<li>管理文件传输以最小化延迟成本</li>
-<li>支持匿名或认证的rsync服务器(理想的镜像)</li>
+<li><p>支持复制链接，设备，所有者，组和权限</p></li>
+<li><p>排除和排除类似于GNU tar的选项</p></li>
+<li><p>CVS排除模式，用于忽略CVS将忽略的相同文件</p></li>
+<li><p>不需要root权限</p></li>
+<li><p>管理文件传输以最小化延迟成本</p></li>
+<li><p>支持匿名或认证的rsync服务器(理想的镜像)</p></li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -300,8 +300,8 @@ susan:herpass
 </pre></div>
 </div>
 <div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">密码文件格式为username:password,且这个用户不必要在系统存在，密码文件权限为600。</p>
+<p class="admonition-title">Attention</p>
+<p>密码文件格式为username:password,且这个用户不必要在系统存在，密码文件权限为600。</p>
 </div>
 </div>
 </div>

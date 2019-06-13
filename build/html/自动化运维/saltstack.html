@@ -95,7 +95,46 @@
 <li class="toctree-l2"><a class="reference internal" href="paramiko.html">4.3. paramiko</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fabric.html">4.4. fabric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ansible.html">4.5. ansible</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.6. saltstack</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.6. saltstack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.6.1. 部署</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">4.6.1.1. 主机规划</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#host">4.6.1.2. 同步host文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">4.6.1.3. 设置管理账户</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">4.6.1.4. 设置主机名</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#salt">4.6.1.5. 安装salt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#salt-minion">4.6.1.6. 配置salt-minion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">4.6.1.7. 测试部署</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.6.2. 远程执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.6.3. 配置管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.6.3.1. 配置修改</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#httpd">4.6.3.2. 安装httpd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#top-sls">4.6.3.3. 编写top.sls文件</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.6.4. 数据系统</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#grains">4.6.4.1. grains 优先级</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pygrains">4.6.4.2. 编写py定义grains</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#etc-salt-grains-grains">4.6.4.3. 在/etc/salt/grains 中定义grains</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#etc-salt-minion-grains">4.6.4.4. 在/etc/salt/minion 中定义grains</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pillar">4.6.5. 数据系统-Pillar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">4.6.5.1. 显示默认的pillar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">4.6.5.2. pillar文件存放位置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">4.6.5.3. 通过pillar查询信息</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.6.6. 远程执行-指定目标</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4.6.7. 远程执行-模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">4.6.7.1. 模块说明</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.6.8. 远程执行-返回程序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module">4.6.9. 自编写module</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../安全和监控/index.html">5. 安全和监控</a></li>
@@ -184,6 +223,400 @@
             
   <div class="section" id="saltstack">
 <h1>4.6. saltstack<a class="headerlink" href="#saltstack" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>4.6.1. 部署<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>4.6.1.1. 主机规划<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 9%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>服务器名称</p></th>
+<th class="head"><p>操作系统版本</p></th>
+<th class="head"><p>内网IP</p></th>
+<th class="head"><p>Hostname</p></th>
+<th class="head"><p>部署模块</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>salt100</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.100</p></td>
+<td><p>salt100</p></td>
+<td><p>salt-master、salt-minion</p></td>
+</tr>
+<tr class="row-odd"><td><p>salt01</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.11</p></td>
+<td><p>salt01</p></td>
+<td><p>salt-minion</p></td>
+</tr>
+<tr class="row-even"><td><p>salt02</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.12</p></td>
+<td><p>salt02</p></td>
+<td><p>salt-minion</p></td>
+</tr>
+<tr class="row-odd"><td><p>salt03</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.13</p></td>
+<td><p>salt03</p></td>
+<td><p>salt-minion</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="host">
+<h3>4.6.1.2. 同步host文件<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat  /etc/hosts
+<span class="m">127</span>.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+salt100 <span class="m">192</span>.168.89.100
+salt01  <span class="m">192</span>.168.89.201
+salt02  <span class="m">192</span>.168.89.202
+salt03  <span class="m">192</span>.168.89.203
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>4.6.1.3. 设置管理账户<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>useradd -u <span class="m">1050</span> yun <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;oracle&quot;</span> <span class="p">|</span> passwd --stdin yun
+<span class="nb">echo</span> <span class="s2">&quot;yun  ALL=(ALL)       NOPASSWD: ALL&quot;</span> &gt;&gt;  /etc/sudoers
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>4.6.1.4. 设置主机名<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hostnamectl  set-hostname master
+hostnamectl  set-hostname salt01
+hostnamectl  set-hostname salt02
+hostnamectl  set-hostname salt03
+</pre></div>
+</div>
+</div>
+<div class="section" id="salt">
+<h3>4.6.1.5. 安装salt<a class="headerlink" href="#salt" title="Permalink to this headline">¶</a></h3>
+<p>管理节点安装 salt-master,salt-minion，普通节点安装salt-minion即可。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install -y salt-master salt-minion
+yum install -y salt-minion
+
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># salt --version</span>
+salt <span class="m">2019</span>.2.0 <span class="o">(</span>Fluorine<span class="o">)</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># salt-minion  --version</span>
+salt-minion <span class="m">2019</span>.2.0 <span class="o">(</span>Fluorine<span class="o">)</span>
+
+systemctl start salt-master.service
+systemctl <span class="nb">enable</span> salt-master.service
+</pre></div>
+</div>
+</div>
+<div class="section" id="salt-minion">
+<h3>4.6.1.6. 配置salt-minion<a class="headerlink" href="#salt-minion" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim /etc/salt/minion
+修改 master : salt100
+
+systemctl start salt-minion.service
+systemctl <span class="nb">enable</span> salt-minion.service
+</pre></div>
+</div>
+<p>salt目录结构</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@master salt<span class="o">]</span><span class="c1"># pwd</span>
+/etc/salt
+<span class="o">[</span>root@master salt<span class="o">]</span><span class="c1"># tree</span>
+.
+├── cloud
+├── cloud.conf.d
+├── cloud.deploy.d
+├── cloud.maps.d
+├── cloud.profiles.d
+├── cloud.providers.d
+├── master
+├── master.d
+├── minion
+├── minion.d
+├── pki
+│   ├── master
+│   │   ├── master.pem
+│   │   ├── master.pub
+│   │   ├── minions
+│   │   ├── minions_autosign
+│   │   ├── minions_denied
+│   │   ├── minions_pre
+│   │   └── minions_rejected
+│   └── minion
+├── proxy
+├── proxy.d
+└── roster
+
+<span class="m">16</span> directories, <span class="m">7</span> files
+
+<span class="o">[</span>root@master salt<span class="o">]</span><span class="c1"># salt-key</span>
+    Accepted Keys:
+    Denied Keys:
+    Unaccepted Keys:
+    salt01
+    salt02
+    salt03
+    Rejected Keys:
+
+<span class="c1"># 发现3个节点都是在待确认的key中， 接收下。</span>
+
+<span class="c1"># 接收</span>
+<span class="o">[</span>root@master salt<span class="o">]</span><span class="c1">#  salt-key -a salt0*</span>
+The following keys are going to be accepted:
+Unaccepted Keys:
+salt01
+salt02
+salt03
+Proceed? <span class="o">[</span>n/Y<span class="o">]</span> y
+Key <span class="k">for</span> minion salt01 accepted.
+Key <span class="k">for</span> minion salt02 accepted.
+Key <span class="k">for</span> minion salt03 accepted.
+
+<span class="c1"># -A 接收所有  -a  可以统配接收，可以指定单个</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>4.6.1.7. 测试部署<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># salt &#39;*&#39; test.ping</span>
+salt01:
+    True
+master:
+    True
+salt02:
+    True
+salt03:
+    True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>4.6.2. 远程执行<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt <span class="s1">&#39;*&#39;</span> cmd.run <span class="s1">&#39;w&#39;</span>
+salt <span class="s1">&#39;*&#39;</span> cmd.run <span class="s1">&#39;mkdir /tmp/aa &amp;&amp; ls -l /tmp/aa&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>4.6.3. 配置管理<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>4.6.3.1. 配置修改<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>salt master的配置文件在 /etc/salt/master</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim /etc/salt/master
+<span class="c1"># 取消如下注释行</span>
+file_roots:
+base:
+    - /srv/salt
+
+systemctl restart salt-master
+mkdir /srv/salt
+</pre></div>
+</div>
+</div>
+<div class="section" id="httpd">
+<h3>4.6.3.2. 安装httpd<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /srv/salt/ <span class="o">&amp;&amp;</span> mkdir web
+vim apache.sls
+<span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># cat apache.sls</span>
+    apache-install:
+    pkg.installed:
+        - names:
+        - httpd
+        - httpd-devel
+        - httpd-tools
+    apache-enable:
+    service.running:
+        - name: httpd
+        - enable: True
+
+<span class="o">[</span>root@salt100 web<span class="o">]</span><span class="c1"># salt &#39;salt01&#39; state.sls web.apache</span>
+其中 salt01 表示应用的主机
+state.sls 表示使用的state模块的sls方式，
+web.apache 表示使用的/srv/base/web/apache.sls文件
+</pre></div>
+</div>
+</div>
+<div class="section" id="top-sls">
+<h3>4.6.3.3. 编写top.sls文件<a class="headerlink" href="#top-sls" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># cat top.sls</span>
+base:
+<span class="s1">&#39;salt0*&#39;</span>:
+    - web.apache
+<span class="s1">&#39;salt03&#39;</span>:
+    - web.apache
+
+salt <span class="s1">&#39;salt01&#39;</span> state.highstate <span class="nv">test</span><span class="o">=</span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>4.6.4. 数据系统<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>grains文档 <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/grains/index.html">https://docs.saltstack.com/en/latest/topics/grains/index.html</a></p>
+<div class="section" id="grains">
+<h3>4.6.4.1. grains 优先级<a class="headerlink" href="#grains" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>salt系统自带信息  【优先级最低】</p></li>
+<li><p>自编写Python脚本  备注：在指定目录下存放py脚本</p></li>
+<li><p>/etc/salt/grains  备注：该文件不存在，需要自己创建</p></li>
+<li><p>/etc/salt/minion  【优先级最高】</p></li>
+</ol>
+<p>查看grains</p>
+<blockquote>
+<div><p>salt ‘salt01’ grains.ls
+salt ‘salt01’ grains.items
+salt ‘salt01’ grains.item os</p>
+</div></blockquote>
+</div>
+<div class="section" id="pygrains">
+<h3>4.6.4.2. 编写py定义grains<a class="headerlink" href="#pygrains" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="etc-salt-grains-grains">
+<h3>4.6.4.3. 在/etc/salt/grains 中定义grains<a class="headerlink" href="#etc-salt-grains-grains" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>在salt01节点修改文件/etc/salt/grains
+<span class="o">[</span>root@salt01 minion<span class="o">]</span><span class="c1"># cat /etc/salt/grains</span>
+roles:
+- webserver02
+- memcache02
+os: redhat02
+<span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># salt &#39;*&#39; saltutil.sync_grains</span>
+salt03:
+salt02:
+salt01:
+master:
+<span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># salt &#39;*&#39; grains.item roles</span>
+master:
+    ----------
+    roles:
+salt03:
+    ----------
+    roles:
+salt01:
+    ----------
+    roles:
+        - webserver02
+        - memcache02
+salt02:
+    ----------
+    roles:
+</pre></div>
+</div>
+</div>
+<div class="section" id="etc-salt-minion-grains">
+<h3>4.6.4.4. 在/etc/salt/minion 中定义grains<a class="headerlink" href="#etc-salt-minion-grains" title="Permalink to this headline">¶</a></h3>
+<p>这个不建议使用， 定义和配置写在一起，不合适，不利于后期的管理维护。</p>
+<p>通过grains 过滤查询</p>
+<blockquote>
+<div><p>salt -G ‘os:centos’ cmd.run ‘uptime’</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="pillar">
+<h2>4.6.5. 数据系统-Pillar<a class="headerlink" href="#pillar" title="Permalink to this headline">¶</a></h2>
+<p>pillar文档 <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/pillar/index.html">https://docs.saltstack.com/en/latest/topics/pillar/index.html</a></p>
+<p>grains 是静态的的， pillar是动态的，</p>
+<p>Pillar刷新 salt ‘*’ saltutil.refresh_pillar</p>
+<div class="section" id="id10">
+<h3>4.6.5.1. 显示默认的pillar<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim /etc/salt/master
+取消注释行
+pillar_opts: True
+systemctl restart salt-master
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>4.6.5.2. pillar文件存放位置<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim /etc/salt/master
+取消注释行
+pillar_roots:
+base:
+    - /srv/pillar
+systemctl restart salt-master
+</pre></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>4.6.5.3. 通过pillar查询信息<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>salt -I ‘role:production’ cmd.run ‘w’</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>4.6.6. 远程执行-指定目标<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>salt 指定目标的方式有很多种。</p>
+<dl class="simple">
+<dt>名字方式：</dt><dd><p>salt ‘salt01’ 这种是指定minion的名字方式</p>
+</dd>
+<dt>统配方式：</dt><dd><p>salt ‘salt0*’ 这种是统配方式</p>
+</dd>
+<dt>正则表达式方式：</dt><dd><p>salt -E ‘web1-(prod|devel)’ test.ping</p>
+</dd>
+<dt>列表匹配：</dt><dd><p>salt -L ‘web1,web2,web3’ test.ping</p>
+</dd>
+<dt>使用grains指定:</dt><dd><p>salt -G  ‘os:centos’ test.ping</p>
+</dd>
+<dt>使用pillar执行</dt><dd><p>salt  -I ‘somekey:specialvalue’ test.ping</p>
+</dd>
+<dt>使用组</dt><dd><p>salt -N group1 test.ping</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id14">
+<h2>4.6.7. 远程执行-模块<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>模块的官方文档： <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/modules/all/index.html#all-salt-modules">https://docs.saltstack.com/en/latest/ref/modules/all/index.html#all-salt-modules</a></p>
+<p>模块位置：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@salt100 salt<span class="o">]</span><span class="c1"># cd /usr/lib/python2.7/site-packages/salt/modules</span>
+<span class="o">[</span>root@salt100 modules<span class="o">]</span><span class="c1"># ll network.py</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">57562</span> Feb <span class="m">16</span> <span class="m">01</span>:14 network.py
+</pre></div>
+</div>
+<div class="section" id="id15">
+<h3>4.6.7.1. 模块说明<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p>salt内置好多模块， 列出所有的模块： salt ‘*’ sys.doc</p>
+<p>执行shell   salt ‘*’ cmd.run ‘ps aux ‘</p>
+<p>cp模块</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt -L <span class="s1">&#39;salt01,salt02&#39;</span> cp.get_file salt://a.txt /tmp/a.txt
+salt-cp  -L <span class="s1">&#39;salt01,salt02&#39;</span> /etc/hosts /tmp/kkk
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>4.6.8. 远程执行-返回程序<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<p>参考： <a class="reference external" href="https://blog.csdn.net/woshizhangliang999/article/details/89349246">https://blog.csdn.net/woshizhangliang999/article/details/89349246</a>
+returner文档： <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/returners/all/index.html#all-salt-returners">https://docs.saltstack.com/en/latest/ref/returners/all/index.html#all-salt-returners</a></p>
+<p>获取返回值： salt ‘*’ test.ping –return mysql</p>
+</div>
+<div class="section" id="module">
+<h2>4.6.9. 自编写module<a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h2>
+<p>自编写module需要放置在/srv/salt/_modules位置上， 文件名字就是模块名字，刷新模块是用 salt ‘*’ saltutil.sync_modules</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir _modules
+<span class="nb">cd</span> _modules/
+vim my_disk.py
+cat my_disk.py
+<span class="c1">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding:utf-8 -*-</span>
+def list<span class="o">()</span>:
+<span class="nv">cmd</span> <span class="o">=</span> <span class="s1">&#39;df -h&#39;</span>
+<span class="nv">ret</span> <span class="o">=</span> __salt__<span class="o">[</span><span class="s1">&#39;cmd.run&#39;</span><span class="o">](</span>cmd<span class="o">)</span>
+<span class="k">return</span> ret
+
+<span class="c1"># 同步到minion上</span>
+salt <span class="s1">&#39;*&#39;</span> saltutil.sync_modules
+<span class="c1"># 执行自定义的模块方法</span>
+salt <span class="s1">&#39;*&#39;</span> my_disk.list
+</pre></div>
+</div>
+</div>
 </div>
 
 

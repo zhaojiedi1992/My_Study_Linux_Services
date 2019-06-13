@@ -192,157 +192,157 @@
 <div class="section" id="logrorate">
 <h2>11.2.1. logrorate的主要配置参数<a class="headerlink" href="#logrorate" title="Permalink to this headline">¶</a></h2>
 <p>参数：</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="38%" />
-<col width="63%" />
+<col style="width: 38%" />
+<col style="width: 63%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">参数</th>
-<th class="head">描述</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>描述</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>compress</td>
-<td>启用压缩，默认gzip的</td>
+<tbody>
+<tr class="row-even"><td><p>compress</p></td>
+<td><p>启用压缩，默认gzip的</p></td>
 </tr>
-<tr class="row-odd"><td>compresscmd</td>
-<td>压缩命令，默认是gzip,可以改</td>
+<tr class="row-odd"><td><p>compresscmd</p></td>
+<td><p>压缩命令，默认是gzip,可以改</p></td>
 </tr>
-<tr class="row-even"><td>uncompresscmd</td>
-<td>解压命令，默认是gunzip</td>
+<tr class="row-even"><td><p>uncompresscmd</p></td>
+<td><p>解压命令，默认是gunzip</p></td>
 </tr>
-<tr class="row-odd"><td>compressext</td>
-<td>压缩扩展</td>
+<tr class="row-odd"><td><p>compressext</p></td>
+<td><p>压缩扩展</p></td>
 </tr>
-<tr class="row-even"><td>compressoptions</td>
-<td>压缩选项，比如-9指定压缩级别</td>
+<tr class="row-even"><td><p>compressoptions</p></td>
+<td><p>压缩选项，比如-9指定压缩级别</p></td>
 </tr>
-<tr class="row-odd"><td>copy</td>
-<td>复制日志文件，但不要更改原始文件。</td>
+<tr class="row-odd"><td><p>copy</p></td>
+<td><p>复制日志文件，但不要更改原始文件。</p></td>
 </tr>
-<tr class="row-even"><td>copytruncate</td>
-<td>在创建副本后，将原始日志文件截断，而不是移动旧日志文件，并选择创建新日志文件</td>
+<tr class="row-even"><td><p>copytruncate</p></td>
+<td><p>在创建副本后，将原始日志文件截断，而不是移动旧日志文件，并选择创建新日志文件</p></td>
 </tr>
-<tr class="row-odd"><td>create mode owner group</td>
-<td>创建新的时候来控制创建文件的权限和所属信息</td>
+<tr class="row-odd"><td><p>create mode owner group</p></td>
+<td><p>创建新的时候来控制创建文件的权限和所属信息</p></td>
 </tr>
-<tr class="row-even"><td>daily</td>
-<td>每日去滚动</td>
+<tr class="row-even"><td><p>daily</p></td>
+<td><p>每日去滚动</p></td>
 </tr>
-<tr class="row-odd"><td>dateext</td>
-<td>使用YYYYMMDD这种后缀，而不是简单的序号，格式收dateformat影响</td>
+<tr class="row-odd"><td><p>dateext</p></td>
+<td><p>使用YYYYMMDD这种后缀，而不是简单的序号，格式收dateformat影响</p></td>
 </tr>
-<tr class="row-even"><td>dateformat  format_string</td>
-<td>默认值是-%Y%m%d,具体格式参考date命令格式即可</td>
+<tr class="row-even"><td><p>dateformat  format_string</p></td>
+<td><p>默认值是-%Y%m%d,具体格式参考date命令格式即可</p></td>
 </tr>
-<tr class="row-odd"><td>delaycompress</td>
-<td>延迟压缩，将前一个日志文件的压缩延迟到下一个旋转周期</td>
+<tr class="row-odd"><td><p>delaycompress</p></td>
+<td><p>延迟压缩，将前一个日志文件的压缩延迟到下一个旋转周期</p></td>
 </tr>
-<tr class="row-even"><td>extension ext</td>
-<td>默认是.gz的</td>
+<tr class="row-even"><td><p>extension ext</p></td>
+<td><p>默认是.gz的</p></td>
 </tr>
-<tr class="row-odd"><td>ifempty</td>
-<td>即使是空的，也要滚动</td>
+<tr class="row-odd"><td><p>ifempty</p></td>
+<td><p>即使是空的，也要滚动</p></td>
 </tr>
-<tr class="row-even"><td>include file_or_directory</td>
-<td>从指定的文件来读取配置信息</td>
+<tr class="row-even"><td><p>include file_or_directory</p></td>
+<td><p>从指定的文件来读取配置信息</p></td>
 </tr>
-<tr class="row-odd"><td>mail address</td>
-<td>当一个日志不存在时，它就被发送到地址</td>
+<tr class="row-odd"><td><p>mail address</p></td>
+<td><p>当一个日志不存在时，它就被发送到地址</p></td>
 </tr>
-<tr class="row-even"><td>mailfirst</td>
-<td>在使用邮件命令时，只需发送刚刚旋转的文件，而不是即将到期的文件。</td>
+<tr class="row-even"><td><p>mailfirst</p></td>
+<td><p>在使用邮件命令时，只需发送刚刚旋转的文件，而不是即将到期的文件。</p></td>
 </tr>
-<tr class="row-odd"><td>maillast</td>
-<td>当使用邮件命令时，要发送即将到期的文件，而不是仅仅旋转的文件（这是默认的）。</td>
+<tr class="row-odd"><td><p>maillast</p></td>
+<td><p>当使用邮件命令时，要发送即将到期的文件，而不是仅仅旋转的文件（这是默认的）。</p></td>
 </tr>
-<tr class="row-even"><td>maxage count</td>
-<td>如果count配置3，就是超过3天的可以删掉了。</td>
+<tr class="row-even"><td><p>maxage count</p></td>
+<td><p>如果count配置3，就是超过3天的可以删掉了。</p></td>
 </tr>
-<tr class="row-odd"><td>minsize size</td>
-<td>单位bytes，日志文件在大于size字节时旋转</td>
+<tr class="row-odd"><td><p>minsize size</p></td>
+<td><p>单位bytes，日志文件在大于size字节时旋转</p></td>
 </tr>
-<tr class="row-even"><td>missingok</td>
-<td>如果缺失，没有错误信息</td>
+<tr class="row-even"><td><p>missingok</p></td>
+<td><p>如果缺失，没有错误信息</p></td>
 </tr>
-<tr class="row-odd"><td>monthly</td>
-<td>每月滚动</td>
+<tr class="row-odd"><td><p>monthly</p></td>
+<td><p>每月滚动</p></td>
 </tr>
-<tr class="row-even"><td>olddir</td>
-<td>日志被移动到目录中进行旋转</td>
+<tr class="row-even"><td><p>olddir</p></td>
+<td><p>日志被移动到目录中进行旋转</p></td>
 </tr>
-<tr class="row-odd"><td>postrotate/endscript</td>
-<td>滚动后脚本</td>
+<tr class="row-odd"><td><p>postrotate/endscript</p></td>
+<td><p>滚动后脚本</p></td>
 </tr>
-<tr class="row-even"><td>prerotate/endscript</td>
-<td>滚动前脚本</td>
+<tr class="row-even"><td><p>prerotate/endscript</p></td>
+<td><p>滚动前脚本</p></td>
 </tr>
-<tr class="row-odd"><td>firstaction/endscript</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>firstaction/endscript</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>lastaction/endscript</td>
-<td>&#160;</td>
+<tr class="row-even"><td><p>lastaction/endscript</p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td>rotate count</td>
-<td>保留个数，如果0，就只有一个当前日志了</td>
+<tr class="row-odd"><td><p>rotate count</p></td>
+<td><p>保留个数，如果0，就只有一个当前日志了</p></td>
 </tr>
-<tr class="row-even"><td>size size</td>
-<td>只有超过这个大小才滚动</td>
+<tr class="row-even"><td><p>size size</p></td>
+<td><p>只有超过这个大小才滚动</p></td>
 </tr>
-<tr class="row-odd"><td>sharedscripts</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p>sharedscripts</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td>shred</td>
-<td>使用shred删除文件</td>
+<tr class="row-even"><td><p>shred</p></td>
+<td><p>使用shred删除文件</p></td>
 </tr>
-<tr class="row-odd"><td>shredcycles count</td>
-<td>删除之前重新文件的次数</td>
+<tr class="row-odd"><td><p>shredcycles count</p></td>
+<td><p>删除之前重新文件的次数</p></td>
 </tr>
-<tr class="row-even"><td>start count</td>
-<td>开始编号</td>
+<tr class="row-even"><td><p>start count</p></td>
+<td><p>开始编号</p></td>
 </tr>
-<tr class="row-odd"><td>weekly</td>
-<td>周滚动</td>
+<tr class="row-odd"><td><p>weekly</p></td>
+<td><p>周滚动</p></td>
 </tr>
-<tr class="row-even"><td>yearly</td>
-<td>年滚动</td>
+<tr class="row-even"><td><p>yearly</p></td>
+<td><p>年滚动</p></td>
 </tr>
-<tr class="row-odd"><td>nocompress</td>
-<td>-</td>
+<tr class="row-odd"><td><p>nocompress</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>nocopy</td>
-<td>-</td>
+<tr class="row-even"><td><p>nocopy</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td>nocopytruncate</td>
-<td>-</td>
+<tr class="row-odd"><td><p>nocopytruncate</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>nocreate</td>
-<td>-</td>
+<tr class="row-even"><td><p>nocreate</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td>nodelaycompress</td>
-<td>-</td>
+<tr class="row-odd"><td><p>nodelaycompress</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>nodateext</td>
-<td>-</td>
+<tr class="row-even"><td><p>nodateext</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td>nomail</td>
-<td>-</td>
+<tr class="row-odd"><td><p>nomail</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>nomissingok</td>
-<td>-</td>
+<tr class="row-even"><td><p>nomissingok</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td>noolddir</td>
-<td>-</td>
+<tr class="row-odd"><td><p>noolddir</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>nosharedscripts</td>
-<td>-</td>
+<tr class="row-even"><td><p>nosharedscripts</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td>noshred</td>
-<td>-</td>
+<tr class="row-odd"><td><p>noshred</p></td>
+<td><p>-</p></td>
 </tr>
-<tr class="row-even"><td>notifempty</td>
-<td>-</td>
+<tr class="row-even"><td><p>notifempty</p></td>
+<td><p>-</p></td>
 </tr>
 </tbody>
 </table>
