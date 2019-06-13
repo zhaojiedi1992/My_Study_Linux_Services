@@ -9,7 +9,7 @@ saltstack
 .. csv-table::
    :header: "服务器名称", "操作系统版本", "内网IP","Hostname","部署模块"
    :widths: 15, 10, 30,30,30
-   
+
    "salt100",	"CentOS7.5",	"172.16.1.100", "salt100",	"salt-master、salt-minion"
    "salt01",	"CentOS7.5",	"172.16.1.11",	 "salt01",	"salt-minion"
    "salt02",	"CentOS7.5",	"172.16.1.12",	 "salt02",	"salt-minion"
@@ -230,6 +230,8 @@ grains 优先级
 
 查看grains 
 
+.. code-block:: bash 
+
     salt 'salt01' grains.ls
     salt 'salt01' grains.items
     salt 'salt01' grains.item os
@@ -279,6 +281,8 @@ grains 优先级
 
 
 通过grains 过滤查询
+
+.. code-block:: bash 
 
     salt -G 'os:centos' cmd.run 'uptime'
 
@@ -340,47 +344,456 @@ salt 指定目标的方式有很多种。
 使用组
     salt -N group1 test.ping 
 
+远程执行-模块
+-----------------------------
+
+模块的官方文档： https://docs.saltstack.com/en/latest/ref/modules/all/index.html#all-salt-modules	
+
+模块位置： 
+
+.. code-block:: bash 
+
+    [root@salt100 salt]# cd /usr/lib/python2.7/site-packages/salt/modules
+    [root@salt100 modules]# ll network.py
+    -rw-r--r-- 1 root root 57562 Feb 16 01:14 network.py
+
+模块说明
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+salt内置好多模块， 列出所有的模块： salt '*' sys.doc 
+
+执行shell   salt '*' cmd.run 'ps aux ' 
 
 
+cp模块
+
+.. code-block:: bash 
+
+    salt -L 'salt01,salt02' cp.get_file salt://a.txt /tmp/a.txt 
+    salt-cp  -L 'salt01,salt02' /etc/hosts /tmp/kkk 
 
 
+远程执行-返回程序
+-----------------------------
+
+参考： https://blog.csdn.net/woshizhangliang999/article/details/89349246
+returner文档： https://docs.saltstack.com/en/latest/ref/returners/all/index.html#all-salt-returners
+
+获取返回值： `salt '*' test.ping --return mysql`  
 
 
+自编写module
+-----------------------------
+
+自编写module需要放置在/srv/salt/_modules位置上， 文件名字就是模块名字，刷新模块是用 salt '*' saltutil.sync_modules 
+
+.. code-block:: bash 
+
+    mkdir _modules 
+    cd _modules/
+    vim my_disk.py
+    cat my_disk.py
+    #!/usr/bin/env python
+    # -*- coding:utf-8 -*-
+    def list():
+    cmd = 'df -h'
+    ret = __salt__['cmd.run'](cmd)
+    return ret
+
+    # 同步到minion上
+    salt '*' saltutil.sync_modules
+    # 执行自定义的模块方法
+    salt '*' my_disk.list 
 
 
+状态文件
+------------------------------------------------
+
+常用状态模块有states.pkg , states.file , states.service 。 
+
+通过状态文件搭建一个集群版本的lamp环境。
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+主机规划
+
+.. csv-table::
+   :header: "服务器名称", "操作系统版本", "内网IP","Hostname","部署模块"
+   :widths: 15, 10, 30,30,30
+
+   "salt100",	"CentOS7.5",	"172.16.1.100", "salt100",	"mariadb"
+   "salt01",	"CentOS7.5",	"172.16.1.11",	 "salt01",	"httpd,php"
+   "salt02",	"CentOS7.5",	"172.16.1.12",	 "salt02",	"httpd,php"
+   "salt03",	"CentOS7.5",	"172.16.1.13",	 "salt03",	"httpd,php"
+
+构思
+
+- 软件包： 使用states.pkg 
+- 配置文件： 使用states.file 
+- 启动服务： 使用states.service 
 
 
+lamp 系统 对于mariab来说只需要一个， 我们规划在salt100服务器上面， 就需要单独写一个sls文件。 
+对于php和httpd环境， 我们需要在三个节点服务器都部署， 编写一个apache_and_php的。
+
+.. code-block:: bash 
+
+    [root@salt100 lamp]# tree 
+    .
+    ├── apache_and_php.sls
+    ├── file
+    │   ├── httpd.conf
+    │   ├── my.cnf
+    │   └── php.ini
+    └── mariadb.sls
+
+    [root@salt100 lamp]# cat apache_and_php.sls 
+    install-mariadb: 
+    pkg.installed: 
+    - name: mariadb
+
+    install-apache: 
+    pkg.installed: 
+    - name: httpd
+
+    install-php:
+    pkg.installed: 
+    - name: php
+    - name: php-devel
+    - name: php-mysql
+    - name: php-cli
+    - name: php-mbstring
+
+    config-apache:
+    file.managed: 
+    - name: /etc/httpd/conf/httpd.conf
+        source: salt://lamp/file/httpd.conf
+        user: root
+        group: root
+        mode: 644 
+        backup: minion
+
+    config-php:
+    file.managed: 
+    - name: /etc/php.ini
+        source: salt://lamp/file/php.ini
+        user: root
+        group: root
+        mode: 644 
+        backup: minion
+
+    start-apache:
+    service.running:
+    - name: httpd
+        enalbe: True 
+        reload: True
+        watch: 
+        - file : config-apache
+
+    [root@salt100 lamp]# cat mariadb.sls 
+    install-mariadb:
+    pkg.installed: 
+    - name: mariadb 
+    - name: mariadb-server
+    - name: mariadb-devel
+    config-mariadb: 
+    file.managed: 
+    - name: /etc/my.cnf
+        source: salt://lamp/file/my.cnf
+        user: root 
+        group: root 
+        mode: 644
+        backup: minion
+    start-mariadb:
+    service.running: 
+    - name: mariadb.service
+        enable: True
+        restart: True
+        watch: 
+        - file: config-mariadb
 
 
+    salt 'master' state.sls lamp.mariadb test=True 
+    salt 'master' state.sls lamp.mariadb 
+    salt 'salt03' state.sls lamp.apache_and_php test=True
+    salt 'salt03' state.sls lamp.apache_and_php
 
 
+状态依赖
+---------------------------------------
+
+- 我依赖谁   require 
+- 谁依赖我   require_in 
+- 我监控谁   watch 
+- 谁监控我   watch_in 
+- 我引用谁   include 
+- 我扩展谁   extend
+
+salt jinja 
+----------------------------------------------
+
+salt的jinja 参考： https://docs.saltstack.com/en/latest/topics/jinja/index.html
+
+jinja在状态中的使用方式， 在file模块使用指定template为jinja 表示使用jinja作为模板， 在sls文件种需要设置一些变量， 在模板中需要引用这些变量。 
+
+做如下修改
+
+.. code-block:: bash 
 
 
+    # 模块配置
+    vim file/httpd.conf  
+    # 修改为如下内容 
+    Listen {{ listen_port }}
+
+    # sls文件配置
+    # 添加如下2行在file模块里面
+        - template: jinja
+        - defaults:
+            listen_port: 81
 
 
+salt run 
+--------------------------------------------
+
+查看job相关的
+
+.. code-block:: bash 
+ 
+    # 返回正在活动中的jobs信息
+    salt-run jobs.active
+    # 返回素有可检测的jobs和活动信息
+    salt-run jobs.list_jobs	
+    # 根据jid列出指定的job
+    salt-run jobs.list_job 20190111160734604439	
+    # 返回以前执行job的打印输出
+    salt-run jobs.lookup_jid 20190111170928354082
 
 
+查看manage相关的
+
+.. code-block:: bash 
+
+    salt-run manage.list_state
+    salt-run manage.alived 
+    salt-run manage.status
+    salt-run manage.down
+    salt-run manage.up
+    salt-run manage.versions
+
+saltutil模块
+
+.. code-block:: bash 
+
+    # 返回minion正在执行salt进程的数据
+    salt '*' saltutil.running
+    # 杀死指定jid进程
+    salt '*' saltutil.kill_job 20190111180228662382
+
+无master 
+----------------------------------------------
+
+当salt处于无master模式的时候，不要运行salt-minionde 守护进程，否认salt-minion将尝试去连接master并失败， slat-call命令独立存储，不需要slat-minion守护进程。 
+
+.. code-block:: bash 
+
+    #  安装master端
+    yum install -y salt-master 
+
+    # 拷贝的秘钥
+    scp /etc/salt/pki/master/{master.pem,master.pub} root@salt01:/etc/salt/pki/master/
+    # 拷贝主master的配置
+    scp /etc/salt/master root@salt01:/etc/salt/master
+    # 拷贝主master的目录
+    scp -r /srv root@salt01:/srv
+
+    # 开机自启
+    systemctl enable salt-master.service
+    systemctl start salt-master.service
+
+    # 配置minion端（所有都操作）
+
+    vim /etc/salt/minion
+    master:
+    - salt100
+    - salt01
+    systemctl restart salt-minion.service 
+
+    # 在salt01上面接收所有的key文件
+    salt-key  -A  
+
+    # 在salt01尝试下
+    salt '*' test.ping 
+    salt03:
+        True
+    salt02:
+        True
+    salt01:
+        True
+    master:
+        True
 
 
+salt-syndic
+-------------------------------------
+
+salt-syncdic 文档： https://docs.saltstack.com/en/latest/topics/topology/syndic.html
+
+Syndic 节点可以看作是一个特殊的直通minion节点， syndic节点是由salt-syndic和salt-master组成，其中salt-master用于控制更低级的minion节点， salt-syndic用户去连接更高级的master节点。
 
 
+salt-ssh 
+-----------------------------------------
+
+salt-ssh 文档： https://docs.saltstack.com/en/latest/topics/ssh/index.html
+
+.. code-block:: bash 
+
+    yum install -y salt-ssh	
+
+    在master节点的创建一个ssh默认的配置文件
+
+    [root@salt100 lamp]# cat  /etc/salt/master.d/roster    
+    # 创建一个默认的ssh配置文件， 指定sudo用户名和密码。
+    roster_defaults:
+    user: yun
+    sudo: True
+    passwd: oracle
+    tty: True
+
+    [root@salt100 lamp]# cat /etc/salt/roster 
+    salt01: 
+    host: salt01
+
+    # 测试salt-ssh
+    [root@salt100 lamp]# salt-ssh  '*' cmd.run 'w'
+    salt01:
+        07:16:38 up 1 day,  5:25,  2 users,  load average: 0.01, 0.03, 0.05
+        USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+        root     tty1                      Wed01   29:23m  0.02s  0.02s -bash
+        root     pts/0    192.168.88.214   02:11   31:34   0.01s  0.01s -bash
+
+    # 使用raw shell
+    [root@salt100 lamp]# salt-ssh  '*' -r  'echo $PATH'
+    salt01:
+        ----------
+        retcode:
+            0
+        stderr:
+        stdout:
+            /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 
 
+salt api
+--------------------------------------------------------------------
+
+.. code-block:: bash 
+
+    # 安装python3.7 
+
+    wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
+    tar xf Python-3.7.3.tar.xz
+    cd Python-3.7.3
+    yum install gcc
+    ./configure --prefix=/usr/local/python37
+    make && make install 
+    vim /etc/profile.d/python.sh
+    cat /etc/profile.d/python.sh
+    PATH=/usr/local/python37/bin:$PATH
+    source /etc/profile.d/python.sh 
+    which python3 
+
+    # 安装salt api 
+    yum install -y salt-api
+    systemctl enable salt-api.service
+
+    # 添加用户
+    useradd -M -s /sbin/nologin -u 1010 saltapi && echo 'oracle' | passwd --stdin saltapi
+    # 安装cherrypy
+    pip3 install CherryPy==3.2.6 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
+
+    # 添加证书
+    [root@salt100 certs]# make testcert 
+    umask 77 ; \
+    /usr/bin/openssl genrsa -aes128 2048 > /etc/pki/tls/private/localhost.key
+    Generating RSA private key, 2048 bit long modulus
+    ..................................+++
+    .......................................+++
+    e is 65537 (0x10001)
+    Enter pass phrase:
+    139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+    Enter pass phrase:
+    139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+    Enter pass phrase:
+    139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+    Enter pass phrase:
+    Verifying - Enter pass phrase:
+    umask 77 ; \
+    /usr/bin/openssl req -utf8 -new -key /etc/pki/tls/private/localhost.key -x509 -days 365 -out /etc/pki/tls/certs/localhost.crt 
+    Enter pass phrase for /etc/pki/tls/private/localhost.key:
+    You are about to be asked to enter information that will be incorporated
+    into your certificate request.
+    What you are about to enter is what is called a Distinguished Name or a DN.
+    There are quite a few fields but you can leave some blank
+    For some fields there will be a default value,
+    If you enter '.', the field will be left blank.
+    -----
+    Country Name (2 letter code) [XX]:cn    
+    State or Province Name (full name) []:beijing
+    Locality Name (eg, city) [Default City]:beijing
+    Organization Name (eg, company) [Default Company Ltd]:limikeji.com
+    Organizational Unit Name (eg, section) []:opt
+    Common Name (eg, your name or your server's hostname) []:www
+    Email Address []:
+
+    [root@salt100 certs]# ll ../private/localhost.key  localhost.crt 
+    -rw------- 1 root root 1310 Jun 13 10:04 localhost.crt
+    -rw------- 1 root root 1766 Jun 13 10:04 ../private/localhost.key
+
+    # 去掉密码
+    [root@salt100 certs]# openssl  rsa -in ../private/localhost.key  -out ../private/localhost_nopass.key
+    Enter pass phrase for ../private/localhost.key:
+    writing RSA key
+    [root@salt100 certs]# mv ../private/localhost_nopass.key ../private/localhost.key
+    mv: overwrite ‘../private/localhost.key’? y
+
+    # 给master配置
+    [root@salt100 master.d]# cat eauth.conf 
+    external_auth:
+    pam:
+        saltapi:
+        - .*
+        - '@wheel'   # to allow access to all wheel modules
+        - '@runner'  # to allow access to all runner modules
+        - '@jobs'    # to allow access to the jobs runner and/or wheel module
+    [root@salt100 master.d]# cat api.conf 
+    rest_cherrypy:
+    port: 8000
+    ssl_crt: /etc/pki/tls/certs/localhost.crt
+    ssl_key: /etc/pki/tls/private/localhost.key
 
 
+    # 重启master, 启动salt-api 
+    systemctl restart salt-master.service
+    systemctl start salt-api.service
+    netstat -tunlp |grep salt-api  
+    tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN      130229/salt-api   
 
+    # 进行测试
+    [root@salt100 master.d]# curl -k https://salt100:8000/login  -H 'Accept: application/x-yaml'  -d username='saltapi'  -d password='oracle'  -d eauth='pam'            
+    return:
+    - eauth: pam
+    expire: 1560478341.170163
+    perms:
+    - .*
+    - '@wheel'
+    - '@runner'
+    - '@jobs'
+    start: 1560435141.170162
+    token: 9650ce783f8b04e15b8f2042d83c2de532c0bf4e
+    user: saltapi
 
-
-
-
-
-
-
-
-
-
-
-
+    yum install jq 
+    curl -k https://salt100:8000/minions/salt01 -H 'Accept: application/json' -H 'X-Auth-Token: 9650ce783f8b04e15b8f2042d83c2de532c0bf4e' |jq 
 
 
 

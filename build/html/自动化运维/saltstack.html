@@ -133,6 +133,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id16">4.6.8. 远程执行-返回程序</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module">4.6.9. 自编写module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">4.6.10. 状态文件</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lamp">4.6.10.1. 通过状态文件搭建一个集群版本的lamp环境。</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">4.6.11. 状态依赖</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#salt-jinja">4.6.12. salt jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#salt-run">4.6.13. salt run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#master">4.6.14. 无master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#salt-syndic">4.6.15. salt-syndic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#salt-ssh">4.6.16. salt-ssh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#salt-api">4.6.17. salt api</a></li>
 </ul>
 </li>
 </ul>
@@ -469,11 +480,11 @@ salt <span class="s1">&#39;salt01&#39;</span> state.highstate <span class="nv">t
 <li><p>/etc/salt/minion  【优先级最高】</p></li>
 </ol>
 <p>查看grains</p>
-<blockquote>
-<div><p>salt ‘salt01’ grains.ls
-salt ‘salt01’ grains.items
-salt ‘salt01’ grains.item os</p>
-</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt <span class="s1">&#39;salt01&#39;</span> grains.ls
+salt <span class="s1">&#39;salt01&#39;</span> grains.items
+salt <span class="s1">&#39;salt01&#39;</span> grains.item os
+</pre></div>
+</div>
 </div>
 <div class="section" id="pygrains">
 <h3>4.6.4.2. 编写py定义grains<a class="headerlink" href="#pygrains" title="Permalink to this headline">¶</a></h3>
@@ -513,9 +524,9 @@ salt02:
 <h3>4.6.4.4. 在/etc/salt/minion 中定义grains<a class="headerlink" href="#etc-salt-minion-grains" title="Permalink to this headline">¶</a></h3>
 <p>这个不建议使用， 定义和配置写在一起，不合适，不利于后期的管理维护。</p>
 <p>通过grains 过滤查询</p>
-<blockquote>
-<div><p>salt -G ‘os:centos’ cmd.run ‘uptime’</p>
-</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt -G <span class="s1">&#39;os:centos&#39;</span> cmd.run <span class="s1">&#39;uptime&#39;</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="pillar">
@@ -594,7 +605,7 @@ salt-cp  -L <span class="s1">&#39;salt01,salt02&#39;</span> /etc/hosts /tmp/kkk
 <h2>4.6.8. 远程执行-返回程序<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <p>参考： <a class="reference external" href="https://blog.csdn.net/woshizhangliang999/article/details/89349246">https://blog.csdn.net/woshizhangliang999/article/details/89349246</a>
 returner文档： <a class="reference external" href="https://docs.saltstack.com/en/latest/ref/returners/all/index.html#all-salt-returners">https://docs.saltstack.com/en/latest/ref/returners/all/index.html#all-salt-returners</a></p>
-<p>获取返回值： salt ‘*’ test.ping –return mysql</p>
+<p>获取返回值： <cite>salt ‘*’ test.ping –return mysql</cite></p>
 </div>
 <div class="section" id="module">
 <h2>4.6.9. 自编写module<a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h2>
@@ -614,6 +625,401 @@ def list<span class="o">()</span>:
 salt <span class="s1">&#39;*&#39;</span> saltutil.sync_modules
 <span class="c1"># 执行自定义的模块方法</span>
 salt <span class="s1">&#39;*&#39;</span> my_disk.list
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h2>4.6.10. 状态文件<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p>常用状态模块有states.pkg , states.file , states.service 。</p>
+<div class="section" id="lamp">
+<h3>4.6.10.1. 通过状态文件搭建一个集群版本的lamp环境。<a class="headerlink" href="#lamp" title="Permalink to this headline">¶</a></h3>
+<p>主机规划</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 9%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>服务器名称</p></th>
+<th class="head"><p>操作系统版本</p></th>
+<th class="head"><p>内网IP</p></th>
+<th class="head"><p>Hostname</p></th>
+<th class="head"><p>部署模块</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>salt100</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.100</p></td>
+<td><p>salt100</p></td>
+<td><p>mariadb</p></td>
+</tr>
+<tr class="row-odd"><td><p>salt01</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.11</p></td>
+<td><p>salt01</p></td>
+<td><p>httpd,php</p></td>
+</tr>
+<tr class="row-even"><td><p>salt02</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.12</p></td>
+<td><p>salt02</p></td>
+<td><p>httpd,php</p></td>
+</tr>
+<tr class="row-odd"><td><p>salt03</p></td>
+<td><p>CentOS7.5</p></td>
+<td><p>172.16.1.13</p></td>
+<td><p>salt03</p></td>
+<td><p>httpd,php</p></td>
+</tr>
+</tbody>
+</table>
+<p>构思</p>
+<ul class="simple">
+<li><p>软件包： 使用states.pkg</p></li>
+<li><p>配置文件： 使用states.file</p></li>
+<li><p>启动服务： 使用states.service</p></li>
+</ul>
+<p>lamp 系统 对于mariab来说只需要一个， 我们规划在salt100服务器上面， 就需要单独写一个sls文件。
+对于php和httpd环境， 我们需要在三个节点服务器都部署， 编写一个apache_and_php的。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># tree</span>
+.
+├── apache_and_php.sls
+├── file
+│   ├── httpd.conf
+│   ├── my.cnf
+│   └── php.ini
+└── mariadb.sls
+
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># cat apache_and_php.sls</span>
+install-mariadb:
+pkg.installed:
+- name: mariadb
+
+install-apache:
+pkg.installed:
+- name: httpd
+
+install-php:
+pkg.installed:
+- name: php
+- name: php-devel
+- name: php-mysql
+- name: php-cli
+- name: php-mbstring
+
+config-apache:
+file.managed:
+- name: /etc/httpd/conf/httpd.conf
+    source: salt://lamp/file/httpd.conf
+    user: root
+    group: root
+    mode: <span class="m">644</span>
+    backup: minion
+
+config-php:
+file.managed:
+- name: /etc/php.ini
+    source: salt://lamp/file/php.ini
+    user: root
+    group: root
+    mode: <span class="m">644</span>
+    backup: minion
+
+start-apache:
+service.running:
+- name: httpd
+    enalbe: True
+    reload: True
+    watch:
+    - file : config-apache
+
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># cat mariadb.sls</span>
+install-mariadb:
+pkg.installed:
+- name: mariadb
+- name: mariadb-server
+- name: mariadb-devel
+config-mariadb:
+file.managed:
+- name: /etc/my.cnf
+    source: salt://lamp/file/my.cnf
+    user: root
+    group: root
+    mode: <span class="m">644</span>
+    backup: minion
+start-mariadb:
+service.running:
+- name: mariadb.service
+    enable: True
+    restart: True
+    watch:
+    - file: config-mariadb
+
+
+salt <span class="s1">&#39;master&#39;</span> state.sls lamp.mariadb <span class="nv">test</span><span class="o">=</span>True
+salt <span class="s1">&#39;master&#39;</span> state.sls lamp.mariadb
+salt <span class="s1">&#39;salt03&#39;</span> state.sls lamp.apache_and_php <span class="nv">test</span><span class="o">=</span>True
+salt <span class="s1">&#39;salt03&#39;</span> state.sls lamp.apache_and_php
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id18">
+<h2>4.6.11. 状态依赖<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>我依赖谁   require</p></li>
+<li><p>谁依赖我   require_in</p></li>
+<li><p>我监控谁   watch</p></li>
+<li><p>谁监控我   watch_in</p></li>
+<li><p>我引用谁   include</p></li>
+<li><p>我扩展谁   extend</p></li>
+</ul>
+</div>
+<div class="section" id="salt-jinja">
+<h2>4.6.12. salt jinja<a class="headerlink" href="#salt-jinja" title="Permalink to this headline">¶</a></h2>
+<p>salt的jinja 参考： <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/jinja/index.html">https://docs.saltstack.com/en/latest/topics/jinja/index.html</a></p>
+<p>jinja在状态中的使用方式， 在file模块使用指定template为jinja 表示使用jinja作为模板， 在sls文件种需要设置一些变量， 在模板中需要引用这些变量。</p>
+<p>做如下修改</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模块配置</span>
+vim file/httpd.conf
+<span class="c1"># 修改为如下内容</span>
+Listen <span class="o">{{</span> listen_port <span class="o">}}</span>
+
+<span class="c1"># sls文件配置</span>
+<span class="c1"># 添加如下2行在file模块里面</span>
+    - template: jinja
+    - defaults:
+        listen_port: <span class="m">81</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="salt-run">
+<h2>4.6.13. salt run<a class="headerlink" href="#salt-run" title="Permalink to this headline">¶</a></h2>
+<p>查看job相关的</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 返回正在活动中的jobs信息</span>
+salt-run jobs.active
+<span class="c1"># 返回素有可检测的jobs和活动信息</span>
+salt-run jobs.list_jobs
+<span class="c1"># 根据jid列出指定的job</span>
+salt-run jobs.list_job <span class="m">20190111160734604439</span>
+<span class="c1"># 返回以前执行job的打印输出</span>
+salt-run jobs.lookup_jid <span class="m">20190111170928354082</span>
+</pre></div>
+</div>
+<p>查看manage相关的</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt-run manage.list_state
+salt-run manage.alived
+salt-run manage.status
+salt-run manage.down
+salt-run manage.up
+salt-run manage.versions
+</pre></div>
+</div>
+<p>saltutil模块</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 返回minion正在执行salt进程的数据</span>
+salt <span class="s1">&#39;*&#39;</span> saltutil.running
+<span class="c1"># 杀死指定jid进程</span>
+salt <span class="s1">&#39;*&#39;</span> saltutil.kill_job <span class="m">20190111180228662382</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="master">
+<h2>4.6.14. 无master<a class="headerlink" href="#master" title="Permalink to this headline">¶</a></h2>
+<p>当salt处于无master模式的时候，不要运行salt-minionde 守护进程，否认salt-minion将尝试去连接master并失败， slat-call命令独立存储，不需要slat-minion守护进程。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#  安装master端</span>
+yum install -y salt-master
+
+<span class="c1"># 拷贝的秘钥</span>
+scp /etc/salt/pki/master/<span class="o">{</span>master.pem,master.pub<span class="o">}</span> root@salt01:/etc/salt/pki/master/
+<span class="c1"># 拷贝主master的配置</span>
+scp /etc/salt/master root@salt01:/etc/salt/master
+<span class="c1"># 拷贝主master的目录</span>
+scp -r /srv root@salt01:/srv
+
+<span class="c1"># 开机自启</span>
+systemctl <span class="nb">enable</span> salt-master.service
+systemctl start salt-master.service
+
+<span class="c1"># 配置minion端（所有都操作）</span>
+
+vim /etc/salt/minion
+master:
+- salt100
+- salt01
+systemctl restart salt-minion.service
+
+<span class="c1"># 在salt01上面接收所有的key文件</span>
+salt-key  -A
+
+<span class="c1"># 在salt01尝试下</span>
+salt <span class="s1">&#39;*&#39;</span> test.ping
+salt03:
+    True
+salt02:
+    True
+salt01:
+    True
+master:
+    True
+</pre></div>
+</div>
+</div>
+<div class="section" id="salt-syndic">
+<h2>4.6.15. salt-syndic<a class="headerlink" href="#salt-syndic" title="Permalink to this headline">¶</a></h2>
+<p>salt-syncdic 文档： <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/topology/syndic.html">https://docs.saltstack.com/en/latest/topics/topology/syndic.html</a></p>
+<p>Syndic 节点可以看作是一个特殊的直通minion节点， syndic节点是由salt-syndic和salt-master组成，其中salt-master用于控制更低级的minion节点， salt-syndic用户去连接更高级的master节点。</p>
+</div>
+<div class="section" id="salt-ssh">
+<h2>4.6.16. salt-ssh<a class="headerlink" href="#salt-ssh" title="Permalink to this headline">¶</a></h2>
+<p>salt-ssh 文档： <a class="reference external" href="https://docs.saltstack.com/en/latest/topics/ssh/index.html">https://docs.saltstack.com/en/latest/topics/ssh/index.html</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install -y salt-ssh
+
+在master节点的创建一个ssh默认的配置文件
+
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># cat  /etc/salt/master.d/roster</span>
+<span class="c1"># 创建一个默认的ssh配置文件， 指定sudo用户名和密码。</span>
+roster_defaults:
+user: yun
+sudo: True
+passwd: oracle
+tty: True
+
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># cat /etc/salt/roster</span>
+salt01:
+host: salt01
+
+<span class="c1"># 测试salt-ssh</span>
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># salt-ssh  &#39;*&#39; cmd.run &#39;w&#39;</span>
+salt01:
+    <span class="m">07</span>:16:38 up <span class="m">1</span> day,  <span class="m">5</span>:25,  <span class="m">2</span> users,  load average: <span class="m">0</span>.01, <span class="m">0</span>.03, <span class="m">0</span>.05
+    USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+    root     tty1                      Wed01   <span class="m">29</span>:23m  <span class="m">0</span>.02s  <span class="m">0</span>.02s -bash
+    root     pts/0    <span class="m">192</span>.168.88.214   <span class="m">02</span>:11   <span class="m">31</span>:34   <span class="m">0</span>.01s  <span class="m">0</span>.01s -bash
+
+<span class="c1"># 使用raw shell</span>
+<span class="o">[</span>root@salt100 lamp<span class="o">]</span><span class="c1"># salt-ssh  &#39;*&#39; -r  &#39;echo $PATH&#39;</span>
+salt01:
+    ----------
+    retcode:
+        <span class="m">0</span>
+    stderr:
+    stdout:
+        /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+</pre></div>
+</div>
+</div>
+<div class="section" id="salt-api">
+<h2>4.6.17. salt api<a class="headerlink" href="#salt-api" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span># 安装python3.7
+
+wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tar.xz
+tar xf Python-3.7.3.tar.xz
+cd Python-3.7.3
+yum install gcc
+./configure --prefix=/usr/local/python37
+make &amp;&amp; make install
+vim /etc/profile.d/python.sh
+cat /etc/profile.d/python.sh
+PATH=/usr/local/python37/bin:$PATH
+source /etc/profile.d/python.sh
+which python3
+
+# 安装salt api
+yum install -y salt-api
+systemctl enable salt-api.service
+
+# 添加用户
+useradd -M -s /sbin/nologin -u 1010 saltapi &amp;&amp; echo &#39;oracle&#39; | passwd --stdin saltapi
+# 安装cherrypy
+pip3 install CherryPy==3.2.6 -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
+
+# 添加证书
+[root@salt100 certs]# make testcert
+umask 77 ; \
+/usr/bin/openssl genrsa -aes128 2048 &gt; /etc/pki/tls/private/localhost.key
+Generating RSA private key, 2048 bit long modulus
+..................................+++
+.......................................+++
+e is 65537 (0x10001)
+Enter pass phrase:
+139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+Enter pass phrase:
+139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+Enter pass phrase:
+139859159766928:error:28069065:lib(40):UI_set_result:result too small:ui_lib.c:831:You must type in 4 to 1023 characters
+Enter pass phrase:
+Verifying - Enter pass phrase:
+umask 77 ; \
+/usr/bin/openssl req -utf8 -new -key /etc/pki/tls/private/localhost.key -x509 -days 365 -out /etc/pki/tls/certs/localhost.crt
+Enter pass phrase for /etc/pki/tls/private/localhost.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:cn
+State or Province Name (full name) []:beijing
+Locality Name (eg, city) [Default City]:beijing
+Organization Name (eg, company) [Default Company Ltd]:limikeji.com
+Organizational Unit Name (eg, section) []:opt
+Common Name (eg, your name or your server&#39;s hostname) []:www
+Email Address []:
+
+[root@salt100 certs]# ll ../private/localhost.key  localhost.crt
+-rw------- 1 root root 1310 Jun 13 10:04 localhost.crt
+-rw------- 1 root root 1766 Jun 13 10:04 ../private/localhost.key
+
+# 去掉密码
+[root@salt100 certs]# openssl  rsa -in ../private/localhost.key  -out ../private/localhost_nopass.key
+Enter pass phrase for ../private/localhost.key:
+writing RSA key
+[root@salt100 certs]# mv ../private/localhost_nopass.key ../private/localhost.key
+mv: overwrite ‘../private/localhost.key’? y
+
+# 给master配置
+[root@salt100 master.d]# cat eauth.conf
+external_auth:
+pam:
+    saltapi:
+    - .*
+    - &#39;@wheel&#39;   # to allow access to all wheel modules
+    - &#39;@runner&#39;  # to allow access to all runner modules
+    - &#39;@jobs&#39;    # to allow access to the jobs runner and/or wheel module
+[root@salt100 master.d]# cat api.conf
+rest_cherrypy:
+port: 8000
+ssl_crt: /etc/pki/tls/certs/localhost.crt
+ssl_key: /etc/pki/tls/private/localhost.key
+
+
+# 重启master, 启动salt-api
+systemctl restart salt-master.service
+systemctl start salt-api.service
+netstat -tunlp |grep salt-api
+tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN      130229/salt-api
+
+# 进行测试
+[root@salt100 master.d]# curl -k https://salt100:8000/login  -H &#39;Accept: application/x-yaml&#39;  -d username=&#39;saltapi&#39;  -d password=&#39;oracle&#39;  -d eauth=&#39;pam&#39;
+return:
+- eauth: pam
+expire: 1560478341.170163
+perms:
+- .*
+- &#39;@wheel&#39;
+- &#39;@runner&#39;
+- &#39;@jobs&#39;
+start: 1560435141.170162
+token: 9650ce783f8b04e15b8f2042d83c2de532c0bf4e
+user: saltapi
+
+yum install jq
+curl -k https://salt100:8000/minions/salt01 -H &#39;Accept: application/json&#39; -H &#39;X-Auth-Token: 9650ce783f8b04e15b8f2042d83c2de532c0bf4e&#39; |jq
 </pre></div>
 </div>
 </div>
